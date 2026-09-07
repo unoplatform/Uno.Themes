@@ -1,8 +1,53 @@
 # Uno Semantic Design Language implementation review
 
-Reviewed `dev/sb/fluent-theme` at `4c9f46c8` on 2026-09-06. Scope: the current implementations, including shared infrastructure and Material v2, Simple, Fluent, C# Markup helpers, runtime coverage, and published documentation. This is a review plus documentation corrections; implementation behavior and tests were not changed.
+Originally reviewed `dev/sb/fluent-theme` at `4c9f46c8` on 2026-09-06. Scope: shared infrastructure and Material v2, Simple, Fluent, C# Markup helpers, runtime coverage, and published documentation. The original audit and documentation pass did not change executable behavior or tests. Findings and original line references below remain historical evidence; follow-up implementation status is tracked separately here.
 
-## Assessment
+## Resolution status — 2026-09-07
+
+Fluent fixes landed in `d7289c42`. Detailed finding-to-test mappings are in the
+[Fluent resolution table](fluent-findings.md#resolution-update--2026-09-07).
+
+| Main finding | Status | Concrete validation |
+|---|---|---|
+| 10: nested/constructor Fluent overrides | Fixed | `When_AccentOverridesAreMerged_AppearanceAndSiblingPrecedenceArePreserved`, `When_LightweightOverrideIsMerged_RenderedFilledButtonUsesLastChild`, `When_ConstructorOverridesSupplied_NativeButtonUsesTheSameValues` |
+| 11: Fluent text-button states | Fixed, with native precedence and teardown coverage | `When_TextButtonStateOverridden_RenderedPartsFollowWithoutChangingStandardButton`, `When_TextButtonStyleIsCleared_ThemeDoesNotRetainButton` |
+| 12: Fluent font root and primary/on-primary paint | Fixed for the documented accent roles; unrelated semantic roles still have no general native mapping | `When_RootFontOverrideChanges_SlotsAndNativeFontFollowAndClear`, `When_SemanticAccentOverrideSet_RenderedNativeButtonUsesColorAndOpacity` |
+| 13: system-accent refresh | Fixed | `When_PlatformAccentChanges_UnrelatedRebuildRefreshesSemanticPalette`, `When_PlatformAccentEventRaised_SemanticPaletteRefreshes`, `When_ThemeIsReplaced_SystemAccentSubscriptionDoesNotRetainIt` |
+| Unnumbered source-reload finding | Fixed | `When_PreviouslyValidOverrideSourceFails_RebuildRetainsAssignedValues` |
+| 14: Dark-only native fallback | Fixed and verified in real Light and Dark app appearances | `When_PrimaryOverrideIsAppearanceSpecific_OtherAppearanceKeepsNativeAccent` |
+| 15: existing native controls after seed/override changes | Fixed for solid brushes | `When_SeedChangesAndClears_TheSameNativeButtonUpdates`, `When_LightweightOverrideChanges_TheSameNativeButtonUpdates` |
+| Fluent presenter alias omitted from inventory | Fixed; Fluent now exposes 55/55 keys | `When_DatePickerFlyoutPresenterSemanticStyleApplied_PreservesNativeTemplate` |
+| 1: nested shared color overrides | Fixed with explicit appearance resolution and existing HighContrast fallback preserved | `When_ColorOverridesAreNested_SharedBrushesPreserveBothAppearances`, `When_HighContrastOverrideIsAbsent_SharedBrushesPreferDarkOverDefault` |
+| 2: invalid radius input | Fixed; negative, non-finite, and scale-overflowing inputs normalize to 4, zero remains valid | `When_CornerRadiusIsInvalid_SemanticAndNativeTokensUseValidDefaults` |
+| 3: Simple outlined buttons | Fixed with an independent outlined template retaining tonal defaults | `When_OutlinedButtonOverridden_UsesOwnStateKeys` |
+| 4: Simple icon toggles | Fixed with 36 independently consumed icon brush keys | `When_IconToggleOverridden_UsesIndependentStateKeys` |
+| 5: Simple label and link states | Fixed | `When_CheckBoxLabelOverridden_UsesMatchingCombinedState`, `When_TextBoxLabelOverridden_HeaderAndPlaceholderFollowState`, `When_SecondaryHyperlinkOverridden_ContentAndUnderlineUseOwnState` |
+| 6: Simple style inventory and seedless palette | Fixed; 55/55 styles, documented native/tonal fallbacks, grayscale legacy secondary roles | `When_MissingSemanticStyleApplied_ResolvesOwnStyleAndTemplate`, `When_SeedlessSimplePaletteUsed_LegacySecondaryBrushesAreGrayscale` |
+| 7: Material rating/calendar state consumers | Fixed | `When_SelectedRatingIsHovered_Then_SemanticHoverBrushIsUsed`, `When_CalendarGlyphBrushIsOverridden_Then_TemplateConsumesNormalAndDisabledKeys` |
+| 8: button border/type-size overrides | Fixed for the portable border and type-size keys; theme-specific corner and padding keys remain documented | `When_ButtonMeasurementsOverridden_PortableBorderAndFontAreConsumed` |
+| 9: Material v2 typography precedence | Fixed; Light LabelExtraSmall is Medium, Dark is Normal; v1 resources preserved | `When_LabelExtraSmallIsUsed_Then_MaterialTypographyWinsOverSharedDefaults`, `When_LegacyMaterialResourcesAreLoaded_Then_SharedTypographyAndFontsRemainAvailable` |
+| 16: Markup weight/path helper types | Fixed public generic signatures; migration documented | `When_TypographyHelpersAreUsed_Then_TypedConsumersResolveScopedOverrides`, `When_PipsPathHelpersAreUsed_Then_StringConsumersResolvePathData`, `When_PipsNavigationDataIsResolved_Then_ItIsAPathString` |
+| 17: missing Markup helpers | Fixed; seven style helpers, 19 slot-family helpers, root family and ShadowColor added | `When_AdditionalSemanticStyleHelpersAreUsed_Then_KeysResolveToExpectedControls`, `When_TypographyHelpersAreUsed_Then_TypedConsumersResolveScopedOverrides` |
+| Additional Markup target metadata finding | Fixed 11 attributes that named helper classes instead of controls | `When_StyleMetadataIsRead_Then_TargetIsTheActualXamlControl` |
+
+After the Fluent fixes, complete Uno Desktop runs passed 558 tests with zero
+failures and one pre-existing skipped hot-reload test in **each** real application
+appearance. Desktop and WebAssembly builds passed. WebAssembly runtime and native
+WinUI runtime behavior were not tested. System-accent notification coverage uses
+a simulated Uno UISettings event and controlled platform resource values, not an
+actual Windows OS accent change. See [implementation progress](../semantic-fixes/progress.md)
+for logs and full build results.
+
+The remaining implementation layer passed 671 tests with zero failures and the
+same pre-existing skip in each real Light and Dark appearance of the Simple Desktop host, and 74 tests with zero failures
+in the Material Desktop host. The HighContrast fallback and finite-radius overflow guards passed. Simple and Material
+WebAssembly builds passed; no WebAssembly runtime execution is claimed. Detailed
+resolution mappings are also recorded in the [Simple](simple-findings.md) and
+[Material](material-findings.md) audit reports. Material's extra static ContentDialog
+type-size observation remains an unverified follow-up, distinct from the resolved
+numbered findings.
+
+## Original assessment
 
 The three themes share much of the semantic vocabulary, but **do not provide equivalent override behavior**. Several controls expose resources they never consume. Fluent's native-resource adapter has narrower input, scope, and lifecycle behavior than the shared theme layer. Passing existing tests does not establish the missing cross-theme contract.
 
@@ -16,7 +61,7 @@ The source inventory contains 55 semantic control-style keys, excluding Material
 
 Fluent's 54 includes the two button styles mapped in code, rather than only declarations in `_Resources.xaml`. Its nearest-match FAB/elevated mappings and nine empty styles preserving native templates are deliberate design choices. Different default appearances are valid; missing keys and ineffective explicit overrides are the portability problems.
 
-## Priority findings
+## Original priority findings
 
 P2 means a functional defect or contract gap to address before claiming semantic override parity. P3 indicates a lower-impact implementation inconsistency. These findings are established by source inspection unless explicitly labeled as needing runtime confirmation. Existing runtime suites were executed separately; no newly written regression test reproduced these findings during this review.
 
@@ -70,7 +115,7 @@ Full source evidence, affected states, and suggested reproductions are in [Mater
 
 17. **P3 — The markup surface is incomplete.** Seven of the 55 semantic control-style keys have no wrapper: ComboBoxItem, DatePickerFlyoutPresenter, MediaTransportControls, MenuFlyoutSeparator, MenuFlyoutSubItem, RadioMenuFlyoutItem, and ToggleMenuFlyoutItem. Typography helpers also omit family keys, and the color helpers omit ShadowColor. This does not remove the underlying XAML resources, but contradicts the previous documentation's claim that all keys have helpers. An attribute/constructor-string comparison across 1,232 helper declarations found no string mismatches.
 
-## Documentation corrections
+## Original documentation corrections
 
 - Expanded `doc/semantic-styles.md` into the cross-theme semantic contract: all 55 style mappings, typography differences, all 33 roles, exact 280-brush inventory and exceptions, state opacities, pairing guidance, override channels/scopes, appearance fallback, and compatibility gaps.
 - Corrected missing `Radius500` and directional spacing companions, scalar-versus-companion independence, font-root/property precedence, source-cache lifecycle, Fluent token limitations, and invalid-radius behavior in `doc/design-tokens.md`.
@@ -78,7 +123,7 @@ Full source evidence, affected states, and suggested reproductions are in [Mater
 - Added missing Material style entries, corrected ShadowColor alpha, and clarified the shared palette versus Material defaults.
 - Added focused control-page notes for ineffective overrides. Corrected public `BaseTheme` XML comments that still described spacing/shape/density as construction-only and overstated font-root override precedence. XML comments are the only library-source edits; executable behavior is unchanged.
 
-## Verification
+## Original verification
 
 Results and limitations are recorded in [progress.md](progress.md). Local build/runtime logs and NUnit XML are retained beside this report and excluded from git. The source inventory and documentation links were also checked independently. No dependencies, target frameworks, or project structure were changed.
 

@@ -1,4 +1,4 @@
-﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml;
 using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
 
@@ -10,7 +10,7 @@ public static partial class Theme
 	{
 		public static partial class Styles
 		{
-			[ResourceKeyDefinition(typeof(Style), "FlyoutPresenterStyle", TargetType = typeof(FlyoutPresenter))]
+			[ResourceKeyDefinition(typeof(Style), "FlyoutPresenterStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.FlyoutPresenter))]
 			public static StaticResourceKey<Style> Default => new("FlyoutPresenterStyle");
 		}
 	}

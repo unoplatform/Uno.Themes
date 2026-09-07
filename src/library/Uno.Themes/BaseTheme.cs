@@ -294,7 +294,8 @@ public abstract partial class BaseTheme : ResourceDictionary
 	/// resources are resolved. Already rendered controls require a theme-change pass or content
 	/// recreation because a <see cref="CornerRadius"/> is a value, not a mutable brush instance.
 	/// Only controls that consume the generated tokens or a design-system adapter follow this setting.
-	/// Supply a finite, non-negative value; the shared shape generator does not validate this input.
+	/// Negative, non-finite, or scale-overflowing inputs generate the default scale with a base of 4;
+	/// zero is valid and generates square corners. The assigned property value is preserved.
 	/// </remarks>
 	public double DefaultCornerRadius
 	{
@@ -307,7 +308,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 			nameof(DefaultCornerRadius),
 			typeof(double),
 			typeof(BaseTheme),
-			new PropertyMetadata(4.0, OnDefaultCornerRadiusChanged));
+			new PropertyMetadata(DefaultCornerRadiusValue, OnDefaultCornerRadiusChanged));
 
 	private static void OnDefaultCornerRadiusChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 	{

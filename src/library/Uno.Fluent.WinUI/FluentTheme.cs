@@ -252,12 +252,10 @@ public partial class FluentTheme : BaseTheme
 		// A locally set DefaultCornerRadius is an explicit choice (even when it is
 		// 4); the DP default means "the platform's". Radius100 is the base unit and
 		// Radius200 twice it — matching ControlCornerRadius (4) / OverlayCornerRadius
-		// (8) at the default unit. Non-finite or negative consumer values are
-		// ignored here, as BaseTheme's shape scale does.
-		if (ReadLocalValue(DefaultCornerRadiusProperty) is double radius
-			&& double.IsFinite(radius)
-			&& radius >= 0)
+		// (8) at the default unit. Invalid values use the shared scale's default.
+		if (ReadLocalValue(DefaultCornerRadiusProperty) is double radius)
 		{
+			radius = NormalizeCornerRadius(radius);
 			tokens ??= new ResourceDictionary();
 			tokens["ControlCornerRadius"] = new CornerRadius(radius);
 			tokens["OverlayCornerRadius"] = new CornerRadius(radius * 2);

@@ -306,7 +306,7 @@ public class Given_FluentAliasResolution
 			report.AppendLine($"{key} = {(found ? rendered : "MISSING")}");
 		}
 
-		var path = Path.Combine(Path.GetTempPath(), "fluent-spike-report.txt");
+		var path = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "fluent-spike-report.txt");
 		File.WriteAllText(path, report.ToString());
 
 		Assert.IsTrue(File.Exists(path), $"discovery report should be written to {path}");

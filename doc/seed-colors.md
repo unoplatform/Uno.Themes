@@ -136,7 +136,7 @@ Seed colors can be changed at runtime — for example from a settings page or a 
 
 This works because the semantic brushes are updated in place rather than replaced, and it covers the state variants too (`PrimaryHoverBrush`, `PrimaryDisabledBrush`, …) along with their opacities — so overriding a token such as `HoverOpacity` in your override dictionary reaches those brushes as well.
 
-Fluent's generated native accent and lightweight resources are replaced during a rebuild, rather than mutated with the shared brushes. Existing native controls are therefore outside this live-instance guarantee and can require resource re-resolution or recreation. This also applies when clearing the seed; see [Fluent behavior notes](fluent-getting-started.md#behavior-notes).
+Fluent also retains solid brushes for its generated native accent and lightweight resources. Changing or clearing a seed, or replacing a supported override, updates the color and opacity used by existing native controls. Non-solid brush replacements and value resources such as font families still follow the framework's resource-refresh rules; see [Fluent override behavior](fluent-getting-started.md#override-compatibility).
 
 > [!NOTE]
 > Roles that are not generated from the seed — the four `Error*` keys — keep their base-palette values, and a `*Brush` key you define yourself in an override dictionary still wins over the generated one.
@@ -227,13 +227,13 @@ Used as the value for `BaseTheme.Colors` (`MaterialTheme.Colors`, `SimpleTheme.C
 
 Static convenience class for runtime theme configuration.
 
-| Member          | Type     | Description                                                                                        |
-|-----------------|----------|----------------------------------------------------------------------------------------------------|
-| `GetTheme()`    | Method   | Returns the first `BaseTheme` directly in `Application.Current.Resources.MergedDictionaries`, or `null` if none is found. |
-| `PrimarySeed`   | Property | Gets or sets the primary seed color on the active theme. Setting regenerates the full palette.     |
-| `SecondarySeed` | Property | Gets or sets the secondary seed color. `null` to auto-derive from primary.                         |
-| `TertiarySeed`  | Property | Gets or sets the tertiary seed color. `null` to auto-derive from primary.                          |
-| `SeedColorMode` | Property | Gets or sets the generation mode on the active theme: `Fidelity` (default) or `TonalSpot`.         |
+| Member | Type | Description |
+| ----------------- | ---------- | ---------------------------------------------------------------------------------------------------- |
+| `GetTheme()` | Method | Returns the first `BaseTheme` directly in `Application.Current.Resources.MergedDictionaries`, or `null` if none is found. |
+| `PrimarySeed` | Property | Gets or sets the primary seed color on the active theme. Setting regenerates the full palette. |
+| `SecondarySeed` | Property | Gets or sets the secondary seed color. `null` to auto-derive from primary. |
+| `TertiarySeed` | Property | Gets or sets the tertiary seed color. `null` to auto-derive from primary. |
+| `SeedColorMode` | Property | Gets or sets the generation mode on the active theme: `Fidelity` (default) or `TonalSpot`. |
 | `DefaultFontFamily` | Property | Gets or sets the active theme's typeface; see [Typography Font Swap](design-tokens.md#typography-font-swap). |
 
 The properties require an active application theme and throw `InvalidOperationException` if none is found. Setting a secondary or tertiary seed alone does not start generation: an effective primary seed is required. Clearing `PrimarySeed` restores the built-in palette for Material, Simple, and Fluent; explicit override resources remain in effect. Perform theme resource changes on the UI thread.
@@ -259,10 +259,10 @@ Under [`FluentTheme`](fluent-getting-started.md), a seed color does more than ge
 
 ### PrimaryColor overrides drive the accent too
 
-The cascade is not limited to seeds. An explicit **`PrimaryColor` override** — through any channel (`Colors.OverrideDictionary`, `Colors.OverrideSource`, or the legacy `ColorOverrideDictionary` / `ColorOverrideSource` theme properties) — also recolors the built-in Fluent controls, matching how a `PrimaryColor` override visibly recolors controls under Material and Simple:
+The cascade is not limited to seeds. An explicit **`PrimaryColor` override** — through `Colors.OverrideDictionary`, `Colors.OverrideSource`, the theme constructor's `colorOverride` argument, or the legacy `ColorOverrideDictionary` / `ColorOverrideSource` properties — also recolors the built-in Fluent controls:
 
 - Unlike a seed (a *generator input*, mapped through tonal-palette tones), an override is the highest-precedence statement of what Primary **is** — it becomes the accent fill **verbatim** for its theme branch, with the surrounding `SystemAccentColor*` shades and accent-text tones derived relative to it, and the on-accent text family picked by contrast against it.
-- A flat value drives both appearances. `Light` and `Dark` values select their respective appearances; `Default` supplies a fallback for either appearance without its own value. Currently an isolated Dark-only override without a seed can also populate the generated native `Default` branch, making it a fallback in Light. Provide both appearance values for predictable accent behavior.
+- A flat value drives both appearances. `Light` and `Dark` values select their respective appearances; `Default` supplies a fallback when the corresponding appearance dictionary is absent. A Dark-only override leaves Light on the platform accent when no seed is active. Nested merged dictionaries are supported with normal resource-dictionary precedence.
 - When both a seed and a `PrimaryColor` override are set, the **override wins** — the same precedence as in the semantic palette.
 - Any accent-family key you override **explicitly** (`SystemAccentColor*`, `AccentFillColor*`, `AccentTextFillColor*`) always wins over the derived values.
 
@@ -273,12 +273,12 @@ The cascade is not limited to seeds. An explicit **`PrimaryColor` override** —
 
 With `ColorPaletteOverride.xaml` defining `PrimaryColor` per theme branch, both semantic-keyed XAML **and** the stock Fluent controls follow it.
 
-The supported bridge input is the theme's configured override dictionary (including the source and obsolete property channels listed above). The constructor's `colorOverride` argument and entries nested in `MergedDictionaries` do not feed Fluent's accent bridge. Other semantic color/brush overrides, such as `OnPrimaryColor`, are not general native accent drivers; see [override compatibility](semantic-styles.md#override-compatibility).
+An explicit `PrimaryBrush` also supplies the native accent fill, while `OnPrimaryColor` or `OnPrimaryBrush` supplies its foreground. A brush takes precedence over its source color and preserves its opacity. Explicit native accent resources and supported control keys retain the final word for their rendered parts. Other semantic palette roles remain available to app content without implying a native control mapping; see [override compatibility](semantic-styles.md#override-compatibility).
 
-Without a seed or a `PrimaryColor` override, none of these overrides exist and the controls follow the platform accent (on Windows, the user's chosen accent color).
+Without a seed or a corresponding explicit override, controls keep the platform accent (on Windows, the user's chosen accent color). The theme refreshes its semantic palette on rebuilds and observes `UISettings.ColorValuesChanged` where the platform supplies that notification.
 
 > [!NOTE]
-> Clearing the seed at runtime (`PrimarySeed = null`) immediately restores the semantic palette and the `SystemAccentColor*` values. Built-in controls that already materialized their accent brushes may keep the last seeded color until the next app-scope resource change or theme switch — a platform resource-cache behavior. Unmerging the theme always restores the platform accent completely.
+> Clearing the seed at runtime (`PrimarySeed = null`) restores the platform palette and native accent brushes used by existing controls. Explicit overrides remain in effect until they are cleared too.
 
 ## Color Precedence
 

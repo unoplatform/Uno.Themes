@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Text;
+using Microsoft.UI.Xaml.Media;
+using Windows.UI.Text;
 using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
 
@@ -8,10 +9,19 @@ public static partial class Theme
 {
 	public static class Typography
 	{
+		/// <summary>Gets the root font family resource.</summary>
+		[ResourceKeyDefinition(typeof(FontFamily), "DefaultFontFamily")]
+		public static ThemeResourceKey<FontFamily> DefaultFontFamily => new("DefaultFontFamily");
+
 		public static class DisplayLarge
 		{
-			[ResourceKeyDefinition(typeof(FontWeights), "DisplayLargeFontWeight")]
-			public static ThemeResourceKey<FontWeights> FontWeight => new("DisplayLargeFontWeight");
+			/// <summary>Gets the DisplayLarge font family resource.</summary>
+			[ResourceKeyDefinition(typeof(FontFamily), "DisplayLargeFontFamily")]
+			public static ThemeResourceKey<FontFamily> FontFamily => new("DisplayLargeFontFamily");
+
+			/// <summary>Gets the font weight resource as a XAML font weight value.</summary>
+			[ResourceKeyDefinition(typeof(FontWeight), "DisplayLargeFontWeight")]
+			public static ThemeResourceKey<FontWeight> FontWeight => new("DisplayLargeFontWeight");
 
 			[ResourceKeyDefinition(typeof(double), "DisplayLargeFontSize")]
 			public static ThemeResourceKey<double> FontSize => new("DisplayLargeFontSize");
@@ -22,8 +32,13 @@ public static partial class Theme
 
 		public static class DisplayMedium
 		{
-			[ResourceKeyDefinition(typeof(FontWeights), "DisplayMediumFontWeight")]
-			public static ThemeResourceKey<FontWeights> FontWeight => new("DisplayMediumFontWeight");
+			/// <summary>Gets the DisplayMedium font family resource.</summary>
+			[ResourceKeyDefinition(typeof(FontFamily), "DisplayMediumFontFamily")]
+			public static ThemeResourceKey<FontFamily> FontFamily => new("DisplayMediumFontFamily");
+
+			/// <summary>Gets the font weight resource as a XAML font weight value.</summary>
+			[ResourceKeyDefinition(typeof(FontWeight), "DisplayMediumFontWeight")]
+			public static ThemeResourceKey<FontWeight> FontWeight => new("DisplayMediumFontWeight");
 
 			[ResourceKeyDefinition(typeof(double), "DisplayMediumFontSize")]
 			public static ThemeResourceKey<double> FontSize => new("DisplayMediumFontSize");
@@ -31,8 +46,13 @@ public static partial class Theme
 
 		public static class DisplaySmall
 		{
-			[ResourceKeyDefinition(typeof(FontWeights), "DisplaySmallFontWeight")]
-			public static ThemeResourceKey<FontWeights> FontWeight => new("DisplaySmallFontWeight");
+			/// <summary>Gets the DisplaySmall font family resource.</summary>
+			[ResourceKeyDefinition(typeof(FontFamily), "DisplaySmallFontFamily")]
+			public static ThemeResourceKey<FontFamily> FontFamily => new("DisplaySmallFontFamily");
+
+			/// <summary>Gets the font weight resource as a XAML font weight value.</summary>
+			[ResourceKeyDefinition(typeof(FontWeight), "DisplaySmallFontWeight")]
+			public static ThemeResourceKey<FontWeight> FontWeight => new("DisplaySmallFontWeight");
 
 			[ResourceKeyDefinition(typeof(double), "DisplaySmallFontSize")]
 			public static ThemeResourceKey<double> FontSize => new("DisplaySmallFontSize");
@@ -40,8 +60,13 @@ public static partial class Theme
 
 		public static class HeadlineLarge
 		{
-			[ResourceKeyDefinition(typeof(FontWeights), "HeadlineLargeFontWeight")]
-			public static ThemeResourceKey<FontWeights> FontWeight => new("HeadlineLargeFontWeight");
+			/// <summary>Gets the HeadlineLarge font family resource.</summary>
+			[ResourceKeyDefinition(typeof(FontFamily), "HeadlineLargeFontFamily")]
+			public static ThemeResourceKey<FontFamily> FontFamily => new("HeadlineLargeFontFamily");
+
+			/// <summary>Gets the font weight resource as a XAML font weight value.</summary>
+			[ResourceKeyDefinition(typeof(FontWeight), "HeadlineLargeFontWeight")]
+			public static ThemeResourceKey<FontWeight> FontWeight => new("HeadlineLargeFontWeight");
 
 			[ResourceKeyDefinition(typeof(double), "HeadlineLargeFontSize")]
 			public static ThemeResourceKey<double> FontSize => new("HeadlineLargeFontSize");
@@ -49,8 +74,13 @@ public static partial class Theme
 
 		public static class HeadlineMedium
 		{
-			[ResourceKeyDefinition(typeof(FontWeights), "HeadlineMediumFontWeight")]
-			public static ThemeResourceKey<FontWeights> FontWeight => new("HeadlineMediumFontWeight");
+			/// <summary>Gets the HeadlineMedium font family resource.</summary>
+			[ResourceKeyDefinition(typeof(FontFamily), "HeadlineMediumFontFamily")]
+			public static ThemeResourceKey<FontFamily> FontFamily => new("HeadlineMediumFontFamily");
+
+			/// <summary>Gets the font weight resource as a XAML font weight value.</summary>
+			[ResourceKeyDefinition(typeof(FontWeight), "HeadlineMediumFontWeight")]
+			public static ThemeResourceKey<FontWeight> FontWeight => new("HeadlineMediumFontWeight");
 
 			[ResourceKeyDefinition(typeof(double), "HeadlineMediumFontSize")]
 			public static ThemeResourceKey<double> FontSize => new("HeadlineMediumFontSize");
@@ -58,8 +88,13 @@ public static partial class Theme
 
 		public static class HeadlineSmall
 		{
-			[ResourceKeyDefinition(typeof(FontWeights), "HeadlineSmallFontWeight")]
-			public static ThemeResourceKey<FontWeights> FontWeight => new("HeadlineSmallFontWeight");
+			/// <summary>Gets the HeadlineSmall font family resource.</summary>
+			[ResourceKeyDefinition(typeof(FontFamily), "HeadlineSmallFontFamily")]
+			public static ThemeResourceKey<FontFamily> FontFamily => new("HeadlineSmallFontFamily");
+
+			/// <summary>Gets the font weight resource as a XAML font weight value.</summary>
+			[ResourceKeyDefinition(typeof(FontWeight), "HeadlineSmallFontWeight")]
+			public static ThemeResourceKey<FontWeight> FontWeight => new("HeadlineSmallFontWeight");
 
 			[ResourceKeyDefinition(typeof(double), "HeadlineSmallFontSize")]
 			public static ThemeResourceKey<double> FontSize => new("HeadlineSmallFontSize");
@@ -67,8 +102,13 @@ public static partial class Theme
 
 		public static class TitleLarge
 		{
-			[ResourceKeyDefinition(typeof(FontWeights), "TitleLargeFontWeight")]
-			public static ThemeResourceKey<FontWeights> FontWeight => new("TitleLargeFontWeight");
+			/// <summary>Gets the TitleLarge font family resource.</summary>
+			[ResourceKeyDefinition(typeof(FontFamily), "TitleLargeFontFamily")]
+			public static ThemeResourceKey<FontFamily> FontFamily => new("TitleLargeFontFamily");
+
+			/// <summary>Gets the font weight resource as a XAML font weight value.</summary>
+			[ResourceKeyDefinition(typeof(FontWeight), "TitleLargeFontWeight")]
+			public static ThemeResourceKey<FontWeight> FontWeight => new("TitleLargeFontWeight");
 
 			[ResourceKeyDefinition(typeof(double), "TitleLargeFontSize")]
 			public static ThemeResourceKey<double> FontSize => new("TitleLargeFontSize");
@@ -76,8 +116,13 @@ public static partial class Theme
 
 		public static class TitleMedium
 		{
-			[ResourceKeyDefinition(typeof(FontWeights), "TitleMediumFontWeight")]
-			public static ThemeResourceKey<FontWeights> FontWeight => new("TitleMediumFontWeight");
+			/// <summary>Gets the TitleMedium font family resource.</summary>
+			[ResourceKeyDefinition(typeof(FontFamily), "TitleMediumFontFamily")]
+			public static ThemeResourceKey<FontFamily> FontFamily => new("TitleMediumFontFamily");
+
+			/// <summary>Gets the font weight resource as a XAML font weight value.</summary>
+			[ResourceKeyDefinition(typeof(FontWeight), "TitleMediumFontWeight")]
+			public static ThemeResourceKey<FontWeight> FontWeight => new("TitleMediumFontWeight");
 
 			[ResourceKeyDefinition(typeof(double), "TitleMediumFontSize")]
 			public static ThemeResourceKey<double> FontSize => new("TitleMediumFontSize");
@@ -85,8 +130,13 @@ public static partial class Theme
 
 		public static class TitleSmall
 		{
-			[ResourceKeyDefinition(typeof(FontWeights), "TitleSmallFontWeight")]
-			public static ThemeResourceKey<FontWeights> FontWeight => new("TitleSmallFontWeight");
+			/// <summary>Gets the TitleSmall font family resource.</summary>
+			[ResourceKeyDefinition(typeof(FontFamily), "TitleSmallFontFamily")]
+			public static ThemeResourceKey<FontFamily> FontFamily => new("TitleSmallFontFamily");
+
+			/// <summary>Gets the font weight resource as a XAML font weight value.</summary>
+			[ResourceKeyDefinition(typeof(FontWeight), "TitleSmallFontWeight")]
+			public static ThemeResourceKey<FontWeight> FontWeight => new("TitleSmallFontWeight");
 
 			[ResourceKeyDefinition(typeof(double), "TitleSmallFontSize")]
 			public static ThemeResourceKey<double> FontSize => new("TitleSmallFontSize");
@@ -94,8 +144,13 @@ public static partial class Theme
 
 		public static class LabelLarge
 		{
-			[ResourceKeyDefinition(typeof(FontWeights), "LabelLargeFontWeight")]
-			public static ThemeResourceKey<FontWeights> FontWeight => new("LabelLargeFontWeight");
+			/// <summary>Gets the LabelLarge font family resource.</summary>
+			[ResourceKeyDefinition(typeof(FontFamily), "LabelLargeFontFamily")]
+			public static ThemeResourceKey<FontFamily> FontFamily => new("LabelLargeFontFamily");
+
+			/// <summary>Gets the font weight resource as a XAML font weight value.</summary>
+			[ResourceKeyDefinition(typeof(FontWeight), "LabelLargeFontWeight")]
+			public static ThemeResourceKey<FontWeight> FontWeight => new("LabelLargeFontWeight");
 
 			[ResourceKeyDefinition(typeof(double), "LabelLargeFontSize")]
 			public static ThemeResourceKey<double> FontSize => new("LabelLargeFontSize");
@@ -106,8 +161,13 @@ public static partial class Theme
 
 		public static class LabelMedium
 		{
-			[ResourceKeyDefinition(typeof(FontWeights), "LabelMediumFontWeight")]
-			public static ThemeResourceKey<FontWeights> FontWeight => new("LabelMediumFontWeight");
+			/// <summary>Gets the LabelMedium font family resource.</summary>
+			[ResourceKeyDefinition(typeof(FontFamily), "LabelMediumFontFamily")]
+			public static ThemeResourceKey<FontFamily> FontFamily => new("LabelMediumFontFamily");
+
+			/// <summary>Gets the font weight resource as a XAML font weight value.</summary>
+			[ResourceKeyDefinition(typeof(FontWeight), "LabelMediumFontWeight")]
+			public static ThemeResourceKey<FontWeight> FontWeight => new("LabelMediumFontWeight");
 
 			[ResourceKeyDefinition(typeof(double), "LabelMediumFontSize")]
 			public static ThemeResourceKey<double> FontSize => new("LabelMediumFontSize");
@@ -118,8 +178,13 @@ public static partial class Theme
 
 		public static class LabelSmall
 		{
-			[ResourceKeyDefinition(typeof(FontWeights), "LabelSmallFontWeight")]
-			public static ThemeResourceKey<FontWeights> FontWeight => new("LabelSmallFontWeight");
+			/// <summary>Gets the LabelSmall font family resource.</summary>
+			[ResourceKeyDefinition(typeof(FontFamily), "LabelSmallFontFamily")]
+			public static ThemeResourceKey<FontFamily> FontFamily => new("LabelSmallFontFamily");
+
+			/// <summary>Gets the font weight resource as a XAML font weight value.</summary>
+			[ResourceKeyDefinition(typeof(FontWeight), "LabelSmallFontWeight")]
+			public static ThemeResourceKey<FontWeight> FontWeight => new("LabelSmallFontWeight");
 
 			[ResourceKeyDefinition(typeof(double), "LabelSmallFontSize")]
 			public static ThemeResourceKey<double> FontSize => new("LabelSmallFontSize");
@@ -130,8 +195,13 @@ public static partial class Theme
 
 		public static class LabelExtraSmall
 		{
-			[ResourceKeyDefinition(typeof(FontWeights), "LabelExtraSmallFontWeight")]
-			public static ThemeResourceKey<FontWeights> FontWeight => new("LabelExtraSmallFontWeight");
+			/// <summary>Gets the LabelExtraSmall font family resource.</summary>
+			[ResourceKeyDefinition(typeof(FontFamily), "LabelExtraSmallFontFamily")]
+			public static ThemeResourceKey<FontFamily> FontFamily => new("LabelExtraSmallFontFamily");
+
+			/// <summary>Gets the font weight resource as a XAML font weight value.</summary>
+			[ResourceKeyDefinition(typeof(FontWeight), "LabelExtraSmallFontWeight")]
+			public static ThemeResourceKey<FontWeight> FontWeight => new("LabelExtraSmallFontWeight");
 
 			[ResourceKeyDefinition(typeof(double), "LabelExtraSmallFontSize")]
 			public static ThemeResourceKey<double> FontSize => new("LabelExtraSmallFontSize");
@@ -142,8 +212,13 @@ public static partial class Theme
 
 		public static class BodyLarge
 		{
-			[ResourceKeyDefinition(typeof(FontWeights), "BodyLargeFontWeight")]
-			public static ThemeResourceKey<FontWeights> FontWeight => new("BodyLargeFontWeight");
+			/// <summary>Gets the BodyLarge font family resource.</summary>
+			[ResourceKeyDefinition(typeof(FontFamily), "BodyLargeFontFamily")]
+			public static ThemeResourceKey<FontFamily> FontFamily => new("BodyLargeFontFamily");
+
+			/// <summary>Gets the font weight resource as a XAML font weight value.</summary>
+			[ResourceKeyDefinition(typeof(FontWeight), "BodyLargeFontWeight")]
+			public static ThemeResourceKey<FontWeight> FontWeight => new("BodyLargeFontWeight");
 
 			[ResourceKeyDefinition(typeof(double), "BodyLargeFontSize")]
 			public static ThemeResourceKey<double> FontSize => new("BodyLargeFontSize");
@@ -154,8 +229,13 @@ public static partial class Theme
 
 		public static class BodyMedium
 		{
-			[ResourceKeyDefinition(typeof(FontWeights), "BodyMediumFontWeight")]
-			public static ThemeResourceKey<FontWeights> FontWeight => new("BodyMediumFontWeight");
+			/// <summary>Gets the BodyMedium font family resource.</summary>
+			[ResourceKeyDefinition(typeof(FontFamily), "BodyMediumFontFamily")]
+			public static ThemeResourceKey<FontFamily> FontFamily => new("BodyMediumFontFamily");
+
+			/// <summary>Gets the font weight resource as a XAML font weight value.</summary>
+			[ResourceKeyDefinition(typeof(FontWeight), "BodyMediumFontWeight")]
+			public static ThemeResourceKey<FontWeight> FontWeight => new("BodyMediumFontWeight");
 
 			[ResourceKeyDefinition(typeof(double), "BodyMediumFontSize")]
 			public static ThemeResourceKey<double> FontSize => new("BodyMediumFontSize");
@@ -166,8 +246,13 @@ public static partial class Theme
 
 		public static class BodySmall
 		{
-			[ResourceKeyDefinition(typeof(FontWeights), "BodySmallFontWeight")]
-			public static ThemeResourceKey<FontWeights> FontWeight => new("BodySmallFontWeight");
+			/// <summary>Gets the BodySmall font family resource.</summary>
+			[ResourceKeyDefinition(typeof(FontFamily), "BodySmallFontFamily")]
+			public static ThemeResourceKey<FontFamily> FontFamily => new("BodySmallFontFamily");
+
+			/// <summary>Gets the font weight resource as a XAML font weight value.</summary>
+			[ResourceKeyDefinition(typeof(FontWeight), "BodySmallFontWeight")]
+			public static ThemeResourceKey<FontWeight> FontWeight => new("BodySmallFontWeight");
 
 
 			[ResourceKeyDefinition(typeof(double), "BodySmallFontSize")]
@@ -179,8 +264,13 @@ public static partial class Theme
 
 		public static class CaptionLarge
 		{
-			[ResourceKeyDefinition(typeof(FontWeights), "CaptionLargeFontWeight")]
-			public static ThemeResourceKey<FontWeights> FontWeight => new("CaptionLargeFontWeight");
+			/// <summary>Gets the CaptionLarge font family resource.</summary>
+			[ResourceKeyDefinition(typeof(FontFamily), "CaptionLargeFontFamily")]
+			public static ThemeResourceKey<FontFamily> FontFamily => new("CaptionLargeFontFamily");
+
+			/// <summary>Gets the font weight resource as a XAML font weight value.</summary>
+			[ResourceKeyDefinition(typeof(FontWeight), "CaptionLargeFontWeight")]
+			public static ThemeResourceKey<FontWeight> FontWeight => new("CaptionLargeFontWeight");
 
 			[ResourceKeyDefinition(typeof(double), "CaptionLargeFontSize")]
 			public static ThemeResourceKey<double> FontSize => new("CaptionLargeFontSize");
@@ -191,8 +281,13 @@ public static partial class Theme
 
 		public static class CaptionMedium
 		{
-			[ResourceKeyDefinition(typeof(FontWeights), "CaptionMediumFontWeight")]
-			public static ThemeResourceKey<FontWeights> FontWeight => new("CaptionMediumFontWeight");
+			/// <summary>Gets the CaptionMedium font family resource.</summary>
+			[ResourceKeyDefinition(typeof(FontFamily), "CaptionMediumFontFamily")]
+			public static ThemeResourceKey<FontFamily> FontFamily => new("CaptionMediumFontFamily");
+
+			/// <summary>Gets the font weight resource as a XAML font weight value.</summary>
+			[ResourceKeyDefinition(typeof(FontWeight), "CaptionMediumFontWeight")]
+			public static ThemeResourceKey<FontWeight> FontWeight => new("CaptionMediumFontWeight");
 
 			[ResourceKeyDefinition(typeof(double), "CaptionMediumFontSize")]
 			public static ThemeResourceKey<double> FontSize => new("CaptionMediumFontSize");
@@ -203,8 +298,13 @@ public static partial class Theme
 
 		public static class CaptionSmall
 		{
-			[ResourceKeyDefinition(typeof(FontWeights), "CaptionSmallFontWeight")]
-			public static ThemeResourceKey<FontWeights> FontWeight => new("CaptionSmallFontWeight");
+			/// <summary>Gets the CaptionSmall font family resource.</summary>
+			[ResourceKeyDefinition(typeof(FontFamily), "CaptionSmallFontFamily")]
+			public static ThemeResourceKey<FontFamily> FontFamily => new("CaptionSmallFontFamily");
+
+			/// <summary>Gets the font weight resource as a XAML font weight value.</summary>
+			[ResourceKeyDefinition(typeof(FontWeight), "CaptionSmallFontWeight")]
+			public static ThemeResourceKey<FontWeight> FontWeight => new("CaptionSmallFontWeight");
 
 			[ResourceKeyDefinition(typeof(double), "CaptionSmallFontSize")]
 			public static ThemeResourceKey<double> FontSize => new("CaptionSmallFontSize");

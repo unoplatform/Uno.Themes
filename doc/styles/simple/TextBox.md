@@ -6,25 +6,25 @@ uid: Uno.Themes.Simple.Styles.TextBox
 
 ## Styles
 
-| Style Key                          | IsDefaultStyle\* |
-|------------------------------------|------------------|
-| `SimpleFilledTextBoxStyle`    |                  |
-| `SimpleTextBoxErrorStyle`     |                  |
-| `SimpleTextBoxSmallStyle`     |                  |
-| `SimpleOutlinedTextBoxStyle`  | True             |
+| Style Key | IsDefaultStyle\* |
+| ------------------------------------ | ------------------ |
+| `SimpleFilledTextBoxStyle` | |
+| `SimpleTextBoxErrorStyle` | |
+| `SimpleTextBoxSmallStyle` | |
+| `SimpleOutlinedTextBoxStyle` | True |
 
 IsDefaultStyle\*: Styles in this column will be set as the default implicit style for the matching control
 
 ## Lightweight Styling
 
 > [!NOTE]
-> Current implementation limitation: for both filled and outlined styles, the `*HeaderForegroundPointerOver`, `*HeaderForegroundFocused`, `*PlaceholderForegroundPointerOver`, and `*PlaceholderForegroundFocused` keys resolve as resources but are not read by the templates. Headers and placeholders retain their base foreground during hover and focus. Their disabled keys are consumed. Input text, background, and border state overrides are consumed normally.
+Both filled and outlined styles consume their header and placeholder foreground keys for normal, pointer-over, focused, and disabled states. These keys customize the header and placeholder independently of input text, background, and border state overrides.
 
 ### Structural Resources
 
-| Key                                                | Type              | Value                                      |
-|----------------------------------------------------|-------------------|--------------------------------------------|
-| `SimpleTextBoxHeaderMargin`                        | `Thickness`       | 0,0,0,4                                   |
+| Key | Type | Value |
+| ---------------------------------------------------- | ------------------- | -------------------------------------------- |
+| `SimpleTextBoxHeaderMargin` | `Thickness` | 0,0,0,4 |
 
 ### Simple Aliases
 

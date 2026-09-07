@@ -148,71 +148,23 @@ internal static class SemanticBrushUpdater
 		}
 	}
 
-	// All theme keys a color layer may declare. Used to detect that a key is theme-scoped in a
-	// layer whose dictionaries for the requested theme did not carry it.
-	private static readonly string[] _allThemeKeys = { "Light", "Dark", "Default", "HighContrast" };
-
 	/// <summary>
-	/// Walks <paramref name="colorLayers"/> from the highest precedence down and returns the first
-	/// definition of <paramref name="key"/> for the requested theme. Within a layer the candidate
-	/// theme keys are probed in order (mirroring the framework's <c>Dark</c> → <c>Default</c>
-	/// fallback). When the layer declares the key only under <em>other</em> theme dictionaries, the
-	/// layer is skipped rather than falling through to the plain lookup:
-	/// <see cref="ResourceDictionary.TryGetValue"/> resolves themed entries against the
-	/// <em>application</em> theme, which would bleed one theme's value into another's brushes.
-	/// The plain lookup remains for genuinely theme-agnostic entries (the opacity tokens).
+	/// Resolves each layer for the requested appearance without ambient or system fallback.
+	/// Later color layers win; each layer preserves own/merged/appearance precedence.
 	/// </summary>
 	private static bool TryResolve<T>(
 		IReadOnlyList<ResourceDictionary> colorLayers, string[] themeKeys, string key, out T resolved)
 		where T : struct
 	{
-		for (int i = colorLayers.Count - 1; i >= 0; i--)
+		for (var i = colorLayers.Count - 1; i >= 0; i--)
 		{
-			var layer = colorLayers[i];
-
-			for (int t = 0; t < themeKeys.Length; t++)
+			if (ThemeResourceResolver.Resolve(colorLayers[i], themeKeys[0], key, themeKeys) is T value)
 			{
-				if (TryGetThemeDictionary(layer, themeKeys[t], out var themed)
-					&& themed.TryGetValue(key, out var themedValue)
-					&& themedValue is T themedResult)
-				{
-					resolved = themedResult;
-					return true;
-				}
-			}
-
-			if (IsThemeScoped(layer, key))
-			{
-				continue;
-			}
-
-			if (layer.TryGetValue(key, out var value) && value is T result)
-			{
-				resolved = result;
+				resolved = value;
 				return true;
 			}
 		}
-
 		resolved = default;
-		return false;
-	}
-
-	/// <summary>
-	/// <c>true</c> when <paramref name="key"/> is declared under any of <paramref name="layer"/>'s
-	/// theme dictionaries — i.e. the key is theme-scoped in this layer and the theme-agnostic
-	/// fallback must not resolve it.
-	/// </summary>
-	private static bool IsThemeScoped(ResourceDictionary layer, string key)
-	{
-		for (int t = 0; t < _allThemeKeys.Length; t++)
-		{
-			if (TryGetThemeDictionary(layer, _allThemeKeys[t], out var themed)
-				&& themed.TryGetValue(key, out _))
-			{
-				return true;
-			}
-		}
-
 		return false;
 	}
 
