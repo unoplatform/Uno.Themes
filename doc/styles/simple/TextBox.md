@@ -4,6 +4,9 @@ uid: Uno.Themes.Simple.Styles.TextBox
 
 # TextBox Control
 
+> [!NOTE]
+> Current implementation limitation: for both filled and outlined styles, the `*HeaderForegroundPointerOver`, `*HeaderForegroundFocused`, `*PlaceholderForegroundPointerOver`, and `*PlaceholderForegroundFocused` keys resolve as resources but are not read by the templates. Headers and placeholders retain their base foreground during hover and focus. Their disabled keys are consumed. Input text, background, and border state overrides are consumed normally.
+
 <!-- BEGIN GENERATED -->
 <!-- This region is generated from the Styles XAML by `dotnet run build/scripts/GenerateStyleDocs.cs`; do not edit it by hand. -->
 

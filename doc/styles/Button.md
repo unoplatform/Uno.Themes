@@ -5,6 +5,8 @@ uid: Uno.Themes.Styles.Button
 # Button Control
 
 > [!NOTE]
+> The tables below describe Material v2. Under Simple, `OutlinedButtonStyle` uses the tonal template: override `FilledTonalButton*` to change it; the declared `OutlinedButton*` aliases are not consumed.
+>
 > Under the [Fluent theme](../fluent-getting-started.md), buttons are rendered by the built-in WinUI templates, which read Fluent's own per-control resources (`AccentButton*`, `Button*`), not the keys below. Override those Fluent keys instead, or set a seed or `PrimaryColor` override to recolor the accent button. See [Lightweight Styling — Fluent theme](../lightweight-styling.md#fluent-theme).
 
 <!-- BEGIN GENERATED -->
