@@ -4,6 +4,8 @@ uid: Uno.Themes.Simple.Styles.Button
 
 # Button Control
 
+Semantic `OutlinedButtonStyle` maps to `SimpleFilledTonalButtonStyle`. Its template consumes `FilledTonalButton*`, so the declared `OutlinedButton*` aliases do not customize it independently. Override the tonal family to affect both variants; see [semantic override compatibility](../../semantic-styles.md#override-compatibility).
+
 ## Styles
 
 | Style Key                                 | IsDefaultStyle\* |
