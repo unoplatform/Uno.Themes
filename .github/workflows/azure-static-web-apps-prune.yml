@@ -1,0 +1,142 @@
+name: Prune Azure Static Web Apps staging environments
+
+# Every same-repo pull request gets a Static Web Apps staging environment (see
+# azure-static-web-apps.yml). Azure caps those per site — 3 on the Free plan, 10 on Standard —
+# and the deploy fails outright once the cap is reached:
+#
+#   The content server has rejected the request with: BadRequest
+#   Reason: This Static Web App already has the maximum number of staging environments.
+#
+# The `close-pull-request` job reclaims an environment when a PR closes, but only if that job
+# actually runs: PRs closed before the job existed, runs cancelled mid-flight, and any failure
+# of that step all leave an environment behind with nothing to collect it. This job reconciles
+# the site against the list of open PRs and deletes the orphans.
+#
+# Required repository configuration (the job no-ops with a notice when any is missing):
+#   vars.AZURE_SWA_NAME            — Static Web App resource name
+#   vars.AZURE_SWA_RESOURCE_GROUP  — its resource group
+#   secrets.AZURE_CLIENT_ID        — federated (OIDC) app registration with Contributor on the site
+#   secrets.AZURE_TENANT_ID
+#   secrets.AZURE_SUBSCRIPTION_ID
+
+on:
+  schedule:
+    # 06:00 UTC daily — before European working hours, so a PR opened in the morning finds
+    # capacity already reclaimed.
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'List the orphaned environments without deleting them'
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+  pull-requests: read
+  id-token: write
+
+jobs:
+  prune:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check configuration
+        id: config
+        env:
+          SWA_NAME: ${{ vars.AZURE_SWA_NAME }}
+          SWA_RESOURCE_GROUP: ${{ vars.AZURE_SWA_RESOURCE_GROUP }}
+          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        run: |
+          set -euo pipefail
+          missing=()
+          for name in SWA_NAME SWA_RESOURCE_GROUP AZURE_CLIENT_ID AZURE_TENANT_ID AZURE_SUBSCRIPTION_ID; do
+            if [ -z "${!name}" ]; then
+              missing+=("$name")
+            fi
+          done
+
+          if [ ${#missing[@]} -gt 0 ]; then
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "::notice title=Prune skipped::Not configured for this repository. Missing: ${missing[*]}. See the header of .github/workflows/azure-static-web-apps-prune.yml."
+          else
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Azure login
+        if: steps.config.outputs.configured == 'true'
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Delete environments whose pull request is no longer open
+        if: steps.config.outputs.configured == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # This job does not check out the repository, so gh has no git remote to infer the
+          # target from and needs it named explicitly.
+          GH_REPO: ${{ github.repository }}
+          SWA_NAME: ${{ vars.AZURE_SWA_NAME }}
+          SWA_RESOURCE_GROUP: ${{ vars.AZURE_SWA_RESOURCE_GROUP }}
+          # Scheduled runs always delete; a manual run defaults to reporting only.
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run || 'false' }}
+        run: |
+          set -euo pipefail
+
+          # buildId is the PR number for a pull-request environment; the production
+          # environment reports "default" and must never be deleted.
+          az staticwebapp environment list \
+            --name "$SWA_NAME" \
+            --resource-group "$SWA_RESOURCE_GROUP" \
+            --output json > environments.json
+
+          jq -r '.[].buildId | select(. != null and . != "default")' environments.json \
+            | sort -u > deployed.txt
+
+          gh pr list --state open --limit 200 --json number \
+            | jq -r '.[].number' | sort -u > open.txt
+
+          comm -23 deployed.txt open.txt > orphans.txt
+
+          echo "Staging environments: $(grep -c . deployed.txt), open pull requests: $(grep -c . open.txt)"
+
+          if [ ! -s orphans.txt ]; then
+            echo "No orphaned environments to reclaim."
+            echo "No orphaned environments to reclaim." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          {
+            echo "### Orphaned Static Web Apps staging environments"
+            echo
+            while read -r build; do
+              echo "- \`$build\` (pull request #$build is not open)"
+            done < orphans.txt
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          if [ "$DRY_RUN" = "true" ]; then
+            echo "Dry run — nothing deleted."
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "_Dry run — nothing deleted._" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          # A single failure must not strand the environments queued behind it.
+          failed=0
+          while read -r build; do
+            echo "Deleting environment $build"
+            if ! az staticwebapp environment delete \
+                --name "$SWA_NAME" \
+                --resource-group "$SWA_RESOURCE_GROUP" \
+                --environment-name "$build" \
+                --yes; then
+              echo "::warning title=Prune failed::Could not delete staging environment $build."
+              failed=1
+            fi
+          done < orphans.txt
+
+          exit "$failed"
