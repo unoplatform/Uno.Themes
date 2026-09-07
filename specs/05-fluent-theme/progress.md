@@ -452,6 +452,14 @@ names the cheapest fix.
 
 ## Review log
 
+- 2026-09-06 — **Named semantic color-role constants** (`Uno.Themes.SemanticColorKeys`,
+  internal): the anonymous `ThemesConstants.SemanticColorKeys` array became named
+  constants plus `All`; `SeedColorPaletteGenerator`, `FluentColorPalette.BuildBranch`
+  and `FluentAccentPalette` write roles through them instead of string literals, so
+  the producers cannot drift from the role set the brush updater reads. No public
+  API or resource-key change; runtime tests keep asserting the literal key strings
+  (that is the contract check).
+
 - 2026-09-06 — **Fluent templates for the five style pages** (Phase 8 above);
   fixes the Fluent head's landing page falling back to the Material template.
   New Fluent-head runtime test `Given_FluentSamplePages` guards every
