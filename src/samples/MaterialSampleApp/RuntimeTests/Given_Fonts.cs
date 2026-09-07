@@ -22,6 +22,40 @@ public class Given_Fonts
 	// A family that does not exist anywhere: what a missing entry point degrades to.
 	private const string MissingEntryPoint = "ms-appx:///Uno.Fonts.Roboto/Fonts/DoesNotExist.ttf#Missing";
 
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_LegacyMaterialResourcesAreLoaded_Then_SharedTypographyAndFontsRemainAvailable()
+	{
+		var resources = new MaterialResourcesV1();
+		Assert.AreEqual("Normal", resources["LabelExtraSmallFontWeight"]);
+		Assert.AreEqual(RobotoEntryPoint, ((FontFamily)resources["DefaultFontFamily"]).Source);
+		Assert.AreEqual(typeof(Button), ((Style)resources["MaterialContainedButtonStyle"]).TargetType);
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow(ElementTheme.Light, (ushort)500)]
+	[DataRow(ElementTheme.Dark, (ushort)400)]
+	public async Task When_LabelExtraSmallIsUsed_Then_MaterialTypographyWinsOverSharedDefaults(ElementTheme appearance, ushort weight)
+	{
+		var container = CreateThemedContainer();
+		container.RequestedTheme = appearance;
+		var text = new TextBlock { Text = "Material label", Style = (Style)container.Resources["LabelExtraSmall"] };
+		container.Children.Add(text);
+		try
+		{
+			UnitTestsUIContentHelper.Content = container;
+			await UnitTestsUIContentHelper.WaitForLoaded(text);
+			await UnitTestsUIContentHelper.WaitForIdle();
+			Assert.AreEqual(weight, text.FontWeight.Weight,
+				"Material's type scale must take precedence over the shared fallback dictionary.");
+		}
+		finally
+		{
+			UnitTestsUIContentHelper.Content = null;
+		}
+	}
+
 	private static Grid CreateThemedContainer()
 	{
 		var container = new Grid();

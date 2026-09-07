@@ -6,11 +6,7 @@
 		Lightweight styling: every visual-state brush is exposed via ThemeResource.
 		
 		Semantic resource layer:
-		CheckBox{Property}{State}  = semantic keys (Material naming, source of truth)
-		SimpleCheckBox{State}{Property} = Simple-prefixed keys that alias → semantic keys
-		
-		Templates reference Simple-prefixed keys (SimpleCheckBox*) so that consumers
-		can override EITHER the Simple key or the semantic key.
+		Templates consume CheckBox{Property}{State} semantic keys directly.
 		
 		States: Unchecked/Checked/Indeterminate × Normal/PointerOver/Pressed/Disabled
 		SDS source: Checkbox/checkbox.css
@@ -260,6 +256,7 @@
 								<!-- ── Checked ── -->
 								<VisualState x:Name="CheckedNormal">
 									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource CheckBoxForegroundChecked}" />
 										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource CheckBoxBackgroundChecked}" />
 										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource CheckBoxBorderBrushChecked}" />
 										<Setter Target="CheckGlyph.Opacity" Value="1" />
@@ -272,7 +269,7 @@
 										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource CheckBoxBorderBrushCheckedPointerOver}" />
 										<Setter Target="CheckGlyph.Opacity" Value="1" />
 										<Setter Target="CheckGlyph.Fill" Value="{ThemeResource CheckBoxGlyphForegroundCheckedPointerOver}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource CheckBoxForegroundUncheckedPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource CheckBoxForegroundCheckedPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="CheckedPressed">
@@ -281,7 +278,7 @@
 										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource CheckBoxBorderBrushCheckedPressed}" />
 										<Setter Target="CheckGlyph.Opacity" Value="1" />
 										<Setter Target="CheckGlyph.Fill" Value="{ThemeResource CheckBoxGlyphForegroundCheckedPressed}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource CheckBoxForegroundUncheckedPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource CheckBoxForegroundCheckedPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="CheckedDisabled">
@@ -290,13 +287,14 @@
 										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource CheckBoxBorderBrushCheckedDisabled}" />
 										<Setter Target="CheckGlyph.Opacity" Value="1" />
 										<Setter Target="CheckGlyph.Fill" Value="{ThemeResource CheckBoxGlyphForegroundCheckedDisabled}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource CheckBoxForegroundUncheckedDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource CheckBoxForegroundCheckedDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<!-- ── Indeterminate ── -->
 								<VisualState x:Name="IndeterminateNormal">
 									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource CheckBoxForegroundIndeterminate}" />
 										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource CheckBoxBackgroundIndeterminate}" />
 										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource CheckBoxBorderBrushIndeterminate}" />
 										<Setter Target="IndeterminateGlyph.Opacity" Value="1" />
@@ -309,7 +307,7 @@
 										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource CheckBoxBorderBrushIndeterminatePointerOver}" />
 										<Setter Target="IndeterminateGlyph.Opacity" Value="1" />
 										<Setter Target="IndeterminateGlyph.Fill" Value="{ThemeResource CheckBoxGlyphForegroundIndeterminatePointerOver}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource CheckBoxForegroundUncheckedPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource CheckBoxForegroundIndeterminatePointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="IndeterminatePressed">
@@ -318,7 +316,7 @@
 										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource CheckBoxBorderBrushIndeterminatePressed}" />
 										<Setter Target="IndeterminateGlyph.Opacity" Value="1" />
 										<Setter Target="IndeterminateGlyph.Fill" Value="{ThemeResource CheckBoxGlyphForegroundIndeterminatePressed}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource CheckBoxForegroundUncheckedPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource CheckBoxForegroundIndeterminatePressed}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="IndeterminateDisabled">
@@ -327,7 +325,7 @@
 										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource CheckBoxBorderBrushIndeterminateDisabled}" />
 										<Setter Target="IndeterminateGlyph.Opacity" Value="1" />
 										<Setter Target="IndeterminateGlyph.Fill" Value="{ThemeResource CheckBoxGlyphForegroundIndeterminateDisabled}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource CheckBoxForegroundUncheckedDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource CheckBoxForegroundIndeterminateDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 

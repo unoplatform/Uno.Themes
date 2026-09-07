@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<!--
+		Later merged dictionaries win. Keep Material typography above the shared
+		type scale; themed entries in the merged root would lose to the base layer.
+	-->
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="ms-appx:///Uno.Material.WinUI/Styles/Application/Common/BaseDictionaries.xaml" />
+		<ResourceDictionary Source="ms-appx:///Uno.Material.WinUI/Styles/Application/v2/Typography.xaml" />
+	</ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>
