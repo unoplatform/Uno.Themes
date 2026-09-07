@@ -25,7 +25,7 @@ namespace Uno.Fluent;
 /// dictionary; when its tokens are unreachable the semantic color roles keep the
 /// shared defaults and a warning is logged (theme initialization never throws).
 /// </remarks>
-public class FluentTheme : BaseTheme
+public partial class FluentTheme : BaseTheme
 {
 	// The spec 05 §5.2 Ⓜ gap keys (ProgressRingStyle, NavigationViewStyle, …)
 	// ship as declarative empty styles in _Resources.xaml — an empty style keeps
@@ -101,9 +101,18 @@ public class FluentTheme : BaseTheme
 	/// <param name="colorOverride">(Optional) Overrides for the semantic <see cref="Color"/> resources, layered above the Fluent palette.</param>
 	/// <param name="fontOverride">(Optional) Overrides for the typography resources, layered above the Fluent type ramp.</param>
 	public FluentTheme(ResourceDictionary? colorOverride = null, ResourceDictionary? fontOverride = null)
-		: base(CreateFluentColorOverride(colorOverride, out var palette), fontOverride)
+		: base(CreateFluentColorOverride(out var palette), fontOverride)
 	{
 		_palette = palette;
+		if (colorOverride is { })
+		{
+			Colors = new ThemeColors { OverrideDictionary = colorOverride };
+		}
+		else
+		{
+			UpdateSource();
+		}
+		ObserveSystemAccent();
 	}
 
 	/// <summary>
@@ -121,15 +130,10 @@ public class FluentTheme : BaseTheme
 	/// <inheritdoc />
 	protected override string DefaultStylesSource => FluentConstants.ResourcePaths.MergedPages;
 
-	private static ResourceDictionary CreateFluentColorOverride(ResourceDictionary? colorOverride, out ResourceDictionary palette)
+	private static ResourceDictionary CreateFluentColorOverride(out ResourceDictionary palette)
 	{
 		palette = new ResourceDictionary();
 		FluentColorPalette.TryPopulate(palette);
-
-		if (colorOverride is { })
-		{
-			palette.SafeMerge(colorOverride);
-		}
 
 		return palette;
 	}
@@ -156,19 +160,6 @@ public class FluentTheme : BaseTheme
 	{
 		base.AddThemeSpecificResources();
 
-		// _palette is null only during the base ctor's first pass, where
-		// CreateFluentColorOverride has just attempted the same build.
-		if (_palette is { ThemeDictionaries.Count: 0 } palette)
-		{
-			// The Fluent tokens were unreachable when this theme was constructed
-			// (e.g. XamlControlsResources merged after FluentTheme, against the
-			// documented ordering) — retry on every rebuild so the palette heals
-			// once the tokens become available. The *Color keys resolve through
-			// the live merge immediately; the generated semantic brushes were
-			// swept before this hook runs and catch up on the following rebuild.
-			FluentColorPalette.TryPopulate(palette);
-		}
-
 		EnsureBundleStyleAliases();
 		AddThemeDictionary(_bundleAliasStyles);
 
@@ -180,17 +171,7 @@ public class FluentTheme : BaseTheme
 		// apart (spec 05 §9.3).
 		var seedColorMode = Colors?.SeedColorMode ?? SeedColorMode.Fidelity;
 
-		// The consumer color override, whatever channel supplied it —
-		// Colors.OverrideDictionary / Colors.OverrideSource and the obsolete
-		// BaseTheme ColorOverride* properties all funnel into
-		// Colors.OverrideDictionary. URI-backed overrides are re-resolved from
-		// their Source on each rebuild (mirroring BaseTheme.UpdateSource) so
-		// hot-reload edits propagate to the accent/bridge layers too.
-		var consumerOverride = Colors?.OverrideDictionary is { } overrideDictionary
-			? overrideDictionary.Source is { } overrideSource
-				? new ResourceDictionary { Source = overrideSource }
-				: overrideDictionary
-			: null;
+		var consumerOverride = ResolvedColorOverride;
 
 		// An explicit PrimaryColor override is the highest-precedence statement
 		// of what "Primary" is — per branch, it drives the accent verbatim,
@@ -203,7 +184,7 @@ public class FluentTheme : BaseTheme
 		// Fluent controls follow it too. Added on every rebuild pass so it
 		// tracks changes and is dropped when the drivers clear (restoring the
 		// platform accent). No driver → no entry at all.
-		if (effectiveSeed is { } || lightAccentBasis is { } || darkAccentBasis is { })
+		if (effectiveSeed is { } || consumerOverride is { })
 		{
 			// Only the pure-seed result is cached: override contents can mutate
 			// without a reference change, so override-driven passes rebuild.
@@ -214,12 +195,17 @@ public class FluentTheme : BaseTheme
 					_accentOverride = (seed, seedColorMode, FluentAccentPalette.Build(seed, seedColorMode, lightBasis: null, darkBasis: null, consumerOverride: null));
 				}
 
-				AddThemeDictionary(_accentOverride.Value.Dictionary);
+				UpdateAccentResources(_accentOverride.Value.Dictionary);
 			}
 			else
 			{
-				AddThemeDictionary(FluentAccentPalette.Build(effectiveSeed, seedColorMode, lightAccentBasis, darkAccentBasis, consumerOverride));
+				UpdateAccentResources(FluentAccentPalette.Build(effectiveSeed, seedColorMode, lightAccentBasis, darkAccentBasis, consumerOverride));
 			}
+		}
+
+		else
+		{
+			UpdateAccentResources(new ResourceDictionary());
 		}
 
 		// Lightweight-styling bridge (spec 05 §10, goal G6). The static neutral
@@ -231,7 +217,7 @@ public class FluentTheme : BaseTheme
 		// mutate without a reference change, so no cache here — it is a handful
 		// of brushes and passes only run on theme-property changes).
 		AddThemeDictionary(_lightweightDefaults);
-		AddThemeDictionary(FluentLightweightBridge.Build(effectiveSeed, seedColorMode, lightAccentBasis, darkAccentBasis, consumerOverride));
+		UpdateLightweightResources(FluentLightweightBridge.Build(effectiveSeed, seedColorMode, lightAccentBasis, darkAccentBasis, consumerOverride));
 
 		// Design tokens → built-in controls (spec 05 §8, goal G4). The XCR templates
 		// read ControlCornerRadius / OverlayCornerRadius and
@@ -240,6 +226,8 @@ public class FluentTheme : BaseTheme
 		// and DefaultFontFamily reach stock Fluent controls the way they reach the
 		// Material/Simple templates. Override-driven only: an unset property
 		// writes nothing, so stock rendering stays the platform's.
+		AddFontRootOverrides();
+
 		if (BuildPlatformTokenOverrides() is { } platformTokens)
 		{
 			AddThemeDictionary(platformTokens);

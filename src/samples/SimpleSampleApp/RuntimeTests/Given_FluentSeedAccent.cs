@@ -760,4 +760,152 @@ public class Given_FluentSeedAccent
 		Assert.AreEqual(expected, GetColor(container.Resources, "SystemAccentColor"),
 			"the obsolete ColorOverrideSource channel must drive the accent cascade (branch-correct, incl. the 'Dark' key)");
 	}
+
+	[TestMethod]
+	[DataRow(false)]
+	[DataRow(true)]
+	[RunsOnUIThread]
+	public void When_AccentOverridesAreMerged_AppearanceAndSiblingPrecedenceArePreserved(bool mergeInsideAppearance)
+	{
+		var overrides = new ResourceDictionary();
+		foreach (var appearance in new[] { "Light", "Dark" })
+		{
+			var expected = appearance == "Light" ? OverrideBlue : OverrideGreen;
+			var first = new ResourceDictionary { ["PrimaryColor"] = SeedRed };
+			var last = new ResourceDictionary { ["PrimaryColor"] = expected };
+			var branch = new ResourceDictionary();
+			if (mergeInsideAppearance)
+			{
+				branch.MergedDictionaries.Add(first);
+				branch.MergedDictionaries.Add(last);
+				overrides.ThemeDictionaries[appearance] = branch;
+			}
+			else
+			{
+				var earlier = new ResourceDictionary();
+				earlier.ThemeDictionaries[appearance] = first;
+				var later = new ResourceDictionary();
+				later.ThemeDictionaries[appearance] = last;
+				overrides.MergedDictionaries.Add(earlier);
+				overrides.MergedDictionaries.Add(later);
+			}
+		}
+
+		var theme = new FluentTheme { Colors = new ThemeColors { OverrideDictionary = overrides } };
+
+		Assert.AreEqual(OverrideBlue, GetBranchColor(theme, "Light", "AccentFillColorDefault"),
+			"the later merged Light override must become the native Light accent fill");
+		Assert.AreEqual(OverrideGreen, GetBranchColor(theme, "Default", "AccentFillColorDefault"),
+			"the later merged Dark override must become the native Dark accent fill");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_MergedNativeAccentBrushOverridesSeed_ExplicitBrushAndOpacityWin()
+	{
+		var expected = new SolidColorBrush(OverrideBlue) { Opacity = 0.43 };
+		var overrides = new ResourceDictionary();
+		overrides.MergedDictionaries.Add(new ResourceDictionary { ["AccentFillColorDefaultBrush"] = expected });
+		var theme = new FluentTheme
+		{
+			Colors = new ThemeColors { PrimarySeed = SeedRed, OverrideDictionary = overrides },
+		};
+
+		foreach (var appearance in new[] { "Light", "Default" })
+		{
+			var actual = FindBranchValue(theme, appearance, "AccentFillColorDefaultBrush") as SolidColorBrush;
+			Assert.IsNotNull(actual, $"{appearance} must expose the explicit native fill brush");
+			Assert.AreEqual(expected.Color, actual.Color, $"{appearance} must preserve the explicit brush color");
+			Assert.AreEqual(expected.Opacity, actual.Opacity, 0.0001, $"{appearance} must preserve the explicit brush opacity");
+		}
+	}
+
+	[TestMethod]
+	[DataRow("PrimaryBrush", false)]
+	[DataRow("PrimaryBrush", true)]
+	[DataRow("OnPrimaryColor", false)]
+	[DataRow("OnPrimaryColor", true)]
+	[DataRow("OnPrimaryBrush", false)]
+	[DataRow("OnPrimaryBrush", true)]
+	[RunsOnUIThread]
+	public async Task When_SemanticAccentOverrideSet_RenderedNativeButtonUsesColorAndOpacity(string key, bool withSeed)
+	{
+		var overrides = new ResourceDictionary();
+		foreach (var appearance in new[] { "Light", "Dark" })
+		{
+			var color = appearance == "Light" ? OverrideBlue : OverrideGreen;
+			var branch = new ResourceDictionary();
+			branch[key] = key == "OnPrimaryColor" ? color : new SolidColorBrush(color) { Opacity = 0.43 };
+			// A brush override must win over the color it normally derives from.
+			if (key == "PrimaryBrush")
+			{
+				branch["PrimaryColor"] = Navy;
+			}
+			else if (key == "OnPrimaryBrush")
+			{
+				branch["OnPrimaryColor"] = PaleYellow;
+			}
+			overrides.ThemeDictionaries[appearance] = branch;
+		}
+		var theme = new FluentTheme
+		{
+			Colors = new ThemeColors { PrimarySeed = withSeed ? SeedRed : null, OverrideDictionary = overrides },
+		};
+		var appDictionaries = Application.Current.Resources.MergedDictionaries;
+		appDictionaries.Add(theme);
+		try
+		{
+			var button = new Button { Content = key, Style = (Style)Application.Current.Resources["FilledButtonStyle"] };
+			var host = new Grid();
+			host.Children.Add(button);
+			UnitTestsUIContentHelper.Content = host;
+			await UnitTestsUIContentHelper.WaitForLoaded(button);
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			var actual = (key == "PrimaryBrush" ? button.Background : button.Foreground) as SolidColorBrush;
+			Assert.IsNotNull(actual, "the native button must use the semantic solid brush override");
+			Assert.AreEqual(IsAmbientDark ? OverrideGreen : OverrideBlue, actual.Color,
+				"the same semantic accent override must reach the native button in the active appearance");
+			Assert.AreEqual(key == "OnPrimaryColor" ? 1.0 : 0.43, actual.Opacity, 0.0001,
+				"a semantic brush override must preserve its opacity on the rendered button");
+		}
+		finally
+		{
+			appDictionaries.Remove(theme);
+		}
+	}
+
+	[TestMethod]
+	[DataRow("Light")]
+	[DataRow("Dark")]
+	[RunsOnUIThread]
+	public async Task When_PrimaryOverrideIsAppearanceSpecific_OtherAppearanceKeepsNativeAccent(string overrideAppearance)
+	{
+		var expected = GetColor(Application.Current.Resources,
+			IsAmbientDark ? "SystemAccentColorLight2" : "SystemAccentColorDark1");
+		var overrides = new ResourceDictionary();
+		overrides.ThemeDictionaries[overrideAppearance] = new ResourceDictionary { ["PrimaryColor"] = OverrideBlue };
+		var theme = new FluentTheme { Colors = new ThemeColors { OverrideDictionary = overrides } };
+		var appDictionaries = Application.Current.Resources.MergedDictionaries;
+		appDictionaries.Add(theme);
+		try
+		{
+			var button = new Button { Content = overrideAppearance, Style = (Style)Application.Current.Resources["FilledButtonStyle"] };
+			var host = new Grid();
+			host.Children.Add(button);
+			UnitTestsUIContentHelper.Content = host;
+			await UnitTestsUIContentHelper.WaitForLoaded(button);
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			var actual = button.Background as SolidColorBrush;
+			Assert.IsNotNull(actual, "the native accent button must retain a solid background");
+			var applies = overrideAppearance == (IsAmbientDark ? "Dark" : "Light");
+			Assert.AreEqual(applies ? OverrideBlue : expected, actual.Color,
+				"an appearance-specific override must not recolor the opposite appearance through Default fallback");
+		}
+		finally
+		{
+			appDictionaries.Remove(theme);
+		}
+	}
 }

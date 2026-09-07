@@ -21,7 +21,7 @@ namespace Uno.Fluent;
 /// <summary>
 /// Builds the reverse "primary → Fluent accent" mapping (spec 05 §9): when an
 /// effective primary color is active — a seed, or an explicit
-/// <c>PrimaryColor</c> consumer override from any channel
+/// <c>PrimaryColor</c> or solid <c>PrimaryBrush</c> consumer override from any channel
 /// (<c>Colors.OverrideDictionary</c> / <c>Colors.OverrideSource</c> or the
 /// obsolete <c>BaseTheme.ColorOverride*</c> properties, which funnel into it) —
 /// the built-in Fluent controls must follow it, so the
@@ -72,7 +72,11 @@ namespace Uno.Fluent;
 /// Any accent-family key the consumer override defines EXPLICITLY wins over
 /// the derived value (the repo-wide override-precedence contract,
 /// <c>Given_ColorOverridePrecedence</c>): those values are copied over the
-/// derived entries, branch-aware ("Light" / "Dark" / "Default" / flat).
+/// derived entries using the complete consumer dictionary graph for each
+/// appearance. Semantic <c>PrimaryBrush</c> and <c>OnPrimaryBrush</c> overrides
+/// retain their brush type and opacity; <c>OnPrimaryColor</c> supplies a native
+/// foreground when no explicit on-primary brush exists. These semantic paints
+/// override generated defaults and are below explicit native accent resources.
 /// </para>
 /// </remarks>
 internal static class FluentAccentPalette
@@ -216,74 +220,84 @@ internal static class FluentAccentPalette
 
 	/// <summary>
 	/// Resolves the per-branch accent basis from the consumer override's
-	/// explicit <c>PrimaryColor</c>, honoring the native ThemeDictionaries
-	/// semantics: the exact branch key first ("Light" / "Dark"), then the
-	/// universal "Default" branch, then a flat (theme-invariant) entry.
-	/// Reads OWN entries only — <c>TryGetValue</c> would also search the
-	/// ambient theme branch and break branch fidelity.
+	/// explicit <c>PrimaryBrush</c> or <c>PrimaryColor</c>. A solid brush takes
+	/// precedence over its source color, as it does in Material and Simple.
+	/// Resource resolution follows the consumer's complete dictionary graph
+	/// for each appearance without consulting the ambient theme.
 	/// </summary>
 	internal static (Color? Light, Color? Dark) ResolveAccentBasis(ResourceDictionary? consumerOverride)
 	{
-		if (consumerOverride is null)
-		{
-			return (null, null);
-		}
+		return (ResolveBasis(LightBranchKey), ResolveBasis(DarkBranchKey));
 
-		var flat = ReadOwnColor(consumerOverride, SemanticColorKeys.Primary);
-		var fallback = ReadBranchColor(consumerOverride, DefaultBranchKey, SemanticColorKeys.Primary);
-		var light = ReadBranchColor(consumerOverride, LightBranchKey, SemanticColorKeys.Primary) ?? fallback ?? flat;
-		var dark = ReadBranchColor(consumerOverride, DarkBranchKey, SemanticColorKeys.Primary) ?? fallback ?? flat;
-		return (light, dark);
+		Color? ResolveBasis(string appearance)
+			=> FluentResourceResolver.Resolve(consumerOverride, appearance, "PrimaryBrush") is SolidColorBrush brush
+				? brush.Color
+				: FluentResourceResolver.Resolve(consumerOverride, appearance, SemanticColorKeys.Primary) as Color?;
 	}
 
 	/// <summary>
 	/// Builds the accent override dictionary from the effective drivers: the
 	/// per-branch override basis (verbatim accent) where present, else the
 	/// <paramref name="seed"/>'s tonal mapping under <paramref name="seedColorMode"/>
-	/// (the mode the semantic palette is generated with). At least one driver
-	/// must be non-null. Consumer-explicit accent-family keys are copied over the
-	/// derived values last.
+	/// (the mode the semantic palette is generated with). Color drivers may be
+	/// null when only brushes or on-primary colors are overridden.
+	/// Consumer-explicit accent-family keys are copied over the derived values last.
 	/// </summary>
 	internal static ResourceDictionary Build(Color? seed, SeedColorMode seedColorMode, Color? lightBasis, Color? darkBasis, ResourceDictionary? consumerOverride)
 	{
 		var dictionary = new ResourceDictionary();
 		var seedShades = seed is { } s ? AccentShades.FromSeed(s, seedColorMode) : (AccentShades?)null;
 
-		if (lightBasis is null && darkBasis is null && seedShades is { } pure)
-		{
-			// Pure-seed mode: the shade set is theme-invariant (like the
-			// platform's), so it lives in flat entries visible from both theme
-			// branches; only the closure varies per branch.
-			WriteShades(dictionary, pure);
-			WriteLegacyBrushes(dictionary, pure.Accent);
-
-			dictionary.ThemeDictionaries[LightBranchKey] = BuildSeedClosure(pure, isLight: true);
-			dictionary.ThemeDictionaries[DefaultBranchKey] = BuildSeedClosure(pure, isLight: false);
-		}
-		else
-		{
-			// Override-driven mode: the basis can differ per branch, so
-			// EVERYTHING is branch-scoped (never mixing flat and branch entries
-			// for the same key — their relative precedence is not portable).
-			// A branch with neither a basis nor a seed gets no entries at all:
-			// the platform accent stays in effect for it.
-			if (BuildBranchFor(isLight: true, lightBasis, seedShades) is { } light)
-			{
-				dictionary.ThemeDictionaries[LightBranchKey] = light;
-			}
-
-			if (BuildBranchFor(isLight: false, darkBasis, seedShades) is { } dark)
-			{
-				dictionary.ThemeDictionaries[DefaultBranchKey] = dark;
-			}
-		}
+		// Keep shades branch-scoped even for a pure seed, so an explicit themed
+		// shade override cannot lose to a generated own (flat) entry. An empty
+		// Light branch is significant: without it a Dark-only override published
+		// in Default would become the universal fallback in the Light appearance.
+		dictionary.ThemeDictionaries[LightBranchKey] = BuildBranchFor(isLight: true, lightBasis, seedShades) ?? new ResourceDictionary();
+		dictionary.ThemeDictionaries[DefaultBranchKey] = BuildBranchFor(isLight: false, darkBasis, seedShades) ?? new ResourceDictionary();
 
 		if (consumerOverride is { })
 		{
+			ApplySemanticBrushOverrides(dictionary, consumerOverride, LightBranchKey, LightBranchKey);
+			ApplySemanticBrushOverrides(dictionary, consumerOverride, DarkBranchKey, DefaultBranchKey);
 			ApplyConsumerAccentOverrides(dictionary, consumerOverride);
 		}
 
 		return dictionary;
+	}
+
+	/// <summary>
+	/// Captures one native platform accent branch for restoring brushes retained
+	/// by existing controls when an override clears. Call after detaching the
+	/// generated layers so platform shades cannot resolve back to the override.
+	/// </summary>
+	internal static ResourceDictionary? BuildPlatformClosure(bool isLight)
+	{
+		if (Application.Current?.Resources is not { } resources)
+		{
+			return null;
+		}
+
+		var colors = new Color[_accentShadeKeys.Length];
+		for (var i = 0; i < _accentShadeKeys.Length; i++)
+		{
+			if (!resources.TryGetValue(_accentShadeKeys[i], out var value) || value is not Color color)
+			{
+				return null;
+			}
+			colors[i] = color;
+		}
+
+		// The OS's shade ramp is authoritative. Re-generating it from the base
+		// accent would change native colors when a consumer clears the driver.
+		var shades = new AccentShades(colors[0], colors[1], colors[2], colors[3], colors[4], colors[5], colors[6]);
+		var branch = BuildSeedClosure(shades, isLight);
+		WriteShades(branch, shades);
+		WriteLegacyBrushes(branch, shades.Accent);
+		// Native on-accent defaults use fixed appearance-specific families; the
+		// contrast choice in WriteClosure is only for consumer-derived accents.
+		WriteOnAccent(branch, "TextOnAccentFillColorPrimary", new SolidColorBrush(isLight ? White : Black));
+		WriteOnAccent(branch, "TextOnAccentFillColorSecondary", new SolidColorBrush(isLight ? WhiteSecondary : BlackSecondary));
+		return branch;
 	}
 
 	private static ResourceDictionary? BuildBranchFor(bool isLight, Color? basis, AccentShades? seedShades)
@@ -314,8 +328,8 @@ internal static class FluentAccentPalette
 
 		if (seedShades is { } st)
 		{
-			// Mixed mode (the OTHER branch has a basis): this branch follows the
-			// seed, with the shade set branch-scoped instead of flat.
+			// This branch follows the seed. Its shades stay in the same branch as
+			// the closure so explicit appearance-specific overrides always win.
 			var branch = BuildSeedClosure(st, isLight);
 			WriteShades(branch, st);
 			WriteLegacyBrushes(branch, st.Accent);
@@ -389,6 +403,42 @@ internal static class FluentAccentPalette
 		branch["TextOnAccentFillColorSecondaryBrush"] = new SolidColorBrush(onAccentSecondary);
 	}
 
+	private static void ApplySemanticBrushOverrides(ResourceDictionary dictionary, ResourceDictionary consumerOverride, string appearance, string branchKey)
+	{
+		var branch = (ResourceDictionary)dictionary.ThemeDictionaries[branchKey];
+		if (FluentResourceResolver.Resolve(consumerOverride, appearance, "PrimaryBrush") is Brush primary)
+		{
+			// An explicit semantic brush is already the consumer's final paint,
+			// including opacity or gradients. Keep it intact in every fill state;
+			// native per-state brush overrides below retain the final word.
+			WriteOnAccent(branch, "AccentFillColorDefault", primary);
+			WriteOnAccent(branch, "AccentFillColorSecondary", primary);
+			WriteOnAccent(branch, "AccentFillColorTertiary", primary);
+		}
+
+		var onPrimary = FluentResourceResolver.Resolve(consumerOverride, appearance, "OnPrimaryBrush") as Brush;
+		if (onPrimary is null
+			&& FluentResourceResolver.Resolve(consumerOverride, appearance, SemanticColorKeys.OnPrimary) is Color onPrimaryColor)
+		{
+			onPrimary = new SolidColorBrush(onPrimaryColor);
+		}
+
+		if (onPrimary is { })
+		{
+			WriteOnAccent(branch, "TextOnAccentFillColorPrimary", onPrimary);
+			WriteOnAccent(branch, "TextOnAccentFillColorSecondary", onPrimary);
+		}
+	}
+
+	private static void WriteOnAccent(ResourceDictionary branch, string colorKey, Brush brush)
+	{
+		branch[colorKey + "Brush"] = brush;
+		if (brush is SolidColorBrush solid)
+		{
+			branch[colorKey] = solid.Color;
+		}
+	}
+
 	/// <summary>
 	/// Copies every accent-family key the consumer override defines EXPLICITLY
 	/// over the derived entries, branch-aware, so the consumer keeps the last
@@ -396,36 +446,14 @@ internal static class FluentAccentPalette
 	/// </summary>
 	private static void ApplyConsumerAccentOverrides(ResourceDictionary dictionary, ResourceDictionary consumerOverride)
 	{
-		var flat = ToOwnEntries(consumerOverride);
-		var light = BranchEntries(consumerOverride, LightBranchKey);
-		var dark = BranchEntries(consumerOverride, DarkBranchKey);
-		var fallback = BranchEntries(consumerOverride, DefaultBranchKey);
-		var derivedFlat = ToOwnEntries(dictionary);
-
 		foreach (var key in EnumerateManagedKeys())
 		{
-			if (flat.TryGetValue(key, out var flatValue))
-			{
-				// Replace the derived flat entry when one exists (pure-seed
-				// shades), and mirror into both branches so the consumer value
-				// wins regardless of flat-vs-branch lookup order.
-				if (derivedFlat.ContainsKey(key))
-				{
-					dictionary[key] = flatValue;
-				}
-
-				WriteToBranch(dictionary, LightBranchKey, key, flatValue);
-				WriteToBranch(dictionary, DefaultBranchKey, key, flatValue);
-			}
-
-			var lightValue = OwnValue(light, key) ?? OwnValue(fallback, key);
-			if (lightValue is { })
+			if (FluentResourceResolver.Resolve(consumerOverride, LightBranchKey, key) is { } lightValue)
 			{
 				WriteToBranch(dictionary, LightBranchKey, key, lightValue);
 			}
 
-			var darkValue = OwnValue(dark, key) ?? OwnValue(fallback, key);
-			if (darkValue is { })
+			if (FluentResourceResolver.Resolve(consumerOverride, DarkBranchKey, key) is { } darkValue)
 			{
 				WriteToBranch(dictionary, DefaultBranchKey, key, darkValue);
 			}
@@ -460,40 +488,6 @@ internal static class FluentAccentPalette
 			created[key] = value;
 			dictionary.ThemeDictionaries[branchKey] = created;
 		}
-	}
-
-	private static Color? ReadBranchColor(ResourceDictionary dictionary, string branchKey, string key)
-	{
-		if (dictionary.ThemeDictionaries.TryGetValue(branchKey, out var value) && value is ResourceDictionary branch)
-		{
-			return ReadOwnColor(branch, key);
-		}
-
-		return null;
-	}
-
-	private static Color? ReadOwnColor(ResourceDictionary dictionary, string key)
-		=> ToOwnEntries(dictionary).TryGetValue(key, out var value) && value is Color color ? color : null;
-
-	private static object? OwnValue(Dictionary<string, object>? entries, string key)
-		=> entries is { } && entries.TryGetValue(key, out var value) ? value : null;
-
-	private static Dictionary<string, object>? BranchEntries(ResourceDictionary dictionary, string branchKey)
-		=> dictionary.ThemeDictionaries.TryGetValue(branchKey, out var value) && value is ResourceDictionary branch
-			? ToOwnEntries(branch)
-			: null;
-
-	private static Dictionary<string, object> ToOwnEntries(ResourceDictionary dictionary)
-	{
-		var entries = new Dictionary<string, object>();
-		foreach (var pair in dictionary)
-		{
-			if (pair.Key is string key)
-			{
-				entries[key] = pair.Value;
-			}
-		}
-		return entries;
 	}
 
 	/// <summary>

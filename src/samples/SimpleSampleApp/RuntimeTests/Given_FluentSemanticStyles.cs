@@ -17,6 +17,27 @@ namespace Uno.Themes.Samples.RuntimeTests;
 [TestClass]
 public class Given_FluentSemanticStyles
 {
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow(ElementTheme.Light)]
+	[DataRow(ElementTheme.Dark)]
+	public async Task When_DatePickerFlyoutPresenterSemanticStyleApplied_PreservesNativeTemplate(ElementTheme appearance)
+	{
+		var theme = new FluentTheme();
+		Assert.IsTrue(theme.TryGetValue("DatePickerFlyoutPresenterStyle", out var value), "The shared presenter style key must resolve under Fluent.");
+		var style = value as Style;
+		Assert.IsNotNull(style);
+		Assert.AreEqual(typeof(DatePickerFlyoutPresenter), style.TargetType);
+		var presenter = new DatePickerFlyoutPresenter { Style = style, RequestedTheme = appearance };
+		var host = new Grid();
+		host.Resources.MergedDictionaries.Add(theme);
+		host.Children.Add(presenter);
+		UnitTestsUIContentHelper.Content = host;
+		await UnitTestsUIContentHelper.WaitForLoaded(presenter);
+		await UnitTestsUIContentHelper.WaitForIdle();
+		Assert.IsNotNull(presenter.Template, "An explicit semantic style must preserve the built-in picker template.");
+	}
+
 	private static Grid CreateThemedContainer()
 	{
 		var container = new Grid();
