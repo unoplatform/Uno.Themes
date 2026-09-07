@@ -134,7 +134,10 @@ jobs:
           app_location: app
           api_location: ""
           output_location: ""
-          production_branch: master
+          # No production_branch input: Azure/static-web-apps-deploy@v1 does not declare one
+          # and warns "Unexpected input(s) 'production_branch'" when it is passed. The action
+          # already picks the target from the event — a push deploys to production, a
+          # pull_request to that PR's staging environment.
 
   close-pull-request:
     if: >
