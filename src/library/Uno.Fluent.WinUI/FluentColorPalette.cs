@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using Uno.Themes;
 
 #if WinUI
 using Microsoft.UI.Xaml;
@@ -158,24 +159,24 @@ internal static class FluentColorPalette
 		// darker/lighter shades of the single Fluent accent (not to neutrals) so
 		// Secondary/Tertiary-styled UI stays visibly branded and hierarchical
 		// (spec 05 §6.3 judgment calls).
-		FromAccent("PrimaryColor", isLight ? "SystemAccentColor" : "SystemAccentColorLight2");
-		FromAccent("PrimaryContainerColor", isLight ? "SystemAccentColorLight2" : "SystemAccentColorDark1");
-		FromAccent("OnPrimaryContainerColor", isLight ? "SystemAccentColorDark2" : "SystemAccentColorLight3");
-		FromAccent("PrimaryInverseColor", isLight ? "SystemAccentColorLight2" : "SystemAccentColor");
-		FromAccent("PrimaryVariantDarkColor", "SystemAccentColorDark1");
-		FromAccent("PrimaryVariantLightColor", "SystemAccentColorLight1");
+		FromAccent(SemanticColorKeys.Primary, isLight ? "SystemAccentColor" : "SystemAccentColorLight2");
+		FromAccent(SemanticColorKeys.PrimaryContainer, isLight ? "SystemAccentColorLight2" : "SystemAccentColorDark1");
+		FromAccent(SemanticColorKeys.OnPrimaryContainer, isLight ? "SystemAccentColorDark2" : "SystemAccentColorLight3");
+		FromAccent(SemanticColorKeys.PrimaryInverse, isLight ? "SystemAccentColorLight2" : "SystemAccentColor");
+		FromAccent(SemanticColorKeys.PrimaryVariantDark, "SystemAccentColorDark1");
+		FromAccent(SemanticColorKeys.PrimaryVariantLight, "SystemAccentColorLight1");
 
-		FromAccent("SecondaryColor", isLight ? "SystemAccentColorDark1" : "SystemAccentColorLight1");
-		FromAccent("SecondaryContainerColor", isLight ? "SystemAccentColorLight3" : "SystemAccentColorDark2");
-		FromAccent("OnSecondaryContainerColor", isLight ? "SystemAccentColorDark3" : "SystemAccentColorLight3");
-		FromAccent("SecondaryVariantDarkColor", "SystemAccentColorDark2");
-		FromAccent("SecondaryVariantLightColor", isLight ? "SystemAccentColor" : "SystemAccentColorLight2");
+		FromAccent(SemanticColorKeys.Secondary, isLight ? "SystemAccentColorDark1" : "SystemAccentColorLight1");
+		FromAccent(SemanticColorKeys.SecondaryContainer, isLight ? "SystemAccentColorLight3" : "SystemAccentColorDark2");
+		FromAccent(SemanticColorKeys.OnSecondaryContainer, isLight ? "SystemAccentColorDark3" : "SystemAccentColorLight3");
+		FromAccent(SemanticColorKeys.SecondaryVariantDark, "SystemAccentColorDark2");
+		FromAccent(SemanticColorKeys.SecondaryVariantLight, isLight ? "SystemAccentColor" : "SystemAccentColorLight2");
 
-		FromAccent("TertiaryColor", isLight ? "SystemAccentColorDark2" : "SystemAccentColorLight3");
-		FromAccent("TertiaryContainerColor", isLight ? "SystemAccentColorLight3" : "SystemAccentColorDark3");
-		FromAccent("OnTertiaryContainerColor", isLight ? "SystemAccentColorDark3" : "SystemAccentColorLight2");
+		FromAccent(SemanticColorKeys.Tertiary, isLight ? "SystemAccentColorDark2" : "SystemAccentColorLight3");
+		FromAccent(SemanticColorKeys.TertiaryContainer, isLight ? "SystemAccentColorLight3" : "SystemAccentColorDark3");
+		FromAccent(SemanticColorKeys.OnTertiaryContainer, isLight ? "SystemAccentColorDark3" : "SystemAccentColorLight2");
 
-		FromAccent("SurfaceTintColor", isLight ? "SystemAccentColor" : "SystemAccentColorLight2");
+		FromAccent(SemanticColorKeys.SurfaceTint, isLight ? "SystemAccentColor" : "SystemAccentColorLight2");
 
 		return branch;
 	}
