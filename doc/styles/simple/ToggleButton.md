@@ -4,7 +4,7 @@ uid: Uno.Themes.Simple.Styles.ToggleButton
 
 # ToggleButton Control
 
-Both Simple variants consume `TextToggleButton*` brush resources. The separate icon template does not read Material's `IconToggleButton*` brush family, so shared overrides using those keys are ineffective under Simple. The default style derives from the text variant; see [semantic override compatibility](../../semantic-styles.md#override-compatibility).
+The text and icon variants consume separate `TextToggleButton*` and `IconToggleButton*` brush resources. The icon family defaults to the matching text-family values and supports independent overrides. The default style derives from the text variant; see [semantic override compatibility](../../semantic-styles.md#override-compatibility).
 
 ## Styles
 
@@ -17,6 +17,8 @@ Both Simple variants consume `TextToggleButton*` brush resources. The separate i
 IsDefaultStyle\*: Styles in this column will be set as the default implicit style for the matching control
 
 ## Lightweight Styling
+
+For every `TextToggleButton` foreground, background, and border brush in the tables below, an `IconToggleButton` key with the same suffix supplies the icon variant. These 36 icon keys cover normal, pointer-over, pressed, and disabled states for unchecked, checked, and indeterminate values. Each defaults to its matching text-toggle brush. Material-specific state-circle and overlay keys are not part of this Simple template.
 
 | Key                                          | Type              | Value                            |
 |----------------------------------------------|-------------------|----------------------------------|

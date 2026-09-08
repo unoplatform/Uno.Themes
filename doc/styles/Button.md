@@ -5,7 +5,7 @@ uid: Uno.Themes.Styles.Button
 # Button Control
 
 > [!NOTE]
-> The tables below describe Material v2. Under Simple, `OutlinedButtonStyle` uses the tonal template: override `FilledTonalButton*` to change it; the declared `OutlinedButton*` aliases are not consumed. Under [Fluent](../fluent-getting-started.md), supported `FilledButton*` and `OutlinedButton*` brush overrides go through `Colors.OverrideDictionary` to native `AccentButton*` and `Button*` resources. Normal-state `TextButtonForeground` and `IconButtonForeground` are consumed directly. Text-button hover/pressed foreground, background, and border semantic keys are currently ineffective, and some other state keys accept overrides without supplying defaults. See [Fluent lightweight styling](../lightweight-styling.md#fluent-theme) for the exact limitations.
+> The tables below describe Material v2. Under Simple, `OutlinedButtonStyle` uses its own `OutlinedButton*` brushes, with defaults matching the tonal variant. Under [Fluent](../fluent-getting-started.md), supported `FilledButton*` and `OutlinedButton*` brush overrides go through the theme's color-override channel to native `AccentButton*` and `Button*` resources. `TextButtonForeground*`, `TextButtonBackground*`, and `TextButtonBorderBrush*` also work at element scope, including pointer-over, pressed, and disabled states; `IconButtonForeground` customizes the icon-button rest state. Some other state keys accept overrides without supplying defaults. See [Fluent lightweight styling](../lightweight-styling.md#fluent-theme) for the supported families and scope rules.
 
 ## Styles
 

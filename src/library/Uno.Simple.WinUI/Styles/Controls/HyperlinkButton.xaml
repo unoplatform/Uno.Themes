@@ -7,7 +7,7 @@
 		
 		Resource layers:
 		HyperlinkButton*       = semantic keys (source of truth)
-		SimpleHyperlinkButton* = Simple-prefixed aliases → HyperlinkButton*
+		SecondaryHyperlinkButton* = independent secondary foreground keys
 		
 		Primary variant: brand color link
 		Secondary variant: muted/secondary color link
@@ -138,6 +138,58 @@
 		   TargetType="HyperlinkButton"
 		   BasedOn="{StaticResource SimpleHyperlinkButtonStyle}">
 		<Setter Property="Foreground" Value="{ThemeResource SecondaryHyperlinkButtonForeground}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="HyperlinkButton">
+					<Grid x:Name="Root"
+						  Background="{TemplateBinding Background}"
+						  Padding="{TemplateBinding Padding}">
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SecondaryHyperlinkButtonForegroundPointerOver}" />
+										<Setter Target="UnderlineRect.Fill" Value="{ThemeResource SecondaryHyperlinkButtonForegroundPointerOver}" />
+										<Setter Target="Root.Background" Value="{ThemeResource HyperlinkButtonBackgroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SecondaryHyperlinkButtonForegroundPressed}" />
+										<Setter Target="UnderlineRect.Fill" Value="{ThemeResource SecondaryHyperlinkButtonForegroundPressed}" />
+										<Setter Target="Root.Background" Value="{ThemeResource HyperlinkButtonBackgroundPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SecondaryHyperlinkButtonForegroundDisabled}" />
+										<Setter Target="UnderlineRect.Fill" Value="{ThemeResource SecondaryHyperlinkButtonForegroundDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<!-- Default content is underlined text -->
+						<ContentPresenter x:Name="ContentPresenter"
+										  Content="{TemplateBinding Content}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  ContentTransitions="{TemplateBinding ContentTransitions}"
+										  Foreground="{TemplateBinding Foreground}"
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+
+						<!-- Underline -->
+						<Rectangle x:Name="UnderlineRect"
+								   Height="1"
+								   Fill="{TemplateBinding Foreground}"
+								   VerticalAlignment="Bottom"
+								   HorizontalAlignment="Stretch" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
 	</Style>
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
