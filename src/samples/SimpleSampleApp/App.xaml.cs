@@ -21,6 +21,11 @@ sealed partial class App : Application
 
 		this.InitializeComponent();
 
+		// After InitializeComponent so the theme is already merged into Resources when shared
+		// code picks this up. See NavigationHelper.CurrentApplication for why Application.Current
+		// cannot be used instead.
+		NavigationHelper.CurrentApplication = this;
+
 #if HAS_UNO || NETFX_CORE
 		this.Suspending += OnSuspending;
 #endif
