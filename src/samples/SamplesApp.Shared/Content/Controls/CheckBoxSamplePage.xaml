@@ -251,6 +251,38 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+
+			<sample:SamplePageLayout.FluentTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<smtx:XamlDisplay UniqueKey="Fluent_CheckBox_Unchecked"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<CheckBox Content="Unchecked"
+									  Style="{StaticResource CheckBoxStyle}" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Fluent_CheckBox_Checked"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<CheckBox Content="Checked"
+									  IsChecked="True"
+									  Style="{StaticResource CheckBoxStyle}" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Fluent_CheckBox_Indeterminate"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<CheckBox Content="Indeterminate"
+									  IsChecked="{x:Null}"
+									  IsThreeState="True"
+									  Style="{StaticResource CheckBoxStyle}" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Fluent_CheckBox_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<CheckBox Content="Disabled"
+									  IsChecked="True"
+									  IsEnabled="False"
+									  Style="{StaticResource CheckBoxStyle}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.FluentTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

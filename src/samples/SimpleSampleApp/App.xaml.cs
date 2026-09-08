@@ -16,6 +16,15 @@ sealed partial class App : Application
 	/// </summary>
 	public App()
 	{
+		// Select the real application appearance before XAML resources initialize, so the
+		// headless suite can verify native resource fallback in both Light and Dark.
+		if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("UNO_RUNTIME_TESTS_OUTPUT_PATH"))
+			&& Enum.TryParse<ApplicationTheme>(Environment.GetEnvironmentVariable("UNO_RUNTIME_TESTS_THEME"), out var testTheme)
+			&& Enum.IsDefined(testTheme))
+		{
+			RequestedTheme = testTheme;
+		}
+
 		ConfigureXamlDisplay();
 		SamplePageLayout.ActiveDesign = Design.Simple;
 

@@ -93,6 +93,21 @@ public partial class SamplePageLayout
 	}
 
 	#endregion
+	#region Property: FluentTemplate
+
+	public static DependencyProperty FluentTemplateProperty { get; } = DependencyProperty.Register(
+		nameof(FluentTemplate),
+		typeof(DataTemplate),
+		typeof(SamplePageLayout),
+		new PropertyMetadata(default));
+
+	public DataTemplate FluentTemplate
+	{
+		get => (DataTemplate)GetValue(FluentTemplateProperty);
+		set => SetValue(FluentTemplateProperty, value);
+	}
+
+	#endregion
 	#region Property: MaterialTemplate
 
 	public static DependencyProperty MaterialTemplateProperty { get; } = DependencyProperty.Register(

@@ -4,6 +4,9 @@ uid: Uno.Themes.Styles.Button
 
 # Button Control
 
+> [!NOTE]
+> Under the [Fluent theme](../fluent-getting-started.md), buttons are rendered by the built-in WinUI templates. The `FilledButton*`, `OutlinedButton*`, `TextButtonForeground*`, and `IconButtonForeground` brush keys below are bridged: they resolve with Fluent default values, and app-wide overrides (via `Colors.OverrideDictionary`) re-point the corresponding Fluent per-control resources (`AccentButton*`, `Button*`). See [Lightweight Styling — Fluent theme](../lightweight-styling.md#fluent-theme) for the override channels and the keys that are not bridged.
+
 ## Styles
 
 | Style Key                | IsDefaultStyle\* |

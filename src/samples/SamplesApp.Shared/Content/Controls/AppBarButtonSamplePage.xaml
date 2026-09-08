@@ -398,6 +398,73 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+			<sample:SamplePageLayout.FluentTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Icon only -->
+						<smtx:XamlDisplay UniqueKey="Fluent_AppBarButton_IconOnly"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal"
+										Spacing="8">
+								<AppBarButton Style="{StaticResource AppBarButtonStyle}">
+									<AppBarButton.Icon>
+										<SymbolIcon Symbol="Add" />
+									</AppBarButton.Icon>
+								</AppBarButton>
+								<AppBarButton Style="{StaticResource AppBarButtonStyle}">
+									<AppBarButton.Icon>
+										<SymbolIcon Symbol="Edit" />
+									</AppBarButton.Icon>
+								</AppBarButton>
+								<AppBarButton Style="{StaticResource AppBarButtonStyle}">
+									<AppBarButton.Icon>
+										<SymbolIcon Symbol="Save" />
+									</AppBarButton.Icon>
+								</AppBarButton>
+							</StackPanel>
+						</smtx:XamlDisplay>
+						<!-- Icon and content -->
+						<smtx:XamlDisplay UniqueKey="Fluent_AppBarButton_IconAndContent"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal"
+										Spacing="8">
+								<AppBarButton Content="Add"
+											  Style="{StaticResource AppBarButtonStyle}">
+									<AppBarButton.Icon>
+										<SymbolIcon Symbol="Add" />
+									</AppBarButton.Icon>
+								</AppBarButton>
+								<AppBarButton Content="Edit"
+											  Style="{StaticResource AppBarButtonStyle}">
+									<AppBarButton.Icon>
+										<SymbolIcon Symbol="Edit" />
+									</AppBarButton.Icon>
+								</AppBarButton>
+								<AppBarButton Content="Save"
+											  Style="{StaticResource AppBarButtonStyle}">
+									<AppBarButton.Icon>
+										<SymbolIcon Symbol="Save" />
+									</AppBarButton.Icon>
+								</AppBarButton>
+							</StackPanel>
+						</smtx:XamlDisplay>
+						<!-- Disabled -->
+						<smtx:XamlDisplay UniqueKey="Fluent_AppBarButton_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal"
+										Spacing="8">
+								<AppBarButton Content="Disabled"
+											  IsEnabled="False"
+											  Style="{StaticResource AppBarButtonStyle}">
+									<AppBarButton.Icon>
+										<SymbolIcon Symbol="Add" />
+									</AppBarButton.Icon>
+								</AppBarButton>
+							</StackPanel>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.FluentTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

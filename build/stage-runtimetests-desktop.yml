@@ -62,7 +62,7 @@ jobs:
       testResultsFiles: '$(Common.TestResultsDirectory)/runtime-tests-$(SampleAppName).xml'
       failTaskOnFailedTests: true
 
-# ThemesSampleApp hosts the three theme heads in secondary ALCs; building alone cannot catch a
+# ThemesSampleApp hosts the four theme heads in secondary ALCs; building alone cannot catch a
 # hosting regression (this repo's history: a wasm payload that fetched HTTP 200 but failed to
 # boot, and a Win32 run-loop bug X11 verification missed). This job actually loads every guest,
 # unloads, and asserts per-cycle ALC reclamation via the wrapper's --smoke mode.
@@ -85,7 +85,7 @@ jobs:
   - template: templates/gitversion.yml
 
   # TargetFrameworkOverride activates the wrapper's ordering ProjectReferences, building the
-  # three guest heads first so their sibling bins exist for the runtime probe.
+  # four guest heads first so their sibling bins exist for the runtime probe.
   - pwsh: |
       dotnet build -c Release -f net10.0-desktop -p:TargetFrameworkOverride=desktop `
         src/samples/ThemesSampleApp/ThemesSampleApp.csproj `

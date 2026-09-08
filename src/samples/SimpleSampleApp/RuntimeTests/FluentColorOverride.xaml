@@ -1,0 +1,24 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!--
+		Consumer-shaped color override used by Given_FluentSeedAccent to verify
+		the URI override channels (Colors.OverrideSource and the obsolete
+		BaseTheme.ColorOverrideSource) under FluentTheme. Mirrors the documented
+		ColorPaletteOverride.xaml shape — including the "Dark" branch key, which
+		consumers use instead of "Default".
+	-->
+	<ResourceDictionary.ThemeDictionaries>
+
+		<!-- Light Theme -->
+		<ResourceDictionary x:Key="Light">
+			<Color x:Key="PrimaryColor">#2196F3</Color>
+		</ResourceDictionary>
+
+		<!-- Dark Theme -->
+		<ResourceDictionary x:Key="Dark">
+			<Color x:Key="PrimaryColor">#66BB6A</Color>
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
+
+</ResourceDictionary>

@@ -130,6 +130,45 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+			<sample:SamplePageLayout.FluentTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Text toggle button -->
+						<smtx:XamlDisplay UniqueKey="Fluent_ToggleButton_Text"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal"
+										Spacing="12">
+								<ToggleButton Content="Unchecked"
+											  Style="{StaticResource TextToggleButtonStyle}" />
+								<ToggleButton Content="Checked"
+											  IsChecked="True"
+											  Style="{StaticResource TextToggleButtonStyle}" />
+								<ToggleButton Content="Disabled"
+											  IsEnabled="False"
+											  Style="{StaticResource TextToggleButtonStyle}" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+						<!-- Icon toggle button -->
+						<smtx:XamlDisplay UniqueKey="Fluent_ToggleButton_Icon"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal"
+										Spacing="12">
+								<ToggleButton Style="{StaticResource IconToggleButtonStyle}">
+									<SymbolIcon Symbol="Bold" />
+								</ToggleButton>
+								<ToggleButton IsChecked="True"
+											  Style="{StaticResource IconToggleButtonStyle}">
+									<SymbolIcon Symbol="Italic" />
+								</ToggleButton>
+								<ToggleButton IsEnabled="False"
+											  Style="{StaticResource IconToggleButtonStyle}">
+									<SymbolIcon Symbol="Underline" />
+								</ToggleButton>
+							</StackPanel>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.FluentTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

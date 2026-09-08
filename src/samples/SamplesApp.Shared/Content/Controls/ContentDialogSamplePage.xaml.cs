@@ -5,7 +5,7 @@
 	nameof(ContentDialog),
 	Description = "Represents a dialog box that can be customized to contain checkboxes, hyperlinks, buttons and any other XAML content.",
 	DocumentationLink = "https://docs.microsoft.com/en-us/uwp/api/Windows.UI.Xaml.Controls.ContentDialog",
-	SupportedDesigns = new[] { Design.Material, Design.Simple }
+	SupportedDesigns = new[] { Design.Material, Design.Simple, Design.Fluent }
 )]
 public sealed partial class ContentDialogSamplePage : Page
 {

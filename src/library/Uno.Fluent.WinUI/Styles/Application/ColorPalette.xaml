@@ -1,0 +1,114 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!--
+		Fluent — Semantic Color Palette (static neutrals)
+
+		The theme-varying NEUTRAL semantic roles, mapped from the Fluent design
+		tokens (spec 05 §6.3) as per-branch literals captured from the running
+		platform (spike S2; matching the documented WinUI 3 token values). Each
+		value is annotated with its normative Fluent token; Given_FluentColorPalette
+		drift-guards the ambient branch against the live platform values on every
+		run, so an Uno.UI token change fails fast — re-capture here when it does.
+
+		The ACCENT-derived roles (the Primary/Secondary/Tertiary families and
+		SurfaceTintColor) are NOT here: they are resolved live per theme branch in
+		code (FluentColorPalette, mechanism C — spec 05 D6). Per-theme-branch XAML
+		<StaticResource> color aliases resolve against the AMBIENT theme on Uno
+		(S1 case 4, specs/lessons.md), and live resolution is also what lets
+		Windows track the user's real system accent.
+
+		This dictionary is copied into the palette branches by
+		FluentColorPalette.TryPopulate only when the Fluent accent tokens are
+		reachable (all-or-nothing): Fluent neutrals around the shared M3 primary
+		would be an incoherent mixed palette. It is excluded from the merged pages
+		(fluent-common.props): theme-branch resources inside the merged bundle do
+		not resolve reliably in Release builds — see specs/lessons.md.
+
+		The TextFillColor* / TextOnAccentFillColor* / ControlStrongStrokeColor
+		captures also appear (as brushes) in LightweightDefaults.xaml — the two
+		files serve different layers; keep both in sync on re-capture.
+	-->
+
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Light">
+			<!-- TextOnAccentFillColorPrimary -->
+			<Color x:Key="OnPrimaryColor">#FFFFFFFF</Color>
+			<Color x:Key="OnSecondaryColor">#FFFFFFFF</Color>
+			<Color x:Key="OnTertiaryColor">#FFFFFFFF</Color>
+
+			<!-- SystemFillColorCritical -->
+			<Color x:Key="ErrorColor">#FFC42B1C</Color>
+			<!-- TextOnAccentFillColorPrimary -->
+			<Color x:Key="OnErrorColor">#FFFFFFFF</Color>
+			<!-- SystemFillColorCriticalBackground -->
+			<Color x:Key="ErrorContainerColor">#FFFDE7E9</Color>
+			<!-- SystemFillColorCritical — Fluent defines no "on critical container" token;
+				 critical-on-critical-background is the WinUI InfoBar pattern -->
+			<Color x:Key="OnErrorContainerColor">#FFC42B1C</Color>
+
+			<!-- Surface* maps to the solid background stack (no Mica/Acrylic — spec 05 N3). -->
+			<!-- SolidBackgroundFillColorBase -->
+			<Color x:Key="BackgroundColor">#FFF3F3F3</Color>
+			<!-- TextFillColorPrimary -->
+			<Color x:Key="OnBackgroundColor">#E4000000</Color>
+			<!-- SolidBackgroundFillColorTertiary -->
+			<Color x:Key="SurfaceColor">#FFF9F9F9</Color>
+			<!-- TextFillColorPrimary -->
+			<Color x:Key="OnSurfaceColor">#E4000000</Color>
+			<!-- SolidBackgroundFillColorSecondary -->
+			<Color x:Key="SurfaceVariantColor">#FFEEEEEE</Color>
+			<!-- TextFillColorSecondary -->
+			<Color x:Key="OnSurfaceVariantColor">#9E000000</Color>
+			<!-- dark-branch SolidBackgroundFillColorBase (SurfaceInverse carries the OTHER branch's value) -->
+			<Color x:Key="SurfaceInverseColor">#FF202020</Color>
+			<!-- TextFillColorInverse -->
+			<Color x:Key="OnSurfaceInverseColor">#FFFFFFFF</Color>
+
+			<!-- ControlStrongStrokeColorDefault -->
+			<Color x:Key="OutlineColor">#72000000</Color>
+			<!-- DividerStrokeColorDefault -->
+			<Color x:Key="OutlineVariantColor">#0F000000</Color>
+
+			<!-- ShadowColor keeps the shared default: Fluent has no shadow color token. -->
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="Default">
+			<!-- TextOnAccentFillColorPrimary -->
+			<Color x:Key="OnPrimaryColor">#FF000000</Color>
+			<Color x:Key="OnSecondaryColor">#FF000000</Color>
+			<Color x:Key="OnTertiaryColor">#FF000000</Color>
+
+			<!-- SystemFillColorCritical -->
+			<Color x:Key="ErrorColor">#FFFF99A4</Color>
+			<!-- TextOnAccentFillColorPrimary -->
+			<Color x:Key="OnErrorColor">#FF000000</Color>
+			<!-- SystemFillColorCriticalBackground -->
+			<Color x:Key="ErrorContainerColor">#FF442726</Color>
+			<!-- SystemFillColorCritical — see the Light-branch note -->
+			<Color x:Key="OnErrorContainerColor">#FFFF99A4</Color>
+
+			<!-- SolidBackgroundFillColorBase -->
+			<Color x:Key="BackgroundColor">#FF202020</Color>
+			<!-- TextFillColorPrimary -->
+			<Color x:Key="OnBackgroundColor">#FFFFFFFF</Color>
+			<!-- SolidBackgroundFillColorTertiary -->
+			<Color x:Key="SurfaceColor">#FF282828</Color>
+			<!-- TextFillColorPrimary -->
+			<Color x:Key="OnSurfaceColor">#FFFFFFFF</Color>
+			<!-- SolidBackgroundFillColorSecondary -->
+			<Color x:Key="SurfaceVariantColor">#FF1C1C1C</Color>
+			<!-- TextFillColorSecondary -->
+			<Color x:Key="OnSurfaceVariantColor">#C5FFFFFF</Color>
+			<!-- light-branch SolidBackgroundFillColorBase -->
+			<Color x:Key="SurfaceInverseColor">#FFF3F3F3</Color>
+			<!-- TextFillColorInverse -->
+			<Color x:Key="OnSurfaceInverseColor">#E4000000</Color>
+
+			<!-- ControlStrongStrokeColorDefault -->
+			<Color x:Key="OutlineColor">#8BFFFFFF</Color>
+			<!-- DividerStrokeColorDefault -->
+			<Color x:Key="OutlineVariantColor">#15FFFFFF</Color>
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
+
+</ResourceDictionary>

@@ -85,6 +85,41 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+			<sample:SamplePageLayout.FluentTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Basic (with explicit ListViewItemStyle) -->
+						<smtx:XamlDisplay UniqueKey="Fluent_ListView_Basic"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ListView MaxHeight="300"
+									  Style="{StaticResource ListViewStyle}">
+								<ListViewItem Content="First Item"
+											  Style="{StaticResource ListViewItemStyle}" />
+								<ListViewItem Content="Second Item"
+											  Style="{StaticResource ListViewItemStyle}" />
+								<ListViewItem Content="Third Item"
+											  Style="{StaticResource ListViewItemStyle}" />
+								<ListViewItem Content="Fourth Item"
+											  Style="{StaticResource ListViewItemStyle}" />
+							</ListView>
+						</smtx:XamlDisplay>
+						<!-- Multiple selection -->
+						<smtx:XamlDisplay UniqueKey="Fluent_ListView_MultiSelection"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ListView SelectionMode="Multiple"
+									  MaxHeight="300"
+									  Style="{StaticResource ListViewStyle}">
+								<ListViewItem Content="Apple" />
+								<ListViewItem Content="Banana"
+											  IsSelected="True" />
+								<ListViewItem Content="Cherry" />
+								<ListViewItem Content="Date"
+											  IsEnabled="False" />
+							</ListView>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.FluentTemplate>
 		</sample:SamplePageLayout>
     </Grid>
 </Page>
