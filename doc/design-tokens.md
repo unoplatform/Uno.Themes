@@ -4,13 +4,13 @@ uid: Uno.Themes.DesignTokens
 
 # Design Tokens & Override Surface
 
-Uno.Themes exposes a set of **shared design tokens** — semantic XAML resources for typography, spacing, shape (corner radius), and density (control height / icon size). These tokens are consumed by all control templates, so overriding a single token key globally affects every control that references it.
+Uno.Themes exposes **shared design tokens** — semantic XAML resources for typography, spacing, shape (corner radius), and density (control height / icon size). An override affects the templates that consume that token. Material and Simple consume many tokens directly or through control-specific resources. Fluent exposes the tokens for app content, but its built-in templates use native Fluent keys; only selected theme properties are translated to those keys. See [Semantic Styles](semantic-styles.md#override-compatibility) for current compatibility gaps.
 
 ## Token Categories
 
 ### Typography
 
-A single root typeface token cascades to all type-scale keys:
+A single theme property, `DefaultFontFamily`, generates all type-scale family keys. The corresponding resource token is:
 
 | Key                 | Default                                                       | Role             |
 |---------------------|---------------------------------------------------------------|------------------|
@@ -32,6 +32,8 @@ The root token is also settable as a `DefaultFontFamily` property on the theme �
 
 Per-scale keys follow the pattern `{Role}{Size}FontFamily`, `{Role}{Size}FontSize`, `{Role}{Size}FontWeight`, `{Role}{Size}CharacterSpacing` — for example `DisplayLargeFontFamily`, `BodyMediumFontSize`.
 
+Character-spacing availability varies by slot; the portable keys are listed in [Semantic Typography](semantic-styles.md#typography). Family, size, and character-spacing resources have types `FontFamily`, `double`, and `int`. Weight resources are declared as strings such as `Normal` or `SemiBold`, converted when applied to `FontWeight` setters.
+
 ### Spacing
 
 | Key         | Value (px) | Thickness Key        |
@@ -51,6 +53,8 @@ Per-scale keys follow the pattern `{Role}{Size}FontFamily`, `{Role}{Size}FontSiz
 | `Space2400` | 96         | `Space2400Thickness` |
 | `Space4000` | 160        | `Space4000Thickness` |
 
+For variants `0`, `050`, `100`, `150`, `200`, `300`, `400`, `500`, `600`, and `800`, the generator also provides `HorizontalThickness`, `VerticalThickness`, `TopThickness`, `BottomThickness`, `LeftThickness`, and `RightThickness` companions. For example, `Space200HorizontalThickness` is `(8,0,8,0)` at default spacing. Larger variants provide only the uniform `Thickness` companion. A scalar override such as `Space200` does not recompute these separate resources; override each consumed companion or set the theme property to regenerate the scale.
+
 ### Shape (Corner Radius)
 
 | Key          | Value (px) | CornerRadius Key         |
@@ -61,6 +65,7 @@ Per-scale keys follow the pattern `{Role}{Size}FontFamily`, `{Role}{Size}FontSiz
 | `Radius200`  | 8          | `Radius200CornerRadius`  |
 | `Radius300`  | 12         | `Radius300CornerRadius`  |
 | `Radius400`  | 16         | `Radius400CornerRadius`  |
+| `Radius500`  | 20         | `Radius500CornerRadius`  |
 | `Radius700`  | 28         | `Radius700CornerRadius`  |
 | `RadiusFull` | 9999       | `RadiusFullCornerRadius` |
 
@@ -88,7 +93,9 @@ Set `DefaultCornerRadius` (shape) or `DefaultSpacing` (spacing) on the theme to 
 <MaterialTheme DefaultCornerRadius="4" DefaultSpacing="6" />
 ```
 
-This generates all `Radius*` / `Space*` tokens as multiples of the base value. The same properties are available on `SimpleTheme`.
+This generates all `Radius*` / `Space*` tokens as multiples of the base value. The same properties are available on `SimpleTheme` and `FluentTheme`. Fluent's native templates do not consume `Space*`, so changing `DefaultSpacing` or `DefaultDensity` changes semantic resources and app content that uses them, but does not resize stock Fluent control padding.
+
+Use finite, non-negative values. Invalid `DefaultSpacing` values fall back to 4. `DefaultCornerRadius` currently lacks that validation in the shared generator: invalid values can enter the semantic shape tokens, while Fluent's native-radius adapter ignores them.
 
 For spacing, the [density mode](#density-modes) (`DefaultDensity`) composes with the base unit rather than replacing it: the effective spacing base is `DefaultSpacing × density factor` (`Compact` ×0.75, `Regular` ×1, `Comfy` ×1.25). With the default base of 4, the modes yield 3 / 4 / 5.
 
@@ -118,11 +125,11 @@ To override individual tokens without changing the whole scale, use standard XAM
 | `DefaultDensity`      | `Density`    | Density mode that scales the spacing base unit (`Compact` ×0.75, `Regular` ×1, `Comfy` ×1.25). Runtime-settable.                            |
 | `DefaultFontFamily`   | `FontFamily` | The font the type scale is generated from: the `DefaultFontFamily` token and every `*FontFamily` key derived from it. Runtime-settable.     |
 
-These properties are defined on `BaseTheme` and inherited by `MaterialTheme`, `SimpleTheme`, and their toolkit wrappers (`MaterialToolkitTheme`, `SimpleToolkitTheme`). All four regenerate their tokens when assigned at runtime; content already on screen re-resolves on a theme-change pass — see the note above and [Typography Font Swap](#typography-font-swap). The color configuration on the separate `Colors` property (`ThemeColors`) changes live — see [Seed Color Palette](seed-colors.md).
+These properties are defined on `BaseTheme` and inherited by `MaterialTheme`, `SimpleTheme`, `FluentTheme`, and the Material/Simple toolkit wrappers (`MaterialToolkitTheme`, `SimpleToolkitTheme`). All four properties regenerate their tokens when assigned at runtime; content reading those tokens through `{ThemeResource}` re-resolves on a theme-change pass — see the note above and [Typography Font Swap](#typography-font-swap). Fluent maps an explicitly set `DefaultCornerRadius` to `ControlCornerRadius` and twice that value to `OverlayCornerRadius`, and maps `DefaultFontFamily` to `ContentControlThemeFontFamily`. Other platform-specific measurements remain native Fluent resources.
 
 ### Density Modes
 
-The `DefaultDensity` property controls the spacing density of all controls.
+The `DefaultDensity` property controls the density of spacing-token consumers.
 It is a *mode*, not a value: it scales the `DefaultSpacing` base unit (effective base = `DefaultSpacing × factor`), adjusting padding and margins (Space* tokens) while keeping control heights and icon sizes constant. The two axes are orthogonal — a branded base unit and a density mode compose freely. The fixed tokens (`ControlHeight*`, `IconSize*`, `TouchTargetMinSize`) never change across density modes.
 
 | DefaultDensity      | Factor | Base at default spacing (4) | Feel                               |
@@ -170,8 +177,8 @@ refresh a hot reload performs.
 > Sans on non-Windows targets — and `DefaultFontFamily` does not touch it. Set both if an app mixes
 > styled and unstyled text.
 
-The same token can be redefined in a `ResourceDictionary` instead, which is the route to take when
-only some appearances or some scales should change:
+For Material or Simple merged at application scope, with the `DefaultFontFamily` property unset,
+the root token can instead be overridden in a font dictionary:
 
 ```xml
 <!-- MyTypography.xaml, referenced as FontOverrideSource on the theme -->
@@ -181,9 +188,8 @@ only some appearances or some scales should change:
 </ResourceDictionary>
 ```
 
-Reference the file as the theme's `FontOverrideSource` (`<MaterialTheme FontOverrideSource="ms-appx:///MyTypography.xaml" />`, likewise on `SimpleTheme`); redefining the root there cascades to every type-scale `FontFamily` key the same way the property does.
+Reference the file as the theme's `FontOverrideSource` (`<MaterialTheme FontOverrideSource="ms-appx:///MyTypography.xaml" />`, likewise on `SimpleTheme`). Material/Simple slot aliases then resolve the root at application scope. A page-scoped root override does not provide the same alias cascade.
 
-A font override wins over the generated tokens, the same way a color override wins over the
-generated seed palette: a key declared in both places takes its value from the override, and a key
-the override is silent about keeps the generated one. A `FontOverrideSource` is re-read from its file
-on every theme rebuild, so a hot-reload edit to it reaches the running app.
+For Fluent, use the `DefaultFontFamily` property for a whole-theme swap: its default slot aliases target `ContentControlThemeFontFamily` directly, so a dictionary redefining only `DefaultFontFamily` does not change the slots. To customize particular slots or appearances, declare concrete keys such as `BodyMediumFontFamily` in `FontOverrideDictionary` or `FontOverrideSource`. Native Fluent controls use `ContentControlThemeFontFamily`, not all of the semantic type slots.
+
+A font override wins **for each key it declares**: a key present in both the override and the generated layer takes the override value. Once the `DefaultFontFamily` property generates concrete slot values, overriding only the root key does not replace those slot values; override the individual slot keys as well or keep the property unset. A source-backed font dictionary is cached across unrelated rebuilds and re-read when reassigned or invalidated by hot reload.

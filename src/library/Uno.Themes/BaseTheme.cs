@@ -58,7 +58,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 	#region FontOverrideSource (DP)
 	/// <summary>
 	/// (Optional) Gets or sets a Uniform Resource Identifier (<see cref="Uri"/>) that provides the source location
-	/// of a <see cref="ResourceDictionary"/> containing overrides for the default Uno.Material <see cref="FontFamily"/> resources
+	/// of a <see cref="ResourceDictionary"/> containing overrides for the active theme's typography resources.
 	/// </summary>
 	public string FontOverrideSource
 	{
@@ -109,9 +109,10 @@ public abstract partial class BaseTheme : ResourceDictionary
 	#region ColorOverrideSource (DP)
 	/// <summary>
 	/// (Optional) Gets or sets a Uniform Resource Identifier (<see cref="Uri"/>) that provides the source location
-	/// of a <see cref="ResourceDictionary"/> containing overrides for the default Uno.Material <see cref="Color"/> resources
+	/// of a <see cref="ResourceDictionary"/> containing overrides for the active theme's color resources.
 	/// </summary>
-	/// <remarks>The overrides set here should be re-defining the <see cref="Color"/> resources used by Uno.Material, not the <see cref="SolidColorBrush"/> resources</remarks>
+	/// <remarks>Color overrides rebuild semantic brushes; a brush override replaces only that resource.
+	/// This legacy property forwards to <see cref="ThemeColors.OverrideSource"/>.</remarks>
 	[Obsolete("Use Colors.OverrideSource on ThemeColors instead. This property will be removed in a future version.")]
 	public string ColorOverrideSource
 	{
@@ -155,7 +156,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 
 	#region FontOverrideDictionary (DP)
 	/// <summary>
-	/// (Optional) Gets or sets a <see cref="ResourceDictionary"/> containing overrides for the default Uno.Material <see cref="FontFamily"/> resources
+	/// (Optional) Gets or sets a <see cref="ResourceDictionary"/> containing overrides for the active theme's typography resources.
 	/// </summary>
 	public ResourceDictionary FontOverrideDictionary
 	{
@@ -181,9 +182,10 @@ public abstract partial class BaseTheme : ResourceDictionary
 
 	#region ColorOverrideDictionary (DP)
 	/// <summary>
-	/// (Optional) Gets or sets a <see cref="ResourceDictionary"/> containing overrides for the default Uno.Material <see cref="Color"/> resources
+	/// (Optional) Gets or sets a <see cref="ResourceDictionary"/> containing overrides for the active theme's color resources.
 	/// </summary>
-	/// <remarks>The overrides set here should be re-defining the <see cref="Color"/> resources used by Uno.Material, not the <see cref="SolidColorBrush"/> resources</remarks>
+	/// <remarks>Color overrides rebuild semantic brushes; a brush override replaces only that resource.
+	/// This legacy property forwards to <see cref="ThemeColors.OverrideDictionary"/>.</remarks>
 	[Obsolete("Use Colors.OverrideDictionary on ThemeColors instead. This property will be removed in a future version.")]
 	public ResourceDictionary ColorOverrideDictionary
 	{
@@ -287,13 +289,12 @@ public abstract partial class BaseTheme : ResourceDictionary
 	/// Individual tokens can still be overridden via lightweight styling.
 	/// </summary>
 	/// <remarks>
-	/// This is a <b>construction-time</b> setting: assign it where the theme is declared
-	/// (normally <c>App.xaml</c>). Assigning it later regenerates the <c>Radius*</c> token
-	/// resources but does not restyle controls — not the ones already rendered, and not ones
-	/// created afterwards. The per-control keys that consume these tokens (<c>ButtonCornerRadius</c>
-	/// and friends) are resolved once when the theme's control-style dictionaries are parsed, and
-	/// a <see cref="CornerRadius"/> is a value with no live instance to update. To offer shape as
-	/// a user setting, change the property and then recreate the root content.
+	/// This is a runtime setting: assigning it regenerates the <c>Radius*</c> resources.
+	/// Controls consuming them through <c>ThemeResource</c> pick up the new values when their
+	/// resources are resolved. Already rendered controls require a theme-change pass or content
+	/// recreation because a <see cref="CornerRadius"/> is a value, not a mutable brush instance.
+	/// Only controls that consume the generated tokens or a design-system adapter follow this setting.
+	/// Supply a finite, non-negative value; the shared shape generator does not validate this input.
 	/// </remarks>
 	public double DefaultCornerRadius
 	{
@@ -334,11 +335,10 @@ public abstract partial class BaseTheme : ResourceDictionary
 	/// Individual tokens can still be overridden via lightweight styling.
 	/// </summary>
 	/// <remarks>
-	/// This is a <b>construction-time</b> setting, for the same reason as
-	/// <see cref="DefaultCornerRadius"/>: assigning it later regenerates the <c>Space*</c> token
-	/// resources but does not restyle controls, because the per-control padding and margin keys
-	/// hold resolved <see cref="Thickness"/> values. To offer spacing as a user setting, change the
-	/// property and then recreate the root content.
+	/// Assigning this at runtime regenerates the <c>Space*</c> resources. Controls consuming them
+	/// through <c>ThemeResource</c> resolve the new values on a theme-change pass or when recreated;
+	/// existing <see cref="Thickness"/> values cannot be mutated in place. Templates that do not
+	/// consume semantic spacing tokens, including stock Fluent templates, retain their own spacing.
 	/// Non-finite or negative values are treated as unset and fall back to the default of 4.
 	/// </remarks>
 	public double DefaultSpacing
@@ -372,11 +372,10 @@ public abstract partial class BaseTheme : ResourceDictionary
 	/// Control heights and icon sizes remain constant across densities.
 	/// </summary>
 	/// <remarks>
-	/// This is a <b>construction-time</b> setting, for the same reason as
-	/// <see cref="DefaultCornerRadius"/>: assigning it later regenerates the <c>Space*</c> token
-	/// resources but does not restyle controls, because the per-control padding and margin keys
-	/// hold resolved <see cref="Thickness"/> values. To offer density as a user setting, change the
-	/// property and then recreate the root content.
+	/// Assigning this at runtime regenerates the <c>Space*</c> resources with the new density factor.
+	/// The same consumer and refresh requirements as <see cref="DefaultSpacing"/> apply:
+	/// already rendered controls reading these tokens need a theme-change pass or recreation,
+	/// while templates that do not consume semantic spacing retain their own measurements.
 	/// </remarks>
 	public Density DefaultDensity
 	{
@@ -417,7 +416,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 	/// that.
 	/// </para>
 	/// <para>
-	/// Unlike <see cref="DefaultCornerRadius"/> and <see cref="DefaultSpacing"/>, this is a
+	/// Like <see cref="DefaultCornerRadius"/> and <see cref="DefaultSpacing"/>, this is a
 	/// <b>runtime</b> setting: text laid out after the change picks the new family up. Text
 	/// <b>already rendered</b> keeps the family it resolved when it loaded — a
 	/// <see cref="FontFamily"/> is an immutable value, so unlike a seed color, whose brushes are live
@@ -431,9 +430,10 @@ public abstract partial class BaseTheme : ResourceDictionary
 	/// does not touch.
 	/// </para>
 	/// <para>
-	/// A consumer <see cref="FontOverrideDictionary"/> declaring any of these keys still wins: it is
-	/// merged above the generated tokens, matching how
-	/// <see cref="ThemeColors.OverrideDictionary"/> beats the generated seed palette.
+	/// A consumer <see cref="FontOverrideDictionary"/> wins for each key it declares: it is merged
+	/// above the generated tokens. Overriding only the root <c>DefaultFontFamily</c> resource does
+	/// not replace the concrete slot values generated by this property; override the individual
+	/// slot keys to change them independently.
 	/// </para>
 	/// </remarks>
 	public FontFamily DefaultFontFamily
