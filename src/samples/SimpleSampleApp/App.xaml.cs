@@ -20,6 +20,7 @@ sealed partial class App : Application
 		SamplePageLayout.ActiveDesign = Design.Simple;
 
 		this.InitializeComponent();
+		NavigationHelper.SampleTheme = this.GetTheme();
 
 #if HAS_UNO || NETFX_CORE
 		this.Suspending += OnSuspending;

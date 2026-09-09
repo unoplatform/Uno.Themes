@@ -10,6 +10,9 @@ public static class NavigationHelper
 	/// </summary>
 	public static Microsoft.UI.Xaml.Window MainWindow { get; set; }
 
+	// Each guest assembly retains its own theme; Application.Current belongs to the wrapper when hosted.
+	internal static BaseTheme? SampleTheme { get; set; }
+
 	/// <summary>
 	/// Callback set by the app to handle shell navigation from shared code (e.g. OverviewSampleView).
 	/// </summary>

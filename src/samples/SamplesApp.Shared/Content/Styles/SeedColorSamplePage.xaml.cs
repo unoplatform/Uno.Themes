@@ -36,8 +36,11 @@ public sealed partial class SeedColorSamplePage : Page
 	private void ApplySeedColor(Color seed)
 	{
 		_lastSeed = seed;
-		SemanticThemeHelper.SeedColorMode = _lastSeedColorMode;
-		SemanticThemeHelper.PrimarySeed = seed;
+		var theme = NavigationHelper.SampleTheme
+			?? throw new InvalidOperationException("The Seed Color sample requires a sample theme.");
+		var colors = theme.Colors ??= new ThemeColors();
+		colors.SeedColorMode = _lastSeedColorMode;
+		colors.PrimarySeed = seed;
 
 		var hct = HctColor.FromArgb(ColorToArgb(seed));
 
