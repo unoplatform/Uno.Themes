@@ -14,8 +14,6 @@
 		<_IsAndroid>false</_IsAndroid>
 		<_IsAndroid Condition="$(IsMonoAndroid) or $(TargetFramework.ToLower().Contains('-android'))">true</_IsAndroid>
 
-		<_IsCatalyst>false</_IsCatalyst>
-		<_IsCatalyst Condition="$(_IsCatalyst) or $(TargetFramework.ToLower().Contains('-maccatalyst'))">true</_IsCatalyst>
 
 		<_IsIOS>false</_IsIOS>
 		<_IsIOS Condition="$(IsXamarinIOS) or $(TargetFramework.ToLower().Contains('-ios'))">true</_IsIOS>
@@ -23,8 +21,6 @@
 		<_IsMacOS>false</_IsMacOS>
 		<_IsMacOS Condition="$(IsXamarinMac) or $(TargetFramework.ToLower().Contains('-macos'))">true</_IsMacOS>
 
-		<IsIOSOrCatalyst>false</IsIOSOrCatalyst>
-		<IsIOSOrCatalyst Condition="$(_IsIOS) or $(_IsCatalyst)">true</IsIOSOrCatalyst>
 
 		<_IsNet>false</_IsNet>
 		<_IsNet Condition="'$(TargetFramework)'=='net461'">true</_IsNet>
@@ -55,9 +51,6 @@
 		<SupportedOSPlatformVersion>11.0</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="$(_IsCatalyst)">
-		<SupportedOSPlatformVersion>14.0</SupportedOSPlatformVersion>
-	</PropertyGroup>
 
 	<PropertyGroup Condition="$(_IsAndroid)">
 		<DefineConstants>$(DefineConstants);__ANDROID__;XAMARIN;MONOANDROID5_0;XAMARIN_ANDROID</DefineConstants>

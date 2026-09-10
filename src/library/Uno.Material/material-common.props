@@ -14,7 +14,7 @@
 	</ItemGroup>
 
 	<Choose>
-		<When Condition="$(IsIOSOrCatalyst) or $(_IsAndroid)">
+		<When Condition="$(_IsIOS) or $(_IsAndroid)">
 			<ItemGroup>
 				<IncludeXamlNamespaces Include="mobile" />
 				<ExcludeXamlNamespaces Include="not_mobile" />
@@ -28,28 +28,6 @@
 		</Otherwise>
 	</Choose>
 
-	<!-- NOTE: These two conditionals ONLY work under Uno targets and not Windows Desktop so they need to be used within the context of not_win or finer constraints -->
-	<!-- Make sure to add these aliases to the mc:Ignorable when using -->
-	<Choose>
-		<When Condition="'$(FrameworkLineage)'=='UWP'">
-			<ItemGroup>
-				<IncludeXamlNamespaces Include="uwp" />
-				<ExcludeXamlNamespaces Include="winui" />
-			</ItemGroup>
-		</When>
-		<When Condition="'$(FrameworkLineage)'=='WinUI'">
-			<ItemGroup>
-				<IncludeXamlNamespaces Include="winui" />
-				<ExcludeXamlNamespaces Include="uwp" />
-			</ItemGroup>
-		</When>
-		<Otherwise>
-			<ItemGroup>
-				<ExcludeXamlNamespaces Include="winui" />
-				<ExcludeXamlNamespaces Include="uwp" />
-			</ItemGroup>
-		</Otherwise>
-	</Choose>
 
 	<ItemGroup>
 		<LottieJson Include="Assets\MaterialDeterminate.json" />
@@ -76,11 +54,6 @@
 		<None Remove="Styles\Controls\v2\_Resources.xaml" />
 	</ItemGroup>
 
-	<ItemGroup Condition="$(IsXamarinIOS) or $(IsMonoAndroid) or $(IsXamarinMac)">
-		<EmbeddedResource Include="LinkerConfig.xamarin.xml">
-			<LogicalName>$(AssemblyName).xml</LogicalName>
-		</EmbeddedResource>
-	</ItemGroup>
 
 	<ItemGroup>
 		<None Update="Styles\Controls\v1\Button.xaml">
