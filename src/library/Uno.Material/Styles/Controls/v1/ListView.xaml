@@ -3,8 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-	xmlns:xamarin="http://uno.ui/xamarin"
-	mc:Ignorable="xamarin">
+	mc:Ignorable="">
 
 
 	<Style x:Key="MaterialListViewItemStyle" TargetType="ListViewItem">
@@ -359,7 +358,6 @@
 							<ContentPresenter x:Name="ContentPresenter"
 											  ContentTransitions="{TemplateBinding ContentTransitions}"
 											  ContentTemplate="{TemplateBinding ContentTemplate}"
-											  xamarin:ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
 											  Content="{TemplateBinding Content}"
 											  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 											  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -405,7 +403,6 @@
 							<FontIcon x:Name="MultiSelectCheck"
 									  FontFamily="{ThemeResource SymbolThemeFontFamily}"
 									  win:Glyph="&#xE73E;"
-									  xamarin:Glyph="&#xE081;"
 									  FontSize="16"
 									  Foreground="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
 									  Visibility="Collapsed"

@@ -3,8 +3,7 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-			 xmlns:xamarin="http://uno.ui/xamarin"
-			 mc:Ignorable="xamarin">
+			 mc:Ignorable="">
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 		<Grid.RowDefinitions>
@@ -38,8 +37,7 @@
 		<!-- Nested frame for samples that needs to be fullscreen -->
 		<Frame x:Name="NestedSampleFrame"
 			   Grid.RowSpan="3"
-			   Visibility="Collapsed"
-			   xamarin:Style="{StaticResource NativeDefaultFrame}" />
+			   Visibility="Collapsed" />
 
 		<StackPanel Grid.Row="2"
 					x:Name="DebuggingToolPanel"
