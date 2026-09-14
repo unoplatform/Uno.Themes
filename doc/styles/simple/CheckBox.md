@@ -14,6 +14,9 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 ## Lightweight Styling
 
+> [!NOTE]
+> Current implementation limitation: the label uses `CheckBoxForegroundUnchecked` at rest in all three check states. Hover, pressed, and disabled labels also use the corresponding `CheckBoxForegroundUnchecked*` keys, including when checked or indeterminate. The declared `CheckBoxForegroundChecked*` and `CheckBoxForegroundIndeterminate*` keys do not currently affect the label. Glyph, background, and border overrides still use their matching check-state keys. See [semantic styles](../../semantic-styles.md) for cross-theme mappings.
+
 ### Structural Resources
 
 | Key                                    | Type              | Value                              |

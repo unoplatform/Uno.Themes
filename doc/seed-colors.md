@@ -9,7 +9,7 @@ Pick one color — typically your brand color — and Uno Themes builds the enti
 Seed color generation is **opt-in**: by default, `MaterialTheme`, `SimpleTheme`, and `FluentTheme` use their built-in palettes (for Fluent, the platform accent and neutrals). The generator only runs when you explicitly set `PrimarySeed` on a `ThemeColors` object.
 
 > [!TIP]
-> New to Uno Themes? Set up a theme first — see [Material getting started](xref:Uno.Themes.Material.GetStarted) or [Simple getting started](xref:Uno.Themes.Simple.GetStarted) — then come back here. Everything on this page assumes a `MaterialTheme` or `SimpleTheme` is already in your `App.xaml`.
+> Set up [Material](xref:Uno.Themes.Material.GetStarted), [Simple](xref:Uno.Themes.Simple.GetStarted), or [Fluent](fluent-getting-started.md) first. This page assumes the corresponding theme is already in your `App.xaml`. Fluent translates the primary palette into native accent resources, with the differences described in [Fluent's seed cascade](#fluenttheme-seed--accent-cascade).
 
 ## How it works, in plain terms
 
@@ -34,7 +34,7 @@ The `SeedColorMode` property on `ThemeColors` picks the recipe. There are two mo
 
 Since version 8.0, the default mode keeps the generated theme true to the color you picked:
 
-- In Light mode, `PrimaryColor` is your seed color **verbatim** — the hex you supply is the hex your buttons render. (The alpha channel is ignored: seeds are treated as fully opaque.)
+- In Light mode, `PrimaryColor` is your seed color **verbatim**. Material/Simple filled buttons use this color; Fluent's native accent fill uses a derived shade, as described below. The alpha channel is ignored: seeds are treated as fully opaque.
 - The color used on top of it (`OnPrimaryColor`, for button text and icons) is chosen automatically so it always stays readable: a pale seed gets dark text, a dark seed gets light text. The pairing always meets the WCAG AA contrast standard (4.5:1).
 - Every supporting palette follows the character of your seed: a muted seed gives a muted theme, and a gray seed gives a fully neutral theme.
 - In Dark mode, `PrimaryColor` is a lighter derivative of your seed — a dark brand color painted onto a dark background would be unreadable, so Dark mode always brightens it.
@@ -132,9 +132,11 @@ The override `ResourceDictionary` follows the same format as the existing [manua
 
 ## Runtime Seed Color Changes
 
-Seed colors can be changed at runtime — for example from a settings page or a color picker. The whole app repaints immediately, including elements already on screen: no page re-navigation and no theme toggle required.
+Seed colors can be changed at runtime — for example from a settings page or a color picker. Elements holding the theme's shared semantic brushes repaint immediately, including those already on screen: no page re-navigation and no theme toggle is required for those brushes.
 
 This works because the semantic brushes are updated in place rather than replaced, and it covers the state variants too (`PrimaryHoverBrush`, `PrimaryDisabledBrush`, …) along with their opacities — so overriding a token such as `HoverOpacity` in your override dictionary reaches those brushes as well.
+
+Fluent's generated native accent and lightweight resources are replaced during a rebuild, rather than mutated with the shared brushes. Existing native controls are therefore outside this live-instance guarantee and can require resource re-resolution or recreation. This also applies when clearing the seed; see [Fluent behavior notes](fluent-getting-started.md#behavior-notes).
 
 > [!NOTE]
 > Roles that are not generated from the seed — the four `Error*` keys — keep their base-palette values, and a `*Brush` key you define yourself in an override dictionary still wins over the generated one.
@@ -210,7 +212,7 @@ Version 8.0 changes what the generator produces. **If you never set `PrimarySeed
 
 ### `ThemeColors`
 
-Used as the value for `BaseTheme.Colors` (i.e., `MaterialTheme.Colors` or `SimpleTheme.Colors`).
+Used as the value for `BaseTheme.Colors` (`MaterialTheme.Colors`, `SimpleTheme.Colors`, or `FluentTheme.Colors`).
 
 | Property             | Type                 | Description                                                                                                                                                         |
 |----------------------|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -227,11 +229,16 @@ Static convenience class for runtime theme configuration.
 
 | Member          | Type     | Description                                                                                        |
 |-----------------|----------|----------------------------------------------------------------------------------------------------|
-| `GetTheme()`    | Method   | Returns the `BaseTheme` instance from `Application.Current.Resources`, or `null` if none is found. |
+| `GetTheme()`    | Method   | Returns the first `BaseTheme` directly in `Application.Current.Resources.MergedDictionaries`, or `null` if none is found. |
 | `PrimarySeed`   | Property | Gets or sets the primary seed color on the active theme. Setting regenerates the full palette.     |
 | `SecondarySeed` | Property | Gets or sets the secondary seed color. `null` to auto-derive from primary.                         |
 | `TertiarySeed`  | Property | Gets or sets the tertiary seed color. `null` to auto-derive from primary.                          |
 | `SeedColorMode` | Property | Gets or sets the generation mode on the active theme: `Fidelity` (default) or `TonalSpot`.         |
+| `DefaultFontFamily` | Property | Gets or sets the active theme's typeface; see [Typography Font Swap](design-tokens.md#typography-font-swap). |
+
+The properties require an active application theme and throw `InvalidOperationException` if none is found. Setting a secondary or tertiary seed alone does not start generation: an effective primary seed is required. Clearing `PrimarySeed` restores the built-in palette for Material, Simple, and Fluent; explicit override resources remain in effect. Perform theme resource changes on the UI thread.
+
+The helper does not search nested dictionaries or page resources and does not select the last theme by resource precedence. Keep one application theme directly merged, or retain and configure an explicit theme instance for scoped use.
 
 ### `ApplicationExtensions`
 
@@ -247,7 +254,7 @@ Under [`FluentTheme`](fluent-getting-started.md), a seed color does more than ge
 
 - The `SystemAccentColor` shade set (`SystemAccentColor`, `Light1`–`Light3`, `Dark1`–`Dark3`) is overridden from the seed's tonal palette: the base accent is the generated light `PrimaryColor` — the seed itself under the default `Fidelity` mode, tone 40 of the chroma-boosted palette under `TonalSpot`. The shades are derived **relative to the accent's own tone**, so a very dark brand color gets darker shades still (its light-theme fill stays navy, not a lighter blue): the dark shades sit at 3/4, 1/2 and 1/4 of the accent's tone, and `Light2` — Fluent's dark-theme accent fill — is anchored at the dark-theme `PrimaryColor` tone (80), with `Light1` midway to it and `Light3` midway from it to white.
 - The accent-derived design tokens (`AccentFillColor*`, `AccentTextFillColor*` colors and brushes) are overridden per Light/Dark theme following Fluent's own structure — for example, the light-theme accent fill is the `Dark1` shade and the dark-theme fill is `Light2`, exactly as with the platform accent.
-- The cascade honors [`SeedColorMode`](#choosing-the-generation-mode) like the semantic palette does, so the built-in accent and the semantic `PrimaryColor` always agree — in the light theme (`SystemAccentColor`) and in the dark theme (`SystemAccentColorLight2`, the accent fill): under the default `Fidelity` mode a muted corporate accent keeps its character in both; `TonalSpot` re-saturates both.
+- The cascade honors [`SeedColorMode`](#two-generation-modes) like the semantic palette does, so the built-in accent and the semantic `PrimaryColor` agree at `SystemAccentColor` in Light and `SystemAccentColorLight2` in Dark. The Light native fill still uses the `Dark1` shade. Under the default `Fidelity` mode a muted corporate accent keeps its character in both; `TonalSpot` re-saturates both.
 - Text on the accent (`TextOnAccentFillColorPrimary` / `Secondary` and their brushes) is picked for **contrast against the derived fill** — Fluent's white (light theme) and black (dark theme) families assume a mid-tone platform accent, so a pale brand color gets black text on its accent buttons, checked check boxes and toggle switches instead of unreadable white. The semantic defaults that sit on the fill (`FilledButtonForeground*`, `CheckBoxGlyphForegroundChecked`, `ToggleSwitchKnobOnFill`) follow the same pick.
 
 ### PrimaryColor overrides drive the accent too
@@ -255,7 +262,7 @@ Under [`FluentTheme`](fluent-getting-started.md), a seed color does more than ge
 The cascade is not limited to seeds. An explicit **`PrimaryColor` override** — through any channel (`Colors.OverrideDictionary`, `Colors.OverrideSource`, or the legacy `ColorOverrideDictionary` / `ColorOverrideSource` theme properties) — also recolors the built-in Fluent controls, matching how a `PrimaryColor` override visibly recolors controls under Material and Simple:
 
 - Unlike a seed (a *generator input*, mapped through tonal-palette tones), an override is the highest-precedence statement of what Primary **is** — it becomes the accent fill **verbatim** for its theme branch, with the surrounding `SystemAccentColor*` shades and accent-text tones derived relative to it, and the on-accent text family picked by contrast against it.
-- Branch-aware: a value in the `Light` / `Dark` (or `Default`) theme dictionary drives that branch; a flat value drives both. A branch with no effective value keeps the seed mapping (when a seed is set) or the platform accent.
+- A flat value drives both appearances. `Light` and `Dark` values select their respective appearances; `Default` supplies a fallback for either appearance without its own value. Currently an isolated Dark-only override without a seed can also populate the generated native `Default` branch, making it a fallback in Light. Provide both appearance values for predictable accent behavior.
 - When both a seed and a `PrimaryColor` override are set, the **override wins** — the same precedence as in the semantic palette.
 - Any accent-family key you override **explicitly** (`SystemAccentColor*`, `AccentFillColor*`, `AccentTextFillColor*`) always wins over the derived values.
 
@@ -265,6 +272,8 @@ The cascade is not limited to seeds. An explicit **`PrimaryColor` override** —
 ```
 
 With `ColorPaletteOverride.xaml` defining `PrimaryColor` per theme branch, both semantic-keyed XAML **and** the stock Fluent controls follow it.
+
+The supported bridge input is the theme's configured override dictionary (including the source and obsolete property channels listed above). The constructor's `colorOverride` argument and entries nested in `MergedDictionaries` do not feed Fluent's accent bridge. Other semantic color/brush overrides, such as `OnPrimaryColor`, are not general native accent drivers; see [override compatibility](semantic-styles.md#override-compatibility).
 
 Without a seed or a `PrimaryColor` override, none of these overrides exist and the controls follow the platform accent (on Windows, the user's chosen accent color).
 
