@@ -69,6 +69,7 @@ public class Given_FluentLightweightStyling
 	[MethodImpl(MethodImplOptions.NoInlining)]
 	private static void CollectReleasedTextButton()
 	{
+		// Force collection only in this leak test, after the strong-reference stack frame has returned.
 		GC.Collect();
 		GC.WaitForPendingFinalizers();
 		GC.Collect();
@@ -678,9 +679,10 @@ public class Given_FluentLightweightStyling
 	[DataRow("TextControlPlaceholderForeground")]
 	public void When_NativeSemanticKey_IsProvidedByXcr(string key)
 	{
-		var xcr = new Microsoft.UI.Xaml.Controls.XamlControlsResources();
+		var resources = new ResourceDictionary();
+		resources.MergedDictionaries.Add(new Microsoft.UI.Xaml.Controls.XamlControlsResources());
 
-		Assert.IsTrue(xcr.TryGetValue(key, out var value) && value is not null,
+		Assert.IsTrue(resources.TryGetValue(key, out var value) && value is not null,
 			$"{key} must be provided natively by XamlControlsResources — a rename in Uno.UI breaks consumer overrides");
 	}
 

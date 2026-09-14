@@ -152,7 +152,7 @@ public class Given_FluentSeedAccent
 	/// (see specs/lessons.md, "dark-branch rendering is not testable in the CI host").
 	/// </summary>
 	private static Color? FindBranchColor(ResourceDictionary dictionary, string branchKey, string key)
-		=> FindBranchValue(dictionary, branchKey, key) is Color color ? color : null;
+		=> FindBranchValue(dictionary, branchKey, key) is Color color ? color : (Color?)null;
 
 	private static object? FindBranchValue(ResourceDictionary dictionary, string branchKey, string key)
 	{
@@ -272,7 +272,7 @@ public class Given_FluentSeedAccent
 		// both the generated light PrimaryColor and the base accent; a muted seed
 		// is visibly re-saturated (sanity: the two modes must differ here).
 		var expectedAccent = Tone(MutedSeed, 40, SeedColorMode.TonalSpot);
-		Assert.AreNotEqual(MutedSeed, expectedAccent,
+		Assert.AreNotEqual(expectedAccent, MutedSeed,
 			"sanity: TonalSpot must move a muted seed, or this test proves nothing");
 
 		Assert.AreEqual(expectedAccent, GetColor(container.Resources, "SystemAccentColor"),
@@ -497,10 +497,8 @@ public class Given_FluentSeedAccent
 			Assert.AreEqual(SeedRed, GetColor(Application.Current.Resources, "SystemAccentColor"),
 				"the seeded accent should be active before clearing");
 
-			// In-place clear: everything the THEME owns restores immediately.
-			// (XCR's own materialized accent brushes can keep the last value
-			// until the next app-scope resource change — platform cache
-			// behavior, documented in seed-colors.md and spike-results.md S4.)
+			// Existing-control brush restoration is covered by Given_FluentThemeLifecycle;
+			// this assertion checks the app-scope accent resource after an in-place clear.
 			theme.Colors.PrimarySeed = null;
 
 			Assert.AreEqual(platformAccent, GetColor(Application.Current.Resources, "SystemAccentColor"),
@@ -511,10 +509,7 @@ public class Given_FluentSeedAccent
 			appDictionaries.Remove(theme);
 		}
 
-		// Unmerging is an app-scope resource change: on the next render pass
-		// XCR re-materializes its accent brushes, so a freshly rendered
-		// built-in control must carry the PLATFORM accent fill again (the S4
-		// clean-restore flow) — no seeded residue.
+		// A newly rendered control must also use the platform accent after unmerging.
 		var expectedPlatformFill = GetColor(
 			Application.Current.Resources,
 			IsAmbientDark ? "SystemAccentColorLight2" : "SystemAccentColorDark1");
@@ -849,7 +844,7 @@ public class Given_FluentSeedAccent
 		}
 		var theme = new FluentTheme
 		{
-			Colors = new ThemeColors { PrimarySeed = withSeed ? SeedRed : null, OverrideDictionary = overrides },
+			Colors = new ThemeColors { PrimarySeed = withSeed ? SeedRed : (Color?)null, OverrideDictionary = overrides },
 		};
 		var appDictionaries = Application.Current.Resources.MergedDictionaries;
 		appDictionaries.Add(theme);

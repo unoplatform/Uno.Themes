@@ -229,8 +229,7 @@ public class Given_FluentColorPalette
 			Assert.IsTrue(
 				Application.Current.Resources.TryGetValue(brushKey, out var value),
 				$"{brushKey} should resolve under an app-scope FluentTheme");
-			var brush = value as SolidColorBrush;
-			Assert.IsNotNull(brush, $"{brushKey} should be a SolidColorBrush");
+			var brush = Assert.IsInstanceOfType<SolidColorBrush>(value, $"{brushKey} should be a SolidColorBrush");
 			Assert.AreEqual(expected, brush.Color,
 				$"{brushKey} must carry the mapped Fluent token value for the ambient theme");
 		}
@@ -262,8 +261,7 @@ public class Given_FluentColorPalette
 				&& accentValue is SolidColorBrush,
 			"AccentFillColorDefaultBrush should be provided by XamlControlsResources");
 
-		var background = button.Background as SolidColorBrush;
-		Assert.IsNotNull(background, "FilledButtonStyle button should have a SolidColorBrush background");
+		var background = Assert.IsInstanceOfType<SolidColorBrush>(button.Background, "FilledButtonStyle button should have a SolidColorBrush background");
 		Assert.AreEqual(((SolidColorBrush)accentValue).Color, background.Color,
 			"the semantic Filled button must render with Fluent's accent fill");
 	}
