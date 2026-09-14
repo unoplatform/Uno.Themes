@@ -247,7 +247,7 @@ Under [`FluentTheme`](fluent-getting-started.md), a seed color does more than ge
 
 - The `SystemAccentColor` shade set (`SystemAccentColor`, `Light1`–`Light3`, `Dark1`–`Dark3`) is overridden from the seed's tonal palette: the base accent is the generated light `PrimaryColor` — the seed itself under the default `Fidelity` mode, tone 40 of the chroma-boosted palette under `TonalSpot`. The shades are derived **relative to the accent's own tone**, so a very dark brand color gets darker shades still (its light-theme fill stays navy, not a lighter blue): the dark shades sit at 3/4, 1/2 and 1/4 of the accent's tone, and `Light2` — Fluent's dark-theme accent fill — is anchored at the dark-theme `PrimaryColor` tone (80), with `Light1` midway to it and `Light3` midway from it to white.
 - The accent-derived design tokens (`AccentFillColor*`, `AccentTextFillColor*` colors and brushes) are overridden per Light/Dark theme following Fluent's own structure — for example, the light-theme accent fill is the `Dark1` shade and the dark-theme fill is `Light2`, exactly as with the platform accent.
-- The cascade honors [`SeedColorMode`](#choosing-the-generation-mode) like the semantic palette does, so the built-in accent and the semantic `PrimaryColor` always agree — in the light theme (`SystemAccentColor`) and in the dark theme (`SystemAccentColorLight2`, the accent fill): under the default `Fidelity` mode a muted corporate accent keeps its character in both; `TonalSpot` re-saturates both.
+- The cascade honors [`SeedColorMode`](#two-generation-modes) like the semantic palette does, so the built-in accent and the semantic `PrimaryColor` always agree — in the light theme (`SystemAccentColor`) and in the dark theme (`SystemAccentColorLight2`, the accent fill): under the default `Fidelity` mode a muted corporate accent keeps its character in both; `TonalSpot` re-saturates both.
 - Text on the accent (`TextOnAccentFillColorPrimary` / `Secondary` and their brushes) is picked for **contrast against the derived fill** — Fluent's white (light theme) and black (dark theme) families assume a mid-tone platform accent, so a pale brand color gets black text on its accent buttons, checked check boxes and toggle switches instead of unreadable white. The semantic defaults that sit on the fill (`FilledButtonForeground*`, `CheckBoxGlyphForegroundChecked`, `ToggleSwitchKnobOnFill`) follow the same pick.
 
 ### PrimaryColor overrides drive the accent too
@@ -269,7 +269,7 @@ With `ColorPaletteOverride.xaml` defining `PrimaryColor` per theme branch, both 
 Without a seed or a `PrimaryColor` override, none of these overrides exist and the controls follow the platform accent (on Windows, the user's chosen accent color).
 
 > [!NOTE]
-> Clearing the seed at runtime (`PrimarySeed = null`) immediately restores the semantic palette and the `SystemAccentColor*` values. Built-in controls that already materialized their accent brushes may keep the last seeded color until the next app-scope resource change or theme switch — a platform resource-cache behavior. Unmerging the theme always restores the platform accent completely.
+> Clearing the seed at runtime (`PrimarySeed = null`) immediately restores the default semantic palette and platform accent, including the accent brushes held by controls already on screen. Explicit color and brush overrides continue to take precedence after the seed is cleared.
 
 ## Color Precedence
 

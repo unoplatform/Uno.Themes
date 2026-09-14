@@ -81,6 +81,8 @@ public partial class FluentTheme
 		var baseline = new ResourceDictionary();
 		baseline.MergedDictionaries.Add(_lightweightDefaults);
 		baseline.MergedDictionaries.Add(FluentLightweightBridge.Build(null, SeedColorMode.Fidelity, null, null, null));
+		baseline.MergedDictionaries.Add(FluentLightweightBridge.CaptureNativeFallbacks());
+		baseline.MergedDictionaries.Add(FluentLightweightBridge.BuildScopedNativeFallbacks(_liveAccentResources, ResolvedColorOverride));
 		FluentResourceUpdater.Update(_liveLightweightResources, replacement, baseline);
 		baseline.MergedDictionaries.Remove(_lightweightDefaults);
 		AddThemeDictionary(_liveLightweightResources);
