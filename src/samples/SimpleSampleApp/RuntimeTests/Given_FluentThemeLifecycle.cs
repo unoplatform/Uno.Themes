@@ -47,6 +47,8 @@ public class Given_FluentThemeLifecycle
 	[MethodImpl(MethodImplOptions.NoInlining)]
 	private static void CollectObservedTheme()
 	{
+		// Intentional leak guard: force finalization in a separate frame from the
+		// strong references created by CreateObservedTheme.
 		GC.Collect();
 		GC.WaitForPendingFinalizers();
 		GC.Collect();
@@ -139,6 +141,187 @@ public class Given_FluentThemeLifecycle
 			AssertBrush(Microsoft.UI.Colors.Blue, 0.4, button.Background);
 		}
 		finally { dictionaries.Remove(theme); }
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow("FilledButtonBackground", "AccentButtonBackground", "FilledButtonStyle", "AccentButtonStyle", false)]
+	[DataRow("OutlinedButtonBackground", "ButtonBackground", "OutlinedButtonStyle", "DefaultButtonStyle", false)]
+	[DataRow("FilledButtonBackground", "AccentButtonBackground", "FilledButtonStyle", "AccentButtonStyle", true)]
+	public async Task When_LightweightOverrideClears_ExistingNativeButtonAndRetainedBrushReturnToBaseline(
+		string semanticKey, string nativeKey, string semanticStyle, string nativeStyle, bool seeded)
+	{
+		var dictionaries = Application.Current.Resources.MergedDictionaries;
+		var theme = new FluentTheme { Colors = new ThemeColors { PrimarySeed = seeded ? Microsoft.UI.Colors.Blue : null } };
+		dictionaries.Add(theme);
+		try
+		{
+			var host = new StackPanel();
+			var baselineButton = new Button { Content = "Baseline", Style = (Style)Application.Current.Resources[nativeStyle] };
+			host.Children.Add(baselineButton);
+			UnitTestsUIContentHelper.Content = host;
+			await UnitTestsUIContentHelper.WaitForLoaded(baselineButton);
+			await UnitTestsUIContentHelper.WaitForIdle();
+			var baseline = Assert.IsInstanceOfType<SolidColorBrush>(baselineButton.Background);
+			var baselineColor = baseline.Color;
+			var baselineOpacity = baseline.Opacity;
+			var overrideBrush = new SolidColorBrush(Microsoft.UI.Colors.Red) { Opacity = 0.43 };
+			theme.Colors.OverrideDictionary = new ResourceDictionary { [semanticKey] = overrideBrush };
+			var button = new Button { Content = "Clear override", Style = (Style)theme[semanticStyle] };
+			host.Children.Add(button);
+			await UnitTestsUIContentHelper.WaitForLoaded(button);
+			await UnitTestsUIContentHelper.WaitForIdle();
+			var retainedBrush = Assert.IsInstanceOfType<SolidColorBrush>(theme[nativeKey]);
+			AssertBrush(overrideBrush.Color, overrideBrush.Opacity, retainedBrush);
+			AssertBrush(overrideBrush.Color, overrideBrush.Opacity, button.Background);
+
+			theme.Colors.OverrideDictionary = null;
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			AssertBrush(baselineColor, baselineOpacity, button.Background);
+			AssertBrush(baselineColor, baselineOpacity, retainedBrush);
+			AssertBrush(Microsoft.UI.Colors.Red, 0.43, overrideBrush);
+		}
+		finally
+		{
+			UnitTestsUIContentHelper.Content = null;
+			dictionaries.Remove(theme);
+		}
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_ScopedLightweightOverrideClears_ExistingButtonAndRetainedBrushReturnToScopedSeed()
+	{
+		var platformColor = Assert.IsInstanceOfType<SolidColorBrush>(Application.Current.Resources["AccentFillColorDefaultBrush"]).Color;
+		var theme = new FluentTheme { Colors = new ThemeColors { PrimarySeed = Microsoft.UI.Colors.Blue } };
+		var baseline = Assert.IsInstanceOfType<SolidColorBrush>(theme["AccentFillColorDefaultBrush"]);
+		if (baseline.Color == platformColor)
+		{
+			// The application may already use the candidate accent. Choose another
+			// scoped seed so the fallback assertion stays meaningful.
+			theme.Colors.PrimarySeed = Microsoft.UI.Colors.Orange;
+			baseline = Assert.IsInstanceOfType<SolidColorBrush>(theme["AccentFillColorDefaultBrush"]);
+		}
+		var baselineColor = baseline.Color;
+		var baselineOpacity = baseline.Opacity;
+		Assert.AreNotEqual(platformColor, baselineColor, "The scoped seed must differ from the app accent so restoring the app fallback cannot pass.");
+		theme.Colors.OverrideDictionary = new ResourceDictionary
+		{
+			["FilledButtonBackground"] = new SolidColorBrush(Microsoft.UI.Colors.Red) { Opacity = 0.43 },
+		};
+		var host = new Grid();
+		host.Resources.MergedDictionaries.Add(theme);
+		var button = new Button { Content = "Scoped clear", Style = (Style)theme["FilledButtonStyle"] };
+		host.Children.Add(button);
+		UnitTestsUIContentHelper.Content = host;
+		try
+		{
+			await UnitTestsUIContentHelper.WaitForLoaded(button);
+			await UnitTestsUIContentHelper.WaitForIdle();
+			var retainedBrush = Assert.IsInstanceOfType<SolidColorBrush>(theme["AccentButtonBackground"]);
+			AssertBrush(Microsoft.UI.Colors.Red, 0.43, button.Background);
+			AssertBrush(Microsoft.UI.Colors.Red, 0.43, retainedBrush);
+
+			theme.Colors.OverrideDictionary = null;
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			AssertBrush(baselineColor, baselineOpacity, retainedBrush);
+			AssertBrush(baselineColor, baselineOpacity, button.Background);
+		}
+		finally
+		{
+			UnitTestsUIContentHelper.Content = null;
+			host.Resources.MergedDictionaries.Remove(theme);
+		}
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow("Background", "AccentFillColorDefaultBrush")]
+	[DataRow("BackgroundPointerOver", "AccentFillColorSecondaryBrush")]
+	[DataRow("BackgroundPressed", "AccentFillColorTertiaryBrush")]
+	[DataRow("Foreground", "TextOnAccentFillColorPrimaryBrush")]
+	[DataRow("ForegroundPointerOver", "TextOnAccentFillColorPrimaryBrush")]
+	[DataRow("ForegroundPressed", "TextOnAccentFillColorSecondaryBrush")]
+	public void When_ScopedButtonOverrideClears_RetainedStateBrushUsesScopedAccent(string suffix, string accentKey)
+	{
+		var theme = new FluentTheme { Colors = new ThemeColors { PrimarySeed = Microsoft.UI.Colors.Orange } };
+		theme.Colors.OverrideDictionary = new ResourceDictionary
+		{
+			["FilledButton" + suffix] = new SolidColorBrush(Microsoft.UI.Colors.Magenta) { Opacity = 0.43 },
+		};
+		var retained = Assert.IsInstanceOfType<SolidColorBrush>(theme["AccentButton" + suffix]);
+		AssertBrush(Microsoft.UI.Colors.Magenta, 0.43, retained);
+
+		theme.Colors.OverrideDictionary = null;
+
+		var expected = Assert.IsInstanceOfType<SolidColorBrush>(theme[accentKey]);
+		AssertBrush(expected.Color, expected.Opacity, retained);
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_ScopedSemanticMappingClears_ExplicitNativeOverrideRemains()
+	{
+		var native = new SolidColorBrush(Microsoft.UI.Colors.Magenta) { Opacity = 0.43 };
+		var theme = new FluentTheme
+		{
+			Colors = new ThemeColors
+			{
+				PrimarySeed = Microsoft.UI.Colors.Orange,
+				OverrideDictionary = new ResourceDictionary
+				{
+					["FilledButtonBackground"] = new SolidColorBrush(Microsoft.UI.Colors.Red),
+					["AccentButtonBackground"] = native,
+				},
+			},
+		};
+		var host = new Grid();
+		host.Resources.MergedDictionaries.Add(theme);
+		var button = new Button { Content = "Native scoped override", Style = (Style)theme["FilledButtonStyle"] };
+		host.Children.Add(button);
+		UnitTestsUIContentHelper.Content = host;
+		try
+		{
+			await UnitTestsUIContentHelper.WaitForLoaded(button);
+			await UnitTestsUIContentHelper.WaitForIdle();
+			var retained = Assert.IsInstanceOfType<SolidColorBrush>(theme["AccentButtonBackground"]);
+			AssertBrush(native.Color, native.Opacity, button.Background);
+			AssertBrush(native.Color, native.Opacity, retained);
+
+			theme.Colors.OverrideDictionary = new ResourceDictionary { ["AccentButtonBackground"] = native };
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			AssertBrush(native.Color, native.Opacity, button.Background);
+			AssertBrush(native.Color, native.Opacity, retained);
+		}
+		finally
+		{
+			UnitTestsUIContentHelper.Content = null;
+			host.Resources.MergedDictionaries.Remove(theme);
+		}
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_NativeAndSemanticLightweightKeysAreOverridden_ExplicitNativeResourceWins()
+	{
+		var semantic = new SolidColorBrush(Microsoft.UI.Colors.Red);
+		var native = new SolidColorBrush(Microsoft.UI.Colors.Blue) { Opacity = 0.43 };
+		var theme = new FluentTheme
+		{
+			Colors = new ThemeColors
+			{
+				OverrideDictionary = new ResourceDictionary
+				{
+					["FilledButtonBackground"] = semantic,
+					["AccentButtonBackground"] = native,
+				},
+			},
+		};
+		AssertBrush(native.Color, native.Opacity, (Brush)theme["AccentButtonBackground"]);
+		AssertBrush(semantic.Color, semantic.Opacity, (Brush)theme["FilledButtonBackground"]);
 	}
 
 	[TestMethod]

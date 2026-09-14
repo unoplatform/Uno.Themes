@@ -223,6 +223,68 @@ internal static class FluentLightweightBridge
 		return dictionary;
 	}
 
+	internal static ResourceDictionary CaptureNativeFallbacks()
+	{
+		var dictionary = new ResourceDictionary();
+		if (Application.Current?.Resources is not { } resources)
+		{
+			return dictionary;
+		}
+
+		foreach (var (_, nativeKey) in _repointMap)
+		{
+			// The previous generated bridge is detached when this runs. Resolve the
+			// native resource used by realized controls, including the active accent.
+			// This captures the active resource context, not separate Light/Dark values:
+			// native aliases cannot be forced into another appearance by a public lookup.
+			// Look up only this key; enumerating XCR can materialize unrelated lazy
+			// resources and mutate the dictionary during enumeration.
+			if (resources.TryGetValue(nativeKey, out var value) && value is { })
+			{
+				dictionary[nativeKey] = value;
+			}
+		}
+		return dictionary;
+	}
+
+	internal static ResourceDictionary BuildScopedNativeFallbacks(ResourceDictionary accentResources, ResourceDictionary? consumerOverride)
+	{
+		var dictionary = new ResourceDictionary();
+		foreach (var appearance in new[] { LightBranchKey, DarkBranchKey })
+		{
+			var branch = new ResourceDictionary();
+			foreach (var (_, nativeKey) in _repointMap)
+			{
+				var value = FluentResourceResolver.Resolve(consumerOverride, appearance, nativeKey);
+				if (value is null && GetAccentResourceKey(nativeKey) is { } accentKey)
+				{
+					value = FluentResourceResolver.Resolve(accentResources, appearance, accentKey);
+				}
+				if (value is { })
+				{
+					branch[nativeKey] = value;
+				}
+			}
+			dictionary.ThemeDictionaries[appearance == DarkBranchKey ? DefaultBranchKey : appearance] = branch;
+		}
+		return dictionary;
+	}
+
+	// The native aliases in XCR's Button/CheckBox/ToggleSwitch theme resources.
+	// Resolve their targets directly from this theme's current accent closure: an
+	// application-level alias lookup cannot see a container-scoped seed or override.
+	private static string? GetAccentResourceKey(string nativeKey) => nativeKey switch
+	{
+		"AccentButtonBackground" or "ToggleSwitchFillOn" or "ToggleSwitchStrokeOn" => "AccentFillColorDefaultBrush",
+		"AccentButtonBackgroundPointerOver" => "AccentFillColorSecondaryBrush",
+		"AccentButtonBackgroundPressed" => "AccentFillColorTertiaryBrush",
+		"AccentButtonForeground" or "AccentButtonForegroundPointerOver"
+			or "CheckBoxCheckGlyphForegroundChecked"
+			or "ToggleSwitchKnobFillOn" or "ToggleSwitchKnobFillOnPointerOver" or "ToggleSwitchKnobFillOnPressed" => "TextOnAccentFillColorPrimaryBrush",
+		"AccentButtonForegroundPressed" => "TextOnAccentFillColorSecondaryBrush",
+		_ => null,
+	};
+
 	/// <summary>
 	/// A branch's accent-button fill, and whether a driver (seed or PrimaryColor
 	/// override) produced it — the stock platform fill leaves the declarative
@@ -346,7 +408,9 @@ internal static class FluentLightweightBridge
 			{
 				if (FluentResourceResolver.Resolve(consumerOverride, appearance, semantic) is { } value)
 				{
-					branch[fluent] = value;
+					// An explicitly named native resource is more specific than its
+					// semantic mapping, matching the accent closure's precedence.
+					branch[fluent] = FluentResourceResolver.Resolve(consumerOverride, appearance, fluent) ?? value;
 					branch[semantic] = value;
 				}
 			}
