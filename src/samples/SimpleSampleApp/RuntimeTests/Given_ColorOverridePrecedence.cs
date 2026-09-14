@@ -2,6 +2,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Uno.Fluent;
 using Uno.Simple;
 using Uno.UI.RuntimeTests;
 using Windows.UI;
@@ -153,47 +154,6 @@ public class Given_ColorOverridePrecedence
 	}
 
 	// ─────────────────────────────────────────────────────────────────────
-	// Unresolvable override sources must degrade, not throw: these setters run
-	// property-changed callbacks, and an exception there crashes the consuming app.
-	// ─────────────────────────────────────────────────────────────────────
-
-	[TestMethod]
-	[RunsOnUIThread]
-	public void When_OverrideSourceDoesNotResolve_Then_ThemeKeepsWorking()
-	{
-		// Well-formed URI, nonexistent dictionary — the common typo case. Uri.TryCreate passes,
-		// so only a guarded dictionary load prevents the crash.
-		var theme = new SimpleTheme();
-		var container = new Grid();
-		container.Resources.MergedDictionaries.Add(theme);
-
-		Assert.IsTrue(container.Resources.TryGetValue("PrimaryColor", out var before),
-			"Sanity: PrimaryColor should resolve before the override is set");
-
-		theme.Colors = new ThemeColors { OverrideSource = "ms-appx:///DoesNotExist/Nope.xaml" };
-
-		Assert.IsTrue(container.Resources.TryGetValue("PrimaryColor", out var after),
-			"The theme must keep its palette when the override source cannot be loaded.");
-		Assert.AreEqual((Color)before, (Color)after,
-			"An unresolvable override source must leave the palette unchanged.");
-		Assert.IsNull(theme.Colors.OverrideDictionary,
-			"An unresolvable override source must fall back to no override.");
-	}
-
-	[TestMethod]
-	[RunsOnUIThread]
-	public void When_FontOverrideSourceDoesNotResolve_Then_ThemeKeepsWorking()
-	{
-		var theme = new SimpleTheme();
-		theme.FontOverrideSource = "ms-appx:///DoesNotExist/Nope.xaml";
-
-		var container = new Grid();
-		container.Resources.MergedDictionaries.Add(theme);
-
-		Assert.IsTrue(container.Resources.TryGetValue("PrimaryColor", out _),
-			"The theme must keep resolving resources when the font override source cannot be loaded.");
-	}
-	// ─────────────────────────────────────────────────────────────────────
 	// 3. FluentTheme: the same precedence contract holds for the code-built
 	//    Fluent palette (specs/05-fluent-theme §6.1) — base palette < seed
 	//    < consumer override.
@@ -278,5 +238,47 @@ public class Given_ColorOverridePrecedence
 		await UnitTestsUIContentHelper.WaitForIdle();
 
 		Assert.IsTrue(button.IsLoaded, "the styled button should load under an overridden FluentTheme");
+	}
+
+	// ─────────────────────────────────────────────────────────────────────
+	// Unresolvable override sources must degrade, not throw: these setters run
+	// property-changed callbacks, and an exception there crashes the consuming app.
+	// ─────────────────────────────────────────────────────────────────────
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_OverrideSourceDoesNotResolve_Then_ThemeKeepsWorking()
+	{
+		// Well-formed URI, nonexistent dictionary — the common typo case. Uri.TryCreate passes,
+		// so only a guarded dictionary load prevents the crash.
+		var theme = new SimpleTheme();
+		var container = new Grid();
+		container.Resources.MergedDictionaries.Add(theme);
+
+		Assert.IsTrue(container.Resources.TryGetValue("PrimaryColor", out var before),
+			"Sanity: PrimaryColor should resolve before the override is set");
+
+		theme.Colors = new ThemeColors { OverrideSource = "ms-appx:///DoesNotExist/Nope.xaml" };
+
+		Assert.IsTrue(container.Resources.TryGetValue("PrimaryColor", out var after),
+			"The theme must keep its palette when the override source cannot be loaded.");
+		Assert.AreEqual((Color)before, (Color)after,
+			"An unresolvable override source must leave the palette unchanged.");
+		Assert.IsNull(theme.Colors.OverrideDictionary,
+			"An unresolvable override source must fall back to no override.");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_FontOverrideSourceDoesNotResolve_Then_ThemeKeepsWorking()
+	{
+		var theme = new SimpleTheme();
+		theme.FontOverrideSource = "ms-appx:///DoesNotExist/Nope.xaml";
+
+		var container = new Grid();
+		container.Resources.MergedDictionaries.Add(theme);
+
+		Assert.IsTrue(container.Resources.TryGetValue("PrimaryColor", out _),
+			"The theme must keep resolving resources when the font override source cannot be loaded.");
 	}
 }

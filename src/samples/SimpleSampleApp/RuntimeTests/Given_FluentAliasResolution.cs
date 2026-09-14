@@ -40,8 +40,7 @@ public class Given_FluentAliasResolution
 	{
 		var container = CreateContainerWithSpikeDictionary();
 
-		var aliased = container.Resources[aliasKey] as Style;
-		Assert.IsNotNull(aliased, $"{aliasKey} should resolve to a Style");
+		var aliased = Assert.IsInstanceOfType<Style>(container.Resources[aliasKey], $"{aliasKey} should resolve to a Style");
 		Assert.AreEqual(typeof(Button), aliased.TargetType);
 
 		Assert.IsTrue(
@@ -75,12 +74,9 @@ public class Given_FluentAliasResolution
 		await UnitTestsUIContentHelper.WaitForLoaded(standardButton);
 		await UnitTestsUIContentHelper.WaitForIdle();
 
-		var aliasBg = aliasButton.Background as SolidColorBrush;
-		var accentBg = accentButton.Background as SolidColorBrush;
-		var standardBg = standardButton.Background as SolidColorBrush;
-		Assert.IsNotNull(aliasBg, "aliased accent button should have a SolidColorBrush background");
-		Assert.IsNotNull(accentBg, "accent button should have a SolidColorBrush background");
-		Assert.IsNotNull(standardBg, "standard button should have a SolidColorBrush background");
+		var aliasBg = Assert.IsInstanceOfType<SolidColorBrush>(aliasButton.Background, "aliased accent button should have a SolidColorBrush background");
+		var accentBg = Assert.IsInstanceOfType<SolidColorBrush>(accentButton.Background, "accent button should have a SolidColorBrush background");
+		var standardBg = Assert.IsInstanceOfType<SolidColorBrush>(standardButton.Background, "standard button should have a SolidColorBrush background");
 
 		Assert.AreEqual(accentBg.Color, aliasBg.Color, "alias must render with the accent background");
 		Assert.AreNotEqual(standardBg.Color, aliasBg.Color, "accent and standard backgrounds must differ");
@@ -96,8 +92,7 @@ public class Given_FluentAliasResolution
 	{
 		var container = CreateContainerWithSpikeDictionary();
 
-		var direct = container.Resources["SpikeFilledButtonStyle"] as Style;
-		Assert.IsNotNull(direct, "direct alias to an XCR key must resolve");
+		var direct = Assert.IsInstanceOfType<Style>(container.Resources["SpikeFilledButtonStyle"], "direct alias to an XCR key must resolve");
 
 		// Spike S1 finding (2026-07-14): an alias whose ResourceKey is itself an
 		// alias in the same dictionary does NOT resolve on Uno ("Couldn't
@@ -120,8 +115,7 @@ public class Given_FluentAliasResolution
 	{
 		var container = CreateContainerWithSpikeDictionary();
 
-		var bridge = container.Resources["SpikeTextButtonStyle"] as Style;
-		Assert.IsNotNull(bridge, "bridge style should resolve");
+		var bridge = Assert.IsInstanceOfType<Style>(container.Resources["SpikeTextButtonStyle"], "bridge style should resolve");
 		Assert.IsTrue(
 			Application.Current.Resources.TryGetValue("DefaultButtonStyle", out var defaultStyle),
 			"DefaultButtonStyle should be available from XamlControlsResources");
@@ -134,8 +128,7 @@ public class Given_FluentAliasResolution
 		await UnitTestsUIContentHelper.WaitForLoaded(button);
 		await UnitTestsUIContentHelper.WaitForIdle();
 
-		var background = button.Background as SolidColorBrush;
-		Assert.IsNotNull(background, "bridge-styled button should have a SolidColorBrush background");
+		var background = Assert.IsInstanceOfType<SolidColorBrush>(button.Background, "bridge-styled button should have a SolidColorBrush background");
 		Assert.AreEqual(Colors.Transparent, background.Color, "bridge setter must win over the BasedOn background at rest");
 	}
 
@@ -173,8 +166,7 @@ public class Given_FluentAliasResolution
 	{
 		var container = CreateContainerWithSpikeDictionary();
 
-		var brush = container.Resources["SpikeOnSurfaceBrush"] as SolidColorBrush;
-		Assert.IsNotNull(brush, "brush built from an aliased color should resolve");
+		var brush = Assert.IsInstanceOfType<SolidColorBrush>(container.Resources["SpikeOnSurfaceBrush"], "brush built from an aliased color should resolve");
 		Assert.AreNotEqual(default(Windows.UI.Color), brush.Color, "brush color should carry the aliased value");
 	}
 
@@ -188,14 +180,12 @@ public class Given_FluentAliasResolution
 	{
 		var container = CreateContainerWithSpikeDictionary();
 
-		var aliased = container.Resources["SpikeBodyFontFamily"] as FontFamily;
-		Assert.IsNotNull(aliased, "FontFamily alias should resolve");
+		var aliased = Assert.IsInstanceOfType<FontFamily>(container.Resources["SpikeBodyFontFamily"], "FontFamily alias should resolve");
 
 		Assert.IsTrue(
 			Application.Current.Resources.TryGetValue("ContentControlThemeFontFamily", out var xcrValue),
 			"ContentControlThemeFontFamily should be available");
-		var target = xcrValue as FontFamily;
-		Assert.IsNotNull(target);
+		var target = Assert.IsInstanceOfType<FontFamily>(xcrValue);
 		Assert.AreEqual(target.Source, aliased.Source, "alias should carry the platform-default font source");
 	}
 

@@ -1,3 +1,3 @@
 var UnoAppManifest = {
-    displayName: "Simple Design Samples"
+    displayName: "Fluent Design Samples"
 }

@@ -26,8 +26,9 @@ public class Given_FluentSamplePages
 	private static IEnumerable<(Type Type, SamplePageAttribute Attribute)> FluentPages()
 		=> typeof(SamplePageLayout).Assembly.DefinedTypes
 			.Where(t => t.Namespace?.StartsWith("Uno.Themes.Samples") == true)
-			.Select(t => (Type: t.AsType(), Attribute: t.GetCustomAttribute<SamplePageAttribute>()))
-			.Where(x => x.Attribute is { } attribute && attribute.SupportedDesigns.Contains(Design.Fluent))
+			.SelectMany(t => t.GetCustomAttributes<SamplePageAttribute>()
+				.Where(attribute => attribute.SupportedDesigns.Contains(Design.Fluent)),
+				(t, attribute) => (Type: t.AsType(), Attribute: attribute))
 			.OrderBy(x => x.Type.Name);
 
 	[TestMethod]
@@ -37,8 +38,9 @@ public class Given_FluentSamplePages
 		var pages = FluentPages().ToList();
 		Assert.IsTrue(pages.Count > 0, "the shared sample assembly should declare Fluent-enabled pages");
 
-		// SeedColorSamplePage applies its last seed to the app theme when it loads; restore afterwards.
+		// SeedColorSamplePage applies its last seed and generation mode to the app theme when it loads.
 		var seedBefore = SemanticThemeHelper.PrimarySeed;
+		var seedColorModeBefore = SemanticThemeHelper.SeedColorMode;
 		var failures = new StringBuilder();
 		try
 		{
@@ -85,6 +87,7 @@ public class Given_FluentSamplePages
 		}
 		finally
 		{
+			SemanticThemeHelper.SeedColorMode = seedColorModeBefore;
 			SemanticThemeHelper.PrimarySeed = seedBefore;
 		}
 

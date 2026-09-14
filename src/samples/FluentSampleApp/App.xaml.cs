@@ -5,7 +5,6 @@ namespace Uno.Themes.Samples;
 /// </summary>
 sealed partial class App : Application
 {
-	private Shell _shell;
 	public static Microsoft.UI.Xaml.Window MainWindow { get; private set; }
 
 	static App() =>
@@ -38,16 +37,11 @@ sealed partial class App : Application
 		MainWindow = new Microsoft.UI.Xaml.Window();
 		NavigationHelper.MainWindow = MainWindow;
 
-		if (MainWindow is Microsoft.UI.Xaml.Window window)
-		{
-			if (!(window.Content is Shell))
-			{
-				window.Content = _shell = NavigationHelper.BuildShell();
-			}
-		}
+		var shell = MainWindow.Content as Shell ?? NavigationHelper.BuildShell();
+		MainWindow.Content = shell;
 
 		NavigationHelper.ShellNavigateToHandler = sample =>
-			NavigationHelper.NavigateTo(_shell, sample, trySynchronizeCurrentItem: true);
+			NavigationHelper.NavigateTo(shell, sample, trySynchronizeCurrentItem: true);
 
 		MainWindow.Activate();
 	}
