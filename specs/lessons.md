@@ -4,6 +4,41 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## Shared brush inputs on attached properties must not inherit the consuming element's data context
+
+**Context:** Fluent semantic fixes (2026-09-07, `d7289c42`). The text-button
+adapter supplied semantic brushes through Brush-valued attached properties.
+Rendered state, style replacement, and resource cleanup tests passed, but a
+collection guard retained the old button after its style was removed and the
+button was unloaded. An equivalent native-style button was collected.
+
+**Root cause:** the attached properties used ordinary `PropertyMetadata`.
+On the tested Uno runtime that lets shared brushes enter the data-context
+inheritance association path, which can retain the consuming button through an
+associated parent even after the adapter's resource dictionary has been removed
+and property values cleared. The relevant upstream path is
+`X:/src/uno/src/Uno.UI/UI/Xaml/DependencyObjectStore.Binder.cs` in the local Uno
+source checkout: `SetChildrenBindableValue` /
+`AssociateParent` manage this relationship. Event detachment alone cannot break
+a framework-owned inheritance association.
+
+**Fix and application:** resource-only Brush inputs do not need to inherit a
+button's DataContext. Under `HAS_UNO`, register them with
+`FrameworkPropertyMetadataOptions.ValueDoesNotInheritDataContext`; retain the
+native `PropertyMetadata` path on WinUI. Uno's handling of this flag avoids the
+shared-brush association path. Do not apply the flag indiscriminately to values
+whose bindings intentionally rely on inherited DataContext.
+
+**Proof:**
+`Given_FluentLightweightStyling.When_TextButtonStyleIsCleared_ThemeDoesNotRetainButton`
+now passes for both the native baseline and semantic style. Keep a live theme
+during the collection test, hold WeakReference trackers in fields, and collect
+from a separate non-inlined method after the method owning strong references
+has returned. State/resource assertions prove rendering and cleanup; they do
+not substitute for proving that the old element is collectible.
+
+---
+
 ## `ResourceDictionary.TryGetValue` falls back to the SYSTEM resources — a per-branch assertion on a system key through it reads the ambient XCR value, not the branch
 
 **Context:** Fluent theme, gap-audit fixes (2026-09-04, `specs/05-fluent-theme/` Phase 7). A new

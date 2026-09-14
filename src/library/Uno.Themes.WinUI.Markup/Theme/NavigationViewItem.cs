@@ -1,4 +1,4 @@
-﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
 using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
@@ -175,7 +175,7 @@ public static partial class Theme
 		}
 		public static partial class Styles
 		{
-			[ResourceKeyDefinition(typeof(Style), "NavigationViewItemStyle", TargetType = typeof(NavigationViewItem))]
+			[ResourceKeyDefinition(typeof(Style), "NavigationViewItemStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.NavigationViewItem))]
 			public static StaticResourceKey<Style> Default => new("NavigationViewItemStyle");
 		}
 	}

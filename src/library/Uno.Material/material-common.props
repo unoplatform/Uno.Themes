@@ -114,6 +114,11 @@
 		<XamlMergeInput Remove="Styles\Application\v1\ColorPalette.xaml" />
 		<XamlMergeInput Remove="Styles\Application\v1\MaterialColors.xaml" />
 		<XamlMergeInput Remove="Styles\Application\Common\Fonts.xaml" />
+		<!-- Keep v1's base layer unchanged. v2 loads its typography after the shared
+		     base dictionary so Material's themed values win merged-resource lookup. -->
+		<XamlMergeInput Remove="Styles\Application\Common\BaseDictionaries.xaml" />
+		<XamlMergeInput Include="Styles\Application\Common\BaseDictionaries.xaml" MergeFile="mergedpages.v1.xaml" />
+		<XamlMergeInput Remove="Styles\Application\v2\Typography.xaml" />
 
 		<XamlMergeInput Remove="Styles\Controls\v1\NavigationView\WUX\**" Condition="'$(UseWinUI)'=='true'" />
 		<Page Remove="Styles\Controls\v1\NavigationView\WUX\**" Condition="'$(UseWinUI)'=='true'" />

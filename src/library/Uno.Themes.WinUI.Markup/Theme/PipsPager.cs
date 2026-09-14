@@ -1,4 +1,4 @@
-﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
 using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
@@ -145,11 +145,13 @@ public static partial class Theme
 				[ResourceKeyDefinition(typeof(double), "PipsPagerNormalEllipseSize")]
 				public static ThemeResourceKey<double> NormalEllipseSize => new("PipsPagerNormalEllipseSize");
 
-				[ResourceKeyDefinition(typeof(double), "PipsPagerPreviousPageButtonData")]
-				public static ThemeResourceKey<double> PreviousPageButtonData => new("PipsPagerPreviousPageButtonData");
+				/// <summary>Gets the path data string for the previous page button.</summary>
+				[ResourceKeyDefinition(typeof(string), "PipsPagerPreviousPageButtonData")]
+				public static ThemeResourceKey<string> PreviousPageButtonData => new("PipsPagerPreviousPageButtonData");
 
-				[ResourceKeyDefinition(typeof(double), "PipsPagerNextPageButtonData")]
-				public static ThemeResourceKey<double> NextPageButtonData => new("PipsPagerNextPageButtonData");
+				/// <summary>Gets the path data string for the next page button.</summary>
+				[ResourceKeyDefinition(typeof(string), "PipsPagerNextPageButtonData")]
+				public static ThemeResourceKey<string> NextPageButtonData => new("PipsPagerNextPageButtonData");
 
 				[ResourceKeyDefinition(typeof(Thickness), "PipsPagerButtonBorderThickness")]
 				public static ThemeResourceKey<Thickness> ButtonBorderThickness => new("PipsPagerButtonBorderThickness");
@@ -169,7 +171,7 @@ public static partial class Theme
 		}
 		public static partial class Styles
 		{
-			[ResourceKeyDefinition(typeof(Style), "PipsPagerStyle", TargetType = typeof(PipsPager))]
+			[ResourceKeyDefinition(typeof(Style), "PipsPagerStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.PipsPager))]
 			public static StaticResourceKey<Style> Default => new("PipsPagerStyle");
 		}
 	}

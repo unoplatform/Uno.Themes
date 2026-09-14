@@ -1,4 +1,4 @@
-﻿using Uno.Extensions.Markup;
+using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
 using Windows.UI;
 
@@ -8,6 +8,14 @@ partial class Theme
 {
 	public static class Colors
 	{
+		/// <summary>Provides the semantic shadow color resource.</summary>
+		public static class Shadow
+		{
+			/// <summary>Gets the semantic shadow color. No shared shadow brush is declared.</summary>
+			[ResourceKeyDefinition(typeof(Color), "ShadowColor")]
+			public static ThemeResourceKey<Color> Default => new("ShadowColor");
+		}
+
 		public static class Primary
 		{
 			[ResourceKeyDefinition(typeof(Color), "PrimaryColor")]

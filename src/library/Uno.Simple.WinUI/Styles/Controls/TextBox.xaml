@@ -12,7 +12,7 @@
 		Resource layers:
 		FilledTextBox*      = semantic keys (source of truth, filled variant)
 		OutlinedTextBox*    = semantic keys (source of truth, outlined variant)
-		SimpleTextBox*      = Simple-prefixed aliases for backwards compat
+		SimpleTextBox*      = Simple-specific sizing and variant resources
 
 		Each variant's keys directly reference semantic brushes — they are
 		independent and do not alias each other.
@@ -250,6 +250,8 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="BackgroundElement.Background" Value="{ThemeResource FilledTextBoxBackgroundPointerOver}" />
+										<Setter Target="HeaderContentPresenter.Foreground" Value="{ThemeResource FilledTextBoxHeaderForegroundPointerOver}" />
+										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource FilledTextBoxPlaceholderForegroundPointerOver}" />
 										<Setter Target="BorderElement.BorderBrush" Value="{ThemeResource FilledTextBoxBorderBrushPointerOver}" />
 										<Setter Target="ContentElement.Foreground" Value="{ThemeResource FilledTextBoxForegroundPointerOver}" />
 									</VisualState.Setters>
@@ -258,6 +260,8 @@
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="BackgroundElement.Background" Value="{ThemeResource FilledTextBoxBackgroundFocused}" />
+										<Setter Target="HeaderContentPresenter.Foreground" Value="{ThemeResource FilledTextBoxHeaderForegroundFocused}" />
+										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource FilledTextBoxPlaceholderForegroundFocused}" />
 										<Setter Target="BorderElement.BorderBrush" Value="{ThemeResource FilledTextBoxBorderBrushFocused}" />
 										<Setter Target="BorderElement.BorderThickness" Value="{ThemeResource FilledTextBoxBorderThicknessFocused}" />
 										<Setter Target="ContentElement.Foreground" Value="{ThemeResource FilledTextBoxForegroundFocused}" />
@@ -397,6 +401,8 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="BackgroundElement.Background" Value="{ThemeResource OutlinedTextBoxBackgroundPointerOver}" />
+										<Setter Target="HeaderContentPresenter.Foreground" Value="{ThemeResource OutlinedTextBoxHeaderForegroundPointerOver}" />
+										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource OutlinedTextBoxPlaceholderForegroundPointerOver}" />
 										<Setter Target="BorderElement.BorderBrush" Value="{ThemeResource OutlinedTextBoxBorderBrushPointerOver}" />
 										<Setter Target="ContentElement.Foreground" Value="{ThemeResource OutlinedTextBoxForegroundPointerOver}" />
 									</VisualState.Setters>
@@ -405,6 +411,8 @@
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="BackgroundElement.Background" Value="{ThemeResource OutlinedTextBoxBackgroundFocused}" />
+										<Setter Target="HeaderContentPresenter.Foreground" Value="{ThemeResource OutlinedTextBoxHeaderForegroundFocused}" />
+										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource OutlinedTextBoxPlaceholderForegroundFocused}" />
 										<Setter Target="BorderElement.BorderBrush" Value="{ThemeResource OutlinedTextBoxBorderBrushFocused}" />
 										<Setter Target="BorderElement.BorderThickness" Value="{ThemeResource OutlinedTextBoxBorderThicknessFocused}" />
 										<Setter Target="ContentElement.Foreground" Value="{ThemeResource OutlinedTextBoxForegroundFocused}" />

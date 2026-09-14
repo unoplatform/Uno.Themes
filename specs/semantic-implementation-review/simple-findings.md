@@ -1,8 +1,31 @@
 # Simple semantic implementation review
 
-Source audit of the current branch, 2026-09-06. No product changes or runtime execution in this review lane. Findings below are established by declarations and template consumers; proposed regression tests still require red/green execution. Paths are repository-relative.
+Original source audit, 2026-09-06. No product changes or runtime execution occurred in the original review lane. Historical findings and line references below are retained; follow-up fixes and regression results are recorded separately. Paths are repository-relative.
 
-## Confirmed implementation gaps
+## Resolution update — 2026-09-07
+
+All seven findings are implemented and regression-tested in the Simple Desktop
+host. The final full runs passed 671 tests with zero failures and one
+pre-existing skipped hot-reload test in each real Light and Dark application appearance. Final appearance runs and build logs are in
+[implementation progress](../semantic-fixes/progress.md). WebAssembly builds passed;
+WebAssembly runtime and native WinUI runtime were not exercised.
+
+| Finding | Resolution | Regression in `Given_SimpleSemanticOverrideStates` |
+|---|---|---|
+| 1: outlined resources | New `SimpleOutlinedButtonStyle` consumes its own brushes and retains the previous tonal defaults | `When_OutlinedButtonOverridden_UsesOwnStateKeys` |
+| 2: icon toggle resources | 36 separate icon foreground/background/border keys, defaulting to matching text-family brushes | `When_IconToggleOverridden_UsesIndependentStateKeys` |
+| 3: checkbox labels | Checked and indeterminate label keys are consumed in every combined interaction state | `When_CheckBoxLabelOverridden_UsesMatchingCombinedState` |
+| 4: textbox header/placeholder | Both variants consume hover/focus keys alongside existing normal/disabled keys | `When_TextBoxLabelOverridden_HeaderAndPlaceholderFollowState` |
+| 5: secondary hyperlink | Content and underline consume the secondary state family independently of primary links | `When_SecondaryHyperlinkOverridden_ContentAndUnderlineUseOwnState` |
+| 6: missing styles | All 55 keys exist. Elevated maps to tonal without shadows, DatePickerFlyoutPresenter maps to its Simple presenter, CommandBar/MediaTransportControls use typed empty styles preserving native templates | `When_MissingSemanticStyleApplied_ResolvesOwnStyleAndTemplate` |
+| 7: legacy secondary palette | Both appearances supply achromatic legacy secondary variants | `When_SeedlessSimplePaletteUsed_LegacySecondaryBrushesAreGrayscale` |
+| Cross-theme measurement finding | The text-button base consumes portable `ButtonBorderThickness` and dynamic `LabelLargeFontSize`; Simple corner/padding keys retain existing scope | `When_ButtonMeasurementsOverridden_PortableBorderAndFontAreConsumed` |
+
+The per-control documentation now describes these working consumers and the
+intentional fallbacks. The original workaround notes below describe the audit
+state and have been replaced in the published pages.
+
+## Original confirmed implementation gaps
 
 1. **P2 — Outlined button overrides are ineffective.** `src/library/Uno.Simple.WinUI/Styles/Controls/_Resources.xaml:106` maps `OutlinedButtonStyle` directly to `SimpleFilledTonalButtonStyle`. `Button.xaml:63` declares twelve `OutlinedButton*` brush aliases, but the actual style and template (`Button.xaml:302`) read only `FilledTonalButton*`. A scoped red `OutlinedButtonBackground` override resolves as a resource yet never reaches the outlined button. These aliases provide lookup parity, not override parity. Give the outlined semantic style consumers of its own keys, retaining the current default appearance if desired. Repro coverage: compare outlined and tonal controls with distinct scoped normal/state brushes, in Light and Dark.
 
@@ -18,7 +41,7 @@ Source audit of the current branch, 2026-09-06. No product changes or runtime ex
 
 7. **P2 — Simple's no-seed palette leaks purple legacy secondary colors.** `src/library/Uno.Simple.WinUI/Styles/Application/ColorPalette.xaml:38` and `:121` override the four modern secondary roles but omit `SecondaryVariantDarkColor` and `SecondaryVariantLightColor`. `SimpleTheme.cs:28` opts out of the default seed, so these roles fall through to shared defaults in `src/library/Uno.Themes/Styles/Applications/Common/SharedColorPalette.xaml:33` and `:89`: purple colors in both appearances. They are recognized shared roles (`SemanticColorKeys.cs:28`), so using their brushes in an otherwise grayscale Simple app introduces unrelated Material colors. Supply Simple defaults for both roles. Repro coverage: enumerate the full shared role inventory in both appearances under a seedless Simple theme and assert intended design-system values, including legacy roles.
 
-## Documentation changes made
+## Original documentation changes made
 
 - `doc/styles/simple/CheckBox.md`: explain which label-state keys are currently consumed and which declarations are ineffective.
 - `doc/styles/simple/HyperlinkButton.md`: explain the inherited primary state keys and the scope effect of the current workaround.
@@ -26,7 +49,7 @@ Source audit of the current branch, 2026-09-06. No product changes or runtime ex
 
 These notes describe current limitations, not an intended semantic contract. Remove/update them when the corresponding implementation and regression tests are fixed.
 
-## Additional central documentation corrections for the primary review lane
+## Original additional central documentation corrections for the primary review lane
 
 - `doc/semantic-styles.md` claims its mappings show every semantic style key but omits `DatePickerFlyoutPresenterStyle` entirely.
 - Its portability prose should distinguish keys that resolve from keys actually consumed by the templates, specifically Simple outlined buttons and icon toggle buttons.
@@ -34,6 +57,6 @@ These notes describe current limitations, not an intended semantic contract. Rem
 - `doc/styles/ToggleButton.md:12` labels the icon variant as the implicit default without theme qualification; Simple's default is `SimpleTextToggleButtonStyle` (`ToggleButton.xaml:458`).
 - Many shared per-control resource pages list Material values without labeling their design-system scope; the existence of Simple-specific pages does not make the shared table an override compatibility matrix.
 
-## Coverage assessment and validation
+## Original coverage assessment and validation
 
 `Given_SemanticStyles.cs` checks normal appearance equivalence for five button variants and override behavior for only filled, tonal, and text buttons. Its outline equivalence row does not override outlined keys, so it cannot detect finding 1. The other gaps require realized-state checks, not only resource-resolution assertions. Review inspected every direct consumer of the keys cited above; no source build or runtime test was executed by this lane. Three documentation files were edited; product code and tests are unchanged.
