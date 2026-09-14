@@ -759,6 +759,58 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.M3MaterialTemplate>
+			<sample:SamplePageLayout.FluentTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Primary FAB (accent) -->
+						<smtx:XamlDisplay UniqueKey="Fluent_Fab_Primary"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal"
+										Spacing="12">
+								<Button Style="{StaticResource SmallFabStyle}">
+									<SymbolIcon Symbol="Add" />
+								</Button>
+								<Button Style="{StaticResource FabStyle}">
+									<SymbolIcon Symbol="Add" />
+								</Button>
+								<Button Style="{StaticResource LargeFabStyle}">
+									<SymbolIcon Symbol="Add" />
+								</Button>
+							</StackPanel>
+						</smtx:XamlDisplay>
+						<!-- Secondary FAB -->
+						<smtx:XamlDisplay UniqueKey="Fluent_Fab_Secondary"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal"
+										Spacing="12">
+								<Button Style="{StaticResource SecondaryFabStyle}">
+									<SymbolIcon Symbol="Edit" />
+								</Button>
+							</StackPanel>
+						</smtx:XamlDisplay>
+						<!-- Tertiary FAB -->
+						<smtx:XamlDisplay UniqueKey="Fluent_Fab_Tertiary"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal"
+										Spacing="12">
+								<Button Style="{StaticResource TertiaryFabStyle}">
+									<SymbolIcon Symbol="Favorite" />
+								</Button>
+							</StackPanel>
+						</smtx:XamlDisplay>
+						<!-- Surface FAB -->
+						<smtx:XamlDisplay UniqueKey="Fluent_Fab_Surface"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal"
+										Spacing="12">
+								<Button Style="{StaticResource SurfaceFabStyle}">
+									<SymbolIcon Symbol="Add" />
+								</Button>
+							</StackPanel>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.FluentTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

@@ -94,5 +94,36 @@
 				</StackPanel>
 			</DataTemplate>
 		</sample:SamplePageLayout.SimpleTemplate>
+		<sample:SamplePageLayout.FluentTemplate>
+			<DataTemplate>
+				<StackPanel>
+					<!-- Fluent reuses the shared, theme-agnostic dialog builders; each dialog picks up the Fluent implicit ContentDialog style -->
+					<smtx:XamlDisplay UniqueKey="Fluent_ContentDialog_Basic"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<Button Content="Show Basic Dialog"
+								Click="ShowContentDialog"
+								Tag="BuildSimpleBasicDialog" />
+					</smtx:XamlDisplay>
+					<smtx:XamlDisplay UniqueKey="Fluent_ContentDialog_Confirm"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<Button Content="Show Confirmation Dialog"
+								Click="ShowContentDialog"
+								Tag="BuildSimpleConfirmDialog" />
+					</smtx:XamlDisplay>
+					<smtx:XamlDisplay UniqueKey="Fluent_ContentDialog_ThreeButton"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<Button Content="Show Save Dialog"
+								Click="ShowContentDialog"
+								Tag="BuildSimpleThreeButtonDialog" />
+					</smtx:XamlDisplay>
+					<smtx:XamlDisplay UniqueKey="Fluent_ContentDialog_CustomContent"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<Button Content="Show Custom Content Dialog"
+								Click="ShowContentDialog"
+								Tag="BuildSimpleCustomContentDialog" />
+					</smtx:XamlDisplay>
+				</StackPanel>
+			</DataTemplate>
+		</sample:SamplePageLayout.FluentTemplate>
 	</sample:SamplePageLayout>
 </Page>

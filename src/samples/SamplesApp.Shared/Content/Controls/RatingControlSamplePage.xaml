@@ -97,6 +97,44 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+			<sample:SamplePageLayout.FluentTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Default -->
+						<smtx:XamlDisplay UniqueKey="Fluent_RatingControl_Default"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:RatingControl Style="{StaticResource RatingControlStyle}" />
+						</smtx:XamlDisplay>
+						<!-- With value -->
+						<smtx:XamlDisplay UniqueKey="Fluent_RatingControl_Value"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:RatingControl Value="3"
+												Style="{StaticResource RatingControlStyle}" />
+						</smtx:XamlDisplay>
+						<!-- With caption -->
+						<smtx:XamlDisplay UniqueKey="Fluent_RatingControl_Caption"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:RatingControl Value="4"
+												Caption="4 out of 5"
+												Style="{StaticResource RatingControlStyle}" />
+						</smtx:XamlDisplay>
+						<!-- Read-only -->
+						<smtx:XamlDisplay UniqueKey="Fluent_RatingControl_ReadOnly"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:RatingControl Value="3.5"
+												IsReadOnly="True"
+												Style="{StaticResource RatingControlStyle}" />
+						</smtx:XamlDisplay>
+						<!-- Disabled -->
+						<smtx:XamlDisplay UniqueKey="Fluent_RatingControl_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:RatingControl Value="2"
+												IsEnabled="False"
+												Style="{StaticResource RatingControlStyle}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.FluentTemplate>
         </sample:SamplePageLayout>
     </Grid>
 </Page>

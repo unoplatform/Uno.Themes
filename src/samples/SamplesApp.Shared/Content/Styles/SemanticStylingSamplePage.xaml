@@ -145,5 +145,145 @@
 				</StackPanel>
 			</DataTemplate>
 		</sample:SamplePageLayout.SimpleTemplate>
+
+		<sample:SamplePageLayout.FluentTemplate>
+			<DataTemplate>
+				<StackPanel Spacing="16" Margin="16,0">
+
+					<!-- ═══════════════════════════════════════════════════════════ -->
+					<!-- SECTION 1: Semantic Button Styles                          -->
+					<!-- The same design-system-agnostic keys, resolved by          -->
+					<!-- FluentTheme onto the built-in Fluent styles.               -->
+					<!-- ═══════════════════════════════════════════════════════════ -->
+					<TextBlock Text="Semantic Button Styles"
+							   Style="{StaticResource TitleLarge}"
+							   Margin="0,16,0,4" />
+					<TextBlock Text="Design-system-agnostic keys resolved onto the built-in Fluent styles: FilledButtonStyle is the accent button, Outlined and FilledTonal are the standard button, Text and Icon are the theme's subtle-button bridge styles. The same keys work under Material and Simple."
+							   Style="{StaticResource BodyMedium}"
+							   Opacity="0.7"
+							   Margin="0,0,0,8"
+							   TextWrapping="Wrap" />
+
+					<!-- FilledButtonStyle → AccentButtonStyle -->
+					<smtx:XamlDisplay UniqueKey="Fluent_Semantic_FilledButton"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<StackPanel Orientation="Horizontal" Spacing="12">
+							<Button Content="FilledButtonStyle"
+									Style="{StaticResource FilledButtonStyle}" />
+							<Button Content="Disabled"
+									Style="{StaticResource FilledButtonStyle}"
+									IsEnabled="False" />
+						</StackPanel>
+					</smtx:XamlDisplay>
+
+					<!-- FilledTonalButtonStyle → DefaultButtonStyle -->
+					<smtx:XamlDisplay UniqueKey="Fluent_Semantic_FilledTonalButton"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<StackPanel Orientation="Horizontal" Spacing="12">
+							<Button Content="FilledTonalButtonStyle"
+									Style="{StaticResource FilledTonalButtonStyle}" />
+							<Button Content="Disabled"
+									Style="{StaticResource FilledTonalButtonStyle}"
+									IsEnabled="False" />
+						</StackPanel>
+					</smtx:XamlDisplay>
+
+					<!-- OutlinedButtonStyle → DefaultButtonStyle -->
+					<smtx:XamlDisplay UniqueKey="Fluent_Semantic_OutlinedButton"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<StackPanel Orientation="Horizontal" Spacing="12">
+							<Button Content="OutlinedButtonStyle"
+									Style="{StaticResource OutlinedButtonStyle}" />
+							<Button Content="Disabled"
+									Style="{StaticResource OutlinedButtonStyle}"
+									IsEnabled="False" />
+						</StackPanel>
+					</smtx:XamlDisplay>
+
+					<!-- TextButtonStyle → FluentTextButtonStyle (subtle button) -->
+					<smtx:XamlDisplay UniqueKey="Fluent_Semantic_TextButton"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<StackPanel Orientation="Horizontal" Spacing="12">
+							<Button Content="TextButtonStyle"
+									Style="{StaticResource TextButtonStyle}" />
+							<Button Content="Disabled"
+									Style="{StaticResource TextButtonStyle}"
+									IsEnabled="False" />
+						</StackPanel>
+					</smtx:XamlDisplay>
+
+					<!-- IconButtonStyle → FluentIconButtonStyle -->
+					<smtx:XamlDisplay UniqueKey="Fluent_Semantic_IconButton"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<StackPanel Orientation="Horizontal" Spacing="12">
+							<Button Style="{StaticResource IconButtonStyle}">
+								<SymbolIcon Symbol="Favorite" />
+							</Button>
+							<Button Style="{StaticResource IconButtonStyle}" IsEnabled="False">
+								<SymbolIcon Symbol="Favorite" />
+							</Button>
+						</StackPanel>
+					</smtx:XamlDisplay>
+
+					<!-- ═══════════════════════════════════════════════════════════ -->
+					<!-- SECTION 2: Lightweight Styling under Fluent                -->
+					<!-- Fluent controls are rendered by the built-in WinUI         -->
+					<!-- templates, which read Fluent's own per-control resources.  -->
+					<!-- ═══════════════════════════════════════════════════════════ -->
+					<TextBlock Text="Lightweight Styling under Fluent"
+							   Style="{StaticResource TitleLarge}"
+							   Margin="0,32,0,4" />
+					<TextBlock Text="Page-scoped overrides target Fluent's per-control keys (AccentButtonBackground, ButtonBorderBrush, …), exactly as in a plain WinUI app. The theme's bridge styles read the semantic TextButtonForeground directly, so that semantic key works at any scope. An app-wide semantic override (FilledButtonBackground, …) goes through the theme's Colors.OverrideDictionary, which re-points the Fluent keys for you."
+							   Style="{StaticResource BodyMedium}"
+							   Opacity="0.7"
+							   Margin="0,0,0,8"
+							   TextWrapping="Wrap" />
+
+					<!-- Scoped override of the accent button behind FilledButtonStyle -->
+					<smtx:XamlDisplay UniqueKey="Fluent_Semantic_Override_AccentButtonBackground"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<StackPanel Orientation="Horizontal" Spacing="12">
+							<StackPanel.Resources>
+								<SolidColorBrush x:Key="AccentButtonBackground" Color="DarkOrchid" />
+								<SolidColorBrush x:Key="AccentButtonBackgroundPointerOver" Color="MediumOrchid" />
+								<SolidColorBrush x:Key="AccentButtonBackgroundPressed" Color="Purple" />
+							</StackPanel.Resources>
+							<Button Content="Fluent key: AccentButtonBackground"
+									Style="{StaticResource FilledButtonStyle}" />
+						</StackPanel>
+					</smtx:XamlDisplay>
+
+					<!-- Scoped override of the standard button behind OutlinedButtonStyle -->
+					<smtx:XamlDisplay UniqueKey="Fluent_Semantic_Override_ButtonBorderBrush"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<StackPanel Orientation="Horizontal" Spacing="12">
+							<StackPanel.Resources>
+								<SolidColorBrush x:Key="ButtonBorderBrush" Color="DarkSlateBlue" />
+								<SolidColorBrush x:Key="ButtonBorderBrushPointerOver" Color="SlateBlue" />
+								<SolidColorBrush x:Key="ButtonBorderBrushPressed" Color="MidnightBlue" />
+								<SolidColorBrush x:Key="ButtonForeground" Color="DarkSlateBlue" />
+							</StackPanel.Resources>
+							<Button Content="Fluent key: ButtonBorderBrush"
+									Style="{StaticResource OutlinedButtonStyle}" />
+						</StackPanel>
+					</smtx:XamlDisplay>
+
+					<!-- Semantic key consumed by the bridge style: works at any scope -->
+					<smtx:XamlDisplay UniqueKey="Fluent_Semantic_Override_TextButtonForeground"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<StackPanel Orientation="Horizontal" Spacing="12">
+							<StackPanel.Resources>
+								<SolidColorBrush x:Key="TextButtonForeground" Color="Crimson" />
+							</StackPanel.Resources>
+							<Button Content="Semantic: TextButtonForeground"
+									Style="{StaticResource TextButtonStyle}" />
+						</StackPanel>
+					</smtx:XamlDisplay>
+
+					<!-- Bottom padding -->
+					<Border Height="32" />
+				</StackPanel>
+			</DataTemplate>
+		</sample:SamplePageLayout.FluentTemplate>
 	</sample:SamplePageLayout>
 </Page>

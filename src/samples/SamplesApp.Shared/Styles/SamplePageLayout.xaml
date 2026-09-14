@@ -188,6 +188,13 @@
 													  ContentTemplate="{TemplateBinding SimpleTemplate}"
 													  VerticalAlignment="Stretch"
 													  HorizontalAlignment="Stretch"
+													  Visibility="Collapsed" />
+									<!-- Fluent Content -->
+									<ContentPresenter x:Name="FluentContentContainer"
+													  Content="{TemplateBinding Content}"
+													  ContentTemplate="{TemplateBinding FluentTemplate}"
+													  VerticalAlignment="Stretch"
+													  HorizontalAlignment="Stretch"
 													  Visibility="Collapsed" />									</Grid>
 
 									<!-- Optional link to documentation -->
@@ -318,6 +325,12 @@
 								<VisualState x:Name="Simple">
 									<VisualState.Setters>
 										<Setter Target="SimpleContentContainer.Visibility" Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Fluent">
+									<VisualState.Setters>
+										<Setter Target="FluentContentContainer.Visibility" Value="Visible" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>

@@ -3,8 +3,9 @@ set -x
 set -euo pipefail
 IFS=$'\n\t'
 
-# Drives the ThemesSampleApp hosting smoke (--smoke): loads Material, Cupertino and Simple in
-# sequence through secondary ALCs, unloads, and verifies each unloaded guest ALC is reclaimed.
+# Drives the ThemesSampleApp hosting smoke (--smoke): loads Material, Cupertino, Simple and
+# Fluent in sequence through secondary ALCs, unloads, and verifies each unloaded guest ALC is
+# reclaimed.
 # The wrapper exits 0 on pass / 1 on fail; `timeout` guards a hung run (exit 124).
 
 cd "src/samples/ThemesSampleApp/bin/Release/net10.0-desktop"

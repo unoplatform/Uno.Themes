@@ -13,10 +13,15 @@
 			<TextBlock Text="Seed Color Palette Generator"
 					   Style="{StaticResource HeadlineSmall}"
 					   Margin="0,16,0,4" />
-			<TextBlock Text="Pick a color to generate a full Material Design 3 palette using the HCT (Hue-Chroma-Tone) color space."
+			<TextBlock Text="Pick a color to generate the full semantic color palette (Material Design 3 tonal system) using the HCT (Hue-Chroma-Tone) color space."
 					   Style="{StaticResource BodyMedium}"
 					   Opacity="0.7"
 					   TextWrapping="Wrap" />
+			<TextBlock x:Name="DesignNote"
+					   Style="{StaticResource BodyMedium}"
+					   Opacity="0.7"
+					   TextWrapping="Wrap"
+					   Visibility="Collapsed" />
 
 			<!-- Color Picker + Seed Info -->
 			<StackPanel Orientation="Horizontal" Spacing="24" Margin="0,8,0,0">

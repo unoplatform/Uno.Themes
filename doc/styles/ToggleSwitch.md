@@ -4,6 +4,9 @@ uid: Uno.Themes.Styles.ToggleSwitch
 
 # ToggleSwitch Control
 
+> [!NOTE]
+> Under the [Fluent theme](../fluent-getting-started.md), the key names below are bridged onto WinUI's per-control resources (`ToggleSwitchOuterBorderFill` → `ToggleSwitchFillOn`, `ToggleSwitchKnobOnFill*` → `ToggleSwitchKnobFillOn*`, …) via `Colors.OverrideDictionary`. Knob shadow/bounds, icon-presenter, and `Focused` knob keys have no Fluent equivalent. See [Lightweight Styling — Fluent theme](../lightweight-styling.md#fluent-theme).
+
 ## Styles
 
 | Style Key           | IsDefaultStyle\* |
