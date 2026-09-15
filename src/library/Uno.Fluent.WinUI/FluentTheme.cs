@@ -140,19 +140,26 @@ public partial class FluentTheme : BaseTheme
 
 	private static ResourceDictionary LoadLightweightDefaults()
 	{
+		Exception loadError;
 		try
 		{
 			return new ResourceDictionary { Source = new Uri(FluentConstants.ResourcePaths.LightweightDefaults) };
 		}
+		catch (InvalidOperationException e)
+		{
+			loadError = e;
+		}
 		catch (Exception e)
 		{
-			// The packaged dictionary failed to load — the semantic lightweight
-			// keys then carry no neutral defaults (overrides still re-point);
-			// never throw from theme initialization.
-			FluentDiagnostics.LogWarning(
-				$"FluentTheme could not load its lightweight-styling defaults (LightweightDefaults.xaml). {e.Message}");
-			return new ResourceDictionary();
+			// Theme initialization must also tolerate unexpected platform loader failures.
+			loadError = e;
 		}
+		// The packaged dictionary failed to load — the semantic lightweight
+		// keys then carry no neutral defaults (overrides still re-point);
+		// never throw from theme initialization.
+		FluentDiagnostics.LogWarning(
+			$"FluentTheme could not load its lightweight-styling defaults (LightweightDefaults.xaml). {loadError.Message}");
+		return new ResourceDictionary();
 	}
 
 	/// <inheritdoc />

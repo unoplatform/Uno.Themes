@@ -25,7 +25,7 @@ public class Given_FluentDesignTokens
 	private static CornerRadius GetCornerRadius(ResourceDictionary resources, string key)
 	{
 		Assert.IsTrue(resources.TryGetValue(key, out var value) && value is { }, $"{key} should resolve");
-		return Assert.IsInstanceOfType<CornerRadius>(value, $"{key} should resolve to a CornerRadius (got {value?.GetType().Name ?? "null"})");
+		return Assert.IsInstanceOfType<CornerRadius>(value, $"{key} should resolve to a CornerRadius");
 	}
 
 	/// <summary>

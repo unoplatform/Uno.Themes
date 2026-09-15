@@ -114,18 +114,25 @@ internal static class FluentColorPalette
 			return cached;
 		}
 
+		Exception loadError;
 		try
 		{
 			return _neutralSource = new ResourceDictionary { Source = new Uri(FluentConstants.ResourcePaths.ColorPalette) };
 		}
+		catch (InvalidOperationException e)
+		{
+			loadError = e;
+		}
 		catch (Exception e)
 		{
-			// The packaged dictionary failed to load — degrade to the shared (M3)
-			// defaults rather than throwing from theme initialization.
-			FluentDiagnostics.LogWarning(
-				$"FluentTheme could not load its neutral color palette (ColorPalette.xaml); semantic colors keep the shared defaults. {e.Message}");
-			return null;
+			// Theme initialization must also tolerate unexpected platform loader failures.
+			loadError = e;
 		}
+		// The packaged dictionary failed to load — degrade to the shared (M3)
+		// defaults rather than throwing from theme initialization.
+		FluentDiagnostics.LogWarning(
+			$"FluentTheme could not load its neutral color palette (ColorPalette.xaml); semantic colors keep the shared defaults. {loadError.Message}");
+		return null;
 	}
 
 	private static ResourceDictionary BuildBranch(string branchKey, bool isLight, IReadOnlyDictionary<string, Color> accent, ResourceDictionary neutrals)

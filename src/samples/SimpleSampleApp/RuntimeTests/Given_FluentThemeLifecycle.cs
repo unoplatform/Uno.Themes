@@ -151,7 +151,7 @@ public class Given_FluentThemeLifecycle
 		string semanticKey, string nativeKey, string semanticStyle, string nativeStyle, bool seeded)
 	{
 		var dictionaries = Application.Current.Resources.MergedDictionaries;
-		var theme = new FluentTheme { Colors = new ThemeColors { PrimarySeed = seeded ? Microsoft.UI.Colors.Blue : null } };
+		var theme = new FluentTheme { Colors = new ThemeColors { PrimarySeed = seeded ? Microsoft.UI.Colors.Blue : (Color?)null } };
 		dictionaries.Add(theme);
 		try
 		{
