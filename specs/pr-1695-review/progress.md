@@ -5,7 +5,8 @@
 - [x] Review the full branch diff for correctness, contracts, lifecycle, security, performance, samples, documentation, and CI coverage.
 - [x] Build the affected libraries and sample heads; run runtime suites and record every failure and limitation.
 - [x] Resolve four test-only GC review threads.
-- [ ] Publish the rebased commits after explicit push approval, resolve the eight remaining addressed code-change threads, and obtain fresh CI results.
+- [x] Publish the rebased commits after explicit push approval and resolve the eight remaining addressed code-change threads.
+- [ ] Verify fresh CI and address any newly generated review findings.
 - [ ] Clear Azure preview staging capacity with the resource owner and verify deployment.
 
 ## Branch and changes
@@ -81,6 +82,9 @@ The direct solution-wide WebAssembly build failed with MSB4057 (`GetCopyToPublis
 
 ## PR threads
 
-Twelve threads were unresolved initially. Four test-only GC findings were explained and resolved on GitHub after leak-test verification. The other eight have local code fixes (XCR initialization, five nullable findings, sample shell capture, and display name); publication and closure remain pending push approval. Replies must not imply unpushed commits are already in the remote PR.
+Twelve threads were unresolved initially. All twelve are now explained and resolved on GitHub. The eight code-change threads cover XCR initialization, five nullable findings, sample shell capture, and display name. After explicit approval, the rebased branch was published with a lease pinned to the original remote head.
 
-Push approval is required by the user's shared Git instructions. Publication should use force-with-lease pinned to the original remote head above, followed by review-thread resolution and fresh CI inspection.
+The new automated review generated six more threads. Five nullable findings in seed-accent tests are addressed with typed MSTest assertions. The XCR container warning is a false positive: the host dictionary is populated through MergedDictionaries, which TryGetValue traverses; the fourteen native-key runtime cases verify this behavior.
+
+Fresh Azure build 233676 passed all three runtime suites and both documentation checks on the initially published revision. CodeQL and Conventional Commits also passed. Platform builds and deployment are still being monitored; these intermediate results do not claim final CI success.
+Follow-up validation: the seed-accent assertion changes build successfully for Release Desktop (0 errors, 115 repository warnings). The complete Simple suite passes again: 570 passed, 0 failed, 1 existing skip. No production behavior or test coverage was changed.

@@ -336,8 +336,8 @@ public class Given_FluentSeedAccent
 	private static Color GetBranchColor(FluentTheme theme, string branchKey, string key)
 	{
 		var value = FindBranchColor(theme, branchKey, key);
-		Assert.IsNotNull(value, $"[{branchKey}] {key} should be written by the accent cascade");
-		return value.Value;
+		return Assert.IsInstanceOfType<Color>(value,
+			$"[{branchKey}] {key} should be written by the accent cascade");
 	}
 
 	[TestMethod]
@@ -361,8 +361,9 @@ public class Given_FluentSeedAccent
 		{
 			Assert.AreEqual(expected, GetBranchColor(theme, branch, "TextOnAccentFillColorPrimary"),
 				$"[{branch}] on-accent text must contrast with a {(pale ? "pale" : "very dark")} verbatim accent fill");
-			var brush = FindBranchValue(theme, branch, "TextOnAccentFillColorPrimaryBrush") as SolidColorBrush;
-			Assert.IsNotNull(brush, $"[{branch}] TextOnAccentFillColorPrimaryBrush should be written by the accent cascade");
+			var brush = Assert.IsInstanceOfType<SolidColorBrush>(
+				FindBranchValue(theme, branch, "TextOnAccentFillColorPrimaryBrush"),
+				$"[{branch}] TextOnAccentFillColorPrimaryBrush should be written by the accent cascade");
 			Assert.AreEqual(expected, brush.Color,
 				$"[{branch}] the on-accent text BRUSH must carry the same family (XCR templates consume the brush)");
 		}
@@ -427,8 +428,8 @@ public class Given_FluentSeedAccent
 			await UnitTestsUIContentHelper.WaitForLoaded(button);
 			await UnitTestsUIContentHelper.WaitForIdle();
 
-			var foreground = button.Foreground as SolidColorBrush;
-			Assert.IsNotNull(foreground, "the accent button should have a SolidColorBrush foreground");
+			var foreground = Assert.IsInstanceOfType<SolidColorBrush>(button.Foreground,
+				"the accent button should have a SolidColorBrush foreground");
 			Assert.AreEqual(Black, foreground.Color,
 				"a built-in accent button on a pale verbatim accent must render black text (readable)");
 		}
@@ -466,8 +467,8 @@ public class Given_FluentSeedAccent
 			await UnitTestsUIContentHelper.WaitForLoaded(button);
 			await UnitTestsUIContentHelper.WaitForIdle();
 
-			var background = button.Background as SolidColorBrush;
-			Assert.IsNotNull(background, "the accent button should have a SolidColorBrush background");
+			var background = Assert.IsInstanceOfType<SolidColorBrush>(button.Background,
+				"the accent button should have a SolidColorBrush background");
 			Assert.AreEqual(expectedFill, background.Color,
 				"the built-in accent button must render with the seed's branch-mapped accent fill (G5)");
 		}
@@ -526,8 +527,8 @@ public class Given_FluentSeedAccent
 		await UnitTestsUIContentHelper.WaitForLoaded(button);
 		await UnitTestsUIContentHelper.WaitForIdle();
 
-		var background = button.Background as SolidColorBrush;
-		Assert.IsNotNull(background, "the restored accent button should have a SolidColorBrush background");
+		var background = Assert.IsInstanceOfType<SolidColorBrush>(button.Background,
+			"the restored accent button should have a SolidColorBrush background");
 		Assert.AreEqual(expectedPlatformFill, background.Color,
 			"a rendered built-in control must carry the platform accent fill after the seeded theme is unmerged");
 	}
