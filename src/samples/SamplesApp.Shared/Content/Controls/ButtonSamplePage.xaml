@@ -709,6 +709,45 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+
+			<sample:SamplePageLayout.FluentTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<smtx:XamlDisplay UniqueKey="Fluent_Button_Filled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="Filled"
+									Style="{StaticResource FilledButtonStyle}" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Fluent_Button_FilledDisabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="Disabled"
+									IsEnabled="False"
+									Style="{StaticResource FilledButtonStyle}" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Fluent_Button_Outlined"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="Outlined"
+									Style="{StaticResource OutlinedButtonStyle}" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Fluent_Button_FilledTonal"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="Tonal"
+									Style="{StaticResource FilledTonalButtonStyle}" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Fluent_Button_Text"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="Text"
+									Style="{StaticResource TextButtonStyle}" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Fluent_Button_Icon"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Style="{StaticResource IconButtonStyle}">
+								<SymbolIcon Symbol="Favorite" />
+							</Button>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.FluentTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

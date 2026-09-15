@@ -4,6 +4,71 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## `ResourceDictionary.TryGetValue` falls back to the SYSTEM resources — a per-branch assertion on a system key through it reads the ambient XCR value, not the branch
+
+**Context:** Fluent theme, gap-audit fixes (2026-09-04, `specs/05-fluent-theme/` Phase 7). A new
+resource-graph test walked the theme's `ThemeDictionaries` to assert the Light and Default branches
+of `TextOnAccentFillColorPrimary` independently, using `branch.TryGetValue(key, …)` on each
+candidate branch dictionary. Before the fix the key was not written anywhere in the theme, yet the
+"pale accent → black text" case passed and only the "navy accent → white text" case failed.
+
+**Root cause:** Uno's public `ResourceDictionary.TryGetValue(object, out object)` is
+`TryGetValue(key, out value, shouldCheckSystem: true)` (`ResourceDictionary.cs`). For a key the
+dictionary does not hold, it consults the system resources — where every `XamlControlsResources`
+token lives — resolved against the **ambient** application theme. The first branch dictionary probed
+(a code-built one that lacked the key) therefore returned XCR's stock value for the dark-mode dev
+machine: black. A test on a non-system key (`PrimaryColor`) written the same way was correct by luck.
+
+**How to apply:**
+- Own-entries reads of a dictionary must **enumerate** it (`foreach (var pair in dictionary)`),
+  never `TryGetValue`/`ContainsKey` — both check the system dictionary by default. Catch
+  `NotSupportedException` for XAML-backed dictionaries (not enumerable on Uno) and treat them as
+  "not here"; make sure the asserted keys live in code-built dictionaries. The library code already
+  follows this (`ToOwnEntries` in `FluentAccentPalette` / `FluentLightweightBridge`); the test
+  helper had not.
+- A branch-level test on a key that XCR also defines must be red-proven in **both** directions
+  (a value that differs from the ambient stock, and one that matches it): only the differing case
+  can expose a system-fallback leak, and which direction differs depends on the host's theme.
+- Corollary for comparing "stock" values: the app-level `TryGetValue` result may not have the type
+  the XCR XAML declares (the host's app-level theme or the system lookup decides what is returned);
+  compare container-vs-app resolution as objects instead of asserting the declared type.
+
+---
+
+## A derived layer that re-implements a base recipe drifts silently when the base gains a mode — consume the mode, and prove agreement for both theme branches from the resource graph
+
+**Context:** Fluent theme, master integration (2026-09-04, `specs/05-fluent-theme/`). #1697 added
+`SeedColorMode` and made `Fidelity` the default, pinning the generated light `PrimaryColor` to the
+seed verbatim. `FluentAccentPalette` had re-implemented the old recipe (tone 40 of a raw-chroma
+palette) instead of consuming the generator's mode, so after the merge the built-in Fluent accent and
+the semantic `PrimaryColor` disagreed under every seed, and `TonalSpot` was ignored — while the
+whole Fluent suite stayed green locally.
+
+**Why it stayed green:** `When_SeedSet_ForwardAndReverseFlowsAgree` asserted the *ambient* branch.
+The dev machine runs Windows dark mode, so it compared the dark `PrimaryColor` (tone 80, unchanged
+by Fidelity) with `SystemAccentColorLight3` (tone 80) — a tautology in that host. Only the Light CI
+host would have failed. Proven by stashing the library fix and re-running: 5 new cases red, the old
+ambient test still green.
+
+**How to apply:**
+- When `BaseTheme` gains a knob (`SeedColorMode`, `DefaultFontFamily`, `DefaultSpacing`, …), grep
+  every concrete theme for code that **re-derives** what the base now parameterizes
+  (`new TonalPalette(hct.Hue, hct.Chroma)`, hard-coded tones, literal font keys) and route it through
+  the same mode/value. Prefer consuming the base's resolved output; when a recipe must be mirrored,
+  put it in one shared helper (`FluentAccentPalette.PaletteOf(color, mode)`) and name the base
+  method it mirrors in the doc comment.
+- An "A agrees with B" contract must be asserted **for both branches** from the theme's own
+  `ThemeDictionaries` (walk later merged dictionaries first — the `FindBranchColor` pattern in
+  `Given_FluentSeedAccent`), never only through the ambient lookup: the CI host and developer
+  machines run different appearances, so an ambient-only test proves a different half on each.
+- A merge from master is a **behavior change** for derived libraries even when nothing in them
+  conflicted. Re-run the derived suites in the CI-parity host and read the *new* warnings (here
+  CS0672 pointed straight at the obsolete override) before assuming a clean merge is a no-op.
+- Red-proof after the fact is cheap: `git stash push -- <lib files>`, build, run the filter, pop
+  (~2 min here). Do it when the test was written alongside the fix.
+
+---
+
 ## A generated layer is always a *merged* dictionary, so it can only shadow keys declared inside `ThemeDictionaries`
 
 **Context:** Spec 09 (`DefaultFontFamily`, PR #1707). `When_DefaultFontFamilySet_Then_ThemeAliasKeysFollow`
@@ -247,6 +312,71 @@ next file to need an override didn't get it.
 - Debug-vs-Release differences in ALC collection are usually **timing masks**, not fixes — never conclude "works in Debug" means reclaimed.
 - Mixed-ALC key/value caches are a general Uno hazard: any process-wide cache keyed by framework type but holding guest values defeats per-ALC sweeps. Prefer upstream fixes that also check the **value's** ALC.
 - Known upstream gap (Uno 6.7-dev): each ALC guest window create/close leaks its native X11 GL context (+ llvmpipe threads) even through `Window.CloseAlcWindows`; managed heap stays clean. Track via llvmpipe thread-group count.
+
+---
+
+## Declarative-first for theme resources: build ResourceDictionaries in C# only when XAML provably cannot express them
+
+**Context:** Fluent theme (2026-08-11, `specs/05-fluent-theme/`) — owner correction: "we shouldn't be doing any runtime C# changes to resource dictionaries and resources". The first implementation built three resource sets in code that are all expressible as plain XAML: the neutral semantic palette values (literal per-branch colors — Simple's `ColorPalette.xaml` is the shipped precedent), the lightweight-styling neutral brush defaults, and the Ⓜ gap-key styles (whose code path always landed on an empty style on Uno anyway). Code construction also duplicated the captured platform values across two C# tables with a "keep in sync" comment, and rebuilt ~70 brushes on every rebuild pass (a WASM memory-growth hazard, AGENTS §2).
+
+**The rule:** in a theme library, a resource belongs in XAML unless one of two justifications holds:
+
+1. **The value is computed from runtime input** — a seed color's tonal palette, an override-driven re-pointing, a live platform token that must be read at runtime (e.g. the Windows system accent, which also varies per user).
+2. **The XAML mechanism is proven broken on Uno** for that shape — per-theme-branch `<StaticResource>` aliases (S1 case 4), intra-bundle aliases under container scope, theme-branch resources inside the XamlMerge bundle in Release (each documented in this file).
+
+Everything else — literal per-branch colors/brushes, empty styles, setters-only styles, aliases to app-scope keys — is declarative. When code *transports* declarative values (e.g. `FluentColorPalette` copying `ColorPalette.xaml` branches so accent + neutral roles share one branch dictionary), the XAML file is the single source of truth and the code contains no values.
+
+**How to apply:** before writing `dictionary[key] = ...` in a theme library, write the resource in XAML first and justify any remaining code path against the two criteria above (in the PR and in a comment at the code site). Load declarative theme-branch dictionaries once (static or per-instance cache), not per rebuild pass.
+
+---
+
+## Manual ThemeDictionaries reads must honor "Dark" (consumers never write "Default"); dark-branch rendering is not testable in the CI host
+
+**Context:** Fluent override-driven accent cascade (2026-07-16, `specs/05-fluent-theme/`). Two related traps:
+
+1. **Branch keys.** Code that reads a consumer override's `ThemeDictionaries` by hand (FluentLightweightBridge re-pointing, FluentAccentPalette basis resolution) originally read only the `Light`/`Default` keys — the keys *we* write. Consumers write **`Dark`** (see every sample head's `ColorPaletteOverride.xaml`); `Default` is the universal fallback for either theme. Manual reads must mirror the native semantics: exact branch key first (`Light`/`Dark`), then `Default`, then flat — and read OWN entries only (`TryGetValue` searches the ambient theme branch and breaks branch fidelity).
+
+2. **Verification.** There is no way to *render* the dark branch in the CI host: the ambient app theme is fixed at launch, and setting `RequestedTheme` on an element (before load or flipped after load) does **not** re-branch `{ThemeResource}` lookups made inside XCR templates against app-scope dictionaries on this target — the control keeps the ambient branch's values. Guard dark-branch behavior at the produced resource-graph level (the theme IS a `ResourceDictionary`; assert its branch contents) and keep rendered assertions for the ambient branch. See `Given_FluentLightweightStyling.When_OverrideUsesDarkBranchKey_DarkBranchIsRepointed`.
+
+**How to apply:** any new code path that inspects consumer-supplied `ThemeDictionaries` must handle `Light`/`Dark`/`Default` with the fallback above, and its dark-branch tests must assert dictionary structure, not rendered brushes.
+
+---
+
+## Theme-branch resources inside a XamlMerge bundle don't resolve in Release builds — put them in Source-merged dictionaries
+
+**Context:** Fluent theme Phase 1 (2026-07-15, `specs/05-fluent-theme/`). `Given_FluentTypography` passed in Debug but failed 30/39 in the Release (CI-parity) run: every slot value (`DisplayLargeFontSize` = 68, SemiBold weights, zero character spacing) resolved to the shared (M3) `SharedTypography.xaml` values instead. `UnoXamlResourcesTrimming` was ruled out (`-p:UnoXamlResourcesTrimming=false` still failed).
+
+**Root cause (behavioral):** Fluent's `Typography.xaml` was part of the `XamlMergeInput` glob, so its `ThemeDictionaries` (Light/Default branches carrying the slot values) landed inside `Generated/mergedpages.xaml` — the dictionary set as `BaseTheme.Source`. In Debug, lookups consult those bundle theme branches before the bundle's merged `SharedTypography.xaml`; in Release (compiled XAML codegen), the bundle's own theme branches lose to the merged dictionaries and the shared defaults win. The merged output itself was correct (both branches present) — it is the *resolution* that differs per configuration. Simple has the same structure and is likely affected too, but nothing asserts its absolute slot values, and its load-bearing font mappings were already moved to the Source-merged `Fonts.xaml` for a related reason (see the Fonts.xaml lesson below).
+
+**Fix / how to apply:** theme-branch (Light/Dark-varying) resources that must shadow a shared default belong in a **standalone dictionary loaded via ms-appx Source from `BaseDictionaries.xaml`**, merged after the shared dictionary — never in a page that flows into the XamlMerge bundle. That path is CI-proven (Simple's `Fonts.xaml`, `Given_Fonts`). Fluent's `Typography.xaml` is now excluded from `XamlMergeInput` and Source-merged between `SharedTypography.xaml` and `Fonts.xaml`. Plain (non-theme-branch) resources — style aliases, control styles — resolve fine from the merged bundle in both configurations.
+
+**Verification trap:** Debug runs mask this entirely. Always run typography/theme-branch assertions through the Release CI-parity script (`build/scripts/linux-skia-desktop-runtime-tests.sh`) before declaring green.
+
+---
+
+## Container-scoped themes: intra-bundle aliases and generated brushes resolve against the APP-LEVEL scope
+
+**Context:** Fluent theme Phase 1 (2026-07-15, `specs/05-fluent-theme/`). The runtime tests instantiate `new FluentTheme()` scoped to a test container (spec 05 D14) inside SimpleSampleApp, whose app-level theme is `SimpleTheme`. Two failure modes surfaced that are invisible when the theme under test is the same as the app-level theme:
+
+1. **Intra-bundle `<StaticResource>` aliases don't see their own bundle below app scope.** An alias like `TextButtonStyle` → `FluentTextButtonStyle` (both shipped in the same merged bundle) resolves at parse time against the app-level scope only. At app scope it happens to work (which is why Simple's `_Resources.xaml` → `Button.xaml` aliases pass); scoped lower, the alias yields nothing — or worse, silently binds to a *foreign* app-level theme's key of the same name. Fix: semantic keys targeting styles the library itself ships are resolved late-bound in code (`FluentTheme._bundleStyleAliases`), from the theme's own `Source` bundle.
+
+2. **Generated semantic brushes materialize once, against the app-level scope.** `SharedColors.xaml` defines `<SolidColorBrush Color="{StaticResource PrimaryColor}"/>`; that color reference is a one-time resolution (already documented atop `Given_ColorOverridePrecedence`). Under a container-scoped theme in a host with a different app-level theme, `PrimaryBrush` & co. carry the *app-level* theme's palette, even though the `*Color` keys resolve correctly from the container. This is a pre-existing property of the shared brush layer (Simple/Material behave identically), not a FluentTheme bug. *Superseded 2026-09 by `SemanticBrushUpdater` (#1697): brushes are now per-theme-instance and rewritten from the theme's own color layers, so a container-scoped theme's brushes carry its own palette. The app-scope test topology remains the documented consumer shape but is no longer required for correctness.*
+
+**How to apply:** when adding semantic aliases whose target ships in the same library, alias them in code, not XAML. When writing runtime tests that assert *generated brush values*, merge the theme into `Application.Current.Resources.MergedDictionaries` (the documented consumer topology) inside try/finally — container-scoped assertions on generated brushes test the wrong scope. Container-scoped assertions on `*Color` keys, styles, and typography values remain fine.
+
+---
+
+## `<StaticResource>` alias limits on Uno: no alias chaining; per-theme-branch aliases resolve the ambient theme
+
+**Context:** Fluent theme Spike S1 (2026-07-14, `specs/05-fluent-theme/`) validated the alias mechanisms the planned `FluentTheme` adapter relies on, in the CI host (SimpleSampleApp, `XamlControlsResources` merged at app scope, Skia desktop). Findings are permanently guarded by `src/samples/SimpleSampleApp/RuntimeTests/Given_FluentAliasResolution.cs`.
+
+**What works:** a `<StaticResource x:Key="A" ResourceKey="XcrKey"/>` alias in a dictionary loaded via `ms-appx` Source, merged as a later sibling of `XamlControlsResources`, resolves to the *same instance* as the XCR resource. `BasedOn="{StaticResource XcrKey}"` setters-only styles and FontFamily aliases work the same way. Alias → concrete style in the same merged bundle also works (Simple's `_Resources.xaml` → `Button.xaml` relies on it).
+
+**What does not work:**
+1. **Alias chaining** — an alias whose `ResourceKey` targets *another alias* in the same dictionary does not resolve (`"Couldn't statically resolve resource"`, lookup yields null). Every alias must target a concrete resource directly.
+2. **Per-theme-branch color aliases** — a `<StaticResource>` alias placed inside `ThemeDictionaries` `Light`/`Default` branches resolves eagerly against the **ambient** theme, so both branches end up with the same value instead of each branch's own. This is the same eager-resolution family as the Fonts.xaml lesson below. Theme-dependent values sourced from another dictionary must be resolved **in code** per branch (see spec 05, decision D6 "mechanism C"), not via per-branch XAML aliases.
+
+**How to apply:** when adding semantic aliases to any `_Resources.xaml`, alias concrete style keys only — never another alias. When mapping theme-varying colors across dictionaries, build the values programmatically per branch. If `Given_FluentAliasResolution.When_AliasOfAlias_DoesNotResolve` or `When_ThemeBranchColorAlias_BranchesResolveAmbientTheme` ever *fail*, the platform constraint has been lifted — revisit spec 05 D6/D16 before assuming either way.
 
 ---
 

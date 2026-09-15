@@ -865,6 +865,288 @@
 					</UserControl>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
+
+			<!-- Fluent: the semantic color roles as FluentTheme maps them from the Fluent design tokens. -->
+			<sample:SamplePageLayout.FluentTemplate>
+				<DataTemplate>
+					<UserControl>
+						<ScrollViewer VerticalScrollBarVisibility="Auto">
+							<StackPanel HorizontalAlignment="Stretch">
+
+								<TextBlock Text="Every semantic color role carries a Fluent design-token value: the Primary, Secondary and Tertiary families follow SystemAccentColor and its shades (the user's accent on Windows), the neutral roles map to the SolidBackgroundFillColor, TextFillColor and StrokeColor tokens, and Error maps to SystemFillColorCritical. The interaction-state brushes are opacity variants of each rest color (the semantic state model) — built-in Fluent controls keep their own discrete state fills."
+										   Style="{StaticResource BodyMedium}"
+										   Opacity="0.7"
+										   TextWrapping="Wrap"
+										   Margin="0,8,0,8" />
+
+							<TextBlock Text="1. Primary"
+									   Style="{StaticResource TitleSmall}"
+									   Margin="0,24,0,8" />
+							<styles:ColorPaletteControl Color1Name="PrimaryBrush"
+														Color1Container="{ThemeResource PrimaryBrush}"
+														ColorContent="{ThemeResource OnPrimaryBrush}" />
+
+							<styles:ColorPaletteControl ColorState="Transparent"
+														Color1Name="PrimaryHoverBrush"
+														Color1Container="{ThemeResource PrimaryHoverBrush}"
+														Color1Content="{ThemeResource PrimaryBrush}"
+														Color2Name="PrimaryFocusedBrush"
+														Color2Container="{ThemeResource PrimaryFocusedBrush}"
+														Color2Content="{ThemeResource PrimaryBrush}"
+														Color3Name="PrimaryPressedBrush"
+														Color3Container="{ThemeResource PrimaryPressedBrush}"
+														Color3Content="{ThemeResource PrimaryBrush}"
+														Color4Name="PrimaryDraggedBrush"
+														Color4Container="{ThemeResource PrimaryDraggedBrush}"
+														Color4Content="{ThemeResource PrimaryBrush}"
+														Color5Name="PrimarySelectedBrush"
+														Color5Container="{ThemeResource PrimarySelectedBrush}"
+														Color5Content="{ThemeResource PrimaryBrush}" />
+
+							<TextBlock Text="2. On Primary"
+									   Style="{StaticResource TitleSmall}"
+									   Margin="0,24,0,8" />
+							<styles:ColorPaletteControl Color1Name="OnPrimaryBrush"
+														Color1Container="{ThemeResource OnPrimaryBrush}"
+														ColorContent="{ThemeResource PrimaryBrush}" />
+
+							<styles:ColorPaletteControl ColorContainer="{ThemeResource PrimaryBrush}"
+														ColorContent="{ThemeResource OnPrimaryBrush}"
+														Color1Name="OnPrimaryMediumBrush"
+														Color1State="{ThemeResource OnPrimaryMediumBrush}"
+														Color2Name="OnPrimaryLowBrush"
+														Color2State="{ThemeResource OnPrimaryLowBrush}" />
+
+							<TextBlock Text="3. Primary Container"
+									   Style="{StaticResource TitleSmall}"
+									   Margin="0,24,0,8" />
+							<styles:ColorPaletteControl Color1Name="PrimaryContainerBrush"
+														Color1Container="{ThemeResource PrimaryContainerBrush}"
+														ColorContent="{ThemeResource OnPrimaryContainerBrush}" />
+
+							<TextBlock Text="4. On Primary Container"
+									   Style="{StaticResource TitleSmall}"
+									   Margin="0,24,0,8" />
+							<styles:ColorPaletteControl Color1Name="OnPrimaryContainerBrush"
+														Color1Container="{ThemeResource OnPrimaryContainerBrush}"
+														ColorContent="{ThemeResource PrimaryContainerBrush}" />
+
+							<TextBlock Text="5. Primary Inverse"
+									   Style="{StaticResource TitleSmall}"
+									   Margin="0,24,0,8" />
+							<styles:ColorPaletteControl Color1Name="PrimaryInverseBrush"
+														Color1Container="{ThemeResource PrimaryInverseBrush}"
+														ColorContent="{ThemeResource OnPrimaryBrush}" />
+
+							<TextBlock Text="6. Primary Variants"
+									   Style="{StaticResource TitleSmall}"
+									   Margin="0,24,0,8" />
+							<styles:ColorPaletteControl Color1Name="PrimaryVariantDarkBrush"
+														Color1Container="{ThemeResource PrimaryVariantDarkBrush}"
+														Color2Name="PrimaryVariantLightBrush"
+														Color2Container="{ThemeResource PrimaryVariantLightBrush}"
+														ColorContent="{ThemeResource OnPrimaryBrush}" />
+
+							<TextBlock Text="7. Secondary"
+									   Style="{StaticResource TitleSmall}"
+									   Margin="0,24,0,8" />
+							<styles:ColorPaletteControl Color1Name="SecondaryBrush"
+														Color1Container="{ThemeResource SecondaryBrush}"
+														ColorContent="{ThemeResource OnSecondaryBrush}" />
+
+							<TextBlock Text="8. On Secondary"
+									   Style="{StaticResource TitleSmall}"
+									   Margin="0,24,0,8" />
+							<styles:ColorPaletteControl Color1Name="OnSecondaryBrush"
+														Color1Container="{ThemeResource OnSecondaryBrush}"
+														ColorContent="{ThemeResource SecondaryBrush}" />
+
+							<TextBlock Text="9. Secondary Container"
+									   Style="{StaticResource TitleSmall}"
+									   Margin="0,24,0,8" />
+							<styles:ColorPaletteControl Color1Name="SecondaryContainerBrush"
+														Color1Container="{ThemeResource SecondaryContainerBrush}"
+														ColorContent="{ThemeResource OnSecondaryContainerBrush}" />
+
+							<TextBlock Text="10. On Secondary Container"
+									   Style="{StaticResource TitleSmall}"
+									   Margin="0,24,0,8" />
+							<styles:ColorPaletteControl Color1Name="OnSecondaryContainerBrush"
+														Color1Container="{ThemeResource OnSecondaryContainerBrush}"
+														ColorContent="{ThemeResource SecondaryContainerBrush}" />
+
+							<TextBlock Text="11. Secondary Variants"
+									   Style="{StaticResource TitleSmall}"
+									   Margin="0,24,0,8" />
+							<styles:ColorPaletteControl Color1Name="SecondaryVariantDarkBrush"
+														Color1Container="{ThemeResource SecondaryVariantDarkBrush}"
+														Color2Name="SecondaryVariantLightBrush"
+														Color2Container="{ThemeResource SecondaryVariantLightBrush}"
+														ColorContent="{ThemeResource OnSecondaryBrush}" />
+
+							<TextBlock Text="12. Tertiary"
+									   Style="{StaticResource TitleSmall}"
+									   Margin="0,24,0,8" />
+							<styles:ColorPaletteControl Color1Name="TertiaryBrush"
+														Color1Container="{ThemeResource TertiaryBrush}"
+														ColorContent="{ThemeResource OnTertiaryBrush}" />
+
+							<TextBlock Text="13. On Tertiary"
+									   Style="{StaticResource TitleSmall}"
+									   Margin="0,24,0,8" />
+							<styles:ColorPaletteControl Color1Name="OnTertiaryBrush"
+														Color1Container="{ThemeResource OnTertiaryBrush}"
+														ColorContent="{ThemeResource TertiaryBrush}" />
+
+							<TextBlock Text="14. Tertiary Container"
+									   Style="{StaticResource TitleSmall}"
+									   Margin="0,24,0,8" />
+							<styles:ColorPaletteControl Color1Name="TertiaryContainerBrush"
+														Color1Container="{ThemeResource TertiaryContainerBrush}"
+														ColorContent="{ThemeResource OnTertiaryContainerBrush}" />
+
+							<TextBlock Text="15. On Tertiary Container"
+									   Style="{StaticResource TitleSmall}"
+									   Margin="0,24,0,8" />
+							<styles:ColorPaletteControl Color1Name="OnTertiaryContainerBrush"
+														Color1Container="{ThemeResource OnTertiaryContainerBrush}"
+														ColorContent="{ThemeResource TertiaryContainerBrush}" />
+
+							<TextBlock Text="16. Background"
+									   Style="{StaticResource TitleSmall}"
+									   Margin="0,24,0,8" />
+							<styles:ColorPaletteControl Color1Name="BackgroundBrush"
+														Color1Container="{ThemeResource BackgroundBrush}"
+														ColorContent="{ThemeResource OnBackgroundBrush}" />
+
+							<TextBlock Text="17. On Background"
+									   Style="{StaticResource TitleSmall}"
+									   Margin="0,24,0,8" />
+							<styles:ColorPaletteControl Color1Name="OnBackgroundBrush"
+														Color1Container="{ThemeResource OnBackgroundBrush}"
+														ColorContent="{ThemeResource BackgroundBrush}" />
+
+							<styles:ColorPaletteControl ColorContainer="{ThemeResource BackgroundBrush}"
+														ColorContent="{ThemeResource OnBackgroundBrush}"
+														Color1Name="OnBackgroundMediumBrush"
+														Color1State="{ThemeResource OnBackgroundMediumBrush}"
+														Color2Name="OnBackgroundLowBrush"
+														Color2State="{ThemeResource OnBackgroundLowBrush}" />
+
+							<TextBlock Text="18. Surface"
+									   Style="{StaticResource TitleSmall}"
+									   Margin="0,24,0,8" />
+							<styles:ColorPaletteControl Color1Name="SurfaceBrush"
+														Color1Container="{ThemeResource SurfaceBrush}"
+														ColorContent="{ThemeResource OnSurfaceBrush}" />
+
+							<TextBlock Text="19. On Surface"
+									   Style="{StaticResource TitleSmall}"
+									   Margin="0,24,0,8" />
+							<styles:ColorPaletteControl Color1Name="OnSurfaceBrush"
+														Color1Container="{ThemeResource OnSurfaceBrush}"
+														ColorContent="{ThemeResource SurfaceBrush}" />
+
+							<styles:ColorPaletteControl ColorContainer="{ThemeResource SurfaceBrush}"
+														ColorContent="{ThemeResource OnSurfaceBrush}"
+														Color1Name="OnSurfaceMediumBrush"
+														Color1State="{ThemeResource OnSurfaceMediumBrush}"
+														Color2Name="OnSurfaceLowBrush"
+														Color2State="{ThemeResource OnSurfaceLowBrush}" />
+
+							<styles:ColorPaletteControl ColorContainer="{ThemeResource SurfaceBrush}"
+														ColorContent="{ThemeResource OnSurfaceBrush}"
+														Color1Name="OnSurfaceHoverBrush"
+														Color1State="{ThemeResource OnSurfaceHoverBrush}"
+														Color2Name="OnSurfaceFocusedBrush"
+														Color2State="{ThemeResource OnSurfaceFocusedBrush}"
+														Color3Name="OnSurfacePressedBrush"
+														Color3State="{ThemeResource OnSurfacePressedBrush}"
+														Color4Name="OnSurfaceDraggedBrush"
+														Color4State="{ThemeResource OnSurfaceDraggedBrush}"
+														Color5Name="OnSurfaceSelectedBrush"
+														Color5State="{ThemeResource OnSurfaceSelectedBrush}" />
+
+							<TextBlock Text="20. Surface Variant"
+									   Style="{StaticResource TitleSmall}"
+									   Margin="0,24,0,8" />
+							<styles:ColorPaletteControl Color1Name="SurfaceVariantBrush"
+														Color1Container="{ThemeResource SurfaceVariantBrush}"
+														ColorContent="{ThemeResource OnSurfaceVariantBrush}" />
+
+							<TextBlock Text="21. On Surface Variant"
+									   Style="{StaticResource TitleSmall}"
+									   Margin="0,24,0,8" />
+							<styles:ColorPaletteControl Color1Name="OnSurfaceVariantBrush"
+														Color1Container="{ThemeResource OnSurfaceVariantBrush}"
+														ColorContent="{ThemeResource SurfaceVariantBrush}" />
+
+							<TextBlock Text="22. Surface Inverse"
+									   Style="{StaticResource TitleSmall}"
+									   Margin="0,24,0,8" />
+							<styles:ColorPaletteControl Color1Name="SurfaceInverseBrush"
+														Color1Container="{ThemeResource SurfaceInverseBrush}"
+														ColorContent="{ThemeResource OnSurfaceInverseBrush}" />
+
+							<TextBlock Text="23. On Surface Inverse"
+									   Style="{StaticResource TitleSmall}"
+									   Margin="0,24,0,8" />
+							<styles:ColorPaletteControl Color1Name="OnSurfaceInverseBrush"
+														Color1Container="{ThemeResource OnSurfaceInverseBrush}"
+														ColorContent="{ThemeResource SurfaceInverseBrush}" />
+
+							<TextBlock Text="24. Surface Tint"
+									   Style="{StaticResource TitleSmall}"
+									   Margin="0,24,0,8" />
+							<styles:ColorPaletteControl Color1Name="SurfaceTintBrush"
+														Color1Container="{ThemeResource SurfaceTintBrush}"
+														ColorContent="{ThemeResource OnPrimaryBrush}" />
+
+							<TextBlock Text="25. Outline"
+									   Style="{StaticResource TitleSmall}"
+									   Margin="0,24,0,8" />
+							<!-- There is no OnOutline role: OnPrimary / OnSurface carry the labels. -->
+							<styles:ColorPaletteControl Color1Name="OutlineBrush"
+														Color1Container="{ThemeResource OutlineBrush}"
+														Color1Content="{ThemeResource OnPrimaryBrush}"
+														Color2Name="OutlineVariantBrush"
+														Color2Container="{ThemeResource OutlineVariantBrush}"
+														Color2Content="{ThemeResource OnSurfaceBrush}" />
+
+							<TextBlock Text="26. Error"
+									   Style="{StaticResource TitleSmall}"
+									   Margin="0,24,0,8" />
+							<styles:ColorPaletteControl Color1Name="ErrorBrush"
+														Color1Container="{ThemeResource ErrorBrush}"
+														ColorContent="{ThemeResource OnErrorBrush}" />
+
+							<TextBlock Text="27. On Error"
+									   Style="{StaticResource TitleSmall}"
+									   Margin="0,24,0,8" />
+							<styles:ColorPaletteControl Color1Name="OnErrorBrush"
+														Color1Container="{ThemeResource OnErrorBrush}"
+														ColorContent="{ThemeResource ErrorBrush}" />
+
+							<TextBlock Text="28. Error Container"
+									   Style="{StaticResource TitleSmall}"
+									   Margin="0,24,0,8" />
+							<styles:ColorPaletteControl Color1Name="ErrorContainerBrush"
+														Color1Container="{ThemeResource ErrorContainerBrush}"
+														ColorContent="{ThemeResource OnErrorContainerBrush}" />
+
+							<TextBlock Text="29. On Error Container"
+									   Style="{StaticResource TitleSmall}"
+									   Margin="0,24,0,8" />
+							<styles:ColorPaletteControl Color1Name="OnErrorContainerBrush"
+														Color1Container="{ThemeResource OnErrorContainerBrush}"
+														ColorContent="{ThemeResource ErrorContainerBrush}" />
+
+								<Border Height="32" />
+							</StackPanel>
+						</ScrollViewer>
+					</UserControl>
+				</DataTemplate>
+			</sample:SamplePageLayout.FluentTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

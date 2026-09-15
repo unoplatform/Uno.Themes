@@ -4,6 +4,9 @@ uid: Uno.Themes.Styles.TextBox
 
 # TextBox Control
 
+> [!NOTE]
+> Under the [Fluent theme](../fluent-getting-started.md), text boxes are rendered by the built-in WinUI template, which has a single variant: both the `FilledTextBox*` and `OutlinedTextBox*` brush families are bridged onto the Fluent `TextControl*` resources (Outlined wins if both are overridden). App-wide overrides go through `Colors.OverrideDictionary`. See [Lightweight Styling — Fluent theme](../lightweight-styling.md#fluent-theme).
+
 ## Styles
 
 | Style Key              | IsDefaultStyle\* |

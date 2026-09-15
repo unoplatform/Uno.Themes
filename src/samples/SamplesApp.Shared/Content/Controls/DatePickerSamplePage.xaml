@@ -140,6 +140,37 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+			<sample:SamplePageLayout.FluentTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Basic -->
+						<smtx:XamlDisplay UniqueKey="Fluent_DatePicker_Basic"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<DatePicker Style="{StaticResource DatePickerStyle}" />
+						</smtx:XamlDisplay>
+						<!-- With header -->
+						<smtx:XamlDisplay UniqueKey="Fluent_DatePicker_Header"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<DatePicker Header="Date of Birth"
+										Style="{StaticResource DatePickerStyle}" />
+						</smtx:XamlDisplay>
+						<!-- Year and month only -->
+						<smtx:XamlDisplay UniqueKey="Fluent_DatePicker_YearMonth"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<DatePicker Header="Select Month"
+										DayVisible="False"
+										Style="{StaticResource DatePickerStyle}" />
+						</smtx:XamlDisplay>
+						<!-- Disabled -->
+						<smtx:XamlDisplay UniqueKey="Fluent_DatePicker_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<DatePicker Header="Disabled"
+										IsEnabled="False"
+										Style="{StaticResource DatePickerStyle}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.FluentTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

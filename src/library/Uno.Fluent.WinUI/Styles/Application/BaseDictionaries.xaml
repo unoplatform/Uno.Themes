@@ -1,0 +1,33 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!--
+		Static base layer for FluentTheme. Pulled into mergedpages.xaml by the
+		Uno.XamlMerge task (via the Styles\Application\ glob) so that a single
+		Source=mergedpages.xaml on BaseTheme brings in the default converter and
+		typography resources the theme needs.
+
+		Order matters: entries listed LATER win at lookup time (MergedDictionaries
+		are searched in reverse). Typography.xaml and Fonts.xaml are merged AFTER
+		SharedTypography.xaml so the Fluent slot values (type-ramp sizes/weights and
+		the platform-default font via ContentControlThemeFontFamily) win
+		deterministically over the shared (M3) defaults. Both are loaded via
+		ms-appx Source rather than through the merged pages: theme-branch resources
+		inside the merged bundle do not resolve reliably in Release builds, while
+		Source-merged standalone dictionaries do (see specs/lessons.md).
+
+		Colour resources are intentionally NOT included here: SharedColors, the
+		shared palette and the code-built Fluent palette (FluentColorPalette,
+		mechanism C) are added dynamically by BaseTheme.UpdateSource so they
+		rebuild on seed-color and override changes.
+	-->
+
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="ms-appx:///Uno.Themes.WinUI/Styles/Applications/Common/Converters.xaml" />
+		<ResourceDictionary Source="ms-appx:///Uno.Themes.WinUI/Styles/Applications/Common/SharedTypography.xaml" />
+
+		<ResourceDictionary Source="ms-appx:///Uno.Fluent.WinUI/Styles/Application/Typography.xaml" />
+		<ResourceDictionary Source="ms-appx:///Uno.Fluent.WinUI/Styles/Application/Fonts.xaml" />
+	</ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

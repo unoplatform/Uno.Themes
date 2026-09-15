@@ -565,6 +565,32 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+
+			<sample:SamplePageLayout.FluentTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<smtx:XamlDisplay UniqueKey="Fluent_TextBox_Filled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Header="Filled"
+									 PlaceholderText="Enter text"
+									 Style="{StaticResource FilledTextBoxStyle}" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Fluent_TextBox_Outlined"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Header="Outlined"
+									 PlaceholderText="Enter text"
+									 Style="{StaticResource OutlinedTextBoxStyle}" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Fluent_TextBox_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Header="Disabled"
+									 IsEnabled="False"
+									 Text="Read-only value"
+									 Style="{StaticResource FilledTextBoxStyle}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.FluentTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>
