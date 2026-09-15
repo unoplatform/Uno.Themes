@@ -67,8 +67,9 @@ public class Given_FluentSamplePages
 						Assert.IsNotNull(layout.FluentTemplate,
 							$"{type.Name} declares Design.Fluent but defines no FluentTemplate");
 
-						var presenter = layout.FindFirstDescendant<ContentPresenter>(x => x.Name == FluentPresenterName);
-						Assert.IsNotNull(presenter, $"{type.Name}: the SamplePageLayout template should expose {FluentPresenterName}");
+						var presenter = Assert.IsInstanceOfType<ContentPresenter>(
+							layout.FindFirstDescendant<ContentPresenter>(x => x.Name == FluentPresenterName),
+							$"{type.Name}: the SamplePageLayout template should expose {FluentPresenterName}");
 						Assert.AreEqual(Visibility.Visible, presenter.Visibility,
 							$"{type.Name}: the Fluent presenter must be the one shown (Fluent visual state)");
 						Assert.IsTrue(VisualTreeHelper.GetChildrenCount(presenter) > 0,

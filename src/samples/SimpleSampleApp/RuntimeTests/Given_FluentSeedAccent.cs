@@ -569,10 +569,10 @@ public class Given_FluentSeedAccent
 		var container = new Grid();
 		container.Resources.MergedDictionaries.Add(theme);
 
-		var lightPrimary = FindBranchColor(theme, "Light", "PrimaryColor");
-		var darkPrimary = FindBranchColor(theme, "Default", "PrimaryColor");
-		Assert.IsNotNull(lightPrimary, "the seeded theme should carry a Light-branch PrimaryColor");
-		Assert.IsNotNull(darkPrimary, "the seeded theme should carry a Default (dark) branch PrimaryColor");
+		var lightPrimary = Assert.IsInstanceOfType<Color>(FindBranchColor(theme, "Light", "PrimaryColor"),
+			"the seeded theme should carry a Light-branch PrimaryColor");
+		var darkPrimary = Assert.IsInstanceOfType<Color>(FindBranchColor(theme, "Default", "PrimaryColor"),
+			"the seeded theme should carry a Default (dark) branch PrimaryColor");
 
 		Assert.AreEqual(lightPrimary, GetColor(container.Resources, "SystemAccentColor"),
 			"the LIGHT semantic PrimaryColor must equal the reverse-mapped base accent (§9.3)");
@@ -659,8 +659,7 @@ public class Given_FluentSeedAccent
 			await UnitTestsUIContentHelper.WaitForLoaded(button);
 			await UnitTestsUIContentHelper.WaitForIdle();
 
-			var background = button.Background as SolidColorBrush;
-			Assert.IsNotNull(background, "the accent button should have a SolidColorBrush background");
+			var background = Assert.IsInstanceOfType<SolidColorBrush>(button.Background, "the accent button should have a SolidColorBrush background");
 			Assert.AreEqual(OverrideBlue, background.Color,
 				"the built-in accent button must render with the overridden PrimaryColor (G5 parity with Material/Simple)");
 		}
@@ -809,8 +808,7 @@ public class Given_FluentSeedAccent
 
 		foreach (var appearance in new[] { "Light", "Default" })
 		{
-			var actual = FindBranchValue(theme, appearance, "AccentFillColorDefaultBrush") as SolidColorBrush;
-			Assert.IsNotNull(actual, $"{appearance} must expose the explicit native fill brush");
+			var actual = Assert.IsInstanceOfType<SolidColorBrush>(FindBranchValue(theme, appearance, "AccentFillColorDefaultBrush"), $"{appearance} must expose the explicit native fill brush");
 			Assert.AreEqual(expected.Color, actual.Color, $"{appearance} must preserve the explicit brush color");
 			Assert.AreEqual(expected.Opacity, actual.Opacity, 0.0001, $"{appearance} must preserve the explicit brush opacity");
 		}
@@ -858,8 +856,7 @@ public class Given_FluentSeedAccent
 			await UnitTestsUIContentHelper.WaitForLoaded(button);
 			await UnitTestsUIContentHelper.WaitForIdle();
 
-			var actual = (key == "PrimaryBrush" ? button.Background : button.Foreground) as SolidColorBrush;
-			Assert.IsNotNull(actual, "the native button must use the semantic solid brush override");
+			var actual = Assert.IsInstanceOfType<SolidColorBrush>(key == "PrimaryBrush" ? button.Background : button.Foreground, "the native button must use the semantic solid brush override");
 			Assert.AreEqual(IsAmbientDark ? OverrideGreen : OverrideBlue, actual.Color,
 				"the same semantic accent override must reach the native button in the active appearance");
 			Assert.AreEqual(key == "OnPrimaryColor" ? 1.0 : 0.43, actual.Opacity, 0.0001,
@@ -893,8 +890,7 @@ public class Given_FluentSeedAccent
 			await UnitTestsUIContentHelper.WaitForLoaded(button);
 			await UnitTestsUIContentHelper.WaitForIdle();
 
-			var actual = button.Background as SolidColorBrush;
-			Assert.IsNotNull(actual, "the native accent button must retain a solid background");
+			var actual = Assert.IsInstanceOfType<SolidColorBrush>(button.Background, "the native accent button must retain a solid background");
 			var applies = overrideAppearance == (IsAmbientDark ? "Dark" : "Light");
 			Assert.AreEqual(applies ? OverrideBlue : expected, actual.Color,
 				"an appearance-specific override must not recolor the opposite appearance through Default fallback");

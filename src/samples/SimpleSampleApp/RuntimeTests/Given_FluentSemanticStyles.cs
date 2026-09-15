@@ -25,8 +25,7 @@ public class Given_FluentSemanticStyles
 	{
 		var theme = new FluentTheme();
 		Assert.IsTrue(theme.TryGetValue("DatePickerFlyoutPresenterStyle", out var value), "The shared presenter style key must resolve under Fluent.");
-		var style = value as Style;
-		Assert.IsNotNull(style);
+		var style = Assert.IsInstanceOfType<Style>(value);
 		Assert.AreEqual(typeof(DatePickerFlyoutPresenter), style.TargetType);
 		var presenter = new DatePickerFlyoutPresenter { Style = style, RequestedTheme = appearance };
 		var host = new Grid();
@@ -99,8 +98,7 @@ public class Given_FluentSemanticStyles
 	{
 		var container = CreateThemedContainer();
 
-		var semantic = container.Resources[semanticKey] as Style;
-		Assert.IsNotNull(semantic, $"{semanticKey} should resolve to a Style under FluentTheme");
+		var semantic = Assert.IsInstanceOfType<Style>(container.Resources[semanticKey], $"{semanticKey} should resolve to a Style under FluentTheme");
 
 		Assert.IsTrue(
 			Application.Current.Resources.TryGetValue(xcrKey, out var xcrValue),
@@ -121,10 +119,8 @@ public class Given_FluentSemanticStyles
 	{
 		var container = CreateThemedContainer();
 
-		var semantic = container.Resources[semanticKey] as Style;
-		var bridge = container.Resources[bridgeKey] as Style;
-		Assert.IsNotNull(semantic, $"{semanticKey} should resolve");
-		Assert.IsNotNull(bridge, $"{bridgeKey} should resolve");
+		var semantic = Assert.IsInstanceOfType<Style>(container.Resources[semanticKey], $"{semanticKey} should resolve");
+		var bridge = Assert.IsInstanceOfType<Style>(container.Resources[bridgeKey], $"{bridgeKey} should resolve");
 		Assert.AreSame(bridge, semantic, $"{semanticKey} should alias {bridgeKey}");
 
 		Assert.AreEqual(typeof(Button), bridge.TargetType);
@@ -152,8 +148,7 @@ public class Given_FluentSemanticStyles
 		await UnitTestsUIContentHelper.WaitForLoaded(button);
 		await UnitTestsUIContentHelper.WaitForIdle();
 
-		var background = button.Background as SolidColorBrush;
-		Assert.IsNotNull(background, "TextButtonStyle button should have a SolidColorBrush background");
+		var background = Assert.IsInstanceOfType<SolidColorBrush>(button.Background, "TextButtonStyle button should have a SolidColorBrush background");
 		Assert.AreEqual(Colors.Transparent, background.Color,
 			"the Fluent subtle button must be transparent at rest");
 	}
@@ -183,8 +178,7 @@ public class Given_FluentSemanticStyles
 		Assert.IsTrue(
 			container.Resources.TryGetValue(semanticKey, out var value),
 			$"{semanticKey} should resolve under FluentTheme");
-		var style = value as Style;
-		Assert.IsNotNull(style, $"{semanticKey} should be a Style");
+		var style = Assert.IsInstanceOfType<Style>(value, $"{semanticKey} should be a Style");
 		Assert.AreEqual(targetType, style.TargetType,
 			$"{semanticKey} should target {targetType.Name}");
 	}
@@ -237,12 +231,9 @@ public class Given_FluentSemanticStyles
 		await UnitTestsUIContentHelper.WaitForLoaded(outlined);
 		await UnitTestsUIContentHelper.WaitForIdle();
 
-		var filledBg = filled.Background as SolidColorBrush;
-		var accentBg = accent.Background as SolidColorBrush;
-		var outlinedBg = outlined.Background as SolidColorBrush;
-		Assert.IsNotNull(filledBg);
-		Assert.IsNotNull(accentBg);
-		Assert.IsNotNull(outlinedBg);
+		var filledBg = Assert.IsInstanceOfType<SolidColorBrush>(filled.Background);
+		var accentBg = Assert.IsInstanceOfType<SolidColorBrush>(accent.Background);
+		var outlinedBg = Assert.IsInstanceOfType<SolidColorBrush>(outlined.Background);
 
 		Assert.AreEqual(accentBg.Color, filledBg.Color,
 			"FilledButtonStyle must render with the Fluent accent background");

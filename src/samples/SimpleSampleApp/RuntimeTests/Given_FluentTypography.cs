@@ -71,8 +71,7 @@ public class Given_FluentTypography
 		Assert.IsTrue(
 			container.Resources.TryGetValue($"{slot}FontFamily", out var family),
 			$"{slot}FontFamily should resolve under FluentTheme");
-		var fontFamily = family as FontFamily;
-		Assert.IsNotNull(fontFamily, $"{slot}FontFamily should be a FontFamily");
+		var fontFamily = Assert.IsInstanceOfType<FontFamily>(family, $"{slot}FontFamily should be a FontFamily");
 		Assert.AreEqual(GetPlatformDefaultFontFamily().Source, fontFamily.Source,
 			$"{slot}FontFamily must be the platform default (ContentControlThemeFontFamily, D11)");
 	}
@@ -119,8 +118,7 @@ public class Given_FluentTypography
 		Assert.IsTrue(
 			container.Resources.TryGetValue(key, out var value),
 			$"{key} should resolve under FluentTheme");
-		var fontFamily = value as FontFamily;
-		Assert.IsNotNull(fontFamily, $"{key} should be a FontFamily");
+		var fontFamily = Assert.IsInstanceOfType<FontFamily>(value, $"{key} should be a FontFamily");
 		Assert.AreEqual(GetPlatformDefaultFontFamily().Source, fontFamily.Source,
 			$"{key} must be the platform default (ContentControlThemeFontFamily, D11)");
 	}
@@ -233,10 +231,8 @@ public class Given_FluentTypography
 	{
 		var container = CreateThemedContainer();
 
-		var semantic = container.Resources[semanticKey] as Style;
-		var fluent = container.Resources[fluentKey] as Style;
-		Assert.IsNotNull(semantic, $"{semanticKey} should resolve");
-		Assert.IsNotNull(fluent, $"{fluentKey} should resolve");
+		var semantic = Assert.IsInstanceOfType<Style>(container.Resources[semanticKey], $"{semanticKey} should resolve");
+		var fluent = Assert.IsInstanceOfType<Style>(container.Resources[fluentKey], $"{fluentKey} should resolve");
 		Assert.AreSame(fluent, semantic, $"{semanticKey} should alias {fluentKey}");
 		Assert.AreEqual(typeof(TextBlock), fluent.TargetType);
 	}
