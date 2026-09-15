@@ -36,3 +36,7 @@ Added Fluent to `build/stage-runtimetests-desktop.yml` so the existing generic b
 - Sample application identity, shared-project import, and application resource ordering follow the other sample heads; XamlControlsResources precedes FluentTheme.
 
 No further blocking project-integration defects were identified by this static review. No builds or tests were run by this review lane to avoid contention with the main verification process.
+
+## Fresh publication deployment
+
+GitHub run 34919760692 successfully built and deployed revision 7e9c6fc4 after publication. The earlier staging-capacity failure no longer reproduces; no Azure resources or workflow checks were modified to obtain this result. Later revisions still require their own final CI checks.

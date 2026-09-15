@@ -211,8 +211,7 @@ public class Given_ColorOverridePrecedence
 		var container = new Grid();
 		container.Resources.MergedDictionaries.Add(theme);
 
-		var style = container.Resources["FilledButtonStyle"] as Style;
-		Assert.IsNotNull(style, "FilledButtonStyle should resolve from FluentTheme");
+		var style = Assert.IsInstanceOfType<Style>(container.Resources["FilledButtonStyle"], "FilledButtonStyle should resolve from FluentTheme");
 
 		// The semantic brush must carry the override; the button itself keeps
 		// Fluent's own accent fill because FilledButtonStyle IS the untouched

@@ -292,8 +292,7 @@ public class Given_FluentLightweightStyling
 		Assert.IsTrue(
 			resources.TryGetValue(key, out var value),
 			$"{key} should resolve under FluentTheme");
-		var brush = value as SolidColorBrush;
-		Assert.IsNotNull(brush, $"{key} should be a SolidColorBrush");
+		var brush = Assert.IsInstanceOfType<SolidColorBrush>(value, $"{key} should be a SolidColorBrush");
 		return brush;
 	}
 
@@ -446,8 +445,7 @@ public class Given_FluentLightweightStyling
 		await UnitTestsUIContentHelper.WaitForLoaded(button);
 		await UnitTestsUIContentHelper.WaitForIdle();
 
-		var foreground = button.Foreground as SolidColorBrush;
-		Assert.IsNotNull(foreground, "the subtle button should have a SolidColorBrush foreground");
+		var foreground = Assert.IsInstanceOfType<SolidColorBrush>(button.Foreground, "the subtle button should have a SolidColorBrush foreground");
 		Assert.AreEqual(OverrideRed, foreground.Color,
 			"a subtree-scoped TextButtonForeground override must reach the bridge style's foreground");
 	}
@@ -469,8 +467,7 @@ public class Given_FluentLightweightStyling
 		await UnitTestsUIContentHelper.WaitForLoaded(button);
 		await UnitTestsUIContentHelper.WaitForIdle();
 
-		var foreground = button.Foreground as SolidColorBrush;
-		Assert.IsNotNull(foreground, "the subtle button should have a SolidColorBrush foreground");
+		var foreground = Assert.IsInstanceOfType<SolidColorBrush>(button.Foreground, "the subtle button should have a SolidColorBrush foreground");
 		Assert.AreEqual(GetAmbientColor("TextFillColorPrimary"), foreground.Color,
 			"without an override, the Fluent subtle button keeps neutral text");
 	}
@@ -516,13 +513,11 @@ public class Given_FluentLightweightStyling
 			await UnitTestsUIContentHelper.WaitForLoaded(filled);
 			await UnitTestsUIContentHelper.WaitForIdle();
 
-			var filledBackground = filled.Background as SolidColorBrush;
-			Assert.IsNotNull(filledBackground, "the filled button should have a SolidColorBrush background");
+			var filledBackground = Assert.IsInstanceOfType<SolidColorBrush>(filled.Background, "the filled button should have a SolidColorBrush background");
 			Assert.AreEqual(OverrideRed, filledBackground.Color,
 				"a FilledButtonBackground override must reach the XCR-templated accent button (G6)");
 
-			var outlinedBackground = outlined.Background as SolidColorBrush;
-			Assert.IsNotNull(outlinedBackground, "the outlined button should have a SolidColorBrush background");
+			var outlinedBackground = Assert.IsInstanceOfType<SolidColorBrush>(outlined.Background, "the outlined button should have a SolidColorBrush background");
 			Assert.AreNotEqual(OverrideRed, outlinedBackground.Color,
 				"the standard button must not be affected by a Filled* override");
 		}
@@ -609,8 +604,7 @@ public class Given_FluentLightweightStyling
 			await UnitTestsUIContentHelper.WaitForLoaded(textBox);
 			await UnitTestsUIContentHelper.WaitForIdle();
 
-			var background = textBox.Background as SolidColorBrush;
-			Assert.IsNotNull(background, "the text box should have a SolidColorBrush background");
+			var background = Assert.IsInstanceOfType<SolidColorBrush>(textBox.Background, "the text box should have a SolidColorBrush background");
 			Assert.AreEqual(OverrideRed, background.Color,
 				"a FilledTextBoxBackground override must reach the XCR-templated TextBox (G6)");
 		}
@@ -715,8 +709,8 @@ public class Given_FluentLightweightStyling
 		// its light branch must not.
 		var (light, dark) = FindBridgeBranches(theme, "AccentButtonBackground");
 
-		Assert.IsNotNull(dark, "a 'Dark'-branch override must re-point AccentButtonBackground in the theme's dark branch");
-		Assert.AreEqual(OverrideRed, ((SolidColorBrush)dark!).Color,
+		var darkBrush = Assert.IsInstanceOfType<SolidColorBrush>(dark, "a 'Dark'-branch override must re-point AccentButtonBackground in the theme's dark branch");
+		Assert.AreEqual(OverrideRed, darkBrush.Color,
 			"the dark branch must carry the override value verbatim (the documented consumer branch key)");
 		Assert.IsNull(light, "a 'Dark'-branch override must not leak into the light branch");
 	}
@@ -787,8 +781,7 @@ public class Given_FluentLightweightStyling
 			await UnitTestsUIContentHelper.WaitForLoaded(lightButton);
 			await UnitTestsUIContentHelper.WaitForIdle();
 
-			var background = lightButton.Background as SolidColorBrush;
-			Assert.IsNotNull(background, "the light-themed button should have a SolidColorBrush background");
+			var background = Assert.IsInstanceOfType<SolidColorBrush>(lightButton.Background, "the light-themed button should have a SolidColorBrush background");
 			Assert.AreEqual(OverrideRed, background.Color,
 				"a 'Default'-branch-only override is the universal fallback and must reach the light branch too");
 		}
@@ -820,8 +813,7 @@ public class Given_FluentLightweightStyling
 			await UnitTestsUIContentHelper.WaitForLoaded(button);
 			await UnitTestsUIContentHelper.WaitForIdle();
 
-			var background = button.Background as SolidColorBrush;
-			Assert.IsNotNull(background, "the stock accent button should have a SolidColorBrush background");
+			var background = Assert.IsInstanceOfType<SolidColorBrush>(button.Background, "the stock accent button should have a SolidColorBrush background");
 			Assert.AreEqual(AmbientAccentFill, background.Color,
 				"without an override the bridge must not re-point anything — stock Fluent rendering stays the platform's");
 		}

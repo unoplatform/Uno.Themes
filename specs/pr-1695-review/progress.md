@@ -7,7 +7,7 @@
 - [x] Resolve four test-only GC review threads.
 - [x] Publish the rebased commits after explicit push approval and resolve the eight remaining addressed code-change threads.
 - [ ] Verify fresh CI and address any newly generated review findings.
-- [ ] Clear Azure preview staging capacity with the resource owner and verify deployment.
+- [x] Verify Azure preview deployment: fresh GitHub run 34919760692 succeeded; the earlier staging-capacity failure no longer reproduces.
 
 ## Branch and changes
 
@@ -75,7 +75,7 @@ The direct solution-wide WebAssembly build failed with MSB4057 (`GetCopyToPublis
 ### External CI and review limits
 
 - iOS CS0037 errors are corrected, but original-platform green requires macOS/CI; no local iOS build was claimed.
-- Azure deployment remains blocked by maximum staging environments. The affected Static Web App is absent from both accessible Azure subscriptions. An owner must free obsolete staging capacity or increase capacity; no Azure resources were changed. See `ci-findings.md`.
+- The original Azure staging-capacity failure cleared externally: GitHub run 34919760692 successfully built and deployed the first published revision. No Azure resources or workflow capacity checks were changed. See `ci-findings.md`.
 - High Contrast remains an unresolved Fluent resource-support finding. Opposite-appearance native fallback and solid/gradient brush-type transitions are not fully verified. See `library-review.md`.
 - Builds retain repository warnings. WebAssembly publish also reported transitive NuGet NU1903 audit warnings for System.Security.Cryptography.Xml 10.0.5. No dependency changes or warning suppressions were introduced; dependency remediation needs separate review.
 - Latest markdownlint-cli 0.49.1 reports MD060 even on untouched master (204 diagnostics in the compared pages). Validation used the Node 18-compatible 0.44.0 CLI; no unrelated formatting churn was applied. CI globbing excludes hidden directories, so explicit `.claude` checks were not represented as CI failures.
@@ -84,7 +84,9 @@ The direct solution-wide WebAssembly build failed with MSB4057 (`GetCopyToPublis
 
 Twelve threads were unresolved initially. All twelve are now explained and resolved on GitHub. The eight code-change threads cover XCR initialization, five nullable findings, sample shell capture, and display name. After explicit approval, the rebased branch was published with a lease pinned to the original remote head.
 
-The new automated review generated six more threads. Five nullable findings in seed-accent tests are addressed with typed MSTest assertions. The XCR container warning is a false positive: the host dictionary is populated through MergedDictionaries, which TryGetValue traverses; the fourteen native-key runtime cases verify this behavior.
+The new automated review generated eleven more threads across two revisions. Ten nullable findings in seed-accent and semantic-style tests are addressed with typed MSTest assertions. The same remaining nullable assertion patterns across the Fluent tests were audited and converted together, preserving existing messages and weak-reference lifetimes. The XCR container warning is a false positive: the host dictionary is populated through MergedDictionaries, which TryGetValue traverses; the fourteen native-key runtime cases verify this behavior.
 
 Fresh Azure build 233676 passed all three runtime suites and both documentation checks on the initially published revision. CodeQL and Conventional Commits also passed. Platform builds and deployment are still being monitored; these intermediate results do not claim final CI success.
 Follow-up validation: the seed-accent assertion changes build successfully for Release Desktop (0 errors, 115 repository warnings). The complete Simple suite passes again: 570 passed, 0 failed, 1 existing skip. No production behavior or test coverage was changed.
+
+The complete assertion cleanup also passes the Release Desktop solution build (0 errors, 441 warnings from rebuilt projects), Simple suite (570 passed, 0 failed, 1 existing skip), and Fluent suite (2 passed, 0 failed). Azure build 233677 additionally passed the Linux hosting smoke, confirming the earlier local Windows-only result is not a CI failure.

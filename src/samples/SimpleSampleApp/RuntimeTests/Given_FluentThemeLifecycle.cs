@@ -38,8 +38,7 @@ public class Given_FluentThemeLifecycle
 	{
 		var theme = new FluentTheme();
 		_observedTheme = new WeakReference<FluentTheme>(theme);
-		var field = typeof(FluentTheme).GetField("_uiSettings", BindingFlags.NonPublic | BindingFlags.Instance);
-		Assert.IsNotNull(field);
+		var field = Assert.IsInstanceOfType<FieldInfo>(typeof(FluentTheme).GetField("_uiSettings", BindingFlags.NonPublic | BindingFlags.Instance));
 		_publisher = (UISettings?)field.GetValue(theme);
 		Assert.IsNotNull(_publisher);
 	}
@@ -379,8 +378,9 @@ public class Given_FluentThemeLifecycle
 		resources.MergedDictionaries.Add(platform);
 		try
 		{
-			var notify = typeof(UISettings).GetMethod("OnColorValuesChanged", BindingFlags.NonPublic | BindingFlags.Static);
-			Assert.IsNotNull(notify, "The Uno platform event seam must be available.");
+			var notify = Assert.IsInstanceOfType<MethodInfo>(
+				typeof(UISettings).GetMethod("OnColorValuesChanged", BindingFlags.NonPublic | BindingFlags.Static),
+				"The Uno platform event seam must be available.");
 			notify.Invoke(null, null);
 			await UnitTestsUIContentHelper.WaitForIdle();
 			Assert.AreEqual(Microsoft.UI.Colors.Orange, (Color)theme["PrimaryColor"]);
@@ -414,8 +414,7 @@ public class Given_FluentThemeLifecycle
 
 	private static void AssertBrush(Color color, double opacity, Brush brush)
 	{
-		Assert.IsInstanceOfType<SolidColorBrush>(brush);
-		var solid = (SolidColorBrush)brush;
+		var solid = Assert.IsInstanceOfType<SolidColorBrush>(brush);
 		Assert.AreEqual(color, solid.Color);
 		Assert.AreEqual(opacity, solid.Opacity, 0.001);
 	}
