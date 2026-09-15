@@ -56,6 +56,8 @@ public partial class FluentTheme
 		}
 		catch (Exception e)
 		{
+			// Invoked by the platform event or dispatcher; escaping here would surface
+			// an unhandled UI callback exception in the consuming application.
 			FluentDiagnostics.LogWarning($"FluentTheme could not refresh the system accent. {e.Message}");
 		}
 	}

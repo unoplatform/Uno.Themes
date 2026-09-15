@@ -158,6 +158,8 @@ internal static class FluentTextButtonResources
 		}
 		catch (Exception ex)
 		{
+			// This is a dependency-property callback boundary: unexpected failures must
+			// be logged here rather than escape into the consuming control's layout.
 			FluentDiagnostics.LogWarning($"Could not apply Fluent text-button resource '{resourceKey}': {ex.Message}");
 		}
 	}
