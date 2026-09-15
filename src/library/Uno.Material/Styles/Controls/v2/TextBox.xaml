@@ -2,11 +2,9 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:not_macos="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:macos="http://uno.ui/macos"
 					xmlns:um="using:Uno.Material"
 					xmlns:ut="using:Uno.Themes"
-					mc:Ignorable="d macos">
+					mc:Ignorable="d">
 
 	<!--
 		NOTE:
@@ -123,8 +121,7 @@
 
 			<!--#region Filled TextBox Style-->
 			<CornerRadius x:Key="FilledTextBoxCornerRadius">4,4,0,0</CornerRadius>
-			<macos:Thickness x:Key="FilledTextBoxPadding">16,7</macos:Thickness>
-			<not_macos:Thickness x:Key="FilledTextBoxPadding">16,8</not_macos:Thickness>
+			<Thickness x:Key="FilledTextBoxPadding">16,8</Thickness>
 			<x:Double x:Key="FilledTextBoxMinHeight">58</x:Double>
 			<x:Double x:Key="FilledTextBoxBorderHeightFocused">2</x:Double>
 			<!--#endregion-->
@@ -239,8 +236,7 @@
 
 			<!--#region Filled TextBox Style-->
 			<CornerRadius x:Key="FilledTextBoxCornerRadius">4,4,0,0</CornerRadius>
-			<macos:Thickness x:Key="FilledTextBoxPadding">16,7</macos:Thickness>
-			<not_macos:Thickness x:Key="FilledTextBoxPadding">16,8</not_macos:Thickness>
+			<Thickness x:Key="FilledTextBoxPadding">16,8</Thickness>
 			<x:Double x:Key="FilledTextBoxMinHeight">58</x:Double>
 			<x:Double x:Key="FilledTextBoxBorderHeightFocused">2</x:Double>
 			<!--#endregion-->
@@ -322,9 +318,7 @@
 		<Setter Property="CharacterSpacing" Value="{ThemeResource FilledTextBoxCharacterSpacing}" />
 		<!-- End: Body Large Typo -->
 
-		<macos:Setter Property="Padding"
-					  Value="{ThemeResource FilledTextBoxPadding}" />
-		<not_macos:Setter Property="Padding"
+		<Setter Property="Padding"
 						  Value="{ThemeResource FilledTextBoxPadding}" />
 
 		<Setter Property="MinHeight" Value="{ThemeResource FilledTextBoxMinHeight}" />
@@ -538,8 +532,7 @@
 								   Fill="{ThemeResource FilledTextBoxBorderBrushFocused}"
 								   Height="{ThemeResource FilledTextBoxBorderThicknessFocused}"
 								   VerticalAlignment="Bottom"
-								   not_macos:RenderTransformOrigin="0.5,0.5"
-								   macos:RenderTransformOrigin="0.0,0.5">
+								   RenderTransformOrigin="0.5,0.5">
 							<Rectangle.RenderTransform>
 								<ScaleTransform x:Name="FocusedBorder_ScaleTransform" ScaleX="0" />
 							</Rectangle.RenderTransform>

@@ -2,11 +2,9 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:not_macos="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:macos="http://uno.ui/macos"
 					xmlns:um="using:Uno.Material"
 					xmlns:ut="using:Uno.Themes"
-					mc:Ignorable="d macos">
+					mc:Ignorable="d">
 
 	<!-- Converters -->
 	<ut:FromEmptyStringToValueConverter x:Key="EmptyToCompositeTransformTranslateY"
@@ -91,10 +89,7 @@
 		<Setter Property="VerticalContentAlignment"
 				Value="Center" />
 
-		<macos:Setter Property="Padding"
-					  Value="0,4" />
-
-		<not_macos:Setter Property="Padding"
+		<Setter Property="Padding"
 						  Value="0,16" />
 		<Setter Property="MinHeight"
 				Value="50" />
@@ -213,8 +208,7 @@
 												  MaxWidth="34"
 												  MinWidth="25"
 												  HorizontalAlignment="Center"
-												  macos:VerticalAlignment="Center"
-												  not_macos:VerticalAlignment="Top"
+												  VerticalAlignment="Top"
 												  Margin="0,0,8,0"/>
 							</Border>
 
@@ -225,8 +219,7 @@
 										  IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
 										  IsTabStop="False"
 										  IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
-										  macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-										  not_macos:VerticalAlignment="Bottom"
+										  VerticalAlignment="Bottom"
 										  VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
 										  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
 										  ZoomMode="Disabled"
@@ -246,8 +239,7 @@
 									   Text="{TemplateBinding PlaceholderText}"
 									   TextAlignment="{TemplateBinding TextAlignment}"
 									   TextWrapping="{TemplateBinding TextWrapping}"
-									   not_macos:VerticalAlignment="Top"
-									   macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+									   VerticalAlignment="Top"
 									   Margin="{TemplateBinding Padding}"
 									   Grid.Column="1">
 								<TextBlock.RenderTransform>
@@ -273,8 +265,7 @@
 								   Fill="{StaticResource TextBoxOutlinedFocusStrokeColorBrush}"
 								   Height="{StaticResource TextBoxFocusStrokeWidth}"
 								   VerticalAlignment="Bottom"
-								   not_macos:RenderTransformOrigin="0.5,0.5"
-								   macos:RenderTransformOrigin="0.0,0.5">
+								   RenderTransformOrigin="0.5,0.5">
 							<Rectangle.RenderTransform>
 								<ScaleTransform x:Name="FocusedBorder_ScaleTransform"
 												ScaleX="0" />

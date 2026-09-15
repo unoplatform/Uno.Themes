@@ -1,5 +1,9 @@
 ﻿parameters:
-  DotNetVersion: '10.0.102'
+  # Keep in sync with UnoCheck_Version: installing wasm-tools pins the mono.toolchain.current
+  # manifest to the SDK uno.check ships for (1.34.1 -> 10.0.101). On a newer SDK the workload
+  # resolver still asks for that SDK's Microsoft.NET.Runtime.MonoTargets.Sdk, which uno.check
+  # never installed, and the net10.0 library builds fail with NETSDK1147.
+  DotNetVersion: '10.0.101'
   UnoCheck_Version: '1.34.1'
   Dotnet_Root: '/usr/local/share/dotnet/'
   Dotnet_Tools: '~/.dotnet/tools'

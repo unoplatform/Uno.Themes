@@ -1,10 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:uno="using:Uno.UI.Xaml.Controls"
-					xmlns:ut="using:Uno.Themes"
-					xmlns:xamarin="http://uno.ui/xamarin"
-					mc:Ignorable="xamarin">
+					xmlns:ut="using:Uno.Themes">
 
 	<!-- Converters -->
 	<ut:FromNullToValueConverter x:Key="NullToVisible"
@@ -171,9 +168,6 @@
 				Value="Stretch" />
 		<Setter Property="ItemContainerStyle"
 				Value="{StaticResource CupertinoComboBoxItemStyle}" />
-		<xamarin:Setter Property="uno:ComboBox.DropDownPreferredPlacement"
-						Value="Below" />
-
 		<Setter Property="ItemsPanel">
 			<Setter.Value>
 				<ItemsPanelTemplate>

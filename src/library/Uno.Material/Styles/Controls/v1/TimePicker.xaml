@@ -2,8 +2,7 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:ios="http://uno.ui/ios"
-					mc:Ignorable="d ios">
+					mc:Ignorable="d">
 
 	<!-- TimePicker FlyoutButton Style -->
 	<Style x:Key="TimePickerFlyoutButtonStyle"
@@ -55,80 +54,6 @@
 		</Setter>
 	</Style>
 
-	<ios:Style x:Key="MaterialTimePickerFlyoutPresenterStyle"
-			   TargetType="TimePickerFlyoutPresenter">
-
-		<Setter Property="Background"
-				Value="{ThemeResource TimePickerFlyoutPresenterBackground}" />
-		<Setter Property="VerticalAlignment"
-				Value="Stretch" />
-		<Setter Property="HorizontalAlignment"
-				Value="Stretch" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Stretch" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Bottom" />
-		<Setter Property="BorderThickness"
-				Value="0" />
-		<Setter Property="IsTabStop"
-				Value="False" />
-		<Setter Property="AutomationProperties.AutomationId"
-				Value="TimePickerFlyoutPresenter" />
-
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="TimePickerFlyoutPresenter">
-					<Grid x:Name="ContentPanel"
-						  Background="{TemplateBinding Background}"
-						  BorderBrush="{TemplateBinding BorderBrush}"
-						  BorderThickness="{TemplateBinding BorderThickness}"
-						  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-						  VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-
-						<Grid.RowDefinitions>
-							<RowDefinition Height="Auto" />
-							<RowDefinition Height="Auto" />
-						</Grid.RowDefinitions>
-
-						<Grid Grid.Row="0"
-							  x:Name="AcceptDismissHostGrid"
-							  Height="44">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="Auto" />
-								<ColumnDefinition Width="*" />
-								<ColumnDefinition Width="Auto" />
-							</Grid.ColumnDefinitions>
-
-							<Button Grid.Column="0"
-									x:Name="DismissButton"
-									x:Uid="TimePickerFlyoutDismissButton"
-									Content="Cancel"
-									HorizontalAlignment="Left"
-									Foreground="{ThemeResource MaterialPrimaryBrush}"
-									Style="{StaticResource IosPickerFlyoutTextButtonStyle}" />
-
-							<Button Grid.Column="2"
-									x:Name="AcceptButton"
-									x:Uid="TimePickerFlyoutAcceptButton"
-									Content="Done"
-									FontWeight="Bold"
-									HorizontalAlignment="Right"
-									Foreground="{ThemeResource MaterialPrimaryBrush}"
-									Style="{StaticResource IosPickerFlyoutTextButtonStyle}" />
-						</Grid>
-
-						<ContentPresenter Grid.Row="1"
-										  Content="{TemplateBinding Content}"
-										  Foreground="{TemplateBinding Foreground}"
-										  HorizontalAlignment="Stretch"
-										  VerticalAlignment="Stretch"
-										  HorizontalContentAlignment="Stretch"
-										  VerticalContentAlignment="Stretch" />
-					</Grid>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</ios:Style>
 
 
 	<Style x:Key="MaterialTimePickerStyle"
