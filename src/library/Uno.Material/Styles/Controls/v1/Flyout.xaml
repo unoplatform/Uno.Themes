@@ -21,22 +21,14 @@
 	<!-- Material FlyoutPresenter Style -->
 	<Style x:Key="MaterialFlyoutPresenterStyle"
 		   TargetType="FlyoutPresenter">
-		<Setter Property="HorizontalAlignment"
-				Value="Stretch" />
-		<Setter Property="VerticalAlignment"
-				Value="Stretch" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Stretch" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Stretch" />
-		<Setter Property="MinWidth"
-				Value="0" />
-		<Setter Property="MinHeight"
-				Value="0" />
-		<Setter Property="MaxWidth"
-				Value="PositiveInfinity" />
-		<Setter Property="MaxHeight"
-				Value="PositiveInfinity" />
+		<Setter Property="HorizontalAlignment" Value="Stretch" />
+		<Setter Property="VerticalAlignment" Value="Stretch" />
+		<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+		<Setter Property="VerticalContentAlignment" Value="Stretch" />
+		<Setter Property="MinWidth" Value="0" />
+		<Setter Property="MinHeight" Value="0" />
+		<Setter Property="MaxWidth" Value="PositiveInfinity" />
+		<Setter Property="MaxHeight" Value="PositiveInfinity" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="FlyoutPresenter">
@@ -62,52 +54,35 @@
 	<Style x:Key="MaterialContentFlyoutPresenterStyle"
 		   TargetType="FlyoutPresenter">
 
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSurfaceBrush}" />
-		<Setter Property="Background"
-				Value="{StaticResource MaterialSurfaceBrush}" />
-		<Setter Property="MinWidth"
-				Value="{StaticResource FlyoutPresenterMinWidth}" />
-		<Setter Property="ScrollViewer.HorizontalScrollMode"
-				Value="Disabled" />
-		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility"
-				Value="Disabled" />
-		<Setter Property="Margin"
-				Value="16" />
-		<Setter Property="CornerRadius"
-				Value="4" />
-		<Setter Property="Margin"
-				Value="16,0" />
+		<Setter Property="Foreground" Value="{StaticResource MaterialOnSurfaceBrush}" />
+		<Setter Property="Background" Value="{StaticResource MaterialSurfaceBrush}" />
+		<Setter Property="MinWidth" Value="{StaticResource FlyoutPresenterMinWidth}" />
+		<Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled" />
+		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+		<Setter Property="Margin" Value="16" />
+		<Setter Property="CornerRadius" Value="4" />
+		<Setter Property="Margin" Value="16,0" />
 	</Style>
 
 	<!-- Material MenuFlyoutPresenter Style -->
 	<Style x:Key="MaterialMenuFlyoutPresenterStyle"
 		   TargetType="MenuFlyoutPresenter">
 
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSurfaceBrush}" />
-		<Setter Property="Background"
-				Value="{StaticResource MaterialSurfaceBrush}" />
-		<Setter Property="MinWidth"
-				Value="{StaticResource FlyoutPresenterMinWidth}" />
-		<Setter Property="CornerRadius"
-				Value="4" />
-		<Setter Property="Margin"
-				Value="0,0" />
+		<Setter Property="Foreground" Value="{StaticResource MaterialOnSurfaceBrush}" />
+		<Setter Property="Background" Value="{StaticResource MaterialSurfaceBrush}" />
+		<Setter Property="MinWidth" Value="{StaticResource FlyoutPresenterMinWidth}" />
+		<Setter Property="CornerRadius" Value="4" />
+		<Setter Property="Margin" Value="0,0" />
 	</Style>
 
 	<!-- Material MenuFlyoutItem Style -->
 	<Style x:Key="MaterialMenuFlyoutItemStyle"
 		   TargetType="MenuFlyoutItem">
 
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSurfaceBrush}" />
-		<Setter Property="Background"
-				Value="{StaticResource MaterialSurfaceBrush}" />
-		<Setter Property="Height"
-				Value="{StaticResource FlyoutMenuItemHeight}" />
-		<Setter Property="Padding"
-				Value="0" />
+		<Setter Property="Foreground" Value="{StaticResource MaterialOnSurfaceBrush}" />
+		<Setter Property="Background" Value="{StaticResource MaterialSurfaceBrush}" />
+		<Setter Property="Height" Value="{StaticResource FlyoutMenuItemHeight}" />
+		<Setter Property="Padding" Value="0" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -130,8 +105,7 @@
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="CommonStatesOverlay.Background"
-												Value="{StaticResource MaterialOnSurfaceHoverBrush}" />
+										<Setter Target="CommonStatesOverlay.Background" Value="{StaticResource MaterialOnSurfaceHoverBrush}" />
 									</VisualState.Setters>
 
 									<Storyboard>
@@ -141,8 +115,7 @@
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="CommonStatesOverlay.Background"
-												Value="{StaticResource MaterialOnSurfacePressedBrush}" />
+										<Setter Target="CommonStatesOverlay.Background" Value="{StaticResource MaterialOnSurfacePressedBrush}" />
 									</VisualState.Setters>
 
 									<Storyboard>
@@ -152,8 +125,7 @@
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Opacity"
-												Value="{StaticResource MaterialLowOpacity}" />
+										<Setter Target="LayoutRoot.Opacity" Value="{StaticResource MaterialLowOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -164,17 +136,14 @@
 
 								<VisualState x:Name="IconPlaceholder">
 									<VisualState.Setters>
-										<Setter Target="IconRoot.Visibility"
-												Value="Visible" />
+										<Setter Target="IconRoot.Visibility" Value="Visible" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="CheckAndIconPlaceholder">
 									<VisualState.Setters>
-										<Setter Target="IconRoot.Margin"
-												Value="{ThemeResource MenuFlyoutItemPlaceholderThemeThickness}" />
-										<Setter Target="IconRoot.Visibility"
-												Value="Visible" />
+										<Setter Target="IconRoot.Margin" Value="{ThemeResource MenuFlyoutItemPlaceholderThemeThickness}" />
+										<Setter Target="IconRoot.Visibility" Value="Visible" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -183,8 +152,7 @@
 								<VisualState x:Name="KeyboardAcceleratorTextCollapsed" />
 								<VisualState x:Name="KeyboardAcceleratorTextVisible">
 									<VisualState.Setters>
-										<Setter Target="KeyboardAcceleratorTextBlock.Visibility"
-												Value="Visible" />
+										<Setter Target="KeyboardAcceleratorTextBlock.Visibility" Value="Visible" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -247,14 +215,10 @@
 	<Style x:Key="MaterialToggleMenuFlyoutItemStyle"
 		   TargetType="ToggleMenuFlyoutItem">
 
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSurfaceBrush}" />
-		<Setter Property="Background"
-				Value="{StaticResource MaterialSurfaceBrush}" />
-		<Setter Property="Height"
-				Value="{StaticResource FlyoutMenuItemHeight}" />
-		<Setter Property="Padding"
-				Value="0" />
+		<Setter Property="Foreground" Value="{StaticResource MaterialOnSurfaceBrush}" />
+		<Setter Property="Background" Value="{StaticResource MaterialSurfaceBrush}" />
+		<Setter Property="Height" Value="{StaticResource FlyoutMenuItemHeight}" />
+		<Setter Property="Padding" Value="0" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -277,8 +241,7 @@
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="CommonStatesOverlay.Background"
-												Value="{StaticResource MaterialOnSurfaceHoverBrush}" />
+										<Setter Target="CommonStatesOverlay.Background" Value="{StaticResource MaterialOnSurfaceHoverBrush}" />
 									</VisualState.Setters>
 
 									<Storyboard>
@@ -288,8 +251,7 @@
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="CommonStatesOverlay.Background"
-												Value="{StaticResource MaterialOnSurfacePressedBrush}" />
+										<Setter Target="CommonStatesOverlay.Background" Value="{StaticResource MaterialOnSurfacePressedBrush}" />
 									</VisualState.Setters>
 
 									<Storyboard>
@@ -299,8 +261,7 @@
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Opacity"
-												Value="{StaticResource MaterialLowOpacity}" />
+										<Setter Target="LayoutRoot.Opacity" Value="{StaticResource MaterialLowOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -310,28 +271,22 @@
 
 								<VisualState x:Name="Checked">
 									<VisualState.Setters>
-										<Setter Target="CheckGlyph.Opacity"
-												Value="1" />
+										<Setter Target="CheckGlyph.Opacity" Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="UncheckedWithIcon">
 									<VisualState.Setters>
-										<Setter Target="TextBlock.Margin"
-												Value="{ThemeResource MenuFlyoutItemPlaceholderThemeThickness}" />
-										<Setter Target="IconRoot.Visibility"
-												Value="Visible" />
+										<Setter Target="TextBlock.Margin" Value="{ThemeResource MenuFlyoutItemPlaceholderThemeThickness}" />
+										<Setter Target="IconRoot.Visibility" Value="Visible" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="CheckedWithIcon">
 									<VisualState.Setters>
-										<Setter Target="TextBlock.Margin"
-												Value="{ThemeResource MenuFlyoutItemPlaceholderThemeThickness}" />
-										<Setter Target="IconRoot.Visibility"
-												Value="Visible" />
-										<Setter Target="CheckGlyph.Opacity"
-												Value="1" />
+										<Setter Target="TextBlock.Margin" Value="{ThemeResource MenuFlyoutItemPlaceholderThemeThickness}" />
+										<Setter Target="IconRoot.Visibility" Value="Visible" />
+										<Setter Target="CheckGlyph.Opacity" Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -340,8 +295,7 @@
 								<VisualState x:Name="KeyboardAcceleratorTextCollapsed" />
 								<VisualState x:Name="KeyboardAcceleratorTextVisible">
 									<VisualState.Setters>
-										<Setter Target="KeyboardAcceleratorTextBlock.Visibility"
-												Value="Visible" />
+										<Setter Target="KeyboardAcceleratorTextBlock.Visibility" Value="Visible" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -415,12 +369,9 @@
 	<Style x:Key="MaterialMenuFlyoutSubItemStyle"
 		   TargetType="MenuFlyoutSubItem">
 
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSurfaceBrush}" />
-		<Setter Property="Background"
-				Value="{StaticResource MaterialSurfaceBrush}" />
-		<Setter Property="Height"
-				Value="{StaticResource FlyoutMenuItemHeight}" />
+		<Setter Property="Foreground" Value="{StaticResource MaterialOnSurfaceBrush}" />
+		<Setter Property="Background" Value="{StaticResource MaterialSurfaceBrush}" />
+		<Setter Property="Height" Value="{StaticResource FlyoutMenuItemHeight}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -438,29 +389,25 @@
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="CommonStatesOverlay.Background"
-												Value="{StaticResource MaterialOnSurfaceHoverBrush}" />
+										<Setter Target="CommonStatesOverlay.Background" Value="{StaticResource MaterialOnSurfaceHoverBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="CommonStatesOverlay.Background"
-												Value="{StaticResource MaterialOnSurfacePressedBrush}" />
+										<Setter Target="CommonStatesOverlay.Background" Value="{StaticResource MaterialOnSurfacePressedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="SubMenuOpened">
 									<VisualState.Setters>
-										<Setter Target="CommonStatesOverlay.Background"
-												Value="{StaticResource MaterialOnSurfaceSelectedBrush}" />
+										<Setter Target="CommonStatesOverlay.Background" Value="{StaticResource MaterialOnSurfaceSelectedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Opacity"
-												Value="{StaticResource MaterialLowOpacity}" />
+										<Setter Target="LayoutRoot.Opacity" Value="{StaticResource MaterialLowOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -470,28 +417,22 @@
 
 								<VisualState x:Name="CheckPlaceholder">
 									<VisualState.Setters>
-										<Setter Target="TextBlock.Margin"
-												Value="{ThemeResource MenuFlyoutItemPlaceholderThemeThickness}" />
+										<Setter Target="TextBlock.Margin" Value="{ThemeResource MenuFlyoutItemPlaceholderThemeThickness}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="IconPlaceholder">
 									<VisualState.Setters>
-										<Setter Target="TextBlock.Margin"
-												Value="{ThemeResource MenuFlyoutItemPlaceholderThemeThickness}" />
-										<Setter Target="IconRoot.Visibility"
-												Value="Visible" />
+										<Setter Target="TextBlock.Margin" Value="{ThemeResource MenuFlyoutItemPlaceholderThemeThickness}" />
+										<Setter Target="IconRoot.Visibility" Value="Visible" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="CheckAndIconPlaceholder">
 									<VisualState.Setters>
-										<Setter Target="TextBlock.Margin"
-												Value="{ThemeResource MenuFlyoutItemDoublePlaceholderThemeThickness}" />
-										<Setter Target="IconRoot.Margin"
-												Value="{ThemeResource MenuFlyoutItemPlaceholderThemeThickness}" />
-										<Setter Target="IconRoot.Visibility"
-												Value="Visible" />
+										<Setter Target="TextBlock.Margin" Value="{ThemeResource MenuFlyoutItemDoublePlaceholderThemeThickness}" />
+										<Setter Target="IconRoot.Margin" Value="{ThemeResource MenuFlyoutItemPlaceholderThemeThickness}" />
+										<Setter Target="IconRoot.Visibility" Value="Visible" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -546,12 +487,9 @@
 	<Style x:Key="MaterialMenuFlyoutSeparatorStyle"
 		   TargetType="MenuFlyoutSeparator">
 
-		<Setter Property="Background"
-				Value="{StaticResource MaterialOnSurfaceFocusedBrush}" />
-		<Setter Property="Padding"
-				Value="0" />
-		<Setter Property="Height"
-				Value="{StaticResource FlyoutMenuSeparatorHeight}" />
+		<Setter Property="Background" Value="{StaticResource MaterialOnSurfaceFocusedBrush}" />
+		<Setter Property="Padding" Value="0" />
+		<Setter Property="Height" Value="{StaticResource FlyoutMenuSeparatorHeight}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
