@@ -21,7 +21,7 @@ families: the root points at a single family whose weights resolve from one refe
 font, or a font with a [font manifest](https://platform.uno/docs/articles/features/custom-fonts.html#variable-fonts-and-font-manifest)
 on platforms without variable-font support).
 
-Cupertino has no semantic type scale: its control styles consume `CupertinoFontFamily`, an alias of the root, and that remains the key to override there — see [Change Default Font](cupertino-getting-started.md#change-default-font).
+Cupertino's semantic type scale comes with [`CupertinoTheme`](cupertino-getting-started.md#using-cupertinotheme), which follows `DefaultFontFamily` like the other themes. Under the `CupertinoColors` / `CupertinoFonts` / `CupertinoResources` setup there is no type scale: the control styles consume `CupertinoFontFamily`, an alias of the root, and that remains the key to override there — see [Change Default Font](cupertino-getting-started.md#change-default-font).
 
 > [!IMPORTANT]
 > **Breaking change**: the former `TypefacePlain` / `TypefaceBrand` token pair (and Simple's

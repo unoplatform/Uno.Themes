@@ -124,12 +124,45 @@ Depending on the type of project template that the Uno Platform application was 
 
 ---
 
+## Using `CupertinoTheme`
+
+`CupertinoTheme` puts Cupertino on the same semantic system as `MaterialTheme` and `SimpleTheme`: a single dictionary that brings the styles, maps Apple's system palette onto the [shared color roles](xref:Uno.Themes.SemanticStyles) (`PrimaryBrush`, `SurfaceBrush`, `OutlineBrush`, …), maps the iOS text styles onto the shared type scale (`BodyLargeFontSize`, `TitleMediumFontWeight`, …), and generates the [design tokens](xref:Uno.Themes.DesignTokens) (`Space*`, `Radius*`, `ControlHeight*`).
+
+```xml
+<Application.Resources>
+    <ResourceDictionary>
+        <ResourceDictionary.MergedDictionaries>
+            <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+
+            <CupertinoTheme xmlns="using:Uno.Cupertino" />
+        </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+</Application.Resources>
+```
+
+It accepts the same properties as the other themes — `ColorOverrideSource`, `FontOverrideSource`, `DefaultFontFamily`, `DefaultSpacing`, `DefaultDensity`, `DefaultCornerRadius` and `Colors`:
+
+```xml
+<CupertinoTheme xmlns="using:Uno.Cupertino"
+                xmlns:ut="using:Uno.Themes"
+                DefaultCornerRadius="6">
+    <CupertinoTheme.Colors>
+        <ut:ThemeColors PrimarySeed="#2E7D32" />
+    </CupertinoTheme.Colors>
+</CupertinoTheme>
+```
+
+The semantic style keys Cupertino has a style for are aliased (`FilledButtonStyle`, `TextButtonStyle`, `OutlinedTextBoxStyle`, `OutlinedPasswordBoxStyle`, `ComboBoxStyle`, `ComboBoxItemStyle`, `CheckBoxStyle`, `RadioButtonStyle`, `ToggleSwitchStyle`, `SliderStyle`, `HyperlinkButtonStyle`, `CalendarViewStyle`, `CalendarDatePickerStyle`, `DatePickerStyle`, `ProgressBarStyle`), so markup written against those keys moves between design systems unchanged.
+
+> [!NOTE]
+> With a [seed color](xref:Uno.Themes.SeedColors), the container roles follow the Material 3 recipe rather than Apple's tinted fills: the generated scheme is coherent, but it is no longer the stock Apple palette. The built-in `Cupertino*Style` control styles still paint from the `Cupertino*` color keys described below, so a seed or a shared-role override reaches the semantic brushes and anything styled with them, not yet those control styles.
+
 ## Customization
 
 The following guides require the creation of new `ResourceDictionary` files in your application project. For more information on how to define styles and resources in a separate `ResourceDictionary`, refer to the [resource management documentation](xref:Guide.HowTo.Create-Control-Library#moving-the-control-style-in-a-separate-resource-dictionary).
 
 > [!NOTE]
-> [Seed color palette generation](xref:Uno.Themes.SeedColors) is available for the Material and Simple themes only — Cupertino colors are customized through the manual overrides below.
+> The overrides below apply to the `CupertinoColors` / `CupertinoFonts` / `CupertinoResources` setup. With `CupertinoTheme`, use `ColorOverrideSource` / `FontOverrideSource` instead, as for the [other themes](xref:Uno.Themes.Overview).
 
 ### Customize Color Palette
 
@@ -143,8 +176,8 @@ The following guides require the creation of new `ResourceDictionary` files in y
 
             <!-- Light Theme -->
             <ResourceDictionary x:Key="Light">
-                <!-- Override CupertinoBlueBrush -->
-                <Color x:Key="CupertinoBlueBrush">#6750A4</Color>
+                <!-- Override CupertinoBlueColor -->
+                <Color x:Key="CupertinoBlueColor">#6750A4</Color>
 
                 <!-- Add more overrides here -->
                 <!-- ... -->
@@ -152,8 +185,8 @@ The following guides require the creation of new `ResourceDictionary` files in y
 
             <!-- Dark Theme -->
             <ResourceDictionary x:Key="Dark">
-                <!-- Override CupertinoBlueBrush -->
-                <Color x:Key="CupertinoBlueBrush">#D0BCFF</Color>
+                <!-- Override CupertinoBlueColor -->
+                <Color x:Key="CupertinoBlueColor">#D0BCFF</Color>
 
                 <!-- Add more overrides here -->
                 <!-- ... -->
