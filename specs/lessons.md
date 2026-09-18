@@ -4,6 +4,45 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## `CommandBarExtensions.NavigationCommand` only renders under the Material **v1** CommandBar template
+
+**Context:** the five `Content/NestedSamples/MediaPlayerElementSample_NestedPage*.xaml` pages declared
+their back button through `uno:CommandBarExtensions.NavigationCommand`. Under Material v2 — the default
+since `MaterialTheme.DefaultStylesSource` points at `Version2.MergedPages` — none of them rendered a
+button at all, so the full-screen nested samples were a dead end on every platform without a system
+back affordance (Skia desktop, Windows).
+
+**Root cause:** the navigation-command slot is not a framework feature, it is a `ContentControl` inside
+the *hand-written* `XamlMaterialCommandBarTemplate` in `Styles/Controls/v1/CommandBar.xaml` (its own
+comment says so: *"Simplified CommandBar template that adds support for
+Uno.UI.CommandBarExtensions.NavigationCommand on Windows"*). v2's `MaterialCommandBarStyle` sets no
+`Template` at all, so the default WinUI template applies and the attached property is simply ignored.
+`doc/material-migration.md` also records that the native iOS/Android CommandBar path is gone, so there
+is no platform where v2 picks the property up. The same pages referenced `MaterialAppBarButton` (a v1-only
+key; v2 has `MaterialAppBarButtonStyle`) and `ms-appx:///Assets/Close.png`, which does not exist in the
+repo — both fail silently as `Uno.UI.ResourceResolver` warnings.
+
+**How to apply:**
+- **In shared sample XAML, put command-bar buttons in `CommandBar.PrimaryCommands`**, not in
+  `CommandBarExtensions.NavigationCommand`, unless the page is pinned to Material v1. PrimaryCommands is
+  rendered by the default template, so it survives a v1→v2 switch and works in every head.
+- Pair it with `OverflowButtonVisibility="Collapsed"` and `IsDynamicOverflowEnabled="False"` when the
+  button is the only way out of a page — dynamic overflow will otherwise fold it into a `…` menu at
+  narrow widths.
+- **A green build proves nothing about resource keys.** Unresolved `{StaticResource}` and a missing
+  template slot both compile clean; they surface as `warn: Uno.UI.ResourceResolver` lines at runtime and
+  as missing UI. Verify sample-UI changes by running the app or a runtime test, never by building.
+- **`MediaPlayerElement.MediaPlayer` is null when no media extension is registered** (Skia desktop).
+  `MediaPlayerElementSample_NestedPage5` threw an NRE from its constructor because of it, and all five
+  pages would have thrown from their `Unloaded` handler *during* back navigation. Null-conditional these.
+- **Do not run the `AGENTS.md` §5 XamlStyler command over existing XAML without checking the diff.**
+  `Settings.XamlStyler` declares no `IndentWithTabs`/`IndentSize`, so `XamlStyler.Console` defaults to
+  4 spaces and rewrites every line of a tab-indented file — the repo's XAML is tabs (`.editorconfig`).
+  It turned a 17-line diff into a 105-line one. Either hand-format to match the file, or revert the
+  whitespace churn afterwards.
+
+---
+
 ## A generated layer is always a *merged* dictionary, so it can only shadow keys declared inside `ThemeDictionaries`
 
 **Context:** Spec 09 (`DefaultFontFamily`, PR #1707). `When_DefaultFontFamilySet_Then_ThemeAliasKeysFollow`

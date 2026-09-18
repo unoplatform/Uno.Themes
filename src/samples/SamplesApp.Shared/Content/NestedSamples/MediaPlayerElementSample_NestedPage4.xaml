@@ -1,7 +1,6 @@
 ﻿<Page x:Class="Uno.Themes.Samples.Content.NestedSamples.MediaPlayerElementSample_NestedPage4"
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	  xmlns:uno="using:Uno.UI.Xaml.Controls"
 	  xmlns:unobehaviors="using:Uno.UI.Behaviors"
 	  xmlns:smtx="using:ShowMeTheXAML"
 	  xmlns:local="using:Uno.Themes.Samples.Content.NestedSamples"
@@ -19,16 +18,24 @@
 
 		<CommandBar Content="MediaPlayerElement sample"
 					unobehaviors:VisibleBoundsPadding.PaddingMask="Top"
-					Style="{StaticResource MaterialCommandBarStyle}">
-			<uno:CommandBarExtensions.NavigationCommand>
+					Style="{StaticResource MaterialCommandBarStyle}"
+					OverflowButtonVisibility="Collapsed"
+					IsDynamicOverflowEnabled="False">
+			<!--
+				The back button lives in PrimaryCommands rather than CommandBarExtensions.NavigationCommand:
+				that slot only exists in the Material v1 CommandBar template, so under v2 (the default) it
+				rendered nothing and this full-screen sample became a dead end.
+			-->
+			<CommandBar.PrimaryCommands>
 				<AppBarButton Click="NavigateBack"
-							  Style="{StaticResource MaterialAppBarButton}">
+							  Label="Back"
+							  AutomationProperties.AutomationId="NestedSampleBackButton"
+							  ToolTipService.ToolTip="Back">
 					<AppBarButton.Icon>
-						<BitmapIcon UriSource="ms-appx:///Assets/Close.png"
-									ShowAsMonochrome="False" />
+						<SymbolIcon Symbol="Back" />
 					</AppBarButton.Icon>
 				</AppBarButton>
-			</uno:CommandBarExtensions.NavigationCommand>
+			</CommandBar.PrimaryCommands>
 		</CommandBar>
 
 		<TextBlock Grid.Row="1"
