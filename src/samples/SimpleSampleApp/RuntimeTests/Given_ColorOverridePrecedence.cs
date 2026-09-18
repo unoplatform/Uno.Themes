@@ -193,4 +193,24 @@ public class Given_ColorOverridePrecedence
 		Assert.IsTrue(container.Resources.TryGetValue("PrimaryColor", out _),
 			"The theme must keep resolving resources when the font override source cannot be loaded.");
 	}
+
+	/// <summary>
+	/// A color override passed to the theme CONSTRUCTOR is merged into the theme's base palette rather than
+	/// added as a layer of its own. The brush rewrite used to read only each layer's own theme blocks, so the
+	/// *Color key followed such an override while the *Brush instance kept the palette value.
+	/// </summary>
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_OverridePassedToConstructor_Then_BrushFollowsNotOnlyTheColor()
+	{
+		var overrides = new ResourceDictionary();
+		overrides["PrimaryColor"] = OverrideBlue;
+		var container = new Grid();
+		container.Resources.MergedDictionaries.Add(new SimpleTheme(colorOverride: overrides));
+
+		Assert.IsTrue(container.Resources.TryGetValue("PrimaryColor", out var color));
+		Assert.AreEqual(OverrideBlue, (Color)color);
+		Assert.IsTrue(container.Resources.TryGetValue("PrimaryBrush", out var brush));
+		Assert.AreEqual(OverrideBlue, ((SolidColorBrush)brush).Color, "the brush must follow a constructor override too");
+	}
 }

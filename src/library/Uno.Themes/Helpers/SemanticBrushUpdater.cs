@@ -190,12 +190,35 @@ internal static class SemanticBrushUpdater
 	{
 		for (int i = colorLayers.Count - 1; i >= 0; i--)
 		{
-			for (int k = 0; k < keys.Length; k++)
+			if (TryResolveAnyInLayer(colorLayers[i], themeKeys, keys, out resolved))
 			{
-				if (TryResolveInLayer(colorLayers[i], themeKeys, keys[k], out resolved))
-				{
-					return true;
-				}
+				return true;
+			}
+		}
+
+		resolved = default;
+		return false;
+	}
+
+	// A dictionary merged into a layer is a layer of its own, above its parent: every candidate key is tried
+	// there before any is tried on the parent. Trying the candidates per top-level layer instead would let the
+	// parent's first candidate shadow a nested override of the second one.
+	private static bool TryResolveAnyInLayer(ResourceDictionary layer, string[] themeKeys, string[] keys, out Color resolved)
+	{
+		var merged = layer.MergedDictionaries;
+		for (int m = merged.Count - 1; m >= 0; m--)
+		{
+			if (TryResolveAnyInLayer(merged[m], themeKeys, keys, out resolved))
+			{
+				return true;
+			}
+		}
+
+		for (int k = 0; k < keys.Length; k++)
+		{
+			if (TryResolveOwn(layer, themeKeys, keys[k], out resolved))
+			{
+				return true;
 			}
 		}
 
@@ -234,6 +257,25 @@ internal static class SemanticBrushUpdater
 	}
 
 	private static bool TryResolveInLayer<T>(ResourceDictionary layer, string[] themeKeys, string key, out T resolved)
+		where T : struct
+	{
+		// A dictionary merged into the layer is consulted first, the last merged winning, as in a framework
+		// lookup where merged dictionaries out-rank the parent's theme dictionaries. This is where a theme
+		// constructor's colorOverride ends up (it is SafeMerge'd into the theme's base palette): without this
+		// the *Color keys followed such an override while the *Brush instances kept the palette value.
+		var merged = layer.MergedDictionaries;
+		for (int m = merged.Count - 1; m >= 0; m--)
+		{
+			if (TryResolveInLayer(merged[m], themeKeys, key, out resolved))
+			{
+				return true;
+			}
+		}
+
+		return TryResolveOwn(layer, themeKeys, key, out resolved);
+	}
+
+	private static bool TryResolveOwn<T>(ResourceDictionary layer, string[] themeKeys, string key, out T resolved)
 		where T : struct
 	{
 		for (int t = 0; t < themeKeys.Length; t++)
