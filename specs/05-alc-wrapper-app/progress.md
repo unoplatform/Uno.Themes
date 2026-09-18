@@ -249,7 +249,7 @@ parsed) and was then immediately torn down.
 - **6.5.153 → 6.7.0-dev.815**: heads' implicit `Uno.WinUI.*` packages jump two dev-minor versions. Expect at most NU1608-class unification warnings (libraries reference lower Uno.WinUI); watch for theme-style/rendering diffs and `Uno.ShowMeTheXAML 2.0.0-dev0015` / `Uno.UI.RuntimeTests.Engine 2.0.0-dev.60` binary compat. Runtime tests are the gate. Dev packages can be evicted from `unoplatformdev` — re-pin to a stable 6.7 once released.
 - **Dual-TFM wrapper build** enters each guest project twice with different global properties; if per-project targets race, use the Phase 5 fallback.
 - **`new Window()` migration** changes head startup on all four TFMs — covered by the existing CI matrix + standalone smoke.
-- **Known v1 limitations** (accepted): guest satellite assemblies and `Assets/**` are not carried on WASM (neutral-language strings; some guest images may 404 — fonts mitigated via wrapper font packages); WASM ALC unload can leave residual roots (functionally harmless; matches studio.live behavior); the desktop wrapper output is not self-contained (probes sibling bins — the `GuestApps/` probe path is the seam for a future packaged layout).
+- **Known v1 limitations** (accepted): guest satellite assemblies are not carried (neutral-language strings); WASM ALC unload can leave residual roots (functionally harmless; matches studio.live behavior); the desktop wrapper output is not self-contained (probes sibling bins — the `GuestApps/` probe path is the seam for a future packaged layout).
 
 ## Verification
 
@@ -279,7 +279,7 @@ parsed) and was then immediately torn down.
 3. [uno#24075](https://github.com/unoplatform/uno/issues/24075) — Guest finalizers during unload re-populate property-system caches after `ExitAlcApplication`'s sweep.
 4. [uno#24076](https://github.com/unoplatform/uno/issues/24076) — Native X11 window/GL context (+ render threads) leak per ALC-guest window create/close cycle (~12-15 MB native/cycle; managed side fully reclaimed). Reproduces with and without an explicit pre-Exit `Window.Close()`.
 
-**Accepted v1 limitations**: the native leak above (bounded by switch count in a dev tool); guest `Assets/**`/satellites not carried (some guest images may 404 — fonts covered by wrapper font packages); desktop wrapper output not self-contained (probes sibling bins; `GuestApps/` probe is the packaged-layout seam); single guest at a time by design.
+**Accepted v1 limitations**: the native leak above (bounded by switch count in a dev tool); guest satellites not carried; desktop wrapper output not self-contained (probes sibling bins; `GuestApps/` probe is the packaged-layout seam); single guest at a time by design.
 
 **Post-review fixes (2026-07-20)** — a seven-lens review panel (verdict: fix-first, nothing block-merge) was applied in full except three tracked follow-ups. Fixed: late-guest-content race on the load-timeout teardown path (re-clear + verify before unload); stuck-run-loop is now a surfaced, latched terminal state (`_faulted` — hosting disabled until restart, no more false "unloaded" success) with the binding-provider restore moved ahead of the early-out; WASM unload no longer burns a fixed 5 s (run loop observed after `Exit()`, where it can actually complete); a partial WASM payload download can no longer poison the MEMFS cache (`.partial` staging + rename, cleanup on failure); payload fetch streams instead of double-buffering each dll; the post-unload sweep dispatch result is checked and logged; per-sweep isolation + a not-found warning on the nav-handler prune; UI dispatches that time out are flagged so they can't run late against an unloading ALC; the wasm payload-exclusion filter is now exactly the ALC-shareable set (**fixes `Uno.UI.Lottie` being stranded on wasm** — neither shipped nor shareable; `Microsoft.Win32*`/`Microsoft.VisualBasic*`/`Uno.UI.Adapter.*` added to the ALC share prefixes to keep every exclusion resolvable) with reciprocal keep-in-sync comments; desktop sibling-bin probe anchored on `SamplesApp.Shared` (no DLL execution from arbitrary same-named trees); locate-before-teardown (a click on a missing guest no longer destroys the running session); `Reload` targets only accepted requests; tier-1 ALC resolution uses an invalidation-cached name map; manifest entries validated against path separators; reflection lookups can no longer crash type initialization; guest-list sync sites documented at the catalog; catalog types made internal. Re-verified after the fixes: desktop e2e (Material/Cupertino/Simple, unload, reload) + 3-cycle soak with per-cycle ALC collection, desktop and wasm builds clean, Lottie present in all three wasm payload manifests.
 
@@ -301,3 +301,51 @@ parsed) and was then immediately torn down.
 - Verify the staging host compresses `.dll.bin` responses (the wasm publish is untrimmed, ~116 MB uncompressed); pre-compress the payload if it doesn't.
 
 **Follow-ups (not applied)**: file the four upstream unoplatform/uno issues from `upstream-issues.md` and replace the spec-pointer comment in `GuestAppLoader.Sweeps.cs` with the issue URLs; run the in-browser wasm smoke/soak (`?smoke`, headless Chrome scraping `[HOSTING-SMOKE] RESULT:`) against a published build — the desktop smoke is CI-gated, the wasm one has the harness but no CI driver yet.
+
+
+---
+
+## Post-v1 — Uno 7 follow-ups (2026-09-18)
+
+Two defects reported against the hosted **Material** guest on the ControlExtensions sample page
+(*Helpers → ControlExtensions*): the `BitmapIcon` example blank, and the `TextBox`/`ComboBox`
+`ControlExtensions.Icon` examples blank. Both reproduce only when hosted — the standalone
+`MaterialSampleApp` renders all of them. Diagnosed by rendering the page inside the guest ALC
+and reading the realized template parts.
+
+### Fixed: guest `ms-appx:///Assets/**` 404s (the `BitmapIcon`)
+
+A hosted guest resolves `ms-appx:///` against the **host's** package root, and the wrapper
+carried only `Assets/Fonts/**/*.ttf`. `ms-appx:///Assets/UnoLogo.png` therefore resolved to a
+path under the wrapper's bin that does not exist; `StorageFile.GetFileFromApplicationUriAsync`
+still succeeds (it does not probe), so nothing logs and the `BitmapIcon` simply lays out at
+zero width (measured `0x20` hosted vs `20x20` standalone).
+
+The wrapper's content glob now mirrors `SamplesApp.Shared.projitems`' own `Assets\**\*.*`
+instead of fonts only, less the Resizetizer inputs (`Assets/Icons/**`, `Assets/Splash/**`,
+which the `UnoIcon`/`UnoSplashScreen` items already consume). Verified **desktop, Debug**:
+`BitmapIcon` measures `20x20` hosted and the Uno logo renders.
+
+**WASM not rebuilt.** The same glob should cover the browser leg, but that was not built or
+run, and it adds ~22 MB (including ~3.8 MB of sample `.mp4`) to a package that already
+publishes untrimmed at ~116 MB. Re-verify the wasm leg — and its StaticWebAssets behavior,
+which has collided before on the heads' identical `WasmCSS/Fonts.css` — before treating the
+"guest images may 404" limitation as retired there.
+
+### Fixed: the issue-3 sweep had been silently dead since the Uno 7 retarget
+
+`Application.CleanupNonDefaultAlcCaches()` gained a `dyingAlc` parameter in Uno 7. The
+reflective invoke passed no arguments, threw `TargetParameterCountException` on every guest
+teardown, and the `catch` downgraded it to a warning — so the post-finalizer cache sweep never
+ran. `GuestAppLoader.Sweeps.cs` now adapts to the method's arity and passes the dying ALC.
+Verified: the warning is gone and the hosting smoke still passes.
+
+### Not fixed (upstream): the `TextBox`/`ComboBox` icons
+
+Attached-property binding paths (`{Binding Path=(ut:ControlExtensions.Icon), …}`) read `null`
+once more than one `Uno.Themes.WinUI` is loaded, although the attached property, the style and
+the type-keyed DP lookup are all correct. The mechanism is not pinned down (by-name owner-type
+resolution is the suspicion, not an observation). Repro and measurements in
+`upstream-issues.md` § 5.
+Repairing the issue-3 sweep does **not** fix it, and no host-side workaround was found —
+loading Material first in a session avoids it.

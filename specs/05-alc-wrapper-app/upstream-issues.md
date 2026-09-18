@@ -5,8 +5,9 @@ Review). All were reproduced against `Uno.Sdk.Private 6.7.0-dev.815` (`artifacts
 `21bf1ad6`) hosting the three theme sample heads through `AlcContentHost` /
 `WindowHelper.ContentHostOverride`.
 
-All four are now filed. Delete each wrapper-side sweep in
+Issues 1-4 are filed. Delete each wrapper-side sweep in
 `src/samples/ThemesSampleApp/GuestHosting/GuestAppLoader.Sweeps.cs` when its fix ships.
+Issue 5 was found later, on Uno 7, and is **not yet filed**.
 
 | # | Issue | Wrapper-side sweep |
 | --- | --- | --- |
@@ -14,6 +15,7 @@ All four are now filed. Delete each wrapper-side sweep in
 | 2 | [unoplatform/uno#24074](https://github.com/unoplatform/uno/issues/24074) | prunes `SystemNavigationManager` handlers |
 | 3 | [unoplatform/uno#24075](https://github.com/unoplatform/uno/issues/24075) | re-invokes `Application.CleanupNonDefaultAlcCaches` |
 | 4 | [unoplatform/uno#24076](https://github.com/unoplatform/uno/issues/24076) | none, not reachable host-side |
+| 5 | not filed yet — attached-property binding paths read `null` once a second ALC has loaded the owner assembly | none found |
 
 ---
 
@@ -89,3 +91,78 @@ ALC-guest-window teardown path.
 
 **Workaround**: none available host-side; bounded in practice by the number of guest switches
 in a session.
+
+## 5. XAML attached-property binding paths read `null` once a second ALC has loaded the owner assembly
+
+**Area**: BindingPath / attached properties / secondary-ALC app support
+**Version**: 7.0.0-dev.701 (Skia desktop, Windows) — **not** filed upstream yet
+
+A template binding whose path is a parenthesized attached property —
+
+```xml
+Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+```
+
+— produces `null` once more than one ALC has loaded `Uno.Themes.WinUI` (each guest loads its
+own copy: the theme libraries are `!`-isolated in `GuestSharedAssemblies.txt`), even though the
+page has set `ControlExtensions.Icon` on that very element and the type-keyed DP lookup returns
+the correct per-ALC `DependencyProperty`.
+
+The exact mechanism was **not** pinned down. The measurements below narrow it to path
+resolution itself rather than to the attached property, the style, or a stale memo cache. The
+suspicion is that the path resolves `ut:ControlExtensions` from the `using:Uno.Themes` xmlns
+**by type name**, so it can land on a different ALC's `ControlExtensions` whose `IconProperty`
+is a different `DependencyProperty` instance than the one the page wrote to — but that
+selection was not directly observed and should be confirmed before fixing.
+
+**Symptom**: every Material control that surfaces `ControlExtensions.Icon` through its template
+renders without its icon — `TextBox` and `ComboBox` on the ControlExtensions sample page are
+the visible cases. Nothing logs: a binding that resolves to `null` is not an error, and the
+`NullToCollapsedConverter` sibling binding then legitimately collapses the icon slot.
+
+**Repro** (desktop, Debug):
+
+1. Launch `ThemesSampleApp`, load **Cupertino** or **Simple** first, then switch to **Material**.
+2. Navigate to *Helpers → ControlExtensions*.
+3. The `TextBox` and `ComboBox` leading star icons are missing.
+
+Load **Material first** in a fresh process and they render correctly — the defect needs a
+second `Uno.Themes.WinUI` to already be loaded.
+
+Measured on the hosted page (`IconPresenter` is the template part fed by the binding):
+
+| | Material loaded first | Material after Cupertino + Simple |
+| --- | --- | --- |
+| `ControlExtensions.Icon` on the `TextBox` | `SymbolIcon` | `SymbolIcon` (set correctly) |
+| `MaterialFilledTextBoxStyle` applied | yes | yes |
+| `DependencyProperty.GetProperty(ControlExtensions, "Icon")` | matches the static DP | matches the static DP |
+| `Uno.Themes.WinUI` copies loaded | 1 | 3 |
+| **`IconPresenter.Content`** | **`SymbolIcon`, 30x20** | **`null`, 0x0** |
+
+So the attached property, the style and the type-keyed DP lookup are all correct; only the
+value the XAML binding path reads is wrong.
+
+**Note**: this is *not* the same as issue 1. `DependencyProperty._getPropertyCache` is cleared
+by the wrapper's existing sweep (that sweep logs no failure), and issue 3's
+`CleanupNonDefaultAlcCaches` sweep was repaired for Uno 7 (see below) — the icon defect
+survives both, so whatever goes wrong happens in path resolution itself, not in a stale memo
+entry.
+
+**Suggested investigation/fix**: check whether an attached-property path's owner type is
+resolved by a process-wide by-name type search; if so, scope it to the ALC of the element being
+bound (or of the parse context that produced the template).
+
+**Workaround**: none found host-side. Load the design system you want to test first in a
+session, or run its head standalone.
+
+---
+
+## Uno 7 signature drift in the issue-3 workaround
+
+Not an upstream defect, but the reason the issue-3 sweep stopped running: Uno 7 changed
+`Application.CleanupNonDefaultAlcCaches()` to `CleanupNonDefaultAlcCaches(AssemblyLoadContext
+dyingAlc)`. The wrapper invoked it reflectively with no arguments, so every post-unload sweep
+threw `TargetParameterCountException` and was swallowed into a warning — the mitigation was
+silently dead. `GuestAppLoader.Sweeps.cs` now adapts to whichever arity the loaded Uno exposes
+and passes the dying ALC. Uno 7 also added a parameterless `CleanupAllSecondaryAlcCaches()`,
+which is the broader hammer if the per-ALC call ever proves insufficient.
