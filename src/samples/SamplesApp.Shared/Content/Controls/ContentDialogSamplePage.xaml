@@ -10,11 +10,13 @@
 	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
 	<Page.Resources>
-		<Style x:Key="CustomSelectableItemStyle" TargetType="ListViewItem">
+		<Style x:Key="CustomSelectableItemStyle"
+			   TargetType="ListViewItem">
 			<Setter Property="Template">
 				<Setter.Value>
 					<ControlTemplate TargetType="ListViewItem">
-						<Grid ColumnSpacing="16" Margin="0,10">
+						<Grid ColumnSpacing="16"
+							  Margin="0,10">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="Auto" />
 								<ColumnDefinition Width="*" />
@@ -34,7 +36,8 @@
 							<ContentPresenter Grid.Column="1"
 											  Content="{TemplateBinding Content}"
 											  VerticalAlignment="Center" />
-							<CheckBox Grid.Column="2" IsChecked="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsSelected, Mode=TwoWay}" />
+							<CheckBox Grid.Column="2"
+									  IsChecked="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsSelected, Mode=TwoWay}" />
 						</Grid>
 					</ControlTemplate>
 				</Setter.Value>
@@ -45,7 +48,8 @@
 	<sample:SamplePageLayout>
 		<sample:SamplePageLayout.M3MaterialTemplate>
 			<DataTemplate>
-				<ScrollViewer HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Disabled">
+				<ScrollViewer HorizontalScrollMode="Disabled"
+							  HorizontalScrollBarVisibility="Disabled">
 					<StackPanel Spacing="16">
 						<Button Content="Basic Content Dialog"
 								Click="ShowContentDialog"

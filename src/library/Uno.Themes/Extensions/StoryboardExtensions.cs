@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 
 #if WinUI
 using Microsoft.UI.Xaml.Media.Animation;

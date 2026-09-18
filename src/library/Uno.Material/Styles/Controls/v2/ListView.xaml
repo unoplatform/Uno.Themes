@@ -1,13 +1,13 @@
-﻿<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-	xmlns:xamarin="http://uno.ui/xamarin"
-	mc:Ignorable="xamarin">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:xamarin="http://uno.ui/xamarin"
+					mc:Ignorable="xamarin">
 
 
-	<Style x:Key="MaterialListViewItemStyle" TargetType="ListViewItem">
+	<Style x:Key="MaterialListViewItemStyle"
+		   TargetType="ListViewItem">
 		<Setter Property="FontFamily" Value="{ThemeResource TitleMediumFontFamily}" />
 		<Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
 		<Setter Property="Background" Value="{ThemeResource ListViewItemBackground}" />
@@ -310,8 +310,10 @@
 								</VisualState>
 								<VisualState x:Name="MultipleDraggingPrimary">
 									<Storyboard>
-										<!-- These two Opacity animations are required - the FadeInThemeAnimations
-										 on the same elements animate an internal Opacity. -->
+										<!--
+											These two Opacity animations are required - the FadeInThemeAnimations
+											on the same elements animate an internal Opacity.
+										-->
 										<DoubleAnimation Storyboard.TargetName="MultiArrangeOverlayBackground"
 														 Storyboard.TargetProperty="Opacity"
 														 Duration="0"
@@ -365,9 +367,11 @@
 											  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 											  Margin="{TemplateBinding Padding}" />
 						</Grid>
-						<!-- The 'Xg' text simulates the amount of space one line of text will occupy.
-						  In the DataPlaceholder state, the Content is not loaded yet so we
-						  approximate the size of the item using placeholder text. -->
+						<!--
+							The 'Xg' text simulates the amount of space one line of text will occupy.
+							In the DataPlaceholder state, the Content is not loaded yet so we
+							approximate the size of the item using placeholder text.
+						-->
 						<TextBlock x:Name="PlaceholderTextBlock"
 								   Opacity="0"
 								   Text="Xg"
@@ -430,8 +434,7 @@
 
 	<Style x:Key="MaterialListViewStyle"
 		   TargetType="ListView">
-		<Setter Property="ItemContainerStyle"
-				Value="{StaticResource MaterialListViewItemStyle}"/>
+		<Setter Property="ItemContainerStyle" Value="{StaticResource MaterialListViewItemStyle}" />
 
 	</Style>
 

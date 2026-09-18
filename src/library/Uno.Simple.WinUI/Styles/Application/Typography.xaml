@@ -1,34 +1,34 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<!--
 		Simple Design System — Semantic Typography Overrides
-
+		
 		This file maps SDS typography tokens to the shared semantic type
 		scale defined in SharedTypography.xaml.
-
+		
 		SDS text styles mapped to semantic slots:
-		  title-hero      (72px, Bold)       -> DisplayLarge
-		  title-page      (48px, Bold)       -> DisplayMedium
-		  subtitle         (32px, Normal)     -> HeadlineLarge
-		  heading          (24px, SemiBold)   -> HeadlineMedium
-		  subheading       (20px, Normal)     -> HeadlineSmall
-		  body-strong      (16px, SemiBold)   -> TitleMedium
-		  body-small-strong(14px, SemiBold)   -> TitleSmall
-		  body-base        (16px, Normal)     -> BodyLarge
-		  body-small       (14px, Normal)     -> BodyMedium
-		  caption          (12px, Normal)     -> BodySmall / CaptionMedium
-
+		title-hero      (72px, Bold)       -> DisplayLarge
+		title-page      (48px, Bold)       -> DisplayMedium
+		subtitle         (32px, Normal)     -> HeadlineLarge
+		heading          (24px, SemiBold)   -> HeadlineMedium
+		subheading       (20px, Normal)     -> HeadlineSmall
+		body-strong      (16px, SemiBold)   -> TitleMedium
+		body-small-strong(14px, SemiBold)   -> TitleSmall
+		body-base        (16px, Normal)     -> BodyLarge
+		body-small       (14px, Normal)     -> BodyMedium
+		caption          (12px, Normal)     -> BodySmall / CaptionMedium
+		
 		Slots without a direct SDS match are marked with "Best guess" and use
 		the nearest SDS scale value and weight that preserves the M3 progression.
-
+		
 		SDS does not define letter-spacing, so CharacterSpacing is set to 0
 		for all slots (overriding the Material-derived shared defaults).
-
+		
 		Font family: the *FontFamily slot keys are declared once, in SharedTypography.xaml,
 		as aliases of the DefaultFontFamily root; Fonts.xaml sets that root to Inter. This
 		file overrides only size, weight and character spacing.
-
+		
 		This dictionary is merged by BaseDictionaries.xaml AFTER SharedTypography.xaml, and
 		is excluded from the XamlMergeInput glob in simple-common.props to keep it that way.
 		Both halves are load-bearing: resources merged into mergedpages itself lose to every
@@ -39,7 +39,7 @@
 	<ResourceDictionary.ThemeDictionaries>
 
 		<!-- ═══════════════════════════════════════════════════════════════ -->
-		<!-- DARK THEME (Default)                                          -->
+		<!-- DARK THEME (Default) -->
 		<!-- ═══════════════════════════════════════════════════════════════ -->
 		<ResourceDictionary x:Key="Default">
 
@@ -149,7 +149,7 @@
 		</ResourceDictionary>
 
 		<!-- ═══════════════════════════════════════════════════════════════ -->
-		<!-- LIGHT THEME                                                   -->
+		<!-- LIGHT THEME -->
 		<!-- ═══════════════════════════════════════════════════════════════ -->
 		<ResourceDictionary x:Key="Light">
 

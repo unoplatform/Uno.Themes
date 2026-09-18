@@ -12,45 +12,29 @@
 	<Thickness x:Key="MaterialButtonPadding">16,8</Thickness>
 	<CornerRadius x:Key="MaterialButtonCornerRadius">4</CornerRadius>
 	<x:Double x:Key="MaterialButtonFontSize">14</x:Double>
-	<StaticResource x:Key="MaterialContainedButtonLowBackgroundBrush"
-					ResourceKey="MaterialOnSurfaceLowBrush" />
-	<StaticResource x:Key="MaterialContainedButtonLowForegroundBrush"
-					ResourceKey="MaterialOnSurfaceLowBrush" />
-	<StaticResource x:Key="MaterialOutlinedButtonLowBrush"
-					ResourceKey="MaterialOnSurfaceLowBrush" />
-	<StaticResource x:Key="MaterialTextButtonLowBrush"
-					ResourceKey="MaterialOnSurfaceLowBrush" />
+	<StaticResource x:Key="MaterialContainedButtonLowBackgroundBrush" ResourceKey="MaterialOnSurfaceLowBrush" />
+	<StaticResource x:Key="MaterialContainedButtonLowForegroundBrush" ResourceKey="MaterialOnSurfaceLowBrush" />
+	<StaticResource x:Key="MaterialOutlinedButtonLowBrush" ResourceKey="MaterialOnSurfaceLowBrush" />
+	<StaticResource x:Key="MaterialTextButtonLowBrush" ResourceKey="MaterialOnSurfaceLowBrush" />
 
 	<!-- Button Styles -->
 	<Style x:Key="MaterialContainedButtonStyle"
 		   TargetType="Button">
 
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnPrimaryBrush}" />
-		<Setter Property="Background"
-				Value="{StaticResource MaterialPrimaryBrush}" />
-		<Setter Property="BorderThickness"
-				Value="0" />
-		<Setter Property="Padding"
-				Value="{ThemeResource MaterialButtonPadding}" />
-		<Setter Property="CornerRadius"
-				Value="{StaticResource MaterialButtonCornerRadius}" />
-		<Setter Property="MinHeight"
-				Value="40" />
-		<Setter Property="FontWeight"
-				Value="Medium" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialMediumFontFamily}" />
-		<Setter Property="CharacterSpacing"
-				Value="89.286" />
-		<Setter Property="FontSize"
-				Value="{ThemeResource MaterialButtonFontSize}" />
-		<Setter Property="UseSystemFocusVisuals"
-				Value="True" />
+		<Setter Property="Foreground" Value="{StaticResource MaterialOnPrimaryBrush}" />
+		<Setter Property="Background" Value="{StaticResource MaterialPrimaryBrush}" />
+		<Setter Property="BorderThickness" Value="0" />
+		<Setter Property="Padding" Value="{ThemeResource MaterialButtonPadding}" />
+		<Setter Property="CornerRadius" Value="{StaticResource MaterialButtonCornerRadius}" />
+		<Setter Property="MinHeight" Value="40" />
+		<Setter Property="FontWeight" Value="Medium" />
+		<Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
+		<Setter Property="CharacterSpacing" Value="89.286" />
+		<Setter Property="FontSize" Value="{ThemeResource MaterialButtonFontSize}" />
+		<Setter Property="UseSystemFocusVisuals" Value="True" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="ut:ControlExtensions.Icon"
-				Value="{x:Null}" />
+		<Setter Property="ut:ControlExtensions.Icon" Value="{x:Null}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -67,17 +51,14 @@
 
 								<VisualState x:Name="Normal">
 									<VisualState.Setters>
-										<Setter Target="CommonStatesOverlay.Opacity"
-												Value="0" />
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="0" />
+										<Setter Target="CommonStatesOverlay.Opacity" Value="0" />
+										<Setter Target="FocusedOverlay.Opacity" Value="0" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="CommonStatesOverlay.Opacity"
-												Value="{StaticResource MaterialHoverOpacity}" />
+										<Setter Target="CommonStatesOverlay.Opacity" Value="{StaticResource MaterialHoverOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -96,10 +77,8 @@
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="Root.Background"
-												Value="{StaticResource MaterialContainedButtonLowBackgroundBrush}" />
-										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource MaterialContainedButtonLowForegroundBrush}" />
+										<Setter Target="Root.Background" Value="{StaticResource MaterialContainedButtonLowBackgroundBrush}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{StaticResource MaterialContainedButtonLowForegroundBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -108,17 +87,15 @@
 
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="{StaticResource MaterialFocusedOpacity}" />
+										<Setter Target="FocusedOverlay.Opacity" Value="{StaticResource MaterialFocusedOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
-								<VisualState x:Name="PointerFocused"/>
+								<VisualState x:Name="PointerFocused" />
 
 								<VisualState x:Name="Unfocused">
 									<VisualState.Setters>
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="0" />
+										<Setter Target="FocusedOverlay.Opacity" Value="0" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -181,43 +158,28 @@
 	<Style x:Key="MaterialContainedSecondaryButtonStyle"
 		   BasedOn="{StaticResource MaterialContainedButtonStyle}"
 		   TargetType="Button">
-		<Setter Property="Foreground"
-				Value="{ThemeResource MaterialOnSecondaryBrush}" />
-		<Setter Property="Background"
-				Value="{ThemeResource MaterialSecondaryBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource MaterialOnSecondaryBrush}" />
+		<Setter Property="Background" Value="{ThemeResource MaterialSecondaryBrush}" />
 	</Style>
 
 	<Style x:Key="MaterialOutlinedButtonStyle"
 		   TargetType="Button">
 
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialPrimaryBrush}" />
-		<Setter Property="Background"
-				Value="Transparent" />
-		<Setter Property="BorderBrush"
-				Value="{StaticResource MaterialPrimaryBrush}" />
-		<Setter Property="BorderThickness"
-				Value="1" />
-		<Setter Property="Padding"
-				Value="{StaticResource MaterialButtonPadding}" />
-		<Setter Property="CornerRadius"
-				Value="{StaticResource MaterialButtonCornerRadius}" />
-		<Setter Property="MinHeight"
-				Value="40" />
-		<Setter Property="FontWeight"
-				Value="Medium" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialMediumFontFamily}" />
-		<Setter Property="CharacterSpacing"
-				Value="89.286" />
-		<Setter Property="FontSize"
-				Value="{StaticResource MaterialButtonFontSize}" />
-		<Setter Property="UseSystemFocusVisuals"
-				Value="True" />
+		<Setter Property="Foreground" Value="{StaticResource MaterialPrimaryBrush}" />
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="BorderBrush" Value="{StaticResource MaterialPrimaryBrush}" />
+		<Setter Property="BorderThickness" Value="1" />
+		<Setter Property="Padding" Value="{StaticResource MaterialButtonPadding}" />
+		<Setter Property="CornerRadius" Value="{StaticResource MaterialButtonCornerRadius}" />
+		<Setter Property="MinHeight" Value="40" />
+		<Setter Property="FontWeight" Value="Medium" />
+		<Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
+		<Setter Property="CharacterSpacing" Value="89.286" />
+		<Setter Property="FontSize" Value="{StaticResource MaterialButtonFontSize}" />
+		<Setter Property="UseSystemFocusVisuals" Value="True" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="ut:ControlExtensions.Icon"
-				Value="{x:Null}" />
+		<Setter Property="ut:ControlExtensions.Icon" Value="{x:Null}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -234,10 +196,8 @@
 
 								<VisualState x:Name="Normal">
 									<VisualState.Setters>
-										<Setter Target="CommonStatesOverlay.Opacity"
-												Value="0" />
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="0" />
+										<Setter Target="CommonStatesOverlay.Opacity" Value="0" />
+										<Setter Target="FocusedOverlay.Opacity" Value="0" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -269,10 +229,8 @@
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource MaterialOutlinedButtonLowBrush}" />
-										<Setter Target="Root.BorderBrush"
-												Value="{StaticResource MaterialOutlinedButtonLowBrush}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{StaticResource MaterialOutlinedButtonLowBrush}" />
+										<Setter Target="Root.BorderBrush" Value="{StaticResource MaterialOutlinedButtonLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -281,8 +239,7 @@
 
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="{StaticResource MaterialFocusedOpacity}" />
+										<Setter Target="FocusedOverlay.Opacity" Value="{StaticResource MaterialFocusedOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -290,8 +247,7 @@
 
 								<VisualState x:Name="Unfocused">
 									<VisualState.Setters>
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="0" />
+										<Setter Target="FocusedOverlay.Opacity" Value="0" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -354,38 +310,25 @@
 	<Style x:Key="MaterialOutlinedSecondaryButtonStyle"
 		   BasedOn="{StaticResource MaterialOutlinedButtonStyle}"
 		   TargetType="Button">
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialSecondaryBrush}" />
-		<Setter Property="BorderBrush"
-				Value="{StaticResource MaterialSecondaryBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource MaterialSecondaryBrush}" />
+		<Setter Property="BorderBrush" Value="{StaticResource MaterialSecondaryBrush}" />
 	</Style>
 
 	<Style x:Key="MaterialTextButtonStyle"
 		   TargetType="Button">
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialPrimaryBrush}" />
-		<Setter Property="Background"
-				Value="Transparent" />
-		<Setter Property="BorderThickness"
-				Value="0" />
-		<Setter Property="Padding"
-				Value="{ThemeResource MaterialButtonPadding}" />
-		<Setter Property="MinHeight"
-				Value="40" />
-		<Setter Property="FontWeight"
-				Value="Medium" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialMediumFontFamily}" />
-		<Setter Property="CharacterSpacing"
-				Value="89.286" />
-		<Setter Property="FontSize"
-				Value="{ThemeResource MaterialButtonFontSize}" />
-		<Setter Property="UseSystemFocusVisuals"
-				Value="True" />
+		<Setter Property="Foreground" Value="{StaticResource MaterialPrimaryBrush}" />
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="BorderThickness" Value="0" />
+		<Setter Property="Padding" Value="{ThemeResource MaterialButtonPadding}" />
+		<Setter Property="MinHeight" Value="40" />
+		<Setter Property="FontWeight" Value="Medium" />
+		<Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
+		<Setter Property="CharacterSpacing" Value="89.286" />
+		<Setter Property="FontSize" Value="{ThemeResource MaterialButtonFontSize}" />
+		<Setter Property="UseSystemFocusVisuals" Value="True" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="ut:ControlExtensions.Icon"
-				Value="{x:Null}" />
+		<Setter Property="ut:ControlExtensions.Icon" Value="{x:Null}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -401,10 +344,8 @@
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal">
 									<VisualState.Setters>
-										<Setter Target="CommonStatesOverlay.Opacity"
-												Value="0" />
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="0" />
+										<Setter Target="CommonStatesOverlay.Opacity" Value="0" />
+										<Setter Target="FocusedOverlay.Opacity" Value="0" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -436,8 +377,7 @@
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource MaterialTextButtonLowBrush}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{StaticResource MaterialTextButtonLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -446,8 +386,7 @@
 
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="{StaticResource MaterialFocusedOpacity}" />
+										<Setter Target="FocusedOverlay.Opacity" Value="{StaticResource MaterialFocusedOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -455,8 +394,7 @@
 
 								<VisualState x:Name="Unfocused">
 									<VisualState.Setters>
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="0" />
+										<Setter Target="FocusedOverlay.Opacity" Value="0" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -519,28 +457,19 @@
 	<Style x:Key="MaterialTextSecondaryButtonStyle"
 		   TargetType="Button"
 		   BasedOn="{StaticResource MaterialTextButtonStyle}">
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialSecondaryBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource MaterialSecondaryBrush}" />
 	</Style>
 
 	<Style x:Key="MaterialButtonIconStyle"
 		   TargetType="Button">
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSurfaceBrush}" />
-		<Setter Property="Background"
-				Value="Transparent" />
-		<Setter Property="BorderThickness"
-				Value="0" />
-		<Setter Property="MinHeight"
-				Value="40" />
-		<Setter Property="MinWidth"
-				Value="40" />
-		<Setter Property="UseSystemFocusVisuals"
-				Value="True" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Center" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
+		<Setter Property="Foreground" Value="{StaticResource MaterialOnSurfaceBrush}" />
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="BorderThickness" Value="0" />
+		<Setter Property="MinHeight" Value="40" />
+		<Setter Property="MinWidth" Value="40" />
+		<Setter Property="UseSystemFocusVisuals" Value="True" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -554,26 +483,22 @@
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="HoverOverlay.Opacity"
-												Value="1" />
+										<Setter Target="HoverOverlay.Opacity" Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="PressedOverlay.Opacity"
-												Value="1" />
+										<Setter Target="PressedOverlay.Opacity" Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="1" />
+										<Setter Target="FocusedOverlay.Opacity" Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{StaticResource MaterialOnSurfaceLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -628,19 +553,15 @@
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter_NotWin.Visibility"
-												Value="Visible" />
-										<Setter Target="HeaderText.Visibility"
-												Value="Collapsed" />
+										<Setter Target="ContentPresenter_NotWin.Visibility" Value="Visible" />
+										<Setter Target="HeaderText.Visibility" Value="Collapsed" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter_NotWin.Visibility"
-												Value="Visible" />
-										<Setter Target="HeaderText.Visibility"
-												Value="Collapsed" />
+										<Setter Target="ContentPresenter_NotWin.Visibility" Value="Visible" />
+										<Setter Target="HeaderText.Visibility" Value="Collapsed" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
