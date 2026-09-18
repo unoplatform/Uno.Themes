@@ -38,6 +38,14 @@ sealed partial class App : Application
 		MainWindow = new Microsoft.UI.Xaml.Window();
 		NavigationHelper.MainWindow = MainWindow;
 
+		// THROWAWAY (spec 10 Phase 0.5): --glass-spike[=<capture dir>] replaces the shell with the Liquid Glass spike page.
+		if (Environment.GetCommandLineArgs().FirstOrDefault(a => a.StartsWith("--glass-spike", StringComparison.Ordinal)) is { } spikeArg)
+		{
+			MainWindow.Content = new Spike.GlassSpikePage(spikeArg.Contains('=') ? spikeArg[(spikeArg.IndexOf('=') + 1)..] : null);
+			MainWindow.Activate();
+			return;
+		}
+
 		if (MainWindow is Microsoft.UI.Xaml.Window window)
 		{
 			if (!(window.Content is Shell))
