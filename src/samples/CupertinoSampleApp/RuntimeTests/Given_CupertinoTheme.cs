@@ -334,4 +334,26 @@ public class Given_CupertinoTheme
 			UnitTestsUIContentHelper.Content = null;
 		}
 	}
+
+	// Every key uno.toolkit.ui's Cupertino styles (TabBar, segmented controls) read from this library
+	// without defining it themselves. Inventory taken from uno.toolkit.ui@d88a0c12: referenced keys minus
+	// the keys its own Cupertino dictionaries declare, minus WinUI's system brushes. Resource keys are
+	// public API; this pins the ones a shipped dependent is known to need.
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow("CupertinoBlueBrush", typeof(SolidColorBrush))]
+	[DataRow("CupertinoLabelBrush", typeof(SolidColorBrush))]
+	[DataRow("CupertinoSystemBackgroundBrush", typeof(SolidColorBrush))]
+	[DataRow("CupertinoTertiarySystemFillBrush", typeof(SolidColorBrush))]
+	[DataRow("CupertinoBlueColor", typeof(Color))]
+	[DataRow("CupertinoQuaternaryGrayColor", typeof(Color))]
+	[DataRow("LabelColor", typeof(Color))]
+	[DataRow("SystemBackgroundColor", typeof(Color))]
+	public void When_ThemeLoaded_Then_KeysTheToolkitDependsOnResolve(string key, Type type)
+	{
+		var container = CreateThemedContainer(new CupertinoTheme());
+
+		Assert.IsTrue(container.Resources.TryGetValue(key, out var value), $"{key} missing");
+		Assert.IsInstanceOfType(value, type, key);
+	}
 }
