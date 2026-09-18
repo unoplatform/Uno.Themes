@@ -2,7 +2,46 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
 					mc:Ignorable="d">
+
+	<!--
+		Implicit styles. The implicit Button is the plain (accent text, no background) style: Apple's
+		default button, and glass never belongs in the content layer. ProgressRing is absent until its
+		style stops being compiled out on Windows.
+	-->
+	<Style BasedOn="{StaticResource CupertinoButtonStyle}"
+		   TargetType="Button" />
+	<Style BasedOn="{StaticResource CupertinoCalendarDatePickerStyle}"
+		   TargetType="CalendarDatePicker" />
+	<Style BasedOn="{StaticResource CupertinoCalendarViewStyle}"
+		   TargetType="CalendarView" />
+	<Style BasedOn="{StaticResource CupertinoCheckBoxStyle}"
+		   TargetType="CheckBox" />
+	<Style BasedOn="{StaticResource CupertinoComboBoxStyle}"
+		   TargetType="ComboBox" />
+	<Style BasedOn="{StaticResource CupertinoDatePickerStyle}"
+		   TargetType="DatePicker" />
+	<Style BasedOn="{StaticResource CupertinoDatePickerFlyoutPresenterStyle}"
+		   TargetType="DatePickerFlyoutPresenter" />
+	<Style BasedOn="{StaticResource CupertinoHyperlinkButtonStyle}"
+		   TargetType="HyperlinkButton" />
+	<Style BasedOn="{StaticResource CupertinoNumberBoxStyle}"
+		   TargetType="muxc:NumberBox" />
+	<Style BasedOn="{StaticResource CupertinoPasswordBoxStyle}"
+		   TargetType="PasswordBox" />
+	<Style BasedOn="{StaticResource CupertinoProgressBarStyle}"
+		   TargetType="ProgressBar" />
+	<Style BasedOn="{StaticResource CupertinoRadioButtonStyle}"
+		   TargetType="RadioButton" />
+	<Style BasedOn="{StaticResource CupertinoSliderStyle}"
+		   TargetType="Slider" />
+	<Style BasedOn="{StaticResource CupertinoBody}"
+		   TargetType="TextBlock" />
+	<Style BasedOn="{StaticResource CupertinoTextBoxStyle}"
+		   TargetType="TextBox" />
+	<Style BasedOn="{StaticResource CupertinoToggleSwitchStyle}"
+		   TargetType="ToggleSwitch" />
 
 	<!--
 		Semantic style aliases shared with Material and Simple (doc/semantic-styles.md). Only the keys

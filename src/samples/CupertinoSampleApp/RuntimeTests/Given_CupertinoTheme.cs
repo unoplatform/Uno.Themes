@@ -304,4 +304,34 @@ public class Given_CupertinoTheme
 			UnitTestsUIContentHelper.Content = null;
 		}
 	}
+
+	// Rendered, not looked up: an implicit style is proven by what an unstyled control ends up with.
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_ThemeLoaded_Then_UnstyledControlsPickUpCupertinoStyles()
+	{
+		var button = new Button { Content = "Plain" };
+		var toggle = new ToggleSwitch();
+		var container = CreateThemedContainer(new CupertinoTheme());
+		container.Children.Add(new StackPanel { Children = { button, toggle } });
+
+		try
+		{
+			UnitTestsUIContentHelper.Content = container;
+			await UnitTestsUIContentHelper.WaitForLoaded(button);
+
+			var accent = GetResource<SolidColorBrush>(container, "CupertinoBlueBrush").Color;
+			Assert.AreEqual(accent, (button.Foreground as SolidColorBrush)?.Color, "implicit Button must be the plain, accent-text style");
+			Assert.IsNull((button.Background as SolidColorBrush)?.Color is { A: > 0 } ? button.Background : null, "plain buttons have no fill");
+
+			var expected = GetResource<Style>(container, "CupertinoToggleSwitchStyle");
+			Assert.AreEqual(expected.TargetType, typeof(ToggleSwitch));
+			Assert.IsTrue(container.Resources.TryGetValue(typeof(ToggleSwitch), out var implicitStyle), "implicit ToggleSwitch style missing");
+			Assert.AreSame(expected, ((Style)implicitStyle).BasedOn);
+		}
+		finally
+		{
+			UnitTestsUIContentHelper.Content = null;
+		}
+	}
 }
