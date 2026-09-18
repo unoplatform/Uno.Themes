@@ -4,6 +4,44 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## "It fails on `master` too" is a claim to prove in one command, not a reason to stop building that configuration
+
+**Context:** Spec 10 (Cupertino v2). The first Debug desktop build of `CupertinoSampleApp` failed with seven
+errors in `SamplesApp.Shared` and generated code. The agent judged them unrelated to its change from where
+they were, switched to Release, and verified **only** Release for the rest of a long session — sixteen commits.
+The maintainer, who builds Debug from the IDE, then reported that the head did not compile.
+
+**Root cause (of the build):** the Uno SDK implicitly references two tooling packages in Debug only
+(`Optimize != true`): `Uno.UI.HotDesign` and `Uno.UI.App.Mcp`. At `Uno.Sdk 7.0.0-dev.701` both were still
+built against Uno 6. Hot Design brings a `Uno.Toolkit.WinUI` that expects `CoreDispatcher` in `Uno.dll`
+(`CS0012` in the generated bindable metadata) and whose public `Uno.Toolkit.UI.VisualTreeHelperEx` collides
+with the samples' helper (`CS0104` / `CS0121`); App MCP compiles but throws `FileNotFoundException` for
+`SkiaSharp.Views.Windows 3.119` from `App.InitializeComponent`. CI builds Release, which references neither,
+so the Uno 7 retarget broke every Debug head on `master` without anyone seeing it. Fixed with
+`UnoDisableHotDesign` + `UnoDisableMCPSupport` in `src/samples/Directory.Build.props`.
+
+**Root cause (of the miss):** the diagnosis was right and still worthless, because it was never tested and
+never acted on. "Not caused by my change" was treated as permission to stop caring about the configuration
+the maintainer actually uses.
+
+**How to apply:**
+- When a build or test fails before your change could plausibly have caused it, **prove it on a clean
+  `master` worktree** (`git worktree add --detach <dir> master`, same command) before writing "pre-existing"
+  anywhere. It costs one build. An unproven "pre-existing" in a progress note is a guess wearing a label.
+- A proven pre-existing break in the configuration people develop in is **still your problem**: fix it in its
+  own commit or put it in front of the maintainer immediately. Working around it silently means the first
+  person to open the IDE finds it for you.
+- **Verify in Debug as well as Release.** They are not the same program here: in Debug `Uno.XamlMerge.Task`
+  emits a `mergedpages.xaml` that *references* every input by `Source` instead of merging them (different
+  lookup order, every file parsed standalone), and the SDK adds the tooling packages above. A theme change
+  that is green in Release has not been shown to work in the IDE.
+- Two SDK opt-outs sit in adjacent item groups and are easy to conflate: `UnoDisableHotDesign` removes only
+  `Uno.UI.HotDesign`; `Uno.UI.App.Mcp` is gated by `UnoDisableMCPSupport`. Read the SDK's
+  `Uno.Implicit.Packages.ProjectSystem.targets` rather than inferring from one property name.
+- A Debug head that *compiles* has not been shown to *start*. Launch it.
+
+---
+
 ## A generated layer is always a *merged* dictionary, so it can only shadow keys declared inside `ThemeDictionaries`
 
 **Context:** Spec 09 (`DefaultFontFamily`, PR #1707). `When_DefaultFontFamilySet_Then_ThemeAliasKeysFollow`

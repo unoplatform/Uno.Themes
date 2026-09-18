@@ -472,8 +472,10 @@ Deviations and things to know:
 smoke, which fails identically on `master` (see "Hand-offs"), and the three settings DPs, which move to
 Phases 2–3 with their consumers.
 
-Environment note for whoever picks this up: **Debug** builds of the sample heads fail on the current dev
-box (`CS0104` `VisualTreeHelperEx` ambiguous with `Uno.Toolkit.UI`, `CS0012` on `Uno, Version=255.255.255.255`)
-in files this work does not touch — the Debug-only Hot Design package set clashes with a locally overridden
-Uno build. Release, which is what CI builds, is clean; all verification above used Release.
+Environment note, **corrected 2026-09-18**: this note used to blame a locally overridden Uno build for the
+Debug failures of the sample heads. That was an unverified guess and it was wrong. Debug was broken on
+`master` for every head by the SDK's Debug-only tooling packages (see `specs/lessons.md`, top entry); fixed in
+`fix(samples): make the sample heads build and start in Debug on Uno 7`. Slices 1–5 above were verified in
+Release only at the time; the Cupertino suite has since been run in **Debug** as well (67 / 67), which also
+exercises XamlMerge's unmerged Debug output.
 
