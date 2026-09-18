@@ -18,6 +18,19 @@
     <!-- Runtime Tests Engine: suppress warnings from injected source package -->
     <NoWarn>$(NoWarn);CS8619;CS8602;Uno0001;IL2026;IL2070;IL2072;IL2075</NoWarn>
     <DefineConstants>$(DefineConstants);IS_UNO_RUNTIMETEST_PROJECT</DefineConstants>
+
+    <!--
+      Debug builds only: the Uno SDK implicitly references two tooling packages whose builds paired with
+      Uno.Sdk 7.0.0-dev.701 were compiled against Uno 6. Release references neither, which is why CI never
+      saw it. Remove both switches once the SDK pairs tooling built against Uno 7.
+      - Uno.UI.HotDesign brings a Uno.Toolkit.WinUI that expects CoreDispatcher in Uno.dll (CS0012 in the
+        generated bindable metadata) and whose public Uno.Toolkit.UI.VisualTreeHelperEx collides with the
+        samples' own helper (CS0104 / CS0121): the heads do not compile.
+      - Uno.UI.App.Mcp loads SkiaSharp.Views.Windows 3.119, which Uno 7 (SkiaSharp 4) does not ship: the
+        heads compile, then throw FileNotFoundException from App.InitializeComponent at startup.
+    -->
+    <UnoDisableHotDesign>true</UnoDisableHotDesign>
+    <UnoDisableMCPSupport>true</UnoDisableMCPSupport>
   </PropertyGroup>
 
   <Import Project="..\..\Directory.Build.props" />
