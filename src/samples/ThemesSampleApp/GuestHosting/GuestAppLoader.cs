@@ -472,7 +472,7 @@ internal sealed partial class GuestAppLoader
 		// (Release-before-allocate: WASM memory growth is irreversible.)
 		GC.Collect();
 		await DrainFinalizersAsync().ConfigureAwait(false);
-		if (!await RunOnUIThreadAsync(SweepNonDefaultAlcCaches).ConfigureAwait(false))
+		if (!await RunOnUIThreadAsync(() => SweepNonDefaultAlcCaches(alc)).ConfigureAwait(false))
 		{
 			_logger.LogWarning("Post-unload ALC cache sweep could not run on the UI thread; guest ALC memory may stay resident until the next guest exits.");
 		}
