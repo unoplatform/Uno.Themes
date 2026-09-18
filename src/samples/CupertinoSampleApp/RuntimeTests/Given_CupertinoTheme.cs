@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Threading.Tasks;
 using Uno.Cupertino;
 using Uno.UI.RuntimeTests;
 using Windows.UI;
@@ -153,5 +154,38 @@ public class Given_CupertinoTheme
 		Assert.AreEqual(size, GetResource<double>(container, slot + "FontSize"), "shadowed by SharedTypography?");
 		Assert.AreEqual(weight, GetResource<string>(container, slot + "FontWeight"));
 		Assert.AreEqual(0, GetResource<int>(container, slot + "CharacterSpacing"));
+	}
+
+	// Alias cascades resolve against the application scope (specs/lessons.md), so the typeface is asserted
+	// on the application theme and on a realized control, never from a scoped container.
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_AppUsesCupertinoTheme_Then_TypeScaleDerivesFromInterRoot()
+	{
+		Assert.IsInstanceOfType(Application.Current.GetTheme(), typeof(CupertinoTheme));
+
+		foreach (var key in new[] { "DefaultFontFamily", "CupertinoFontFamily", "BodyLargeFontFamily", "DisplayLargeFontFamily", "LabelSmallFontFamily" })
+		{
+			Assert.IsTrue(Application.Current.Resources.TryGetValue(key, out var value), $"{key} missing");
+			StringAssert.Contains(((FontFamily)value).Source, "Inter", $"{key} must derive from the Inter root");
+		}
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_AppUsesCupertinoTheme_Then_RealizedButtonRendersInter()
+	{
+		var button = new Button { Content = "Inter", Style = (Style)Application.Current.Resources["CupertinoButtonStyle"] };
+		try
+		{
+			UnitTestsUIContentHelper.Content = button;
+			await UnitTestsUIContentHelper.WaitForLoaded(button);
+
+			StringAssert.Contains(button.FontFamily.Source, "Inter");
+		}
+		finally
+		{
+			UnitTestsUIContentHelper.Content = null;
+		}
 	}
 }

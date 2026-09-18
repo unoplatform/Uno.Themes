@@ -1,8 +1,7 @@
 # 10 — Cupertino v2: Liquid Glass era theme on the semantic system
 
-Status: **Phase 0.5 spike run on the software path; Phase 1 in progress** (2026-09-18). D-1 … D-7 are still
-unconfirmed — Phase 1 proceeds on the recommendations as working assumptions and touches nothing that is
-expensive to reverse.
+Status: **Phase 0.5 spike run on the software path; Phase 1 in progress** (2026-09-18). D-1 / D-2 / D-3 / D-7 confirmed as
+recommended; D-5 open until the GPU spike items are run on real hardware.
 Branch: `dev/sb/cupertino-v2` (currently identical to `master`).
 
 Companion documents in this folder:
@@ -91,7 +90,9 @@ docs are not deferred to the end).
 - [x] Research: Apple HIG / Liquid Glass digest; Cupertino.Avalonia reference; Uno Skia rendering survey.
 - [x] Write the four companion documents and this plan.
 - [x] Skeptic review; findings folded in (see "Review").
-- [ ] D-1 … D-7 confirmed by the maintainer (D-5 provisionally; final after Phase 0.5).
+- [x] D-1, D-2, D-3, D-7 confirmed by the maintainer on 2026-09-18, each as recommended (replace in place +
+  frozen V1; plain implicit button; Inter via `Uno.Fonts.Inter`, SF-Pro.ttf removed; Lottie dropped). D-4
+  applied as recommended (indigo). D-5 waits on the GPU spike items; D-6 is a follow-up.
 
 ### Phase 0.5 — Liquid Glass spike (size S, throwaway)
 
@@ -271,6 +272,10 @@ row updated in the same PR.
 - `src/samples/SamplesApp.Shared/Assets/Fonts/Cupertino/SF-Pro.ttf` is an Apple-licensed font in a public
   repository, independent of this work; Phase 1 deletes it, but it should go even if this spec stalls.
 
+- `ThemesSampleApp --smoke` fails on `master` on Win32 with Uno 7.0.0-dev.701: the Material guest ALC is not
+  reclaimed and `Application.CleanupNonDefaultAlcCaches` throws `TargetParameterCountException` (reflection
+  signature drift in `GuestHosting`). CI runs the smoke on X11, so this may be Win32-only; separate issue.
+
 ## Review
 
 ### Skeptic review — 2026-09-18 (pre-approval)
@@ -327,10 +332,9 @@ Deviations from the Phase 1 list, each deliberate:
 - **No font-cascade test from a scoped container** — `specs/lessons.md` records that alias cascades
   resolve against the application scope; that test arrives with the sample's `App.xaml` switch.
 
-Still open in Phase 1, in dependency order: `Uno.Fonts.Inter` + `Fonts.xaml` and the sample `App.xaml`
-switch (both wait on **D-3** — it adds a package reference); legacy colour values → June-2025 palette,
-`CupertinoBrushes.xaml` + live brush rewrite, implicit styles, the legacy shim and frozen V1 (wait on
-**D-1**); `Thickness.xaml` and motion tokens (unblocked, but nothing reads them before Phase 3); Toolkit
+Still open in Phase 1: legacy colour values → June-2025 palette,
+`CupertinoBrushes.xaml` + live brush rewrite, implicit styles, the legacy shim and frozen V1 (D-1, now
+confirmed); `Thickness.xaml` and motion tokens (unblocked, but nothing reads them before Phase 3); Toolkit
 key inventory; CI matrix row; docs delta.
 
 ### Phase 1, slice 2 — 2026-09-18: type scale and semantic style aliases (additive)
@@ -356,6 +360,25 @@ Deviations:
 - Semantic keys with no Cupertino style today (tonal / outlined / icon buttons, toggle buttons, filled
   text fields, list, dialog, navigation, menus, FABs, pips, rating) and the TextBlock slot aliases arrive
   with their controls in Phases 3–4.
+
+### Phase 1, slice 3 — 2026-09-18: Inter, sample head on `CupertinoTheme`, SF Pro removed (D-3)
+
+Landed: `Uno.Fonts.Inter` referenced from `cupertino-common.props` (version already pinned in
+`src/library/Directory.Packages.props`); `Fonts.xaml` root = Inter in all three blocks; the two dead
+`SF Pro` literals (`CupertinoHyperlinkButtonFontFamily`, `CupertinoRadioButtonFontFamily` — declared, read by
+no style) now alias `CupertinoFontFamily`; `CupertinoSampleApp/App.xaml` merges `<CupertinoTheme />`;
+`CupertinoFontsOverride.xaml` and the Apple-licensed `SamplesApp.Shared/Assets/Fonts/Cupertino/SF-Pro.ttf`
+deleted. Result: **40 / 40 passed**, including the application-scope cascade (`GetTheme()` is a
+`CupertinoTheme`; root, `CupertinoFontFamily` and three slots derive from Inter) and a realized
+`CupertinoButtonStyle` button rendering Inter. `Uno.Fonts.Inter/Fonts/*.ttf` is present in the head's output,
+so the assertion is not passing on a silent fallback. The real shell boots under the theme and stays up
+with clean logs. Formatters clean.
+
+Hosting smoke (`ThemesSampleApp --smoke`, Win32, Release): **FAIL, and identically on an untouched `master`
+worktree** — in both, every guest hosts, the *Material* guest's ALC is reported not reclaimed, and
+`Application.CleanupNonDefaultAlcCaches` throws `TargetParameterCountException` (the wrapper's reflection
+call no longer matches Uno 7.0.0-dev.701). On this branch Cupertino hosts and its ALC is fully collected.
+Not caused by this work; recorded under "Hand-offs".
 
 Environment note for whoever picks this up: **Debug** builds of the sample heads fail on the current dev
 box (`CS0104` `VisualTreeHelperEx` ambiguous with `Uno.Toolkit.UI`, `CS0012` on `Uno, Version=255.255.255.255`)

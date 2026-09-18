@@ -404,7 +404,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 	/// <summary>
 	/// (Optional) Gets or sets the <see cref="FontFamily"/> the theme's whole type scale is generated
 	/// from. Left unset (the default), the concrete theme's own typeface stands (Material: Roboto,
-	/// Simple: Inter, Cupertino: SF Pro, otherwise Segoe UI).
+	/// Simple and Cupertino: Inter, otherwise Segoe UI).
 	/// </summary>
 	/// <remarks>
 	/// <para>
