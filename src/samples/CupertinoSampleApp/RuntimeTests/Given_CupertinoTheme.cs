@@ -156,6 +156,81 @@ public class Given_CupertinoTheme
 		Assert.AreEqual(0, GetResource<int>(container, slot + "CharacterSpacing"));
 	}
 
+	// The semantic contract: every key Simple aliases in its _Resources.xaml, plus the two Material-only keys
+	// specs/10-cupertino-liquid-glass/token-and-style-mapping.md §6 commits Cupertino to. The keys live in
+	// each theme's XAML, not in code, so this list is the head's copy — extend it when Simple gains a key.
+	// MediaTransportControlsStyle is a documented gap, as it is in Simple.
+	private static readonly string[] SemanticKeys =
+	{
+		"FilledButtonStyle", "FilledTonalButtonStyle", "OutlinedButtonStyle", "TextButtonStyle", "IconButtonStyle", "ElevatedButtonStyle",
+		"TextToggleButtonStyle", "IconToggleButtonStyle",
+		"FilledTextBoxStyle", "OutlinedTextBoxStyle", "FilledPasswordBoxStyle", "OutlinedPasswordBoxStyle",
+		"ComboBoxStyle", "ComboBoxItemStyle",
+		"CheckBoxStyle", "RadioButtonStyle", "ToggleSwitchStyle", "SliderStyle",
+		"HyperlinkButtonStyle", "SecondaryHyperlinkButtonStyle",
+		"ListViewStyle", "ListViewItemStyle", "ContentDialogStyle",
+		"AppBarButtonStyle", "CommandBarStyle", "NavigationViewStyle", "NavigationViewItemStyle",
+		"CalendarViewStyle", "CalendarDatePickerStyle", "DatePickerStyle",
+		"ProgressBarStyle", "ProgressRingStyle", "PipsPagerStyle", "RatingControlStyle",
+		"FlyoutPresenterStyle", "MenuFlyoutPresenterStyle", "MenuFlyoutItemStyle", "MenuFlyoutSeparatorStyle",
+		"MenuFlyoutSubItemStyle", "ToggleMenuFlyoutItemStyle", "RadioMenuFlyoutItemStyle",
+		"FabStyle", "SmallFabStyle", "LargeFabStyle",
+		"SecondaryFabStyle", "SecondarySmallFabStyle", "SecondaryLargeFabStyle",
+		"TertiaryFabStyle", "TertiarySmallFabStyle", "TertiaryLargeFabStyle",
+		"SurfaceFabStyle", "SurfaceSmallFabStyle", "SurfaceLargeFabStyle",
+		"DisplayLarge", "DisplayMedium", "DisplaySmall",
+		"HeadlineLarge", "HeadlineMedium", "HeadlineSmall",
+		"TitleLarge", "TitleMedium", "TitleSmall",
+		"BodyLarge", "BodyMedium", "BodySmall",
+		"LabelLarge", "LabelMedium", "LabelSmall", "LabelExtraSmall",
+		"CaptionLarge", "CaptionMedium", "CaptionSmall",
+	};
+
+	// Keys Cupertino has no style for yet. This list only ever shrinks: the test below fails as soon as one
+	// of these starts resolving, so an entry cannot outlive the work that makes it obsolete, and a key that
+	// is neither resolvable nor listed here fails it too. Empty means the contract is met.
+	private static readonly string[] PendingSemanticKeys =
+	{
+		// Phase 3 — core controls
+		"FilledTonalButtonStyle", "OutlinedButtonStyle", "IconButtonStyle", "ElevatedButtonStyle",
+		"TextToggleButtonStyle", "IconToggleButtonStyle",
+		"FilledTextBoxStyle", "FilledPasswordBoxStyle",
+		"SecondaryHyperlinkButtonStyle", "ProgressRingStyle",
+		"FabStyle", "SmallFabStyle", "LargeFabStyle",
+		"SecondaryFabStyle", "SecondarySmallFabStyle", "SecondaryLargeFabStyle",
+		"TertiaryFabStyle", "TertiarySmallFabStyle", "TertiaryLargeFabStyle",
+		"SurfaceFabStyle", "SurfaceSmallFabStyle", "SurfaceLargeFabStyle",
+		"DisplayLarge", "DisplayMedium", "DisplaySmall",
+		"HeadlineLarge", "HeadlineMedium", "HeadlineSmall",
+		"TitleLarge", "TitleMedium", "TitleSmall",
+		"BodyLarge", "BodyMedium", "BodySmall",
+		"LabelLarge", "LabelMedium", "LabelSmall", "LabelExtraSmall",
+		"CaptionLarge", "CaptionMedium", "CaptionSmall",
+
+		// Phase 4 — containers and navigation
+		"ListViewStyle", "ListViewItemStyle", "ContentDialogStyle",
+		"AppBarButtonStyle", "CommandBarStyle", "NavigationViewStyle", "NavigationViewItemStyle",
+		"PipsPagerStyle", "RatingControlStyle",
+		"FlyoutPresenterStyle", "MenuFlyoutPresenterStyle", "MenuFlyoutItemStyle", "MenuFlyoutSeparatorStyle",
+		"MenuFlyoutSubItemStyle", "ToggleMenuFlyoutItemStyle", "RadioMenuFlyoutItemStyle",
+	};
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_ThemeLoaded_Then_EverySemanticKeyResolvesOrIsTrackedAsPending()
+	{
+		var container = CreateThemedContainer(new CupertinoTheme());
+		bool Resolves(string key) => container.Resources.TryGetValue(key, out var value) && value is Style;
+
+		var missing = SemanticKeys.Except(PendingSemanticKeys).Where(k => !Resolves(k)).ToArray();
+		var landed = PendingSemanticKeys.Where(Resolves).ToArray();
+		var unknown = PendingSemanticKeys.Except(SemanticKeys).ToArray();
+
+		Assert.AreEqual(0, missing.Length, $"semantic keys that neither resolve nor are tracked as pending: {string.Join(", ", missing)}");
+		Assert.AreEqual(0, landed.Length, $"now resolve - remove them from PendingSemanticKeys: {string.Join(", ", landed)}");
+		Assert.AreEqual(0, unknown.Length, $"pending keys that are not part of the contract: {string.Join(", ", unknown)}");
+	}
+
 	// Alias cascades resolve against the application scope (specs/lessons.md), so the typeface is asserted
 	// on the application theme and on a realized control, never from a scoped container.
 	[TestMethod]
