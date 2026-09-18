@@ -10,6 +10,183 @@
 	</Style>
 
 	<!--
+		Semantic type scale. Each style reads its slot tokens (Typography.xaml) through ThemeResource, so a
+		DefaultFontFamily change or a lightweight override of a *FontSize / *FontWeight token reaches it.
+	-->
+	<Style x:Key="CupertinoDisplayLarge"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource DisplayLargeFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource DisplayLargeFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource DisplayLargeFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource DisplayLargeCharacterSpacing}" />
+	</Style>
+
+	<Style x:Key="CupertinoDisplayMedium"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource DisplayMediumFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource DisplayMediumFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource DisplayMediumFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource DisplayMediumCharacterSpacing}" />
+	</Style>
+
+	<Style x:Key="CupertinoDisplaySmall"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource DisplaySmallFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource DisplaySmallFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource DisplaySmallFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource DisplaySmallCharacterSpacing}" />
+	</Style>
+
+	<Style x:Key="CupertinoHeadlineLarge"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource HeadlineLargeFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource HeadlineLargeFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource HeadlineLargeFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource HeadlineLargeCharacterSpacing}" />
+	</Style>
+
+	<Style x:Key="CupertinoHeadlineMedium"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource HeadlineMediumFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource HeadlineMediumFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource HeadlineMediumFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource HeadlineMediumCharacterSpacing}" />
+	</Style>
+
+	<Style x:Key="CupertinoHeadlineSmall"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource HeadlineSmallFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource HeadlineSmallFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource HeadlineSmallFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource HeadlineSmallCharacterSpacing}" />
+	</Style>
+
+	<Style x:Key="CupertinoTitleLarge"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource TitleLargeFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource TitleLargeFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource TitleLargeFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource TitleLargeCharacterSpacing}" />
+	</Style>
+
+	<Style x:Key="CupertinoTitleMedium"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource TitleMediumFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource TitleMediumFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource TitleMediumFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource TitleMediumCharacterSpacing}" />
+	</Style>
+
+	<Style x:Key="CupertinoTitleSmall"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource TitleSmallFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource TitleSmallFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource TitleSmallFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource TitleSmallCharacterSpacing}" />
+	</Style>
+
+	<Style x:Key="CupertinoBodyLarge"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyLargeFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource BodyLargeCharacterSpacing}" />
+	</Style>
+
+	<Style x:Key="CupertinoBodyMedium"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource BodyMediumFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyMediumFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyMediumFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource BodyMediumCharacterSpacing}" />
+	</Style>
+
+	<Style x:Key="CupertinoBodySmall"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource BodySmallFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodySmallFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodySmallFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource BodySmallCharacterSpacing}" />
+	</Style>
+
+	<Style x:Key="CupertinoLabelLarge"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource LabelLargeFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource LabelLargeFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource LabelLargeFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource LabelLargeCharacterSpacing}" />
+	</Style>
+
+	<Style x:Key="CupertinoLabelMedium"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource LabelMediumFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource LabelMediumFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource LabelMediumFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource LabelMediumCharacterSpacing}" />
+	</Style>
+
+	<Style x:Key="CupertinoLabelSmall"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource LabelSmallFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource LabelSmallFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource LabelSmallFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource LabelSmallCharacterSpacing}" />
+	</Style>
+
+	<Style x:Key="CupertinoLabelExtraSmall"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource LabelExtraSmallFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource LabelExtraSmallFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource LabelExtraSmallFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource LabelExtraSmallCharacterSpacing}" />
+	</Style>
+
+	<Style x:Key="CupertinoCaptionLarge"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource CaptionLargeFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource CaptionLargeFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource CaptionLargeFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource CaptionLargeCharacterSpacing}" />
+	</Style>
+
+	<Style x:Key="CupertinoCaptionMedium"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource CaptionMediumFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource CaptionMediumFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource CaptionMediumFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource CaptionMediumCharacterSpacing}" />
+	</Style>
+
+	<Style x:Key="CupertinoCaptionSmall"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource CaptionSmallFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource CaptionSmallFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource CaptionSmallFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource CaptionSmallCharacterSpacing}" />
+	</Style>
+
+	<!-- Apple-named styles: each is the slot carrying the same text style, plus its leading. -->
+
+	<!--
 		******************************************************************
 		STYLE GUIDE TEXTBLOCKS STYLES
 		******************************************************************
@@ -18,100 +195,88 @@
 	<!-- Large Title -->
 	<Style x:Key="CupertinoLargeTitle"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+		   BasedOn="{StaticResource CupertinoDisplaySmall}">
 
-		<Setter Property="FontSize" Value="34" />
 		<Setter Property="LineHeight" Value="41" />
 	</Style>
 
 	<!-- Title 1 -->
 	<Style x:Key="CupertinoPrimaryTitle"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+		   BasedOn="{StaticResource CupertinoHeadlineLarge}">
 
-		<Setter Property="FontSize" Value="28" />
 		<Setter Property="LineHeight" Value="34" />
 	</Style>
 
 	<!-- Title 2 -->
 	<Style x:Key="CupertinoSecondaryTitle"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+		   BasedOn="{StaticResource CupertinoHeadlineMedium}">
 
-		<Setter Property="FontSize" Value="22" />
 		<Setter Property="LineHeight" Value="28" />
 	</Style>
 
 	<!-- Title 3 -->
 	<Style x:Key="CupertinoTertiaryTitle"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+		   BasedOn="{StaticResource CupertinoHeadlineSmall}">
 
-		<Setter Property="FontSize" Value="20" />
 		<Setter Property="LineHeight" Value="25" />
 	</Style>
 
 	<!-- Headline -->
 	<Style x:Key="CupertinoHeadline"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+		   BasedOn="{StaticResource CupertinoTitleMedium}">
 
-		<Setter Property="FontSize" Value="17" />
-		<Setter Property="FontWeight" Value="SemiBold" />
 		<Setter Property="LineHeight" Value="22" />
 	</Style>
 
 	<!-- Body -->
 	<Style x:Key="CupertinoBody"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+		   BasedOn="{StaticResource CupertinoBodyLarge}">
 
-		<Setter Property="FontSize" Value="17" />
 		<Setter Property="LineHeight" Value="22" />
 	</Style>
 
 	<!-- Callout -->
 	<Style x:Key="CupertinoCallout"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+		   BasedOn="{StaticResource CupertinoBodyMedium}">
 
-		<Setter Property="FontSize" Value="16" />
 		<Setter Property="LineHeight" Value="21" />
 	</Style>
 
 	<!-- Subhead -->
 	<Style x:Key="CupertinoSubhead"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+		   BasedOn="{StaticResource CupertinoBodySmall}">
 
-		<Setter Property="FontSize" Value="15" />
 		<Setter Property="LineHeight" Value="20" />
 	</Style>
 
 	<!-- Footnote -->
 	<Style x:Key="CupertinoFootnote"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+		   BasedOn="{StaticResource CupertinoCaptionLarge}">
 
-		<Setter Property="FontSize" Value="13" />
 		<Setter Property="LineHeight" Value="18" />
 	</Style>
 
 	<!-- Caption 1 -->
 	<Style x:Key="CupertinoPrimaryCaption"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+		   BasedOn="{StaticResource CupertinoCaptionMedium}">
 
-		<Setter Property="FontSize" Value="12" />
 		<Setter Property="LineHeight" Value="16" />
 	</Style>
 
 	<!-- Caption 2 -->
 	<Style x:Key="CupertinoSecondaryCaption"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+		   BasedOn="{StaticResource CupertinoCaptionSmall}">
 
-		<Setter Property="FontSize" Value="11" />
 		<Setter Property="LineHeight" Value="13" />
 	</Style>
 

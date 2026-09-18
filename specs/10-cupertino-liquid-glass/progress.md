@@ -212,7 +212,11 @@ row updated in the same PR.
 - [ ] CheckBox, RadioButton, ToggleSwitch (51 × 31 / 27), Slider (capsule track, 28 thumb).
 - [ ] ProgressBar, ProgressRing (8-spoke storyboard; remove the `Lottie` feature, the two `*Animation_Uno`
   keys and the `#if !WinUI_Desktop` special case) (D-7).
-- [ ] TextBlock styles for every slot + Apple-named aliases.
+- [x] TextBlock styles for every slot + Apple-named aliases. 19 `Cupertino<Slot>` styles reading the slot
+  tokens through `{ThemeResource}`, 19 semantic aliases, and the 11 Apple-named styles re-based on their
+  slot (sizes matched exactly, so only their leading remains local). Rendered test covers size, weight,
+  an unchanged Apple-named style, and a scoped `*FontSize` override. Ratchet: 35 of the 72 contract keys resolve, 37 pending (was 57 pending at its introduction).
+  Cupertino 74 / 74 in Debug and Release.
 - [ ] ComboBox (pop-up button + glass popup) and ComboBoxItem.
 - [ ] Gate: `Given_CupertinoControls` green; formatters clean; docs rows present for every style in the PR.
 

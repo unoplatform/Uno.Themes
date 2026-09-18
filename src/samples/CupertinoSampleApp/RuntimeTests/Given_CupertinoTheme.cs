@@ -241,12 +241,6 @@ public class Given_CupertinoTheme
 		"SecondaryFabStyle", "SecondarySmallFabStyle", "SecondaryLargeFabStyle",
 		"TertiaryFabStyle", "TertiarySmallFabStyle", "TertiaryLargeFabStyle",
 		"SurfaceFabStyle", "SurfaceSmallFabStyle", "SurfaceLargeFabStyle",
-		"DisplayLarge", "DisplayMedium", "DisplaySmall",
-		"HeadlineLarge", "HeadlineMedium", "HeadlineSmall",
-		"TitleLarge", "TitleMedium", "TitleSmall",
-		"BodyLarge", "BodyMedium", "BodySmall",
-		"LabelLarge", "LabelMedium", "LabelSmall", "LabelExtraSmall",
-		"CaptionLarge", "CaptionMedium", "CaptionSmall",
 
 		// Phase 4 — containers and navigation
 		"ListViewStyle", "ListViewItemStyle", "ContentDialogStyle",
@@ -406,4 +400,42 @@ public class Given_CupertinoTheme
 		Assert.AreEqual(GetResource<SolidColorBrush>(container, "CupertinoLinkBrush").Color, GetResource<Color>(container, "LinkColor"));
 	}
 
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_SlotStylesApplied_Then_TextRendersTheTypeScaleAndFollowsTokenOverrides()
+	{
+		var container = CreateThemedContainer(new CupertinoTheme());
+		var body = new TextBlock { Text = "Body", Style = GetResource<Style>(container, "BodyLarge") };
+		var title = new TextBlock { Text = "Title", Style = GetResource<Style>(container, "TitleMedium") };
+		var headline = new TextBlock { Text = "Headline", Style = GetResource<Style>(container, "CupertinoHeadline") };
+
+		// A lightweight override of the slot token, scoped to one panel.
+		var overridden = new TextBlock { Text = "Big body", Style = GetResource<Style>(container, "BodyLarge") };
+		var scope = new StackPanel { Children = { overridden } };
+		scope.Resources["BodyLargeFontSize"] = 21d;
+
+		container.Children.Add(new StackPanel { Children = { body, title, headline, scope } });
+
+		try
+		{
+			UnitTestsUIContentHelper.Content = container;
+			await UnitTestsUIContentHelper.WaitForLoaded(overridden);
+
+			Assert.AreEqual(17d, body.FontSize);
+			Assert.AreEqual(Microsoft.UI.Text.FontWeights.Normal.Weight, body.FontWeight.Weight);
+			Assert.AreEqual(17d, title.FontSize);
+			Assert.AreEqual(Microsoft.UI.Text.FontWeights.SemiBold.Weight, title.FontWeight.Weight);
+
+			// The Apple-named style is the slot plus its leading: nothing about it may have moved.
+			Assert.AreEqual(17d, headline.FontSize);
+			Assert.AreEqual(Microsoft.UI.Text.FontWeights.SemiBold.Weight, headline.FontWeight.Weight);
+			Assert.AreEqual(22d, headline.LineHeight);
+
+			Assert.AreEqual(21d, overridden.FontSize, "a scoped *FontSize override must reach the slot style");
+		}
+		finally
+		{
+			UnitTestsUIContentHelper.Content = null;
+		}
+	}
 }
