@@ -17,37 +17,23 @@
 	<x:Double x:Key="CheckAreaSize">18</x:Double>
 	<CornerRadius x:Key="CheckAreaCornerRadius">4</CornerRadius>
 
-	<StaticResource x:Key="MaterialCheckBoxBorderBrush"
-					ResourceKey="MaterialOnSurfaceMediumBrush" />
+	<StaticResource x:Key="MaterialCheckBoxBorderBrush" ResourceKey="MaterialOnSurfaceMediumBrush" />
 
 	<Style x:Key="MaterialCheckBoxStyle"
 		   TargetType="CheckBox">
-		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialRegularFontFamily}" />
-		<Setter Property="Background"
-				Value="{StaticResource MaterialPrimaryBrush}" />
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnBackgroundBrush}" />
-		<Setter Property="BorderBrush"
-				Value="{StaticResource MaterialCheckBoxBorderBrush}" />
-		<Setter Property="BorderThickness"
-				Value="2" />
-		<Setter Property="Padding"
-				Value="8,0,0,0" />
-		<Setter Property="HorizontalAlignment"
-				Value="Left" />
-		<Setter Property="VerticalAlignment"
-				Value="Stretch" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Left" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
-		<Setter Property="MinWidth"
-				Value="0" />
-		<Setter Property="MinHeight"
-				Value="{StaticResource CheckAreaSize}" />
-		<Setter Property="UseSystemFocusVisuals"
-				Value="False" />
+		<Setter Property="FontFamily" Value="{StaticResource MaterialRegularFontFamily}" />
+		<Setter Property="Background" Value="{StaticResource MaterialPrimaryBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource MaterialOnBackgroundBrush}" />
+		<Setter Property="BorderBrush" Value="{StaticResource MaterialCheckBoxBorderBrush}" />
+		<Setter Property="BorderThickness" Value="2" />
+		<Setter Property="Padding" Value="8,0,0,0" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="VerticalAlignment" Value="Stretch" />
+		<Setter Property="HorizontalContentAlignment" Value="Left" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="MinWidth" Value="0" />
+		<Setter Property="MinHeight" Value="{StaticResource CheckAreaSize}" />
+		<Setter Property="UseSystemFocusVisuals" Value="False" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -113,32 +99,24 @@
 
 								<VisualState x:Name="UncheckedDisabled">
 									<VisualState.Setters>
-										<Setter Target="CheckBoxContainer.Opacity"
-												Value="{StaticResource MaterialMediumOpacity}" />
-										<Setter Target="ContentPresenter.Opacity"
-												Value="{StaticResource MaterialMediumOpacity}" />
+										<Setter Target="CheckBoxContainer.Opacity" Value="{StaticResource MaterialMediumOpacity}" />
+										<Setter Target="ContentPresenter.Opacity" Value="{StaticResource MaterialMediumOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="CheckedNormal">
 									<VisualState.Setters>
-										<Setter Target="BackgroundBorder.Opacity"
-												Value="0" />
-										<Setter Target="CheckedBackgroundBorder.Opacity"
-												Value="1" />
-										<Setter Target="CheckGlyph.Opacity"
-												Value="1" />
+										<Setter Target="BackgroundBorder.Opacity" Value="0" />
+										<Setter Target="CheckedBackgroundBorder.Opacity" Value="1" />
+										<Setter Target="CheckGlyph.Opacity" Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="CheckedPointerOver">
 									<VisualState.Setters>
-										<Setter Target="BackgroundBorder.Opacity"
-												Value="0" />
-										<Setter Target="CheckedBackgroundBorder.Opacity"
-												Value="1" />
-										<Setter Target="CheckGlyph.Opacity"
-												Value="1" />
+										<Setter Target="BackgroundBorder.Opacity" Value="0" />
+										<Setter Target="CheckedBackgroundBorder.Opacity" Value="1" />
+										<Setter Target="CheckGlyph.Opacity" Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -184,38 +162,27 @@
 
 								<VisualState x:Name="CheckedDisabled">
 									<VisualState.Setters>
-										<Setter Target="CheckBoxContainer.Opacity"
-												Value="{StaticResource MaterialMediumOpacity}" />
-										<Setter Target="ContentPresenter.Opacity"
-												Value="{StaticResource MaterialMediumOpacity}" />
-										<Setter Target="BackgroundBorder.Opacity"
-												Value="0" />
-										<Setter Target="CheckedBackgroundBorder.Opacity"
-												Value="1" />
-										<Setter Target="CheckGlyph.Opacity"
-												Value="1" />
+										<Setter Target="CheckBoxContainer.Opacity" Value="{StaticResource MaterialMediumOpacity}" />
+										<Setter Target="ContentPresenter.Opacity" Value="{StaticResource MaterialMediumOpacity}" />
+										<Setter Target="BackgroundBorder.Opacity" Value="0" />
+										<Setter Target="CheckedBackgroundBorder.Opacity" Value="1" />
+										<Setter Target="CheckGlyph.Opacity" Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="IndeterminateNormal">
 									<VisualState.Setters>
-										<Setter Target="BackgroundBorder.Opacity"
-												Value="0" />
-										<Setter Target="CheckedBackgroundBorder.Opacity"
-												Value="1" />
-										<Setter Target="HyphenGlyph.Opacity"
-												Value="1" />
+										<Setter Target="BackgroundBorder.Opacity" Value="0" />
+										<Setter Target="CheckedBackgroundBorder.Opacity" Value="1" />
+										<Setter Target="HyphenGlyph.Opacity" Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="IndeterminatePointerOver">
 									<VisualState.Setters>
-										<Setter Target="BackgroundBorder.Opacity"
-												Value="0" />
-										<Setter Target="CheckedBackgroundBorder.Opacity"
-												Value="1" />
-										<Setter Target="HyphenGlyph.Opacity"
-												Value="1" />
+										<Setter Target="BackgroundBorder.Opacity" Value="0" />
+										<Setter Target="CheckedBackgroundBorder.Opacity" Value="1" />
+										<Setter Target="HyphenGlyph.Opacity" Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -261,16 +228,11 @@
 
 								<VisualState x:Name="IndeterminateDisabled">
 									<VisualState.Setters>
-										<Setter Target="CheckBoxContainer.Opacity"
-												Value="{StaticResource MaterialMediumOpacity}" />
-										<Setter Target="ContentPresenter.Opacity"
-												Value="{StaticResource MaterialMediumOpacity}" />
-										<Setter Target="BackgroundBorder.Opacity"
-												Value="0" />
-										<Setter Target="CheckedBackgroundBorder.Opacity"
-												Value="1" />
-										<Setter Target="HyphenGlyph.Opacity"
-												Value="1" />
+										<Setter Target="CheckBoxContainer.Opacity" Value="{StaticResource MaterialMediumOpacity}" />
+										<Setter Target="ContentPresenter.Opacity" Value="{StaticResource MaterialMediumOpacity}" />
+										<Setter Target="BackgroundBorder.Opacity" Value="0" />
+										<Setter Target="CheckedBackgroundBorder.Opacity" Value="1" />
+										<Setter Target="HyphenGlyph.Opacity" Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -278,8 +240,13 @@
 									<VisualTransition From="UncheckedNormal"
 													  To="UncheckedPressed">
 										<Storyboard>
+<<<<<<< HEAD
 											<not_ios:DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
 																				   Storyboard.TargetName="PressRing">
+=======
+											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
+																		   Storyboard.TargetName="PressRing">
+>>>>>>> a3b9df0 (ci: enforce dotnet format and XAML Styler (#1725))
 												<EasingDoubleKeyFrame KeyTime="0"
 																	  Value="0" />
 												<EasingDoubleKeyFrame KeyTime="0:0:0.1"
@@ -293,8 +260,13 @@
 									<VisualTransition From="UncheckedPointerOver"
 													  To="UncheckedPressed">
 										<Storyboard>
+<<<<<<< HEAD
 											<not_ios:DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
 																				   Storyboard.TargetName="PressRing">
+=======
+											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
+																		   Storyboard.TargetName="PressRing">
+>>>>>>> a3b9df0 (ci: enforce dotnet format and XAML Styler (#1725))
 												<EasingDoubleKeyFrame KeyTime="0"
 																	  Value="0" />
 												<EasingDoubleKeyFrame KeyTime="0:0:0.1"
@@ -308,8 +280,13 @@
 									<VisualTransition From="CheckedNormal"
 													  To="CheckedPressed">
 										<Storyboard>
+<<<<<<< HEAD
 											<not_ios:DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
 																				   Storyboard.TargetName="PressRing">
+=======
+											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
+																		   Storyboard.TargetName="PressRing">
+>>>>>>> a3b9df0 (ci: enforce dotnet format and XAML Styler (#1725))
 												<EasingDoubleKeyFrame KeyTime="0"
 																	  Value="0" />
 												<EasingDoubleKeyFrame KeyTime="0:0:0.1"
@@ -339,8 +316,13 @@
 									<VisualTransition From="CheckedPointerOver"
 													  To="CheckedPressed">
 										<Storyboard>
+<<<<<<< HEAD
 											<not_ios:DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
 																				   Storyboard.TargetName="PressRing">
+=======
+											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
+																		   Storyboard.TargetName="PressRing">
+>>>>>>> a3b9df0 (ci: enforce dotnet format and XAML Styler (#1725))
 												<EasingDoubleKeyFrame KeyTime="0"
 																	  Value="0" />
 												<EasingDoubleKeyFrame KeyTime="0:0:0.1"
@@ -371,8 +353,13 @@
 													  To="IndeterminatePressed">
 
 										<Storyboard>
+<<<<<<< HEAD
 											<not_ios:DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
 																				   Storyboard.TargetName="PressRing">
+=======
+											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
+																		   Storyboard.TargetName="PressRing">
+>>>>>>> a3b9df0 (ci: enforce dotnet format and XAML Styler (#1725))
 												<EasingDoubleKeyFrame KeyTime="0"
 																	  Value="0" />
 												<EasingDoubleKeyFrame KeyTime="0:0:0.1"
@@ -403,8 +390,13 @@
 													  To="IndeterminatePressed">
 
 										<Storyboard>
+<<<<<<< HEAD
 											<not_ios:DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
 																				   Storyboard.TargetName="PressRing">
+=======
+											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
+																		   Storyboard.TargetName="PressRing">
+>>>>>>> a3b9df0 (ci: enforce dotnet format and XAML Styler (#1725))
 												<EasingDoubleKeyFrame KeyTime="0"
 																	  Value="0" />
 												<EasingDoubleKeyFrame KeyTime="0:0:0.1"
@@ -436,8 +428,7 @@
 							<VisualStateGroup x:Name="FocusStates">
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="FocusRing.Opacity"
-												Value="{StaticResource MaterialFocusedOpacity}" />
+										<Setter Target="FocusRing.Opacity" Value="{StaticResource MaterialFocusedOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -532,9 +523,7 @@
 	<Style x:Key="MaterialSecondaryCheckBoxStyle"
 		   TargetType="CheckBox"
 		   BasedOn="{StaticResource MaterialCheckBoxStyle}">
-		<Setter Property="Background"
-				Value="{StaticResource MaterialSecondaryBrush}" />
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSecondaryBrush}" />
+		<Setter Property="Background" Value="{StaticResource MaterialSecondaryBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource MaterialOnSecondaryBrush}" />
 	</Style>
 </ResourceDictionary>

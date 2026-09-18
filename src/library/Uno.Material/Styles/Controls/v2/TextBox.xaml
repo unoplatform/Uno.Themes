@@ -1,4 +1,4 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -13,18 +13,18 @@
 		Expected TextBox behavior:
 		We are going a different route than the Official Material M2/M3 Google samples & the Material doc regarding the fact that the Placeholder will always be visible.
 		(cf. specs discussions here https://github.com/unoplatform/Uno.Themes/issues/974)
-
+		
 		- Without Header/Placeholder: Simple TextBox
-
+		
 		- With placeholder but no header: The placeholder will be displayed where the text is supposed to be until the text is inputted
-
+		
 		- With header but no placeholder: The header will be displayed where the text is supposed to be when unfocused and will move up when text is inputted or when focus is gained
-
+		
 		- With header and placeholder: The header will be displayed at the top, and the placeholder will be displayed where the text is supposed to be until the text is inputted
 	-->
 	<ResourceDictionary.ThemeDictionaries>
 		<ResourceDictionary x:Key="Default">
-			<!--#region DownscaledHeader visual state -->
+			<!--#region DownscaledHeader visual state-->
 			<x:Double x:Key="DownscaledHeaderHeaderCompositeTransformTranslateY">-11</x:Double>
 			<x:Double x:Key="DownscaledHeaderPlaceholderTextCompositeTransformTranslateY">8</x:Double>
 			<x:Double x:Key="DownscaledHeaderTextCompositeTransformTranslateY">8</x:Double>
@@ -140,7 +140,7 @@
 		</ResourceDictionary>
 
 		<ResourceDictionary x:Key="Light">
-			<!--#region DownscaledHeader visual state -->
+			<!--#region DownscaledHeader visual state-->
 			<x:Double x:Key="DownscaledHeaderHeaderCompositeTransformTranslateY">-11</x:Double>
 			<x:Double x:Key="DownscaledHeaderPlaceholderTextCompositeTransformTranslateY">8</x:Double>
 			<x:Double x:Key="DownscaledHeaderTextCompositeTransformTranslateY">8</x:Double>
@@ -322,10 +322,14 @@
 		<Setter Property="CharacterSpacing" Value="{ThemeResource FilledTextBoxCharacterSpacing}" />
 		<!-- End: Body Large Typo -->
 
+<<<<<<< HEAD
 		<macos:Setter Property="Padding"
 					  Value="{ThemeResource FilledTextBoxPadding}" />
 		<not_macos:Setter Property="Padding"
 						  Value="{ThemeResource FilledTextBoxPadding}" />
+=======
+		<Setter Property="Padding" Value="{ThemeResource FilledTextBoxPadding}" />
+>>>>>>> a3b9df0 (ci: enforce dotnet format and XAML Styler (#1725))
 
 		<Setter Property="MinHeight" Value="{ThemeResource FilledTextBoxMinHeight}" />
 
@@ -429,7 +433,10 @@
 														 To="{StaticResource DownscaledHeaderCompositeTransformScaleY}" />
 									</Storyboard>
 									<VisualState.StateTriggers>
-										<ut:TextBoxHeaderStateTrigger Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}" FocusState="{Binding FocusState, RelativeSource={RelativeSource TemplatedParent}}" PlaceholderText="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}}" HeaderText="{Binding Header, RelativeSource={RelativeSource TemplatedParent}}" />
+										<ut:TextBoxHeaderStateTrigger Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}"
+																	  FocusState="{Binding FocusState, RelativeSource={RelativeSource TemplatedParent}}"
+																	  PlaceholderText="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}}"
+																	  HeaderText="{Binding Header, RelativeSource={RelativeSource TemplatedParent}}" />
 									</VisualState.StateTriggers>
 								</VisualState>
 							</VisualStateGroup>
@@ -652,7 +659,10 @@
 														 To="{StaticResource DownscaledHeaderCompositeTransformScaleY}" />
 									</Storyboard>
 									<VisualState.StateTriggers>
-										<ut:TextBoxHeaderStateTrigger Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}" FocusState="{Binding FocusState, RelativeSource={RelativeSource TemplatedParent}}" PlaceholderText="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}}" HeaderText="{Binding Header, RelativeSource={RelativeSource TemplatedParent}}" />
+										<ut:TextBoxHeaderStateTrigger Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}"
+																	  FocusState="{Binding FocusState, RelativeSource={RelativeSource TemplatedParent}}"
+																	  PlaceholderText="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}}"
+																	  HeaderText="{Binding Header, RelativeSource={RelativeSource TemplatedParent}}" />
 									</VisualState.StateTriggers>
 								</VisualState>
 							</VisualStateGroup>
@@ -685,7 +695,8 @@
 							</Viewbox>
 
 							<!-- 1: Text Elements Container -->
-							<Grid Grid.Column="1" Margin="{ThemeResource Space200HorizontalThickness}">
+							<Grid Grid.Column="1"
+								  Margin="{ThemeResource Space200HorizontalThickness}">
 								<!--
 									We need to center this in both Singleline and Multiline mode:
 									- SingleLine via Border.MinHeight + SV.HAlign

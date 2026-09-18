@@ -12,8 +12,7 @@
 	<Style x:Key="SeeSourceFlyoutButtonStyle"
 		   BasedOn="{StaticResource DefaultButtonStyle}"
 		   TargetType="Button">
-		<Setter Property="Tag"
-				Value="See Source" />
+		<Setter Property="Tag" Value="See Source" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -26,6 +25,7 @@
 								<Flyout Placement="LeftEdgeAlignedBottom">
 									<Flyout.FlyoutPresenterStyle>
 										<Style TargetType="FlyoutPresenter">
+<<<<<<< HEAD
 											<Setter Property="ScrollViewer.HorizontalScrollMode"
 													Value="Disabled" />
 											<Setter Property="ScrollViewer.HorizontalScrollBarVisibility"
@@ -43,6 +43,16 @@
 											<Setter Property="Margin"
 													not_win:Value="40,100,40,40"
 													win:Value="40,0,40,0" />
+=======
+											<Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled" />
+											<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+											<Setter Property="ScrollViewer.VerticalScrollMode" Value="Disabled" />
+											<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />
+											<Setter Property="MinHeight" Value="0" />
+											<Setter Property="MinWidth" Value="0" />
+											<Setter Property="Padding" Value="0,0,0,2" />
+											<Setter Property="Margin" Value="40,100,40,40" />
+>>>>>>> a3b9df0 (ci: enforce dotnet format and XAML Styler (#1725))
 										</Style>
 									</Flyout.FlyoutPresenterStyle>
 
@@ -67,7 +77,6 @@
 	<Style x:Key="SeeXamlFlyoutButtonStyle"
 		   BasedOn="{StaticResource SeeSourceFlyoutButtonStyle}"
 		   TargetType="Button">
-		<Setter Property="Tag"
-				Value="See Xaml" />
+		<Setter Property="Tag" Value="See Xaml" />
 	</Style>
 </ResourceDictionary>

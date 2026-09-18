@@ -23,12 +23,9 @@
 	<!-- DatePicker Style -->
 	<Style x:Key="CupertinoDatePickerFlyoutButtonStyle"
 		   TargetType="Button">
-		<Setter Property="FontFamily"
-				Value="{ThemeResource CupertinoFontFamily}" />
-		<Setter Property="Background"
-				Value="Transparent" />
-		<Setter Property="Padding"
-				Value="0" />
+		<Setter Property="FontFamily" Value="{ThemeResource CupertinoFontFamily}" />
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="Padding" Value="0" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -53,14 +50,12 @@
 								<VisualState x:Name="PointerOver" />
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="RootGrid.Opacity"
-												Value="0.65" />
+										<Setter Target="RootGrid.Opacity" Value="0.65" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="RootGrid.Opacity"
-												Value="0.65" />
+										<Setter Target="RootGrid.Opacity" Value="0.65" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -72,34 +67,23 @@
 	</Style>
 
 	<Style x:Key="CupertinoDatePickerFlyoutPresenterStyle"
-				   TargetType="DatePickerFlyoutPresenter">
-		<Setter Property="Width"
-				Value="296" />
-		<Setter Property="MinWidth"
-				Value="296" />
-		<Setter Property="MaxHeight"
-				Value="398" />
-		<Setter Property="IsTabStop"
-				Value="False" />
-		<Setter Property="FontFamily"
-				Value="{ThemeResource CupertinoFontFamily}" />
-		<Setter Property="FontWeight"
-				Value="Normal" />
-		<Setter Property="FontSize"
-				Value="{ThemeResource ControlContentThemeFontSize}" />
-		<Setter Property="Background"
-				Value="{ThemeResource SystemBackgroundColor}" />
-		<Setter Property="AutomationProperties.AutomationId"
-				Value="DatePickerFlyoutPresenter" />
-		<Setter Property="BorderThickness"
-				Value="{StaticResource CupertinoDateTimeFlyoutBorderThickness}" />
-		<Setter Property="BorderBrush"
-				Value="{ThemeResource CupertinoDatePickerBorderBrush}" />
-		<Setter Property="CornerRadius"
-				Value="6" />
+		   TargetType="DatePickerFlyoutPresenter">
+		<Setter Property="Width" Value="296" />
+		<Setter Property="MinWidth" Value="296" />
+		<Setter Property="MaxHeight" Value="398" />
+		<Setter Property="IsTabStop" Value="False" />
+		<Setter Property="FontFamily" Value="{ThemeResource CupertinoFontFamily}" />
+		<Setter Property="FontWeight" Value="Normal" />
+		<Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
+		<Setter Property="Background" Value="{ThemeResource SystemBackgroundColor}" />
+		<Setter Property="AutomationProperties.AutomationId" Value="DatePickerFlyoutPresenter" />
+		<Setter Property="BorderThickness" Value="{StaticResource CupertinoDateTimeFlyoutBorderThickness}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource CupertinoDatePickerBorderBrush}" />
+		<Setter Property="CornerRadius" Value="6" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="DatePickerFlyoutPresenter">
+<<<<<<< HEAD
 					<toolkit:ElevatedView MaxHeight="398"
 										  Background="{ThemeResource CupertinoQuinaryGrayBrush}"
 										  BorderBrush="{TemplateBinding BorderBrush}"
@@ -107,6 +91,15 @@
 										  CornerRadius="{TemplateBinding CornerRadius}"
 										  Elevation="{StaticResource MaterialDatePickerFlyoutElevation}"
 										  ShadowColor="{StaticResource ShadowColor}">
+=======
+					<uno:ElevatedView MaxHeight="398"
+									  Background="{ThemeResource CupertinoQuinaryGrayBrush}"
+									  BorderBrush="{TemplateBinding BorderBrush}"
+									  BorderThickness="{TemplateBinding BorderThickness}"
+									  CornerRadius="{TemplateBinding CornerRadius}"
+									  Elevation="{StaticResource MaterialDatePickerFlyoutElevation}"
+									  ShadowColor="{StaticResource ShadowColor}">
+>>>>>>> a3b9df0 (ci: enforce dotnet format and XAML Styler (#1725))
 						<Border x:Name="Background">
 							<Grid x:Name="ContentPanel">
 
@@ -195,18 +188,12 @@
 
 	<Style x:Key="CupertinoDatePickerStyle"
 		   TargetType="DatePicker">
-		<Setter Property="FontFamily"
-				Value="{ThemeResource CupertinoFontFamily}" />
-		<Setter Property="Background"
-				Value="Transparent" />
-		<Setter Property="Foreground"
-				Value="{ThemeResource CupertinoLabelBrush}" />
-		<Setter Property="BorderBrush"
-				Value="{ThemeResource CupertinoDatePickerBorderBrush}" />
-		<Setter Property="HorizontalAlignment"
-				Value="Stretch" />
-		<Setter Property="CornerRadius"
-				Value="{StaticResource CupertinoDatePickerCornerRadius}" />
+		<Setter Property="FontFamily" Value="{ThemeResource CupertinoFontFamily}" />
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="Foreground" Value="{ThemeResource CupertinoLabelBrush}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource CupertinoDatePickerBorderBrush}" />
+		<Setter Property="HorizontalAlignment" Value="Stretch" />
+		<Setter Property="CornerRadius" Value="{StaticResource CupertinoDatePickerCornerRadius}" />
 		<not_win:Setter Property="FlyoutPresenterStyle"
 						Value="{StaticResource CupertinoDatePickerFlyoutPresenterStyle}" />
 
@@ -272,10 +259,8 @@
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="DateText.Foreground"
-												Value="{ThemeResource CupertinoPrimaryGrayColor}" />
-										<Setter Target="HeaderTextBlock.Foreground"
-												Value="{ThemeResource CupertinoPrimaryGrayColor}" />
+										<Setter Target="DateText.Foreground" Value="{ThemeResource CupertinoPrimaryGrayColor}" />
+										<Setter Target="HeaderTextBlock.Foreground" Value="{ThemeResource CupertinoPrimaryGrayColor}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -284,10 +269,8 @@
 								<VisualState x:Name="HasDate" />
 								<VisualState x:Name="HasNoDate">
 									<VisualState.Setters>
-										<Setter Target="DateText.Visibility"
-												Value="Collapsed" />
-										<Setter Target="PlaceholderText.Visibility"
-												Value="Visible" />
+										<Setter Target="DateText.Visibility" Value="Collapsed" />
+										<Setter Target="PlaceholderText.Visibility" Value="Visible" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>

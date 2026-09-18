@@ -1,20 +1,25 @@
+<<<<<<< HEAD
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					mc:Ignorable="">
+=======
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+>>>>>>> a3b9df0 (ci: enforce dotnet format and XAML Styler (#1725))
 
 	<!--
 		Simple Design System — ListView / ListViewItem Style
 		Maps SDS ListBox component tokens to WinUI ListView + ListViewItem.
-
+		
 		Lightweight styling pattern: every visual-state brush is exposed via
 		ThemeResource so consumers can override any individual key.
-
+		
 		Semantic resource layer:
 		ListView*       = semantic keys for the container (source of truth)
 		ListViewItem*   = semantic keys for list items (source of truth)
-
+		
 		SDS ListBox:
 		Container: bg = background-default-default, border = border-default-default, radius = 8px
 		Item normal: transparent bg, text = text-default-default, description = text-default-secondary
