@@ -20,7 +20,7 @@ uid: Uno.Themes.Overview
 
 Cross-cutting guides shared by the theme libraries:
 
-- [Seed Color Palette](seed-colors.md) — generate the full Light and Dark color theme from a single seed color (Material and Simple)
+- [Seed Color Palette](seed-colors.md) — generate the full Light and Dark color theme from a single seed color (Material, Simple and Cupertino)
 - [Semantic Styles](semantic-styles.md) — design-system-agnostic style names, so you can switch themes without changing your XAML
 - [Design Tokens](design-tokens.md) — spacing, shape, and density values you can adjust globally
 - [Lightweight Styling](lightweight-styling.md) — override individual colors, brushes, and sizes per control without redefining the control template

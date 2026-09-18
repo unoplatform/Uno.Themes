@@ -6,7 +6,7 @@ uid: Uno.Themes.SeedColors
 
 Pick one color — typically your brand color — and Uno Themes builds the entire color theme from it: buttons, text, surfaces, outlines, hover and pressed states, for both Light and Dark mode. Instead of hand-defining 30+ color resources, you set a single **seed color** and the library derives the full semantic palette automatically, using the Material Design 3 [HCT](https://material.io/blog/science-of-color-design) color model.
 
-Seed color generation is **opt-in**: by default, `MaterialTheme` and `SimpleTheme` use their built-in palettes. The generator only runs when you explicitly set `PrimarySeed` on a `ThemeColors` object.
+Seed color generation is **opt-in**: by default, `MaterialTheme`, `SimpleTheme` and `CupertinoTheme` use their built-in palettes. The generator only runs when you explicitly set `PrimarySeed` on a `ThemeColors` object.
 
 > [!TIP]
 > New to Uno Themes? Set up a theme first — see [Material getting started](xref:Uno.Themes.Material.GetStarted) or [Simple getting started](xref:Uno.Themes.Simple.GetStarted) — then come back here. Everything on this page assumes a `MaterialTheme` or `SimpleTheme` is already in your `App.xaml`.

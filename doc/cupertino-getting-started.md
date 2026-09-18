@@ -53,9 +53,7 @@ Depending on the type of project template that the Uno Platform application was 
 
                 <!-- Code ommitted of brevity -->
 
-                <uc:CupertinoColors xmlns="using:Uno.Cupertino" />
-                <uc:CupertinoFonts xmlns="using:Uno.Cupertino" />
-                <uc:CupertinoResources xmlns="using:Uno.Cupertino" />
+                <CupertinoTheme xmlns="using:Uno.Cupertino" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
@@ -74,9 +72,7 @@ Depending on the type of project template that the Uno Platform application was 
     <ResourceDictionary>
         <ResourceDictionary.MergedDictionaries>
 
-        <CupertinoColors xmlns="using:Uno.Cupertino" />
-        <CupertinoFonts xmlns="using:Uno.Cupertino" />
-        <CupertinoResources xmlns="using:Uno.Cupertino" />
+        <CupertinoTheme xmlns="using:Uno.Cupertino" />
 
         </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
@@ -109,9 +105,7 @@ Depending on the type of project template that the Uno Platform application was 
                     <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
 
                     <!-- Load Uno.Cupertino resources -->
-                    <CupertinoColors xmlns="using:Uno.Cupertino" />
-                    <CupertinoFonts xmlns="using:Uno.Cupertino" />
-                    <CupertinoResources xmlns="using:Uno.Cupertino" />
+                    <CupertinoTheme xmlns="using:Uno.Cupertino" />
 
                     <!-- Load custom application resources -->
                     <!-- ... -->
@@ -155,14 +149,45 @@ It accepts the same properties as the other themes — `ColorOverrideSource`, `F
 The semantic style keys Cupertino has a style for are aliased (`FilledButtonStyle`, `TextButtonStyle`, `OutlinedTextBoxStyle`, `OutlinedPasswordBoxStyle`, `ComboBoxStyle`, `ComboBoxItemStyle`, `CheckBoxStyle`, `RadioButtonStyle`, `ToggleSwitchStyle`, `SliderStyle`, `HyperlinkButtonStyle`, `CalendarViewStyle`, `CalendarDatePickerStyle`, `DatePickerStyle`, `ProgressBarStyle`), so markup written against those keys moves between design systems unchanged.
 
 > [!NOTE]
-> With a [seed color](xref:Uno.Themes.SeedColors), the container roles follow the Material 3 recipe rather than Apple's tinted fills: the generated scheme is coherent, but it is no longer the stock Apple palette. The built-in `Cupertino*Style` control styles still paint from the `Cupertino*` color keys described below, so a seed or a shared-role override reaches the semantic brushes and anything styled with them, not yet those control styles.
+> With a [seed color](xref:Uno.Themes.SeedColors), the container roles follow the Material 3 recipe rather than Apple's tinted fills: the generated scheme is coherent, but it is no longer the stock Apple palette. The accent brushes of the Cupertino vocabulary — `CupertinoBlueBrush` and `CupertinoLinkBrush` — follow the seeded primary, so the built-in `Cupertino*Style` control styles pick the accent up too; the other system colors (`CupertinoRedBrush`, `CupertinoGreenBrush`, …) keep their Apple values.
+
+### Cupertino colors and brushes
+
+Alongside the shared roles, `CupertinoTheme` keeps the Cupertino vocabulary: the system colors (`CupertinoRedColor`, `CupertinoOrangeColor`, `CupertinoYellowColor`, `CupertinoGreenColor`, `CupertinoMintColor`, `CupertinoTealColor`, `CupertinoCyanColor`, `CupertinoBlueColor`, `CupertinoIndigoColor`, `CupertinoPurpleColor`, `CupertinoPinkColor`, `CupertinoBrownColor`), the six grays, and the label, fill, background and separator colors, each with a matching `Cupertino*Brush`. The values follow Apple's system palette as published in June 2025.
+
+The brushes are live: overriding a `*Color` key through `ColorOverrideSource` repaints everything already on screen that uses the matching brush, without re-navigation. To re-tint the accent, override `PrimaryColor` (it reaches the semantic brushes and the Cupertino accent brushes) or `CupertinoBlueColor` (the Cupertino accent only; it wins over `PrimaryColor` and over a seed).
+
+## Migrating from `CupertinoColors` / `CupertinoFonts` / `CupertinoResources`
+
+The three dictionaries are obsolete. They keep working: `CupertinoResources` is now a `CupertinoTheme`, and `CupertinoColors` / `CupertinoFonts` only record their `OverrideSource` for the `CupertinoResources` declared **after** them. To migrate, replace the three with one:
+
+```xml
+<!-- Before -->
+<CupertinoColors xmlns="using:Uno.Cupertino"
+                 OverrideSource="ms-appx:///Styles/Application/CupertinoColorsOverride.xaml" />
+<CupertinoFonts xmlns="using:Uno.Cupertino"
+                OverrideSource="ms-appx:///Styles/Application/CupertinoFontsOverride.xaml" />
+<CupertinoResources xmlns="using:Uno.Cupertino" />
+
+<!-- After -->
+<CupertinoTheme xmlns="using:Uno.Cupertino"
+                ColorOverrideSource="ms-appx:///Styles/Application/CupertinoColorsOverride.xaml"
+                FontOverrideSource="ms-appx:///Styles/Application/CupertinoFontsOverride.xaml" />
+```
+
+What changes when you upgrade, whether or not you migrate:
+
+- **Implicit styles are always on.** `WithImplicitStyles` no longer has any effect, and unstyled `Button`, `TextBox`, `CheckBox`, `ToggleSwitch`, `Slider`, `TextBlock`, … now pick up the Cupertino styles. Set an explicit `Style` where you relied on the platform default.
+- **`CupertinoColors` and `CupertinoFonts` carry no resources on their own.** Used without `CupertinoResources` (or `CupertinoTheme`), they resolve nothing.
+- **Color values** moved to Apple's June 2025 system palette (for example `CupertinoBlueColor` is `#0088FF` / `#0091FF`, previously `#007BFF` / `#0A84FF`).
+- **The default typeface is Inter**, see [Change Default Font](#change-default-font).
+- **In a font override file, redefine `DefaultFontFamily`.** `CupertinoFontFamily` is an alias of that root; the obsolete `CupertinoFonts` path still translates a file that only redefines `CupertinoFontFamily`, `CupertinoTheme.FontOverrideSource` does not.
+
+If you need the previous look unchanged while you migrate, replace `<CupertinoResources />` with `<CupertinoResourcesV1 />`: the styles, colors and fonts exactly as they shipped before `CupertinoTheme`, frozen, with none of the semantic system. It is obsolete from the start and is removed in the next major version.
 
 ## Customization
 
 The following guides require the creation of new `ResourceDictionary` files in your application project. For more information on how to define styles and resources in a separate `ResourceDictionary`, refer to the [resource management documentation](xref:Guide.HowTo.Create-Control-Library#moving-the-control-style-in-a-separate-resource-dictionary).
-
-> [!NOTE]
-> The overrides below apply to the `CupertinoColors` / `CupertinoFonts` / `CupertinoResources` setup. With `CupertinoTheme`, use `ColorOverrideSource` / `FontOverrideSource` instead, as for the [other themes](xref:Uno.Themes.Overview).
 
 ### Customize Color Palette
 
@@ -196,16 +221,18 @@ The following guides require the creation of new `ResourceDictionary` files in y
     </ResourceDictionary>
     ```
 
-3. In `App.xaml`, update `<CupertinoColors />` with the override from the previous steps:
+3. In `App.xaml`, update `<CupertinoTheme />` with the override from the previous steps:
 
     ```xml
-    <CupertinoColors xmlns="using:Uno.Cupertino"
-                     OverrideSource="ms-appx:///Styles/Application/CupertinoColorsOverride.xaml" />
+    <CupertinoTheme xmlns="using:Uno.Cupertino"
+                    ColorOverrideSource="ms-appx:///Styles/Application/CupertinoColorsOverride.xaml" />
     ```
+
+The same file can override the shared roles (`PrimaryColor`, `SurfaceColor`, …). To derive the whole scheme from one color instead, see [Seed Color Palette](xref:Uno.Themes.SeedColors).
 
 ### Change Default Font
 
-By default, Uno Cupertino uses [Inter](https://rsms.me/inter/), brought in through the `Uno.Fonts.Inter` package, so text renders the same on every platform. Apple's SF Pro cannot be redistributed and does not resolve by name outside Apple devices, which is why it is not the default. Upon installation of the Uno Cupertino package, you will have a `CupertinoFontFamily` resource available. It is an alias of the shared `DefaultFontFamily` root token (see [Design Tokens](design-tokens.md#typography)). With `CupertinoTheme`, set `DefaultFontFamily` or a `FontOverrideSource` that redefines `DefaultFontFamily`; under the `CupertinoFonts` setup described below there is no semantic type scale, so `CupertinoFontFamily` stays the key to override.
+By default, Uno Cupertino uses [Inter](https://rsms.me/inter/), brought in through the `Uno.Fonts.Inter` package, so text renders the same on every platform. Apple's SF Pro cannot be redistributed and does not resolve by name outside Apple devices, which is why it is not the default. The root of the type scale is the shared `DefaultFontFamily` token (see [Design Tokens](design-tokens.md#typography)); `CupertinoFontFamily`, which the Cupertino control styles read, is an alias of it. Overriding only the alias changes those control styles but not the shared type scale (`BodyLargeFontFamily`, …), so override the root and both follow.
 
 If you would like Uno Cupertino to use a different font, you can override the default `FontFamily` by following these steps:
 
@@ -217,14 +244,16 @@ If you would like Uno Cupertino to use a different font, you can override the de
     <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-        <FontFamily x:Key="CupertinoFontFamily">ms-appx:///Assets/Fonts/MyCustomFont.ttf</FontFamily>
+        <FontFamily x:Key="DefaultFontFamily">ms-appx:///Assets/Fonts/MyCustomFont.ttf</FontFamily>
 
     </ResourceDictionary>
     ```
 
-4. In the `App.xaml`, update `<CupertinoFonts />` with the override from the previous steps:
+4. In the `App.xaml`, update `<CupertinoTheme />` with the override from the previous steps:
 
     ```xml
-    <CupertinoFonts xmlns="using:Uno.Cupertino"
-                    OverrideSource="ms-appx:///Styles/Application/CupertinoFontsOverride.xaml" />
+    <CupertinoTheme xmlns="using:Uno.Cupertino"
+                    FontOverrideSource="ms-appx:///Styles/Application/CupertinoFontsOverride.xaml" />
     ```
+
+For a font that needs no file of its own, the `DefaultFontFamily` property does the same in one line, and can be changed at runtime — see [Typography Font Swap](design-tokens.md#typography-font-swap).

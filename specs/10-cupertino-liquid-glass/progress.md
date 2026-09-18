@@ -339,7 +339,7 @@ Deviations from the Phase 1 list, each deliberate:
 - **No font-cascade test from a scoped container** — `specs/lessons.md` records that alias cascades
   resolve against the application scope; that test arrives with the sample's `App.xaml` switch.
 
-Still open in Phase 1: implicit styles and the frozen `CupertinoResourcesV1` (D-1); `Thickness.xaml` and motion tokens (unblocked, but nothing reads them before Phase 3); Toolkit
+Still open in Phase 1: `Thickness.xaml` and motion tokens (unblocked, but nothing reads them before Phase 3); Toolkit
 key inventory; CI matrix row; docs delta.
 
 ### Phase 1, slice 2 — 2026-09-18: type scale and semantic style aliases (additive)
@@ -423,6 +423,54 @@ Deviations:
 - `AddThemeSpecificResources` loads `CupertinoBrushes.xaml` unguarded, exactly as `BaseTheme` loads
   `SharedColors.xaml`: an in-package URI that fails to load means every style is missing too, and catching
   it without a logger available in this assembly would be a silent swallow (AGENTS.md §8).
+
+### Phase 1, slice 5 — 2026-09-18: implicit styles, frozen V1, Toolkit inventory, docs
+
+Landed:
+
+- **Implicit styles** in `_Resources.xaml`: the set `CupertinoResources.WithImplicitStyles` used to export,
+  minus `ProgressRing` (compiled out on Windows until D-7's storyboard ring). Implicit `Button` = the plain
+  style (D-2). Asserted on realized controls, not by lookup.
+- **`CupertinoResourcesV1`** (D-1 escape hatch): `master`'s 17 control dictionaries and 5 application
+  dictionaries copied verbatim under `Styles/{Controls,Application}/v1/` and merged into a second output,
+  `Generated/mergedpages.v1.xaml`; `CupertinoColorsV1` (x:Class, palette merged before
+  `InitializeComponent` so the brushes' `{StaticResource}` resolve) and `CupertinoFontsV1` read the
+  overrides recorded by the obsolete `CupertinoColors` / `CupertinoFonts`. All three types are `[Obsolete]`
+  from birth. A diff of every v1 file against `master` shows only the two intended edits (the `x:Class`
+  rename, the two nested dictionary names). `mergedpages.xaml` is unaffected (no v1 origins).
+- **Toolkit key inventory** (`uno.toolkit.ui@d88a0c12`, `src/library/Uno.Toolkit.Cupertino`): referenced keys
+  minus keys it declares itself minus WinUI system brushes leaves **8** keys it needs from this library —
+  `CupertinoBlueBrush`, `CupertinoLabelBrush`, `CupertinoSystemBackgroundBrush`,
+  `CupertinoTertiarySystemFillBrush`, `CupertinoBlueColor`, `CupertinoQuaternaryGrayColor`, `LabelColor`,
+  `SystemBackgroundColor`. All resolve under `CupertinoTheme`; pinned by
+  `When_ThemeLoaded_Then_KeysTheToolkitDependsOnResolve`. It has no code dependency on the legacy classes.
+- **Docs:** `cupertino-getting-started.md` installs and customises through `CupertinoTheme`, documents the
+  Cupertino colour vocabulary and its live brushes, and gains a migration section (what changes on upgrade,
+  the V1 escape hatch); `seed-colors.md` / `themes-overview.md` / `design-tokens.md` no longer exclude
+  Cupertino.
+
+Result: Cupertino **67 / 67** on `net10.0-desktop` Release. Formatters clean; cSpell and markdownlint clean
+on the edited pages.
+
+Deviations and things to know:
+
+- **The V1 override test was split.** Uno builds the dictionary graph behind a `Source`-loaded
+  `mergedpages.v1.xaml` once per process, so every `CupertinoResourcesV1` shares one nested
+  `CupertinoColorsV1`: the recorded override is read on the first load only. A brush-level "with override"
+  and "without override" assertion therefore cannot both pass in one run, in either order. The suite asserts
+  the override at the `CupertinoColorsV1` colour level instead; the end-to-end brush assertion was confirmed
+  passing alone in a fresh process, which is the real-app scenario (one `App.xaml`, loaded once).
+- **+23 duplicated `Uno0001` warnings** ("not implemented in Uno") from the v1 merged page's generated code —
+  the same 23 the main merged page already emits, because the XAML is identical. Not suppressed: widening
+  `NoWarn` needs approval (AGENTS.md §4). Material's props already carry `NoWarn` for it; **maintainer call.**
+- **V1 keeps the Lottie progress ring**, so D-7 (drop Lottie) and the frozen V1 collide in Phase 3: either V1
+  loses its `ProgressRing.xaml`, or the Lottie dependency outlives D-7 by one major. Decide there.
+- Only `net10.0-desktop` was built and tested. The x:Class dictionary and the `WinUI_Desktop` branch of
+  `CupertinoResourcesV1` are unverified on `net10.0-windows10.0.19041`; CI covers it.
+
+**Phase 1 status:** every item is done or explicitly deferred with a reason, except the phase gate's hosting
+smoke, which fails identically on `master` (see "Hand-offs"), and the three settings DPs, which move to
+Phases 2–3 with their consumers.
 
 Environment note for whoever picks this up: **Debug** builds of the sample heads fail on the current dev
 box (`CS0104` `VisualTreeHelperEx` ambiguous with `Uno.Toolkit.UI`, `CS0012` on `Uno, Version=255.255.255.255`)
