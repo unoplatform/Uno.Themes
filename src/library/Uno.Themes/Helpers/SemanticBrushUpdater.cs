@@ -148,6 +148,61 @@ internal static class SemanticBrushUpdater
 		}
 	}
 
+	/// <summary>
+	/// Applies resolved colors to a design system's own brushes (e.g. the <c>Cupertino*Brush</c> set), which
+	/// follow no role/state naming scheme and are therefore described by an explicit map.
+	/// </summary>
+	/// <param name="brushes">The design system's brush dictionary. Must be the same instance across rebuilds.</param>
+	/// <param name="colorLayers">The color dictionaries in <b>increasing</b> precedence order. Later entries win.</param>
+	/// <param name="brushColorKeys">
+	/// Brush key → the color keys that may supply it. The highest-precedence layer defining <em>any</em> of
+	/// them wins, and within a layer the first listed wins — so a brush can name its own color first and a
+	/// semantic role second, and follow a seed without losing a consumer override of its own color.
+	/// </param>
+	internal static void Apply(
+		ResourceDictionary brushes,
+		IReadOnlyList<ResourceDictionary> colorLayers,
+		IReadOnlyList<(string Brush, string[] Colors)> brushColorKeys)
+	{
+		foreach (var (brushTheme, colorThemes) in ThemesConstants.BrushThemeSources)
+		{
+			if (!TryGetThemeDictionary(brushes, brushTheme, out var themedBrushes))
+			{
+				continue;
+			}
+
+			for (int i = 0; i < brushColorKeys.Count; i++)
+			{
+				var (brushKey, colorKeys) = brushColorKeys[i];
+				if (themedBrushes.TryGetValue(brushKey, out var value)
+					&& value is SolidColorBrush brush
+					&& TryResolveAny(colorLayers, colorThemes, colorKeys, out var color)
+					&& !brush.Color.Equals(color))
+				{
+					brush.Color = color;
+				}
+			}
+		}
+	}
+
+	private static bool TryResolveAny(
+		IReadOnlyList<ResourceDictionary> colorLayers, string[] themeKeys, string[] keys, out Color resolved)
+	{
+		for (int i = colorLayers.Count - 1; i >= 0; i--)
+		{
+			for (int k = 0; k < keys.Length; k++)
+			{
+				if (TryResolveInLayer(colorLayers[i], themeKeys, keys[k], out resolved))
+				{
+					return true;
+				}
+			}
+		}
+
+		resolved = default;
+		return false;
+	}
+
 	// All theme keys a color layer may declare. Used to detect that a key is theme-scoped in a
 	// layer whose dictionaries for the requested theme did not carry it.
 	private static readonly string[] _allThemeKeys = { "Light", "Dark", "Default", "HighContrast" };
@@ -168,29 +223,34 @@ internal static class SemanticBrushUpdater
 	{
 		for (int i = colorLayers.Count - 1; i >= 0; i--)
 		{
-			var layer = colorLayers[i];
-
-			for (int t = 0; t < themeKeys.Length; t++)
+			if (TryResolveInLayer(colorLayers[i], themeKeys, key, out resolved))
 			{
-				if (TryGetThemeDictionary(layer, themeKeys[t], out var themed)
-					&& themed.TryGetValue(key, out var themedValue)
-					&& themedValue is T themedResult)
-				{
-					resolved = themedResult;
-					return true;
-				}
-			}
-
-			if (IsThemeScoped(layer, key))
-			{
-				continue;
-			}
-
-			if (layer.TryGetValue(key, out var value) && value is T result)
-			{
-				resolved = result;
 				return true;
 			}
+		}
+
+		resolved = default;
+		return false;
+	}
+
+	private static bool TryResolveInLayer<T>(ResourceDictionary layer, string[] themeKeys, string key, out T resolved)
+		where T : struct
+	{
+		for (int t = 0; t < themeKeys.Length; t++)
+		{
+			if (TryGetThemeDictionary(layer, themeKeys[t], out var themed)
+				&& themed.TryGetValue(key, out var themedValue)
+				&& themedValue is T themedResult)
+			{
+				resolved = themedResult;
+				return true;
+			}
+		}
+
+		if (!IsThemeScoped(layer, key) && layer.TryGetValue(key, out var value) && value is T result)
+		{
+			resolved = result;
+			return true;
 		}
 
 		resolved = default;

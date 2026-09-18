@@ -51,6 +51,14 @@ public abstract partial class BaseTheme : ResourceDictionary
 	private ResourceDictionary _semanticBrushes;
 	private ResourceDictionary _previousColorsLayer;
 
+	/// <summary>
+	/// The colour dictionaries of the last rebuild, in increasing precedence (shared palette, theme base
+	/// palette, seed palette, consumer override). Available to a concrete theme from
+	/// <see cref="AddThemeSpecificResources"/> so it can rewrite its own design-system brushes from the same
+	/// resolved colours the semantic brushes were written from.
+	/// </summary>
+	internal IReadOnlyList<ResourceDictionary> ColorLayers { get; private set; } = Array.Empty<ResourceDictionary>();
+
 	// Tracks the dictionaries this theme appends to its own MergedDictionaries during
 	// UpdateSource() so a subsequent rebuild (theme-property change or hot reload) removes
 	// only those, leaving any other entries in place rather than wiping MergedDictionaries.
@@ -780,6 +788,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 		// change). See SemanticBrushUpdater.
 		_semanticBrushes ??= new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorsResourcePath) };
 		SemanticBrushUpdater.Apply(_semanticBrushes, colorLayers);
+		ColorLayers = colorLayers;
 
 		return colors;
 	}
