@@ -110,6 +110,13 @@ internal sealed partial class GuestAppLoader
 	internal bool? LastUnloadedAlcCollected { get; private set; }
 
 	/// <summary>
+	/// Gets the hosted guest's <see cref="Application"/> instance, for hosting verification that has
+	/// to reach into the guest's own ALC (see <c>GuestHostingSmoke</c>). <see langword="null"/> until
+	/// the guest's <c>Application</c> has been constructed by its run loop.
+	/// </summary>
+	internal Application? CurrentGuestApp => _session?.GuestApp;
+
+	/// <summary>
 	/// Loads <paramref name="info"/> into a fresh collectible ALC, tearing down any previous guest first.
 	/// </summary>
 	public async Task LoadAsync(GuestAppInfo info, IProgress<string>? progress = null, CancellationToken cancellationToken = default)

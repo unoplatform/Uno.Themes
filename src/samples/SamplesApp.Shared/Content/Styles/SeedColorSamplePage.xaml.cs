@@ -36,8 +36,7 @@ public sealed partial class SeedColorSamplePage : Page
 	private void ApplySeedColor(Color seed)
 	{
 		_lastSeed = seed;
-		SemanticThemeHelper.SeedColorMode = _lastSeedColorMode;
-		SemanticThemeHelper.PrimarySeed = seed;
+		ApplySeedToTheme(seed);
 
 		var hct = HctColor.FromArgb(ColorToArgb(seed));
 
@@ -50,6 +49,31 @@ public sealed partial class SeedColorSamplePage : Page
 
 		var modeAttribute = _lastSeedColorMode == SeedColorMode.Fidelity ? string.Empty : "\n                 SeedColorMode=\"TonalSpot\"";
 		XamlSnippet.Text = $"<MaterialTheme>\n  <MaterialTheme.Colors>\n    <ThemeColors PrimarySeed=\"#{seed.R:X2}{seed.G:X2}{seed.B:X2}\"{modeAttribute} />\n  </MaterialTheme.Colors>\n</MaterialTheme>";
+	}
+
+	/// <summary>
+	/// Pushes the seed and generation mode onto this application's theme.
+	/// </summary>
+	/// <remarks>
+	/// Resolved through <see cref="NavigationHelper.CurrentApplication"/> rather than the static
+	/// <c>SemanticThemeHelper</c>, which reads <c>Application.Current</c>: that is the *host's*
+	/// application when this sample is hosted in a secondary ALC (ThemesSampleApp), and the host is
+	/// deliberately theme-free, so the static path threw and the page could not even be constructed.
+	/// This is the instance-based access documented in doc/seed-colors.md.
+	/// Missing theme degrades to a no-op so the rest of the page still renders.
+	/// </remarks>
+	private static void ApplySeedToTheme(Color seed)
+	{
+		var application = NavigationHelper.CurrentApplication ?? Application.Current;
+		if (application.GetTheme() is not { } theme)
+		{
+			return;
+		}
+
+		// Matches the lazy creation the static helper performed.
+		theme.Colors ??= new ThemeColors();
+		theme.Colors.SeedColorMode = _lastSeedColorMode;
+		theme.Colors.PrimarySeed = seed;
 	}
 
 	private static int ColorToArgb(Color c) => (c.A << 24) | (c.R << 16) | (c.G << 8) | c.B;

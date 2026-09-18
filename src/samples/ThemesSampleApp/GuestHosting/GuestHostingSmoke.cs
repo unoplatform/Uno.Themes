@@ -51,6 +51,7 @@ internal static class GuestHostingSmoke
 				}
 
 				_logger.LogInformation("[HOSTING-SMOKE] {App} is hosted.", app.DisplayName);
+				passed &= CheckGuestThemeIsReachable(loader, app);
 				passed &= await CheckReclamationAsync(loader);
 			}
 
@@ -80,6 +81,96 @@ internal static class GuestHostingSmoke
 #if !__WASM__
 		Environment.Exit(passed ? 0 : 1);
 #endif
+	}
+
+	/// <summary>
+	/// Verifies the hosted guest can reach its own theme from its own shared sample code.
+	/// </summary>
+	/// <remarks>
+	/// Guests must not resolve their theme through <c>Application.Current</c>: it is a process-wide
+	/// static in the shared Uno.UI and is never assigned for a secondary ALC, so it returns this
+	/// deliberately theme-free wrapper. That is what broke the Seed Color page, which threw out of
+	/// its own constructor and could not be opened in any guest. The guest heads publish themselves
+	/// on their per-ALC <c>NavigationHelper.CurrentApplication</c> instead; this asserts that
+	/// hand-off is in place and actually yields a <c>BaseTheme</c>.
+	/// <para>
+	/// Read via reflection because the guest's <c>SamplesApp.Shared</c> and theme libraries are
+	/// isolated per-ALC (<c>!Uno.Themes.WinUI</c> in GuestSharedAssemblies.txt), so the wrapper
+	/// shares no type identity with them — the same reason it cannot call <c>GetTheme()</c> on a
+	/// guest app itself. Existing reflection precedent: GuestAppLoader.Sweeps.cs.
+	/// </para>
+	/// <para>
+	/// Deliberately asserts the invariant rather than constructing the Seed Color page: building a
+	/// guest visual tree here would add ALC roots and could destabilise the reclamation check below,
+	/// failing this CI gate for reasons unrelated to theming. Systematic per-page coverage is a
+	/// separate follow-up.
+	/// </para>
+	/// </remarks>
+	private static bool CheckGuestThemeIsReachable(GuestAppLoader loader, GuestAppInfo app)
+	{
+		var guestApp = loader.CurrentGuestApp;
+		if (guestApp is null)
+		{
+			_logger.LogError("[HOSTING-SMOKE] {App} produced no Application instance to check.", app.DisplayName);
+			return false;
+		}
+
+		var navigationHelper = guestApp.GetType().Assembly.GetType("Uno.Themes.Samples.NavigationHelper");
+		if (navigationHelper?.GetProperty("CurrentApplication")?.GetValue(null) is not Application registered)
+		{
+			_logger.LogError(
+				"[HOSTING-SMOKE] {App} did not publish NavigationHelper.CurrentApplication; its shared code cannot reach its own theme.",
+				app.DisplayName);
+			return false;
+		}
+
+		if (!ReferenceEquals(registered, guestApp))
+		{
+			_logger.LogError(
+				"[HOSTING-SMOKE] {App} published a different Application than the one hosted.",
+				app.DisplayName);
+			return false;
+		}
+
+		// Mirrors Uno.Themes' own first-level MergedDictionaries scan, matched by name against the
+		// guest's isolated BaseTheme type — hence this rather than calling GetTheme() directly.
+		var theme = registered.Resources?.MergedDictionaries
+			.FirstOrDefault(d => IsBaseTheme(d.GetType()));
+
+		if (theme is null)
+		{
+			// Not a failure: only Material and Simple ship a BaseTheme-derived dictionary. Cupertino
+			// merges CupertinoColors/Fonts/Resources and has no CupertinoTheme type at all, which is
+			// why the Seed Color page declares SupportedDesigns = { Material, Simple }. The invariant
+			// this gate enforces is the hand-off above, which every guest owes.
+			_logger.LogInformation(
+				"[HOSTING-SMOKE] {App} publishes its application; it merges no BaseTheme (expected for this design).",
+				app.DisplayName);
+			return true;
+		}
+
+		_logger.LogInformation(
+			"[HOSTING-SMOKE] {App} resolves its own theme ({Theme}) from its own application.",
+			app.DisplayName,
+			theme.GetType().Name);
+		return true;
+	}
+
+	/// <summary>
+	/// Walks the base chain by name: <c>BaseTheme</c> lives in the guest's isolated
+	/// <c>Uno.Themes.WinUI</c>, so the wrapper has no shared type to compare against.
+	/// </summary>
+	private static bool IsBaseTheme(Type? type)
+	{
+		for (var current = type; current is not null; current = current.BaseType)
+		{
+			if (current.FullName == "Uno.Themes.BaseTheme")
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	private static async Task<bool> CheckReclamationAsync(GuestAppLoader loader)
