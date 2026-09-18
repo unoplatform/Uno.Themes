@@ -16,6 +16,14 @@ internal static class CupertinoConstants
 	public static string StateConstants = $"ms-appx:///{PackageName}/Styles/Application/StateConstants.xaml";
 	public static string MergedPages = $"ms-appx:///{PackageName}/Generated/mergedpages.xaml";
 
+	/// <summary>Resource paths of the frozen pre-<see cref="CupertinoTheme"/> generation, see <see cref="CupertinoResourcesV1"/>.</summary>
+	public static class V1
+	{
+		public static string ColorPalette = $"ms-appx:///{PackageName}/Styles/Application/v1/ColorPalette.xaml";
+		public static string Fonts = $"ms-appx:///{PackageName}/Styles/Application/v1/Fonts.xaml";
+		public static string MergedPages = $"ms-appx:///{PackageName}/Generated/mergedpages.v1.xaml";
+	}
+
 	/// <summary>The font key a pre-<see cref="CupertinoTheme"/> font override file redefines.</summary>
 	public const string LegacyFontFamilyKey = "CupertinoFontFamily";
 
