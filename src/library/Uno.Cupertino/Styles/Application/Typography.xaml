@@ -1,0 +1,250 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!--
+		Cupertino — Semantic Typography Overrides
+		
+		Maps Apple's iOS text styles (Large / default Dynamic Type size) onto the shared semantic
+		type scale defined in SharedTypography.xaml. Each slot below names the Apple style it carries.
+		
+		CharacterSpacing is 0 everywhere: Apple's tracking tables are unpublished and SF tracks
+		dynamically, so the Material-derived shared defaults are overridden rather than inherited.
+		
+		Font family: the *FontFamily slot keys are declared once, in SharedTypography.xaml, as
+		aliases of the DefaultFontFamily root; Fonts.xaml sets that root. This file overrides only
+		size, weight and character spacing.
+		
+		This dictionary is merged by BaseDictionaries.xaml AFTER SharedTypography.xaml, and is
+		excluded from the XamlMergeInput glob in cupertino-common.props to keep it that way. Both
+		halves are load-bearing: resources merged into mergedpages itself lose to every dictionary
+		BaseDictionaries merges, so a slot declared here would silently resolve to the shared
+		Material value instead of Cupertino's.
+	-->
+
+	<ResourceDictionary.ThemeDictionaries>
+
+		<ResourceDictionary x:Key="Default">
+
+			<!-- DISPLAY -->
+
+			<!-- DisplayLarge — extrapolated above Large Title (40pt, Bold) -->
+			<x:String x:Key="DisplayLargeFontWeight">Bold</x:String>
+			<x:Double x:Key="DisplayLargeFontSize">40</x:Double>
+			<x:Int32 x:Key="DisplayLargeCharacterSpacing">0</x:Int32>
+
+			<!-- DisplayMedium — Large Title, emphasized (34pt, Bold) -->
+			<x:String x:Key="DisplayMediumFontWeight">Bold</x:String>
+			<x:Double x:Key="DisplayMediumFontSize">34</x:Double>
+			<x:Int32 x:Key="DisplayMediumCharacterSpacing">0</x:Int32>
+
+			<!-- DisplaySmall — Large Title (34pt, Normal) -->
+			<x:String x:Key="DisplaySmallFontWeight">Normal</x:String>
+			<x:Double x:Key="DisplaySmallFontSize">34</x:Double>
+			<x:Int32 x:Key="DisplaySmallCharacterSpacing">0</x:Int32>
+
+			<!-- HEADLINE -->
+
+			<!-- HeadlineLarge — Title 1 (28pt, Normal) -->
+			<x:String x:Key="HeadlineLargeFontWeight">Normal</x:String>
+			<x:Double x:Key="HeadlineLargeFontSize">28</x:Double>
+			<x:Int32 x:Key="HeadlineLargeCharacterSpacing">0</x:Int32>
+
+			<!-- HeadlineMedium — Title 2 (22pt, Normal) -->
+			<x:String x:Key="HeadlineMediumFontWeight">Normal</x:String>
+			<x:Double x:Key="HeadlineMediumFontSize">22</x:Double>
+			<x:Int32 x:Key="HeadlineMediumCharacterSpacing">0</x:Int32>
+
+			<!-- HeadlineSmall — Title 3 (20pt, Normal) -->
+			<x:String x:Key="HeadlineSmallFontWeight">Normal</x:String>
+			<x:Double x:Key="HeadlineSmallFontSize">20</x:Double>
+			<x:Int32 x:Key="HeadlineSmallCharacterSpacing">0</x:Int32>
+
+			<!-- TITLE -->
+
+			<!-- TitleLarge — Title 3, emphasized (20pt, SemiBold) -->
+			<x:String x:Key="TitleLargeFontWeight">SemiBold</x:String>
+			<x:Double x:Key="TitleLargeFontSize">20</x:Double>
+			<x:Int32 x:Key="TitleLargeCharacterSpacing">0</x:Int32>
+
+			<!-- TitleMedium — Headline (17pt, SemiBold) -->
+			<x:String x:Key="TitleMediumFontWeight">SemiBold</x:String>
+			<x:Double x:Key="TitleMediumFontSize">17</x:Double>
+			<x:Int32 x:Key="TitleMediumCharacterSpacing">0</x:Int32>
+
+			<!-- TitleSmall — Subhead, emphasized (15pt, SemiBold) -->
+			<x:String x:Key="TitleSmallFontWeight">SemiBold</x:String>
+			<x:Double x:Key="TitleSmallFontSize">15</x:Double>
+			<x:Int32 x:Key="TitleSmallCharacterSpacing">0</x:Int32>
+
+			<!-- BODY -->
+
+			<!-- BodyLarge — Body (17pt, Normal) -->
+			<x:String x:Key="BodyLargeFontWeight">Normal</x:String>
+			<x:Double x:Key="BodyLargeFontSize">17</x:Double>
+			<x:Int32 x:Key="BodyLargeCharacterSpacing">0</x:Int32>
+
+			<!-- BodyMedium — Callout (16pt, Normal) -->
+			<x:String x:Key="BodyMediumFontWeight">Normal</x:String>
+			<x:Double x:Key="BodyMediumFontSize">16</x:Double>
+			<x:Int32 x:Key="BodyMediumCharacterSpacing">0</x:Int32>
+
+			<!-- BodySmall — Subhead (15pt, Normal) -->
+			<x:String x:Key="BodySmallFontWeight">Normal</x:String>
+			<x:Double x:Key="BodySmallFontSize">15</x:Double>
+			<x:Int32 x:Key="BodySmallCharacterSpacing">0</x:Int32>
+
+			<!-- LABEL -->
+
+			<!-- LabelLarge — Body, button label (17pt, Medium) -->
+			<x:String x:Key="LabelLargeFontWeight">Medium</x:String>
+			<x:Double x:Key="LabelLargeFontSize">17</x:Double>
+			<x:Int32 x:Key="LabelLargeCharacterSpacing">0</x:Int32>
+
+			<!-- LabelMedium — Subhead, segmented / picker label (15pt, Medium) -->
+			<x:String x:Key="LabelMediumFontWeight">Medium</x:String>
+			<x:Double x:Key="LabelMediumFontSize">15</x:Double>
+			<x:Int32 x:Key="LabelMediumCharacterSpacing">0</x:Int32>
+
+			<!-- LabelSmall — Footnote, emphasized (13pt, Medium) -->
+			<x:String x:Key="LabelSmallFontWeight">Medium</x:String>
+			<x:Double x:Key="LabelSmallFontSize">13</x:Double>
+			<x:Int32 x:Key="LabelSmallCharacterSpacing">0</x:Int32>
+
+			<!-- LabelExtraSmall — Caption 2, tab-bar label (11pt, Medium) -->
+			<x:String x:Key="LabelExtraSmallFontWeight">Medium</x:String>
+			<x:Double x:Key="LabelExtraSmallFontSize">11</x:Double>
+			<x:Int32 x:Key="LabelExtraSmallCharacterSpacing">0</x:Int32>
+
+			<!-- CAPTION -->
+
+			<!-- CaptionLarge — Footnote (13pt, Normal) -->
+			<x:String x:Key="CaptionLargeFontWeight">Normal</x:String>
+			<x:Double x:Key="CaptionLargeFontSize">13</x:Double>
+			<x:Int32 x:Key="CaptionLargeCharacterSpacing">0</x:Int32>
+
+			<!-- CaptionMedium — Caption 1 (12pt, Normal) -->
+			<x:String x:Key="CaptionMediumFontWeight">Normal</x:String>
+			<x:Double x:Key="CaptionMediumFontSize">12</x:Double>
+			<x:Int32 x:Key="CaptionMediumCharacterSpacing">0</x:Int32>
+
+			<!-- CaptionSmall — Caption 2 (11pt, Normal) -->
+			<x:String x:Key="CaptionSmallFontWeight">Normal</x:String>
+			<x:Double x:Key="CaptionSmallFontSize">11</x:Double>
+			<x:Int32 x:Key="CaptionSmallCharacterSpacing">0</x:Int32>
+
+		</ResourceDictionary>
+
+		<ResourceDictionary x:Key="Light">
+
+			<!-- DISPLAY -->
+
+			<!-- DisplayLarge — extrapolated above Large Title (40pt, Bold) -->
+			<x:String x:Key="DisplayLargeFontWeight">Bold</x:String>
+			<x:Double x:Key="DisplayLargeFontSize">40</x:Double>
+			<x:Int32 x:Key="DisplayLargeCharacterSpacing">0</x:Int32>
+
+			<!-- DisplayMedium — Large Title, emphasized (34pt, Bold) -->
+			<x:String x:Key="DisplayMediumFontWeight">Bold</x:String>
+			<x:Double x:Key="DisplayMediumFontSize">34</x:Double>
+			<x:Int32 x:Key="DisplayMediumCharacterSpacing">0</x:Int32>
+
+			<!-- DisplaySmall — Large Title (34pt, Normal) -->
+			<x:String x:Key="DisplaySmallFontWeight">Normal</x:String>
+			<x:Double x:Key="DisplaySmallFontSize">34</x:Double>
+			<x:Int32 x:Key="DisplaySmallCharacterSpacing">0</x:Int32>
+
+			<!-- HEADLINE -->
+
+			<!-- HeadlineLarge — Title 1 (28pt, Normal) -->
+			<x:String x:Key="HeadlineLargeFontWeight">Normal</x:String>
+			<x:Double x:Key="HeadlineLargeFontSize">28</x:Double>
+			<x:Int32 x:Key="HeadlineLargeCharacterSpacing">0</x:Int32>
+
+			<!-- HeadlineMedium — Title 2 (22pt, Normal) -->
+			<x:String x:Key="HeadlineMediumFontWeight">Normal</x:String>
+			<x:Double x:Key="HeadlineMediumFontSize">22</x:Double>
+			<x:Int32 x:Key="HeadlineMediumCharacterSpacing">0</x:Int32>
+
+			<!-- HeadlineSmall — Title 3 (20pt, Normal) -->
+			<x:String x:Key="HeadlineSmallFontWeight">Normal</x:String>
+			<x:Double x:Key="HeadlineSmallFontSize">20</x:Double>
+			<x:Int32 x:Key="HeadlineSmallCharacterSpacing">0</x:Int32>
+
+			<!-- TITLE -->
+
+			<!-- TitleLarge — Title 3, emphasized (20pt, SemiBold) -->
+			<x:String x:Key="TitleLargeFontWeight">SemiBold</x:String>
+			<x:Double x:Key="TitleLargeFontSize">20</x:Double>
+			<x:Int32 x:Key="TitleLargeCharacterSpacing">0</x:Int32>
+
+			<!-- TitleMedium — Headline (17pt, SemiBold) -->
+			<x:String x:Key="TitleMediumFontWeight">SemiBold</x:String>
+			<x:Double x:Key="TitleMediumFontSize">17</x:Double>
+			<x:Int32 x:Key="TitleMediumCharacterSpacing">0</x:Int32>
+
+			<!-- TitleSmall — Subhead, emphasized (15pt, SemiBold) -->
+			<x:String x:Key="TitleSmallFontWeight">SemiBold</x:String>
+			<x:Double x:Key="TitleSmallFontSize">15</x:Double>
+			<x:Int32 x:Key="TitleSmallCharacterSpacing">0</x:Int32>
+
+			<!-- BODY -->
+
+			<!-- BodyLarge — Body (17pt, Normal) -->
+			<x:String x:Key="BodyLargeFontWeight">Normal</x:String>
+			<x:Double x:Key="BodyLargeFontSize">17</x:Double>
+			<x:Int32 x:Key="BodyLargeCharacterSpacing">0</x:Int32>
+
+			<!-- BodyMedium — Callout (16pt, Normal) -->
+			<x:String x:Key="BodyMediumFontWeight">Normal</x:String>
+			<x:Double x:Key="BodyMediumFontSize">16</x:Double>
+			<x:Int32 x:Key="BodyMediumCharacterSpacing">0</x:Int32>
+
+			<!-- BodySmall — Subhead (15pt, Normal) -->
+			<x:String x:Key="BodySmallFontWeight">Normal</x:String>
+			<x:Double x:Key="BodySmallFontSize">15</x:Double>
+			<x:Int32 x:Key="BodySmallCharacterSpacing">0</x:Int32>
+
+			<!-- LABEL -->
+
+			<!-- LabelLarge — Body, button label (17pt, Medium) -->
+			<x:String x:Key="LabelLargeFontWeight">Medium</x:String>
+			<x:Double x:Key="LabelLargeFontSize">17</x:Double>
+			<x:Int32 x:Key="LabelLargeCharacterSpacing">0</x:Int32>
+
+			<!-- LabelMedium — Subhead, segmented / picker label (15pt, Medium) -->
+			<x:String x:Key="LabelMediumFontWeight">Medium</x:String>
+			<x:Double x:Key="LabelMediumFontSize">15</x:Double>
+			<x:Int32 x:Key="LabelMediumCharacterSpacing">0</x:Int32>
+
+			<!-- LabelSmall — Footnote, emphasized (13pt, Medium) -->
+			<x:String x:Key="LabelSmallFontWeight">Medium</x:String>
+			<x:Double x:Key="LabelSmallFontSize">13</x:Double>
+			<x:Int32 x:Key="LabelSmallCharacterSpacing">0</x:Int32>
+
+			<!-- LabelExtraSmall — Caption 2, tab-bar label (11pt, Medium) -->
+			<x:String x:Key="LabelExtraSmallFontWeight">Medium</x:String>
+			<x:Double x:Key="LabelExtraSmallFontSize">11</x:Double>
+			<x:Int32 x:Key="LabelExtraSmallCharacterSpacing">0</x:Int32>
+
+			<!-- CAPTION -->
+
+			<!-- CaptionLarge — Footnote (13pt, Normal) -->
+			<x:String x:Key="CaptionLargeFontWeight">Normal</x:String>
+			<x:Double x:Key="CaptionLargeFontSize">13</x:Double>
+			<x:Int32 x:Key="CaptionLargeCharacterSpacing">0</x:Int32>
+
+			<!-- CaptionMedium — Caption 1 (12pt, Normal) -->
+			<x:String x:Key="CaptionMediumFontWeight">Normal</x:String>
+			<x:Double x:Key="CaptionMediumFontSize">12</x:Double>
+			<x:Int32 x:Key="CaptionMediumCharacterSpacing">0</x:Int32>
+
+			<!-- CaptionSmall — Caption 2 (11pt, Normal) -->
+			<x:String x:Key="CaptionSmallFontWeight">Normal</x:String>
+			<x:Double x:Key="CaptionSmallFontSize">11</x:Double>
+			<x:Int32 x:Key="CaptionSmallCharacterSpacing">0</x:Int32>
+
+		</ResourceDictionary>
+
+	</ResourceDictionary.ThemeDictionaries>
+
+</ResourceDictionary>

@@ -9,4 +9,37 @@
 		<uc:CupertinoColors />
 		<uc:CupertinoFonts />
 	</ResourceDictionary.MergedDictionaries>
+	<!--
+		Semantic style aliases shared with Material and Simple (doc/semantic-styles.md). Only the keys
+		Cupertino has a style for today are declared; the rest arrive with their controls.
+	-->
+
+	<!-- Button -->
+	<StaticResource x:Key="FilledButtonStyle" ResourceKey="CupertinoContainedButtonStyle" />
+	<StaticResource x:Key="TextButtonStyle" ResourceKey="CupertinoButtonStyle" />
+
+	<!-- TextBox / PasswordBox -->
+	<StaticResource x:Key="OutlinedTextBoxStyle" ResourceKey="CupertinoTextBoxStyle" />
+	<StaticResource x:Key="OutlinedPasswordBoxStyle" ResourceKey="CupertinoPasswordBoxStyle" />
+
+	<!-- ComboBox -->
+	<StaticResource x:Key="ComboBoxStyle" ResourceKey="CupertinoComboBoxStyle" />
+	<StaticResource x:Key="ComboBoxItemStyle" ResourceKey="CupertinoComboBoxItemStyle" />
+
+	<!-- Selection controls -->
+	<StaticResource x:Key="CheckBoxStyle" ResourceKey="CupertinoCheckBoxStyle" />
+	<StaticResource x:Key="RadioButtonStyle" ResourceKey="CupertinoRadioButtonStyle" />
+	<StaticResource x:Key="ToggleSwitchStyle" ResourceKey="CupertinoToggleSwitchStyle" />
+	<StaticResource x:Key="SliderStyle" ResourceKey="CupertinoSliderStyle" />
+
+	<!-- HyperlinkButton -->
+	<StaticResource x:Key="HyperlinkButtonStyle" ResourceKey="CupertinoHyperlinkButtonStyle" />
+
+	<!-- Date / calendar -->
+	<StaticResource x:Key="CalendarViewStyle" ResourceKey="CupertinoCalendarViewStyle" />
+	<StaticResource x:Key="CalendarDatePickerStyle" ResourceKey="CupertinoCalendarDatePickerStyle" />
+	<StaticResource x:Key="DatePickerStyle" ResourceKey="CupertinoDatePickerStyle" />
+
+	<!-- Progress -->
+	<StaticResource x:Key="ProgressBarStyle" ResourceKey="CupertinoProgressBarStyle" />
 </ResourceDictionary>

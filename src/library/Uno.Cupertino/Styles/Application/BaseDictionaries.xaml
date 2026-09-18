@@ -11,7 +11,8 @@
 		are searched in reverse), and a merged dictionary beats mergedpages' OWN theme
 		dictionaries. Any Cupertino file that has to override a shared default must
 		therefore be removed from the glob (see cupertino-common.props) and merged
-		here, AFTER the dictionary it overrides. That is why Fonts.xaml is listed below.
+		here, AFTER the dictionary it overrides. That is why Typography.xaml and
+		Fonts.xaml are listed below.
 		
 		Colour resources are intentionally NOT included here: SharedColors, the shared/seed
 		palettes and Cupertino's ColorPalette.xaml are added (and removed) dynamically by
@@ -22,6 +23,7 @@
 		<ResourceDictionary Source="ms-appx:///Uno.Themes.WinUI/Styles/Applications/Common/Converters.xaml" />
 		<ResourceDictionary Source="ms-appx:///Uno.Themes.WinUI/Styles/Applications/Common/SharedTypography.xaml" />
 
+		<ResourceDictionary Source="ms-appx:///Uno.Cupertino.WinUI/Styles/Application/Typography.xaml" />
 		<ResourceDictionary Source="ms-appx:///Uno.Cupertino.WinUI/Styles/Application/Fonts.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 

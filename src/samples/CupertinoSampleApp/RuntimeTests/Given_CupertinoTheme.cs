@@ -110,4 +110,48 @@ public class Given_CupertinoTheme
 
 		Assert.IsNotNull(GetResource<Style>(container, key).TargetType);
 	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow("FilledButtonStyle", typeof(Button))]
+	[DataRow("TextButtonStyle", typeof(Button))]
+	[DataRow("OutlinedTextBoxStyle", typeof(TextBox))]
+	[DataRow("OutlinedPasswordBoxStyle", typeof(PasswordBox))]
+	[DataRow("ComboBoxStyle", typeof(ComboBox))]
+	[DataRow("ComboBoxItemStyle", typeof(ComboBoxItem))]
+	[DataRow("CheckBoxStyle", typeof(CheckBox))]
+	[DataRow("RadioButtonStyle", typeof(RadioButton))]
+	[DataRow("ToggleSwitchStyle", typeof(ToggleSwitch))]
+	[DataRow("SliderStyle", typeof(Slider))]
+	[DataRow("HyperlinkButtonStyle", typeof(HyperlinkButton))]
+	[DataRow("CalendarViewStyle", typeof(CalendarView))]
+	[DataRow("CalendarDatePickerStyle", typeof(CalendarDatePicker))]
+	[DataRow("DatePickerStyle", typeof(DatePicker))]
+	[DataRow("ProgressBarStyle", typeof(ProgressBar))]
+	public void When_ThemeLoaded_Then_SemanticStyleKeysResolve(string key, Type targetType)
+	{
+		var container = CreateThemedContainer(new CupertinoTheme());
+
+		Assert.AreEqual(targetType, GetResource<Style>(container, key).TargetType);
+	}
+
+	// Sizes and weights are literals inside ThemeDictionaries, so a scoped lookup is a valid read of them;
+	// the *FontFamily aliases are not (they resolve against the application scope) and are not asserted here.
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow("DisplayLarge", 40d, "Bold")]
+	[DataRow("DisplaySmall", 34d, "Normal")]
+	[DataRow("HeadlineLarge", 28d, "Normal")]
+	[DataRow("TitleMedium", 17d, "SemiBold")]
+	[DataRow("BodyLarge", 17d, "Normal")]
+	[DataRow("LabelLarge", 17d, "Medium")]
+	[DataRow("CaptionSmall", 11d, "Normal")]
+	public void When_ThemeLoaded_Then_TypeScaleCarriesAppleTextStyles(string slot, double size, string weight)
+	{
+		var container = CreateThemedContainer(new CupertinoTheme());
+
+		Assert.AreEqual(size, GetResource<double>(container, slot + "FontSize"), "shadowed by SharedTypography?");
+		Assert.AreEqual(weight, GetResource<string>(container, slot + "FontWeight"));
+		Assert.AreEqual(0, GetResource<int>(container, slot + "CharacterSpacing"));
+	}
 }

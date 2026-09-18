@@ -329,9 +329,33 @@ Deviations from the Phase 1 list, each deliberate:
 
 Still open in Phase 1, in dependency order: `Uno.Fonts.Inter` + `Fonts.xaml` and the sample `App.xaml`
 switch (both wait on **D-3** — it adds a package reference); legacy colour values → June-2025 palette,
-`CupertinoBrushes.xaml` + live brush rewrite, the legacy shim and frozen V1 (wait on **D-1**);
-`Typography.xaml`, `Thickness.xaml`, motion tokens, `_Resources.xaml` semantic aliases and
-`CupertinoConstants` key lists (unblocked); Toolkit key inventory; CI matrix row; docs delta.
+`CupertinoBrushes.xaml` + live brush rewrite, implicit styles, the legacy shim and frozen V1 (wait on
+**D-1**); `Thickness.xaml` and motion tokens (unblocked, but nothing reads them before Phase 3); Toolkit
+key inventory; CI matrix row; docs delta.
+
+### Phase 1, slice 2 — 2026-09-18: type scale and semantic style aliases (additive)
+
+Landed: `Styles/Application/Typography.xaml` (19 slots per `token-and-style-mapping.md` §3, tracking 0),
+removed from the `XamlMergeInput` glob **and** merged by `BaseDictionaries.xaml` after
+`SharedTypography.xaml` in the same edit; 15 semantic style aliases in `_Resources.xaml` pointing at the
+existing Cupertino styles. Result: **38 / 38 passed**; the type-scale rows discriminate (the shared default
+for `DisplayLargeFontSize` is 57, the theme resolves 40). Formatters clean, no warnings from the changed
+files.
+
+Deviations:
+
+- **No implicit styles yet.** `_Resources.xaml` is part of `mergedpages.xaml`, which the legacy
+  `CupertinoResources` also loads, so implicit styles declared there would switch on for every legacy
+  consumer that never set `WithImplicitStyles` — the behaviour change §8 attributes to D-1. Keyed aliases
+  are additive and safe; implicit styles land with the legacy shim.
+- **`ProgressRingStyle` not aliased:** `CupertinoProgressRingStyle` is compiled out on the Windows TFM, so
+  the alias would dangle there. It arrives with the storyboard ring (D-7, Phase 3).
+- **No `CupertinoConstants.SemanticStyleKeys` list:** nothing in the library consumes it and the sample
+  head cannot see `internal` members, so the tests carry the keys as `DataRow`s. Add the list when a
+  library consumer appears.
+- Semantic keys with no Cupertino style today (tonal / outlined / icon buttons, toggle buttons, filled
+  text fields, list, dialog, navigation, menus, FABs, pips, rating) and the TextBlock slot aliases arrive
+  with their controls in Phases 3–4.
 
 Environment note for whoever picks this up: **Debug** builds of the sample heads fail on the current dev
 box (`CS0104` `VisualTreeHelperEx` ambiguous with `Uno.Toolkit.UI`, `CS0012` on `Uno, Version=255.255.255.255`)
