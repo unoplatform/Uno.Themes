@@ -14,7 +14,7 @@ There is **no `dotnet test` entry point** in this repo. Runtime tests execute in
 ## Where tests live
 
 - **Canonical host:** `src/samples/SimpleSampleApp/RuntimeTests/Given_*.cs`. Per `AGENTS.md` §5, new tests belong here unless the behavior is genuinely Material/Cupertino-specific.
-- **Other hosts:** `src/samples/MaterialSampleApp/RuntimeTests/` (currently `Given_DesignTokens.cs`); `CupertinoSampleApp` references `Uno.UI.RuntimeTests.Engine` but hosts no tests today.
+- **Other hosts:** `src/samples/MaterialSampleApp/RuntimeTests/` (currently `Given_DesignTokens.cs`) and `src/samples/CupertinoSampleApp/RuntimeTests/` (`Given_CupertinoTheme.cs` — the Simple host cannot reference `Uno.Cupertino`). All three heads are rows of the CI matrix in `build/stage-runtimetests-desktop.yml`.
 - **Naming:** `Given_<Subject>.cs`, e.g. `Given_SeedColorPalette`, `Given_SemanticStyles`, `Given_ColorOverridePrecedence`, `Given_DesignTokens`, `Given_Fonts`, `Given_HotReload`.
 - **Attributes:** MSTest-style — `[TestClass]`, `[TestMethod]`, `[DataRow(...)]`, plus `[RunsOnUIThread]` for any test that touches `FrameworkElement` / `ResourceDictionary` / `Application.Resources`.
 
