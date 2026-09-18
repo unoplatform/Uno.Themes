@@ -76,14 +76,26 @@
   </ItemGroup>
 
   <!--
-    Same reason as the font packages above, for the fonts that live in the repo rather than in a
+    Same reason as the font packages above, for the assets that live in the repo rather than in a
     package: a hosted guest resolves ms-appx:/// against the *host's* package root, and the wasm
-    guest payload carries assemblies only. Without these, Cupertino falls back to a default
-    typeface in the browser (SF-Pro fails to load). Fonts only — the wrapper deliberately does
-    not import SamplesApp.Shared.
+    guest payload carries assemblies only. Without the fonts, Cupertino falls back to a default
+    typeface in the browser (SF-Pro fails to load); without the images, every guest
+    `ms-appx:///Assets/...` reference 404s silently — a BitmapIcon then lays out at zero width
+    (measured on the ControlExtensions sample, which shows `Assets/UnoLogo.png`).
+
+    This mirrors SamplesApp.Shared.projitems' own `Assets\**\*.*` content glob, so a guest sees
+    the same asset tree hosted as standalone. Content only — the wrapper still deliberately does
+    not import SamplesApp.Shared or reference any theme library.
+
+    Icons/ and Splash/ are excluded: they are Resizetizer *inputs* (consumed by the UnoIcon /
+    UnoSplashScreen items below, which generate their own output), not assets a guest resolves
+    through ms-appx, so copying them as content only risks a duplicate target path.
   -->
   <ItemGroup>
-    <Content Include="../SamplesApp.Shared/Assets/Fonts/**/*.ttf" Link="Assets/Fonts/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../SamplesApp.Shared/Assets/**/*.*"
+             Exclude="../SamplesApp.Shared/Assets/Icons/**/*.*;../SamplesApp.Shared/Assets/Splash/**/*.*"
+             Link="Assets/%(RecursiveDir)%(Filename)%(Extension)"
+             CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>
