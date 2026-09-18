@@ -10,8 +10,7 @@
 					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					mc:Ignorable="ios android wasm not_win">
 
-	<StaticResource x:Key="CupertinoCalendarViewAccentBrush"
-					ResourceKey="CupertinoBlueBrush" />
+	<StaticResource x:Key="CupertinoCalendarViewAccentBrush" ResourceKey="CupertinoBlueBrush" />
 
 	<SolidColorBrush x:Key="CupertinoCalendarViewSelectedBackground"
 					 Color="{ThemeResource CupertinoBlueColor}"
@@ -22,76 +21,45 @@
 
 	<Style x:Key="DefaultCupertinoCalendarViewStyle"
 		   TargetType="CalendarView">
-		<Setter Property="FocusBorderBrush"
-				Value="{ThemeResource CupertinoCalendarViewAccentBrush}" />
-		<Setter Property="SelectedHoverBorderBrush"
-				Value="{ThemeResource CupertinoCalendarViewAccentBrush}" />
-		<Setter Property="SelectedPressedBorderBrush"
-				Value="{ThemeResource CupertinoCalendarViewAccentBrush}" />
-		<Setter Property="SelectedBorderBrush"
-				Value="{ThemeResource CupertinoCalendarViewAccentBrush}" />
-		<Setter Property="HoverBorderBrush"
-				Value="{ThemeResource CupertinoCalendarViewAccentBrush}" />
-		<Setter Property="PressedBorderBrush"
-				Value="{ThemeResource CupertinoCalendarViewAccentBrush}" />
-		<Setter Property="CalendarItemBorderBrush"
-				Value="{ThemeResource CalendarViewCalendarItemRevealBorderBrush}" />
-		<Setter Property="TodayForeground"
-				Value="{ThemeResource CalendarViewForeground}" />
-		<Setter Property="BlackoutForeground"
-				Value="{ThemeResource CalendarViewBlackoutForeground}" />
+		<Setter Property="FocusBorderBrush" Value="{ThemeResource CupertinoCalendarViewAccentBrush}" />
+		<Setter Property="SelectedHoverBorderBrush" Value="{ThemeResource CupertinoCalendarViewAccentBrush}" />
+		<Setter Property="SelectedPressedBorderBrush" Value="{ThemeResource CupertinoCalendarViewAccentBrush}" />
+		<Setter Property="SelectedBorderBrush" Value="{ThemeResource CupertinoCalendarViewAccentBrush}" />
+		<Setter Property="HoverBorderBrush" Value="{ThemeResource CupertinoCalendarViewAccentBrush}" />
+		<Setter Property="PressedBorderBrush" Value="{ThemeResource CupertinoCalendarViewAccentBrush}" />
+		<Setter Property="CalendarItemBorderBrush" Value="{ThemeResource CalendarViewCalendarItemRevealBorderBrush}" />
+		<Setter Property="TodayForeground" Value="{ThemeResource CalendarViewForeground}" />
+		<Setter Property="BlackoutForeground" Value="{ThemeResource CalendarViewBlackoutForeground}" />
 		<win:Setter Property="SelectedForeground"
 					Value="{ThemeResource CalendarViewSelectedForeground}" />
 		<not_win:Setter Property="SelectedForeground"
 						Value="{ThemeResource CupertinoCalendarViewAccentBrush}" />
-		<Setter Property="PressedForeground"
-				Value="{ThemeResource CalendarViewPressedForeground}" />
-		<Setter Property="OutOfScopeForeground"
-				Value="{ThemeResource CalendarViewOutOfScopeForeground}" />
-		<Setter Property="CalendarItemForeground"
-				Value="{ThemeResource CalendarViewCalendarItemForeground}" />
-		<Setter Property="OutOfScopeBackground"
-				Value="{ThemeResource CalendarViewOutOfScopeBackground}" />
-		<Setter Property="CalendarItemBackground"
-				Value="{ThemeResource CupertinoSystemBackgroundBrush}" />
-		<Setter Property="Foreground"
-				Value="{ThemeResource CalendarViewForeground}" />
-		<Setter Property="Background"
-				Value="{ThemeResource CupertinoSystemBackgroundBrush}" />
-		<Setter Property="BorderBrush"
-				Value="{ThemeResource CalendarViewBorderBrush}" />
-		<Setter Property="DayItemFontFamily"
-				Value="{ThemeResource CupertinoFontFamily}" />
-		<Setter Property="DayItemFontSize"
-				Value="14" />
-		<Setter Property="FirstOfMonthLabelFontFamily"
-				Value="{ThemeResource CupertinoFontFamily}" />
-		<Setter Property="FirstOfMonthLabelFontSize"
-				Value="0" />
-		<Setter Property="MonthYearItemFontFamily"
-				Value="{ThemeResource CupertinoFontFamily}" />
-		<Setter Property="MonthYearItemFontSize"
-				Value="14" />
-		<Setter Property="FirstOfYearDecadeLabelFontFamily"
-				Value="{ThemeResource CupertinoFontFamily}" />
+		<Setter Property="PressedForeground" Value="{ThemeResource CalendarViewPressedForeground}" />
+		<Setter Property="OutOfScopeForeground" Value="{ThemeResource CalendarViewOutOfScopeForeground}" />
+		<Setter Property="CalendarItemForeground" Value="{ThemeResource CalendarViewCalendarItemForeground}" />
+		<Setter Property="OutOfScopeBackground" Value="{ThemeResource CalendarViewOutOfScopeBackground}" />
+		<Setter Property="CalendarItemBackground" Value="{ThemeResource CupertinoSystemBackgroundBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource CalendarViewForeground}" />
+		<Setter Property="Background" Value="{ThemeResource CupertinoSystemBackgroundBrush}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource CalendarViewBorderBrush}" />
+		<Setter Property="DayItemFontFamily" Value="{ThemeResource CupertinoFontFamily}" />
+		<Setter Property="DayItemFontSize" Value="14" />
+		<Setter Property="FirstOfMonthLabelFontFamily" Value="{ThemeResource CupertinoFontFamily}" />
+		<Setter Property="FirstOfMonthLabelFontSize" Value="0" />
+		<Setter Property="MonthYearItemFontFamily" Value="{ThemeResource CupertinoFontFamily}" />
+		<Setter Property="MonthYearItemFontSize" Value="14" />
+		<Setter Property="FirstOfYearDecadeLabelFontFamily" Value="{ThemeResource CupertinoFontFamily}" />
 		<not_win:Setter Property="CalendarItemBorderThickness"
 						Value="0" />
 		<win:Setter Property="CalendarItemBorderThickness"
 					Value="2" />
-		<Setter Property="BorderThickness"
-				Value="1" />
-		<Setter Property="HorizontalAlignment"
-				Value="Left" />
-		<Setter Property="VerticalAlignment"
-				Value="Center" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Stretch" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Stretch" />
-		<Setter Property="IsTabStop"
-				Value="False" />
-		<Setter Property="UseSystemFocusVisuals"
-				Value="{StaticResource UseSystemFocusVisuals}" />
+		<Setter Property="BorderThickness" Value="1" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+		<Setter Property="VerticalContentAlignment" Value="Stretch" />
+		<Setter Property="IsTabStop" Value="False" />
+		<Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
 		<not_win:Setter Property="CornerRadius"
 						Value="{ThemeResource ControlCornerRadius}" />
 		<not_win:Setter Property="DayItemCornerRadius"
@@ -115,25 +83,17 @@
 							<Style x:Key="WeekDayNameStyle"
 								   BasedOn="{StaticResource CaptionTextBlockStyle}"
 								   TargetType="TextBlock">
-								<Setter Property="HorizontalAlignment"
-										Value="Center" />
-								<Setter Property="VerticalAlignment"
-										Value="Center" />
+								<Setter Property="HorizontalAlignment" Value="Center" />
+								<Setter Property="VerticalAlignment" Value="Center" />
 							</Style>
 							<Style x:Key="NavigationButtonStyle"
 								   TargetType="Button">
-								<Setter Property="HorizontalAlignment"
-										Value="Stretch" />
-								<Setter Property="VerticalAlignment"
-										Value="Stretch" />
-								<Setter Property="UseSystemFocusVisuals"
-										Value="{StaticResource UseSystemFocusVisuals}" />
-								<Setter Property="FontSize"
-										Value="12" />
-								<Setter Property="Background"
-										Value="{ThemeResource CalendarViewNavigationButtonBackground}" />
-								<Setter Property="BackgroundSizing"
-										Value="OuterBorderEdge" />
+								<Setter Property="HorizontalAlignment" Value="Stretch" />
+								<Setter Property="VerticalAlignment" Value="Stretch" />
+								<Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
+								<Setter Property="FontSize" Value="12" />
+								<Setter Property="Background" Value="{ThemeResource CalendarViewNavigationButtonBackground}" />
+								<Setter Property="BackgroundSizing" Value="OuterBorderEdge" />
 								<Setter Property="Template">
 									<Setter.Value>
 										<ControlTemplate TargetType="Button">
@@ -152,16 +112,13 @@
 														<VisualState x:Name="Normal" />
 														<VisualState x:Name="PointerOver">
 															<VisualState.Setters>
-																<Setter Target="Text.BorderBrush"
-																		Value="{ThemeResource CalendarViewNavigationButtonBorderBrushPointerOver}" />
-																<Setter Target="Text.Opacity"
-																		Value="{StaticResource CupertinoHoverOpacity}" />
+																<Setter Target="Text.BorderBrush" Value="{ThemeResource CalendarViewNavigationButtonBorderBrushPointerOver}" />
+																<Setter Target="Text.Opacity" Value="{StaticResource CupertinoHoverOpacity}" />
 															</VisualState.Setters>
 														</VisualState>
 														<VisualState x:Name="Pressed">
 															<VisualState.Setters>
-																<Setter Target="Text.Opacity"
-																		Value="{StaticResource CupertinoPressedOpacity}" />
+																<Setter Target="Text.Opacity" Value="{StaticResource CupertinoPressedOpacity}" />
 															</VisualState.Setters>
 														</VisualState>
 														<VisualState x:Name="Disabled" />
@@ -208,27 +165,21 @@
 
 														<VisualState x:Name="PointerOver">
 															<VisualState.Setters>
-																<Setter Target="Text.BorderBrush"
-																		Value="{ThemeResource CalendarViewNavigationButtonBorderBrushPointerOver}" />
-																<Setter Target="Text.Opacity"
-																		Value="{StaticResource CupertinoHoverOpacity}" />
-																<Setter Target="HeaderGlyph.Opacity"
-																		Value="{StaticResource CupertinoHoverOpacity}" />
+																<Setter Target="Text.BorderBrush" Value="{ThemeResource CalendarViewNavigationButtonBorderBrushPointerOver}" />
+																<Setter Target="Text.Opacity" Value="{StaticResource CupertinoHoverOpacity}" />
+																<Setter Target="HeaderGlyph.Opacity" Value="{StaticResource CupertinoHoverOpacity}" />
 															</VisualState.Setters>
 														</VisualState>
 
 														<VisualState x:Name="Pressed">
 															<VisualState.Setters>
-																<Setter Target="Text.Opacity"
-																		Value="{StaticResource CupertinoPressedOpacity}" />
-																<Setter Target="HeaderGlyph.Opacity"
-																		Value="{StaticResource CupertinoPressedOpacity}" />
+																<Setter Target="Text.Opacity" Value="{StaticResource CupertinoPressedOpacity}" />
+																<Setter Target="HeaderGlyph.Opacity" Value="{StaticResource CupertinoPressedOpacity}" />
 															</VisualState.Setters>
 														</VisualState>
 														<VisualState x:Name="Disabled">
 															<VisualState.Setters>
-																<Setter Target="HeaderGlyph.Opacity"
-																		Value="0" />
+																<Setter Target="HeaderGlyph.Opacity" Value="0" />
 															</VisualState.Setters>
 														</VisualState>
 													</VisualStateGroup>
@@ -241,20 +192,13 @@
 							</Style>
 							<Style x:Key="ScrollViewerStyle"
 								   TargetType="ScrollViewer">
-								<Setter Property="HorizontalScrollMode"
-										Value="Disabled" />
-								<Setter Property="VerticalScrollMode"
-										Value="Enabled" />
-								<Setter Property="VerticalSnapPointsType"
-										Value="Optional" />
-								<Setter Property="ZoomMode"
-										Value="Disabled" />
-								<Setter Property="TabNavigation"
-										Value="Once" />
-								<Setter Property="BringIntoViewOnFocusChange"
-										Value="False" />
-								<Setter Property="Template"
-										Value="{StaticResource ScrollViewerScrollBarlessTemplate}" />
+								<Setter Property="HorizontalScrollMode" Value="Disabled" />
+								<Setter Property="VerticalScrollMode" Value="Enabled" />
+								<Setter Property="VerticalSnapPointsType" Value="Optional" />
+								<Setter Property="ZoomMode" Value="Disabled" />
+								<Setter Property="TabNavigation" Value="Once" />
+								<Setter Property="BringIntoViewOnFocusChange" Value="False" />
+								<Setter Property="Template" Value="{StaticResource ScrollViewerScrollBarlessTemplate}" />
 								<not_win:Setter Property="(uno:ScrollViewer.ShouldFallBackToNativeScrollBars)"
 												Value="False" />
 							</Style>
@@ -458,8 +402,7 @@
 								<VisualState x:Name="Year">
 									<!-- Begin: Uno only -->
 									<VisualState.Setters>
-										<Setter Target="YearViewScrollViewer.IsHitTestVisible"
-												Value="True" />
+										<Setter Target="YearViewScrollViewer.IsHitTestVisible" Value="True" />
 									</VisualState.Setters>
 									<!-- End: Uno only -->
 									<Storyboard>
@@ -490,8 +433,7 @@
 								<VisualState x:Name="Decade">
 									<!-- Begin: Uno only -->
 									<VisualState.Setters>
-										<Setter Target="DecadeViewScrollViewer.IsHitTestVisible"
-												Value="True" />
+										<Setter Target="DecadeViewScrollViewer.IsHitTestVisible" Value="True" />
 									</VisualState.Setters>
 									<!-- End: Uno only -->
 									<Storyboard>

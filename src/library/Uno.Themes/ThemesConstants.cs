@@ -7,7 +7,7 @@ internal static class ThemesConstants
 		"Uno.Themes.WinUI";
 #else
 		"Uno.Themes";
-#endif	
+#endif
 
 	public static string ConverterResourcePath = $"ms-appx:///{PackageName}/Styles/Applications/Common/Converters.xaml";
 	public static string SharedColorsResourcePath = $"ms-appx:///{PackageName}/Styles/Applications/Common/SharedColors.xaml";

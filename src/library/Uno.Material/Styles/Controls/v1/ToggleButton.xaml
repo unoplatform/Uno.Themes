@@ -12,8 +12,7 @@
 	<SolidColorBrush x:Key="ToggleButtonTextLabelBrush"
 					 Color="{ThemeResource MaterialPrimaryColor}" />
 
-	<StaticResource x:Key="ToggleButtonForegroundThemeBrush"
-					ResourceKey="MaterialOnSurfaceBrush" />
+	<StaticResource x:Key="ToggleButtonForegroundThemeBrush" ResourceKey="MaterialOnSurfaceBrush" />
 
 	<!-- Other ToggleButton Variables -->
 	<CornerRadius x:Key="ToggleButtonBorderRadius">4</CornerRadius>
@@ -22,24 +21,15 @@
 
 	<Style x:Key="MaterialTextToggleButtonStyle"
 		   TargetType="ToggleButton">
-		<Setter Property="Foreground"
-				Value="{StaticResource ToggleButtonTextLabelBrush}" />
-		<Setter Property="Background"
-				Value="Transparent" />
-		<Setter Property="BorderThickness"
-				Value="0" />
-		<Setter Property="Padding"
-				Value="{ThemeResource ToggleButtonPadding}" />
-		<Setter Property="CornerRadius"
-				Value="{StaticResource ToggleButtonBorderRadius}" />
-		<Setter Property="MinHeight"
-				Value="40" />
-		<Setter Property="FontFamily"
-				Value="{ThemeResource MaterialRegularFontFamily}" />
-		<Setter Property="FontSize"
-				Value="{ThemeResource ToggleButtonFontSize}" />
-		<Setter Property="UseSystemFocusVisuals"
-				Value="True" />
+		<Setter Property="Foreground" Value="{StaticResource ToggleButtonTextLabelBrush}" />
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="BorderThickness" Value="0" />
+		<Setter Property="Padding" Value="{ThemeResource ToggleButtonPadding}" />
+		<Setter Property="CornerRadius" Value="{StaticResource ToggleButtonBorderRadius}" />
+		<Setter Property="MinHeight" Value="40" />
+		<Setter Property="FontFamily" Value="{ThemeResource MaterialRegularFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource ToggleButtonFontSize}" />
+		<Setter Property="UseSystemFocusVisuals" Value="True" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="ToggleButton">
@@ -52,10 +42,8 @@
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal">
 									<VisualState.Setters>
-										<Setter Target="HoverOverlay.Opacity"
-												Value="0" />
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="0" />
+										<Setter Target="HoverOverlay.Opacity" Value="0" />
+										<Setter Target="FocusedOverlay.Opacity" Value="0" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="PointerOver">
@@ -75,10 +63,8 @@
 								<xamarin:VisualState x:Name="Pressed">
 									<!-- https://github.com/unoplatform/uno/issues/5099 -->
 									<VisualState.Setters>
-										<Setter Target="HoverOverlay.Opacity"
-												Value="0" />
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="0" />
+										<Setter Target="HoverOverlay.Opacity" Value="0" />
+										<Setter Target="FocusedOverlay.Opacity" Value="0" />
 									</VisualState.Setters>
 								</xamarin:VisualState>
 								<win:VisualState x:Name="Pressed">
@@ -105,8 +91,7 @@
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{StaticResource MaterialOnSurfaceLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Checked" />
@@ -114,17 +99,15 @@
 							<VisualStateGroup x:Name="FocusStates">
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="1" />
+										<Setter Target="FocusedOverlay.Opacity" Value="1" />
 									</VisualState.Setters>
 								</VisualState>
-								
+
 								<VisualState x:Name="PointerFocused" />
 
 								<VisualState x:Name="Unfocused">
 									<VisualState.Setters>
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="0" />
+										<Setter Target="FocusedOverlay.Opacity" Value="0" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -169,27 +152,18 @@
 
 	<Style x:Key="MaterialToggleButtonIconStyle"
 		   TargetType="ToggleButton">
-		<Setter Property="Foreground"
-				Value="{StaticResource ToggleButtonForegroundThemeBrush}" />
-		<Setter Property="Background"
-				Value="Transparent" />
-		<Setter Property="BorderThickness"
-				Value="0" />
-		<Setter Property="MinHeight"
-				Value="40" />
-		<Setter Property="MinWidth"
-				Value="40" />
-		<Setter Property="UseSystemFocusVisuals"
-				Value="True" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Center" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
+		<Setter Property="Foreground" Value="{StaticResource ToggleButtonForegroundThemeBrush}" />
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="BorderThickness" Value="0" />
+		<Setter Property="MinHeight" Value="40" />
+		<Setter Property="MinWidth" Value="40" />
+		<Setter Property="UseSystemFocusVisuals" Value="True" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="ut:ControlExtensions.AlternateContent"
-				Value="{x:Null}" />
-		
+		<Setter Property="ut:ControlExtensions.AlternateContent" Value="{x:Null}" />
+
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="ToggleButton">
@@ -202,70 +176,50 @@
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Visibility"
-												Value="Visible" />
-										<Setter Target="AlternateContentPresenter.Visibility"
-												Value="Collapsed" />
-										<Setter Target="HoverOverlay.Opacity"
-												Value="1" />
+										<Setter Target="ContentPresenter.Visibility" Value="Visible" />
+										<Setter Target="AlternateContentPresenter.Visibility" Value="Collapsed" />
+										<Setter Target="HoverOverlay.Opacity" Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Visibility"
-												Value="Visible" />
-										<Setter Target="AlternateContentPresenter.Visibility"
-												Value="Collapsed" />
-										<Setter Target="PressedOverlay.Opacity"
-												Value="1" />
+										<Setter Target="ContentPresenter.Visibility" Value="Visible" />
+										<Setter Target="AlternateContentPresenter.Visibility" Value="Collapsed" />
+										<Setter Target="PressedOverlay.Opacity" Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Visibility"
-												Value="Visible" />
-										<Setter Target="AlternateContentPresenter.Visibility"
-												Value="Collapsed" />
-										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="ContentPresenter.Visibility" Value="Visible" />
+										<Setter Target="AlternateContentPresenter.Visibility" Value="Collapsed" />
+										<Setter Target="ContentPresenter.Foreground" Value="{StaticResource MaterialOnSurfaceLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Checked">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Visibility"
-												Value="Collapsed" />
-										<Setter Target="AlternateContentPresenter.Visibility"
-												Value="Visible" />
+										<Setter Target="ContentPresenter.Visibility" Value="Collapsed" />
+										<Setter Target="AlternateContentPresenter.Visibility" Value="Visible" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="CheckedPointerOver">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Visibility"
-												Value="Collapsed" />
-										<Setter Target="AlternateContentPresenter.Visibility"
-												Value="Visible" />
-										<Setter Target="HoverOverlay.Opacity"
-												Value="1" />
+										<Setter Target="ContentPresenter.Visibility" Value="Collapsed" />
+										<Setter Target="AlternateContentPresenter.Visibility" Value="Visible" />
+										<Setter Target="HoverOverlay.Opacity" Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="CheckedPressed">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Visibility"
-												Value="Collapsed" />
-										<Setter Target="AlternateContentPresenter.Visibility"
-												Value="Visible" />
-										<Setter Target="PressedOverlay.Opacity"
-												Value="1" />
+										<Setter Target="ContentPresenter.Visibility" Value="Collapsed" />
+										<Setter Target="AlternateContentPresenter.Visibility" Value="Visible" />
+										<Setter Target="PressedOverlay.Opacity" Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="CheckedDisabled">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Visibility"
-												Value="Collapsed" />
-										<Setter Target="AlternateContentPresenter.Visibility"
-												Value="Visible" />
-										<Setter Target="AlternateContentPresenter.Foreground"
-												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="ContentPresenter.Visibility" Value="Collapsed" />
+										<Setter Target="AlternateContentPresenter.Visibility" Value="Visible" />
+										<Setter Target="AlternateContentPresenter.Foreground" Value="{StaticResource MaterialOnSurfaceLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
