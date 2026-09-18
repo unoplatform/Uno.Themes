@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using Uno.Themes.Helpers;
 
 #if WinUI
 using Microsoft.UI.Xaml;
@@ -25,15 +27,25 @@ public sealed partial class CupertinoColorsV1 : ResourceDictionary
 	{
 		// The palette (then the override) must be merged before InitializeComponent: the brushes read
 		// their colors with {StaticResource} while this dictionary is parsed.
-		MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(CupertinoConstants.V1.ColorPalette) });
+		var layers = new List<ResourceDictionary> { new ResourceDictionary { Source = new Uri(CupertinoConstants.V1.ColorPalette) } };
 #pragma warning disable CS0618 // The obsolete recorder is the only channel carrying the legacy override.
 		var overrideSource = CupertinoColors.RecordedOverrideSource;
 #pragma warning restore CS0618
 		if (!string.IsNullOrWhiteSpace(overrideSource))
 		{
-			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(overrideSource) });
+			layers.Add(new ResourceDictionary { Source = new Uri(overrideSource) });
+		}
+
+		foreach (var layer in layers)
+		{
+			MergedDictionaries.Add(layer);
 		}
 
 		InitializeComponent();
+
+		// {StaticResource} in this dictionary resolves against the application scope before its own merged
+		// palette, and an app migrating through V1 usually has the new palette there. Paint the brushes from
+		// the frozen layers explicitly so "frozen" holds whatever the ambient scope contains.
+		SemanticBrushUpdater.Apply(this, layers, CupertinoConstants.BrushColorKeys);
 	}
 }

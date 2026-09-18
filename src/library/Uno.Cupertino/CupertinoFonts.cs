@@ -9,14 +9,25 @@ using Windows.UI.Xaml;
 namespace Uno.Cupertino;
 
 /// <summary>
-/// Legacy entry point for a Cupertino font override. It no longer carries any resource: it records
-/// <see cref="OverrideSource"/> for a <see cref="CupertinoResources"/> declared after it.
+/// Legacy entry point for a Cupertino font override: it records <see cref="OverrideSource"/> for a
+/// <see cref="CupertinoResources"/> declared after it. It still carries the default Cupertino fonts.
 /// </summary>
 [Obsolete("Use CupertinoTheme with DefaultFontFamily or FontOverrideSource instead. This type will be removed in a future version.")]
 public sealed class CupertinoFonts : ResourceDictionary
 {
 	// Process-wide on purpose, see CupertinoColors.RecordedOverrideSource.
 	internal static string RecordedOverrideSource { get; private set; }
+
+	/// <summary>
+	/// Initializes a new instance of the <see cref="CupertinoFonts"/> class.
+	/// </summary>
+	public CupertinoFonts()
+	{
+		// See CupertinoColors: a recorder without an OverrideSource must not inherit an earlier one.
+		RecordedOverrideSource = null;
+
+		MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(CupertinoConstants.Fonts) });
+	}
 
 	/// <summary>
 	/// (Optional) Gets or sets the URI of a dictionary overriding Cupertino fonts.

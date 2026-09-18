@@ -29,6 +29,16 @@ internal static class CupertinoConstants
 
 	private const string PrimaryColor = "PrimaryColor";
 
+	/// <summary>The accent brushes of <see cref="BrushColorKeys"/> with the color key each is published under.</summary>
+	public static readonly (string Brush, string Color)[] AccentColorKeys =
+	{
+		("CupertinoBlueBrush", "CupertinoBlueColor"),
+		("CupertinoLinkBrush", "LinkColor"),
+	};
+
+	/// <summary>The theme blocks <c>ColorPalette.xaml</c> declares; the accent colors are re-emitted for each.</summary>
+	public static readonly string[] AccentThemeKeys = { "Light", "Default" };
+
 	/// <summary>
 	/// Every brush in <c>CupertinoBrushes.xaml</c> with the color keys that may supply it. A XAML-backed
 	/// dictionary cannot be enumerated on Uno, so this list is the source of truth — keep it in sync with

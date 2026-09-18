@@ -4,10 +4,12 @@ using Uno.Themes.Helpers;
 
 #if WinUI
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Media;
 using Windows.UI;
 #else
 using Windows.UI;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 #endif
 
 namespace Uno.Cupertino;
@@ -15,6 +17,8 @@ namespace Uno.Cupertino;
 /// <summary>
 /// Cupertino Theme resources including colors, fonts, layout values, and styles.
 /// </summary>
+/// <param name="colorOverride">(Optional) A dictionary redefining Cupertino or shared <c>*Color</c> resources.</param>
+/// <param name="fontOverride">(Optional) A dictionary redefining font resources, typically <c>DefaultFontFamily</c>.</param>
 public class CupertinoTheme(ResourceDictionary colorOverride = null, ResourceDictionary fontOverride = null)
 	: BaseTheme(GetCupertinoColorOverride(colorOverride), fontOverride)
 {
@@ -59,6 +63,35 @@ public class CupertinoTheme(ResourceDictionary colorOverride = null, ResourceDic
 		_cupertinoBrushes ??= new ResourceDictionary { Source = new Uri(CupertinoConstants.Brushes) };
 		SemanticBrushUpdater.Apply(_cupertinoBrushes, ColorLayers, CupertinoConstants.BrushColorKeys);
 		AddThemeDictionary(_cupertinoBrushes);
+		AddThemeDictionary(BuildAccentColors(_cupertinoBrushes));
+	}
+
+	// The accent brushes follow the semantic primary (a seed, or a PrimaryColor override) while their *Color
+	// keys are plain palette entries. Consumers read both (uno.toolkit.ui's Cupertino styles do), so the
+	// colors are re-emitted from the painted brushes to keep the accent from splitting in two.
+	private static ResourceDictionary BuildAccentColors(ResourceDictionary brushes)
+	{
+		var accents = new ResourceDictionary();
+		foreach (var themeKey in CupertinoConstants.AccentThemeKeys)
+		{
+			if (!brushes.ThemeDictionaries.TryGetValue(themeKey, out var block) || block is not ResourceDictionary themedBrushes)
+			{
+				continue;
+			}
+
+			var themedColors = new ResourceDictionary();
+			foreach (var (brushKey, colorKey) in CupertinoConstants.AccentColorKeys)
+			{
+				if (themedBrushes.TryGetValue(brushKey, out var value) && value is SolidColorBrush brush)
+				{
+					themedColors[colorKey] = brush.Color;
+				}
+			}
+
+			accents.ThemeDictionaries[themeKey] = themedColors;
+		}
+
+		return accents;
 	}
 
 	/// <summary>

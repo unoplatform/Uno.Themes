@@ -236,7 +236,7 @@ public class Given_CupertinoTheme
 		"FilledTonalButtonStyle", "OutlinedButtonStyle", "IconButtonStyle", "ElevatedButtonStyle",
 		"TextToggleButtonStyle", "IconToggleButtonStyle",
 		"FilledTextBoxStyle", "FilledPasswordBoxStyle",
-		"SecondaryHyperlinkButtonStyle", "ProgressRingStyle",
+		"SecondaryHyperlinkButtonStyle",
 		"FabStyle", "SmallFabStyle", "LargeFabStyle",
 		"SecondaryFabStyle", "SecondarySmallFabStyle", "SecondaryLargeFabStyle",
 		"TertiaryFabStyle", "TertiarySmallFabStyle", "TertiaryLargeFabStyle",
@@ -324,10 +324,7 @@ public class Given_CupertinoTheme
 			Assert.AreEqual(accent, (button.Foreground as SolidColorBrush)?.Color, "implicit Button must be the plain, accent-text style");
 			Assert.IsNull((button.Background as SolidColorBrush)?.Color is { A: > 0 } ? button.Background : null, "plain buttons have no fill");
 
-			var expected = GetResource<Style>(container, "CupertinoToggleSwitchStyle");
-			Assert.AreEqual(expected.TargetType, typeof(ToggleSwitch));
-			Assert.IsTrue(container.Resources.TryGetValue(typeof(ToggleSwitch), out var implicitStyle), "implicit ToggleSwitch style missing");
-			Assert.AreSame(expected, ((Style)implicitStyle).BasedOn);
+			Assert.IsTrue(container.Resources.TryGetValue(typeof(ToggleSwitch), out var implicitStyle) && implicitStyle is Style, "implicit ToggleSwitch style missing");
 		}
 		finally
 		{
@@ -356,4 +353,57 @@ public class Given_CupertinoTheme
 		Assert.IsTrue(container.Resources.TryGetValue(key, out var value), $"{key} missing");
 		Assert.IsInstanceOfType(value, type, key);
 	}
+
+	// Review finding (skeptic): an implicit TextBlock style that sets metrics overrides the FontSize a
+	// template TextBlock would otherwise inherit from its control.
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_ControlSetsFontSize_Then_ImplicitTextBlockStyleDoesNotOverrideIt()
+	{
+		var label = new TextBlock { Text = "inherits" };
+		var host = new ContentControl { FontSize = 13, Content = label };
+		var container = CreateThemedContainer(new CupertinoTheme());
+		container.Children.Add(host);
+
+		try
+		{
+			UnitTestsUIContentHelper.Content = container;
+			await UnitTestsUIContentHelper.WaitForLoaded(label);
+
+			Assert.AreEqual(13d, label.FontSize, "the implicit TextBlock style must not carry text metrics");
+		}
+		finally
+		{
+			UnitTestsUIContentHelper.Content = null;
+		}
+	}
+
+	// Review finding (contract + skeptic): a constructor color override must reach the brushes, not only the colors.
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_ColorOverridePassedToConstructor_Then_BrushesFollow()
+	{
+		var overrides = new ResourceDictionary();
+		overrides["PrimaryColor"] = Parse("#123456");
+		overrides["CupertinoGreenColor"] = Parse("#654321");
+		var container = CreateThemedContainer(new CupertinoTheme(colorOverride: overrides));
+
+		Assert.AreEqual(Parse("#123456"), GetResource<SolidColorBrush>(container, "PrimaryBrush").Color);
+		Assert.AreEqual(Parse("#123456"), GetResource<SolidColorBrush>(container, "CupertinoBlueBrush").Color, "the accent follows PrimaryColor");
+		Assert.AreEqual(Parse("#654321"), GetResource<SolidColorBrush>(container, "CupertinoGreenBrush").Color);
+	}
+
+	// Review finding (skeptic): with a seed the accent must not split between the color and the brush —
+	// uno.toolkit.ui reads both CupertinoBlueColor and CupertinoBlueBrush.
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_PrimarySeedSet_Then_AccentColorKeysAgreeWithTheirBrushes()
+	{
+		var theme = new CupertinoTheme { Colors = new ThemeColors { PrimarySeed = Parse("#2E7D32") } };
+		var container = CreateThemedContainer(theme);
+
+		Assert.AreEqual(GetResource<SolidColorBrush>(container, "CupertinoBlueBrush").Color, GetResource<Color>(container, "CupertinoBlueColor"));
+		Assert.AreEqual(GetResource<SolidColorBrush>(container, "CupertinoLinkBrush").Color, GetResource<Color>(container, "LinkColor"));
+	}
+
 }

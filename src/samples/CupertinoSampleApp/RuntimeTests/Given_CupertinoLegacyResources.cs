@@ -86,5 +86,44 @@ public class Given_CupertinoLegacyResources
 		Assert.IsTrue(container.Resources.TryGetValue("CupertinoBlueBrush", out var value));
 		Assert.AreNotEqual(OverrideBlue, ((SolidColorBrush)value).Color);
 	}
+
+	// Review finding (contract, HIGH): consumers merge <CupertinoColors /> / <CupertinoFonts /> into their own
+	// style dictionaries so {StaticResource Cupertino*Brush} resolves there. They must still carry the keys.
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_RecordersUsedOnTheirOwn_Then_TheyStillCarryTheirKeys()
+	{
+		var colors = new CupertinoColors();
+		var fonts = new CupertinoFonts();
+
+		Assert.IsTrue(colors.TryGetValue("CupertinoBlueColor", out var color) && color is Color, "CupertinoBlueColor");
+		Assert.IsTrue(colors.TryGetValue("CupertinoBlueBrush", out var brush) && brush is SolidColorBrush, "CupertinoBlueBrush");
+		Assert.AreEqual((Color)color, ((SolidColorBrush)brush).Color, "the brush must be painted from the palette, not left at its parse-time value");
+		Assert.IsTrue(fonts.TryGetValue("CupertinoFontFamily", out var family) && family is FontFamily, "CupertinoFontFamily");
+	}
+
+	// Review finding (contract + skeptic): a recorder declared WITHOUT an OverrideSource never fires the
+	// property-changed callback, so a previously recorded URI used to survive into the next CupertinoResources.
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_LaterRecorderHasNoOverrideSource_Then_EarlierUriIsNotInherited()
+	{
+		var first = new CupertinoColors { OverrideSource = ColorsOverride };
+		try
+		{
+			_ = new CupertinoColors();
+			var resources = new CupertinoResources();
+			var container = new Grid();
+			container.Resources.MergedDictionaries.Add(resources);
+
+			Assert.IsTrue(container.Resources.TryGetValue("CupertinoBlueBrush", out var value));
+			Assert.AreNotEqual(OverrideBlue, ((SolidColorBrush)value).Color);
+		}
+		finally
+		{
+			first.OverrideSource = null;
+		}
+	}
+
 #pragma warning restore CS0618
 }

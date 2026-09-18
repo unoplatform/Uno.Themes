@@ -95,5 +95,19 @@ public class Given_CupertinoResourcesV1
 		Assert.IsTrue(sut.TryGetValue("CupertinoBlueColor", out var value), "CupertinoBlueColor missing");
 		Assert.AreEqual(FrozenBlue, (Color)value);
 	}
+
+	// Review finding (contract): V1 must paint its brushes from its OWN frozen palette. {StaticResource} in
+	// an x:Class dictionary resolves against the application scope first, where the new palette lives.
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_ColorsV1BuiltOnItsOwn_Then_BrushesUseTheFrozenPaletteNotTheAmbientOne()
+	{
+		var sut = new CupertinoColorsV1();
+
+		Assert.IsTrue(sut.TryGetValue("CupertinoBlueColor", out var color) && color is Color);
+		Assert.IsTrue(sut.TryGetValue("CupertinoBlueBrush", out var brush) && brush is SolidColorBrush);
+		Assert.AreEqual((Color)color, ((SolidColorBrush)brush).Color);
+	}
+
 #pragma warning restore CS0618
 }

@@ -276,13 +276,6 @@ row updated in the same PR.
   reclaimed and `Application.CleanupNonDefaultAlcCaches` throws `TargetParameterCountException` (reflection
   signature drift in `GuestHosting`). CI runs the smoke on X11, so this may be Win32-only; separate issue.
 
-- A colour override passed to a theme **constructor** (`new SimpleTheme(colorOverride)`, and the Material
-  equivalent) is `SafeMerge`d into the theme's base palette. `SemanticBrushUpdater` resolves each layer from
-  its own `ThemeDictionaries` and never descends into a layer's merged dictionaries, so the `*Color` keys
-  follow such an override while the `*Brush` instances do not. Found while writing the Cupertino legacy
-  shim; unverified for Simple / Material and therefore not fixed here — it needs its own red/fix/green in
-  the Simple host. The `ColorOverrideSource` / `Colors.OverrideDictionary` path is unaffected.
-
 ## Review
 
 ### Skeptic review — 2026-09-18 (pre-approval)
@@ -471,6 +464,36 @@ Deviations and things to know:
 **Phase 1 status:** every item is done or explicitly deferred with a reason, except the phase gate's hosting
 smoke, which fails identically on `master` (see "Hand-offs"), and the three settings DPs, which move to
 Phases 2–3 with their consumers.
+
+### Phase 1 review — 2026-09-18: `contract` + `skeptic` reviewers, findings and dispositions
+
+Both reviewers returned "fix first". Every finding that came with a failing scenario was first written as a
+test and confirmed **red** (six of six), then fixed. Result after the fixes: Cupertino **73 / 73** in Release
+**and Debug**; Simple **257 passed + 1 pre-existing `[Ignore]`**; Material **63 / 63**; formatters and doc
+linters clean.
+
+| # | Finding (reviewer) | Disposition |
+|---|---|---|
+| 1 | `CupertinoColors` / `CupertinoFonts` became empty, breaking consumers who merge them into their own dictionaries to resolve `{StaticResource Cupertino*Brush}` — contradicts "every key kept" (contract, HIGH) | **Fixed.** Both carry their defaults again; the brushes are painted from the palette through the updater, so they are right whatever the parse-time scope holds. They still only *record* `OverrideSource` |
+| 2 | Implicit `TextBlock` based on `CupertinoBody` sets FontSize 17 / LineHeight 22 into every control template; `<TextBox FontSize="13">` shows a 17px placeholder; WinAppSDK has no shield at all (skeptic, MED-HIGH) | **Fixed.** Implicit `TextBlock` = `CupertinoBaseTextBlockStyle` (no metrics). Test asserts a template-less inherited FontSize survives |
+| 3 | `CupertinoTheme(colorOverride)` — new public API whose override reached `*Color` but not `*Brush` (both, MED) | **Fixed at the root, in shared code.** `SemanticBrushUpdater` now treats a dictionary merged *into* a colour layer as a higher-precedence layer of its own (that is where `SafeMerge` puts a constructor override). The same bug existed in `SimpleTheme(colorOverride)` on `master`: red/green test added to `Given_ColorOverridePrecedence` in the Simple host, confirmed red against the pre-fix updater. The shim went back to the constructor path, so the extra startup rebuild and its `ponytail:` note are gone |
+| 4 | `RecordedOverrideSource` never reset: a recorder declared without `OverrideSource` never fires the callback, so a stale URI leaks into the next `CupertinoResources` / V1 (both, MED) | **Fixed.** Each recorder resets the static in its constructor; test covers exactly that sequence |
+| 5 | `[Obsolete]` messages and docs sent users to `ColorOverrideSource`, itself obsolete (contract, MED) | **Fixed.** Messages and docs use `Colors.OverrideSource` |
+| 6 | V1 tests run under an app-scope `CupertinoTheme` with identical key names, so "frozen" was unproven; a directly built `CupertinoColorsV1` painted its brushes from the *ambient* (new) palette (contract, MED) | **Fixed.** `CupertinoColorsV1` repaints its brushes from its own frozen layers after `InitializeComponent`; test asserts it. A V1-only launch switch for the head was not added (V1 is an escape hatch, not a product) |
+| 7 | With a seed the accent split: `CupertinoBlueBrush` followed the seed, `CupertinoBlueColor` / `LinkColor` stayed Apple blue, and uno.toolkit.ui reads both (skeptic, LOW-MED) | **Fixed.** The theme re-emits the two accent colour keys from the painted brushes in a small generated layer |
+| 8 | Brush-map drift invisible: a brush added to the XAML but not to `BrushColorKeys` looks right in a warm app and is transparent at cold start (skeptic, LOW) | **Fixed by construction.** `CupertinoBrushes.xaml` declares no `Color` at all; the map owns it, so drift fails the same way warm and cold |
+| 9 | Implicit / aliased `ProgressRing` missing, and the comment claiming the style is "compiled out on Windows" was wrong — a `win:` variant exists (contract, LOW) | **Fixed.** `ProgressRingStyle` aliased everywhere; implicit style `not_win:` only, as the legacy export was. The ratchet forced it off the pending list |
+| 10 | `AreSame(BasedOn)` pinned wrapper structure; primary-constructor params undocumented (contract, LOW) | **Fixed** |
+| 11 | A consumer override of a `Cupertino*Brush` *key* loses to the theme's brush dictionary, unlike the semantic brushes (contract, LOW) | **Open.** Needs the brush dictionary merged inside BaseTheme's colour layer, before the consumer override — a `BaseTheme` seam change. Colour-key overrides work; documented as the supported route |
+| 12 | The ratchet's key list is a hand copy of Simple's aliases and will not notice Simple gaining a key; suggested linking Simple's `_Resources.xaml` into the head as an `EmbeddedResource` and diffing (skeptic) | **Open — maintainer call** (changes the head's project file) |
+| 13 | A bad legacy *font* override URI throws from `App.xaml` while a bad colour URI degrades (skeptic → operability) | **Open, parity.** `master`'s `CupertinoFonts` threw in the same place |
+| 14 | `When_ThemeLoaded_Then_SemanticBrushesFollowApplePalette` cannot fail while the app-scope theme has the same palette (contract, LOW) | **Accepted as weak.** The override / seed / constructor tests around it do discriminate |
+
+Checked and found fine by the reviewers: all 17 control dictionaries keep identical key sets between v1 and
+the new generation; all 53 colour keys keep their type; 39 map entries = 39 XAML brushes; theme blocks and
+`BaseDictionaries` ordering violate nothing in `lessons.md`; the XamlMerge split cannot collide; re-adding
+the cached brush dictionary is no new hazard (BaseTheme already does the same); two theme instances get
+independent brush objects.
 
 Environment note, **corrected 2026-09-18**: this note used to blame a locally overridden Uno build for the
 Debug failures of the sample heads. That was an unverified guess and it was wrong. Debug was broken on

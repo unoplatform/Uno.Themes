@@ -22,17 +22,8 @@ public sealed class CupertinoResources : CupertinoTheme
 	/// Initializes a new instance of the <see cref="CupertinoResources"/> class from the recorded overrides.
 	/// </summary>
 	public CupertinoResources()
-		: base(colorOverride: null, fontOverride: Load(CupertinoFonts.RecordedOverrideSource))
+		: base(Load(CupertinoColors.RecordedOverrideSource), Load(CupertinoFonts.RecordedOverrideSource))
 	{
-		// Routed through ColorOverrideSource rather than the constructor: a constructor override is merged
-		// *into* the base palette, where the brush rewrite cannot see it, while this one becomes the
-		// highest-precedence color layer. ponytail: costs legacy consumers one extra theme rebuild at
-		// startup; goes away if BaseTheme ever accepts its overrides before the first build.
-		if (!string.IsNullOrWhiteSpace(CupertinoColors.RecordedOverrideSource))
-		{
-			ColorOverrideSource = CupertinoColors.RecordedOverrideSource;
-		}
-
 		// A legacy font file redefines CupertinoFontFamily, which under the theme is an alias of the root and
 		// reaches nothing when overridden. Translate it into the root so the whole type scale follows.
 		if (FontOverrideDictionary is { } fonts

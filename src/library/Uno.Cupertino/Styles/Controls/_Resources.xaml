@@ -3,12 +3,18 @@
 					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-					mc:Ignorable="d">
+					xmlns:not_win="http://uno.ui/not_win"
+					mc:Ignorable="d not_win">
 
 	<!--
 		Implicit styles. The implicit Button is the plain (accent text, no background) style: Apple's
-		default button, and glass never belongs in the content layer. ProgressRing is absent until its
-		style stops being compiled out on Windows.
+		default button, and glass never belongs in the content layer.
+		
+		The implicit TextBlock is the BASE style, which carries no metrics: an application-level implicit
+		TextBlock style reaches into every control template, and a FontSize there would override the one a
+		template TextBlock inherits from its control (a 13px TextBox would show a 17px placeholder).
+		
+		The implicit ProgressRing is not_win only, as CupertinoResources.WithImplicitStyles always was.
 	-->
 	<Style BasedOn="{StaticResource CupertinoButtonStyle}"
 		   TargetType="Button" />
@@ -32,11 +38,13 @@
 		   TargetType="PasswordBox" />
 	<Style BasedOn="{StaticResource CupertinoProgressBarStyle}"
 		   TargetType="ProgressBar" />
+	<not_win:Style BasedOn="{StaticResource CupertinoProgressRingStyle}"
+				   TargetType="muxc:ProgressRing" />
 	<Style BasedOn="{StaticResource CupertinoRadioButtonStyle}"
 		   TargetType="RadioButton" />
 	<Style BasedOn="{StaticResource CupertinoSliderStyle}"
 		   TargetType="Slider" />
-	<Style BasedOn="{StaticResource CupertinoBody}"
+	<Style BasedOn="{StaticResource CupertinoBaseTextBlockStyle}"
 		   TargetType="TextBlock" />
 	<Style BasedOn="{StaticResource CupertinoTextBoxStyle}"
 		   TargetType="TextBox" />
@@ -76,4 +84,5 @@
 
 	<!-- Progress -->
 	<StaticResource x:Key="ProgressBarStyle" ResourceKey="CupertinoProgressBarStyle" />
+	<StaticResource x:Key="ProgressRingStyle" ResourceKey="CupertinoProgressRingStyle" />
 </ResourceDictionary>
