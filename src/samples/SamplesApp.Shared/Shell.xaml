@@ -7,7 +7,8 @@
 		<Grid.RowDefinitions>
 			<!-- 0: (reserved for visible padding), 1: nav-view -->
 			<!-- 0-1: fullscreen nested frame -->
-			<RowDefinition x:Name="TopPaddingRow" Height="0" />
+			<RowDefinition x:Name="TopPaddingRow"
+						   Height="0" />
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 
@@ -23,12 +24,12 @@
 			<muxc:NavigationView.PaneTitle>Uno.Themes SampleApp</muxc:NavigationView.PaneTitle>
 			<muxc:NavigationView.PaneCustomContent>
 				<ToggleButton x:Name="DarkLightModeToggle"
-								Content="Light and Dark"
-								Style="{StaticResource DarkLightToggleTheme}"
-								Click="ToggleButton_Click"
-								Margin="0,0,20,16"
-								HorizontalAlignment="Right"
-								VerticalAlignment="Bottom" />
+							  Content="Light and Dark"
+							  Style="{StaticResource DarkLightToggleTheme}"
+							  Click="ToggleButton_Click"
+							  Margin="0,0,20,16"
+							  HorizontalAlignment="Right"
+							  VerticalAlignment="Bottom" />
 			</muxc:NavigationView.PaneCustomContent>
 		</muxc:NavigationView>
 
@@ -44,8 +45,11 @@
 					Visibility="Collapsed"
 					HorizontalAlignment="Center"
 					VerticalAlignment="Bottom">
-			<TextBlock x:Name="DebugVisualStatesText" Visibility="Collapsed" />
-			<Button Content="DebugTV" Click="DebugVisualTree" CornerRadius="0" />
+			<TextBlock x:Name="DebugVisualStatesText"
+					   Visibility="Collapsed" />
+			<Button Content="DebugTV"
+					Click="DebugVisualTree"
+					CornerRadius="0" />
 		</StackPanel>
 	</Grid>
 </UserControl>

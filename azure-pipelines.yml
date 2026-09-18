@@ -46,6 +46,14 @@ stages:
   jobs:
   - template: build/stage-docs-validations.yml
 
+- stage: Code_Style
+  displayName: Code Style
+  dependsOn: Determine_Changes
+  # Don't trigger this stage if only docs files are changed
+  condition: and(succeeded(), ne(dependencies.Determine_Changes.outputs['evaluate_changes.DetermineChanges.docsOnly'], 'true'))
+  jobs:
+  - template: build/stage-code-style.yml
+
 - stage: Packages
   displayName: Packages
   dependsOn: Determine_Changes

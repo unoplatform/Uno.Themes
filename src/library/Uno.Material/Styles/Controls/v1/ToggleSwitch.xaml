@@ -4,29 +4,19 @@
 
 	<Style x:Key="MaterialToggleSwitchStyle"
 		   TargetType="ToggleSwitch">
-		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialRegularFontFamily}" />
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialToggleSwitchOnButtonBrush}" />
-		<Setter Property="Background"
-				Value="{StaticResource MaterialToggleSwitchOnBackgroundBrush}" />
+		<Setter Property="FontFamily" Value="{StaticResource MaterialRegularFontFamily}" />
+		<Setter Property="Foreground" Value="{StaticResource MaterialToggleSwitchOnButtonBrush}" />
+		<Setter Property="Background" Value="{StaticResource MaterialToggleSwitchOnBackgroundBrush}" />
 
 		<!-- microsoft/microsoft-ui-xaml#6157: reset min-width inherited from base style -->
-		<Setter Property="MinWidth"
-				Value="70" />
+		<Setter Property="MinWidth" Value="70" />
 
-		<Setter Property="HorizontalAlignment"
-				Value="Left" />
-		<Setter Property="VerticalAlignment"
-				Value="Center" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Left" />
-		<Setter Property="FontSize"
-				Value="15" />
-		<Setter Property="ManipulationMode"
-				Value="System,TranslateX" />
-		<Setter Property="UseSystemFocusVisuals"
-				Value="True" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalContentAlignment" Value="Left" />
+		<Setter Property="FontSize" Value="15" />
+		<Setter Property="ManipulationMode" Value="System,TranslateX" />
+		<Setter Property="UseSystemFocusVisuals" Value="True" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -41,10 +31,8 @@
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="SwitchKnobOnShadow.Opacity"
-												Value="0.1" />
-										<Setter Target="SwitchKnobOffShadow.Opacity"
-												Value="0.1" />
+										<Setter Target="SwitchKnobOnShadow.Opacity" Value="0.1" />
+										<Setter Target="SwitchKnobOffShadow.Opacity" Value="0.1" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -92,10 +80,8 @@
 
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="SwitchKnobOnShadow.Opacity"
-												Value="0.2" />
-										<Setter Target="SwitchKnobOffShadow.Opacity"
-												Value="0.2" />
+										<Setter Target="SwitchKnobOnShadow.Opacity" Value="0.2" />
+										<Setter Target="SwitchKnobOffShadow.Opacity" Value="0.2" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -103,10 +89,8 @@
 
 								<VisualState x:Name="Unfocused">
 									<VisualState.Setters>
-										<Setter Target="SwitchKnobOnShadow.Opacity"
-												Value="0" />
-										<Setter Target="SwitchKnobOffShadow.Opacity"
-												Value="0" />
+										<Setter Target="SwitchKnobOnShadow.Opacity" Value="0" />
+										<Setter Target="SwitchKnobOffShadow.Opacity" Value="0" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -149,16 +133,14 @@
 													  From="Dragging"
 													  To="Off"
 													  GeneratedDuration="0">
-										<Storyboard>
-										</Storyboard>
+										<Storyboard />
 									</VisualTransition>
 
 									<VisualTransition x:Name="OnToOffTransition"
 													  From="On"
 													  To="Off"
 													  GeneratedDuration="0">
-										<Storyboard>
-										</Storyboard>
+										<Storyboard />
 									</VisualTransition>
 
 									<VisualTransition x:Name="OffToOnTransition"
@@ -258,8 +240,7 @@
 
 							<VisualStateGroup x:Name="ContentStates">
 								<VisualState x:Name="OffContent">
-									<Storyboard>
-									</Storyboard>
+									<Storyboard />
 								</VisualState>
 
 								<VisualState x:Name="OnContent">
@@ -301,7 +282,7 @@
 						<TextBlock Text="{TemplateBinding Header}"
 								   Style="{StaticResource MaterialBody2}"
 								   Foreground="{StaticResource MaterialOnBackgroundBrush}"
-								   Visibility="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsedConverter},TargetNullValue=Collapsed}"
+								   Visibility="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsedConverter}, TargetNullValue=Collapsed}"
 								   Grid.ColumnSpan="4" />
 
 						<ContentPresenter x:Name="OnContentPresenter"
@@ -365,14 +346,14 @@
 									 Height="40"
 									 Opacity="0" />
 
-							<uno:ElevatedView  Width="20"
-												   Height="20"
-												   Elevation="4"
-												   CornerRadius="10"
-												   ShadowColor="{StaticResource MaterialShadowColor}"
-												   Background="Transparent"
-												   VerticalAlignment="Stretch"
-												   HorizontalAlignment="Stretch">
+							<uno:ElevatedView Width="20"
+											  Height="20"
+											  Elevation="4"
+											  CornerRadius="10"
+											  ShadowColor="{StaticResource MaterialShadowColor}"
+											  Background="Transparent"
+											  VerticalAlignment="Stretch"
+											  HorizontalAlignment="Stretch">
 								<Grid>
 									<Ellipse x:Name="SwitchKnobOn"
 											 Fill="{TemplateBinding Foreground}"
@@ -406,12 +387,10 @@
 	</Style>
 
 	<Style x:Key="MaterialSecondaryToggleSwitchStyle"
-				 TargetType="ToggleSwitch"
-				 BasedOn="{StaticResource MaterialToggleSwitchStyle}">
+		   TargetType="ToggleSwitch"
+		   BasedOn="{StaticResource MaterialToggleSwitchStyle}">
 
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialSecondaryVariantDarkBrush}" />
-		<Setter Property="Background"
-				Value="{StaticResource MaterialSecondaryVariantLightBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource MaterialSecondaryVariantDarkBrush}" />
+		<Setter Property="Background" Value="{StaticResource MaterialSecondaryVariantLightBrush}" />
 	</Style>
 </ResourceDictionary>

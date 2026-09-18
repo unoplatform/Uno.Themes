@@ -17,13 +17,10 @@
 	<Style x:Key="DeleteButtonStyle"
 		   TargetType="Button">
 
-		<Setter Property="Height"
-				Value="44" />
-		<Setter Property="Width"
-				Value="44" />
-		<Setter Property="CornerRadius"
-				Value="22" />
-		
+		<Setter Property="Height" Value="44" />
+		<Setter Property="Width" Value="44" />
+		<Setter Property="CornerRadius" Value="22" />
+
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
@@ -44,8 +41,7 @@
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="ButtonLayoutGrid.Opacity"
-												Value="0" />
+										<Setter Target="ButtonLayoutGrid.Opacity" Value="0" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -64,7 +60,7 @@
 						<um:Ripple Feedback="{StaticResource MaterialPrimaryBrush}"
 								   FeedbackOpacity="{StaticResource MaterialPressedOpacity}"
 								   CornerRadius="{TemplateBinding CornerRadius}"
-								   AutomationProperties.AccessibilityView="Raw"/>
+								   AutomationProperties.AccessibilityView="Raw" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
@@ -74,29 +70,19 @@
 	<Style x:Key="MaterialFilledTextBoxStyle"
 		   TargetType="TextBox">
 
-		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialRegularFontFamily}" />
-		<Setter Property="Foreground"
-				Value="{StaticResource TextBoxLabelDefaultColorBrush}" />
-		<Setter Property="PlaceholderForeground"
-				Value="{StaticResource TextBoxLabelDefaultColorBrush}" />
-		<Setter Property="Background"
-				Value="{StaticResource TextBoxFilledBackgroundColorBrush}" />
-		<Setter Property="BorderBrush"
-				Value="{StaticResource TextBoxFilledIndicatorColorBrush}" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Left" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
+		<Setter Property="FontFamily" Value="{StaticResource MaterialRegularFontFamily}" />
+		<Setter Property="Foreground" Value="{StaticResource TextBoxLabelDefaultColorBrush}" />
+		<Setter Property="PlaceholderForeground" Value="{StaticResource TextBoxLabelDefaultColorBrush}" />
+		<Setter Property="Background" Value="{StaticResource TextBoxFilledBackgroundColorBrush}" />
+		<Setter Property="BorderBrush" Value="{StaticResource TextBoxFilledIndicatorColorBrush}" />
+		<Setter Property="HorizontalContentAlignment" Value="Left" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
 
-		<Setter Property="Padding"
-						  Value="0,16" />
-		<Setter Property="MinHeight"
-				Value="50" />
+		<Setter Property="Padding" Value="0,16" />
+		<Setter Property="MinHeight" Value="50" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="ut:ControlExtensions.Icon"
-				Value="{x:Null}" />
+		<Setter Property="ut:ControlExtensions.Icon" Value="{x:Null}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -113,22 +99,17 @@
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="NormalBorder.Fill"
-												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
-										<Setter Target="ContentElement.Foreground"
-												Value="{StaticResource MaterialOnSurfaceBrush}" />
+										<Setter Target="NormalBorder.Fill" Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="ContentElement.Foreground" Value="{StaticResource MaterialOnSurfaceBrush}" />
 										<!-- In this case the opacity is not applied to the brush -->
-										<Setter Target="ContentElement.Opacity"
-												Value="{StaticResource MaterialLowOpacity}" />
-										<Setter Target="PlaceholderElement.Foreground"
-												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="ContentElement.Opacity" Value="{StaticResource MaterialLowOpacity}" />
+										<Setter Target="PlaceholderElement.Foreground" Value="{StaticResource MaterialOnSurfaceLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="PlaceholderElement.Foreground"
-												Value="{StaticResource TextBoxLabelFocusColorBrush}" />
+										<Setter Target="PlaceholderElement.Foreground" Value="{StaticResource TextBoxLabelFocusColorBrush}" />
 									</VisualState.Setters>
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="FocusedBorder_ScaleTransform"
@@ -142,8 +123,7 @@
 							<VisualStateGroup x:Name="ButtonStates">
 								<VisualState x:Name="ButtonVisible">
 									<VisualState.Setters>
-										<Setter Target="DeleteButton.Opacity"
-												Value="1" />
+										<Setter Target="DeleteButton.Opacity" Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="ButtonCollapsed">
@@ -209,7 +189,7 @@
 												  MinWidth="25"
 												  HorizontalAlignment="Center"
 												  VerticalAlignment="Top"
-												  Margin="0,0,8,0"/>
+												  Margin="0,0,8,0" />
 							</Border>
 
 							<ScrollViewer x:Name="ContentElement"
@@ -267,8 +247,7 @@
 								   VerticalAlignment="Bottom"
 								   RenderTransformOrigin="0.5,0.5">
 							<Rectangle.RenderTransform>
-								<ScaleTransform x:Name="FocusedBorder_ScaleTransform"
-												ScaleX="0" />
+								<ScaleTransform x:Name="FocusedBorder_ScaleTransform" ScaleX="0" />
 							</Rectangle.RenderTransform>
 						</Rectangle>
 					</Grid>
@@ -279,34 +258,22 @@
 
 	<Style x:Key="MaterialOutlinedTextBoxStyle"
 		   TargetType="TextBox">
-		
-		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialRegularFontFamily}" />
-		<Setter Property="Background"
-				Value="Transparent" />
-		<Setter Property="Foreground"
-				Value="{StaticResource TextBoxLabelDefaultColorBrush}" />
-		<Setter Property="PlaceholderForeground"
-				Value="{StaticResource TextBoxLabelDefaultColorBrush}" />
-		<Setter Property="BorderThickness"
-				Value="1" />
-		<Setter Property="BorderBrush"
-				Value="{StaticResource TextBoxFilledIndicatorColorBrush}" />
-		<Setter Property="CornerRadius"
-				Value="{StaticResource TextBoxOutlinedCorderRadius}" />
 
-		<Setter Property="HorizontalContentAlignment"
-				Value="Left" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
-		<Setter Property="Padding"
-				Value="0,16" />
-		<Setter Property="MinHeight"
-				Value="50" />
+		<Setter Property="FontFamily" Value="{StaticResource MaterialRegularFontFamily}" />
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="Foreground" Value="{StaticResource TextBoxLabelDefaultColorBrush}" />
+		<Setter Property="PlaceholderForeground" Value="{StaticResource TextBoxLabelDefaultColorBrush}" />
+		<Setter Property="BorderThickness" Value="1" />
+		<Setter Property="BorderBrush" Value="{StaticResource TextBoxFilledIndicatorColorBrush}" />
+		<Setter Property="CornerRadius" Value="{StaticResource TextBoxOutlinedCorderRadius}" />
+
+		<Setter Property="HorizontalContentAlignment" Value="Left" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="Padding" Value="0,16" />
+		<Setter Property="MinHeight" Value="50" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="ut:ControlExtensions.Icon"
-				Value="{x:Null}" />
+		<Setter Property="ut:ControlExtensions.Icon" Value="{x:Null}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -325,32 +292,25 @@
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="Root.BorderBrush"
-												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
-										<Setter Target="ContentElement.Foreground"
-												Value="{StaticResource MaterialOnSurfaceBrush}" />
+										<Setter Target="Root.BorderBrush" Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="ContentElement.Foreground" Value="{StaticResource MaterialOnSurfaceBrush}" />
 										<!-- In this case the opacity is not applied to the brush -->
-										<Setter Target="ContentElement.Opacity"
-												Value="{StaticResource MaterialLowOpacity}" />
-										<Setter Target="PlaceholderElement.Foreground"
-												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="ContentElement.Opacity" Value="{StaticResource MaterialLowOpacity}" />
+										<Setter Target="PlaceholderElement.Foreground" Value="{StaticResource MaterialOnSurfaceLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="Root.BorderBrush"
-												Value="{StaticResource TextBoxFilledFocusIndicatorColorBrush}" />
-										<Setter Target="PlaceholderElement.Foreground"
-												Value="{StaticResource TextBoxLabelFocusColorBrush}" />
+										<Setter Target="Root.BorderBrush" Value="{StaticResource TextBoxFilledFocusIndicatorColorBrush}" />
+										<Setter Target="PlaceholderElement.Foreground" Value="{StaticResource TextBoxLabelFocusColorBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
 							<VisualStateGroup x:Name="ButtonStates">
 								<VisualState x:Name="ButtonVisible">
 									<VisualState.Setters>
-										<Setter Target="DeleteButton.Opacity"
-												Value="1" />
+										<Setter Target="DeleteButton.Opacity" Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="ButtonCollapsed">
@@ -409,14 +369,14 @@
 
 							<Border Margin="{TemplateBinding Padding}">
 								<ContentPresenter x:Name="IconPresenter"
-                                                  Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
+												  Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
 												  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 												  MaxHeight="34"
 												  MaxWidth="34"
 												  MinWidth="25"
 												  HorizontalAlignment="Center"
 												  VerticalAlignment="Bottom"
-												  Margin="0,0,8,0"/>
+												  Margin="0,0,8,0" />
 							</Border>
 
 							<ScrollViewer x:Name="ContentElement"

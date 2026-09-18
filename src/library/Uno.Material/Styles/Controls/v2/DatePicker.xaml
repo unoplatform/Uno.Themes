@@ -1,4 +1,4 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:not_win="http://uno.ui/not_win"
@@ -165,7 +165,7 @@
 	</Style>
 
 	<Style x:Key="MaterialDatePickerFlyoutPresenterStyle"
-				   TargetType="DatePickerFlyoutPresenter">
+		   TargetType="DatePickerFlyoutPresenter">
 		<Setter Property="Width" Value="{ThemeResource DatePickerFlyoutPresenterWidth}" />
 		<Setter Property="MinWidth" Value="{ThemeResource DatePickerFlyoutPresenterMinWidth}" />
 		<Setter Property="MaxHeight" Value="{ThemeResource DatePickerFlyoutPresenterMaxHeight}" />
@@ -182,12 +182,12 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="DatePickerFlyoutPresenter">
 					<uno:ElevatedView MaxHeight="{TemplateBinding MaxHeight}"
-										  Background="{TemplateBinding Background}"
-										  BorderBrush="{TemplateBinding BorderBrush}"
-										  BorderThickness="{TemplateBinding BorderThickness}"
-										  CornerRadius="{TemplateBinding CornerRadius}"
-										  Elevation="{ThemeResource DatePickerFlyoutElevation}"
-										  ShadowColor="{StaticResource ShadowColor}">
+									  Background="{TemplateBinding Background}"
+									  BorderBrush="{TemplateBinding BorderBrush}"
+									  BorderThickness="{TemplateBinding BorderThickness}"
+									  CornerRadius="{TemplateBinding CornerRadius}"
+									  Elevation="{ThemeResource DatePickerFlyoutElevation}"
+									  ShadowColor="{StaticResource ShadowColor}">
 						<Border x:Name="Background">
 							<Grid x:Name="ContentPanel">
 

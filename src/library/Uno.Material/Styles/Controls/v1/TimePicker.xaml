@@ -8,10 +8,8 @@
 	<Style x:Key="TimePickerFlyoutButtonStyle"
 		   TargetType="Button">
 
-		<Setter Property="Background"
-				Value="Transparent" />
-		<Setter Property="Padding"
-				Value="0" />
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="Padding" Value="0" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -26,14 +24,12 @@
 								<VisualState x:Name="PointerOver" />
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="RootGrid.Opacity"
-												Value="0.65" />
+										<Setter Target="RootGrid.Opacity" Value="0.65" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="RootGrid.Opacity"
-												Value="0.65" />
+										<Setter Target="RootGrid.Opacity" Value="0.65" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -59,18 +55,12 @@
 	<Style x:Key="MaterialTimePickerStyle"
 		   TargetType="TimePicker">
 
-		<Setter Property="Background"
-				Value="{StaticResource TextBoxFilledBackgroundColorBrush}" />
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialPrimaryBrush}" />
-		<Setter Property="BorderBrush"
-				Value="{StaticResource MaterialPrimaryBrush}" />
-		<Setter Property="HorizontalAlignment"
-				Value="Stretch" />
-		<Setter Property="Height"
-				Value="53" />
-		<Setter Property="CornerRadius"
-				Value="4,4,0,0" />
+		<Setter Property="Background" Value="{StaticResource TextBoxFilledBackgroundColorBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource MaterialPrimaryBrush}" />
+		<Setter Property="BorderBrush" Value="{StaticResource MaterialPrimaryBrush}" />
+		<Setter Property="HorizontalAlignment" Value="Stretch" />
+		<Setter Property="Height" Value="53" />
+		<Setter Property="CornerRadius" Value="4,4,0,0" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -83,20 +73,14 @@
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="HeaderTextBlock.Foreground"
-												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="HeaderTextBlock.Foreground" Value="{StaticResource MaterialOnSurfaceLowBrush}" />
 
-										<Setter Target="HourTextBlock.Foreground"
-												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
-										<Setter Target="ColonText.Foreground"
-												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
-										<Setter Target="MinuteTextBlock.Foreground"
-												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
-										<Setter Target="PeriodTextBlock.Foreground"
-												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="HourTextBlock.Foreground" Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="ColonText.Foreground" Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="MinuteTextBlock.Foreground" Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="PeriodTextBlock.Foreground" Value="{StaticResource MaterialOnSurfaceLowBrush}" />
 
-										<Setter Target="BottomBorder.Fill"
-												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="BottomBorder.Fill" Value="{StaticResource MaterialOnSurfaceLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -105,19 +89,15 @@
 
 								<VisualState x:Name="HasTime">
 									<VisualState.Setters>
-										<Setter Target="FlyoutButtonContentGrid.Visibility"
-												Value="Visible" />
-										<Setter Target="PlaceholderContentGrid.Visibility"
-												Value="Collapsed" />
+										<Setter Target="FlyoutButtonContentGrid.Visibility" Value="Visible" />
+										<Setter Target="PlaceholderContentGrid.Visibility" Value="Collapsed" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="HasNoTime">
 									<VisualState.Setters>
-										<Setter Target="PlaceholderContentGrid.Visibility"
-												Value="Visible" />
-										<Setter Target="FlyoutButtonContentGrid.Visibility"
-												Value="Collapsed" />
+										<Setter Target="PlaceholderContentGrid.Visibility" Value="Visible" />
+										<Setter Target="FlyoutButtonContentGrid.Visibility" Value="Collapsed" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>

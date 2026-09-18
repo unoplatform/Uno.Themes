@@ -7,31 +7,22 @@
 	<SolidColorBrush x:Key="CupertinoCalendarDatePickerBorderBrushPointerOver"
 					 Color="{ThemeResource CupertinoPrimaryGrayColor}"
 					 Opacity="{StaticResource CupertinoHoverOpacity}" />
-	
+
 	<SolidColorBrush x:Key="CupertinoCalendarDatePickerBorderBrushPressed"
 					 Color="{ThemeResource CupertinoPrimaryGrayColor}"
-					 Opacity="{StaticResource CupertinoPressedOpacity}"  />
+					 Opacity="{StaticResource CupertinoPressedOpacity}" />
 
 	<Style x:Key="DefaultCupertinoCalendarDatePickerStyle"
 		   TargetType="CalendarDatePicker">
-		<Setter Property="Foreground"
-				Value="{ThemeResource CalendarDatePickerForeground}" />
-		<Setter Property="Background"
-				Value="{StaticResource CupertinoCalendarDatePickerBackground}" />
-		<Setter Property="BorderBrush"
-				Value="{ThemeResource CupertinoPrimaryGrayBrush}" />
-		<Setter Property="BorderThickness"
-				Value="1" />
-		<Setter Property="CalendarViewStyle"
-				Value="{StaticResource CupertinoCalendarViewStyle}" />
-		<Setter Property="HorizontalAlignment"
-				Value="Left" />
-		<Setter Property="VerticalAlignment"
-				Value="Center" />
-		<Setter Property="CornerRadius"
-				Value="5" />
-		<Setter Property="UseSystemFocusVisuals"
-				Value="{ThemeResource IsApplicationFocusVisualKindReveal}" />
+		<Setter Property="Foreground" Value="{ThemeResource CalendarDatePickerForeground}" />
+		<Setter Property="Background" Value="{StaticResource CupertinoCalendarDatePickerBackground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource CupertinoPrimaryGrayBrush}" />
+		<Setter Property="BorderThickness" Value="1" />
+		<Setter Property="CalendarViewStyle" Value="{StaticResource CupertinoCalendarViewStyle}" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="CornerRadius" Value="5" />
+		<Setter Property="UseSystemFocusVisuals" Value="{ThemeResource IsApplicationFocusVisualKindReveal}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="CalendarDatePicker">
@@ -44,8 +35,10 @@
 								<VisualState x:Name="PointerOver">
 
 									<Storyboard>
-										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background" Storyboard.TargetProperty="BorderBrush">
-											<DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CupertinoCalendarDatePickerBorderBrushPointerOver}" />
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background"
+																	   Storyboard.TargetProperty="BorderBrush">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource CupertinoCalendarDatePickerBorderBrushPointerOver}" />
 										</ObjectAnimationUsingKeyFrames>
 									</Storyboard>
 								</VisualState>
@@ -53,8 +46,10 @@
 								<VisualState x:Name="Pressed">
 
 									<Storyboard>
-										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background" Storyboard.TargetProperty="BorderBrush">
-											<DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CupertinoCalendarDatePickerBorderBrushPressed}" />
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background"
+																	   Storyboard.TargetProperty="BorderBrush">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource CupertinoCalendarDatePickerBorderBrushPressed}" />
 										</ObjectAnimationUsingKeyFrames>
 									</Storyboard>
 								</VisualState>
@@ -113,16 +108,11 @@
 								<VisualState x:Name="TopHeader" />
 								<VisualState x:Name="LeftHeader">
 									<VisualState.Setters>
-										<Setter Target="HeaderContentPresenter.(Grid.Row)"
-												Value="1" />
-										<Setter Target="HeaderContentPresenter.(Grid.Column)"
-												Value="0" />
-										<Setter Target="HeaderContentPresenter.(Grid.ColumnSpan)"
-												Value="1" />
-										<Setter Target="HeaderContentPresenter.Margin"
-												Value="{StaticResource CalendarDatePickerLeftHeaderMargin}" />
-										<Setter Target="HeaderContentPresenter.MaxWidth"
-												Value="{StaticResource CalendarDatePickerLeftHeaderMaxWidth}" />
+										<Setter Target="HeaderContentPresenter.(Grid.Row)" Value="1" />
+										<Setter Target="HeaderContentPresenter.(Grid.Column)" Value="0" />
+										<Setter Target="HeaderContentPresenter.(Grid.ColumnSpan)" Value="1" />
+										<Setter Target="HeaderContentPresenter.Margin" Value="{StaticResource CalendarDatePickerLeftHeaderMargin}" />
+										<Setter Target="HeaderContentPresenter.MaxWidth" Value="{StaticResource CalendarDatePickerLeftHeaderMaxWidth}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -134,12 +124,9 @@
 									ShouldConstrainToRootBounds="False">
 								<Flyout.FlyoutPresenterStyle>
 									<Style TargetType="FlyoutPresenter">
-										<Setter Property="Padding"
-												Value="0" />
-										<Setter Property="BorderThickness"
-												Value="0" />
-										<Setter Property="IsDefaultShadowEnabled"
-												Value="True" />
+										<Setter Property="Padding" Value="0" />
+										<Setter Property="BorderThickness" Value="0" />
+										<Setter Property="IsDefaultShadowEnabled" Value="True" />
 										<Setter Property="Template">
 											<Setter.Value>
 												<ControlTemplate TargetType="FlyoutPresenter">

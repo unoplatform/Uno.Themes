@@ -251,12 +251,48 @@ For the full command reference (filter syntax, headless vs interactive, adding n
 - Use raw strings (`"""..."""`) for expected and actual samples.
 - Avoid manual newline normalization (`Replace("\r\n", "\n")`); rely on the test framework's options where available.
 
-### Format XAML
+### Code formatting
+
+Both formatters are gated in CI by the **Code Style** stage (`build/stage-code-style.yml`),
+which runs the two commands below in verify mode. Run them locally before pushing.
+
+XAML Styler is pinned as a local tool in `.config/dotnet-tools.json` — always invoke it
+through `dotnet xstyler` after `dotnet tool restore`, never through `dotnet dnx`, which
+resolves whatever version is newest and silently changes the formatting baseline.
 
 ```bash
-# Run xaml styler (uses Settings.XamlStyler at the repo root)
-dotnet dnx XamlStyler.Console -r -l Debug -c Settings.XamlStyler -d "."
+# XAML (uses Settings.XamlStyler at the repo root)
+dotnet tool restore
+dotnet xstyler -c Settings.XamlStyler -f "$(git ls-files '*.xaml' | paste -sd,)"
+
+# Verify (this is what CI runs)
+dotnet xstyler -c Settings.XamlStyler --passive -f "$(git ls-files '*.xaml' | paste -sd,)"
 ```
+
+```bash
+# C# whitespace
+TargetFrameworkOverride=desktop dotnet format whitespace Uno.Themes.sln --exclude src/samples/SamplesApp.Shared
+
+# Verify (this is what CI runs)
+TargetFrameworkOverride=desktop dotnet format whitespace Uno.Themes.sln --verify-no-changes --exclude src/samples/SamplesApp.Shared
+```
+
+Three things about these commands are load-bearing:
+
+✅ **Drive the styler from `git ls-files`, not `-d`.** The XamlMerge task writes gitignored
+`mergedpages*.xaml` into `src/library/*/Generated/`, and `-r -d src` checks those too, so the
+gate fails for anyone who built before running it. `-d "."` is worse still — it also sweeps
+agent worktrees under `.claude/` and every `obj/` tree.
+✅ **XAML Styler needs two passes to converge.** Its first pass can leave trailing
+whitespace after a self-closing tag on files that already had some; the second removes it.
+If `--passive` reports failures on files you just formatted, run the format command again
+rather than hand-editing them.
+✅ **`src/samples/SamplesApp.Shared` is excluded from `dotnet format`.** Its files are
+linked into the sample heads through a shared project (`.shproj`/`.projitems`), and
+`dotnet format` does not resolve an `.editorconfig` for those linked documents — it falls
+back to the Roslyn defaults (4 spaces) and would rewrite ~72 tab-indented files against
+the repo convention. Do not "fix" this by dropping the `--exclude`, and do not reformat
+that folder to spaces; `.editorconfig` declares tabs for `.cs` and that is the convention.
 
 ✅ Always run runtime tests as part of verification of theme/style changes — they are not optional manual steps.
 ✅ Maintain or improve passing test count.
