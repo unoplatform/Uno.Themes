@@ -276,6 +276,13 @@ row updated in the same PR.
   reclaimed and `Application.CleanupNonDefaultAlcCaches` throws `TargetParameterCountException` (reflection
   signature drift in `GuestHosting`). CI runs the smoke on X11, so this may be Win32-only; separate issue.
 
+- A colour override passed to a theme **constructor** (`new SimpleTheme(colorOverride)`, and the Material
+  equivalent) is `SafeMerge`d into the theme's base palette. `SemanticBrushUpdater` resolves each layer from
+  its own `ThemeDictionaries` and never descends into a layer's merged dictionaries, so the `*Color` keys
+  follow such an override while the `*Brush` instances do not. Found while writing the Cupertino legacy
+  shim; unverified for Simple / Material and therefore not fixed here — it needs its own red/fix/green in
+  the Simple host. The `ColorOverrideSource` / `Colors.OverrideDictionary` path is unaffected.
+
 ## Review
 
 ### Skeptic review — 2026-09-18 (pre-approval)
@@ -332,9 +339,7 @@ Deviations from the Phase 1 list, each deliberate:
 - **No font-cascade test from a scoped container** — `specs/lessons.md` records that alias cascades
   resolve against the application scope; that test arrives with the sample's `App.xaml` switch.
 
-Still open in Phase 1: legacy colour values → June-2025 palette,
-`CupertinoBrushes.xaml` + live brush rewrite, implicit styles, the legacy shim and frozen V1 (D-1, now
-confirmed); `Thickness.xaml` and motion tokens (unblocked, but nothing reads them before Phase 3); Toolkit
+Still open in Phase 1: implicit styles and the frozen `CupertinoResourcesV1` (D-1); `Thickness.xaml` and motion tokens (unblocked, but nothing reads them before Phase 3); Toolkit
 key inventory; CI matrix row; docs delta.
 
 ### Phase 1, slice 2 — 2026-09-18: type scale and semantic style aliases (additive)
@@ -379,6 +384,45 @@ worktree** — in both, every guest hosts, the *Material* guest's ALC is reporte
 `Application.CleanupNonDefaultAlcCaches` throws `TargetParameterCountException` (the wrapper's reflection
 call no longer matches Uno 7.0.0-dev.701). On this branch Cupertino hosts and its ALC is fully collected.
 Not caused by this work; recorded under "Hand-offs".
+
+### Phase 1, slice 4 — 2026-09-18: semantic contract ratchet, live legacy brushes, legacy shim (D-1)
+
+Landed:
+
+- `Given_CupertinoTheme.When_ThemeLoaded_Then_EverySemanticKeyResolvesOrIsTrackedAsPending` — the 72-key
+  semantic contract (Simple's 70 aliases + `ElevatedButtonStyle` + `CommandBarStyle`) with an explicit
+  `PendingSemanticKeys` list. It fails when an unlisted key does not resolve **and** when a pending key
+  starts resolving, so the list can only shrink. Mutation-checked both ways; the failure names the key.
+- `Uno.Themes`: `BaseTheme.ColorLayers` (internal) exposes the resolved colour layers of the last rebuild;
+  `SemanticBrushUpdater.Apply(brushes, layers, map)` rewrites a design system's own brushes from them. The
+  per-layer lookup was factored out of `TryResolve` unchanged. A map entry lists candidate colour keys:
+  the highest-precedence layer defining any of them wins, and within a layer the first listed wins.
+- `CupertinoColors.xaml` → `CupertinoBrushes.xaml` (no code-behind class), owned by the theme: loaded
+  once, rewritten in place on every rebuild through `CupertinoConstants.BrushColorKeys`, re-added as a
+  dynamic layer. `CupertinoBlueBrush` and `CupertinoLinkBrush` list `PrimaryColor` second, so they follow a
+  seed or a `PrimaryColor` override while a consumer's `CupertinoBlueColor` override still wins.
+- Palette: the nine existing system colours and `LinkColor` moved to Apple's 2025-06-09 values;
+  `CupertinoMint` / `Cyan` / `Brown` `Color` + `Brush` added.
+- Legacy shim: `CupertinoColors` and `CupertinoFonts` are `[Obsolete]` recorders of `OverrideSource`;
+  `CupertinoResources : CupertinoTheme` (`[Obsolete]`, still `sealed`) applies the recorded overrides and
+  translates a legacy `CupertinoFontFamily` override into `DefaultFontFamily`. `_Resources.xaml` no longer
+  nests the two legacy dictionaries.
+
+Result: Cupertino **54 / 54**; Simple **256 passed + 1 skipped** (the `[Ignore]` already on `master` from
+#1679); Material **63 / 63** — the shared-library change left both suites unchanged. Formatters clean; the
+real shell boots with clean logs.
+
+Deviations:
+
+- **The shim routes the colour override through `ColorOverrideSource`, not the base constructor.** A
+  constructor `colorOverride` is merged *into* the theme's base palette, where the brush rewrite (which
+  reads each layer's own theme blocks) cannot see it; the first version of the shim failed its own test for
+  exactly that reason. Cost: one extra theme rebuild at startup for legacy consumers with a colour
+  override. See "Hand-offs" — the constructor path has the same blind spot in Simple and Material.
+- **Glass-tint and switch colour keys not added yet** — nothing reads them before Phases 2–3.
+- `AddThemeSpecificResources` loads `CupertinoBrushes.xaml` unguarded, exactly as `BaseTheme` loads
+  `SharedColors.xaml`: an in-package URI that fails to load means every style is missing too, and catching
+  it without a logger available in this assembly would be a silent swallow (AGENTS.md §8).
 
 Environment note for whoever picks this up: **Debug** builds of the sample heads fail on the current dev
 box (`CS0104` `VisualTreeHelperEx` ambiguous with `Uno.Toolkit.UI`, `CS0012` on `Uno, Version=255.255.255.255`)

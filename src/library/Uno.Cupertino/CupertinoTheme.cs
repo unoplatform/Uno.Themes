@@ -1,5 +1,6 @@
 using System;
 using Uno.Themes;
+using Uno.Themes.Helpers;
 
 #if WinUI
 using Microsoft.UI.Xaml;
@@ -47,6 +48,18 @@ public class CupertinoTheme(ResourceDictionary colorOverride = null, ResourceDic
 
 	/// <inheritdoc />
 	protected override string DefaultStylesSource => CupertinoConstants.MergedPages;
+
+	// Created once and kept for the lifetime of the theme: consumers hold {ThemeResource Cupertino*Brush}
+	// references to these instances, so they are rewritten in place, never replaced (see SemanticBrushUpdater).
+	private ResourceDictionary _cupertinoBrushes;
+
+	/// <inheritdoc />
+	protected override void AddThemeSpecificResources()
+	{
+		_cupertinoBrushes ??= new ResourceDictionary { Source = new Uri(CupertinoConstants.Brushes) };
+		SemanticBrushUpdater.Apply(_cupertinoBrushes, ColorLayers, CupertinoConstants.BrushColorKeys);
+		AddThemeDictionary(_cupertinoBrushes);
+	}
 
 	/// <summary>
 	/// The font family alias keys Cupertino declares — StaticResource aliases that snapshot at parse

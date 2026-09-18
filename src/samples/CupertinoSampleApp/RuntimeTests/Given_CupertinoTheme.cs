@@ -92,6 +92,47 @@ public class Given_CupertinoTheme
 
 	[TestMethod]
 	[RunsOnUIThread]
+	public void When_PrimarySeedSet_Then_AccentLegacyBrushFollowsOnTheSameInstance()
+	{
+		var theme = new CupertinoTheme();
+		var container = CreateThemedContainer(theme);
+		var accent = GetResource<SolidColorBrush>(container, "CupertinoBlueBrush");
+		var green = GetResource<SolidColorBrush>(container, "CupertinoGreenBrush");
+		var unseededGreen = green.Color;
+
+		theme.Colors = new ThemeColors { PrimarySeed = Parse("#2E7D32") };
+
+		Assert.AreSame(accent, GetResource<SolidColorBrush>(container, "CupertinoBlueBrush"), "the instance must survive a rebuild");
+		Assert.AreEqual(GetResource<Color>(container, "PrimaryColor"), accent.Color, "the accent brush follows the seeded primary");
+		Assert.AreEqual(unseededGreen, green.Color, "system colours that are not the accent stay put");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_ConsumerOverridesCupertinoBlueColor_Then_ItBeatsTheSeed()
+	{
+		var overrides = new ResourceDictionary();
+		overrides["CupertinoBlueColor"] = Parse("#123456");
+		var theme = new CupertinoTheme { Colors = new ThemeColors { PrimarySeed = Parse("#2E7D32"), OverrideDictionary = overrides } };
+		var container = CreateThemedContainer(theme);
+
+		Assert.AreEqual(Parse("#123456"), GetResource<SolidColorBrush>(container, "CupertinoBlueBrush").Color);
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow("CupertinoBlueColor", "#0088FF", "#0091FF")]
+	[DataRow("CupertinoRedColor", "#FF383C", "#FF4245")]
+	[DataRow("CupertinoOrangeColor", "#FF8D28", "#FF9230")]
+	[DataRow("CupertinoMintColor", "#00C8B3", "#00DAC3")]
+	[DataRow("CupertinoCyanColor", "#00C0E8", "#3CD3FE")]
+	[DataRow("CupertinoBrownColor", "#AC7F5E", "#B78A66")]
+	[DataRow("LinkColor", "#0088FF", "#0091FF")]
+	public void When_PaletteLoaded_Then_SystemColoursCarryThe2025Values(string key, string light, string dark) =>
+		When_PaletteLoaded_Then_SharedRolesCarryAppleValues(key, light, dark);
+
+	[TestMethod]
+	[RunsOnUIThread]
 	public void When_ThemeLoaded_Then_DesignTokensGenerate()
 	{
 		var container = CreateThemedContainer(new CupertinoTheme { DefaultSpacing = 6, DefaultCornerRadius = 5 });

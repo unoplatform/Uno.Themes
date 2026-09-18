@@ -1,114 +1,57 @@
 using System;
-using System.Collections.Generic;
 
 #if WinUI
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Media;
 #else
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 #endif
 
 namespace Uno.Cupertino;
 
 /// <summary>
-/// Cupertino resources including colors, layout values and styles
+/// Legacy entry point: a <see cref="CupertinoTheme"/> that picks up the overrides recorded by a
+/// <see cref="CupertinoColors"/> / <see cref="CupertinoFonts"/> declared before it.
 /// </summary>
-public sealed class CupertinoResources : ResourceDictionary
+#pragma warning disable CS0618 // The obsolete recorders are this shim's only input.
+[Obsolete("Use CupertinoTheme instead. This type will be removed in a future version.")]
+public sealed class CupertinoResources : CupertinoTheme
 {
+	/// <summary>
+	/// Initializes a new instance of the <see cref="CupertinoResources"/> class from the recorded overrides.
+	/// </summary>
 	public CupertinoResources()
+		: base(colorOverride: null, fontOverride: Load(CupertinoFonts.RecordedOverrideSource))
 	{
-		MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(Themes.ThemesConstants.ConverterResourcePath) });
-		ImportResourceDictionaries();
-	}
-
-	public bool WithImplicitStyles { set => ExportImplicitStyles(value); }
-
-	private IEnumerable<(string Source, string[] ImplicitStyles)> GetResourceInfos()
-	{
-		var resources = new List<(string Path, string[] ImplicitStyles)>();
-
-		var implicitStyles = new[] {
-			// Add all ResourceDictionaries for Controls here in alphabetical order
-			// "ms-appx:///Uno.Cupertino/Styles/Controls/Button.xaml",
-			"CupertinoButtonStyle",
-			// "ms-appx:///Uno.Cupertino/Styles/Controls/CalendarDatePicker.xaml",
-			"CupertinoCalendarDatePickerStyle",
-			// "ms-appx:///Uno.Cupertino/Styles/Controls/CalendarView.xaml",
-			"CupertinoCalendarViewStyle",
-			// "ms-appx:///Uno.Cupertino/Styles/Controls/CheckBox.xaml",
-			"CupertinoCheckBoxStyle",
-			// "ms-appx:///Uno.Cupertino/Styles/Controls/ComboBox.xaml",
-			"CupertinoComboBoxStyle",
-			// "ms-appx:///Uno.Cupertino/Styles/Controls/DatePicker.xaml",
-			"CupertinoDatePickerStyle", "CupertinoDatePickerFlyoutPresenterStyle",
-			// "ms-appx:///Uno.Cupertino/Styles/Controls/HyperlinkButton.xaml",
-			"CupertinoHyperlinkButtonStyle",
-			// "ms-appx:///Uno.Cupertino/Styles/Controls/NumberBox.xaml",
-			"CupertinoNumberBoxStyle",
-			// "ms-appx:///Uno.Cupertino/Styles/Controls/PasswordBox.xaml",
-			"CupertinoPasswordBoxStyle",
-			// "ms-appx:///Uno.Cupertino/Styles/Controls/ProgressBar.xaml",
-			"CupertinoProgressBarStyle",
-#if !WinUI_Desktop
-			// "ms-appx:///Uno.Cupertino/Styles/Controls/ProgressRing.xaml",
-			"CupertinoProgressRingStyle",
-#endif
-			// "ms-appx:///Uno.Cupertino/Styles/Controls/RadioButton.xaml",
-			"CupertinoRadioButtonStyle",
-			// "ms-appx:///Uno.Cupertino/Styles/Controls/Slider.xaml",
-			"CupertinoSliderStyle",
-			// "ms-appx:///Uno.Cupertino/Styles/Controls/TextBlock.xaml",
-			"CupertinoBody",
-			// "ms-appx:///Uno.Cupertino/Styles/Controls/TextBox.xaml",
-			"CupertinoTextBoxStyle",
-			// "ms-appx:///Uno.Cupertino/Styles/Controls/ToggleSwitch.xaml",
-			"CupertinoToggleSwitchStyle",
-		};
-
-		Add(CupertinoConstants.MergedPages, implicitStyles);
-
-		return resources;
-
-		void Add(string source, params string[] styles) => resources.Add((source, styles));
-	}
-
-	private void ImportResourceDictionaries()
-	{
-		foreach (var info in GetResourceInfos())
+		// Routed through ColorOverrideSource rather than the constructor: a constructor override is merged
+		// *into* the base palette, where the brush rewrite cannot see it, while this one becomes the
+		// highest-precedence color layer. ponytail: costs legacy consumers one extra theme rebuild at
+		// startup; goes away if BaseTheme ever accepts its overrides before the first build.
+		if (!string.IsNullOrWhiteSpace(CupertinoColors.RecordedOverrideSource))
 		{
-			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(info.Source) });
+			ColorOverrideSource = CupertinoColors.RecordedOverrideSource;
+		}
+
+		// A legacy font file redefines CupertinoFontFamily, which under the theme is an alias of the root and
+		// reaches nothing when overridden. Translate it into the root so the whole type scale follows.
+		if (FontOverrideDictionary is { } fonts
+			&& !fonts.ContainsKey(DefaultFontFamilyKey)
+			&& fonts.TryGetValue(CupertinoConstants.LegacyFontFamilyKey, out var value)
+			&& value is FontFamily family)
+		{
+			DefaultFontFamily = family;
 		}
 	}
 
-	private void ExportImplicitStyles(bool value)
-	{
-		if (!value) return; // we don't support teardown
+	private const string DefaultFontFamilyKey = "DefaultFontFamily";
 
-		var implicitResources = new ResourceDictionary();
-		foreach (var info in GetResourceInfos())
-		{
-			foreach (var key in info.ImplicitStyles ?? Array.Empty<string>())
-			{
-				if (!this.TryGetValue(key, out var resource) || !(resource is Style style))
-				{
-					// uwp: If the {key} style is clearly defined in {info.Source}, but we can't find it here.
-					// And, that it only happens on uwp, and not other uno platforms.
-					// It means that the style references resources that are not directly included.
-					// This can usually be fixed by including `<CupertinoColors xmlns="using:Uno.Cupertino" />` in the MergedDictionaries of {info.Source}.
-					// note: Resources used on Style.Setters need to be directly defined/included, those used in Style.Template dont have to be.
-					throw new ArgumentException($"Missing resource: key={key} from={info.Source}");
-				}
-				if (style.TargetType == null)
-				{
-					throw new InvalidOperationException($"Missing TargetType on style: key={key}");
-				}
+	/// <summary>
+	/// No longer has any effect: the implicit styles are part of <see cref="CupertinoTheme"/>.
+	/// </summary>
+	public bool WithImplicitStyles { set { } }
 
-				implicitResources.Add(style.TargetType, style);
-			}
-		}
-
-		// UWP don't allow for res-dict with Source set to contain resource directly:
-		// > Local values are not allowed in resource dictionary with Source set
-		// but, we can add them through merged-dict instead.
-		this.MergedDictionaries.Add(implicitResources);
-	}
+	private static ResourceDictionary Load(string source) =>
+		string.IsNullOrWhiteSpace(source) ? null : new ResourceDictionary { Source = new Uri(source) };
 }
+#pragma warning restore CS0618

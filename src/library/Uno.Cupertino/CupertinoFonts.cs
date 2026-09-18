@@ -6,19 +6,28 @@ using Microsoft.UI.Xaml;
 using Windows.UI.Xaml;
 #endif
 
-
 namespace Uno.Cupertino;
 
-public sealed partial class CupertinoFonts : ResourceDictionary
+/// <summary>
+/// Legacy entry point for a Cupertino font override. It no longer carries any resource: it records
+/// <see cref="OverrideSource"/> for a <see cref="CupertinoResources"/> declared after it.
+/// </summary>
+[Obsolete("Use CupertinoTheme with DefaultFontFamily or FontOverrideSource instead. This type will be removed in a future version.")]
+public sealed class CupertinoFonts : ResourceDictionary
 {
-	private static string FontOverrideSource;
+	// Process-wide on purpose, see CupertinoColors.RecordedOverrideSource.
+	internal static string RecordedOverrideSource { get; private set; }
 
+	/// <summary>
+	/// (Optional) Gets or sets the URI of a dictionary overriding Cupertino fonts.
+	/// </summary>
 	public string OverrideSource
 	{
 		get => (string)GetValue(OverrideSourceProperty);
 		set => SetValue(OverrideSourceProperty, value);
 	}
 
+	/// <summary>Identifies the <see cref="OverrideSource"/> dependency property.</summary>
 	public static DependencyProperty OverrideSourceProperty { get; } =
 		DependencyProperty.Register(
 			nameof(OverrideSource),
@@ -28,19 +37,6 @@ public sealed partial class CupertinoFonts : ResourceDictionary
 
 	private static void OnFontOverrideSourcePropertyChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
 	{
-		FontOverrideSource = args.NewValue as string;
-	}
-
-	public CupertinoFonts()
-	{
-		MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(CupertinoConstants.Fonts) });
-
-		if (!string.IsNullOrWhiteSpace(FontOverrideSource))
-		{
-			MergedDictionaries.Add(new ResourceDictionary
-			{
-				Source = new Uri(FontOverrideSource)
-			});
-		}
+		RecordedOverrideSource = args.NewValue as string;
 	}
 }

@@ -8,16 +8,27 @@ using Windows.UI.Xaml;
 
 namespace Uno.Cupertino;
 
-public sealed partial class CupertinoColors : ResourceDictionary
+/// <summary>
+/// Legacy entry point for a Cupertino color override. It no longer carries any resource: it records
+/// <see cref="OverrideSource"/> for a <see cref="CupertinoResources"/> declared after it.
+/// </summary>
+[Obsolete("Use CupertinoTheme with ColorOverrideSource instead. This type will be removed in a future version.")]
+public sealed class CupertinoColors : ResourceDictionary
 {
-	private static string ColorPaletteOverrideSource;
+	// Process-wide on purpose: the legacy App.xaml setup declares the three dictionaries as siblings, so the
+	// only channel from this one to CupertinoResources is the order they are constructed in.
+	internal static string RecordedOverrideSource { get; private set; }
 
+	/// <summary>
+	/// (Optional) Gets or sets the URI of a dictionary overriding Cupertino colors.
+	/// </summary>
 	public string OverrideSource
 	{
 		get => (string)GetValue(OverrideSourceProperty);
 		set => SetValue(OverrideSourceProperty, value);
 	}
 
+	/// <summary>Identifies the <see cref="OverrideSource"/> dependency property.</summary>
 	public static DependencyProperty OverrideSourceProperty { get; } =
 		DependencyProperty.Register(
 			nameof(OverrideSource),
@@ -27,17 +38,6 @@ public sealed partial class CupertinoColors : ResourceDictionary
 
 	private static void OnColorPaletteOverrideSourceChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
 	{
-		ColorPaletteOverrideSource = args.NewValue as string;
-	}
-
-	public CupertinoColors()
-	{
-		MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(CupertinoConstants.ColorPalette) });
-		if (!string.IsNullOrWhiteSpace(ColorPaletteOverrideSource))
-		{
-			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ColorPaletteOverrideSource) });
-		}
-
-		InitializeComponent();
+		RecordedOverrideSource = args.NewValue as string;
 	}
 }
