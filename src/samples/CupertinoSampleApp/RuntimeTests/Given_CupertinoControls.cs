@@ -271,4 +271,42 @@ public class Given_CupertinoControls
 			UnitTestsUIContentHelper.Content = null;
 		}
 	}
+
+	// The activity indicator is eight spokes turning in 45 degree steps; it no longer needs Lottie.
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow("ProgressRingStyle", 20)]
+	[DataRow("CupertinoLargeProgressRingStyle", 37)]
+	[DataRow(null, 20)]
+	public async Task When_ProgressRingActive_Then_EightSpokesStepAround(string? styleKey, double size)
+	{
+		try
+		{
+			var ring = await Load(CreateThemedContainer(), new ProgressRing { IsActive = true }, styleKey);
+
+			Assert.AreEqual(size, ring.ActualWidth, 0.5);
+			var spokes = FindDescendant<Grid>(ring, "Spokes") ?? throw new AssertFailedException("no spokes in the template");
+			Assert.AreEqual(8, spokes.Children.Count);
+			var rotation = (RotateTransform)spokes.RenderTransform;
+
+			var seen = new HashSet<double>();
+			for (var i = 0; i < 20 && seen.Count < 3; i++)
+			{
+				seen.Add(rotation.Angle);
+				await Task.Delay(60);
+			}
+
+			Assert.IsTrue(seen.Count >= 3, $"the ring should be turning, saw only {string.Join(", ", seen)}");
+			Assert.IsTrue(seen.All(a => a % 45 == 0), $"the ring turns in whole spokes, saw {string.Join(", ", seen)}");
+
+			ring.IsActive = false;
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			Assert.AreEqual(0, spokes.Opacity, "an inactive ring is hidden");
+		}
+		finally
+		{
+			UnitTestsUIContentHelper.Content = null;
+		}
+	}
 }
