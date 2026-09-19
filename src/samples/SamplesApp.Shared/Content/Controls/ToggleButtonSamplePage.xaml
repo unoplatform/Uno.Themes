@@ -73,6 +73,46 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.M3MaterialTemplate>
+			<sample:SamplePageLayout.CupertinoTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Text toggle -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_ToggleButton_Text">
+							<StackPanel Orientation="Horizontal"
+										Spacing="12"
+										Margin="5">
+								<ToggleButton Content="Unchecked"
+											  Style="{StaticResource CupertinoTextToggleButtonStyle}" />
+								<ToggleButton Content="Checked"
+											  IsChecked="True"
+											  Style="{StaticResource CupertinoTextToggleButtonStyle}" />
+								<ToggleButton Content="Disabled"
+											  IsChecked="True"
+											  IsEnabled="False"
+											  Style="{StaticResource CupertinoTextToggleButtonStyle}" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- Icon toggle -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_ToggleButton_Icon">
+							<StackPanel Orientation="Horizontal"
+										Spacing="12"
+										Margin="5">
+								<ToggleButton Style="{StaticResource CupertinoIconToggleButtonStyle}">
+									<SymbolIcon Symbol="Bold" />
+								</ToggleButton>
+								<ToggleButton IsChecked="True"
+											  Style="{StaticResource CupertinoIconToggleButtonStyle}">
+									<SymbolIcon Symbol="Italic" />
+								</ToggleButton>
+								<ToggleButton Style="{StaticResource CupertinoIconToggleButtonStyle}">
+									<SymbolIcon Symbol="Underline" />
+								</ToggleButton>
+							</StackPanel>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.CupertinoTemplate>
 			<sample:SamplePageLayout.SimpleTemplate>
 				<DataTemplate>
 					<StackPanel>

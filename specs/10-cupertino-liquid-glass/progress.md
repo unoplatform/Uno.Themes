@@ -275,7 +275,12 @@ row updated in the same PR.
     glass template (one template, `Regular`; the preset stays for consumers).
   - Docs: `doc/cupertino-controls-styles.md` gained a Buttons section (mapping + lightweight keys). The
     Cupertino column of `doc/semantic-styles.md` is left for one pass in Phase 5, when every key resolves.
-- [ ] ToggleButton (text / icon), HyperlinkButton (primary / secondary).
+- [x] ToggleButton (text / icon, implicit) and HyperlinkButton (primary / secondary), 2026-09-18. Same
+  dimming model as the buttons: four toggle brushes (`TextToggleButton{Foreground,Background}[Checked]`, the
+  icon style reads the same keys), one brush per link style. Checked = accent tint
+  (`PrimaryContainerBrush` + accent text), as the mapping spec says. Ratchet: 54 of 72 resolve, 18 pending.
+  Suite 92 / 92, Debug and Release. Test note: a visual-state setter resolves its `{ThemeResource}` against
+  the application theme, so checked-state brushes are compared by color, not by instance.
 - [ ] TextBox (default / filled / plain / search), PasswordBox, NumberBox (stepper capsule), AutoSuggestBox.
 - [ ] CheckBox, RadioButton, ToggleSwitch (51 × 31 / 27), Slider (capsule track, 28 thumb).
 - [ ] ProgressBar, ProgressRing (8-spoke storyboard; remove the `Lottie` feature, the two `*Animation_Uno`

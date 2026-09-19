@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Uno.Cupertino;
 using Uno.UI.RuntimeTests;
@@ -37,14 +38,23 @@ public class Given_CupertinoControls
 		}
 	}
 
-	private static async Task<Button> LoadButton(Grid container, string styleKey, bool isEnabled = true)
+	private static Task<Button> LoadButton(Grid container, string styleKey, bool isEnabled = true)
+		=> Load(container, new Button { Content = "Button", IsEnabled = isEnabled }, styleKey);
+
+	// A null style key leaves the control unstyled, so the theme's implicit style applies.
+	private static async Task<T> Load<T>(Grid container, T control, string? styleKey)
+		where T : Control
 	{
-		var button = new Button { Content = "Button", Style = Resource<Style>(container, styleKey), IsEnabled = isEnabled };
-		container.Children.Add(button);
+		if (styleKey is not null)
+		{
+			control.Style = Resource<Style>(container, styleKey);
+		}
+
+		container.Children.Add(control);
 		UnitTestsUIContentHelper.Content = container;
-		await UnitTestsUIContentHelper.WaitForLoaded(button);
+		await UnitTestsUIContentHelper.WaitForLoaded(control);
 		await UnitTestsUIContentHelper.WaitForIdle();
-		return button;
+		return control;
 	}
 
 	private static T? FindDescendant<T>(DependencyObject root, string? name = null)
@@ -175,6 +185,61 @@ public class Given_CupertinoControls
 			Assert.AreEqual(size, button.ActualWidth, 0.5);
 			Assert.AreEqual(size, button.ActualHeight, 0.5);
 			Assert.IsTrue(button.CornerRadius.TopLeft >= size / 2, "a full radius makes the square a circle");
+		}
+		finally
+		{
+			UnitTestsUIContentHelper.Content = null;
+		}
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow("TextToggleButtonStyle")]
+	[DataRow("IconToggleButtonStyle")]
+	[DataRow(null)]
+	public async Task When_ToggleButtonChecked_Then_TakesTheAccentTint(string? styleKey)
+	{
+		try
+		{
+			var container = CreateThemedContainer();
+			var toggle = await Load(container, new ToggleButton { Content = "Toggle" }, styleKey);
+			var root = FindDescendant<Grid>(toggle, "Root") ?? throw new AssertFailedException("template root missing");
+			Assert.AreSame(Resource<Brush>(container, "SecondaryContainerBrush"), root.Background, "unchecked");
+
+			toggle.IsChecked = true;
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			// By color: a visual-state setter resolves its ThemeResource against the application's theme, which
+			// holds other brush instances than this scoped one.
+			Assert.AreEqual(Resource<SolidColorBrush>(container, "PrimaryContainerBrush").Color, (root.Background as SolidColorBrush)?.Color, "checked Background");
+			var presenter = FindDescendant<ContentPresenter>(toggle, "ContentPresenter");
+			Assert.AreEqual(Resource<SolidColorBrush>(container, "PrimaryBrush").Color, (presenter?.Foreground as SolidColorBrush)?.Color, "checked Foreground");
+
+			toggle.IsChecked = false;
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			Assert.AreSame(Resource<Brush>(container, "SecondaryContainerBrush"), root.Background, "unchecked again");
+		}
+		finally
+		{
+			UnitTestsUIContentHelper.Content = null;
+		}
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow("HyperlinkButtonStyle", "PrimaryBrush")]
+	[DataRow("SecondaryHyperlinkButtonStyle", "OnSurfaceVariantBrush")]
+	[DataRow(null, "PrimaryBrush")]
+	public async Task When_HyperlinkButtonStyleApplied_Then_RendersItsRole(string? styleKey, string foregroundKey)
+	{
+		try
+		{
+			var container = CreateThemedContainer();
+
+			var link = await Load(container, new HyperlinkButton { Content = "Link" }, styleKey);
+
+			Assert.AreSame(Resource<Brush>(container, foregroundKey), link.Foreground);
 		}
 		finally
 		{

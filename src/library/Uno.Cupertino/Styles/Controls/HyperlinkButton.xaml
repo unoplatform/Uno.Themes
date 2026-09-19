@@ -4,6 +4,18 @@
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					mc:Ignorable="d">
 
+	<!-- Lightweight styling: a link is one foreground; its states dim it. -->
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="HyperlinkButtonForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="SecondaryHyperlinkButtonForeground" ResourceKey="OnSurfaceVariantBrush" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="HyperlinkButtonForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="SecondaryHyperlinkButtonForeground" ResourceKey="OnSurfaceVariantBrush" />
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
+
 	<StaticResource x:Key="CupertinoHyperlinkButtonFontFamily" ResourceKey="CupertinoFontFamily" />
 	<x:Boolean x:Key="HyperlinkUnderlineVisible">True</x:Boolean>
 	<x:String x:Key="MinusGlyphPathStyle">M0 1.67236H5.57812V0.327637H0V1.67236Z</x:String>
@@ -11,7 +23,7 @@
 	<Style x:Key="CupertinoHyperlinkButtonStyle"
 		   TargetType="HyperlinkButton">
 		<Setter Property="FontFamily" Value="{ThemeResource CupertinoFontFamily}" />
-		<Setter Property="Foreground" Value="{ThemeResource CupertinoBlueBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource HyperlinkButtonForeground}" />
 		<Setter Property="Padding" Value="0" />
 
 		<Setter Property="Template">
@@ -70,6 +82,13 @@
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
+	</Style>
+
+	<!-- The secondary label color: a link that should not compete with the content around it. -->
+	<Style x:Key="CupertinoSecondaryHyperlinkButtonStyle"
+		   BasedOn="{StaticResource CupertinoHyperlinkButtonStyle}"
+		   TargetType="HyperlinkButton">
+		<Setter Property="Foreground" Value="{ThemeResource SecondaryHyperlinkButtonForeground}" />
 	</Style>
 
 </ResourceDictionary>

@@ -1,0 +1,135 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!--
+		Cupertino toggle buttons: a gray capsule that takes the accent tint when checked. Like the buttons
+		(Button.xaml), the interaction states only dim the control, so the lightweight-styling surface is the
+		four brushes below. The icon style is the same toggle as a circle and reads the same keys.
+	-->
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="TextToggleButtonForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TextToggleButtonBackground" ResourceKey="SecondaryContainerBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundChecked" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundChecked" ResourceKey="PrimaryContainerBrush" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="TextToggleButtonForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TextToggleButtonBackground" ResourceKey="SecondaryContainerBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundChecked" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundChecked" ResourceKey="PrimaryContainerBrush" />
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
+
+	<Style x:Key="CupertinoTextToggleButtonStyle"
+		   TargetType="ToggleButton">
+		<Setter Property="Foreground" Value="{ThemeResource TextToggleButtonForeground}" />
+		<Setter Property="Background" Value="{ThemeResource TextToggleButtonBackground}" />
+		<Setter Property="BorderThickness" Value="0" />
+		<Setter Property="Padding" Value="{ThemeResource CupertinoButtonPadding}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource CupertinoButtonCornerRadius}" />
+		<Setter Property="MinHeight" Value="{ThemeResource CupertinoButtonMinHeight}" />
+		<Setter Property="FontFamily" Value="{ThemeResource CupertinoFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource CupertinoButtonFontSize}" />
+		<Setter Property="FontWeight" Value="{ThemeResource LabelLargeFontWeight}" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="UseSystemFocusVisuals" Value="True" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="ToggleButton">
+					<Grid x:Name="Root"
+						  Background="{TemplateBinding Background}"
+						  BorderBrush="{TemplateBinding BorderBrush}"
+						  BorderThickness="{TemplateBinding BorderThickness}"
+						  CornerRadius="{TemplateBinding CornerRadius}"
+						  AutomationProperties.AccessibilityView="Raw">
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="Root.Opacity" Value="{StaticResource CupertinoHoverOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="Root.Opacity" Value="{StaticResource CupertinoButtonPressedOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="Root.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Checked">
+									<VisualState.Setters>
+										<Setter Target="Root.Background" Value="{ThemeResource TextToggleButtonBackgroundChecked}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundChecked}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedPointerOver">
+									<VisualState.Setters>
+										<Setter Target="Root.Background" Value="{ThemeResource TextToggleButtonBackgroundChecked}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundChecked}" />
+										<Setter Target="Root.Opacity" Value="{StaticResource CupertinoHoverOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedPressed">
+									<VisualState.Setters>
+										<Setter Target="Root.Background" Value="{ThemeResource TextToggleButtonBackgroundChecked}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundChecked}" />
+										<Setter Target="Root.Opacity" Value="{StaticResource CupertinoButtonPressedOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedDisabled">
+									<VisualState.Setters>
+										<Setter Target="Root.Background" Value="{ThemeResource TextToggleButtonBackgroundChecked}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundChecked}" />
+										<Setter Target="Root.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Indeterminate" />
+								<VisualState x:Name="IndeterminatePointerOver">
+									<VisualState.Setters>
+										<Setter Target="Root.Opacity" Value="{StaticResource CupertinoHoverOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="IndeterminatePressed">
+									<VisualState.Setters>
+										<Setter Target="Root.Opacity" Value="{StaticResource CupertinoButtonPressedOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="IndeterminateDisabled">
+									<VisualState.Setters>
+										<Setter Target="Root.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<ContentPresenter x:Name="ContentPresenter"
+										  Margin="{TemplateBinding Padding}"
+										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+										  Content="{TemplateBinding Content}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  ContentTransitions="{TemplateBinding ContentTransitions}"
+										  Foreground="{TemplateBinding Foreground}" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="CupertinoIconToggleButtonStyle"
+		   BasedOn="{StaticResource CupertinoTextToggleButtonStyle}"
+		   TargetType="ToggleButton">
+		<Setter Property="Width" Value="{StaticResource CupertinoIconButtonSize}" />
+		<Setter Property="Height" Value="{StaticResource CupertinoIconButtonSize}" />
+		<Setter Property="MinHeight" Value="0" />
+		<Setter Property="Padding" Value="0" />
+	</Style>
+
+</ResourceDictionary>
