@@ -266,3 +266,6 @@ If you would like Uno Cupertino to use a different font, you can override the de
     ```
 
 For a font that needs no file of its own, the `DefaultFontFamily` property does the same in one line, and can be changed at runtime — see [Typography Font Swap](design-tokens.md#typography-font-swap).
+
+> [!TIP]
+> To use the system font on macOS, set `DefaultFontFamily=".AppleSystemUIFont"` on the theme. Family names such as `SF Pro`, `SF Pro Text` or `system-ui` do not resolve through Skia, even on a Mac: they fall back silently to the platform default, which is why they are not used here.

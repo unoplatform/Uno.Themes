@@ -123,12 +123,13 @@ Partial class excluded on the Windows TFM. `RenderOverride(canvas, size)`:
    inner shadow (wide stroke + `SKMaskFilter.CreateBlur` after the clip, Toolkit's recipe).
 5. `canvas.Restore()` twice (layer, then clip). The drop shadow is drawn by `ElevatedView` on the `GlassPanel`, not here.
 
-Repaint model: `Invalidate()` on `SizeChanged` and on any parameter DP change. While a panel animates
-(press / release, parameter animation) it subscribes to `CompositionTarget.Rendering` and calls
-`Invalidate()` per frame **for the animation duration only**; the subscription is dropped on completion and
-in `Unloaded` (a `Loaded → Unloaded → Loaded` cycle must not double-subscribe — guarded by a field). Static
-glass over static content is recorded once and replayed by Uno's picture cache. A glass bar over a
-*scrolling* list is the canonical hard case and is spike item 5.
+Repaint model (**rewritten after the GPU spike, §9**): the backplate subscribes to
+`CompositionTarget.Rendering` in `Loaded` and calls `Invalidate()` **every frame while it is loaded**,
+unsubscribing in `Unloaded` (a `Loaded → Unloaded → Loaded` cycle must not double-subscribe — guarded by a
+field). This is not an optimisation that can be skipped: with damage-region rendering a backplate that is
+not part of the damage reads its own previous output back as "backdrop" and re-blurs it, smearing anything
+that moves behind it. The original model here — "static glass is recorded once and replayed" — is what
+produced that ghost. The cost is that a screen showing glass never idles; §5 budgets for it.
 
 Upgrade path: when `SKRuntimeEffect.ToImageFilter` ships, the chain collapses into one runtime image
 filter (Kyant0/AndroidLiquidGlass style). The chain lives in one method so the swap is local.
@@ -167,7 +168,11 @@ It returns as a follow-up if the WebGPU (non-`SKCanvas`) backend in uno#24153 la
   large surfaces (navigation bar, tab bar, one popover or sheet) at 60 fps on WebGL2. **Never** per-item
   glass inside lists; rows use solid fills.
 - Downsample before blurring (sigma ≥ 16 → k = sigma/8). Bounded, quantised filter cache (above).
-- Per-frame `Invalidate()` only for the duration of an animation; static panels never force repaints.
+- Every Liquid-tier panel invalidates per frame while loaded (§3, §9): correctness requires it. Measured
+  cost on a macOS GPU: none visible — 60 fps (vsync cap) with six surfaces. The real cost is idle power:
+  the render loop keeps running while any glass is on screen, so glass belongs on surfaces that are
+  transient (popovers, menus, dialogs) or few (one bar), never scattered through content. The Solid tier
+  does not invalidate.
 - Reduce Motion zeroes every Cupertino `Duration` resource at construction time and `GlassPanel` skips its
   press animation when `CupertinoReduceMotion` is true.
 
@@ -279,3 +284,25 @@ behind the element actually changed.
 
 Gate status: **correctness of the Liquid tier on the GPU depends on the invalidate run.** Performance
 headroom is not the concern it was expected to be (vsync-capped with six surfaces).
+
+## 10. Spike results — 2026-09-18, macOS GPU, second maintainer run (`--glass-spike-invalidate`)
+
+| # | Question | Result |
+|---|---|---|
+| 2 | Does per-frame `Invalidate()` remove the feedback ghost? | **Yes.** The blur inside every panel tracks the moving bar exactly; no trail, no streaks. **60 fps** (vsync cap) across ~12 000 frames and 73 032 backplate renders with six surfaces. §3 and §5 are rewritten accordingly |
+| 9 | System-font family name on an Apple host (macOS, Skia) | `SKTypeface.Default` = **Helvetica**. `.AppleSystemUIFont` and `.SF NS` resolve (`SKFontManager` returns them, rendered width 578 vs 590 for the fallback). **`SF Pro`, `SF Pro Text`, `SF Pro Display`, `San Francisco`, `system-ui`, `-apple-system` all return null** and render as the Helvetica fallback. `Helvetica Neue` resolves (594); control `Courier New` 624 |
+
+Consequences:
+
+- **The opt-in to the system font on macOS is `DefaultFontFamily=".AppleSystemUIFont"`.** iOS is unverified
+  (same Skia font manager, so probably the same name, but not measured).
+- **The previous Cupertino default, `SF Pro` by name, never resolved — not even on a Mac.** It rendered
+  Helvetica there and the platform default everywhere else. D-3 (Inter) replaced a default that had never
+  worked, not one that worked only on Apple hosts.
+- **Phase 0.5 gate: GO for the Liquid tier.** Backdrop reads, refraction, popups, scrolling content and the
+  ghost fix are all verified on a GPU; the clip-order and `Opacity` corrections stand. Still unmeasured:
+  WASM WebGL2 (item 6) and Android. Rather than teach the throwaway spike a query-string switch, item 6
+  moves to Phase 2's `LiquidGlassSamplePage`, which is reachable from the sample shell on every head.
+- **Upstream follow-up:** ask for `SKCanvasElement` to be able to declare that it samples its backdrop (the
+  public face of the internal `RequiresRepaintOnEveryFrame` / `DamageRegionSamplingMargin`), so the
+  compositor repaints it only when something behind it changed and a static glass screen can idle again.

@@ -169,9 +169,10 @@ Semantic aliases in `_Resources.xaml`: `DisplayLarge` → `CupertinoDisplayLarge
   declare, so a runtime `DefaultFontFamily` change reaches the templates (lesson in `specs/lessons.md`).
   **Overriding `CupertinoFontFamily` reaches nothing** (it is a dead alias, same lesson); the docs and the
   legacy `CupertinoFonts` shim translate a `CupertinoFontFamily` override into `DefaultFontFamily` (§8).
-- Apple-host consumers opt into the system font with one line
-  (`<CupertinoTheme DefaultFontFamily="…" />`); the family name Uno Skia resolves on macOS / iOS is spike
-  item 9.
+- Apple-host consumers opt into the system font with one line:
+  `<CupertinoTheme DefaultFontFamily=".AppleSystemUIFont" />` — measured on macOS
+  (`liquid-glass-rendering.md` §10); iOS unverified. `SF Pro` / `SF Pro Text` / `system-ui` do **not**
+  resolve through Skia, even on a Mac.
 
 ## 4. Shape, spacing, density tokens
 

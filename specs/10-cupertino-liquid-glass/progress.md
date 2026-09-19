@@ -105,15 +105,15 @@ family name on Apple hosts (D-3 docs).
 - [x] Software-path findings recorded in `liquid-glass-rendering.md` §8 (items 1, 3, 4, 7, 8 answered; 2 and 5
   answered for correctness). Two design corrections came out of it: clip **before** the backdrop
   `SaveLayer`, and the backplate has to apply `Opacity` itself. The pixel test is no longer GPU-gated.
-- [ ] GPU items — first maintainer run done on macOS (`liquid-glass-rendering.md` §9): 1 and 5 pass at 61 fps;
-  **2 fails with a feedback-loop ghost**; the candidate fix (`--glass-spike-invalidate`) and item 9 (font
-  probe) await a second run. 6 (WebGL2) still open. Originally:
-  1 / 2 / 5 / 6 on a GPU desktop and a WebGL2 browser, 9 on an Apple host. **Blocked on
+- [x] GPU items — two maintainer runs on macOS (`liquid-glass-rendering.md` §9, §10): 1 and 5 pass at the
+  vsync cap; **2 failed with a feedback-loop ghost and is fixed by per-frame `Invalidate()`**, confirmed at
+  60 fps; 9 answered (`.AppleSystemUIFont`; `SF Pro` by name never resolved, even on a Mac). Item 6 (WASM
+  WebGL2) and Android move to Phase 2's sample page. **Blocked on
   hardware:** the dev box has no GPU (ASPEED BMC) and agents run in a disconnected RDP session, so Uno
   always picks the software renderer there and the frame clock is throttled to ~4 fps regardless of
   content. Needs a manual `CupertinoSampleApp --glass-spike` run on real hardware.
 - [ ] D-5 taken (evidence in §8 item 8).
-- [ ] Gate: go / no-go on the Liquid tier — **provisional go** on correctness; cost unmeasured. A no-go
+- [x] Gate: **GO** on the Liquid tier (2026-09-18) — correctness and cost both measured on a GPU. A no-go
   means Phases 1, 3 and 4 still ship (Solid tier everywhere) and Phase 2 is replaced by the
   composition-brush follow-up.
 - [ ] Delete `CupertinoSampleApp/Spike/` and the `--glass-spike` hook in `App.xaml.cs` once the GPU items
