@@ -333,4 +333,29 @@ public class Given_CupertinoControls
 			UnitTestsUIContentHelper.Content = null;
 		}
 	}
+
+	// Bug: the slider and the switch painted themselves with brushes declared next to their styles from a
+	// one-time snapshot of a color, so a seed, a PrimaryColor override or a CupertinoGreenColor override never
+	// reached them. They must use the theme's live brushes, which are repainted in place.
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_SliderAndSwitchRendered_Then_TheyUseTheLiveBrushes()
+	{
+		try
+		{
+			var container = CreateThemedContainer();
+
+			var slider = await Load(container, new Slider { Value = 50 }, "SliderStyle");
+			var toggle = await Load(container, new ToggleSwitch { IsOn = true }, "ToggleSwitchStyle");
+
+			Assert.AreSame(Resource<Brush>(container, "CupertinoBlueBrush"), slider.Foreground, "slider active track");
+			Assert.AreSame(Resource<Brush>(container, "CupertinoPrimaryGrayBrush"), slider.Background, "slider track");
+			Assert.AreSame(Resource<Brush>(container, "CupertinoGreenBrush"), toggle.Background, "switch on-background");
+			Assert.AreSame(Resource<Brush>(container, "CupertinoWhiteBrush"), toggle.Foreground, "switch knob");
+		}
+		finally
+		{
+			UnitTestsUIContentHelper.Content = null;
+		}
+	}
 }

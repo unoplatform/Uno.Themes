@@ -5,14 +5,24 @@
 					xmlns:not_win="http://uno.ui/not_win"
 					mc:Ignorable="not_win">
 
-	<SolidColorBrush x:Key="CupertinoSliderTrackBrush"
-					 Color="{ThemeResource CupertinoPrimaryGrayColor}" />
-	<SolidColorBrush x:Key="CupertinoSliderThumbBrush"
-					 Color="{ThemeResource CupertinoWhiteColor}" />
-	<SolidColorBrush x:Key="CupertinoSliderActiveTrackBrush"
-					 Color="{ThemeResource CupertinoBlueColor}" />
-	<SolidColorBrush x:Key="CupertinoSliderTickBarFill"
-					 Color="{ThemeResource CupertinoPrimaryGrayColor}" />
+	<!--
+		Aliases of the theme's live brushes, declared per theme so they switch with it. They used to be brushes
+		of their own, built from a one-time snapshot of a color, which no seed or color override ever reached.
+	-->
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="CupertinoSliderTrackBrush" ResourceKey="CupertinoPrimaryGrayBrush" />
+			<StaticResource x:Key="CupertinoSliderThumbBrush" ResourceKey="CupertinoWhiteBrush" />
+			<StaticResource x:Key="CupertinoSliderActiveTrackBrush" ResourceKey="CupertinoBlueBrush" />
+			<StaticResource x:Key="CupertinoSliderTickBarFill" ResourceKey="CupertinoPrimaryGrayBrush" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="CupertinoSliderTrackBrush" ResourceKey="CupertinoPrimaryGrayBrush" />
+			<StaticResource x:Key="CupertinoSliderThumbBrush" ResourceKey="CupertinoWhiteBrush" />
+			<StaticResource x:Key="CupertinoSliderActiveTrackBrush" ResourceKey="CupertinoBlueBrush" />
+			<StaticResource x:Key="CupertinoSliderTickBarFill" ResourceKey="CupertinoPrimaryGrayBrush" />
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
 
 	<!-- Cupertino Slider Thumb Style -->
 	<Style x:Key="CupertinoSliderThumbStyle"
@@ -161,7 +171,7 @@
 								<!-- TopTickBar -->
 								<TickBar x:Name="TopTickBar"
 										 Visibility="Collapsed"
-										 Fill="{StaticResource CupertinoSliderTickBarFill}"
+										 Fill="{ThemeResource CupertinoSliderTickBarFill}"
 										 Height="4"
 										 VerticalAlignment="Bottom"
 										 Margin="0,0,0,4"
@@ -178,7 +188,7 @@
 								<!-- BottomTickBar -->
 								<TickBar x:Name="BottomTickBar"
 										 Visibility="Collapsed"
-										 Fill="{StaticResource CupertinoSliderTickBarFill}"
+										 Fill="{ThemeResource CupertinoSliderTickBarFill}"
 										 Height="4"
 										 VerticalAlignment="Top"
 										 Margin="0,4,0,0"
@@ -244,7 +254,7 @@
 								<!-- LeftTickBar -->
 								<TickBar x:Name="LeftTickBar"
 										 Visibility="Collapsed"
-										 Fill="{StaticResource CupertinoSliderTickBarFill}"
+										 Fill="{ThemeResource CupertinoSliderTickBarFill}"
 										 Width="4"
 										 HorizontalAlignment="Right"
 										 Margin="0,0,4,0"
@@ -261,7 +271,7 @@
 								<!-- RightTickBar -->
 								<TickBar x:Name="RightTickBar"
 										 Visibility="Collapsed"
-										 Fill="{StaticResource CupertinoSliderTickBarFill}"
+										 Fill="{ThemeResource CupertinoSliderTickBarFill}"
 										 Width="4"
 										 HorizontalAlignment="Left"
 										 Margin="4,0,0,0"

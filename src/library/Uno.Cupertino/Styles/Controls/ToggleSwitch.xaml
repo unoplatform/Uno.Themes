@@ -1,11 +1,20 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-	<!-- Toggle On -->
-	<SolidColorBrush x:Key="CupertinoToggleSwitchOnButtonBrush"
-					 Color="{ThemeResource CupertinoWhiteColor}" />
-	<SolidColorBrush x:Key="CupertinoToggleSwitchOnBackgroundBrush"
-					 Color="{ThemeResource CupertinoGreenColor}" />
+	<!--
+		Toggle on. Aliases of the theme's live brushes, declared per theme so they switch with it. They used to be brushes
+		of their own, built from a one-time snapshot of a color, which no seed or color override ever reached.
+	-->
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="CupertinoToggleSwitchOnButtonBrush" ResourceKey="CupertinoWhiteBrush" />
+			<StaticResource x:Key="CupertinoToggleSwitchOnBackgroundBrush" ResourceKey="CupertinoGreenBrush" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="CupertinoToggleSwitchOnButtonBrush" ResourceKey="CupertinoWhiteBrush" />
+			<StaticResource x:Key="CupertinoToggleSwitchOnBackgroundBrush" ResourceKey="CupertinoGreenBrush" />
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
 
 	<x:Double x:Key="ToggleSwitchThemeMinWidth">0</x:Double>
 
