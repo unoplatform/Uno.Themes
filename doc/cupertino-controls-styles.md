@@ -101,10 +101,17 @@ Each variant reads two brushes. There are no per-state keys: the states dim the 
 | `FilledPasswordBoxForeground` / `FilledPasswordBoxBackground` | `OnSurfaceBrush` / `SecondaryContainerBrush` |
 | `CupertinoFilledTextBoxCornerRadius` | `10` (both filled styles) |
 
-## Progress ring
+## Progress bar and ring
 
 `CupertinoProgressRingStyle` (`ProgressRingStyle`, and the implicit style) is Apple's activity indicator: eight spokes, 20 px, turning one spoke every 0.1 s. `CupertinoLargeProgressRingStyle` is the 37 px size. The HIG has no determinate activity indicator, so a determinate ring shows the spokes at rest; use a `ProgressBar` to show progress. On WinAppSDK the native ring is kept and tinted.
 
 | Key | Default |
 | --- | ------- |
 | `CupertinoProgressRingSize` / `CupertinoLargeProgressRingSize` | `20` / `37` |
+
+`CupertinoProgressBarStyle` (`ProgressBarStyle`, and the implicit style) is a 4 px rounded bar. It stretches to the width it is given, with a minimum of 250 px.
+
+| Key | Default |
+| --- | ------- |
+| `ProgressBarForeground` / `ProgressBarBackground` | `PrimaryBrush` / `OutlineVariantBrush` |
+| `CupertinoProgressBarHeight` / `CupertinoProgressBarMinWidth` / `CupertinoProgressBarCornerRadius` | `4` / `250` / `2` |

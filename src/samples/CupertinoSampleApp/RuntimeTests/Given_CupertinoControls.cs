@@ -309,4 +309,28 @@ public class Given_CupertinoControls
 			UnitTestsUIContentHelper.Content = null;
 		}
 	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow("ProgressBarStyle")]
+	[DataRow(null)]
+	public async Task When_ProgressBarStyleApplied_Then_ThinAccentBarThatCanStretch(string? styleKey)
+	{
+		try
+		{
+			var container = CreateThemedContainer();
+			container.Width = 400;
+
+			var bar = await Load(container, new ProgressBar { Value = 50, HorizontalAlignment = HorizontalAlignment.Stretch }, styleKey);
+
+			Assert.AreSame(Resource<Brush>(container, "PrimaryBrush"), bar.Foreground, "Foreground");
+			Assert.AreSame(Resource<Brush>(container, "OutlineVariantBrush"), bar.Background, "Background");
+			Assert.AreEqual(4, bar.ActualHeight, 0.5);
+			Assert.AreEqual(400, bar.ActualWidth, 0.5, "the bar used to be pinned to 250 px");
+		}
+		finally
+		{
+			UnitTestsUIContentHelper.Content = null;
+		}
+	}
 }

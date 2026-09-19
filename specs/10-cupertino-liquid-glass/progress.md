@@ -286,20 +286,39 @@ row updated in the same PR.
   **Every Phase 3 key of the semantic contract now resolves**: 56 of 72, the 16 pending are all Phase 4.
   Suite 93 / 93. Cut until asked for: plain and search variants, an `AutoSuggestBox` style and the
   `NumberBox` stepper capsule — none is a semantic key, and the search look is the filled style plus an icon.
-- [ ] CheckBox, RadioButton, ToggleSwitch (51 × 31 / 27), Slider (capsule track, 28 thumb).
+- [x] CheckBox, RadioButton, ToggleSwitch, Slider — **no change needed for the contract.** Checked against
+  the spec's numbers on 2026-09-18: the existing ToggleSwitch is already 51 × 31 with a 27 knob and the
+  Slider already has a 4 px track and a 28 px thumb; all four semantic keys resolve, and their `Cupertino*`
+  brushes follow the accent, a seed and overrides through `BrushColorKeys`. Left for a polish pass with the
+  maintainer looking at a GPU: semantic lightweight-styling keys for these four, and any look tuning.
+  - **Bug found and fixed while checking (red → green, `When_SliderAndSwitchRendered_Then_TheyUseTheLiveBrushes`):**
+    Slider and ToggleSwitch painted themselves with brushes declared next to their styles as
+    `<SolidColorBrush Color="{ThemeResource …Color}" />` at the top level — a one-time snapshot, so a seed,
+    a `PrimaryColor` override or a `CupertinoGreenColor` override never reached the slider's active track
+    or the switch. The six keys are now per-theme aliases of the live brushes (names kept), read with
+    `{ThemeResource}`. Suite 99 / 99.
+  - **Same defect still open in the files Phase 4 rewrites** (tracked, not fixed here): `CalendarView`
+    (`CupertinoCalendarViewSelectedBackground`, accent at 27 % — the visible one under a seed — plus a
+    top-level alias of `CupertinoBlueBrush`), `CalendarDatePicker` (2), `DatePicker` (1), `ComboBox` (1),
+    `NumberBox` (3), `TextBox` (2), `PasswordBox` (1). The ones carrying an `Opacity` need a painted brush
+    in `CupertinoBrushes.xaml` + a `BrushColorKeys` entry, as `CupertinoGlassProminentTintBrush` has.
 - [x] ProgressRing (D-7, 2026-09-18): eight `Rectangle` spokes with fixed opacities (`max(0.35, 1 − i × 0.185)`)
   in a group that turns in 45° steps — one `DoubleAnimationUsingKeyFrames`, 0.8 s, forever — instead of
   eight opacity tracks. `Inactive` hides it, `DeterminateActive` shows it at rest. `not_win:` only; the
   `win:` style still tints the native ring. **`UnoFeatures=Lottie`, the JSON asset, the two
   `*Animation_Uno` keys and the `lottie_*` XAML namespaces are removed** (breaking, documented in the
   migration list). `CupertinoLargeProgressRingStyle` (37) added. Suite 96 / 96.
-- [ ] ProgressBar restyle (4 pt bar); today's 15-line style already resolves `ProgressBarStyle`.
+- [x] ProgressBar (2026-09-18): 4 px, radius 2, `ProgressBarForeground` / `ProgressBarBackground` →
+  `PrimaryBrush` / `OutlineVariantBrush`, on the stock template (Simple's recipe). The fixed `Width=250`
+  became a `MinWidth`, so the bar can stretch (behavior change, in the migration list). Suite 98 / 98.
 - [x] TextBlock styles for every slot + Apple-named aliases. 19 `Cupertino<Slot>` styles reading the slot
   tokens through `{ThemeResource}`, 19 semantic aliases, and the 11 Apple-named styles re-based on their
   slot (sizes matched exactly, so only their leading remains local). Rendered test covers size, weight,
   an unchanged Apple-named style, and a scoped `*FontSize` override. Ratchet: 35 of the 72 contract keys resolve, 37 pending (was 57 pending at its introduction).
   Cupertino 74 / 74 in Debug and Release.
-- [ ] ComboBox (pop-up button + glass popup) and ComboBoxItem.
+- [ ] ComboBox (pop-up button + glass popup) and ComboBoxItem — **moved to Phase 4**: its popup is the same
+  glass surface as `FlyoutPresenter` / `MenuFlyoutPresenter`, so it is built once, there. `ComboBoxStyle`
+  and `ComboBoxItemStyle` already resolve to the existing styles.
 - [ ] Gate: `Given_CupertinoControls` green; formatters clean; docs rows present for every style in the PR.
 
 ### Phase 4 — Containers, navigation, glass interactivity (size L)

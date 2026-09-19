@@ -221,6 +221,7 @@ What else changes when you upgrade:
 - **An unstyled `TextBlock` gets the Cupertino typeface, wrapping and trimming, not a size.** Apply `BodyLarge` (or `CupertinoBody`) where you want the 17 pt body style.
 - **Color values** moved to Apple's June 2025 system palette (for example `CupertinoBlueColor` is `#0088FF` / `#0091FF`, previously `#007BFF` / `#0A84FF`).
 - **The default typeface is Inter**, see [Change Default Font](#change-default-font).
+- **`CupertinoProgressBarStyle` is no longer pinned to 250 px wide.** That is now its minimum; the bar stretches to the width it is given.
 - **The progress ring no longer uses Lottie.** `CupertinoProgressRingStyle` is drawn in XAML, so the package no longer brings `Uno.WinUI.Lottie` in, and the `CupertinoDeterminateAnimation_Uno` / `CupertinoIndeterminateAnimation_Uno` resources are gone. If your app uses Lottie itself, add `Lottie` to its own `UnoFeatures`.
 - **In a font override file, redefine `DefaultFontFamily`.** `CupertinoFontFamily` is an alias of that root, so a file that only redefines `CupertinoFontFamily` no longer changes the typeface.
 
