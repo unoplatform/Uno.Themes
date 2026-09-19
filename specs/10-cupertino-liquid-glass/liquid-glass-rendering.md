@@ -54,6 +54,13 @@ device-motion specular. Reference parameter sets per Apple material are in `refe
 
 ## 3. Decision: two-tier `GlassPanel`
 
+> **As built (2026-09-18):** the shipped primitive is a subset of this section — see `progress.md`, Phase 2,
+> for what was cut and why. Differences that matter when reading on: the theme has one setting,
+> `GlassRenderingMode` (no separate `ReduceTransparency` / `ReduceMotion` yet); there are no advanced
+> override DPs and no shared LRU cache (each backplate caches its own chain); tint and the solid fill are
+> ordinary XAML layers above the backplate, not Skia drawing; `Uno.WinUI.Graphics2DSK` is already an implicit
+> Uno.Sdk 7 package, so D-5 needed no project change.
+
 One public primitive, `Uno.Cupertino.GlassPanel`, picks a renderer at load time and degrades to a solid
 fill. Every Cupertino template that shows glass places a `GlassPanel` as its bottom layer and puts ordinary
 XAML on top. Nothing else in the theme knows how glass is drawn. Glass is used only where Apple uses it —

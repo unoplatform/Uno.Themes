@@ -37,6 +37,31 @@ public class CupertinoTheme(ResourceDictionary colorOverride = null, ResourceDic
 	{
 	}
 
+	#region GlassRenderingMode (DP)
+	/// <summary>
+	/// Gets or sets how every <see cref="GlassPanel"/> under this theme is drawn. Default is
+	/// <see cref="Uno.Cupertino.GlassRenderingMode.Auto"/>. Set <see cref="Uno.Cupertino.GlassRenderingMode.Solid"/>
+	/// to honor a Reduce Transparency preference: it wins over a panel's own <see cref="GlassPanel.RenderingMode"/>.
+	/// </summary>
+	/// <remarks>
+	/// This is a <b>construction-time</b> setting: a panel reads it when it loads, so a later change reaches
+	/// the panels loaded afterwards.
+	/// </remarks>
+	public GlassRenderingMode GlassRenderingMode
+	{
+		get => (GlassRenderingMode)GetValue(GlassRenderingModeProperty);
+		set => SetValue(GlassRenderingModeProperty, value);
+	}
+
+	/// <summary>Identifies the <see cref="GlassRenderingMode"/> dependency property.</summary>
+	public static DependencyProperty GlassRenderingModeProperty { get; } =
+		DependencyProperty.Register(
+			nameof(GlassRenderingMode),
+			typeof(GlassRenderingMode),
+			typeof(CupertinoTheme),
+			new PropertyMetadata(GlassRenderingMode.Auto, (d, _) => (d as CupertinoTheme)?.UpdateSource()));
+	#endregion
+
 	private static ResourceDictionary GetCupertinoColorOverride(ResourceDictionary colorOverride)
 	{
 		// Load the Cupertino color palette (overrides the default SharedColorPalette values)
@@ -64,6 +89,7 @@ public class CupertinoTheme(ResourceDictionary colorOverride = null, ResourceDic
 		SemanticBrushUpdater.Apply(_cupertinoBrushes, ColorLayers, CupertinoConstants.BrushColorKeys);
 		AddThemeDictionary(_cupertinoBrushes);
 		AddThemeDictionary(BuildAccentColors(_cupertinoBrushes));
+		AddThemeDictionary(new ResourceDictionary { [CupertinoConstants.GlassRenderingModeKey] = GlassRenderingMode.ToString() });
 	}
 
 	// The accent brushes follow the semantic primary (a seed, or a PrimaryColor override) while their *Color

@@ -1,8 +1,7 @@
 # 10 — Cupertino v2: Liquid Glass era theme on the semantic system
 
-Status: **Phase 0.5 spike run on the software path; Phase 1 in progress** (2026-09-18). D-1 / D-2 / D-3 / D-7 confirmed as
-recommended; D-5 open until the GPU spike items are run on real hardware.
-Branch: `dev/sb/cupertino-v2` (currently identical to `master`).
+Status: **Phases 0.5, 1 and 2 done; Phase 3 next** (2026-09-18). D-1 (amended: no V1, no compatibility classes) / D-2 / D-3 / D-5 / D-7 taken.
+Branch: `dev/sb/cupertino-v2`.
 
 Companion documents in this folder:
 
@@ -129,8 +128,8 @@ family name on Apple hosts (D-3 docs).
 - [x] Gate: **GO** on the Liquid tier (2026-09-18) — correctness and cost both measured on a GPU. A no-go
   means Phases 1, 3 and 4 still ship (Solid tier everywhere) and Phase 2 is replaced by the
   composition-brush follow-up.
-- [ ] Delete `CupertinoSampleApp/Spike/` and the `--glass-spike` hook in `App.xaml.cs` once the GPU items
-  are recorded.
+- [x] `CupertinoSampleApp/Spike/` and the `--glass-spike` hook deleted with Phase 2; the Liquid Glass
+  sample page replaces them for GPU runs.
 
 ### Phase 1 — Foundation: `CupertinoTheme : BaseTheme` (size L, purely additive)
 
@@ -189,27 +188,58 @@ Samples, tests, CI, docs:
 - [ ] Gate: Cupertino suite green under the CI script; Material and Simple suites unchanged; three heads
   build for `net10.0-desktop`; `ThemesSampleApp` hosting smoke still cycles Cupertino.
 
-### Phase 2 — `GlassPanel` primitive (size M, only if Phase 0.5 is a go)
+### Phase 2 — `GlassPanel` primitive (size M) — **done 2026-09-18, cut down from the plan**
 
-- [ ] `GlassPanel : Control` per `liquid-glass-rendering.md` §3: `GlassMaterial` / `GlassRenderingMode`
-  enums with explicit underlying type, `TintColor : Color`, clamped advanced parameters, tier chosen on
-  `Loaded` from the theme resources; preset table in `GlassPanel.Presets` (constants, AGENTS.md §9).
-- [ ] `SkiaGlassBackplate : SKCanvasElement` (partial, excluded on the Windows TFM): displacement-map
-  refraction, downsampled clamp blur, saturation + adaptive tint colour filter, rim + inner shadow inside the
-  layer; filter chain cached per quantised `(size, scale, preset)` with an LRU cap of 32.
-- [ ] Solid tier; Reduce Transparency routing; `CompositionTarget.Rendering` subscription only while
-  animating, dropped in `Unloaded`, no double-subscribe.
-- [ ] Press interaction (scale 1.04 + light boost over `CupertinoPressDuration`, spring-back over
-  `CupertinoMorphDuration`), skipped when `CupertinoReduceMotion`.
-- [ ] Tests (`Given_GlassPanel.cs`) per `liquid-glass-rendering.md` §6: tier vs capabilities; Reduce
-  Transparency → Solid; clamping; unsubscribe-on-unload leak guard; bounded cache; GPU-gated pixel test
-  using the capture method the spike selected.
-- [ ] `SamplesApp.Shared/Content/Styles/LiquidGlassSamplePage.xaml`: every material over a photo wallpaper,
-  light / dark, mode switcher.
-- [ ] Docs delta: new `doc/cupertino-liquid-glass.md` (API, materials, tiers, performance rules,
-  accessibility), `doc/toc.yml`.
-- [ ] Gate: tests green on desktop CI; **hosting smoke green with the backplate loaded in a guest ALC**;
-  screenshots from Desktop GPU, WASM WebGL2 and Android attached to the PR.
+Shipped:
+
+- [x] `GlassPanel : Control` (`Controls/GlassPanel.cs`): `Material`, `RenderingMode`, `TintColor`, inherited
+  `Background` / `BorderBrush` / `CornerRadius`, read-only `ActualRenderingMode`. Template
+  (`Styles/Controls/GlassPanel.xaml`, `CupertinoGlassPanelStyle` + implicit style) is `PART_Root` Grid >
+  `PART_Fill` (Background) > `PART_Tint` (tint + hairline); the backplate is inserted beneath `PART_Fill` in
+  code because its type does not exist on the Windows TFM. Tier is resolved on `Loaded` and again when
+  `Material` / `RenderingMode` / `CornerRadius` change.
+- [x] `SkiaGlassBackplate : SKCanvasElement` (`#if HAS_UNO`): clip **before** the backdrop `SaveLayer`,
+  ancestor `Opacity` folded into the layer paint, per-frame `Invalidate()` while loaded with a guarded
+  subscribe / unsubscribe, SkSL normal map → displacement, downsampled clamp blur at sigma ≥ 16, saturation
+  matrix, white rim inside the layer.
+- [x] Solid tier = the same template with `PART_Fill` opaque; Liquid lays `Background` over the glass at the
+  preset's veil opacity, so light / dark follow `SurfaceBrush` with no extra keys.
+- [x] `CupertinoTheme.GlassRenderingMode` (DP → resource `CupertinoGlassRenderingMode`, stored as the
+  member name: a boxed managed enum in a `ResourceDictionary` is a WinAppSDK risk that cannot be tested
+  here). Theme `Solid` beats a panel's `Liquid`; the nearest theme in the tree wins.
+- [x] **D-5 needed no project change.** Uno.Sdk 7 adds `Uno.WinUI.Graphics2DSK` to every SDK project
+  implicitly (`Uno.Implicit.Packages.ProjectSystem.targets`), so `Uno.Cupertino.WinUI` already restored it
+  and SkiaSharp. No `PackageReference` was added.
+- [x] `Given_GlassPanel.cs` (5 tests): Auto matches capabilities; theme Solid beats panel Liquid; Liquid →
+  Solid removes the backplate; pixel test (blurred edge inside, hard edge outside, backdrop visible — not
+  GPU-gated); leak guard — **proven red** with the `Rendering` unsubscribe commented out.
+- [x] `CupertinoSampleApp/Content/LiquidGlassSamplePage.xaml` (in the head, not `SamplesApp.Shared`: the
+  shared project compiles into the Material and Simple heads, which cannot reference `Uno.Cupertino`):
+  every material, tint, capsule, forced Liquid / Solid, `Opacity`, over a scrolling color list. Checked in
+  light and dark through `RenderTargetBitmap` with the theme forced to Liquid.
+- [x] Docs: a "Liquid Glass" section in `doc/cupertino-getting-started.md` and a `GlassPanel` row in
+  `doc/cupertino-controls-styles.md` (AGENTS.md §13 prefers extending a page over adding one).
+
+Cut, each with the trigger that brings it back:
+
+- **Advanced override DPs** (`BlurRadius`, `Saturation`, `Refraction`, …) and their clamping test — no
+  consumer; the presets are internal (`GlassPreset`). Add when a control or a user needs a value a material
+  does not give.
+- **`ReduceTransparency`** — it is `GlassRenderingMode="Solid"` on the theme; one switch, not two.
+- **`ReduceMotion`, `IsInteractive` press animation** — nothing animates yet. They arrive with the first
+  animation in Phase 3 (glass button press), where `VisualState`s are the natural place for it.
+- **LRU filter cache of 32** — each backplate caches its own chain and rebuilds it only when size, radius or
+  preset change; bounded by construction (one chain per panel), so the bounded-cache test has no subject.
+- **Adaptive veil, inner shadow, `ElevatedView` drop shadow, per-corner radii** — look-and-feel tuning for
+  Phase 2b, once the presets are measured against the iOS 26 kit on a GPU. One radius serves all corners
+  (marked `ponytail:` in `GlassPanel.UpdateTier`).
+
+Still open:
+
+- [ ] GPU look: run `CupertinoSampleApp`, open **Styles → Liquid Glass**, scroll. The preset numbers are the
+  spec's starting values plus veil opacities taken from the spike (0.22 regular); none are measured.
+- [ ] WASM WebGL2 and Android (spike item 6) through the same page.
+- [ ] Hosting smoke with the backplate in a guest ALC — blocked: the smoke fails on `master` (see Hand-offs).
 
 ### Phase 3 — Core controls (size L)
 

@@ -157,6 +157,41 @@ Alongside the shared roles, `CupertinoTheme` keeps the Cupertino vocabulary: the
 
 The brushes are live: overriding a `*Color` key through `Colors.OverrideSource` repaints everything already on screen that uses the matching brush, without re-navigation. To re-tint the accent, override `PrimaryColor` (it reaches the semantic brushes and the Cupertino accent brushes) or `CupertinoBlueColor` (the Cupertino accent only; it wins over `PrimaryColor` and over a seed).
 
+## Liquid Glass
+
+`GlassPanel` is a Liquid Glass surface: it blurs, saturates and refracts whatever is drawn beneath it. Place it as the bottom layer of a bar, a floating control, a popover or a dialog, and put the content on top:
+
+```xml
+<Grid xmlns:uc="using:Uno.Cupertino"
+      Height="52">
+    <uc:GlassPanel CornerRadius="26" />
+    <TextBlock Text="Library"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center" />
+</Grid>
+```
+
+| Property | Description |
+| -------- | ----------- |
+| `Material` | The glass variant: `Regular` (default; bars, glass buttons), `Prominent` (meant to carry a tint), `Thin` (small moving parts), `Thick` (popovers, menus, dialogs, sheets) or `Clear` (media overlays). |
+| `TintColor` | A color laid over the glass; its alpha is the tint strength. Default is transparent. |
+| `Background` | The fill of the Solid rendering, also laid thinly over the glass to keep content legible. Default is `SurfaceBrush`. |
+| `CornerRadius` | One radius is used for all four corners; a value of half the height gives a capsule. |
+| `RenderingMode` | `Auto` (default), `Liquid` or `Solid`. |
+| `ActualRenderingMode` | Read-only: `Liquid` or `Solid`, resolved when the panel loads. |
+
+The blurred backdrop is drawn through Skia. In `Auto`, a panel renders `Liquid` where the app uses the Skia renderer with hardware acceleration, and `Solid` — an opaque `Background` with a hairline — everywhere else: WinAppSDK, the native iOS and Android renderers, and the software renderer.
+
+To honor a Reduce Transparency preference, set `GlassRenderingMode="Solid"` on the theme. It wins over a panel that asks for `Liquid`, and it is read when a panel loads:
+
+```xml
+<CupertinoTheme xmlns="using:Uno.Cupertino"
+                GlassRenderingMode="Solid" />
+```
+
+> [!IMPORTANT]
+> A panel rendering `Liquid` repaints on every frame while it is on screen, so the app does not go idle while glass is visible. Use glass the way Apple does: for a few large or transient surfaces (a bar, a popover, a dialog) floating above the content, never inside item templates, and never glass on glass.
+
 ## Migrating from `CupertinoColors` / `CupertinoFonts` / `CupertinoResources`
 
 The three dictionaries were removed in this major version; an app that declares them no longer compiles. Replace the three with one `CupertinoTheme`:

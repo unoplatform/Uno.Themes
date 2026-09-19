@@ -16,6 +16,9 @@ internal static class CupertinoConstants
 	public static string StateConstants = $"ms-appx:///{PackageName}/Styles/Application/StateConstants.xaml";
 	public static string MergedPages = $"ms-appx:///{PackageName}/Generated/mergedpages.xaml";
 
+	/// <summary>The resource <see cref="CupertinoTheme.GlassRenderingMode"/> is published under, as the enum member's name.</summary>
+	public const string GlassRenderingModeKey = "CupertinoGlassRenderingMode";
+
 	private const string PrimaryColor = "PrimaryColor";
 
 	/// <summary>The accent brushes of <see cref="BrushColorKeys"/> with the color key each is published under.</summary>

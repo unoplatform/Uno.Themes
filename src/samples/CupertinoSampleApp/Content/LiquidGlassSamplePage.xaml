@@ -1,0 +1,228 @@
+﻿<Page x:Class="Uno.Themes.Samples.Content.LiquidGlassSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:sample="using:Uno.Themes.Samples"
+	  xmlns:uc="using:Uno.Cupertino"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<sample:SamplePageLayout>
+		<sample:SamplePageLayout.CupertinoTemplate>
+			<DataTemplate>
+				<StackPanel Spacing="12">
+					<TextBlock Text="Scroll the colors under the glass. Each panel blurs, saturates and refracts what is beneath it; where that cannot be drawn (no GPU, WinAppSDK, a native renderer) it falls back to a solid fill."
+							   Style="{StaticResource BodyMedium}"
+							   TextWrapping="Wrap" />
+
+					<!-- Fixed height: the page layout scrolls, and the glass needs its own scrolling backdrop. -->
+					<Grid Height="520">
+						<ScrollViewer>
+							<StackPanel>
+								<Border Height="72"
+										Background="{ThemeResource CupertinoRedBrush}">
+									<TextBlock Text="Red"
+											   Style="{StaticResource TitleLarge}"
+											   Foreground="{ThemeResource CupertinoWhiteBrush}"
+											   HorizontalAlignment="Center"
+											   VerticalAlignment="Center" />
+								</Border>
+								<Border Height="72"
+										Background="{ThemeResource CupertinoOrangeBrush}">
+									<TextBlock Text="Orange"
+											   Style="{StaticResource TitleLarge}"
+											   Foreground="{ThemeResource CupertinoWhiteBrush}"
+											   HorizontalAlignment="Center"
+											   VerticalAlignment="Center" />
+								</Border>
+								<Border Height="72"
+										Background="{ThemeResource CupertinoYellowBrush}">
+									<TextBlock Text="Yellow"
+											   Style="{StaticResource TitleLarge}"
+											   Foreground="{ThemeResource CupertinoWhiteBrush}"
+											   HorizontalAlignment="Center"
+											   VerticalAlignment="Center" />
+								</Border>
+								<Border Height="72"
+										Background="{ThemeResource CupertinoGreenBrush}">
+									<TextBlock Text="Green"
+											   Style="{StaticResource TitleLarge}"
+											   Foreground="{ThemeResource CupertinoWhiteBrush}"
+											   HorizontalAlignment="Center"
+											   VerticalAlignment="Center" />
+								</Border>
+								<Border Height="72"
+										Background="{ThemeResource CupertinoMintBrush}">
+									<TextBlock Text="Mint"
+											   Style="{StaticResource TitleLarge}"
+											   Foreground="{ThemeResource CupertinoWhiteBrush}"
+											   HorizontalAlignment="Center"
+											   VerticalAlignment="Center" />
+								</Border>
+								<Border Height="72"
+										Background="{ThemeResource CupertinoTealBrush}">
+									<TextBlock Text="Teal"
+											   Style="{StaticResource TitleLarge}"
+											   Foreground="{ThemeResource CupertinoWhiteBrush}"
+											   HorizontalAlignment="Center"
+											   VerticalAlignment="Center" />
+								</Border>
+								<Border Height="72"
+										Background="{ThemeResource CupertinoCyanBrush}">
+									<TextBlock Text="Cyan"
+											   Style="{StaticResource TitleLarge}"
+											   Foreground="{ThemeResource CupertinoWhiteBrush}"
+											   HorizontalAlignment="Center"
+											   VerticalAlignment="Center" />
+								</Border>
+								<Border Height="72"
+										Background="{ThemeResource CupertinoBlueBrush}">
+									<TextBlock Text="Blue"
+											   Style="{StaticResource TitleLarge}"
+											   Foreground="{ThemeResource CupertinoWhiteBrush}"
+											   HorizontalAlignment="Center"
+											   VerticalAlignment="Center" />
+								</Border>
+								<Border Height="72"
+										Background="{ThemeResource CupertinoIndigoBrush}">
+									<TextBlock Text="Indigo"
+											   Style="{StaticResource TitleLarge}"
+											   Foreground="{ThemeResource CupertinoWhiteBrush}"
+											   HorizontalAlignment="Center"
+											   VerticalAlignment="Center" />
+								</Border>
+								<Border Height="72"
+										Background="{ThemeResource CupertinoPurpleBrush}">
+									<TextBlock Text="Purple"
+											   Style="{StaticResource TitleLarge}"
+											   Foreground="{ThemeResource CupertinoWhiteBrush}"
+											   HorizontalAlignment="Center"
+											   VerticalAlignment="Center" />
+								</Border>
+								<Border Height="72"
+										Background="{ThemeResource CupertinoPinkBrush}">
+									<TextBlock Text="Pink"
+											   Style="{StaticResource TitleLarge}"
+											   Foreground="{ThemeResource CupertinoWhiteBrush}"
+											   HorizontalAlignment="Center"
+											   VerticalAlignment="Center" />
+								</Border>
+								<Border Height="72"
+										Background="{ThemeResource CupertinoBrownBrush}">
+									<TextBlock Text="Brown"
+											   Style="{StaticResource TitleLarge}"
+											   Foreground="{ThemeResource CupertinoWhiteBrush}"
+											   HorizontalAlignment="Center"
+											   VerticalAlignment="Center" />
+								</Border>
+							</StackPanel>
+						</ScrollViewer>
+
+						<!-- Offset so each row of panels straddles two colors. -->
+						<StackPanel Margin="12,44,12,0"
+									Spacing="16"
+									VerticalAlignment="Top">
+							<Grid ColumnSpacing="8">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition />
+									<ColumnDefinition />
+									<ColumnDefinition />
+									<ColumnDefinition />
+									<ColumnDefinition />
+								</Grid.ColumnDefinitions>
+								<Grid Grid.Column="0"
+									  Height="56">
+									<uc:GlassPanel Material="Regular" />
+									<TextBlock Text="Regular"
+											   Style="{StaticResource LabelLarge}"
+											   HorizontalAlignment="Center"
+											   VerticalAlignment="Center" />
+								</Grid>
+								<Grid Grid.Column="1"
+									  Height="56">
+									<uc:GlassPanel Material="Prominent" />
+									<TextBlock Text="Prominent"
+											   Style="{StaticResource LabelLarge}"
+											   HorizontalAlignment="Center"
+											   VerticalAlignment="Center" />
+								</Grid>
+								<Grid Grid.Column="2"
+									  Height="56">
+									<uc:GlassPanel Material="Thin" />
+									<TextBlock Text="Thin"
+											   Style="{StaticResource LabelLarge}"
+											   HorizontalAlignment="Center"
+											   VerticalAlignment="Center" />
+								</Grid>
+								<Grid Grid.Column="3"
+									  Height="56">
+									<uc:GlassPanel Material="Thick" />
+									<TextBlock Text="Thick"
+											   Style="{StaticResource LabelLarge}"
+											   HorizontalAlignment="Center"
+											   VerticalAlignment="Center" />
+								</Grid>
+								<Grid Grid.Column="4"
+									  Height="56">
+									<uc:GlassPanel Material="Clear" />
+									<TextBlock Text="Clear"
+											   Style="{StaticResource LabelLarge}"
+											   HorizontalAlignment="Center"
+											   VerticalAlignment="Center" />
+								</Grid>
+							</Grid>
+							<Grid ColumnSpacing="8">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition />
+									<ColumnDefinition />
+									<ColumnDefinition />
+									<ColumnDefinition />
+									<ColumnDefinition />
+								</Grid.ColumnDefinitions>
+								<Grid Grid.Column="0"
+									  Height="56">
+									<uc:GlassPanel Material="Prominent"
+												   TintColor="#990088FF" />
+									<TextBlock Text="Tinted"
+											   Style="{StaticResource LabelLarge}"
+											   HorizontalAlignment="Center"
+											   VerticalAlignment="Center" />
+								</Grid>
+								<Grid Grid.Column="1"
+									  Height="56">
+									<uc:GlassPanel CornerRadius="28" />
+									<TextBlock Text="Capsule"
+											   Style="{StaticResource LabelLarge}"
+											   HorizontalAlignment="Center"
+											   VerticalAlignment="Center" />
+								</Grid>
+								<Grid Grid.Column="2"
+									  Height="56">
+									<uc:GlassPanel RenderingMode="Liquid" />
+									<TextBlock Text="Liquid (forced)"
+											   Style="{StaticResource LabelLarge}"
+											   HorizontalAlignment="Center"
+											   VerticalAlignment="Center" />
+								</Grid>
+								<Grid Grid.Column="3"
+									  Height="56">
+									<uc:GlassPanel RenderingMode="Solid" />
+									<TextBlock Text="Solid (forced)"
+											   Style="{StaticResource LabelLarge}"
+											   HorizontalAlignment="Center"
+											   VerticalAlignment="Center" />
+								</Grid>
+								<Grid Grid.Column="4"
+									  Height="56">
+									<uc:GlassPanel Opacity="0.5" />
+									<TextBlock Text="Opacity 0.5"
+											   Style="{StaticResource LabelLarge}"
+											   HorizontalAlignment="Center"
+											   VerticalAlignment="Center" />
+								</Grid>
+							</Grid>
+						</StackPanel>
+					</Grid>
+				</StackPanel>
+			</DataTemplate>
+		</sample:SamplePageLayout.CupertinoTemplate>
+	</sample:SamplePageLayout>
+</Page>
