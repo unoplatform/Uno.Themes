@@ -562,31 +562,140 @@
 			<sample:SamplePageLayout.CupertinoTemplate>
 				<DataTemplate>
 					<StackPanel>
-						<!-- Button Default -->
-						<smtx:XamlDisplay UniqueKey="Cupertino_ButtonSamplePage_Default">
-							<Button Content="DEFAULT"
-									Style="{StaticResource CupertinoButtonStyle}"
-									Margin="5" />
+						<!-- Plain -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_ButtonSamplePage_Plain">
+							<StackPanel Orientation="Horizontal"
+										Spacing="12"
+										Margin="5">
+								<Button Content="Plain"
+										Style="{StaticResource CupertinoPlainButtonStyle}" />
+								<Button Content="Disabled"
+										IsEnabled="False"
+										Style="{StaticResource CupertinoPlainButtonStyle}" />
+							</StackPanel>
 						</smtx:XamlDisplay>
-						<!-- Button Default Disabled -->
-						<smtx:XamlDisplay UniqueKey="Cupertino_ButtonSamplePage_DefaultDisabled">
-							<Button Content="DISABLED"
-									IsEnabled="False"
-									Style="{StaticResource CupertinoButtonStyle}"
-									Margin="5" />
+						<!-- Prominent -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_ButtonSamplePage_Prominent">
+							<StackPanel Orientation="Horizontal"
+										Spacing="12"
+										Margin="5">
+								<Button Content="Prominent"
+										Style="{StaticResource CupertinoProminentButtonStyle}" />
+								<Button Content="Disabled"
+										IsEnabled="False"
+										Style="{StaticResource CupertinoProminentButtonStyle}" />
+							</StackPanel>
 						</smtx:XamlDisplay>
-						<!-- Button Contained -->
-						<smtx:XamlDisplay UniqueKey="Cupertino_ButtonSamplePage_Contained">
-							<Button Content="CONTAINED"
-									Style="{StaticResource CupertinoContainedButtonStyle}"
-									Margin="5" />
+						<!-- Tinted -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_ButtonSamplePage_Tinted">
+							<StackPanel Orientation="Horizontal"
+										Spacing="12"
+										Margin="5">
+								<Button Content="Tinted"
+										Style="{StaticResource CupertinoTintedButtonStyle}" />
+								<Button Content="Disabled"
+										IsEnabled="False"
+										Style="{StaticResource CupertinoTintedButtonStyle}" />
+							</StackPanel>
 						</smtx:XamlDisplay>
-						<!-- Button Contained Disabled -->
-						<smtx:XamlDisplay UniqueKey="Cupertino_ButtonSamplePage_ContainedDisabled">
-							<Button Content="DISABLED"
-									IsEnabled="False"
-									Style="{StaticResource CupertinoContainedButtonStyle}"
-									Margin="5" />
+						<!-- Gray -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_ButtonSamplePage_Gray">
+							<StackPanel Orientation="Horizontal"
+										Spacing="12"
+										Margin="5">
+								<Button Content="Gray"
+										Style="{StaticResource CupertinoGrayButtonStyle}" />
+								<Button Content="Disabled"
+										IsEnabled="False"
+										Style="{StaticResource CupertinoGrayButtonStyle}" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+						<!-- Destructive -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_ButtonSamplePage_Destructive">
+							<StackPanel Orientation="Horizontal"
+										Spacing="12"
+										Margin="5">
+								<Button Content="Destructive"
+										Style="{StaticResource CupertinoDestructiveButtonStyle}" />
+								<Button Content="Disabled"
+										IsEnabled="False"
+										Style="{StaticResource CupertinoDestructiveButtonStyle}" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+						<!-- With an icon -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_ButtonSamplePage_WithIcon">
+							<Button Content="Add"
+									Style="{StaticResource CupertinoProminentButtonStyle}"
+									Margin="5">
+								<ut:ControlExtensions.Icon>
+									<SymbolIcon Symbol="Add" />
+								</ut:ControlExtensions.Icon>
+							</Button>
+						</smtx:XamlDisplay>
+						<!-- Glass -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_ButtonSamplePage_Glass">
+							<StackPanel Orientation="Horizontal"
+										Spacing="12"
+										Margin="5">
+								<Button Content="Glass"
+										Style="{StaticResource CupertinoGlassButtonStyle}" />
+								<Button Content="Disabled"
+										IsEnabled="False"
+										Style="{StaticResource CupertinoGlassButtonStyle}" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+						<!-- Glass Prominent -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_ButtonSamplePage_GlassProminent">
+							<StackPanel Orientation="Horizontal"
+										Spacing="12"
+										Margin="5">
+								<Button Content="Glass Prominent"
+										Style="{StaticResource CupertinoGlassProminentButtonStyle}" />
+								<Button Content="Disabled"
+										IsEnabled="False"
+										Style="{StaticResource CupertinoGlassProminentButtonStyle}" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+						<!-- Icon buttons -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_ButtonSamplePage_Icons">
+							<StackPanel Orientation="Horizontal"
+										Spacing="12"
+										Margin="5">
+								<Button Style="{StaticResource CupertinoIconButtonStyle}">
+									<SymbolIcon Symbol="Add" />
+								</Button>
+								<Button Style="{StaticResource CupertinoTintedIconButtonStyle}">
+									<SymbolIcon Symbol="Edit" />
+								</Button>
+								<Button Style="{StaticResource CupertinoGrayIconButtonStyle}">
+									<SymbolIcon Symbol="More" />
+								</Button>
+								<Button Style="{StaticResource CupertinoGlassIconButtonStyle}">
+									<SymbolIcon Symbol="Find" />
+								</Button>
+								<Button Style="{StaticResource CupertinoGlassProminentIconButtonStyle}">
+									<SymbolIcon Symbol="Add" />
+								</Button>
+							</StackPanel>
+						</smtx:XamlDisplay>
+						<!-- Large icon buttons -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_ButtonSamplePage_LargeIcons">
+							<StackPanel Orientation="Horizontal"
+										Spacing="12"
+										Margin="5">
+								<Button Style="{StaticResource CupertinoLargeTintedIconButtonStyle}">
+									<SymbolIcon Symbol="Edit" />
+								</Button>
+								<Button Style="{StaticResource CupertinoLargeGrayIconButtonStyle}">
+									<SymbolIcon Symbol="More" />
+								</Button>
+								<Button Style="{StaticResource CupertinoLargeGlassIconButtonStyle}">
+									<SymbolIcon Symbol="Find" />
+								</Button>
+								<Button Style="{StaticResource CupertinoLargeGlassProminentIconButtonStyle}">
+									<SymbolIcon Symbol="Add" />
+								</Button>
+							</StackPanel>
 						</smtx:XamlDisplay>
 					</StackPanel>
 				</DataTemplate>

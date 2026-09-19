@@ -250,8 +250,31 @@ added to `Given_CupertinoControls.cs` (rendered Background / Foreground / size a
 override flows through), `doc/styles/cupertino/<Control>.md` snapshot and `doc/cupertino-controls-styles.md`
 row updated in the same PR.
 
-- [ ] Button family: Plain (implicit), Prominent, Tinted, Gray, Glass (opt-in), Destructive, Small / Large,
-  icon variants, FAB aliases.
+- [x] Button family (2026-09-18): Plain (implicit), Prominent, Tinted, Gray, Destructive, Glass, Glass
+  Prominent; icon circles (plain, tinted, gray, glass, glass prominent; 44 and 56); all 6 semantic button
+  keys and all 12 FAB keys aliased; `CupertinoButtonStyle` / `CupertinoContainedButtonStyle` kept as aliases.
+  Ratchet: 51 of 72 resolve, 21 pending. Suite 86 / 86, Debug and Release.
+  - **One shared template.** Apple's buttons dim on interaction instead of changing color, so states only
+    move `Root.Opacity` (hover 0.85, pressed `CupertinoButtonPressedOpacity` 0.6, disabled 0.5) and a variant
+    is two brushes. Lightweight styling is therefore `<Variant>Foreground` / `<Variant>Background` only —
+    **no per-state keys**, unlike Simple and Material. Add per-state keys when someone needs a state that is
+    not a dim; it means one template per variant (Simple's Button.xaml is 965 lines for that reason).
+  - **Deviation from the mapping spec: no semantic button key resolves to glass, FABs excepted.** The spec
+    had `FilledButtonStyle` → glass prominent and `ElevatedButtonStyle` / `IconButtonStyle` → glass. It was
+    written before the GPU spike showed that glass repaints every frame; those keys are the buttons of forms
+    and lists, so a page with a primary button would never idle. `FilledButtonStyle` is the solid accent
+    capsule (Apple's `.borderedProminent`), Elevated shares Gray with Outlined, Icon is the plain circle.
+    FABs float, which is where Apple uses glass, so `Fab*` / `SecondaryFab*` stay glass. One alias line each
+    to flip. **Maintainer call.**
+  - `GlassPanel.TintColor : Color` became `GlassPanel.Tint : Brush` (pushed an hour earlier, no consumer):
+    a button's `Background` is template-bound straight into the tint, and
+    `CupertinoGlassProminentTintBrush` (accent at 85 %, painted through `BrushColorKeys`) follows a seed or
+    a `PrimaryColor` override live. The code-behind tint brush and its callback went away.
+  - Cut: Small / Large text sizes (set `MinHeight` / `FontSize` / `Padding`; a size style would have to
+    exist once per variant), press scale on glass (dims like the rest), `Material=Prominent` inside the
+    glass template (one template, `Regular`; the preset stays for consumers).
+  - Docs: `doc/cupertino-controls-styles.md` gained a Buttons section (mapping + lightweight keys). The
+    Cupertino column of `doc/semantic-styles.md` is left for one pass in Phase 5, when every key resolves.
 - [ ] ToggleButton (text / icon), HyperlinkButton (primary / secondary).
 - [ ] TextBox (default / filled / plain / search), PasswordBox, NumberBox (stepper capsule), AutoSuggestBox.
 - [ ] CheckBox, RadioButton, ToggleSwitch (51 × 31 / 27), Slider (capsule track, 28 thumb).

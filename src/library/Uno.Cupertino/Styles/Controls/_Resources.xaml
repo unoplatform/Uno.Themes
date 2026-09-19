@@ -17,7 +17,7 @@
 		
 		The implicit ProgressRing is not_win only, as it always was.
 	-->
-	<Style BasedOn="{StaticResource CupertinoButtonStyle}"
+	<Style BasedOn="{StaticResource CupertinoPlainButtonStyle}"
 		   TargetType="Button" />
 	<Style BasedOn="{StaticResource CupertinoCalendarDatePickerStyle}"
 		   TargetType="CalendarDatePicker" />
@@ -59,9 +59,30 @@
 		Cupertino has a style for today are declared; the rest arrive with their controls.
 	-->
 
-	<!-- Button -->
-	<StaticResource x:Key="FilledButtonStyle" ResourceKey="CupertinoContainedButtonStyle" />
-	<StaticResource x:Key="TextButtonStyle" ResourceKey="CupertinoButtonStyle" />
+	<!--
+		Button. No semantic button key resolves to glass: these are the buttons of forms and lists, and glass repaints
+		on every frame. Apple has neither an outlined nor an elevated button; gray is the closest to both.
+	-->
+	<StaticResource x:Key="FilledButtonStyle" ResourceKey="CupertinoProminentButtonStyle" />
+	<StaticResource x:Key="FilledTonalButtonStyle" ResourceKey="CupertinoTintedButtonStyle" />
+	<StaticResource x:Key="OutlinedButtonStyle" ResourceKey="CupertinoGrayButtonStyle" />
+	<StaticResource x:Key="ElevatedButtonStyle" ResourceKey="CupertinoGrayButtonStyle" />
+	<StaticResource x:Key="TextButtonStyle" ResourceKey="CupertinoPlainButtonStyle" />
+	<StaticResource x:Key="IconButtonStyle" ResourceKey="CupertinoIconButtonStyle" />
+
+	<!-- FAB: the HIG has none. A floating action is where Apple does use glass, so the first two families are glass circles. -->
+	<StaticResource x:Key="FabStyle" ResourceKey="CupertinoGlassProminentIconButtonStyle" />
+	<StaticResource x:Key="SmallFabStyle" ResourceKey="CupertinoGlassProminentIconButtonStyle" />
+	<StaticResource x:Key="LargeFabStyle" ResourceKey="CupertinoLargeGlassProminentIconButtonStyle" />
+	<StaticResource x:Key="SecondaryFabStyle" ResourceKey="CupertinoGlassIconButtonStyle" />
+	<StaticResource x:Key="SecondarySmallFabStyle" ResourceKey="CupertinoGlassIconButtonStyle" />
+	<StaticResource x:Key="SecondaryLargeFabStyle" ResourceKey="CupertinoLargeGlassIconButtonStyle" />
+	<StaticResource x:Key="TertiaryFabStyle" ResourceKey="CupertinoTintedIconButtonStyle" />
+	<StaticResource x:Key="TertiarySmallFabStyle" ResourceKey="CupertinoTintedIconButtonStyle" />
+	<StaticResource x:Key="TertiaryLargeFabStyle" ResourceKey="CupertinoLargeTintedIconButtonStyle" />
+	<StaticResource x:Key="SurfaceFabStyle" ResourceKey="CupertinoGrayIconButtonStyle" />
+	<StaticResource x:Key="SurfaceSmallFabStyle" ResourceKey="CupertinoGrayIconButtonStyle" />
+	<StaticResource x:Key="SurfaceLargeFabStyle" ResourceKey="CupertinoLargeGrayIconButtonStyle" />
 
 	<!-- TextBox / PasswordBox -->
 	<StaticResource x:Key="OutlinedTextBoxStyle" ResourceKey="CupertinoTextBoxStyle" />

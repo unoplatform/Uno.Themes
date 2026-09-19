@@ -4,6 +4,18 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## `RadiusFull` (9999) makes a circle out of a square and an ellipse out of anything else on Uno Skia
+
+**Context:** Spec 10, Cupertino buttons. `CornerRadius="9999"` on a 116 × 44 `Grid` rendered an ellipse,
+not a capsule: Uno Skia scales an oversized radius per axis (rx → width / 2, ry → height / 2) where WinUI
+clamps both to half the shorter side. Only a `RenderTargetBitmap` capture showed it; every test passed.
+
+**How to apply:**
+- For a capsule use a real radius, half the control's (minimum) height. Keep `RadiusFull` for squares.
+- When a style's shape matters, look at a capture before calling it done; resource assertions cannot see shape.
+
+---
+
 ## A decision option must not smuggle a second deliverable — ask about the expensive rider separately
 
 **Context:** Spec 10 (Cupertino v2), decision D-1. The maintainer was offered "Replace in place

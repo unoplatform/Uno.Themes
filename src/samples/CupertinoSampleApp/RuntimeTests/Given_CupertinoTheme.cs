@@ -233,14 +233,9 @@ public class Given_CupertinoTheme
 	private static readonly string[] PendingSemanticKeys =
 	{
 		// Phase 3 — core controls
-		"FilledTonalButtonStyle", "OutlinedButtonStyle", "IconButtonStyle", "ElevatedButtonStyle",
 		"TextToggleButtonStyle", "IconToggleButtonStyle",
 		"FilledTextBoxStyle", "FilledPasswordBoxStyle",
 		"SecondaryHyperlinkButtonStyle",
-		"FabStyle", "SmallFabStyle", "LargeFabStyle",
-		"SecondaryFabStyle", "SecondarySmallFabStyle", "SecondaryLargeFabStyle",
-		"TertiaryFabStyle", "TertiarySmallFabStyle", "TertiaryLargeFabStyle",
-		"SurfaceFabStyle", "SurfaceSmallFabStyle", "SurfaceLargeFabStyle",
 
 		// Phase 4 — containers and navigation
 		"ListViewStyle", "ListViewItemStyle", "ContentDialogStyle",

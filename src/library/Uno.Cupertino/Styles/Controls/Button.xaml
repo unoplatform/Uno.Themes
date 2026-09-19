@@ -1,216 +1,320 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					mc:Ignorable="d">
+					xmlns:uc="using:Uno.Cupertino"
+					xmlns:ut="using:Uno.Themes">
+
+	<!--
+		Cupertino buttons. Apple's buttons answer to interaction by dimming, not by changing color, so every
+		variant shares one template whose states only move the opacity; a variant is a Foreground and a
+		Background. That is also the whole lightweight-styling surface: <Variant>Foreground and
+		<Variant>Background. There are no per-state brush keys.
+
+		Semantic keys:       TextButton* (plain), FilledButton* (prominent), FilledTonalButton* (tinted),
+		OutlinedButton* (gray - Apple has no outlined button), IconButton*.
+		Cupertino-only keys: CupertinoDestructiveButton*, CupertinoGlassButton*, CupertinoGlassProminentButton*.
+
+		The glass styles are opt-in and meant for the few controls that float above content. A GlassPanel
+		repaints on every frame, so glass does not belong on the buttons of a form or a list.
+	-->
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="TextButtonForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledButtonForeground" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="FilledButtonBackground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="FilledTonalButtonForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackground" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="OutlinedButtonForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedButtonBackground" ResourceKey="SecondaryContainerBrush" />
+			<StaticResource x:Key="IconButtonForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="IconButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="CupertinoDestructiveButtonForeground" ResourceKey="ErrorBrush" />
+			<StaticResource x:Key="CupertinoDestructiveButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="CupertinoGlassButtonForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CupertinoGlassButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="CupertinoGlassProminentButtonForeground" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="CupertinoGlassProminentButtonBackground" ResourceKey="CupertinoGlassProminentTintBrush" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="TextButtonForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledButtonForeground" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="FilledButtonBackground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="FilledTonalButtonForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackground" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="OutlinedButtonForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedButtonBackground" ResourceKey="SecondaryContainerBrush" />
+			<StaticResource x:Key="IconButtonForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="IconButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="CupertinoDestructiveButtonForeground" ResourceKey="ErrorBrush" />
+			<StaticResource x:Key="CupertinoDestructiveButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="CupertinoGlassButtonForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CupertinoGlassButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="CupertinoGlassProminentButtonForeground" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="CupertinoGlassProminentButtonBackground" ResourceKey="CupertinoGlassProminentTintBrush" />
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
 
 	<!-- Documented variables -->
-	<Thickness x:Key="CupertinoButtonPadding">20</Thickness>
-	<CornerRadius x:Key="CupertinoButtonCornerRadius">8</CornerRadius>
-	<x:Double x:Key="CupertinoButtonFontSize">14</x:Double>
+	<Thickness x:Key="CupertinoButtonPadding">16,7</Thickness>
+	<!-- Half the minimum height, not RadiusFull: Uno Skia scales an oversized radius per axis, which turns a capsule into an ellipse. -->
+	<CornerRadius x:Key="CupertinoButtonCornerRadius">22</CornerRadius>
+	<CornerRadius x:Key="CupertinoLargeIconButtonCornerRadius">28</CornerRadius>
+	<x:Double x:Key="CupertinoButtonFontSize">17</x:Double>
+	<x:Double x:Key="CupertinoButtonMinHeight">44</x:Double>
+	<x:Double x:Key="CupertinoButtonIconSpacing">6</x:Double>
+	<x:Double x:Key="CupertinoButtonPressedOpacity">0.6</x:Double>
+	<x:Double x:Key="CupertinoIconButtonSize">44</x:Double>
+	<x:Double x:Key="CupertinoLargeIconButtonSize">56</x:Double>
 
-	<!-- Styles -->
-	<Style x:Key="CupertinoButtonStyle"
+	<Style x:Key="CupertinoBaseButtonStyle"
 		   TargetType="Button">
-
-		<Setter Property="Foreground" Value="{ThemeResource CupertinoBlueBrush}" />
-		<Setter Property="Background" Value="Transparent" />
-		<Setter Property="BorderThickness" Value="0" />
-		<Setter Property="Padding" Value="0" />
-		<Setter Property="MinHeight" Value="40" />
-		<Setter Property="FontFamily" Value="{ThemeResource CupertinoFontFamily}" />
-		<Setter Property="FontSize" Value="{ThemeResource CupertinoButtonFontSize}" />
-		<Setter Property="UseSystemFocusVisuals" Value="True" />
-
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="Button">
-
-					<Grid x:Name="Root"
-						  Background="{TemplateBinding Background}"
-						  BorderBrush="{TemplateBinding BorderBrush}"
-						  BorderThickness="{TemplateBinding BorderThickness}"
-						  CornerRadius="{TemplateBinding CornerRadius}">
-
-						<VisualStateManager.VisualStateGroups>
-							<VisualStateGroup x:Name="CommonStates">
-
-								<VisualState x:Name="Normal">
-									<VisualState.Setters>
-										<Setter Target="FocusedOverlay.Opacity" Value="0" />
-									</VisualState.Setters>
-								</VisualState>
-
-								<VisualState x:Name="PointerOver">
-									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Opacity" Value="{StaticResource CupertinoHoverOpacity}" />
-									</VisualState.Setters>
-								</VisualState>
-
-								<VisualState x:Name="Pressed">
-									<Storyboard>
-										<DoubleAnimation Storyboard.TargetName="ContentPresenter"
-														 Storyboard.TargetProperty="Opacity"
-														 To="{StaticResource CupertinoPressedOpacity}"
-														 Duration="{StaticResource CupertinoAnimationDuration}">
-											<DoubleAnimation.EasingFunction>
-												<CubicEase EasingMode="EaseIn" />
-											</DoubleAnimation.EasingFunction>
-										</DoubleAnimation>
-									</Storyboard>
-								</VisualState>
-
-								<VisualState x:Name="Disabled">
-									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource CupertinoPrimaryGrayColor}" />
-									</VisualState.Setters>
-								</VisualState>
-							</VisualStateGroup>
-
-							<VisualStateGroup x:Name="FocusStates">
-
-								<VisualState x:Name="Focused">
-									<VisualState.Setters>
-										<Setter Target="FocusedOverlay.Opacity" Value="{StaticResource CupertinoFocusedOpacity}" />
-									</VisualState.Setters>
-								</VisualState>
-
-								<VisualState x:Name="PointerFocused" />
-
-								<VisualState x:Name="Unfocused">
-									<VisualState.Setters>
-										<Setter Target="FocusedOverlay.Opacity" Value="0" />
-									</VisualState.Setters>
-								</VisualState>
-							</VisualStateGroup>
-						</VisualStateManager.VisualStateGroups>
-
-						<Border x:Name="FocusedOverlay"
-								Background="{TemplateBinding Background}"
-								Opacity="0" />
-
-						<ContentPresenter x:Name="ContentPresenter"
-										  Padding="{TemplateBinding Padding}"
-										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-										  AutomationProperties.AccessibilityView="Raw"
-										  BorderBrush="{TemplateBinding BorderBrush}"
-										  BorderThickness="{TemplateBinding BorderThickness}"
-										  Content="{TemplateBinding Content}"
-										  ContentTemplate="{TemplateBinding ContentTemplate}"
-										  ContentTransitions="{TemplateBinding ContentTransitions}"
-										  CornerRadius="{StaticResource CupertinoButtonCornerRadius}"
-										  FontFamily="{TemplateBinding FontFamily}"
-										  FontSize="{TemplateBinding FontSize}"
-										  Foreground="{TemplateBinding Foreground}" />
-					</Grid>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
-
-	<Style x:Key="CupertinoContainedButtonStyle"
-		   TargetType="Button">
-
-		<Setter Property="Foreground" Value="{ThemeResource CupertinoWhiteBrush}" />
-		<Setter Property="Background" Value="{ThemeResource CupertinoBlueBrush}" />
 		<Setter Property="BorderThickness" Value="0" />
 		<Setter Property="Padding" Value="{ThemeResource CupertinoButtonPadding}" />
-		<Setter Property="CornerRadius" Value="{StaticResource CupertinoButtonCornerRadius}" />
-		<Setter Property="MinHeight" Value="40" />
+		<Setter Property="CornerRadius" Value="{ThemeResource CupertinoButtonCornerRadius}" />
+		<Setter Property="MinHeight" Value="{ThemeResource CupertinoButtonMinHeight}" />
 		<Setter Property="FontFamily" Value="{ThemeResource CupertinoFontFamily}" />
 		<Setter Property="FontSize" Value="{ThemeResource CupertinoButtonFontSize}" />
+		<Setter Property="FontWeight" Value="{ThemeResource LabelLargeFontWeight}" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
 		<Setter Property="UseSystemFocusVisuals" Value="True" />
-
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
-
 					<Grid x:Name="Root"
 						  Background="{TemplateBinding Background}"
 						  BorderBrush="{TemplateBinding BorderBrush}"
 						  BorderThickness="{TemplateBinding BorderThickness}"
-						  CornerRadius="{TemplateBinding CornerRadius}">
-
+						  CornerRadius="{TemplateBinding CornerRadius}"
+						  AutomationProperties.AccessibilityView="Raw">
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
-
-								<VisualState x:Name="Normal">
-									<VisualState.Setters>
-										<Setter Target="CommonStatesOverlay.Opacity" Value="0" />
-										<Setter Target="FocusedOverlay.Opacity" Value="0" />
-									</VisualState.Setters>
-								</VisualState>
-
+								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="CommonStatesOverlay.Opacity" Value="{StaticResource CupertinoHoverOverlayOpacity}" />
+										<Setter Target="Root.Opacity" Value="{StaticResource CupertinoHoverOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
-
 								<VisualState x:Name="Pressed">
 									<Storyboard>
-										<DoubleAnimation Storyboard.TargetName="CommonStatesOverlay"
+										<DoubleAnimation Storyboard.TargetName="Root"
 														 Storyboard.TargetProperty="Opacity"
-														 To="{StaticResource CupertinoPressedOverlayOpacity}"
-														 Duration="{StaticResource CupertinoAnimationDuration}">
-											<DoubleAnimation.EasingFunction>
-												<CubicEase EasingMode="EaseIn" />
-											</DoubleAnimation.EasingFunction>
-										</DoubleAnimation>
+														 To="{StaticResource CupertinoButtonPressedOpacity}"
+														 Duration="{StaticResource CupertinoAnimationDuration}" />
 									</Storyboard>
 								</VisualState>
-
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="Root.Background" Value="{ThemeResource CupertinoPrimaryGrayColor}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource CupertinoWhiteBrush}" />
-									</VisualState.Setters>
-								</VisualState>
-							</VisualStateGroup>
-
-							<VisualStateGroup x:Name="FocusStates">
-
-								<VisualState x:Name="Focused">
-									<VisualState.Setters>
-										<Setter Target="FocusedOverlay.Opacity" Value="{StaticResource CupertinoFocusedOpacity}" />
-									</VisualState.Setters>
-								</VisualState>
-
-								<VisualState x:Name="PointerFocused" />
-
-								<VisualState x:Name="Unfocused">
-									<VisualState.Setters>
-										<Setter Target="FocusedOverlay.Opacity" Value="0" />
+										<Setter Target="Root.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
-
-						<Border x:Name="CommonStatesOverlay"
-								Background="{TemplateBinding Foreground}"
-								Opacity="0" />
-
-						<Border x:Name="FocusedOverlay"
-								Background="{TemplateBinding Foreground}"
-								Opacity="0" />
-
-						<ContentPresenter x:Name="ContentPresenter"
-										  Padding="{TemplateBinding Padding}"
-										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-										  AutomationProperties.AccessibilityView="Raw"
-										  BorderBrush="{TemplateBinding BorderBrush}"
-										  BorderThickness="{TemplateBinding BorderThickness}"
-										  Content="{TemplateBinding Content}"
-										  ContentTemplate="{TemplateBinding ContentTemplate}"
-										  ContentTransitions="{TemplateBinding ContentTransitions}"
-										  CornerRadius="{StaticResource CupertinoButtonCornerRadius}"
-										  FontFamily="{TemplateBinding FontFamily}"
-										  FontSize="{TemplateBinding FontSize}" />
+						<StackPanel Orientation="Horizontal"
+									HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+									VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+									Margin="{TemplateBinding Padding}"
+									Spacing="{StaticResource CupertinoButtonIconSpacing}">
+							<ContentPresenter Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+											  Foreground="{TemplateBinding Foreground}"
+											  Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
+											  VerticalAlignment="Center" />
+							<ContentPresenter x:Name="ContentPresenter"
+											  Content="{TemplateBinding Content}"
+											  ContentTemplate="{TemplateBinding ContentTemplate}"
+											  ContentTransitions="{TemplateBinding ContentTransitions}"
+											  Foreground="{TemplateBinding Foreground}"
+											  VerticalAlignment="Center" />
+						</StackPanel>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
 	</Style>
+
+	<Style x:Key="CupertinoBaseGlassButtonStyle"
+		   BasedOn="{StaticResource CupertinoBaseButtonStyle}"
+		   TargetType="Button">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid x:Name="Root"
+						  AutomationProperties.AccessibilityView="Raw">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="Root.Opacity" Value="{StaticResource CupertinoHoverOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="Root"
+														 Storyboard.TargetProperty="Opacity"
+														 To="{StaticResource CupertinoButtonPressedOpacity}"
+														 Duration="{StaticResource CupertinoAnimationDuration}" />
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="Root.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						<!-- The button's Background is the glass tint, not a fill. -->
+						<uc:GlassPanel CornerRadius="{TemplateBinding CornerRadius}"
+									   Tint="{TemplateBinding Background}" />
+						<StackPanel Orientation="Horizontal"
+									HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+									VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+									Margin="{TemplateBinding Padding}"
+									Spacing="{StaticResource CupertinoButtonIconSpacing}">
+							<ContentPresenter Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+											  Foreground="{TemplateBinding Foreground}"
+											  Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
+											  VerticalAlignment="Center" />
+							<ContentPresenter x:Name="ContentPresenter"
+											  Content="{TemplateBinding Content}"
+											  ContentTemplate="{TemplateBinding ContentTemplate}"
+											  ContentTransitions="{TemplateBinding ContentTransitions}"
+											  Foreground="{TemplateBinding Foreground}"
+											  VerticalAlignment="Center" />
+						</StackPanel>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- Text buttons -->
+	<Style x:Key="CupertinoPlainButtonStyle"
+		   BasedOn="{StaticResource CupertinoBaseButtonStyle}"
+		   TargetType="Button">
+		<Setter Property="Foreground" Value="{ThemeResource TextButtonForeground}" />
+		<Setter Property="Background" Value="{ThemeResource TextButtonBackground}" />
+	</Style>
+	<Style x:Key="CupertinoProminentButtonStyle"
+		   BasedOn="{StaticResource CupertinoBaseButtonStyle}"
+		   TargetType="Button">
+		<Setter Property="Foreground" Value="{ThemeResource FilledButtonForeground}" />
+		<Setter Property="Background" Value="{ThemeResource FilledButtonBackground}" />
+	</Style>
+	<Style x:Key="CupertinoTintedButtonStyle"
+		   BasedOn="{StaticResource CupertinoBaseButtonStyle}"
+		   TargetType="Button">
+		<Setter Property="Foreground" Value="{ThemeResource FilledTonalButtonForeground}" />
+		<Setter Property="Background" Value="{ThemeResource FilledTonalButtonBackground}" />
+	</Style>
+	<Style x:Key="CupertinoGrayButtonStyle"
+		   BasedOn="{StaticResource CupertinoBaseButtonStyle}"
+		   TargetType="Button">
+		<Setter Property="Foreground" Value="{ThemeResource OutlinedButtonForeground}" />
+		<Setter Property="Background" Value="{ThemeResource OutlinedButtonBackground}" />
+	</Style>
+	<Style x:Key="CupertinoDestructiveButtonStyle"
+		   BasedOn="{StaticResource CupertinoBaseButtonStyle}"
+		   TargetType="Button">
+		<Setter Property="Foreground" Value="{ThemeResource CupertinoDestructiveButtonForeground}" />
+		<Setter Property="Background" Value="{ThemeResource CupertinoDestructiveButtonBackground}" />
+	</Style>
+	<Style x:Key="CupertinoGlassButtonStyle"
+		   BasedOn="{StaticResource CupertinoBaseGlassButtonStyle}"
+		   TargetType="Button">
+		<Setter Property="Foreground" Value="{ThemeResource CupertinoGlassButtonForeground}" />
+		<Setter Property="Background" Value="{ThemeResource CupertinoGlassButtonBackground}" />
+	</Style>
+	<Style x:Key="CupertinoGlassProminentButtonStyle"
+		   BasedOn="{StaticResource CupertinoBaseGlassButtonStyle}"
+		   TargetType="Button">
+		<Setter Property="Foreground" Value="{ThemeResource CupertinoGlassProminentButtonForeground}" />
+		<Setter Property="Background" Value="{ThemeResource CupertinoGlassProminentButtonBackground}" />
+	</Style>
+
+	<!-- Icon buttons: a circle around the Content. The large size is the closest thing to a FAB. -->
+	<Style x:Key="CupertinoIconButtonStyle"
+		   BasedOn="{StaticResource CupertinoBaseButtonStyle}"
+		   TargetType="Button">
+		<Setter Property="Foreground" Value="{ThemeResource IconButtonForeground}" />
+		<Setter Property="Background" Value="{ThemeResource IconButtonBackground}" />
+		<Setter Property="Width" Value="{StaticResource CupertinoIconButtonSize}" />
+		<Setter Property="Height" Value="{StaticResource CupertinoIconButtonSize}" />
+		<Setter Property="MinHeight" Value="0" />
+		<Setter Property="Padding" Value="0" />
+	</Style>
+	<Style x:Key="CupertinoTintedIconButtonStyle"
+		   BasedOn="{StaticResource CupertinoBaseButtonStyle}"
+		   TargetType="Button">
+		<Setter Property="Foreground" Value="{ThemeResource FilledTonalButtonForeground}" />
+		<Setter Property="Background" Value="{ThemeResource FilledTonalButtonBackground}" />
+		<Setter Property="Width" Value="{StaticResource CupertinoIconButtonSize}" />
+		<Setter Property="Height" Value="{StaticResource CupertinoIconButtonSize}" />
+		<Setter Property="MinHeight" Value="0" />
+		<Setter Property="Padding" Value="0" />
+	</Style>
+	<Style x:Key="CupertinoGrayIconButtonStyle"
+		   BasedOn="{StaticResource CupertinoBaseButtonStyle}"
+		   TargetType="Button">
+		<Setter Property="Foreground" Value="{ThemeResource OutlinedButtonForeground}" />
+		<Setter Property="Background" Value="{ThemeResource OutlinedButtonBackground}" />
+		<Setter Property="Width" Value="{StaticResource CupertinoIconButtonSize}" />
+		<Setter Property="Height" Value="{StaticResource CupertinoIconButtonSize}" />
+		<Setter Property="MinHeight" Value="0" />
+		<Setter Property="Padding" Value="0" />
+	</Style>
+	<Style x:Key="CupertinoGlassIconButtonStyle"
+		   BasedOn="{StaticResource CupertinoBaseGlassButtonStyle}"
+		   TargetType="Button">
+		<Setter Property="Foreground" Value="{ThemeResource CupertinoGlassButtonForeground}" />
+		<Setter Property="Background" Value="{ThemeResource CupertinoGlassButtonBackground}" />
+		<Setter Property="Width" Value="{StaticResource CupertinoIconButtonSize}" />
+		<Setter Property="Height" Value="{StaticResource CupertinoIconButtonSize}" />
+		<Setter Property="MinHeight" Value="0" />
+		<Setter Property="Padding" Value="0" />
+	</Style>
+	<Style x:Key="CupertinoGlassProminentIconButtonStyle"
+		   BasedOn="{StaticResource CupertinoBaseGlassButtonStyle}"
+		   TargetType="Button">
+		<Setter Property="Foreground" Value="{ThemeResource CupertinoGlassProminentButtonForeground}" />
+		<Setter Property="Background" Value="{ThemeResource CupertinoGlassProminentButtonBackground}" />
+		<Setter Property="Width" Value="{StaticResource CupertinoIconButtonSize}" />
+		<Setter Property="Height" Value="{StaticResource CupertinoIconButtonSize}" />
+		<Setter Property="MinHeight" Value="0" />
+		<Setter Property="Padding" Value="0" />
+	</Style>
+	<Style x:Key="CupertinoLargeTintedIconButtonStyle"
+		   BasedOn="{StaticResource CupertinoTintedIconButtonStyle}"
+		   TargetType="Button">
+		<Setter Property="Width" Value="{StaticResource CupertinoLargeIconButtonSize}" />
+		<Setter Property="Height" Value="{StaticResource CupertinoLargeIconButtonSize}" />
+		<Setter Property="CornerRadius" Value="{StaticResource CupertinoLargeIconButtonCornerRadius}" />
+	</Style>
+	<Style x:Key="CupertinoLargeGrayIconButtonStyle"
+		   BasedOn="{StaticResource CupertinoGrayIconButtonStyle}"
+		   TargetType="Button">
+		<Setter Property="Width" Value="{StaticResource CupertinoLargeIconButtonSize}" />
+		<Setter Property="Height" Value="{StaticResource CupertinoLargeIconButtonSize}" />
+		<Setter Property="CornerRadius" Value="{StaticResource CupertinoLargeIconButtonCornerRadius}" />
+	</Style>
+	<Style x:Key="CupertinoLargeGlassIconButtonStyle"
+		   BasedOn="{StaticResource CupertinoGlassIconButtonStyle}"
+		   TargetType="Button">
+		<Setter Property="Width" Value="{StaticResource CupertinoLargeIconButtonSize}" />
+		<Setter Property="Height" Value="{StaticResource CupertinoLargeIconButtonSize}" />
+		<Setter Property="CornerRadius" Value="{StaticResource CupertinoLargeIconButtonCornerRadius}" />
+	</Style>
+	<Style x:Key="CupertinoLargeGlassProminentIconButtonStyle"
+		   BasedOn="{StaticResource CupertinoGlassProminentIconButtonStyle}"
+		   TargetType="Button">
+		<Setter Property="Width" Value="{StaticResource CupertinoLargeIconButtonSize}" />
+		<Setter Property="Height" Value="{StaticResource CupertinoLargeIconButtonSize}" />
+		<Setter Property="CornerRadius" Value="{StaticResource CupertinoLargeIconButtonCornerRadius}" />
+	</Style>
+
+	<!-- The names these two styles had before the button family existed. -->
+	<StaticResource x:Key="CupertinoButtonStyle" ResourceKey="CupertinoPlainButtonStyle" />
+	<StaticResource x:Key="CupertinoContainedButtonStyle" ResourceKey="CupertinoProminentButtonStyle" />
+
 </ResourceDictionary>
