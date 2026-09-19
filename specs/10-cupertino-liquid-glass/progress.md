@@ -281,7 +281,11 @@ row updated in the same PR.
   (`PrimaryContainerBrush` + accent text), as the mapping spec says. Ratchet: 54 of 72 resolve, 18 pending.
   Suite 92 / 92, Debug and Release. Test note: a visual-state setter resolves its `{ThemeResource}` against
   the application theme, so checked-state brushes are compared by color, not by instance.
-- [ ] TextBox (default / filled / plain / search), PasswordBox, NumberBox (stepper capsule), AutoSuggestBox.
+- [x] Filled TextBox / PasswordBox (2026-09-18): `CupertinoFilled{TextBox,PasswordBox}Style`, based on the
+  existing bordered styles (same template), `FilledTextBoxStyle` / `FilledPasswordBoxStyle` aliased.
+  **Every Phase 3 key of the semantic contract now resolves**: 56 of 72, the 16 pending are all Phase 4.
+  Suite 93 / 93. Cut until asked for: plain and search variants, an `AutoSuggestBox` style and the
+  `NumberBox` stepper capsule — none is a semantic key, and the search look is the filled style plus an icon.
 - [ ] CheckBox, RadioButton, ToggleSwitch (51 × 31 / 27), Slider (capsule track, 28 thumb).
 - [ ] ProgressBar, ProgressRing (8-spoke storyboard; remove the `Lottie` feature, the two `*Animation_Uno`
   keys and the `#if !WinUI_Desktop` special case) (D-7).

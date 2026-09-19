@@ -246,4 +246,29 @@ public class Given_CupertinoControls
 			UnitTestsUIContentHelper.Content = null;
 		}
 	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_FilledTextFieldStylesApplied_Then_FilledAndBorderless()
+	{
+		try
+		{
+			var container = CreateThemedContainer();
+			var fill = Resource<Brush>(container, "SecondaryContainerBrush");
+
+			var text = await Load(container, new TextBox(), "FilledTextBoxStyle");
+			var password = await Load(container, new PasswordBox(), "FilledPasswordBoxStyle");
+
+			Assert.AreSame(fill, text.Background, "TextBox Background");
+			Assert.AreEqual(new Thickness(0), text.BorderThickness, "TextBox BorderThickness");
+			Assert.AreSame(Resource<Brush>(container, "OnSurfaceVariantBrush"), text.PlaceholderForeground, "TextBox PlaceholderForeground");
+			Assert.AreSame(fill, FindDescendant<Border>(text, "ContentBorder")?.Background, "rendered TextBox fill");
+			Assert.AreSame(fill, password.Background, "PasswordBox Background");
+			Assert.AreEqual(new Thickness(0), password.BorderThickness, "PasswordBox BorderThickness");
+		}
+		finally
+		{
+			UnitTestsUIContentHelper.Content = null;
+		}
+	}
 }
