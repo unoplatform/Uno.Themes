@@ -96,10 +96,14 @@ docs are not deferred to the end).
 - [x] **D-1 amended the same day: no frozen V1.** The maintainer's words: "We should be dropping v1
   completely and just having a brand new cupertino theme, no need to maintain v1." `CupertinoResourcesV1`,
   its two helper types, the 22 copied dictionaries, the second merge output and its test were built
-  (slice 5) and then **removed**. The obsolete `CupertinoColors` / `CupertinoFonts` / `CupertinoResources`
-  shim stays: it is ~100 lines that keep existing `App.xaml` files compiling, not a second generation of
-  styles. With V1 gone the D-7 collision (V1's Lottie ring) and the duplicated `Uno0001` warnings are moot,
+  (slice 5) and then **removed**. With V1 gone the D-7 collision (V1's Lottie ring) and the duplicated `Uno0001` warnings are moot,
   so no `NoWarn` was added.
+- [x] **D-1 amended again: no compatibility classes either.** Maintainer: "remove the compatibility
+  classes too". The obsolete `CupertinoColors` / `CupertinoFonts` / `CupertinoResources` shim, its test
+  class (6 tests) and its two fixtures are **removed**; `CupertinoTheme` is the only entry point and an
+  `App.xaml` that declares the old trio no longer compiles (documented in the migration section of
+  `doc/cupertino-getting-started.md`). Suite after removal: 63 / 63, Debug and Release. Review items 4 and
+  13 (recorder state, bad legacy font URI) are moot.
 - [x] **D-5 taken (2026-09-18): the backplate lives in `Uno.Cupertino.WinUI`**, which references
   `Uno.WinUI.Graphics2DSK`; compiled out on the Windows TFM. The package reference is added in Phase 2.
 
@@ -153,7 +157,7 @@ Library (`src/library/Uno.Cupertino/`):
   values).
 - [ ] `Styles/Controls/_Resources.xaml`: implicit styles + every semantic alias in Simple's list (pointing at
   the existing styles) + typography aliases.
-- [ ] Legacy shim per §8: `CupertinoResources : CupertinoTheme` (`[Obsolete]`, reads the static override
+- [x] ~~Legacy shim per §8~~ (built in slice 4, removed with the second D-1 amendment): `CupertinoResources : CupertinoTheme` (`[Obsolete]`, reads the static override
   URIs, `WithImplicitStyles` no-op); `CupertinoColors` / `CupertinoFonts` record the URI only; a
   `CupertinoFontFamily` override is translated to `DefaultFontFamily`. `CupertinoConstants` gains
   `ResourcePaths`, `SemanticStyleKeys`, `PaletteKeys`, `BrushColorKeys`.

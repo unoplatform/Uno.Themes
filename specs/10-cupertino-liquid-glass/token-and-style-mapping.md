@@ -167,8 +167,8 @@ Semantic aliases in `_Resources.xaml`: `DisplayLarge` → `CupertinoDisplayLarge
 - `CupertinoFontFamily` stays as an alias of `DefaultFontFamily` and is listed in
   `CupertinoTheme.FontFamilyAliasKeys`, with every per-control `Cupertino*FontFamily` alias the styles
   declare, so a runtime `DefaultFontFamily` change reaches the templates (lesson in `specs/lessons.md`).
-  **Overriding `CupertinoFontFamily` reaches nothing** (it is a dead alias, same lesson); the docs and the
-  legacy `CupertinoFonts` shim translate a `CupertinoFontFamily` override into `DefaultFontFamily` (§8).
+  **Overriding `CupertinoFontFamily` reaches nothing** (it is a dead alias, same lesson); the docs tell
+  consumers to redefine `DefaultFontFamily` instead (§8).
 - Apple-host consumers opt into the system font with one line:
   `<CupertinoTheme DefaultFontFamily=".AppleSystemUIFont" />` — measured on macOS
   (`liquid-glass-rendering.md` §10); iOS unverified. `SF Pro` / `SF Pro Text` / `system-ui` do **not**
@@ -326,9 +326,9 @@ against the Figma 27 kit and iOS 26 screenshots during Phase 2b. Dispersion (chr
 
 | Legacy API | Disposition |
 |---|---|
-| `CupertinoResources` (+ `WithImplicitStyles`) | Kept, `[Obsolete("Use CupertinoTheme")]`, and **is** the theme: `CupertinoResources : CupertinoTheme`. Its ctor reads the static override URIs recorded by `CupertinoColors.OverrideSource` / `CupertinoFonts.OverrideSource` (the existing "delay-one" hack — URIs, never instances, so the WinAppSDK two-parents rule is not hit) and passes them to the base as colour / font overrides. Being the theme itself, it sits at the top level of `MergedDictionaries`, so `Application.GetTheme()` finds it and nothing is parsed twice. `WithImplicitStyles` becomes a no-op and **implicit styles are now always on** (behaviour change for consumers that never set it; documented) |
-| `CupertinoColors` | Kept, `[Obsolete]`; records the override URI only — it no longer merges the palette (the theme does). A consumer that declared it *after* `CupertinoResources` gets no override, exactly as today |
-| `CupertinoFonts` | Kept, `[Obsolete]`; records the override URI. A legacy override file that redefines `CupertinoFontFamily` is **translated** into a `DefaultFontFamily` override when the theme resolves it (otherwise it would be a dead alias) |
+| `CupertinoResources` (+ `WithImplicitStyles`) | **Removed** (D-1 as amended twice on 2026-09-18): no `[Obsolete]` shim; `CupertinoTheme` is the only entry point. Breaking, documented in the migration section |
+| `CupertinoColors` | **Removed** (D-1 as amended twice on 2026-09-18): no `[Obsolete]` shim; `CupertinoTheme` is the only entry point. Breaking, documented in the migration section |
+| `CupertinoFonts` | **Removed** (D-1 as amended twice on 2026-09-18): no `[Obsolete]` shim; `CupertinoTheme` is the only entry point. Breaking, documented in the migration section |
 | `CupertinoConstants` | Gains `ResourcePaths`, `SemanticStyleKeys`, `PaletteKeys`, `BrushColorKeys` (test and rewrite inputs; AGENTS.md §9) |
 | All `Cupertino*Style` keys in `doc/cupertino-controls-styles.md` | Kept as aliases to the new styles (§6). **Visual change**: e.g. `CupertinoContainedButtonStyle` becomes a glass capsule |
 | All `Cupertino*Color` / `Cupertino*Brush` / label / fill / background keys | Kept; **values updated** to the June-2025 palette |

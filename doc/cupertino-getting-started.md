@@ -159,7 +159,7 @@ The brushes are live: overriding a `*Color` key through `Colors.OverrideSource` 
 
 ## Migrating from `CupertinoColors` / `CupertinoFonts` / `CupertinoResources`
 
-The three dictionaries are obsolete. They keep working: `CupertinoResources` is now a `CupertinoTheme`, and `CupertinoColors` / `CupertinoFonts` only record their `OverrideSource` for the `CupertinoResources` declared **after** them. To migrate, replace the three with one:
+The three dictionaries were removed in this major version; an app that declares them no longer compiles. Replace the three with one `CupertinoTheme`:
 
 ```xml
 <!-- Before -->
@@ -179,14 +179,14 @@ The three dictionaries are obsolete. They keep working: `CupertinoResources` is 
 </CupertinoTheme>
 ```
 
-What changes when you upgrade, whether or not you migrate:
+What else changes when you upgrade:
 
-- **Implicit styles are always on.** `WithImplicitStyles` no longer has any effect, and unstyled `Button`, `TextBox`, `CheckBox`, `ToggleSwitch`, `Slider`, `TextBlock`, … now pick up the Cupertino styles. Set an explicit `Style` where you relied on the platform default.
-- **`CupertinoColors` and `CupertinoFonts` still carry the default colors, brushes and fonts**, so a dictionary that merges them to resolve `{StaticResource Cupertino*Brush}` keeps working. They no longer apply their own `OverrideSource`; only the `CupertinoResources` declared after them does.
+- **Implicit styles are always on.** `WithImplicitStyles` is gone, and unstyled `Button`, `TextBox`, `CheckBox`, `ToggleSwitch`, `Slider`, `TextBlock`, … now pick up the Cupertino styles. Set an explicit `Style` where you relied on the platform default.
+- **A dictionary that merged `<CupertinoColors />` or `<CupertinoFonts />`** to resolve `{StaticResource Cupertino*Brush}` should drop the merge: the keys now come from the `CupertinoTheme` in `App.xaml`.
 - **An unstyled `TextBlock` gets the Cupertino typeface, wrapping and trimming, not a size.** Apply `BodyLarge` (or `CupertinoBody`) where you want the 17 pt body style.
 - **Color values** moved to Apple's June 2025 system palette (for example `CupertinoBlueColor` is `#0088FF` / `#0091FF`, previously `#007BFF` / `#0A84FF`).
 - **The default typeface is Inter**, see [Change Default Font](#change-default-font).
-- **In a font override file, redefine `DefaultFontFamily`.** `CupertinoFontFamily` is an alias of that root; the obsolete `CupertinoFonts` path still translates a file that only redefines `CupertinoFontFamily`, `CupertinoTheme.FontOverrideSource` does not.
+- **In a font override file, redefine `DefaultFontFamily`.** `CupertinoFontFamily` is an alias of that root, so a file that only redefines `CupertinoFontFamily` no longer changes the typeface.
 
 ## Customization
 

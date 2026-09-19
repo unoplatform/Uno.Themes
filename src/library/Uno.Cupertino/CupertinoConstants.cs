@@ -16,9 +16,6 @@ internal static class CupertinoConstants
 	public static string StateConstants = $"ms-appx:///{PackageName}/Styles/Application/StateConstants.xaml";
 	public static string MergedPages = $"ms-appx:///{PackageName}/Generated/mergedpages.xaml";
 
-	/// <summary>The font key a pre-<see cref="CupertinoTheme"/> font override file redefines.</summary>
-	public const string LegacyFontFamilyKey = "CupertinoFontFamily";
-
 	private const string PrimaryColor = "PrimaryColor";
 
 	/// <summary>The accent brushes of <see cref="BrushColorKeys"/> with the color key each is published under.</summary>
