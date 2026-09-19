@@ -1,10 +1,8 @@
 #nullable enable
 using System;
-using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
-using Windows.UI;
 
 #if HAS_UNO
 using Microsoft.UI.Composition;
@@ -31,14 +29,11 @@ namespace Uno.Cupertino;
 /// </remarks>
 [TemplatePart(Name = RootPartName, Type = typeof(Grid))]
 [TemplatePart(Name = FillPartName, Type = typeof(Border))]
-[TemplatePart(Name = TintPartName, Type = typeof(Border))]
 public partial class GlassPanel : Control
 {
 	private const string RootPartName = "PART_Root";
 	private const string FillPartName = "PART_Fill";
-	private const string TintPartName = "PART_Tint";
 
-	private readonly SolidColorBrush _tintBrush = new(Colors.Transparent);
 	private Grid? _root;
 	private Border? _fill;
 
@@ -97,31 +92,24 @@ public partial class GlassPanel : Control
 			new PropertyMetadata(GlassRenderingMode.Auto, OnTierPropertyChanged));
 	#endregion
 
-	#region TintColor (DP)
+	#region Tint (DP)
 	/// <summary>
-	/// Gets or sets a color laid over the glass; its alpha is the tint strength. Default is transparent.
+	/// Gets or sets a brush laid over the glass, in both rendering modes. Its opacity is the tint strength.
+	/// Default is <see langword="null"/>: no tint.
 	/// </summary>
-	public Color TintColor
+	public Brush? Tint
 	{
-		get => (Color)GetValue(TintColorProperty);
-		set => SetValue(TintColorProperty, value);
+		get => (Brush?)GetValue(TintProperty);
+		set => SetValue(TintProperty, value);
 	}
 
-	/// <summary>Identifies the <see cref="TintColor"/> dependency property.</summary>
-	public static DependencyProperty TintColorProperty { get; } =
+	/// <summary>Identifies the <see cref="Tint"/> dependency property.</summary>
+	public static DependencyProperty TintProperty { get; } =
 		DependencyProperty.Register(
-			nameof(TintColor),
-			typeof(Color),
+			nameof(Tint),
+			typeof(Brush),
 			typeof(GlassPanel),
-			new PropertyMetadata(Colors.Transparent, OnTintColorChanged));
-
-	private static void OnTintColorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-	{
-		if (d is GlassPanel panel && e.NewValue is Color color)
-		{
-			panel._tintBrush.Color = color;
-		}
-	}
+			new PropertyMetadata(null));
 	#endregion
 
 	/// <summary>
@@ -143,10 +131,6 @@ public partial class GlassPanel : Control
 #endif
 		_root = GetTemplateChild(RootPartName) as Grid;
 		_fill = GetTemplateChild(FillPartName) as Border;
-		if (GetTemplateChild(TintPartName) is Border tint)
-		{
-			tint.Background = _tintBrush;
-		}
 
 		UpdateTier();
 	}

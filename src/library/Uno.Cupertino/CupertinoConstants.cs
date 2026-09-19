@@ -42,6 +42,7 @@ internal static class CupertinoConstants
 		// Accent
 		("CupertinoBlueBrush", new[] { "CupertinoBlueColor", PrimaryColor }),
 		("CupertinoLinkBrush", new[] { "LinkColor", PrimaryColor }),
+		("CupertinoGlassProminentTintBrush", new[] { PrimaryColor }),
 
 		// System colors
 		("CupertinoRedBrush", new[] { "CupertinoRedColor" }),

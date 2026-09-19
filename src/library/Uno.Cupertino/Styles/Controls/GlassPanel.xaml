@@ -3,8 +3,9 @@
 					xmlns:uc="using:Uno.Cupertino">
 
 	<!--
-		Background is the opaque fill of the Solid tier and, at the material's veil opacity, the layer that
-		keeps content legible over the Liquid tier. GlassPanel inserts its Skia backplate beneath PART_Fill.
+		Background (with the hairline) is the opaque fill of the Solid tier and, at the material's veil
+		opacity, the layer that keeps content legible over the Liquid tier, where the backplate draws the rim.
+		GlassPanel inserts its Skia backplate beneath PART_Fill.
 	-->
 	<Style x:Key="CupertinoGlassPanelStyle"
 		   TargetType="uc:GlassPanel">
@@ -19,10 +20,10 @@
 					<Grid x:Name="PART_Root">
 						<Border x:Name="PART_Fill"
 								Background="{TemplateBinding Background}"
-								CornerRadius="{TemplateBinding CornerRadius}" />
-						<Border x:Name="PART_Tint"
 								BorderBrush="{TemplateBinding BorderBrush}"
 								BorderThickness="{TemplateBinding BorderThickness}"
+								CornerRadius="{TemplateBinding CornerRadius}" />
+						<Border Background="{TemplateBinding Tint}"
 								CornerRadius="{TemplateBinding CornerRadius}" />
 					</Grid>
 				</ControlTemplate>

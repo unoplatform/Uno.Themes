@@ -9,7 +9,7 @@ public enum GlassMaterial : int
 	/// <summary>The default glass: bars, glass buttons, sidebars.</summary>
 	Regular = 0,
 
-	/// <summary>Glass meant to carry a <see cref="GlassPanel.TintColor"/>: prominent buttons, the primary toolbar item.</summary>
+	/// <summary>Glass meant to carry a <see cref="GlassPanel.Tint"/>: prominent buttons, the primary toolbar item.</summary>
 	Prominent = 1,
 
 	/// <summary>A light blur with strong refraction: small moving parts such as a slider knob.</summary>
