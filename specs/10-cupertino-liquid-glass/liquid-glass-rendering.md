@@ -248,3 +248,34 @@ machine has, and it holds in the overlay layer. What is still unmeasured is exac
 for — GPU behaviour and cost. Items 1 / 2 / 5 / 6 on a GPU desktop and in a WebGL2 browser, and item 9 on an
 Apple host, need a run of `CupertinoSampleApp --glass-spike` on real hardware before Phase 2 starts; the
 spike file stays in the sample head until then. Phase 1 does not depend on any of it.
+
+## 9. Spike results — 2026-09-18, macOS desktop, GPU (maintainer run)
+
+First run on real hardware: macOS, `AreEffectsFast() == true`, **61 fps** (the vsync cap) with six glass
+surfaces, a bar animating behind five of them and a list scrolling under the sixth. `RenderOverride` ran 6
+times in total, as on the software path.
+
+| # | Question | Result on the GPU |
+|---|---|---|
+| 1 | Backdrop `SaveLayer` reads what is beneath | **Yes.** Blur, saturation and the SkSL displacement map all render on the GPU backend |
+| 2 | Stale content when the backdrop changes | **FAILS — and worse than stale.** With the bar at x ≈ 330–425, every panel showed magenta smeared from ≈ 165 to 430 with fine vertical streaks. Uno repaints only the damaged strip (the bar's old and new rectangles) each frame; the panel's backdrop filter then reads a framebuffer that, outside that strip, still holds the panel's **own previous blurred output**, and blurs it again. Moving content is integrated into a trail: a feedback loop, not a snapshot. The software-path captures in §8 could not show this — `RenderTargetBitmap` is always a full fresh render |
+| 3 | `Opacity` | Confirmed on the GPU: the panel under `Opacity="0.3"` renders at full strength |
+| 5 | Glass bar over scrolling content | **Correct at 61 fps.** Scrolling dirties the whole region every frame, so the backdrop under the bar is redrawn before it is read — which is the same reason item 2 fails when only a strip is dirty |
+| 6 | WASM WebGL2 | Still open (the spike is only reachable from the command line) |
+| 9 | System-font family name | Still open; the spike now prints what `SKFontManager` resolves for each candidate next to the rendered width, with `Courier New` as a control (a width-only probe cannot tell "unresolved" from "resolved to the platform default") |
+
+**Design consequence.** Uno's own backdrop consumers avoid this with two *internal* visual flags,
+`RequiresRepaintOnEveryFrame` and `DamageRegionSamplingMargin` (§2, first row). `SKCanvasElement` exposes
+neither, and they cannot be reached from this library. What is available: the backplate calls `Invalidate()`
+every frame while it is loaded, so its whole bounds are damaged and everything behind it is redrawn before
+the backdrop is read — the same behaviour, obtained from the outside. `--glass-spike-invalidate` does exactly
+that; on the software path it took `RenderOverride` from 6 calls to ~65 per second with correct output. **It
+still has to be confirmed on the GPU**, together with its cost: a panel that invalidates every frame keeps
+the render loop running while it is on screen, so a static screen with glass never idles. If it holds, §3's
+repaint model ("static glass is recorded once and replayed") is wrong and becomes: invalidate per frame
+while loaded and visible, and stop in `Unloaded`. Follow-up worth filing upstream either way: let
+`SKCanvasElement` declare that it samples its backdrop, so the compositor can do this only when something
+behind the element actually changed.
+
+Gate status: **correctness of the Liquid tier on the GPU depends on the invalidate run.** Performance
+headroom is not the concern it was expected to be (vsync-capped with six surfaces).

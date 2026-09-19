@@ -105,7 +105,10 @@ family name on Apple hosts (D-3 docs).
 - [x] Software-path findings recorded in `liquid-glass-rendering.md` §8 (items 1, 3, 4, 7, 8 answered; 2 and 5
   answered for correctness). Two design corrections came out of it: clip **before** the backdrop
   `SaveLayer`, and the backplate has to apply `Opacity` itself. The pixel test is no longer GPU-gated.
-- [ ] GPU items — 1 / 2 / 5 / 6 on a GPU desktop and a WebGL2 browser, 9 on an Apple host. **Blocked on
+- [ ] GPU items — first maintainer run done on macOS (`liquid-glass-rendering.md` §9): 1 and 5 pass at 61 fps;
+  **2 fails with a feedback-loop ghost**; the candidate fix (`--glass-spike-invalidate`) and item 9 (font
+  probe) await a second run. 6 (WebGL2) still open. Originally:
+  1 / 2 / 5 / 6 on a GPU desktop and a WebGL2 browser, 9 on an Apple host. **Blocked on
   hardware:** the dev box has no GPU (ASPEED BMC) and agents run in a disconnected RDP session, so Uno
   always picks the software renderer there and the frame clock is throttled to ~4 fps regardless of
   content. Needs a manual `CupertinoSampleApp --glass-spike` run on real hardware.

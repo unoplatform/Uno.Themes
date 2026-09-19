@@ -137,6 +137,15 @@ internal sealed class GlassSpikePage : Page
 
 	private static bool NoGlass => Environment.GetCommandLineArgs().Contains("--glass-spike-noglass");
 
+	// GPU finding: with damage-region rendering the backdrop read picks up the panel's OWN previous output
+	// outside the dirty strip and re-blurs it every frame, which smears moving content into a trail.
+	// --glass-spike-invalidate repaints every backplate each frame, so its whole bounds are damaged and the
+	// content behind it is redrawn first. This is what Uno's acrylic does internally.
+	private static bool InvalidateEveryFrame => Environment.GetCommandLineArgs().Contains("--glass-spike-invalidate");
+
+	private static readonly List<SpikeGlassBackplate> _plates = new();
+	private string _fontProbe = "";
+
 	public GlassSpikePage(string? autoDir)
 	{
 		_autoDir = autoDir;
@@ -145,8 +154,35 @@ internal sealed class GlassSpikePage : Page
 		Unloaded += (_, _) => CompositionTarget.Rendering -= OnRendering;
 	}
 
-	private static SpikeGlassBackplate Glass(float sigma, float refraction = 0, bool downsample = false, bool clipAfter = false, double w = 260, double h = 84) =>
-		new() { Sigma = sigma, Refraction = refraction, Downsample = downsample, ClipAfterSaveLayer = clipAfter, Width = w, Height = h };
+	private static SpikeGlassBackplate Glass(float sigma, float refraction = 0, bool downsample = false, bool clipAfter = false, double w = 260, double h = 84)
+	{
+		var plate = new SpikeGlassBackplate { Sigma = sigma, Refraction = refraction, Downsample = downsample, ClipAfterSaveLayer = clipAfter, Width = w, Height = h };
+		_plates.Add(plate);
+		return plate;
+	}
+
+	// Spike item 9: which family name reaches the system font on this host? Two views, because neither is
+	// enough alone. "skia" asks SKFontManager what each name resolves to (null = no such family). "width" is
+	// what XAML actually rendered; a name whose width equals the fallback's either did not resolve or IS the
+	// platform default, so Courier New is listed as a control that must differ.
+	private static string ProbeSystemFonts()
+	{
+		static double Width(string family)
+		{
+			var text = new TextBlock { Text = "Handgloves 0123456789 WMwm", FontSize = 40, FontFamily = new FontFamily(family) };
+			text.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+			return Math.Round(text.DesiredSize.Width, 1);
+		}
+
+		var fallback = Width("NoSuchFontFamily-glass-spike");
+		var candidates = new[] { ".AppleSystemUIFont", "SF Pro", "SF Pro Text", "SF Pro Display", ".SF NS", "San Francisco", "system-ui", "-apple-system", "Helvetica Neue", "Segoe UI", "Courier New" };
+		var rows = candidates.Select(c =>
+		{
+			using var match = SKFontManager.Default.MatchFamily(c);
+			return $"{c}: skia={match?.FamilyName ?? "null"} width={Width(c)}";
+		});
+		return $"default typeface={SKTypeface.Default.FamilyName} fallback width={fallback} || " + string.Join(" | ", rows);
+	}
 
 	private static FrameworkElement Labeled(string label, FrameworkElement glass)
 	{
@@ -235,6 +271,15 @@ internal sealed class GlassSpikePage : Page
 	private void OnLoaded(object sender, RoutedEventArgs e)
 	{
 		CompositionTarget.Rendering += OnRendering;
+		try
+		{
+			_fontProbe = ProbeSystemFonts();
+		}
+		catch (Exception ex)
+		{
+			_fontProbe = "font probe failed: " + ex.Message;
+		}
+		Console.WriteLine("[glass-spike] fonts: " + _fontProbe);
 		if (_autoDir is not null)
 		{
 			_ = RunScriptAsync(_autoDir);
@@ -250,7 +295,15 @@ internal sealed class GlassSpikePage : Page
 			_fps = _frames * 1000.0 / (now - _lastFpsTick);
 			_frames = 0;
 			_lastFpsTick = now;
-			_hud.Text = $"{_fps:F0} fps | backplate renders {SpikeGlassBackplate.RenderCount} | {Capabilities()}";
+			_hud.Text = $"{_fps:F0} fps | backplate renders {SpikeGlassBackplate.RenderCount} | invalidate-every-frame={InvalidateEveryFrame} | {Capabilities()}\nfonts: {_fontProbe}";
+		}
+
+		if (InvalidateEveryFrame)
+		{
+			foreach (var plate in _plates)
+			{
+				plate.Invalidate();
+			}
 		}
 
 		if (_scroller is { } sv)
@@ -270,7 +323,7 @@ internal sealed class GlassSpikePage : Page
 		{
 			Directory.CreateDirectory(dir);
 			await Task.Delay(4000);
-			File.WriteAllText(System.IO.Path.Combine(dir, "info.txt"), $"{Capabilities()}\nfps(4 panels + bar + scrolling list)={_fps:F1}\nrenders={SpikeGlassBackplate.RenderCount}\nos={Environment.OSVersion}\n");
+			File.WriteAllText(System.IO.Path.Combine(dir, "info.txt"), $"{Capabilities()}\ninvalidate-every-frame={InvalidateEveryFrame}\nfonts: {_fontProbe}\nfps(4 panels + bar + scrolling list)={_fps:F1}\nrenders={SpikeGlassBackplate.RenderCount}\nos={Environment.OSVersion}\n");
 
 			// Item 7: does RenderTargetBitmap see the backdrop SaveLayer? Captured from the topmost visual so the popup layer is included.
 			await CaptureAsync(dir, "main-1");
