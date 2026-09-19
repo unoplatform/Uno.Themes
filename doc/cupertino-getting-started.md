@@ -188,8 +188,6 @@ What changes when you upgrade, whether or not you migrate:
 - **The default typeface is Inter**, see [Change Default Font](#change-default-font).
 - **In a font override file, redefine `DefaultFontFamily`.** `CupertinoFontFamily` is an alias of that root; the obsolete `CupertinoFonts` path still translates a file that only redefines `CupertinoFontFamily`, `CupertinoTheme.FontOverrideSource` does not.
 
-If you need the previous look unchanged while you migrate, replace `<CupertinoResources />` with `<CupertinoResourcesV1 />`: the styles, colors and fonts exactly as they shipped before `CupertinoTheme`, frozen, with none of the semantic system. It is obsolete from the start and is removed in the next major version.
-
 ## Customization
 
 The following guides require the creation of new `ResourceDictionary` files in your application project. For more information on how to define styles and resources in a separate `ResourceDictionary`, refer to the [resource management documentation](xref:Guide.HowTo.Create-Control-Library#moving-the-control-style-in-a-separate-resource-dictionary).

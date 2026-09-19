@@ -338,9 +338,8 @@ against the Figma 27 kit and iOS 26 screenshots during Phase 2b. Dispersion (chr
 | Transitive `Uno.WinUI.Lottie` reference | **Removed** (same) |
 | `Uno.Toolkit` `CupertinoToolkitTheme` | Key-compatible; Phase 1 inventories every Cupertino key it reads before closing; follow-up to derive it from `CupertinoTheme` like `MaterialToolkitTheme` |
 
-All of the above ships in the next **major** version; a frozen, opt-in `CupertinoResourcesV1`
-(today's dictionaries merged into `Generated/mergedpages.v1.xaml`, no tests, removed in the following
-major) gives pinned consumers an escape hatch (D-1).
+All of the above ships in the next **major** version. There is **no frozen V1** (D-1 as amended on
+2026-09-18): an app that must keep the previous look stays on the previous major of the package.
 
 ## 9. Cut from v2 (YAGNI — add on request)
 

@@ -4,6 +4,33 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## A decision option must not smuggle a second deliverable — ask about the expensive rider separately
+
+**Context:** Spec 10 (Cupertino v2), decision D-1. The maintainer was offered "Replace in place
+(Recommended)" against "Full v1/v2 split". The recommended option's *description* also said today's
+dictionaries would be frozen as an opt-in `CupertinoResourcesV1` escape hatch. He picked it. The agent then
+built the escape hatch — three public types, 22 XAML files copied from `master` (3.5 k lines), a second
+XamlMerge output, tests, docs — and only when a later question mentioned V1 again did the maintainer say he
+had never wanted one: "no need to maintain v1". All of it was removed the same day.
+
+**Root cause:** the choice he was actually making was *in place vs. side by side*. The frozen copy was a
+rider the spec author had attached to make the recommendation look safer, carried into the option text as
+if it were part of the same decision. Accepting the headline was read as accepting the rider. It was never
+put to him as a question he could say no to, and it was by far the more expensive half.
+
+**How to apply:**
+- One question per independently rejectable deliverable. If an option's description contains the word
+  "plus", or a second noun phrase that needs its own files, tests and docs, it is two questions.
+- Before building anything whose only purpose is to soften another decision (escape hatches, compatibility
+  copies, feature flags "just in case"), confirm it explicitly and state its cost in the terms that matter:
+  files, public types, and what has to be maintained until it is deleted.
+- An approval given to a recommendation covers the recommendation's *headline*. Treat everything else in
+  the description as unconfirmed until it is said back.
+- The cheapest escape hatch for a breaking major is usually the one that already exists: the previous major
+  of the package.
+
+---
+
 ## "It fails on `master` too" is a claim to prove in one command, not a reason to stop building that configuration
 
 **Context:** Spec 10 (Cupertino v2). The first Debug desktop build of `CupertinoSampleApp` failed with seven

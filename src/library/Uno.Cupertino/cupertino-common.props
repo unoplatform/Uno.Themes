@@ -51,31 +51,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<XamlMergeOutputFiles Include="Generated\mergedpages.xaml" />
-		<XamlMergeOutputFiles Include="Generated\mergedpages.v1.xaml" />
-
-		<XamlMergeInput Include="Styles\Controls\**\*.xaml" Exclude="Styles\Controls\v1\**" MergeFile="mergedpages.xaml" />
-		<XamlMergeInput Include="Styles\Application\**\*.xaml" Exclude="Styles\Application\v1\**" MergeFile="mergedpages.xaml" />
+		<XamlMergeInput Include="Styles\Controls\**\*.xaml" />
+		<XamlMergeInput Include="Styles\Application\**\*.xaml" />
 		<None Remove="Styles\Controls\_Resources.xaml" />
 		<XamlMergeInput Remove="Styles\Application\CupertinoBrushes.xaml" />
 		<XamlMergeInput Remove="Styles\Application\ColorPalette.xaml" />
 		<XamlMergeInput Remove="Styles\Application\Fonts.xaml" />
 		<XamlMergeInput Remove="Styles\Application\Typography.xaml" />
 
-		<!-- CupertinoResourcesV1: the frozen pre-CupertinoTheme generation -->
-		<XamlMergeInput Include="Styles\Controls\v1\**\*.xaml" MergeFile="mergedpages.v1.xaml" />
-		<XamlMergeInput Include="Styles\Application\v1\**\*.xaml" MergeFile="mergedpages.v1.xaml" />
-		<None Remove="Styles\Controls\v1\_Resources.xaml" />
-		<XamlMergeInput Remove="Styles\Application\v1\CupertinoColorsV1.xaml" />
-		<XamlMergeInput Remove="Styles\Application\v1\ColorPalette.xaml" />
-		<XamlMergeInput Remove="Styles\Application\v1\Fonts.xaml" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<UpToDateCheckInput Remove="Styles\Application\CupertinoBrushes.xaml" />
 		<UpToDateCheckInput Remove="Styles\Controls\_Resources.xaml" />
-		<UpToDateCheckInput Remove="Styles\Application\v1\CupertinoColorsV1.xaml" />
-		<UpToDateCheckInput Remove="Styles\Controls\v1\_Resources.xaml" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(ImplicitUsings)'=='true' OR '$(ImplicitUsings)'=='enable'">

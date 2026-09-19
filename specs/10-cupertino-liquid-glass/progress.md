@@ -90,9 +90,18 @@ docs are not deferred to the end).
 - [x] Research: Apple HIG / Liquid Glass digest; Cupertino.Avalonia reference; Uno Skia rendering survey.
 - [x] Write the four companion documents and this plan.
 - [x] Skeptic review; findings folded in (see "Review").
-- [x] D-1, D-2, D-3, D-7 confirmed by the maintainer on 2026-09-18, each as recommended (replace in place +
-  frozen V1; plain implicit button; Inter via `Uno.Fonts.Inter`, SF-Pro.ttf removed; Lottie dropped). D-4
-  applied as recommended (indigo). D-5 waits on the GPU spike items; D-6 is a follow-up.
+- [x] D-1, D-2, D-3, D-7 confirmed by the maintainer on 2026-09-18 (replace in place; plain implicit button;
+  Inter via `Uno.Fonts.Inter`, SF-Pro.ttf removed; Lottie dropped). D-4 applied as recommended (indigo).
+  D-6 is a follow-up.
+- [x] **D-1 amended the same day: no frozen V1.** The maintainer's words: "We should be dropping v1
+  completely and just having a brand new cupertino theme, no need to maintain v1." `CupertinoResourcesV1`,
+  its two helper types, the 22 copied dictionaries, the second merge output and its test were built
+  (slice 5) and then **removed**. The obsolete `CupertinoColors` / `CupertinoFonts` / `CupertinoResources`
+  shim stays: it is ~100 lines that keep existing `App.xaml` files compiling, not a second generation of
+  styles. With V1 gone the D-7 collision (V1's Lottie ring) and the duplicated `Uno0001` warnings are moot,
+  so no `NoWarn` was added.
+- [x] **D-5 taken (2026-09-18): the backplate lives in `Uno.Cupertino.WinUI`**, which references
+  `Uno.WinUI.Graphics2DSK`; compiled out on the Windows TFM. The package reference is added in Phase 2.
 
 ### Phase 0.5 — Liquid Glass spike (size S, throwaway)
 
@@ -112,7 +121,7 @@ family name on Apple hosts (D-3 docs).
   hardware:** the dev box has no GPU (ASPEED BMC) and agents run in a disconnected RDP session, so Uno
   always picks the software renderer there and the frame clock is throttled to ~4 fps regardless of
   content. Needs a manual `CupertinoSampleApp --glass-spike` run on real hardware.
-- [ ] D-5 taken (evidence in §8 item 8).
+- [x] D-5 taken — in `Uno.Cupertino.WinUI` (see Phase 0).
 - [x] Gate: **GO** on the Liquid tier (2026-09-18) — correctness and cost both measured on a GPU. A no-go
   means Phases 1, 3 and 4 still ship (Solid tier everywhere) and Phase 2 is replaced by the
   composition-brush follow-up.
@@ -148,8 +157,7 @@ Library (`src/library/Uno.Cupertino/`):
   URIs, `WithImplicitStyles` no-op); `CupertinoColors` / `CupertinoFonts` record the URI only; a
   `CupertinoFontFamily` override is translated to `DefaultFontFamily`. `CupertinoConstants` gains
   `ResourcePaths`, `SemanticStyleKeys`, `PaletteKeys`, `BrushColorKeys`.
-- [ ] Frozen `CupertinoResourcesV1` over `Generated/mergedpages.v1.xaml` (D-1): move today's dictionaries
-  under `Styles/Controls/v1/` + `Styles/Application/v1/`, second `XamlMergeInput` mapping, no tests.
+- [x] ~~Frozen `CupertinoResourcesV1`~~ — built, then removed when D-1 was amended (no V1).
 - [ ] Add `Uno.Fonts.Inter`; keep `Lottie` until Phase 3 replaces the ring (D-7).
 - [ ] Inventory every Cupertino key `uno.toolkit.ui`'s `CupertinoToolkitTheme` reads (grep its Styles tree);
   record the list here and assert each key resolves in `Given_CupertinoPalette`.
