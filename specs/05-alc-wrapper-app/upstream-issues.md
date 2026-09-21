@@ -1,13 +1,14 @@
 # Upstream issues — unoplatform/uno (6.7-dev secondary-ALC app support)
 
-The four gaps found while building `ThemesSampleApp` (see `progress.md` → Phase 4 findings and
-Review). All were reproduced against `Uno.Sdk.Private 6.7.0-dev.815` (`artifacts/uno` @
-`21bf1ad6`) hosting the three theme sample heads through `AlcContentHost` /
-`WindowHelper.ContentHostOverride`.
+The five gaps found while building `ThemesSampleApp` (see `progress.md` → Phase 4 findings and
+Review). Issues 1-4 were reproduced against `Uno.Sdk.Private 6.7.0-dev.815` (`artifacts/uno` @
+`21bf1ad6`) and issue 5 against `7.0.0-dev.701`, all hosting the three theme sample heads
+through `AlcContentHost` / `WindowHelper.ContentHostOverride`.
 
-Issues 1-4 are filed. Delete each wrapper-side sweep in
+All five are filed. Delete each wrapper-side sweep in
 `src/samples/ThemesSampleApp/GuestHosting/GuestAppLoader.Sweeps.cs` when its fix ships.
-Issue 5 was found later, on Uno 7, and is **not yet filed**.
+Issue 5 was found later, on Uno 7, and has no sweep to delete — it is a resolution bug, not a
+cache-retention one.
 
 | # | Issue | Wrapper-side sweep |
 | --- | --- | --- |
@@ -15,7 +16,7 @@ Issue 5 was found later, on Uno 7, and is **not yet filed**.
 | 2 | [unoplatform/uno#24074](https://github.com/unoplatform/uno/issues/24074) | prunes `SystemNavigationManager` handlers |
 | 3 | [unoplatform/uno#24075](https://github.com/unoplatform/uno/issues/24075) | re-invokes `Application.CleanupNonDefaultAlcCaches` |
 | 4 | [unoplatform/uno#24076](https://github.com/unoplatform/uno/issues/24076) | none, not reachable host-side |
-| 5 | not filed yet — attached-property binding paths read `null` once a second ALC has loaded the owner assembly | none found |
+| 5 | [unoplatform/uno#24581](https://github.com/unoplatform/uno/issues/24581) | none found |
 
 ---
 
@@ -95,7 +96,7 @@ in a session.
 ## 5. XAML attached-property binding paths read `null` once a second ALC has loaded the owner assembly
 
 **Area**: BindingPath / attached properties / secondary-ALC app support
-**Version**: 7.0.0-dev.701 (Skia desktop, Windows) — **not** filed upstream yet
+**Version**: 7.0.0-dev.701 (Skia desktop, Windows)
 
 A template binding whose path is a parenthesized attached property —
 
@@ -108,12 +109,39 @@ own copy: the theme libraries are `!`-isolated in `GuestSharedAssemblies.txt`), 
 page has set `ControlExtensions.Icon` on that very element and the type-keyed DP lookup returns
 the correct per-ALC `DependencyProperty`.
 
-The exact mechanism was **not** pinned down. The measurements below narrow it to path
-resolution itself rather than to the attached property, the style, or a stale memo cache. The
-suspicion is that the path resolves `ut:ControlExtensions` from the `using:Uno.Themes` xmlns
-**by type name**, so it can land on a different ALC's `ControlExtensions` whose `IconProperty`
-is a different `DependencyProperty` instance than the one the page wrote to — but that
-selection was not directly observed and should be confirmed before fixing.
+**Mechanism (confirmed).** `DependencyProperty.InternalGetProperty` discards the caller's
+`type` in favour of the one parsed out of the path string, and
+`DependencyPropertyDescriptor.Parse` resolves that owner type by name through
+`SearchTypeInLoadedAssemblies` → `ContextualAssemblyResolver.GetRelevantAssemblies()`. That
+resolver is ALC-aware only while an `EnterContextualReflection` scope is active, and the only
+such scope in all of `Uno.UI` is around `PageStackEntry.ResolveDescriptor` — page *type
+descriptor* resolution, not template application or binding evaluation. With no scope active it
+falls back to `AppDomain.CurrentDomain.GetAssemblies()`, which yields the **first-loaded**
+`Uno.Themes.WinUI` — including copies in guest ALCs already unloaded but not yet collected,
+exactly the stale-ALC case the resolver's own summary says it exists to avoid.
+
+Measured from the host after each guest load, replaying `SearchTypeInLoadedAssemblies` verbatim
+(`Type.GetType` returned `null` and the contextual scope was `<none>` at every step, so every
+resolution went through the `AppDomain` scan):
+
+| Load order | Hosted guest | `Uno.Themes.WinUI` copies | Owner type resolved to |
+| --- | --- | --- | --- |
+| catalog | Material | 1 | `GuestALC-MaterialSampleApp` ✅ |
+| catalog | Cupertino | 2 | `GuestALC-MaterialSampleApp` ❌ |
+| catalog | Simple | 3 | `GuestALC-MaterialSampleApp` ❌ |
+| reverse | Simple | 1 | `GuestALC-SimpleSampleApp` ✅ |
+| reverse | Cupertino | 2 | `GuestALC-SimpleSampleApp` ❌ |
+| reverse | **Material** | 3 | **`GuestALC-SimpleSampleApp`** ❌ |
+
+The winner is pinned to the first-loaded guest and never tracks the hosted one. Two other
+candidates were ruled out on the way: the by-name `BindableMetadataProvider` fast path (each
+guest installs its own provider at startup, so last-loaded-wins predicts the opposite
+direction), and a shared `BindingPropertyHelper._getValueGetter` memo (no earlier guest ever
+binds that path string — Cupertino references `ControlExtensions` nowhere, Simple uses only
+`LeadingIcon` / `TrailingIcon`).
+
+The probe was a throwaway addition to `GuestHostingSmoke` and was reverted after the run; it is
+a one-off diagnostic, not a regression guard.
 
 **Symptom**: every Material control that surfaces `ControlExtensions.Icon` through its template
 renders without its icon — `TextBox` and `ComboBox` on the ControlExtensions sample page are
@@ -142,18 +170,29 @@ Measured on the hosted page (`IconPresenter` is the template part fed by the bin
 So the attached property, the style and the type-keyed DP lookup are all correct; only the
 value the XAML binding path reads is wrong.
 
-**Note**: this is *not* the same as issue 1. `DependencyProperty._getPropertyCache` is cleared
-by the wrapper's existing sweep (that sweep logs no failure), and issue 3's
-`CleanupNonDefaultAlcCaches` sweep was repaired for Uno 7 (see below) — the icon defect
-survives both, so whatever goes wrong happens in path resolution itself, not in a stale memo
-entry.
+**Note**: this is *not* the same as issue 1, and no sweep can fix it.
+`DependencyProperty._getPropertyCache` is cleared by the wrapper's existing sweep (that sweep
+logs no failure), and issue 3's `CleanupNonDefaultAlcCaches` sweep was repaired for Uno 7 (see
+below) — the icon defect survives both, because nothing cached is stale: the resolution is
+wrong every time it runs.
 
-**Suggested investigation/fix**: check whether an attached-property path's owner type is
-resolved by a process-wide by-name type search; if so, scope it to the ALC of the element being
-bound (or of the parse context that produced the template).
+**Symmetry**: Material is the visible victim only because its templates bind `.Icon`. Simple's
+templates bind `ControlExtensions.LeadingIcon` / `.TrailingIcon`, so a Simple guest loaded after
+another guest should lose its leading/trailing icons the same way. Cupertino references
+`ControlExtensions` nowhere and is unaffected.
 
-**Workaround**: none found host-side. Load the design system you want to test first in a
-session, or run its head standalone.
+**Suggested fix**: enter the bound element's ALC contextual-reflection scope around template
+application / binding-path resolution, so `GetRelevantAssemblies()` takes its ALC-aware branch
+for framework-created bindings as it does for consumer-created ones; or resolve the owner type
+against `AssemblyLoadContext.GetLoadContext(element.GetType().Assembly)` instead of a
+process-wide scan. Note the mitigation `ContextualAssemblyResolver` documents — wrapping
+`SetBinding` in `EnterContextualReflection` — is structurally unavailable for a
+template-declared binding, since the consumer has no call site to wrap.
+
+**Workaround**: none in use. A host-side `EnterContextualReflection` scope around guest UI
+work is plausible now that the mechanism is known, but binding evaluation happens on the
+dispatcher during layout rather than at a call site the host controls, so it was not attempted.
+Load the design system you want to test first in a session, or run its head standalone.
 
 ---
 
