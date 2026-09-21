@@ -110,6 +110,46 @@ internal sealed partial class GuestAppLoader
 	internal bool? LastUnloadedAlcCollected { get; private set; }
 
 	/// <summary>
+	/// Counts the XAML snippets the hosted guest registered with ShowMeTheXAML, or
+	/// <see langword="null"/> when no guest is hosted or the guest never loaded ShowMeTheXAML.
+	/// </summary>
+	/// <remarks>
+	/// <c>XamlResolver</c> is a static dictionary and <c>Uno.ShowMeTheXAML</c> resolves per-ALC
+	/// (it is deliberately absent from <c>GuestSharedAssemblies.txt</c>), so every guest owns its
+	/// own registrations and the host can read them without disturbing them. Worth checking
+	/// because the failure is silent: <c>XamlDisplay.Init()</c> probes
+	/// <c>Assembly.GetEntryAssembly()</c>, which is the wrapper under hosting, and an
+	/// unregistered key resolves to an empty string rather than throwing — every "show me the
+	/// XAML" pane in the guest just renders blank.
+	/// </remarks>
+	internal int? GetHostedXamlSnippetCount()
+	{
+		if (_session is not { } session)
+		{
+			return null;
+		}
+
+		try
+		{
+			var resolver = session.Alc.Assemblies
+				.FirstOrDefault(assembly => assembly.GetName().Name == "Uno.ShowMeTheXAML")
+				?.GetType("ShowMeTheXAML.XamlResolver");
+
+			// DebugView is a Dictionary<string, string>; its identity comes from the shared BCL.
+			return resolver?.GetProperty("DebugView", BindingFlags.Public | BindingFlags.Static)?.GetValue(null)
+				is System.Collections.ICollection registrations
+				? registrations.Count
+				: null;
+		}
+		catch (Exception ex) when (ex is MemberAccessException or TargetInvocationException or InvalidOperationException)
+		{
+			// Diagnostic only — never take the host down over a probe.
+			_logger.LogWarning(ex, "Could not read the hosted guest's ShowMeTheXAML registrations.");
+			return null;
+		}
+	}
+
+	/// <summary>
 	/// Loads <paramref name="info"/> into a fresh collectible ALC, tearing down any previous guest first.
 	/// </summary>
 	public async Task LoadAsync(GuestAppInfo info, IProgress<string>? progress = null, CancellationToken cancellationToken = default)

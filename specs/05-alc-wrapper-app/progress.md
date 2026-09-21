@@ -349,3 +349,38 @@ resolution is the suspicion, not an observation). Repro and measurements in
 `upstream-issues.md` § 5.
 Repairing the issue-3 sweep does **not** fix it, and no host-side workaround was found —
 loading Material first in a session avoids it.
+
+### Fixed: ShowMeTheXaml panes were blank in every hosted guest
+
+Reported separately: the "show me the XAML" pane renders nothing for any guest, on any sample
+page. Standalone heads are unaffected.
+
+`Uno.ShowMeTheXAML.MSBuild` generates a `ShowMeTheXAML.XamlDictionary` per head whose static
+constructor feeds `XamlResolver`; `XamlDisplay.Init()` is what triggers it. With no argument,
+`Init()` looks the type up on `Assembly.GetEntryAssembly()` — which under hosting is
+`ThemesSampleApp`, and the wrapper does not reference ShowMeTheXAML at all. The `GetType` miss
+is silent, and `XamlResolver.Resolve` answers an unregistered key with `""` rather than
+throwing, so the whole feature degrades to blank panes with nothing logged. (`Init()`'s
+`GetCallingAssembly()` fallback only runs when the entry assembly is `null`, so it never
+covered this.)
+
+Each head now passes its own assembly: `XamlDisplay.Init(typeof(App).Assembly)`. Standalone
+behaviour is unchanged — the entry assembly is already that assembly, and
+`RunClassConstructor` on an initialized type is a no-op.
+
+Guarded by the hosting smoke rather than a `Given_*` runtime test: the defect exists *only*
+under ALC hosting, so a runtime test in `SimpleSampleApp` would have been green before the fix
+and proven nothing. `GuestHostingSmoke` now reads each hosted guest's `XamlResolver.DebugView`
+count through the guest ALC and fails the run at zero — real red/green, and already CI-gated by
+`HostingSmoke_Desktop`. Verified **desktop, Debug**: before the fix all three guests reported
+`0` snippets and the smoke exited `1`; after, each reports `589` and the smoke exits `0`.
+
+The probe reads the resolver through the guest ALC, which only works because
+`Uno.ShowMeTheXAML` is absent from every `=`/`^` rule in `GuestSharedAssemblies.txt` and is not
+in the wrapper's own closure, so it falls to tier 3 and loads per-ALC. If that ever changes the
+smoke reports a distinct "could not read" failure rather than blaming `Init()` again.
+
+**WASM not rebuilt or run.** `Init(assembly)` takes the explicit-assemblies branch before the
+`IsMonoWebAssembly` guard is reached, so the browser leg should be at least as correct as
+desktop and no longer depends on `GetEntryAssembly()` being non-null there — but that was not
+verified, same caveat as the assets fix above.
