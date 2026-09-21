@@ -19,9 +19,17 @@ namespace Uno.Themes;
 public static class SemanticThemeHelper
 {
 	/// <summary>
-	/// Gets the <see cref="BaseTheme"/> instance from <see cref="Application.Current.Resources"/>.
+	/// Gets the <see cref="BaseTheme"/> instance from <c>Application.Current.Resources</c>.
 	/// Returns <c>null</c> if no <see cref="BaseTheme"/> is found.
 	/// </summary>
+	/// <remarks>
+	/// Every member of this class resolves the theme through <see cref="Application.Current"/>, which
+	/// is only assigned for the application whose assembly lives in the default
+	/// <c>AssemblyLoadContext</c>. An application hosted in a secondary ALC is registered per-ALC
+	/// instead, so from its code <see cref="Application.Current"/> is the <em>hosting</em>
+	/// application and this lookup finds the host's theme or none at all. Such an application must
+	/// hold on to its own instance and use <see cref="ApplicationExtensions.GetTheme(Application)"/>.
+	/// </remarks>
 	public static BaseTheme GetTheme() => Application.Current.GetTheme();
 
 	/// <summary>
