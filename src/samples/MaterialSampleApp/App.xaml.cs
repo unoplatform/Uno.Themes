@@ -16,6 +16,10 @@ sealed partial class App : Application
 	/// </summary>
 	public App()
 	{
+		// Application.Current only ever points at the default-ALC application, so a head hosted in a
+		// secondary ALC by ThemesSampleApp must hand sample pages its own instance for theme lookups.
+		SampleThemeHelper.CurrentApplication = this;
+
 		ConfigureXamlDisplay();
 		SamplePageLayout.ActiveDesign = Design.Material;
 

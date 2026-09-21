@@ -300,6 +300,53 @@ parsed) and was then immediately torn down.
 - The desktop CI artifact carries no guests (sibling-bin probe layout) — noted in `stage-build-desktop.yml`; the `HostingSmoke_Desktop` job is the hosting gate.
 - Verify the staging host compresses `.dll.bin` responses (the wasm publish is untrimmed, ~116 MB uncompressed); pre-compress the payload if it doesn't.
 
+**Post-delivery fix (2026-09-21) — sample pages could not reach their own theme when hosted**
+
+Reported: hosting a head and opening **Seed Color** failed with `InvalidOperationException: No BaseTheme
+(MaterialTheme, SimpleTheme, etc.) found in Application.Current.Resources.MergedDictionaries`, thrown from
+`SeedColorSamplePage`'s constructor (`ApplySeedColor` -> `SemanticThemeHelper.SeedColorMode` ->
+`GetThemeOrThrow`).
+
+- **Root cause — `Application.Current` is the *host* inside a hosted guest.** Verified from the pinned
+  `Uno.UI.dll` (`Uno.Sdk.Private 7.0.0-dev.701`) IL, not from docs: `Application..ctor` calls `set_Current(this)` ->
+  `SetCurrentApplication`, which assigns the `_current` static **only** when the app's assembly is in the
+  default ALC. A secondary-ALC app is instead put in `_applicationsByAlc`
+  (`ConditionalWeakTable<AssemblyLoadContext, Application>`), given an `AlcRegistrationId`, and latches
+  `_hasSecondaryApps` — `_current` is never touched. So from guest code `Application.Current` is the wrapper
+  `App`, which is deliberately theme-free. `BaseTheme` is also ALC-isolated (`!Uno.Themes.WinUI`), so the
+  lookup could not match a host theme even if the host had one: `OfType<BaseTheme>()` compares against the
+  *guest's* `BaseTheme` type.
+- **No public accessor exists** for a guest's own `Application`: `Application.GetForAssemblyLoadContext`,
+  `GetForInstance`, `GetForType`, `EnumerateSecondaryApplications`, `GetLatestSecondaryApplicationForType`
+  and `AlcContentHost.SourceApplicationOverride` are all `internal`. `GetForInstance`/`GetForType` also fall
+  back to `Application.Current` for default-ALC types, so they answer "the host" for the shared framework
+  types most of a guest tree is made of.
+- **Fix (samples layer; the shipping libraries are unchanged).** `SamplesApp.Shared/Helpers/SampleThemeHelper.cs`
+  holds the head's own `Application` (`CurrentApplication`, defaulting to `Application.Current`) and exposes
+  `GetTheme()` / `GetColorsOrThrow()`; each head's `App` constructor registers itself as its first statement.
+  The shared project compiles into the head assembly, so the handle is per-head — and per-ALC when hosted —
+  the same mechanism `NavigationHelper.MainWindow` and `SamplePageLayout.ActiveDesign` already depend on.
+  `SeedColorSamplePage` and `FontFamilyTunerControl` (3 call sites) route through it; `FontFamilyTunerControl`
+  keeps its deliberate null-tolerance, the page keeps failing loudly (the message now names the missing
+  registration). Runtime tests that call `SemanticThemeHelper` directly are correct as-is — they run
+  standalone, where both routes agree.
+- **Library change is documentation only:** a remark on `SemanticThemeHelper.GetTheme()` stating that every
+  member resolves `Application.Current` and is therefore wrong for a secondary-ALC-hosted app, pointing at
+  `ApplicationExtensions.GetTheme(Application)`. No resource key, API or style changed.
+- **Verified.** A throwaway in-ALC probe (reflection into the live guest, reverted) reported for Material and
+  Simple: `Application.Current => Uno.Themes.WrapperApp.App`,
+  `SemanticThemeHelper.GetTheme() => NULL`, `SampleThemeHelper.CurrentApplication => Uno.Themes.Samples.App`,
+  `SampleThemeHelper.GetTheme() => {Material,Simple}Theme`, and `new SeedColorSamplePage() => OK`.
+  Cupertino returns `NULL` from both routes because that head merges no `BaseTheme` at all (`CupertinoColors`
+  / `CupertinoFonts` / `CupertinoResources`); neither `SeedColorSamplePage` nor `DesignTokensSamplePage`
+  lists `Design.Cupertino`, so no page is affected. Also run: `--smoke` across all three guests (PASS), the
+  full Simple runtime suite (259 passed / 1 pre-existing `[Ignore]` skip / 0 failed), and the new
+  `Given_SampleThemeAccess` (3 tests) alongside the untouched `Given_ApplicationExtensions` (3 tests).
+- **Follow-up (not applied):** the hosted path is verified manually, not gated in CI. Gating it would mean a
+  guest-side `--sample=<name>` deep link (the extension point `GuestAppDeepLink`'s remark already anticipates)
+  plus a second hosting-smoke pass; deliberately left out — the signal would be an indirect 30 s content-ready
+  timeout per guest, for ~2 extra minutes of `HostingSmoke_Desktop`.
+
 **Follow-ups (not applied)**: file the four upstream unoplatform/uno issues from `upstream-issues.md` and replace the spec-pointer comment in `GuestAppLoader.Sweeps.cs` with the issue URLs; run the in-browser wasm smoke/soak (`?smoke`, headless Chrome scraping `[HOSTING-SMOKE] RESULT:`) against a published build — the desktop smoke is CI-gated, the wasm one has the harness but no CI driver yet.
 
 

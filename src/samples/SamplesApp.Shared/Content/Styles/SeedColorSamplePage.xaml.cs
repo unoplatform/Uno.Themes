@@ -36,8 +36,12 @@ public sealed partial class SeedColorSamplePage : Page
 	private void ApplySeedColor(Color seed)
 	{
 		_lastSeed = seed;
-		SemanticThemeHelper.SeedColorMode = _lastSeedColorMode;
-		SemanticThemeHelper.PrimarySeed = seed;
+
+		// Not SemanticThemeHelper: it resolves Application.Current, which is the wrapper app — not
+		// this head — when the head is hosted in a secondary ALC by ThemesSampleApp.
+		var colors = SampleThemeHelper.GetColorsOrThrow();
+		colors.SeedColorMode = _lastSeedColorMode;
+		colors.PrimarySeed = seed;
 
 		var hct = HctColor.FromArgb(ColorToArgb(seed));
 
