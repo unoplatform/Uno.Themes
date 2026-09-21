@@ -7,23 +7,18 @@
 	<SolidColorBrush x:Key="MaterialSliderTrackBrush"
 					 Color="{ThemeResource MaterialSliderTrackColor}" />
 
-	<StaticResource x:Key="MaterialSliderTickBarFill"
-					ResourceKey="MaterialOnSecondaryLowBrush" />
-	<StaticResource x:Key="MaterialSliderTickBarFillDisabled"
-					ResourceKey="SystemControlDisabledBaseMediumLowBrush" />
+	<StaticResource x:Key="MaterialSliderTickBarFill" ResourceKey="MaterialOnSecondaryLowBrush" />
+	<StaticResource x:Key="MaterialSliderTickBarFillDisabled" ResourceKey="SystemControlDisabledBaseMediumLowBrush" />
 
-	<StaticResource x:Key="MaterialSliderInlineTickBarFill"
-					ResourceKey="SystemControlBackgroundAltHighBrush" />
+	<StaticResource x:Key="MaterialSliderInlineTickBarFill" ResourceKey="SystemControlBackgroundAltHighBrush" />
 
-	<StaticResource x:Key="MaterialSliderThumbBackgroundDisabled"
-					ResourceKey="SystemControlDisabledChromeDisabledHighBrush" />
+	<StaticResource x:Key="MaterialSliderThumbBackgroundDisabled" ResourceKey="SystemControlDisabledChromeDisabledHighBrush" />
 
 	<!-- Material Slider Thumb Style -->
 	<Style x:Key="MaterialSliderThumbStyle"
 		   TargetType="Thumb">
 
-		<Setter Property="BorderThickness"
-				Value="0" />
+		<Setter Property="BorderThickness" Value="0" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Thumb">
@@ -40,24 +35,15 @@
 	<Style x:Key="MaterialSliderStyle"
 		   TargetType="Slider">
 
-		<Setter Property="Background"
-				Value="{StaticResource MaterialSliderTrackBrush}" />
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialPrimaryBrush}" />
-		<Setter Property="BorderThickness"
-				Value="0" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource ContentControlThemeFontFamily}" />
-		<Setter Property="FontSize"
-				Value="{StaticResource ControlContentThemeFontSize}" />
-		<Setter Property="ManipulationMode"
-				Value="None" />
-		<Setter Property="UseSystemFocusVisuals"
-				Value="{StaticResource UseSystemFocusVisuals}" />
-		<Setter Property="FocusVisualMargin"
-				Value="-7,0,-7,0" />
-		<Setter Property="IsFocusEngagementEnabled"
-				Value="True" />
+		<Setter Property="Background" Value="{StaticResource MaterialSliderTrackBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource MaterialPrimaryBrush}" />
+		<Setter Property="BorderThickness" Value="0" />
+		<Setter Property="FontFamily" Value="{StaticResource ContentControlThemeFontFamily}" />
+		<Setter Property="FontSize" Value="{StaticResource ControlContentThemeFontSize}" />
+		<Setter Property="ManipulationMode" Value="None" />
+		<Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
+		<Setter Property="FocusVisualMargin" Value="-7,0,-7,0" />
+		<Setter Property="IsFocusEngagementEnabled" Value="True" />
 		<not_win:Setter Property="CornerRadius"
 						Value="{StaticResource ControlCornerRadius}" />
 
@@ -332,7 +318,6 @@
 		   BasedOn="{StaticResource MaterialSliderStyle}"
 		   TargetType="Slider">
 
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialSecondaryBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource MaterialSecondaryBrush}" />
 	</Style>
 </ResourceDictionary>

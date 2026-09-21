@@ -20,7 +20,7 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="AppBarButton">
 					<um:Ripple Feedback="{TemplateBinding Foreground}"
-									 FeedbackOpacity="{StaticResource MaterialPressedOpacity}">
+							   FeedbackOpacity="{StaticResource MaterialPressedOpacity}">
 						<Viewbox x:Name="ContentViewbox"
 								 Height="{ThemeResource AppBarButtonContentHeight}"
 								 Width="{ThemeResource AppBarButtonContentHeight}"
@@ -124,7 +124,6 @@
 	</Style>
 	<Style x:Key="MaterialCommandBarStyle"
 		   TargetType="CommandBar"
-		   BasedOn="{StaticResource BaseMaterialCommandBarStyle}">
-	</Style>
+		   BasedOn="{StaticResource BaseMaterialCommandBarStyle}" />
 
 </ResourceDictionary>

@@ -5,8 +5,7 @@
 	<Style x:Key="SeeSourceFlyoutButtonStyle"
 		   BasedOn="{StaticResource DefaultButtonStyle}"
 		   TargetType="Button">
-		<Setter Property="Tag"
-				Value="See Source" />
+		<Setter Property="Tag" Value="See Source" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -19,22 +18,14 @@
 								<Flyout Placement="LeftEdgeAlignedBottom">
 									<Flyout.FlyoutPresenterStyle>
 										<Style TargetType="FlyoutPresenter">
-											<Setter Property="ScrollViewer.HorizontalScrollMode"
-													Value="Disabled" />
-											<Setter Property="ScrollViewer.HorizontalScrollBarVisibility"
-													Value="Disabled" />
-											<Setter Property="ScrollViewer.VerticalScrollMode"
-													Value="Disabled" />
-											<Setter Property="ScrollViewer.VerticalScrollBarVisibility"
-													Value="Disabled" />
-											<Setter Property="MinHeight"
-													Value="0" />
-											<Setter Property="MinWidth"
-													Value="0" />
-											<Setter Property="Padding"
-													Value="0,0,0,2" />
-											<Setter Property="Margin"
-Value="40,100,40,40" />
+											<Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled" />
+											<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+											<Setter Property="ScrollViewer.VerticalScrollMode" Value="Disabled" />
+											<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />
+											<Setter Property="MinHeight" Value="0" />
+											<Setter Property="MinWidth" Value="0" />
+											<Setter Property="Padding" Value="0,0,0,2" />
+											<Setter Property="Margin" Value="40,100,40,40" />
 										</Style>
 									</Flyout.FlyoutPresenterStyle>
 
@@ -59,7 +50,6 @@ Value="40,100,40,40" />
 	<Style x:Key="SeeXamlFlyoutButtonStyle"
 		   BasedOn="{StaticResource SeeSourceFlyoutButtonStyle}"
 		   TargetType="Button">
-		<Setter Property="Tag"
-				Value="See Xaml" />
+		<Setter Property="Tag" Value="See Xaml" />
 	</Style>
 </ResourceDictionary>

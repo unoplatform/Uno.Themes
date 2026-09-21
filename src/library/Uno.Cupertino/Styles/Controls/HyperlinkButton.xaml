@@ -10,12 +10,9 @@
 
 	<Style x:Key="CupertinoHyperlinkButtonStyle"
 		   TargetType="HyperlinkButton">
-		<Setter Property="FontFamily"
-				Value="{ThemeResource CupertinoFontFamily}" />
-		<Setter Property="Foreground"
-				Value="{ThemeResource CupertinoBlueBrush}" />
-		<Setter Property="Padding"
-				Value="0" />
+		<Setter Property="FontFamily" Value="{ThemeResource CupertinoFontFamily}" />
+		<Setter Property="Foreground" Value="{ThemeResource CupertinoBlueBrush}" />
+		<Setter Property="Padding" Value="0" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -29,22 +26,19 @@
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="Content.Opacity"
-												Value="{StaticResource CupertinoMediumOpacity}" />
+										<Setter Target="Content.Opacity" Value="{StaticResource CupertinoMediumOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="Content.Opacity"
-												Value="{StaticResource CupertinoPressedOpacity}" />
+										<Setter Target="Content.Opacity" Value="{StaticResource CupertinoPressedOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Opacity"
-												Value="{StaticResource CupertinoDisableStateOpacity}" />
+										<Setter Target="ContentPresenter.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
