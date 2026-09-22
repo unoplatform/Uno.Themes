@@ -141,12 +141,9 @@ public class Given_SemanticResources
 			isSemantic |= dictionary is SemanticResources;
 			var target = isSemantic ? semantic : other;
 
-			foreach (var key in dictionary.Keys)
+			foreach (var name in dictionary.Keys.OfType<string>())
 			{
-				if (key is string name)
-				{
-					target.Add(name);
-				}
+				target.Add(name);
 			}
 
 			foreach (var merged in dictionary.MergedDictionaries)
@@ -156,12 +153,12 @@ public class Given_SemanticResources
 
 			// Through the indexer, not enumeration: a Source-copied dictionary holds its theme
 			// dictionaries as lazy initializers until first indexed, and enumeration returns those.
-			foreach (var themeKey in dictionary.ThemeDictionaries.Keys.ToList())
+			foreach (var themedDictionary in dictionary.ThemeDictionaries.Keys
+				.ToList()
+				.Select(themeKey => dictionary.ThemeDictionaries[themeKey])
+				.OfType<ResourceDictionary>())
 			{
-				if (dictionary.ThemeDictionaries[themeKey] is ResourceDictionary themedDictionary)
-				{
-					Visit(themedDictionary, isSemantic);
-				}
+				Visit(themedDictionary, isSemantic);
 			}
 		}
 	}

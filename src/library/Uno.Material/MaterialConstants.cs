@@ -22,7 +22,7 @@ internal static class MaterialConstants
 		{
 			public static string Typography = $"ms-appx:///{PackageName}/Styles/Application/v2/MaterialFonts.xaml";
 			public static string MergedPages = $"ms-appx:///{PackageName}/Generated/mergedpages.v2.xaml";
-			public static string SemanticStyles = $"ms-appx:///{PackageName}/Styles/Controls/v2/SemanticStyles.xaml";
+			public static readonly string SemanticStyles = $"ms-appx:///{PackageName}/Styles/Controls/v2/SemanticStyles.xaml";
 		}
 
 		public static class Common
