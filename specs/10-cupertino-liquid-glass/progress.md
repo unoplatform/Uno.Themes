@@ -1,6 +1,8 @@
 # 10 — Cupertino v2: Liquid Glass era theme on the semantic system
 
-Status: **Phases 0.5, 1 and 2 done; Phase 3 next** (2026-09-18). D-1 (amended: no V1, no compatibility classes) / D-2 / D-3 / D-5 / D-7 taken.
+Status: **Phases 0.5–3 done; Phase 4 in progress** (2026-09-22): popovers / menus, lists and the alert are in
+(ratchet 66 / 72); navigation, bars, pips, rating and the snapshot-brush fix are left — see `handoff.md`.
+D-1 (amended: no V1, no compatibility classes) / D-2 / D-3 / D-5 / D-7 taken.
 Branch: `dev/sb/cupertino-v2`.
 
 Companion documents in this folder:
