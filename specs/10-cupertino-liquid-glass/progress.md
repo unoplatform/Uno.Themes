@@ -1,7 +1,8 @@
 # 10 — Cupertino v2: Liquid Glass era theme on the semantic system
 
-Status: **Phases 0.5–3 done; Phase 4 in progress** (2026-09-22): popovers / menus, lists and the alert are in
-(ratchet 66 / 72); navigation, bars, pips, rating and the snapshot-brush fix are left — see `handoff.md`.
+Status: **Phase 4 implementation and local verification complete** (2026-09-22).
+All 72 semantic keys resolve. Navigation, bars, pips, rating and live field/calendar brushes are implemented;
+remaining visual/device checks and optional glass work are recorded below and in `handoff.md`.
 D-1 (amended: no V1, no compatibility classes) / D-2 / D-3 / D-5 / D-7 taken.
 Branch: `dev/sb/cupertino-v2`.
 
@@ -77,6 +78,18 @@ WinAppSDK head must compile and run with the solid fallback.
 | ~~D-8~~ | Increased Contrast palette | **Cut.** WinUI `HighContrast` is the OS mode and is never selected on Skia; the 12 colours would be unreachable | `CupertinoTheme.IncreaseContrast` bool if ever requested |
 
 ## Plan
+
+### Continuation — 2026-09-22
+
+- [x] Complete NavigationView, CommandBar/AppBarButton, PipsPager and RatingControl with rendered tests and samples.
+- [x] Reproduce the remaining snapshot-brush defects, fix the live brush mappings, and verify override/seed changes.
+- [x] Empty the semantic-key ratchet; document all Cupertino mappings and lightweight styling.
+- [x] Run Cupertino Debug/Release tests, Material/Simple desktop regression suites, Cupertino WASM build and formatting/doc checks.
+- [x] Review the final changes and record remaining GPU-dependent and optional work explicitly.
+
+The solid NavigationView/CommandBar recipes in the handoff are the implementation scope; glass bars,
+optional calendar restyling and GPU tuning remain follow-ups. Builds are coordinated in the main lane
+to avoid concurrent writes to shared generated outputs.
 
 Phase gates are hard: a phase is complete only when its runtime tests pass under the CI script
 (`build/scripts/linux-skia-desktop-runtime-tests.sh` against `CupertinoSampleApp`), the Material and Simple
@@ -321,7 +334,7 @@ row updated in the same PR.
 - [ ] ComboBox (pop-up button + glass popup) and ComboBoxItem — **moved to Phase 4**: its popup is the same
   glass surface as `FlyoutPresenter` / `MenuFlyoutPresenter`, so it is built once, there. `ComboBoxStyle`
   and `ComboBoxItemStyle` already resolve to the existing styles.
-- [ ] Gate: `Given_CupertinoControls` green; formatters clean; docs rows present for every style in the PR.
+- [x] Gate: `Given_CupertinoControls` green; formatters clean; docs rows present for every implemented style.
 
 ### Phase 4 — Containers, navigation, glass interactivity (size L)
 
@@ -346,19 +359,26 @@ row updated in the same PR.
   disabled. The `ComboBox` popup is the same glass menu (rows 43 → 44). `CupertinoToolTipStyle` is the
   macOS tooltip, solid. All 7 semantic keys resolve; ratchet 63 / 72. **Cut:** the pop-open scale animation —
   Uno's own popup transition is what shows today; add when the maintainer wants it after a GPU look.
-- [ ] NavigationView / NavigationViewItem (glass sidebar, top bar), CommandBar / AppBarButton (one shared
-  glass slab per group, prominent primary), PipsPager, RatingControl, Expander.
-- [ ] CalendarView, CalendarDatePicker, DatePicker (+ flyout presenter on a glass backplate).
-- [ ] Glass interactivity polish: switch and slider knobs become `Thin` glass while dragging.
+- [x] NavigationView / NavigationViewItem, CommandBar / AppBarButton, PipsPager and RatingControl
+  (2026-09-22). Solid navigation/command surfaces retain stock behavior; glass sidebar and shared command
+  slab remain deferred per the handoff. Expander is cut (no semantic key). All 72 contract keys resolve.
+  RatingControl keeps Uno's stock 32 px layout with 16 px glyphs: its code sets a local Height, overriding
+  the proposed 20 px style setter.
+- [x] Remaining field/calendar snapshot brushes fixed. Twelve reproductions failed before the fix;
+  brush instances now repaint and preserve opacity across replacement/clear overrides and seed changes.
+  Rendered TextBox borders are also checked under Light and Dark. All existing brush keys remain.
+- Deferred: calendar visual restyling and a glass date-picker flyout; brush correctness is fixed above.
+- Deferred: glass switch/slider drag polish requires GPU review.
 - [ ] Gate: `Given_CupertinoContainers` green (dialog / flyout resolve and render on desktop; NavigationView
   pane resources resolve Light / Dark); sample pages updated; `doc/semantic-styles.md` gains its Cupertino
   column; WASM smoke of the sample app under `ThemesSampleApp`.
 
 ### Phase 5 — Wrap-up (size S)
 
-- [ ] `doc/lightweight-styling.md` cross-links; `doc/cupertino-controls-styles.md` regenerated in full.
+- [x] `doc/lightweight-styling.md` cross-links; Cupertino controls and semantic mapping docs updated.
 - [ ] `specs/lessons.md`: corrections received during the work.
-- [ ] `/review-panel` on the final diff; findings triaged here under "Review".
+- [x] All seven reviewer lenses applied to the continuation diff; findings triaged below. Three available
+  reviewer workers ran the seven lenses in batches rather than seven simultaneous workers.
 - [ ] Follow-up issues: uno.toolkit.ui `CupertinoToolkitTheme` → derive from `CupertinoTheme`, adopt
   `GlassPanel` for TabBar (floating bottom / segmented) and NavigationBar; macOS `Pointer` idiom (D-6);
   `Uno.Cupertino.WinUI.Markup` package; SkSL single-pass glass when SkiaSharp `ToImageFilter` ships;
@@ -402,6 +422,50 @@ row updated in the same PR.
   signature drift in `GuestHosting`). CI runs the smoke on X11, so this may be Win32-only; separate issue.
 
 ## Review
+
+### Continuation review and results — 2026-09-22
+
+Scope: remaining Phase 4 controls, live field/calendar brushes, samples and documentation. The seven
+lenses (architect, contract, quality, security, performance, operability, skeptic) found three actionable
+items; all are addressed:
+
+- Selection assertions now verify opacity as well as color, distinguishing an accent tint from an opaque fill.
+- Added Light/Dark rendered field-border override/clear cases alongside the 12 brush/seed regressions.
+- AppBarButton overflow now keeps keyboard shortcut labels, submenu chevrons and the stock overflow
+  interaction states. Both missing-part reproductions failed before the template fix. Visual captures
+  then exposed clipped labels from the inherited stock Width=68; both Light/Dark fit assertions failed
+  before setting Width=Auto and HorizontalAlignment=Stretch. All six command-bar cases now pass.
+
+Verification (Windows software Skia, final sources):
+
+| Gate | Result |
+| --- | --- |
+| Cupertino Debug desktop | Build succeeds; **135/135 passed** |
+| Cupertino Release desktop | Build succeeds; **135/135 passed** |
+| Material Debug desktop | Build succeeds; **63/63 passed** |
+| Simple Debug desktop | Build succeeds; **257 passed, 1 existing skipped**, no failures |
+| Cupertino Debug browserwasm | Build succeeds; browser runtime/GPU not exercised |
+| XAML | All 204 tracked XAML files pass; all 19 changed/new XAML files pass |
+| C# whitespace | Solution verification passes, shared linked sources excluded as required |
+| Documentation | cspell and markdownlint pass for all three edited published pages |
+| Visual | Light/Dark navigation, toolbar overflow, pips and ratings captured and inspected |
+
+Builds still emit package-source/version, generated Uno API and shared sample warnings. The single new
+nullable warning in the icon-clear test was removed with ClearValue; final desktop builds report 105
+warnings, matching the initial build count. No warning suppression or dependencies were added.
+
+The 12 original snapshot-brush reproductions all failed before the fix. The full suite additionally
+caught cold-start opacity token resolution and the displaced filled-TextBox resource block; literal
+calendar opacity defaults and merged per-theme aliases fix both without weakening existing tests.
+
+Artifacts are in `%TEMP%/cupertino-phase4` (NUnit XML, build/test logs and four PNG captures). The temporary
+capture class was removed before final verification. The seven-lens review ends at ship, subject to the
+remaining device/hosting checks below; it does not certify GPU rendering.
+
+Outstanding: browser execution, GPU tuning, Android and WinAppSDK/device checks, and hosting smoke were
+not run in this continuation. The prior handoff records the Win32 hosting issue; this session does not
+independently re-establish its master baseline. Calendar restyling, glass bars and drag polish remain
+deferred. Follow-up issue creation/publication is not part of this local implementation.
 
 ### Skeptic review — 2026-09-18 (pre-approval)
 
@@ -626,4 +690,3 @@ Debug failures of the sample heads. That was an unverified guess and it was wron
 `fix(samples): make the sample heads build and start in Debug on Uno 7`. Slices 1–5 above were verified in
 Release only at the time; the Cupertino suite has since been run in **Debug** as well (67 / 67), which also
 exercises XamlMerge's unmerged Debug output.
-

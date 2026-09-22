@@ -401,6 +401,29 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+			<sample:SamplePageLayout.CupertinoTemplate>
+				<DataTemplate>
+					<smtx:XamlDisplay UniqueKey="Cupertino_AppBarButtonSamplePage"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<StackPanel Orientation="Horizontal"
+									Spacing="12">
+							<AppBarButton Icon="Add"
+										  Label="Add"
+										  Style="{StaticResource CupertinoAppBarButtonStyle}" />
+							<AppBarButton Icon="Edit"
+										  Label="Edit"
+										  IsCompact="True"
+										  Style="{StaticResource CupertinoAppBarButtonStyle}" />
+							<AppBarButton Label="Done"
+										  Style="{StaticResource CupertinoAppBarButtonStyle}" />
+							<AppBarButton Icon="Delete"
+										  Label="Delete"
+										  IsEnabled="False"
+										  Style="{StaticResource CupertinoAppBarButtonStyle}" />
+						</StackPanel>
+					</smtx:XamlDisplay>
+				</DataTemplate>
+			</sample:SamplePageLayout.CupertinoTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

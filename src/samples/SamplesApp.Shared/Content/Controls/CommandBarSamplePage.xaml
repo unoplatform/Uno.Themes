@@ -34,6 +34,31 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.M3MaterialTemplate>
+			<sample:SamplePageLayout.CupertinoTemplate>
+				<DataTemplate>
+					<smtx:XamlDisplay UniqueKey="Cupertino_CommandBarSamplePage"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<CommandBar Style="{StaticResource CupertinoCommandBarStyle}">
+							<CommandBar.PrimaryCommands>
+								<AppBarButton Icon="Add"
+											  Label="Add"
+											  Style="{StaticResource CupertinoAppBarButtonStyle}" />
+								<AppBarButton Icon="Edit"
+											  Label="Edit"
+											  Style="{StaticResource CupertinoAppBarButtonStyle}" />
+							</CommandBar.PrimaryCommands>
+							<CommandBar.SecondaryCommands>
+								<AppBarButton Icon="Delete"
+											  Label="Delete"
+											  Style="{StaticResource CupertinoAppBarButtonStyle}" />
+								<AppBarButton Label="Disabled"
+											  IsEnabled="False"
+											  Style="{StaticResource CupertinoAppBarButtonStyle}" />
+							</CommandBar.SecondaryCommands>
+						</CommandBar>
+					</smtx:XamlDisplay>
+				</DataTemplate>
+			</sample:SamplePageLayout.CupertinoTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

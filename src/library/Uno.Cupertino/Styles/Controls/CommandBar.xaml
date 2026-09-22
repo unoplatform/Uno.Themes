@@ -1,0 +1,34 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="CommandBarBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="CommandBarForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CommandBarOverflowPresenterBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="CommandBarOverflowPresenterBorderBrush" ResourceKey="OutlineVariantBrush" />
+			<StaticResource x:Key="CommandBarEllipsisIconForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="CommandBarBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="CommandBarForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CommandBarOverflowPresenterBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="CommandBarOverflowPresenterBorderBrush" ResourceKey="OutlineVariantBrush" />
+			<StaticResource x:Key="CommandBarEllipsisIconForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="HighContrast">
+			<StaticResource x:Key="CommandBarBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="CommandBarForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CommandBarOverflowPresenterBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="CommandBarOverflowPresenterBorderBrush" ResourceKey="OutlineVariantBrush" />
+			<StaticResource x:Key="CommandBarEllipsisIconForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
+	<!-- Stock CommandBar reads this token dynamically for its compact content and more button. -->
+	<x:Double x:Key="AppBarThemeCompactHeight">44</x:Double>
+	<!-- Solid toolbar recipe; a shared glass slab requires a separate template. -->
+	<Style x:Key="CupertinoCommandBarStyle"
+		   TargetType="CommandBar">
+		<Setter Property="Background" Value="{ThemeResource CommandBarBackground}" />
+		<Setter Property="Foreground" Value="{ThemeResource CommandBarForeground}" />
+	</Style>
+</ResourceDictionary>

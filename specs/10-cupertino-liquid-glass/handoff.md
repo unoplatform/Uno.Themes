@@ -1,3 +1,55 @@
+# Handoff update — 2026-09-22 continuation
+
+The Phase 4 implementation below has now been completed locally. The earlier handoff is retained under
+"Previous handoff" as historical implementation context; its pending-key and test-count statements are
+superseded by this update. See `progress.md`, "Continuation review and results", for evidence and review.
+
+## Current state
+
+- All **72 semantic style keys resolve**; `PendingSemanticKeys` is empty.
+- Added NavigationView/NavigationViewItem, CommandBar/AppBarButton, PipsPager and RatingControl styles,
+  implicit styles, shared sample templates and Light/Dark rendered runtime coverage.
+- Navigation and command bars use the handoff's **solid** recipe. Glass slabs/panes remain deferred.
+- AppBarButton handles compact/right/overflow labels, shortcuts, submenu indicators and dimming. Its
+  Width=Auto overrides the stock 68px width that clipped overflow labels (red/fix/green covered).
+- Field/calendar brushes now repaint in place across override/clear and seed changes. Public legacy
+  brush names remain aliases. Calendar hover/pressed opacity uses literal 0.85/0.4 defaults because
+  resolving state tokens when the brush dictionary first loads gave opacity 1 at cold startup.
+- RatingControl retains Uno's stock 32px layout with 16px glyphs; Uno assigns Height locally, so a
+  proposed 20px style setter would not work.
+- Cupertino mapping column, control reference and lightweight-styling cross-links are updated.
+
+## Verified
+
+- Cupertino desktop: **135/135 Debug and 135/135 Release**.
+- Material desktop Debug: **63/63**.
+- Simple desktop Debug: **257 passed, 1 existing ignored test, 0 failed**.
+- Cupertino Debug browserwasm build passes. No browser runtime smoke was performed.
+- All tracked XAML and changed/new XAML formatting, solution C# whitespace, cspell and markdownlint pass.
+- Four software-rendered Light/Dark captures inspected. Temporary capture test removed.
+- Seven review lenses applied; findings fixed, skeptic re-review says ship.
+- Builds retain package/generated/shared-sample warnings; no new warning suppressions or dependencies.
+
+Artifacts: `%TEMP%/cupertino-phase4`, including `*-verified.xml`, `*-verified-build.log`, regression XML
+for Material/Simple, `wasm-final-build.log`, and `phase4-{Light,Dark}-{controls,overflow}.png`. Scratch
+`run-tests.ps1` there launches hidden Windows processes, sets DOTNET_MODIFIABLE_ASSEMBLIES=debug, captures
+stdout/stderr and rejects missing/empty results. Do not assume scratch artifacts survive on another machine.
+
+## Remaining work / maintainer decisions
+
+1. GPU, browser-runtime, Android and Windows-native visual/device verification. Glass tint/presets still
+   need hardware tuning. Hosting smoke was not rerun; the older Win32 failure remains recorded below.
+2. Glass NavigationView pane / shared CommandBar slab, calendar restyling, drag glass and pop-open polish
+   remain optional follow-ups. No Expander style is required by the semantic contract.
+3. Semantic button aliases stay as previously agreed/implemented (ordinary buttons solid; FAB family
+   glass). A change to the earlier spec's glass button aliases remains a maintainer decision.
+4. Toolkit adoption, pointer idiom, Markup package and other Phase 5 follow-up issues remain to be
+   created/published explicitly. No push or PR was performed.
+5. Other known review items from earlier phases remain in progress.md; this continuation's review scope
+   was its own Phase 4 diff, not a fresh audit of the entire branch.
+
+## Previous handoff (historical)
+
 # Handoff — Cupertino v2 (spec 10), written 2026-09-22
 
 For the next agent picking up `dev/sb/cupertino-v2`. `progress.md` is the plan and the per-item record;

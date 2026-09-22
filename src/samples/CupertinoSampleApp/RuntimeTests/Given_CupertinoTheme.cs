@@ -231,14 +231,7 @@ public class Given_CupertinoTheme
 	// Keys Cupertino has no style for yet. This list only ever shrinks: the test below fails as soon as one
 	// of these starts resolving, so an entry cannot outlive the work that makes it obsolete, and a key that
 	// is neither resolvable nor listed here fails it too. Empty means the contract is met.
-	private static readonly string[] PendingSemanticKeys =
-	{
-		// Phase 3 — core controls
-
-		// Phase 4 — containers and navigation
-		"AppBarButtonStyle", "CommandBarStyle", "NavigationViewStyle", "NavigationViewItemStyle",
-		"PipsPagerStyle", "RatingControlStyle",
-	};
+	private static readonly string[] PendingSemanticKeys = Array.Empty<string>();
 
 	[TestMethod]
 	[RunsOnUIThread]

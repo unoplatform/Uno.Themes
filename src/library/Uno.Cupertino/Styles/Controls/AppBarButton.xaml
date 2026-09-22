@@ -1,0 +1,176 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<Style x:Key="CupertinoAppBarButtonStyle"
+		   TargetType="AppBarButton">
+		<!-- Override the stock 68 px width so overflow labels and shortcut columns can fit. -->
+		<Setter Property="Width" Value="Auto" />
+		<Setter Property="HorizontalAlignment" Value="Stretch" />
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="Foreground" Value="{ThemeResource OnSurfaceBrush}" />
+		<Setter Property="MinHeight" Value="{StaticResource CupertinoRowMinHeight}" />
+		<Setter Property="MinWidth" Value="{StaticResource CupertinoRowMinHeight}" />
+		<Setter Property="Padding" Value="8" />
+		<Setter Property="FontFamily" Value="{ThemeResource DefaultFontFamily}" />
+		<Setter Property="FontSize" Value="12" />
+		<Setter Property="UseSystemFocusVisuals" Value="True" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="AppBarButton">
+					<Grid x:Name="Root"
+						  Background="{TemplateBinding Background}"
+						  Padding="{TemplateBinding Padding}"
+						  BorderBrush="{TemplateBinding BorderBrush}"
+						  BorderThickness="{TemplateBinding BorderThickness}"
+						  CornerRadius="{TemplateBinding CornerRadius}">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="OverflowNormal" />
+								<VisualState x:Name="OverflowPointerOver">
+									<VisualState.Setters>
+										<Setter Target="Root.Opacity" Value="{StaticResource CupertinoHoverOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="OverflowPressed">
+									<VisualState.Setters>
+										<Setter Target="Root.Opacity" Value="{StaticResource CupertinoButtonPressedOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="OverflowSubMenuOpened">
+									<VisualState.Setters>
+										<Setter Target="Root.Opacity" Value="{StaticResource CupertinoHoverOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="Root.Opacity" Value="{StaticResource CupertinoHoverOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="Root.Opacity" Value="{StaticResource CupertinoButtonPressedOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="Root.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="ApplicationViewStates">
+								<VisualState x:Name="FullSize" />
+								<VisualState x:Name="Compact">
+									<VisualState.Setters>
+										<Setter Target="TextLabel.Visibility" Value="Collapsed" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="LabelCollapsed">
+									<VisualState.Setters>
+										<Setter Target="TextLabel.Visibility" Value="Collapsed" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="LabelOnRight">
+									<VisualState.Setters>
+										<Setter Target="ContentRoot.Orientation" Value="Horizontal" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Overflow">
+									<VisualState.Setters>
+										<Setter Target="ContentRoot.Orientation" Value="Horizontal" />
+										<Setter Target="ContentRoot.HorizontalAlignment" Value="Left" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="OverflowWithToggleButtons">
+									<VisualState.Setters>
+										<Setter Target="ContentRoot.Orientation" Value="Horizontal" />
+										<Setter Target="ContentRoot.HorizontalAlignment" Value="Left" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="OverflowWithMenuIcons">
+									<VisualState.Setters>
+										<Setter Target="ContentRoot.Orientation" Value="Horizontal" />
+										<Setter Target="ContentRoot.HorizontalAlignment" Value="Left" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="OverflowWithToggleButtonsAndMenuIcons">
+									<VisualState.Setters>
+										<Setter Target="ContentRoot.Orientation" Value="Horizontal" />
+										<Setter Target="ContentRoot.HorizontalAlignment" Value="Left" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="KeyboardAcceleratorTextVisibility">
+								<VisualState x:Name="KeyboardAcceleratorTextCollapsed" />
+								<VisualState x:Name="KeyboardAcceleratorTextVisible">
+									<VisualState.Setters>
+										<Setter Target="KeyboardAcceleratorTextLabel.Visibility" Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="FlyoutStates">
+								<VisualState x:Name="NoFlyout" />
+								<VisualState x:Name="HasFlyout">
+									<VisualState.Setters>
+										<Setter Target="SubItemChevron.Visibility" Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="Auto" />
+						</Grid.ColumnDefinitions>
+						<StackPanel x:Name="ContentRoot"
+									HorizontalAlignment="Center"
+									VerticalAlignment="Center"
+									Spacing="4">
+							<Viewbox x:Name="ContentViewbox"
+									 Width="22"
+									 Height="22"
+									 HorizontalAlignment="Center"
+									 VerticalAlignment="Center"
+									 Visibility="{Binding Icon, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+								<ContentPresenter x:Name="Content"
+												  Content="{TemplateBinding Icon}"
+												  Foreground="{TemplateBinding Foreground}" />
+							</Viewbox>
+							<TextBlock x:Name="TextLabel"
+									   Text="{TemplateBinding Label}"
+									   Foreground="{TemplateBinding Foreground}"
+									   FontFamily="{TemplateBinding FontFamily}"
+									   FontSize="{TemplateBinding FontSize}"
+									   FontWeight="{TemplateBinding FontWeight}"
+									   HorizontalAlignment="Center"
+									   VerticalAlignment="Center" />
+						</StackPanel>
+						<!-- The stock control discovers the accelerator label by name and reserves a shared column width. -->
+						<TextBlock x:Name="KeyboardAcceleratorTextLabel"
+								   Grid.Column="1"
+								   Text="{TemplateBinding KeyboardAcceleratorTextOverride}"
+								   MinWidth="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.KeyboardAcceleratorTextMinWidth}"
+								   Margin="16,0,0,0"
+								   Foreground="{TemplateBinding Foreground}"
+								   FontFamily="{TemplateBinding FontFamily}"
+								   FontSize="{TemplateBinding FontSize}"
+								   HorizontalAlignment="Right"
+								   VerticalAlignment="Center"
+								   Visibility="Collapsed"
+								   AutomationProperties.AccessibilityView="Raw" />
+						<FontIcon x:Name="SubItemChevron"
+								  Grid.Column="2"
+								  Glyph="&#xE76C;"
+								  FontFamily="{ThemeResource SymbolThemeFontFamily}"
+								  FontSize="12"
+								  Foreground="{TemplateBinding Foreground}"
+								  Margin="12,0,0,0"
+								  VerticalAlignment="Center"
+								  MirroredWhenRightToLeft="True"
+								  Visibility="Collapsed"
+								  AutomationProperties.AccessibilityView="Raw" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+</ResourceDictionary>

@@ -1,0 +1,106 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="PipsPagerNavigationButtonForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBackground" ResourceKey="TransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBorderBrush" ResourceKey="TransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBackgroundPointerOver" ResourceKey="TransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBorderBrushPointerOver" ResourceKey="TransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonForegroundPressed" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBackgroundPressed" ResourceKey="TransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBorderBrushPressed" ResourceKey="TransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBackgroundDisabled" ResourceKey="TransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBorderBrushDisabled" ResourceKey="TransparentBrush" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="PipsPagerNavigationButtonForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBackground" ResourceKey="TransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBorderBrush" ResourceKey="TransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBackgroundPointerOver" ResourceKey="TransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBorderBrushPointerOver" ResourceKey="TransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonForegroundPressed" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBackgroundPressed" ResourceKey="TransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBorderBrushPressed" ResourceKey="TransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBackgroundDisabled" ResourceKey="TransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBorderBrushDisabled" ResourceKey="TransparentBrush" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="HighContrast">
+			<StaticResource x:Key="PipsPagerNavigationButtonForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBackground" ResourceKey="TransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBorderBrush" ResourceKey="TransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBackgroundPointerOver" ResourceKey="TransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBorderBrushPointerOver" ResourceKey="TransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonForegroundPressed" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBackgroundPressed" ResourceKey="TransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBorderBrushPressed" ResourceKey="TransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBackgroundDisabled" ResourceKey="TransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBorderBrushDisabled" ResourceKey="TransparentBrush" />
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
+
+	<!-- Seven point dots with nine points between them; the square pip also supports vertical paging. -->
+	<Style x:Key="CupertinoPipsPagerNormalPipStyle"
+		   TargetType="Button">
+		<Setter Property="Width" Value="16" />
+		<Setter Property="Height" Value="16" />
+		<Setter Property="MinWidth" Value="0" />
+		<Setter Property="MinHeight" Value="0" />
+		<Setter Property="Padding" Value="0" />
+		<Setter Property="Foreground" Value="{ThemeResource OnSurfaceLowBrush}" />
+		<Setter Property="UseSystemFocusVisuals" Value="True" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid x:Name="Root"
+						  Background="Transparent">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="Root.Opacity" Value="{ThemeResource CupertinoHoverOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="Root.Opacity" Value="{ThemeResource CupertinoButtonPressedOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="Root.Opacity" Value="{ThemeResource CupertinoDisableStateOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						<Ellipse Width="7"
+								 Height="7"
+								 HorizontalAlignment="Center"
+								 VerticalAlignment="Center"
+								 Fill="{TemplateBinding Foreground}" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="CupertinoPipsPagerSelectedPipStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource CupertinoPipsPagerNormalPipStyle}">
+		<Setter Property="Foreground" Value="{ThemeResource OnSurfaceBrush}" />
+	</Style>
+
+	<Style x:Key="CupertinoPipsPagerStyle"
+		   TargetType="PipsPager">
+		<Setter Property="NormalPipStyle" Value="{StaticResource CupertinoPipsPagerNormalPipStyle}" />
+		<Setter Property="SelectedPipStyle" Value="{StaticResource CupertinoPipsPagerSelectedPipStyle}" />
+	</Style>
+</ResourceDictionary>
