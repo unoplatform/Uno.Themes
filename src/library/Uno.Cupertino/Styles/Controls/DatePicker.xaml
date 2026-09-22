@@ -3,6 +3,7 @@
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:not_win="http://uno.ui/not_win"
 					xmlns:uno="using:Uno.UI.Xaml.Controls"
+					xmlns:uc="using:Uno.Cupertino"
 					mc:Ignorable="not_win">
 	<ResourceDictionary.ThemeDictionaries>
 		<ResourceDictionary x:Key="Light">
@@ -23,7 +24,7 @@
 	<x:Double x:Key="MaterialDatePickerSpacerThemeWidth">1</x:Double>
 	<Thickness x:Key="MaterialDatePickerHostPadding">24,24,8,8</Thickness>
 
-	<CornerRadius x:Key="CupertinoDatePickerCornerRadius">5</CornerRadius>
+	<CornerRadius x:Key="CupertinoDatePickerCornerRadius">22</CornerRadius>
 
 	<!-- DatePicker Style -->
 	<Style x:Key="CupertinoDatePickerFlyoutButtonStyle"
@@ -80,22 +81,22 @@
 		<Setter Property="FontFamily" Value="{ThemeResource CupertinoFontFamily}" />
 		<Setter Property="FontWeight" Value="Normal" />
 		<Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
-		<Setter Property="Background" Value="{ThemeResource SystemBackgroundColor}" />
+		<Setter Property="Background" Value="Transparent" />
 		<Setter Property="AutomationProperties.AutomationId" Value="DatePickerFlyoutPresenter" />
 		<Setter Property="BorderThickness" Value="{StaticResource CupertinoDateTimeFlyoutBorderThickness}" />
 		<Setter Property="BorderBrush" Value="{ThemeResource CupertinoDatePickerBorderBrush}" />
-		<Setter Property="CornerRadius" Value="6" />
+		<Setter Property="CornerRadius" Value="26" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="DatePickerFlyoutPresenter">
-					<uno:ElevatedView MaxHeight="398"
-									  Background="{ThemeResource CupertinoQuinaryGrayBrush}"
-									  BorderBrush="{TemplateBinding BorderBrush}"
-									  BorderThickness="{TemplateBinding BorderThickness}"
-									  CornerRadius="{TemplateBinding CornerRadius}"
-									  Elevation="{StaticResource MaterialDatePickerFlyoutElevation}"
-									  ShadowColor="{StaticResource ShadowColor}">
-						<Border x:Name="Background">
+					<Grid MaxHeight="398">
+						<uc:GlassPanel Material="Thick"
+									   BorderBrush="{TemplateBinding BorderBrush}"
+									   BorderThickness="{TemplateBinding BorderThickness}"
+									   Tint="{ThemeResource CupertinoPopoverTintBrush}"
+									   CornerRadius="{TemplateBinding CornerRadius}" />
+						<Border x:Name="Background"
+								CornerRadius="{TemplateBinding CornerRadius}">
 							<Grid x:Name="ContentPanel">
 
 								<Grid.RowDefinitions>
@@ -159,8 +160,8 @@
 											   Margin="6,0,6,0"
 											   VerticalAlignment="Center"
 											   Fill="{ThemeResource CupertinoDatePickerFlyoutPresenterHighlightFill}"
-											   RadiusX="6"
-											   RadiusY="6" />
+											   RadiusX="18"
+											   RadiusY="18" />
 									<Rectangle x:Name="FirstPickerSpacing"
 											   Grid.Column="1"
 											   Width="0"
@@ -175,7 +176,7 @@
 
 							</Grid>
 						</Border>
-					</uno:ElevatedView>
+					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
@@ -183,11 +184,13 @@
 
 	<Style x:Key="CupertinoDatePickerStyle"
 		   TargetType="DatePicker">
+		<Setter Property="MinWidth" Value="0" />
+		<Setter Property="FontSize" Value="17" />
 		<Setter Property="FontFamily" Value="{ThemeResource CupertinoFontFamily}" />
-		<Setter Property="Background" Value="Transparent" />
-		<Setter Property="Foreground" Value="{ThemeResource CupertinoLabelBrush}" />
+		<Setter Property="Background" Value="{ThemeResource CupertinoQuinaryGrayBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="BorderBrush" Value="{ThemeResource CupertinoDatePickerBorderBrush}" />
-		<Setter Property="HorizontalAlignment" Value="Stretch" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
 		<Setter Property="CornerRadius" Value="{StaticResource CupertinoDatePickerCornerRadius}" />
 		<not_win:Setter Property="FlyoutPresenterStyle"
 						Value="{StaticResource CupertinoDatePickerFlyoutPresenterStyle}" />
@@ -204,11 +207,12 @@
 						</Grid.RowDefinitions>
 						<!-- Header -->
 						<TextBlock x:Name="HeaderTextBlock"
-								   Margin="0,8,10,0"
+								   FontSize="13"
+								   Margin="0,0,0,4"
 								   HorizontalAlignment="Stretch"
 								   VerticalAlignment="Top"
-								   Foreground="{TemplateBinding Foreground}"
-								   Style="{StaticResource BodyTextBlockStyle}"
+								   Foreground="{ThemeResource OnSurfaceBrush}"
+								   Style="{StaticResource CupertinoBody}"
 								   Text="{TemplateBinding Header}"
 								   TextWrapping="Wrap" />
 						<!-- Flyout Button -->
@@ -218,28 +222,33 @@
 								HorizontalContentAlignment="Stretch"
 								IsEnabled="{TemplateBinding IsEnabled}"
 								Style="{StaticResource CupertinoDatePickerFlyoutButtonStyle}"
-								MinWidth="296"
+								MinHeight="44"
 								UseSystemFocusVisuals="{TemplateBinding UseSystemFocusVisuals}">
 
 							<Grid x:Name="FlyoutButtonContentGrid"
+								  MinHeight="44"
 								  VerticalAlignment="Top"
 								  Background="{TemplateBinding Background}"
 								  BorderBrush="{TemplateBinding BorderBrush}"
-								  BorderThickness="1"
+								  BorderThickness="0"
 								  CornerRadius="{TemplateBinding CornerRadius}">
 
 								<!-- DateText -->
 								<TextBlock x:Name="DateText"
-										   Margin="10,0,0,0"
-										   Style="{StaticResource BodyTextBlockStyle}"
+										   Foreground="{TemplateBinding Foreground}"
+										   Margin="16,0"
+										   VerticalAlignment="Center"
+										   Style="{StaticResource CupertinoBody}"
 										   Text="{Binding SelectedDate, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource StringFormatConverter}, ConverterParameter=' {0:d}'}" />
 
 								<!-- PlaceholderText -->
 								<TextBlock x:Name="PlaceholderText"
-										   Margin="10,0,0,0"
-										   Foreground="{ThemeResource CupertinoPlaceholderTextBrush}"
-										   Style="{StaticResource BodyTextBlockStyle}"
-										   Text="{TemplateBinding Header}"
+										   x:Uid="CupertinoDatePickerPlaceholder"
+										   Margin="16,0"
+										   VerticalAlignment="Center"
+										   Foreground="{TemplateBinding Foreground}"
+										   Style="{StaticResource CupertinoBody}"
+										   Text="Choose a date"
 										   Visibility="Collapsed" />
 
 								<!-- Removing this cause trouble with the DatePicker code -->

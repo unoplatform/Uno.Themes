@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:uc="using:Uno.Cupertino">
 
 	<!--
 		Toggle on. Aliases of the theme's live brushes, declared per theme so they switch with it. They used to be brushes
@@ -16,6 +17,10 @@
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 
+	<!--
+		Apple's current iOS @2x toggle artwork has a 128×56 track and an 80×48 capsule thumb.
+		The 20 px travel remains the stock drag endpoint difference (64 - 44).
+	-->
 	<x:Double x:Key="ToggleSwitchThemeMinWidth">0</x:Double>
 
 	<Style x:Key="DefaultCupertinoToggleSwitchStyle"
@@ -31,7 +36,7 @@
 		<Setter Property="FontSize" Value="15" />
 		<Setter Property="ManipulationMode" Value="System,TranslateX" />
 		<Setter Property="UseSystemFocusVisuals" Value="True" />
-		<Setter Property="CornerRadius" Value="15.5" />
+		<Setter Property="CornerRadius" Value="14" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -44,7 +49,14 @@
 
 								<VisualState x:Name="Normal" />
 
-								<VisualState x:Name="Pressed" />
+								<VisualState x:Name="PointerOver" />
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="SwitchThumbGlass.Visibility" Value="Visible" />
+										<Setter Target="SwitchThumbGlass.RenderingMode" Value="Auto" />
+										<Setter Target="SolidKnob.Visibility" Value="Collapsed" />
+									</VisualState.Setters>
+								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<Storyboard>
@@ -262,15 +274,15 @@
 							  Grid.Row="2"
 							  VerticalAlignment="Center">
 							<Rectangle x:Name="OuterBorder"
-									   Height="31"
-									   Width="51"
+									   Height="28"
+									   Width="64"
 									   RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TopLeftCornerRadiusDoubleValueConverter}}"
 									   RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BottomRightCornerRadiusDoubleValueConverter}}"
 									   Fill="{ThemeResource CupertinoSecondarySystemFillBrush}" />
 
 							<Rectangle x:Name="HighlightBorder"
-									   Height="31"
-									   Width="51"
+									   Height="28"
+									   Width="64"
 									   RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TopLeftCornerRadiusDoubleValueConverter}}"
 									   RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BottomRightCornerRadiusDoubleValueConverter}}"
 									   Fill="{TemplateBinding Background}"
@@ -281,19 +293,31 @@
 							  Grid.Row="2"
 							  Padding="2,0"
 							  HorizontalAlignment="Left"
-							  Width="31"
-							  Height="27">
+							  Width="44"
+							  Height="24">
 
-							<Ellipse Fill="{TemplateBinding Foreground}"
-									 x:Name="SwitchKnobOn"
-									 Opacity="0"
-									 VerticalAlignment="Stretch"
-									 HorizontalAlignment="Stretch" />
+							<Grid x:Name="SolidKnob">
+								<Border Background="{TemplateBinding Foreground}"
+										CornerRadius="12"
+										x:Name="SwitchKnobOn"
+										Opacity="0"
+										VerticalAlignment="Stretch"
+										HorizontalAlignment="Stretch" />
 
-							<Ellipse Fill="{TemplateBinding Foreground}"
-									 x:Name="SwitchKnobOff"
-									 VerticalAlignment="Stretch"
-									 HorizontalAlignment="Stretch" />
+								<Border Background="{TemplateBinding Foreground}"
+										CornerRadius="12"
+										x:Name="SwitchKnobOff"
+										VerticalAlignment="Stretch"
+										HorizontalAlignment="Stretch" />
+
+							</Grid>
+							<uc:GlassPanel x:Name="SwitchThumbGlass"
+										   Material="Regular"
+										   RenderingMode="Solid"
+										   Visibility="Collapsed"
+										   Background="{TemplateBinding Foreground}"
+										   CornerRadius="12"
+										   IsHitTestVisible="False" />
 
 							<Grid.RenderTransform>
 								<TranslateTransform x:Name="KnobTranslateTransform" />

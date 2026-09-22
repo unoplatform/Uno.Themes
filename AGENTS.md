@@ -374,6 +374,8 @@ If the payload doesn't have a natural args type, declare a small `record` ending
 
 ## 11. UI / XAML
 
+✅ For a design-system refresh, verify visual fidelity separately from semantic/API coverage. Compare rendered Light/Dark states with the current reference for the agreed platform; record the source, measured choices and remaining differences. A resolving resource key or passing behavior test is not visual acceptance, and inherited "polish deferred" notes do not fulfill an explicit visual-matching request.
+
 ✅ Minimize code-behind; prefer attached properties, behaviors, or template parts for reusable logic.
 ✅ Use bindings for state propagation; avoid hand-wired property change handlers when a binding suffices.
 ✅ Avoid manual dispatcher usage unless necessary.

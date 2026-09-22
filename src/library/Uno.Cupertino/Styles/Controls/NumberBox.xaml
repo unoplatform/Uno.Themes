@@ -16,13 +16,14 @@
 	<x:String x:Key="PlusGlyphPathStyle">M0.578125 5.67236H4.29688V9.47412H5.6416V5.67236H9.36035V4.32764H5.6416V0.525879H4.29688V4.32764H0.578125V5.67236Z</x:String>
 	<x:String x:Key="MinusGlyphPathStyle">M0 1.67236H5.57812V0.327637H0V1.67236Z</x:String>
 
-	<x:Double x:Key="CupertinoHeaderFontSize">8</x:Double>
+	<x:Double x:Key="CupertinoHeaderFontSize">13</x:Double>
 
-	<CornerRadius x:Key="CupertinoCornerRadius">8</CornerRadius>
+	<CornerRadius x:Key="CupertinoCornerRadius">10</CornerRadius>
 
 	<Style x:Name="CupertinoNumberBoxStyle"
 		   TargetType="muxc:NumberBox">
-		<Setter Property="FontFamily" Value="{ThemeResource CupertinoFontFamily}" />
+		<Setter Property="FontFamily" Value="{ThemeResource DefaultFontFamily}" />
+		<Setter Property="FontSize" Value="17" />
 		<Setter Property="Background" Value="{ThemeResource CupertinoSystemBackgroundBrush}" />
 		<Setter Property="CornerRadius" Value="{StaticResource CupertinoCornerRadius}" />
 		<Setter Property="BorderThickness" Value="1" />
@@ -77,7 +78,8 @@
 									 HeaderTemplate="{TemplateBinding HeaderTemplate}"
 									 PlaceholderText="{TemplateBinding PlaceholderText}" />
 
-							<StackPanel CornerRadius="{TemplateBinding CornerRadius}"
+							<StackPanel CornerRadius="22"
+										VerticalAlignment="Center"
 										Background="{ThemeResource CupertinoQuinaryGrayBrush}"
 										Orientation="Horizontal"
 										Grid.Column="1">
@@ -102,8 +104,8 @@
 		   TargetType="RepeatButton">
 		<Style.Setters>
 			<Setter Property="IsTabStop" Value="False" />
-			<Setter Property="Width" Value="50" />
-			<Setter Property="Height" Value="24" />
+			<Setter Property="Width" Value="44" />
+			<Setter Property="Height" Value="44" />
 			<Setter Property="FontSize" Value="22" />
 			<Setter Property="Padding" Value="7" />
 			<Setter Property="VerticalAlignment" Value="Center" />
@@ -114,7 +116,8 @@
 			<Setter Property="Template">
 				<Setter.Value>
 					<ControlTemplate TargetType="RepeatButton">
-						<Grid x:Name="ButtonLayoutGrid">
+						<Grid x:Name="ButtonLayoutGrid"
+							  Background="Transparent">
 
 							<VisualStateManager.VisualStateGroups>
 								<VisualStateGroup x:Name="CommonStates">
@@ -125,7 +128,11 @@
 											<Setter Target="PressedOverlay.Opacity" Value="{StaticResource CupertinoFocusedOpacity}" />
 										</VisualState.Setters>
 									</VisualState>
-									<VisualState x:Name="Disabled" />
+									<VisualState x:Name="Disabled">
+										<VisualState.Setters>
+											<Setter Target="ButtonLayoutGrid.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+										</VisualState.Setters>
+									</VisualState>
 								</VisualStateGroup>
 							</VisualStateManager.VisualStateGroups>
 
@@ -135,7 +142,8 @@
 								  Margin="{TemplateBinding Padding}"
 								  VerticalAlignment="Center"
 								  HorizontalAlignment="Center"
-								  Width="9"
+								  Width="14"
+								  Stretch="Uniform"
 								  AutomationProperties.AccessibilityView="Raw" />
 
 							<Border x:Name="PressedOverlay"
@@ -152,8 +160,8 @@
 		   TargetType="RepeatButton">
 		<Style.Setters>
 			<Setter Property="IsTabStop" Value="False" />
-			<Setter Property="Width" Value="50" />
-			<Setter Property="Height" Value="24" />
+			<Setter Property="Width" Value="44" />
+			<Setter Property="Height" Value="44" />
 			<Setter Property="FontSize" Value="22" />
 			<Setter Property="Padding" Value="7" />
 			<Setter Property="VerticalAlignment" Value="Center" />
@@ -164,7 +172,8 @@
 			<Setter Property="Template">
 				<Setter.Value>
 					<ControlTemplate TargetType="RepeatButton">
-						<Grid x:Name="ButtonLayoutGrid">
+						<Grid x:Name="ButtonLayoutGrid"
+							  Background="Transparent">
 
 							<VisualStateManager.VisualStateGroups>
 								<VisualStateGroup x:Name="CommonStates">
@@ -175,7 +184,11 @@
 											<Setter Target="PressedOverlay.Opacity" Value="{StaticResource CupertinoFocusedOpacity}" />
 										</VisualState.Setters>
 									</VisualState>
-									<VisualState x:Name="Disabled" />
+									<VisualState x:Name="Disabled">
+										<VisualState.Setters>
+											<Setter Target="ButtonLayoutGrid.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+										</VisualState.Setters>
+									</VisualState>
 								</VisualStateGroup>
 							</VisualStateManager.VisualStateGroups>
 
@@ -185,7 +198,8 @@
 								  Margin="{TemplateBinding Padding}"
 								  VerticalAlignment="Center"
 								  HorizontalAlignment="Center"
-								  Width="10"
+								  Width="14"
+								  Stretch="Uniform"
 								  AutomationProperties.AccessibilityView="Raw" />
 
 							<Border x:Name="PressedOverlay"
@@ -200,7 +214,8 @@
 
 	<Style x:Key="NumberBoxTextBoxStyle"
 		   TargetType="TextBox">
-		<Setter Property="FontFamily" Value="{ThemeResource CupertinoFontFamily}" />
+		<Setter Property="FontFamily" Value="{ThemeResource DefaultFontFamily}" />
+		<Setter Property="FontSize" Value="17" />
 		<Setter Property="Background" Value="Transparent" />
 		<Setter Property="Foreground" Value="{ThemeResource CupertinoLabelBrush}" />
 		<Setter Property="HorizontalContentAlignment" Value="Left" />

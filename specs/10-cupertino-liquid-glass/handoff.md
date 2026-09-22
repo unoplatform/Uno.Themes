@@ -1,4 +1,38 @@
-# Handoff update — 2026-09-22 continuation
+# Handoff update — 2026-09-22 iOS/iPadOS HIG polish
+
+The user confirmed iOS/iPadOS throughout and requested polishing the current styles against Apple's
+current HIG. This update supersedes the solid navigation/bar recipe and optional visual-polish deferrals
+in the historical handoff below. Full audit, references and results: [hig-polish.md](hig-polish.md).
+
+## Current result
+
+- Current capsule switches/sliders, interaction glass, and 44px touch targets.
+- Persistent field labels, readable selections, compact date controls, rounded glass calendar/wheel
+  popups, and subdued adjacent-month dates. Consumer calendar styles and borders remain honored.
+- Glass navigation panes and floating command groups; Cupertino overflow rows, shortcuts and text-only
+  actions. Dynamic overflow and consumer font overrides are covered.
+- Leading alert title/message, adaptive capsule actions with long-label wrapping and RTL/default-action
+  coverage; menu symbols trail labels and check marks have a shared gutter.
+- All existing semantic keys remain available. The new live `CupertinoBarTintBrush` is documented.
+- Permanent sample: **Styles → Cupertino Gallery** in CupertinoSampleApp. Launch with
+  `dotnet run --project src/samples/CupertinoSampleApp/CupertinoSampleApp.csproj -f net10.0-desktop`.
+
+## Verification and limits
+
+- Cupertino desktop: **188/188 Debug and 188/188 Release**; Debug WebAssembly build passes.
+- Material desktop Debug: **63/63**; Simple desktop Debug: **257 passed, 1 existing skip, 0 failed**.
+- All 210 source XAML files pass formatting, solution C# whitespace passes, published docs and the new
+  HIG audit pass spelling/Markdown. Historical spec/lesson sections retain existing lint findings.
+- Light/Dark gallery, selection states, alerts, menus, navigation, toolbars and picker captures reviewed.
+  Independent visual and quality/contract reviews approve. Scratch capture code was removed from the repo.
+- Artifacts: `%TEMP%/cupertino-hig`, including `*-final.xml`, build logs, PNGs and scratch capture source.
+- Existing build warnings remain (Cupertino desktop 105; WASM 107); no dependencies or suppressions added.
+- No GPU/device or browser-runtime visual verification was performed. Inter is a cross-platform substitute
+  for SF. Forced Liquid captures verify this renderer, not Apple's adaptive native optics. Generic Uno
+  controls do not synthesize native background extension, adaptive sheets or continuous page scrubbing.
+- The user explicitly authorized pushing everything during this pass; inspect branch history for publishing state.
+
+## Historical Phase 4 continuation
 
 The Phase 4 implementation below has now been completed locally. The earlier handoff is retained under
 "Previous handoff" as historical implementation context; its pending-key and test-count statements are

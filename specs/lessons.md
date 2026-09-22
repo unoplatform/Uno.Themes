@@ -4,6 +4,24 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## Semantic coverage does not prove fidelity to the design reference
+
+**Context:** Spec 10, Cupertino Liquid Glass. The user inspected the shipped styles against Apple's
+Toggles HIG and questioned the mismatch. The implementation had retained the old ToggleSwitch template
+because its dimensions and semantic keys satisfied the contract, while treating its visual redesign as
+deferred polish. Passing resource and behavior tests did not establish the requested visual match.
+
+**How to apply:**
+
+- Track semantic/API coverage and visual fidelity separately. Do not describe a control as visually
+  complete because its key resolves, dimensions match an old measurement, or its brush updates correctly.
+- Compare rendered states against the relevant current Apple platform reference before marking visual
+  work complete; record which reference and states were inspected.
+- Carrying forward a handoff's visual deferral does not fulfill the broader design goal. Name the gap
+  explicitly in completion reports and keep the visual acceptance item open.
+
+---
+
 ## A 0.5 px `Rectangle` is layout-rounded to nothing on Uno Skia
 
 **Context:** Spec 10, Cupertino lists and menus. The hairline separator, a `Rectangle Height="0.5"`, measured

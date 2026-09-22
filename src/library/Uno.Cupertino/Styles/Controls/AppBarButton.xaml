@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 	<Style x:Key="CupertinoAppBarButtonStyle"
 		   TargetType="AppBarButton">
@@ -11,7 +11,7 @@
 		<Setter Property="MinWidth" Value="{StaticResource CupertinoRowMinHeight}" />
 		<Setter Property="Padding" Value="8" />
 		<Setter Property="FontFamily" Value="{ThemeResource DefaultFontFamily}" />
-		<Setter Property="FontSize" Value="12" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
 		<Setter Property="UseSystemFocusVisuals" Value="True" />
 		<Setter Property="Template">
 			<Setter.Value>
@@ -61,7 +61,7 @@
 								<VisualState x:Name="FullSize" />
 								<VisualState x:Name="Compact">
 									<VisualState.Setters>
-										<Setter Target="TextLabel.Visibility" Value="Collapsed" />
+										<Setter Target="TextLabel.Visibility" Value="{Binding Icon, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToVisibleConverter}}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="LabelCollapsed">
@@ -71,31 +71,63 @@
 								</VisualState>
 								<VisualState x:Name="LabelOnRight">
 									<VisualState.Setters>
-										<Setter Target="ContentRoot.Orientation" Value="Horizontal" />
+										<Setter Target="ContentViewbox.(Grid.ColumnSpan)" Value="1" />
+										<Setter Target="TextLabel.(Grid.Row)" Value="0" />
+										<Setter Target="TextLabel.(Grid.Column)" Value="1" />
+										<Setter Target="TextLabel.(Grid.ColumnSpan)" Value="1" />
+										<Setter Target="TextLabel.Margin" Value="4,0,0,0" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Overflow">
 									<VisualState.Setters>
-										<Setter Target="ContentRoot.Orientation" Value="Horizontal" />
-										<Setter Target="ContentRoot.HorizontalAlignment" Value="Left" />
+										<Setter Target="ContentViewbox.(Grid.Column)" Value="1" />
+										<Setter Target="ContentViewbox.(Grid.ColumnSpan)" Value="1" />
+										<Setter Target="ContentViewbox.Margin" Value="10,0,0,0" />
+										<Setter Target="TextLabel.(Grid.Row)" Value="0" />
+										<Setter Target="TextLabel.(Grid.ColumnSpan)" Value="1" />
+										<Setter Target="TextLabel.Margin" Value="0" />
+										<Setter Target="TextLabel.HorizontalAlignment" Value="Left" />
+										<Setter Target="ContentRoot.HorizontalAlignment" Value="Stretch" />
+										<Setter Target="Root.Padding" Value="{StaticResource CupertinoMenuFlyoutItemPadding}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="OverflowWithToggleButtons">
 									<VisualState.Setters>
-										<Setter Target="ContentRoot.Orientation" Value="Horizontal" />
-										<Setter Target="ContentRoot.HorizontalAlignment" Value="Left" />
+										<Setter Target="ContentViewbox.(Grid.Column)" Value="1" />
+										<Setter Target="ContentViewbox.(Grid.ColumnSpan)" Value="1" />
+										<Setter Target="ContentViewbox.Margin" Value="10,0,0,0" />
+										<Setter Target="TextLabel.(Grid.Row)" Value="0" />
+										<Setter Target="TextLabel.(Grid.ColumnSpan)" Value="1" />
+										<Setter Target="TextLabel.Margin" Value="0" />
+										<Setter Target="TextLabel.HorizontalAlignment" Value="Left" />
+										<Setter Target="ContentRoot.HorizontalAlignment" Value="Stretch" />
+										<Setter Target="Root.Padding" Value="{StaticResource CupertinoMenuFlyoutItemPadding}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="OverflowWithMenuIcons">
 									<VisualState.Setters>
-										<Setter Target="ContentRoot.Orientation" Value="Horizontal" />
-										<Setter Target="ContentRoot.HorizontalAlignment" Value="Left" />
+										<Setter Target="ContentViewbox.(Grid.Column)" Value="1" />
+										<Setter Target="ContentViewbox.(Grid.ColumnSpan)" Value="1" />
+										<Setter Target="ContentViewbox.Margin" Value="10,0,0,0" />
+										<Setter Target="TextLabel.(Grid.Row)" Value="0" />
+										<Setter Target="TextLabel.(Grid.ColumnSpan)" Value="1" />
+										<Setter Target="TextLabel.Margin" Value="0" />
+										<Setter Target="TextLabel.HorizontalAlignment" Value="Left" />
+										<Setter Target="ContentRoot.HorizontalAlignment" Value="Stretch" />
+										<Setter Target="Root.Padding" Value="{StaticResource CupertinoMenuFlyoutItemPadding}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="OverflowWithToggleButtonsAndMenuIcons">
 									<VisualState.Setters>
-										<Setter Target="ContentRoot.Orientation" Value="Horizontal" />
-										<Setter Target="ContentRoot.HorizontalAlignment" Value="Left" />
+										<Setter Target="ContentViewbox.(Grid.Column)" Value="1" />
+										<Setter Target="ContentViewbox.(Grid.ColumnSpan)" Value="1" />
+										<Setter Target="ContentViewbox.Margin" Value="10,0,0,0" />
+										<Setter Target="TextLabel.(Grid.Row)" Value="0" />
+										<Setter Target="TextLabel.(Grid.ColumnSpan)" Value="1" />
+										<Setter Target="TextLabel.Margin" Value="0" />
+										<Setter Target="TextLabel.HorizontalAlignment" Value="Left" />
+										<Setter Target="ContentRoot.HorizontalAlignment" Value="Stretch" />
+										<Setter Target="Root.Padding" Value="{StaticResource CupertinoMenuFlyoutItemPadding}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -121,11 +153,20 @@
 							<ColumnDefinition Width="Auto" />
 							<ColumnDefinition Width="Auto" />
 						</Grid.ColumnDefinitions>
-						<StackPanel x:Name="ContentRoot"
-									HorizontalAlignment="Center"
-									VerticalAlignment="Center"
-									Spacing="4">
+						<Grid x:Name="ContentRoot"
+							  HorizontalAlignment="Center"
+							  VerticalAlignment="Center"
+							  RowSpacing="4">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="Auto" />
+							</Grid.ColumnDefinitions>
 							<Viewbox x:Name="ContentViewbox"
+									 Grid.ColumnSpan="2"
 									 Width="22"
 									 Height="22"
 									 HorizontalAlignment="Center"
@@ -136,6 +177,8 @@
 												  Foreground="{TemplateBinding Foreground}" />
 							</Viewbox>
 							<TextBlock x:Name="TextLabel"
+									   Grid.Row="1"
+									   Grid.ColumnSpan="2"
 									   Text="{TemplateBinding Label}"
 									   Foreground="{TemplateBinding Foreground}"
 									   FontFamily="{TemplateBinding FontFamily}"
@@ -143,7 +186,7 @@
 									   FontWeight="{TemplateBinding FontWeight}"
 									   HorizontalAlignment="Center"
 									   VerticalAlignment="Center" />
-						</StackPanel>
+						</Grid>
 						<!-- The stock control discovers the accelerator label by name and reserves a shared column width. -->
 						<TextBlock x:Name="KeyboardAcceleratorTextLabel"
 								   Grid.Column="1"

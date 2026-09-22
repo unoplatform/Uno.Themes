@@ -17,6 +17,8 @@ Lightweight styling is surgical — one key at a time. To change the app's whole
 
 Cupertino supports the same [semantic style keys](semantic-styles.md), with its own control-specific resources. See [Cupertino control styles](cupertino-controls-styles.md) for field and calendar color overrides, navigation, command bars and glass styles. Use `CupertinoTheme.Colors.OverrideDictionary` for palette changes that must update live.
 
+`CupertinoBarTintBrush` controls the tint over navigation panes and command groups. Its default follows `SurfaceColor` at 35% opacity; overriding the surface color preserves that opacity while updating existing controls.
+
 ## App/Page level styling
 
 The most common way to override resources is at the App level. This is done by adding a new `ResourceDictionary` to the `ResourceDictionary.MergedDictionaries` collection in your `AppResources.xaml` file. The following XAML shows how to override the default resources used with the `FilledButtonStyle` from Uno Themes.

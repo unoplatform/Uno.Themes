@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:uc="using:Uno.Cupertino"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:uno="using:Uno.UI.Xaml.Controls"
 					xmlns:not_win="http://uno.ui/not_win"
@@ -32,10 +33,35 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Thumb">
-					<Border Background="{TemplateBinding Background}"
-							BorderBrush="{TemplateBinding BorderBrush}"
-							BorderThickness="{TemplateBinding BorderThickness}"
-							CornerRadius="10" />
+					<Grid>
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver" />
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="ThumbGlass.Visibility" Value="Visible" />
+										<Setter Target="ThumbGlass.RenderingMode" Value="Auto" />
+										<Setter Target="SolidThumb.Visibility" Value="Collapsed" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled" />
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						<Border x:Name="SolidThumb"
+								Background="{TemplateBinding Background}"
+								BorderBrush="{TemplateBinding BorderBrush}"
+								BorderThickness="{TemplateBinding BorderThickness}"
+								CornerRadius="12" />
+						<!-- Explicit Solid while hidden releases the per-frame backplate after interaction. -->
+						<uc:GlassPanel x:Name="ThumbGlass"
+									   Material="Regular"
+									   RenderingMode="Solid"
+									   Visibility="Collapsed"
+									   Background="{TemplateBinding Background}"
+									   CornerRadius="12"
+									   IsHitTestVisible="False" />
+					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
@@ -138,7 +164,7 @@
 
 							<!-- HorizontalTemplate -->
 							<Grid x:Name="HorizontalTemplate"
-								  MinHeight="34">
+								  MinHeight="{ThemeResource CupertinoButtonMinHeight}">
 
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="Auto" />
@@ -199,10 +225,10 @@
 								<uno:ElevatedView Grid.Row="0"
 												  Grid.RowSpan="3"
 												  Grid.Column="1"
-												  Width="28"
-												  Height="28"
+												  Width="40"
+												  Height="24"
 												  Background="Transparent"
-												  CornerRadius="14"
+												  CornerRadius="12"
 												  Elevation="3"
 												  ShadowColor="{StaticResource ShadowColor}">
 
@@ -210,8 +236,8 @@
 										   Style="{StaticResource CupertinoSliderThumbStyle}"
 										   Background="{ThemeResource CupertinoSliderThumbBrush}"
 										   DataContext="{TemplateBinding Value}"
-										   Height="28"
-										   Width="28"
+										   Height="24"
+										   Width="40"
 										   FocusVisualMargin="-14,-6,-14,-6"
 										   AutomationProperties.AccessibilityView="Raw" />
 								</uno:ElevatedView>
@@ -219,7 +245,7 @@
 
 							<!-- VerticalTemplate -->
 							<Grid x:Name="VerticalTemplate"
-								  MinWidth="32"
+								  MinWidth="{ThemeResource CupertinoButtonMinHeight}"
 								  Visibility="Collapsed">
 
 								<Grid.RowDefinitions>
@@ -282,18 +308,18 @@
 								<uno:ElevatedView Grid.Row="1"
 												  Grid.Column="0"
 												  Grid.ColumnSpan="3"
-												  Width="28"
-												  Height="28"
+												  Width="24"
+												  Height="40"
 												  Background="Transparent"
-												  CornerRadius="14"
+												  CornerRadius="12"
 												  Elevation="3"
 												  ShadowColor="{StaticResource ShadowColor}">
 									<Thumb x:Name="VerticalThumb"
 										   Style="{StaticResource CupertinoSliderThumbStyle}"
 										   Background="{ThemeResource CupertinoSliderThumbBrush}"
 										   DataContext="{TemplateBinding Value}"
-										   Width="28"
-										   Height="28"
+										   Width="24"
+										   Height="40"
 										   FocusVisualMargin="-6,-14,-6,-14"
 										   AutomationProperties.AccessibilityView="Raw" />
 								</uno:ElevatedView>

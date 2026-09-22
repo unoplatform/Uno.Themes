@@ -46,6 +46,7 @@ internal static class CupertinoConstants
 
 		// Glass tints: the surface laid over a popover's or an alert's glass, the opacity is the tint strength
 		("CupertinoPopoverTintBrush", new[] { "SurfaceColor" }),
+		("CupertinoBarTintBrush", new[] { "SurfaceColor" }),
 		("CupertinoDialogTintBrush", new[] { "SurfaceColor" }),
 
 		// Live field and calendar brushes (opacity remains in CupertinoBrushes.xaml).

@@ -13,6 +13,41 @@ namespace Uno.Themes.Samples.RuntimeTests;
 [TestClass]
 public class Given_CupertinoNavigation
 {
+	[TestMethod]
+	[DataRow(ElementTheme.Light)]
+	[DataRow(ElementTheme.Dark)]
+	[RunsOnUIThread]
+	public async Task When_SurfaceOverrideChanges_Then_RealizedBarTintRepaints(ElementTheme appearance)
+	{
+		var theme = new CupertinoTheme();
+		var container = new Grid { Width = 600, Height = 200, RequestedTheme = appearance };
+		container.Resources.MergedDictionaries.Add(theme);
+		var bar = new CommandBar { Style = Resource<Style>(container, "CommandBarStyle") };
+		bar.PrimaryCommands.Add(new AppBarButton { Icon = new SymbolIcon(Symbol.Add), Label = "Add" });
+		container.Children.Add(bar);
+		try
+		{
+			UnitTestsUIContentHelper.Content = container;
+			await UnitTestsUIContentHelper.WaitForLoaded(bar);
+			await UnitTestsUIContentHelper.WaitForIdle();
+			var glass = FindDescendant<GlassPanel>(bar, "CommandGroupGlass");
+			Assert.IsNotNull(glass);
+			var tint = glass.Tint as SolidColorBrush;
+			Assert.IsNotNull(tint);
+			Assert.AreEqual(AppearanceColor(appearance, "SurfaceColor"), tint.Color);
+			var overrides = new ResourceDictionary { ["SurfaceColor"] = Colors.Coral };
+			theme.Colors = new ThemeColors { OverrideDictionary = overrides };
+			await UnitTestsUIContentHelper.WaitForIdle();
+			Assert.AreSame(tint, glass.Tint, "An existing navigation surface must keep its live brush");
+			Assert.AreEqual(Colors.Coral, tint.Color);
+			Assert.AreEqual(0.35, tint.Opacity, 0.001, "Color overrides retain the translucent bar treatment");
+		}
+		finally
+		{
+			UnitTestsUIContentHelper.Content = null;
+		}
+	}
+
 	private static T Resource<T>(FrameworkElement scope, string key)
 		=> scope.Resources.TryGetValue(key, out var value) && value is T typed
 			? typed
@@ -107,6 +142,9 @@ public class Given_CupertinoNavigation
 	{
 		var presenter = FindDescendant<NavigationViewItemPresenter>(item, "NavigationViewItemPresenter");
 		Assert.IsNotNull(presenter, "The stock navigation item presenter must be realized");
+		var indicator = FindDescendant<Microsoft.UI.Xaml.Shapes.Rectangle>(presenter, "SelectionIndicator");
+		Assert.IsNotNull(indicator, "Keep the native selection animation part");
+		Assert.AreEqual((byte)0, ((SolidColorBrush)indicator.Fill).Color.A, "iOS selection uses the rounded row without a separate WinUI selection line");
 		var layout = FindDescendant<Grid>(presenter, "LayoutRoot");
 		var label = FindDescendant<ContentPresenter>(presenter, "ContentPresenter");
 		Assert.IsNotNull(layout);

@@ -26,14 +26,16 @@
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 
-	<CornerRadius x:Key="CupertinoTextBoxCornerRadius">5</CornerRadius>
+	<CornerRadius x:Key="CupertinoTextBoxCornerRadius">10</CornerRadius>
 	<CornerRadius x:Key="CupertinoFilledTextBoxCornerRadius">10</CornerRadius>
 
-	<!-- TODO : Update when design is ready -->
+	<!-- The trailing clear glyph remains small inside a full touch target. -->
 	<x:String x:Key="ClearGlyphPathData">M10.661012,7.5689991L7.5990001,10.650999 12.939089,15.997999 7.5990001,21.336999 10.661012,24.405 16.007082,19.065 21.369997,24.405 24.430058,21.336999 24.429081,21.336 19.088991,15.998999 24.429081,10.662001 21.345095,7.5819996 16.007082,12.919001z M15.997072,0C24.828983,0 31.994999,7.1770013 31.994999,15.999998 31.994999,24.826997 24.828007,31.999999 15.997072,31.999999 7.1569835,31.999999 1.5270052E-07,24.826997 0,15.999998 1.5270052E-07,7.1799997 7.1569835,0 15.997072,0z</x:String>
 
 	<Style x:Key="DeleteButtonStyle"
 		   TargetType="Button">
+		<Setter Property="MinWidth" Value="44" />
+		<Setter Property="MinHeight" Value="44" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
@@ -70,7 +72,8 @@
 
 	<Style x:Key="CupertinoTextBoxStyle"
 		   TargetType="TextBox">
-		<Setter Property="FontFamily" Value="{ThemeResource CupertinoFontFamily}" />
+		<Setter Property="FontFamily" Value="{ThemeResource DefaultFontFamily}" />
+		<Setter Property="FontSize" Value="17" />
 		<Setter Property="Background" Value="Transparent" />
 		<!-- Issue with updating foreground on theme change https://github.com/unoplatform/Uno.Themes/issues/522 -->
 		<Setter Property="Foreground" Value="{ThemeResource CupertinoLabelBrush}" />
@@ -81,7 +84,7 @@
 
 		<Setter Property="HorizontalContentAlignment" Value="Left" />
 		<Setter Property="VerticalContentAlignment" Value="Center" />
-		<Setter Property="Padding" Value="10" />
+		<Setter Property="Padding" Value="12,0" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -124,13 +127,28 @@
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
-						<Border x:Name="ContentBorder"
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="*" />
+						</Grid.RowDefinitions>
+						<ContentPresenter x:Name="HeaderContentPresenter"
+										  Content="{TemplateBinding Header}"
+										  ContentTemplate="{TemplateBinding HeaderTemplate}"
+										  FontSize="13"
+										  Foreground="{TemplateBinding Foreground}"
+										  TextWrapping="Wrap"
+										  Margin="0,0,0,4"
+										  Visibility="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}}" />
+						<Border Grid.Row="1"
+								x:Name="ContentBorder"
 								Background="{TemplateBinding Background}"
 								BorderBrush="{TemplateBinding BorderBrush}"
 								BorderThickness="{TemplateBinding BorderThickness}"
 								CornerRadius="{TemplateBinding CornerRadius}" />
 
-						<Grid Margin="{TemplateBinding Padding}">
+						<Grid Grid.Row="1"
+							  MinHeight="44"
+							  Margin="{TemplateBinding Padding}">
 
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="*" />

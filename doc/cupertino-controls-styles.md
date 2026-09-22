@@ -48,9 +48,15 @@ uid: Uno.Themes.Cupertino.Styles
 | `ToggleSwitch`              | `CupertinoToggleSwitchStyle`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | `ToolTip`                   | `CupertinoToolTipStyle`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
+## iOS and iPadOS appearance
+
+The styles follow the iOS and iPadOS direction of Apple's [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines). They implement that appearance with Uno controls; they do not replace them with UIKit controls. Open **Styles > Cupertino Gallery** in the Cupertino sample app to see settings, forms, actions and navigation together, then use the individual control pages for more states.
+
+Dimensions below are Uno logical pixels. The theme uses a 44 by 44 target for buttons and field actions, following Apple's guidance for comfortable touch interaction. Other geometry, including corner radii and spacing, is the theme's interpretation of Apple's published examples, not a universal size mandated by the HIG. Typography uses the bundled Inter family; its metrics and symbols differ from Apple's SF fonts. See [font configuration and rendering](cupertino-getting-started.md#change-default-font).
+
 ## Buttons
 
-Apple's buttons answer to interaction by dimming rather than by changing color, so every Cupertino button shares one template: pointer-over, pressed and disabled only change the opacity of the whole control. A variant is a foreground and a background.
+Cupertino buttons use opacity changes for pointer-over, pressed and disabled states. Plain, tinted, prominent and glass variants express the action hierarchy described in Apple's [Buttons](https://developer.apple.com/design/human-interface-guidelines/buttons) guidance. Their shared template keeps short labels within a minimum 44 by 44 target.
 
 | Style | Semantic key | Look |
 | ----- | ------------ | ---- |
@@ -92,7 +98,7 @@ Each variant reads two brushes. There are no per-state keys: the states dim the 
 | `CupertinoButtonPadding` | `16,7` | |
 | `CupertinoButtonCornerRadius` | `22` | Half of the minimum height, which makes a capsule. |
 | `CupertinoButtonFontSize` | `17` | |
-| `CupertinoButtonMinHeight` | `44` | Apple's minimum hit target. |
+| `CupertinoButtonMinHeight` | `44` | Minimum button height and width in this theme. |
 | `CupertinoButtonIconSpacing` | `6` | |
 | `CupertinoButtonPressedOpacity` | `0.6` | |
 | `CupertinoIconButtonSize` / `CupertinoLargeIconButtonSize` | `44` / `56` | |
@@ -108,15 +114,21 @@ Each variant reads two brushes. There are no per-state keys: the states dim the 
 | `HyperlinkButtonForeground` | `PrimaryBrush` |
 | `SecondaryHyperlinkButtonForeground` | `OnSurfaceVariantBrush` |
 
-## Text fields
+## Switches and sliders
 
-`CupertinoTextBoxStyle` and `CupertinoPasswordBoxStyle` (`OutlinedTextBoxStyle`, `OutlinedPasswordBoxStyle`, and the implicit styles) draw a hairline border. `CupertinoFilledTextBoxStyle` and `CupertinoFilledPasswordBoxStyle` (`FilledTextBoxStyle`, `FilledPasswordBoxStyle`) have no border and sit on the gray fill, the look of a search field or of a field inside a grouped list.
+`CupertinoToggleSwitchStyle` uses a 64 by 28 track and a 40 by 24 capsule thumb, measured from Apple's current [iOS toggle artwork](https://developer.apple.com/design/human-interface-guidelines/toggles). Its thumb moves 20 pixels between states. `CupertinoSliderStyle` uses a 40 by 24 horizontal thumb, rotated in the vertical layout; this size is a theme choice based on the elongated shape in Apple's [slider examples](https://developer.apple.com/design/human-interface-guidelines/sliders). The horizontal slider keeps at least 44 pixels of target height, and the vertical slider keeps at least 44 pixels of target width, around the smaller thumb silhouette.
 
-| Key | Default |
-| --- | ------- |
-| `FilledTextBoxForeground` / `FilledTextBoxBackground` / `FilledTextBoxPlaceholderForeground` | `OnSurfaceBrush` / `SecondaryContainerBrush` / `OnSurfaceVariantBrush` |
-| `FilledPasswordBoxForeground` / `FilledPasswordBoxBackground` | `OnSurfaceBrush` / `SecondaryContainerBrush` |
-| `CupertinoFilledTextBoxCornerRadius` | `10` (both filled styles) |
+The thumbs are solid at rest. During a press they use `Regular` glass where the renderer supports it, then return to solid when interaction ends. This avoids continuous glass rendering for idle settings controls.
+
+## Text fields and pickers
+
+`CupertinoTextBoxStyle` and `CupertinoPasswordBoxStyle` keep `Header` and `HeaderTemplate` above the input, so the label remains visible after typing. They use 17 pixel body text, a 44 pixel minimum input row and 10 pixel field corners. The text field's trailing clear button keeps its small glyph inside a 44 by 44 target, following the trailing clear affordance in Apple's [Text fields](https://developer.apple.com/design/human-interface-guidelines/text-fields) guidance.
+
+`FilledTextBoxStyle` and `FilledPasswordBoxStyle` use the same input behavior on a gray fill without a border. `OutlinedTextBoxStyle` and `OutlinedPasswordBoxStyle` retain the bordered variants. These are text-entry surfaces; they remain solid.
+
+`CupertinoNumberBoxStyle` pairs an editable value with a horizontal minus/plus stepper. Each stepper button is 44 by 44, the value uses 17 pixel text, and the header uses 13 pixel text. This follows the value-and-stepper relationship in Apple's [Steppers](https://developer.apple.com/design/human-interface-guidelines/steppers) guidance while retaining Uno's numeric formatting and increment behavior.
+
+`CupertinoComboBoxStyle` uses a 44 pixel minimum field and 17 pixel text, with its choices in a glass popup. Date controls use a rounded gray compact affordance with accent date text and a separate neutral label. The date picker sizes to its content by default; set `HorizontalAlignment="Stretch"` when it should fill its container. Its empty-state prompt can be localized through the `CupertinoDatePickerPlaceholder.Text` resource. `CupertinoCalendarViewStyle` uses 20 pixel day labels and 17 pixel month/year labels, a tinted circular selection, and the accent for today. Both date-picker popups use rounded `Thick` glass. The calendar leaves unselected and adjacent-month day backgrounds transparent; the wheel picker uses a rounded selection band. These presentations follow Apple's [compact, inline and wheel picker examples](https://developer.apple.com/design/human-interface-guidelines/pickers); date ordering and selection remain the responsibility of the underlying Uno controls.
 
 ## Progress bar and ring
 
@@ -149,11 +161,13 @@ Each variant reads two brushes. There are no per-state keys: the states dim the 
 | --- | ------- | ----------- |
 | `CupertinoRowMinHeight` / `CupertinoRowPadding` | `44` / `16,0` | |
 | `CupertinoSeparatorInset` | `16,0,0,0` | |
-| `CupertinoGroupCornerRadius` | `26` | The iOS 26 inset-grouped section radius. |
+| `CupertinoGroupCornerRadius` | `26` | Theme radius for inset-grouped sections. |
 
 ## Alerts
 
-`CupertinoContentDialogStyle` (`ContentDialogStyle`, and the implicit `ContentDialog`) is an alert: a title, a message and full-width 44 px action rows separated by hairlines, on `Thick` [Liquid Glass](xref:Uno.Themes.Cupertino.GetStarted#liquid-glass) over a dimming layer. The rows stack primary, secondary, then close (Cancel) at the bottom; the `DefaultButton` is bold. Set `PrimaryButtonStyle` (or another button style) to `CupertinoContentDialogDestructiveButtonStyle` for an action in the error color; `CupertinoContentDialogButtonStyle` and `CupertinoContentDialogDefaultButtonStyle` are the plain and bold rows.
+`CupertinoContentDialogStyle` (`ContentDialogStyle`, and the implicit `ContentDialog`) presents an alert on `Thick` [Liquid Glass](xref:Uno.Themes.Cupertino.GetStarted#liquid-glass) over a dimming layer. Its title and message align to the leading edge, and its actions are separated filled capsules, following Apple's current [Alerts](https://developer.apple.com/design/human-interface-guidelines/alerts) example. Two actions share a row when their labels fit; longer labels or three actions stack vertically. The default action is trailing in a horizontal row and first in a stack. The panel mirrors its layout for right-to-left content.
+
+`CupertinoContentDialogButtonStyle` provides the secondary action, `CupertinoContentDialogDefaultButtonStyle` provides the accent default action, and `CupertinoContentDialogDestructiveButtonStyle` uses the error color. Assign these through the dialog's button-style properties when an action needs an explicit role.
 
 | Key | Default |
 | --- | ------- |
@@ -165,14 +179,14 @@ Each variant reads two brushes. There are no per-state keys: the states dim the 
 
 | Key | Default | Description |
 | --- | ------- | ----------- |
-| `CupertinoAlertMinWidth` / `CupertinoAlertMaxWidth` | `270` / `320` | Apple's alert is 270 wide. |
+| `CupertinoAlertMinWidth` / `CupertinoAlertMaxWidth` | `270` / `320` | Theme width bounds; actions adapt to the available space. |
 | `CupertinoAlertCornerRadius` | `30` | |
 | `CupertinoAlertTitleMargin` / `CupertinoAlertContentMargin` | `20,20,20,6` / `20,0,20,16` | |
 | `CupertinoAlertEdgeMargin` | `24` | From the edges of the window. |
 
 ## Popovers and menus
 
-`CupertinoFlyoutPresenterStyle` (`FlyoutPresenterStyle`, and the implicit `FlyoutPresenter`) is a popover: its content sits on a `Thick` [Liquid Glass](xref:Uno.Themes.Cupertino.GetStarted#liquid-glass) panel behind a hairline, in a 26 px rounded corner, with 16 px of padding. `CupertinoMenuFlyoutPresenterStyle` (`MenuFlyoutPresenterStyle`) is the same surface, at least 250 px wide, holding 44 px rows: `CupertinoMenuFlyoutItemStyle`, `CupertinoToggleMenuFlyoutItemStyle`, `CupertinoRadioMenuFlyoutItemStyle`, `CupertinoMenuFlyoutSubItemStyle` and `CupertinoMenuFlyoutSeparatorStyle` (their semantic keys, and the implicit styles). A row highlights with the gray fill while hovered or pressed and dims when disabled; an icon leads the label, a checked toggle or radio row shows a leading checkmark, a sub-item a trailing chevron, and a separator is a hairline inside an 8 px band. The `ComboBox` popup is the same glass menu. `CupertinoToolTipStyle` (the implicit `ToolTip`) is the macOS tooltip: caption text on the surface, behind a hairline, solid rather than glass.
+`CupertinoFlyoutPresenterStyle` (`FlyoutPresenterStyle`, and the implicit `FlyoutPresenter`) is a popover: its content sits on a `Thick` [Liquid Glass](xref:Uno.Themes.Cupertino.GetStarted#liquid-glass) panel behind a hairline, in a 26 px rounded corner, with 16 px of padding. `CupertinoMenuFlyoutPresenterStyle` (`MenuFlyoutPresenterStyle`) is the same surface, at least 250 px wide, holding 44 px rows: `CupertinoMenuFlyoutItemStyle`, `CupertinoToggleMenuFlyoutItemStyle`, `CupertinoRadioMenuFlyoutItemStyle`, `CupertinoMenuFlyoutSubItemStyle` and `CupertinoMenuFlyoutSeparatorStyle` (their semantic keys, and the implicit styles). A row highlights with the gray fill while hovered or pressed and dims when disabled; an action icon trails the label, a checked toggle or radio row shows a leading checkmark, a sub-item a trailing chevron, and a separator is a hairline inside an 8 px band. The `ComboBox` popup is the same glass menu. `CupertinoToolTipStyle` (the implicit `ToolTip`) provides a compatibility tooltip: caption text on a solid surface behind a hairline. It is not a native iOS tooltip pattern.
 
 | Key | Default |
 | --- | ------- |
@@ -188,7 +202,7 @@ Each variant reads two brushes. There are no per-state keys: the states dim the 
 | Key | Default | Description |
 | --- | ------- | ----------- |
 | `CupertinoPopoverCornerRadius` / `CupertinoPopoverPadding` | `26` / `16` | Popovers, menus and the `ComboBox` popup. |
-| `CupertinoHairlineThickness` | `0.5` | Apple's separator and rim. |
+| `CupertinoHairlineThickness` | `0.5` | Theme separator and rim thickness. |
 | `CupertinoMenuFlyoutPresenterMinWidth` | `250` | |
 | `CupertinoMenuFlyoutItemHeight` / `CupertinoMenuFlyoutItemPadding` | `44` / `16,0` | Also the `ComboBox` rows. |
 | `CupertinoMenuFlyoutItemIconSize` / `CupertinoMenuFlyoutItemIconMargin` | `22` / `0,0,10,0` | |
@@ -197,9 +211,11 @@ Each variant reads two brushes. There are no per-state keys: the states dim the 
 
 ## Navigation and command bars
 
-`NavigationViewStyle` and `NavigationViewItemStyle` use the stock navigation behavior with a solid surface pane, 44 px minimum rows and 10 px row corners. Selection uses `PrimarySelectedBrush` with `PrimaryBrush` text; hover and pressed backgrounds use `SecondaryContainerBrush`. Both left and top navigation are supported.
+`NavigationViewStyle` places `Regular` glass behind the pane and top navigation while retaining Uno's navigation behavior. Navigation and command-bar glass use the live `CupertinoBarTintBrush`, which follows `SurfaceColor` at 35% opacity and repaints when the color override changes. `NavigationViewItemStyle` uses 44 pixel minimum rows and 10 pixel corners. Sidebar icons use `PrimaryBrush`. Selection uses a rounded `PrimarySelectedBrush` row with `PrimaryBrush` text; the separate WinUI selection line is transparent. Hover and pressed backgrounds use `SecondaryContainerBrush`. Both left and top navigation are supported.
 
-`CommandBarStyle` keeps the stock command layout and overflow behavior on a solid surface. Its compact height is 44 px. `AppBarButtonStyle` uses a 22 px icon with a minimum 44 by 44 px target; compact commands hide their labels, while overflow commands show labels beside icons, keyboard shortcuts and submenu indicators. Hover, press and disabled states dim the command. Glass behind the navigation pane and command groups is deferred.
+For a visible blurred backdrop, compose your page background or content beneath the navigation glass. Uno's `SplitView` does not synthesize the native iPadOS background extension; a uniform surface behind the pane produces a uniform glass result.
+
+`CommandBarStyle` groups commands in a rounded `Regular` glass surface and places overflow commands on `Thick` glass. Its compact height is 44 pixels. `AppBarButtonStyle` uses a 22 pixel icon with a minimum 44 by 44 target; compact commands with icons hide their labels, while text-only actions such as Edit keep their labels visible. Overflow uses the menu minimum width of 250 pixels and 16 pixel horizontal row insets. Its rows use 17 pixel body text with trailing action icons, keyboard shortcuts and submenu indicators. Hover, press and disabled states dim the command.
 
 ## Page indicators and ratings
 
@@ -212,3 +228,9 @@ Each variant reads two brushes. There are no per-state keys: the states dim the 
 Field borders share `CupertinoFieldBorderBrush`, painted from `LabelColor` at opacity 0.2. The existing `CupertinoTextBoxBorderBrush`, `CupertinoPasswordBoxBorderBrush`, `CupertinoComboBoxBorderBrush`, `CupertinoDatePickerBorderBrush` and `CupertinoDeleteButtonTextBoxBrush` keys remain available. Number-box header and detail brushes retain their 0.7 and 0.3 opacities. Calendar selection follows the primary seed at opacity 0.27; an explicit `CupertinoBlueColor` override takes precedence.
 
 Use the theme's `Colors.OverrideDictionary` to override color keys. These brushes repaint in place when overrides or seeds change, and clearing the override restores the palette. See [color overrides](cupertino-getting-started.md) and [lightweight styling](lightweight-styling.md).
+
+## Compatibility controls
+
+`CheckBox`, `RadioButton`, `RatingControl` and `ToolTip` remain available for applications that use those Uno APIs. They share the Cupertino palette and preserve their familiar behavior, but do not claim a direct native iOS control equivalent. Checkboxes and radio buttons retain their small glyphs inside minimum 44 by 44 targets; short toggle-button labels also keep that minimum target. The FAB semantic aliases likewise map to Cupertino floating circular buttons. `PipsPager` provides discrete page selection; it does not implement UIKit's continuous page-control scrubbing.
+
+In `Auto`, glass falls back to a solid surface on software rendering and unsupported native renderers. Explicitly requesting `Liquid` on Skia can render Uno's custom blur and refraction in software, including diagnostic screenshots. Those captures do not certify Apple's native adaptive optical behavior or hardware performance. See [Liquid Glass](cupertino-getting-started.md#liquid-glass) for rendering modes.

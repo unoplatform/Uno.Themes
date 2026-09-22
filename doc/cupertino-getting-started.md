@@ -11,7 +11,7 @@ uid: Uno.Themes.Cupertino.GetStarted
 > [!IMPORTANT]
 > UnoFeatures: **Cupertino** — add `<UnoFeatures>Cupertino</UnoFeatures>` to your app's `.csproj` to enable Uno Cupertino.
 
-Uno Cupertino is enabled through the `Cupertino` UnoFeatures and lets you apply [Cupertino - Human Interface Guideline styling](https://developer.apple.com/design/human-interface-guidelines) to your application with a few lines of code.
+Uno Cupertino is enabled through the `Cupertino` UnoFeatures and applies an iOS and iPadOS appearance informed by Apple's [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines) to Uno controls. It includes the shared semantic styles and palette, rounded field and action surfaces, and Liquid Glass for navigation, command groups and popovers. It is an Uno implementation, not a wrapper around UIKit or an exact reproduction of Apple's system renderer.
 
 ## Getting Started
 
@@ -146,7 +146,7 @@ It accepts the same properties as the other themes — `FontOverrideSource`, `De
 </CupertinoTheme>
 ```
 
-The semantic style keys Cupertino has a style for are aliased (`FilledButtonStyle`, `TextButtonStyle`, `OutlinedTextBoxStyle`, `OutlinedPasswordBoxStyle`, `ComboBoxStyle`, `ComboBoxItemStyle`, `CheckBoxStyle`, `RadioButtonStyle`, `ToggleSwitchStyle`, `SliderStyle`, `HyperlinkButtonStyle`, `CalendarViewStyle`, `CalendarDatePickerStyle`, `DatePickerStyle`, `ProgressBarStyle`, `ProgressRingStyle`), and so are the 19 text styles of the shared type scale (`DisplayLarge` … `CaptionSmall`), so markup written against those keys moves between design systems unchanged. The Apple-named text styles (`CupertinoLargeTitle`, `CupertinoHeadline`, `CupertinoBody`, …) are the matching slot plus its leading, so they follow the same `*FontSize` / `*FontWeight` tokens.
+All 72 shared [semantic control style keys](semantic-styles.md) resolve under Cupertino, including navigation, command bars, page indicators and ratings. The 19 shared text styles (`DisplayLarge` through `CaptionSmall`) also resolve, so markup using these keys can move between design systems. Cupertino maps the roles to its own appearance; a shared key does not imply identical layout or native iOS equivalence for every control. The Apple-named text styles (`CupertinoLargeTitle`, `CupertinoHeadline`, `CupertinoBody`, and others) use the matching font-size and weight slots with their associated line heights.
 
 > [!NOTE]
 > With a [seed color](xref:Uno.Themes.SeedColors), the container roles follow the Material 3 recipe rather than Apple's tinted fills: the generated scheme is coherent, but it is no longer the stock Apple palette. The accent brushes of the Cupertino vocabulary — `CupertinoBlueBrush` and `CupertinoLinkBrush` — follow the seeded primary, so the built-in `Cupertino*Style` control styles pick the accent up too; the other system colors (`CupertinoRedBrush`, `CupertinoGreenBrush`, …) keep their Apple values.
@@ -156,6 +156,12 @@ The semantic style keys Cupertino has a style for are aliased (`FilledButtonStyl
 Alongside the shared roles, `CupertinoTheme` keeps the Cupertino vocabulary: the system colors (`CupertinoRedColor`, `CupertinoOrangeColor`, `CupertinoYellowColor`, `CupertinoGreenColor`, `CupertinoMintColor`, `CupertinoTealColor`, `CupertinoCyanColor`, `CupertinoBlueColor`, `CupertinoIndigoColor`, `CupertinoPurpleColor`, `CupertinoPinkColor`, `CupertinoBrownColor`), the six grays, and the label, fill, background and separator colors, each with a matching `Cupertino*Brush`. The values follow Apple's system palette as published in June 2025.
 
 The brushes are live: overriding a `*Color` key through `Colors.OverrideSource` repaints everything already on screen that uses the matching brush, without re-navigation. To re-tint the accent, override `PrimaryColor` (it reaches the semantic brushes and the Cupertino accent brushes) or `CupertinoBlueColor` (the Cupertino accent only; it wins over `PrimaryColor` and over a seed).
+
+## Explore the Cupertino Gallery
+
+In the Cupertino sample app, open **Styles > Cupertino Gallery**. It combines settings switches, sliders, labeled forms, date selection, actions and navigation in one page. The individual control pages provide additional states and variations. Use the sample's theme controls to compare light and dark appearances.
+
+The current styles follow the iOS/iPadOS HIG direction, including capsule switch and slider thumbs, trailing menu symbols, adaptive alert actions, persistent field labels and rounded date pickers. The [control-style reference](cupertino-controls-styles.md) distinguishes artwork measurements and theme sizing choices from Apple's general guidance. The gallery also makes it possible to assess the relationships between controls, rather than checking isolated resource keys.
 
 ## Liquid Glass
 
@@ -182,6 +188,8 @@ The brushes are live: overriding a `*Color` key through `Colors.OverrideSource` 
 
 The blurred backdrop is drawn through Skia. In `Auto`, a panel renders `Liquid` where the app uses the Skia renderer with hardware acceleration, and `Solid` — an opaque `Background` with a hairline — everywhere else: WinAppSDK, the native iOS and Android renderers, and the software renderer.
 
+For visual testing on Skia, explicitly set `GlassRenderingMode="Liquid"` on the theme to render Uno's custom blur and refraction even in software. This differs from the default `Auto` fallback. Such captures can show the implementation's effect, but cannot certify Apple's native adaptive optics or hardware performance. Even with acceleration, `GlassPanel` is Uno's interpretation of the material, not Apple's native adaptive optical renderer. For navigation glass, your page must draw a background or content beneath the pane: Uno does not automatically extend content behind it as a native iPadOS sidebar can.
+
 To honor a Reduce Transparency preference, set `GlassRenderingMode="Solid"` on the theme. It wins over a panel that asks for `Liquid`, and it is read when a panel loads:
 
 ```xml
@@ -190,7 +198,7 @@ To honor a Reduce Transparency preference, set `GlassRenderingMode="Solid"` on t
 ```
 
 > [!IMPORTANT]
-> A panel rendering `Liquid` repaints on every frame while it is on screen, so the app does not go idle while glass is visible. Use glass the way Apple does: for a few large or transient surfaces (a bar, a popover, a dialog) floating above the content, never inside item templates, and never glass on glass.
+> A panel rendering `Liquid` repaints on every frame while it is on screen, so the app does not go idle while glass is visible. Keep persistent glass to a few navigation or command surfaces above content, and avoid placing it inside every list item. Switch and slider thumbs activate their glass only during interaction and return to solid at rest.
 
 ## Migrating from `CupertinoColors` / `CupertinoFonts` / `CupertinoResources`
 
@@ -276,7 +284,7 @@ The same file can override the shared roles (`PrimaryColor`, `SurfaceColor`, …
 
 ### Change Default Font
 
-By default, Uno Cupertino uses [Inter](https://rsms.me/inter/), brought in through the `Uno.Fonts.Inter` package, so text renders the same on every platform. Apple's SF Pro cannot be redistributed and does not resolve by name outside Apple devices, which is why it is not the default. The root of the type scale is the shared `DefaultFontFamily` token (see [Design Tokens](design-tokens.md#typography)); `CupertinoFontFamily`, which the Cupertino control styles read, is an alias of it. Overriding only the alias changes those control styles but not the shared type scale (`BodyLargeFontFamily`, …), so override the root and both follow.
+By default, Uno Cupertino uses [Inter](https://rsms.me/inter/), brought in through the `Uno.Fonts.Inter` package, to provide a bundled cross-platform typeface. Inter is not SF Pro: glyph shapes, metrics and line breaks can differ from Apple screenshots. Apple's SF Pro cannot be redistributed and does not resolve by name outside Apple devices, which is why it is not the default. The root of the type scale is the shared `DefaultFontFamily` token (see [Design Tokens](design-tokens.md#typography)); `CupertinoFontFamily`, which the Cupertino control styles read, is an alias of it. Overriding only the alias changes those control styles but not the shared type scale (`BodyLargeFontFamily`, …), so override the root and both follow.
 
 If you would like Uno Cupertino to use a different font, you can override the default `FontFamily` by following these steps:
 

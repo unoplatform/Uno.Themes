@@ -1,8 +1,12 @@
 # 10 — Cupertino v2: Liquid Glass era theme on the semantic system
 
-Status: **Phase 4 implementation and local verification complete** (2026-09-22).
-All 72 semantic keys resolve. Navigation, bars, pips, rating and live field/calendar brushes are implemented;
-remaining visual/device checks and optional glass work are recorded below and in `handoff.md`.
+Status: **Current iOS/iPadOS HIG polish implemented and verified** (2026-09-22).
+All 72 semantic keys resolve. The requested visual audit and fixes supersede the earlier solid-bar and
+optional-polish deferrals below. See [HIG polish](hig-polish.md) and [handoff](handoff.md) for the current result.
+
+Cupertino desktop passes **188/188 Debug and Release**; WASM builds. Material passes **63/63**;
+Simple passes **257 with 1 existing skip**. Light/Dark visual review and source formatting pass.
+Hardware/device and browser-runtime visuals remain unverified. The user authorized pushing this work.
 D-1 (amended: no V1, no compatibility classes) / D-2 / D-3 / D-5 / D-7 taken.
 Branch: `dev/sb/cupertino-v2`.
 
@@ -422,6 +426,16 @@ row updated in the same PR.
   signature drift in `GuestHosting`). CI runs the smoke on X11, so this may be Win32-only; separate issue.
 
 ## Review
+
+### Visual acceptance correction — 2026-09-22
+
+The user reports that the styles do not match Apple's current Toggles HIG. The semantic contract is
+complete, but visual fidelity is not: ToggleSwitch retains the old 51 × 31 template with solid ellipse
+thumbs, and ToggleButton uses the spec's gray-to-tinted capsule approximation. The earlier "no change
+needed for the contract" decision must not be interpreted as visual acceptance. Reopen the toggle visual
+comparison against https://developer.apple.com/design/human-interface-guidelines/toggles, distinguishing
+iOS/iPadOS examples from macOS, before claiming the new theme matches that reference. No control code
+was changed in this diagnostic follow-up.
 
 ### Continuation review and results — 2026-09-22
 

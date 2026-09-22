@@ -231,11 +231,13 @@ public class Given_CupertinoContainers
 			var primary = FindDescendant<Button>(dialog, "PrimaryButton") ?? throw new AssertFailedException("no primary button");
 			var close = FindDescendant<Button>(dialog, "CloseButton") ?? throw new AssertFailedException("no close button");
 			Assert.IsTrue(primary.ActualHeight >= 44, $"an action row is 44 high, was {primary.ActualHeight}");
-			Assert.IsTrue(primary.ActualWidth >= 270, $"an alert is at least 270 wide, was {primary.ActualWidth}");
-			Assert.AreEqual(primary.ActualWidth, close.ActualWidth, "action rows span the alert");
+			Assert.IsTrue(glass.ActualWidth >= 270, $"an alert is at least 270 wide, was {glass.ActualWidth}");
+			Assert.AreEqual(primary.ActualWidth, close.ActualWidth, "two capsule actions share the available width");
 			Assert.AreEqual(Microsoft.UI.Text.FontWeights.SemiBold.Weight, primary.FontWeight.Weight, "the default action is bold");
 			Assert.AreEqual(Microsoft.UI.Text.FontWeights.Normal.Weight, close.FontWeight.Weight, "the other actions are not");
-			Assert.AreEqual(ColorOf(container, "PrimaryBrush"), ColorOf(close.Foreground), "actions are accent text");
+			Assert.AreEqual(ColorOf(container, "OnSurfaceBrush"), ColorOf(close.Foreground), "secondary actions use label text");
+			Assert.IsTrue(primary.CornerRadius.TopLeft >= 22 && close.CornerRadius.TopLeft >= 22, "actions have capsule corners");
+			Assert.IsTrue(primary.TransformToVisual(dialog).TransformPoint(new Point()).X > close.TransformToVisual(dialog).TransformPoint(new Point()).X, "Cancel leads and the default action trails");
 			Assert.AreEqual(Visibility.Collapsed, FindDescendant<Button>(dialog, "SecondaryButton")?.Visibility, "no secondary action");
 		}
 		finally

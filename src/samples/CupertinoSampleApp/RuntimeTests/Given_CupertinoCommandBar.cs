@@ -80,11 +80,15 @@ public class Given_CupertinoCommandBar
 			}
 
 			Assert.IsTrue(VisualStateManager.GoToState(button, "LabelOnRight", false));
-			Assert.AreEqual(Orientation.Horizontal, Find<StackPanel>(button, "ContentRoot").Orientation);
+			await UnitTestsUIContentHelper.WaitForIdle();
+			var icon = Find<Viewbox>(button, "ContentViewbox");
+			var text = Find<TextBlock>(button, "TextLabel");
+			Assert.IsTrue(text.TransformToVisual(button).TransformPoint(new Windows.Foundation.Point()).X >= icon.TransformToVisual(button).TransformPoint(new Windows.Foundation.Point()).X + icon.ActualWidth, "LabelOnRight places the label after the icon");
 			Assert.IsTrue(VisualStateManager.GoToState(button, "LabelCollapsed", false));
 			Assert.AreEqual(Visibility.Collapsed, Find<TextBlock>(button, "TextLabel").Visibility);
 			Assert.IsTrue(VisualStateManager.GoToState(button, "FullSize", false));
-			Assert.AreEqual(Orientation.Vertical, Find<StackPanel>(button, "ContentRoot").Orientation);
+			await UnitTestsUIContentHelper.WaitForIdle();
+			Assert.IsTrue(text.TransformToVisual(button).TransformPoint(new Windows.Foundation.Point()).Y >= icon.TransformToVisual(button).TransformPoint(new Windows.Foundation.Point()).Y + icon.ActualHeight, "FullSize places the label below the icon");
 
 			button.IsCompact = true;
 			await UnitTestsUIContentHelper.WaitForIdle();
@@ -142,7 +146,9 @@ public class Given_CupertinoCommandBar
 			await UnitTestsUIContentHelper.WaitForIdle();
 			Assert.AreEqual("Delete", Find<TextBlock>(secondary, "TextLabel").Text);
 			Assert.AreEqual(Visibility.Visible, Find<TextBlock>(secondary, "TextLabel").Visibility);
-			Assert.AreEqual(Orientation.Horizontal, Find<StackPanel>(secondary, "ContentRoot").Orientation);
+			var overflowIcon = Find<Viewbox>(secondary, "ContentViewbox");
+			var overflowLabel = Find<TextBlock>(secondary, "TextLabel");
+			Assert.IsTrue(overflowIcon.TransformToVisual(secondary).TransformPoint(new Windows.Foundation.Point()).X >= overflowLabel.TransformToVisual(secondary).TransformPoint(new Windows.Foundation.Point()).X + overflowLabel.ActualWidth, "Overflow presents label and icon in a horizontal row");
 			Assert.IsTrue(secondary.ActualHeight >= 44);
 			var label = Find<TextBlock>(secondary, "TextLabel");
 			var naturalLabel = new TextBlock { Text = secondary.Label, FontFamily = label.FontFamily, FontSize = label.FontSize, FontWeight = label.FontWeight };
