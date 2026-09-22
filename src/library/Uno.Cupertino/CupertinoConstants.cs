@@ -44,8 +44,9 @@ internal static class CupertinoConstants
 		("CupertinoLinkBrush", new[] { "LinkColor", PrimaryColor }),
 		("CupertinoGlassProminentTintBrush", new[] { PrimaryColor }),
 
-		// Glass tints: the surface laid over a popover's glass, the opacity is the tint strength
+		// Glass tints: the surface laid over a popover's or an alert's glass, the opacity is the tint strength
 		("CupertinoPopoverTintBrush", new[] { "SurfaceColor" }),
+		("CupertinoDialogTintBrush", new[] { "SurfaceColor" }),
 
 		// System colors
 		("CupertinoRedBrush", new[] { "CupertinoRedColor" }),

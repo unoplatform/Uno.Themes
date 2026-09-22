@@ -61,6 +61,43 @@
 				</ScrollViewer>
 			</DataTemplate>
 		</sample:SamplePageLayout.M3MaterialTemplate>
+		<sample:SamplePageLayout.CupertinoTemplate>
+			<DataTemplate>
+				<StackPanel Spacing="8">
+					<!-- An alert on Thick glass: one action -->
+					<smtx:XamlDisplay UniqueKey="Cupertino_ContentDialog_Basic"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<Button Content="Show alert"
+								Click="ShowContentDialog"
+								Tag="BuildSimpleBasicDialog" />
+					</smtx:XamlDisplay>
+
+					<!-- Two actions: the default one is bold, Cancel is the bottom row -->
+					<smtx:XamlDisplay UniqueKey="Cupertino_ContentDialog_Confirm"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<Button Content="Show confirmation"
+								Click="ShowContentDialog"
+								Tag="BuildSimpleConfirmDialog" />
+					</smtx:XamlDisplay>
+
+					<!-- Three actions -->
+					<smtx:XamlDisplay UniqueKey="Cupertino_ContentDialog_ThreeButton"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<Button Content="Show three actions"
+								Click="ShowContentDialog"
+								Tag="BuildSimpleThreeButtonDialog" />
+					</smtx:XamlDisplay>
+
+					<!-- A destructive action in the error color -->
+					<smtx:XamlDisplay UniqueKey="Cupertino_ContentDialog_Destructive"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<Button Content="Show destructive alert"
+								Click="ShowContentDialog"
+								Tag="BuildCupertinoDeleteDialog" />
+					</smtx:XamlDisplay>
+				</StackPanel>
+			</DataTemplate>
+		</sample:SamplePageLayout.CupertinoTemplate>
 		<sample:SamplePageLayout.SimpleTemplate>
 			<DataTemplate>
 				<StackPanel>

@@ -329,7 +329,13 @@ row updated in the same PR.
   itself (16 px from the screen edges) is the consumer's `Margin`. **Ceiling:** every row draws its hairline,
   so the last one sits on the group's bottom edge (0.5 px of `OutlineVariantBrush` on the surface's edge;
   invisible in the captures); a per-item "is last" hook would hide it. Ratchet 65 / 72.
-- [ ] ContentDialog (alert on Thick glass over a dimming layer; hairline button rows).
+- [x] ContentDialog (2026-09-22): an alert — `GlassPanel Material=Thick` tinted with `CupertinoDialogTintBrush`
+  (surface at 80 %, painted from `SurfaceColor`) over `CupertinoDimmingBrush` (#59000000), CR 30, MinWidth 270
+  (Apple's alert) / MaxWidth 320, title `TitleMedium` SemiBold, message `BodySmall`, left-aligned; actions
+  are full-width 44 px rows stacked primary → secondary → close with hairlines, the default action SemiBold.
+  `CupertinoContentDialogButtonStyle` / `…DefaultButtonStyle` / `…DestructiveButtonStyle` (error color) are
+  public so a consumer can mark an action destructive. **Cut:** the two-actions-side-by-side layout iOS uses
+  for short labels — stacked is always correct, side-by-side needs measuring the labels. Ratchet 66 / 72.
 - [x] Flyout / MenuFlyout family / ToolTip (2026-09-22): `FlyoutPresenter` and `MenuFlyoutPresenter` retemplated
   on a `GlassPanel Material=Thick` tinted with `CupertinoPopoverTintBrush` (the surface at 76 %, painted from
   `SurfaceColor` through `BrushColorKeys`), CR 26, hairline rim; menu rows 44 high, Padding 16,0, icon leading

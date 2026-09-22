@@ -236,7 +236,6 @@ public class Given_CupertinoTheme
 		// Phase 3 — core controls
 
 		// Phase 4 — containers and navigation
-		"ContentDialogStyle",
 		"AppBarButtonStyle", "CommandBarStyle", "NavigationViewStyle", "NavigationViewItemStyle",
 		"PipsPagerStyle", "RatingControlStyle",
 	};

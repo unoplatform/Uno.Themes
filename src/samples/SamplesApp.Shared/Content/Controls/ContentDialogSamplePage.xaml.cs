@@ -5,7 +5,7 @@
 	nameof(ContentDialog),
 	Description = "Represents a dialog box that can be customized to contain checkboxes, hyperlinks, buttons and any other XAML content.",
 	DocumentationLink = "https://docs.microsoft.com/en-us/uwp/api/Windows.UI.Xaml.Controls.ContentDialog",
-	SupportedDesigns = new[] { Design.Material, Design.Simple }
+	SupportedDesigns = new[] { Design.Material, Design.Cupertino, Design.Simple }
 )]
 public sealed partial class ContentDialogSamplePage : Page
 {
@@ -26,6 +26,7 @@ public sealed partial class ContentDialogSamplePage : Page
 			[nameof(BuildSimpleConfirmDialog)] = BuildSimpleConfirmDialog,
 			[nameof(BuildSimpleThreeButtonDialog)] = BuildSimpleThreeButtonDialog,
 			[nameof(BuildSimpleCustomContentDialog)] = BuildSimpleCustomContentDialog,
+			[nameof(BuildCupertinoDeleteDialog)] = BuildCupertinoDeleteDialog,
 		};
 
 		if ((sender as Button)?.Tag is string context && mappings.TryGetValue(context, out var builder))
@@ -132,6 +133,17 @@ public sealed partial class ContentDialogSamplePage : Page
 		PrimaryButtonText = "Save",
 		SecondaryButtonText = "Don't Save",
 		CloseButtonText = "Cancel",
+	};
+
+	// A destructive action takes the error color; Cancel is the default so it is the bold row, as on iOS.
+	private ContentDialog BuildCupertinoDeleteDialog() => new ContentDialog()
+	{
+		Title = "Delete Note?",
+		Content = "This note will be deleted from all your devices.",
+		PrimaryButtonText = "Delete",
+		PrimaryButtonStyle = (Style)Application.Current.Resources["CupertinoContentDialogDestructiveButtonStyle"],
+		CloseButtonText = "Cancel",
+		DefaultButton = ContentDialogButton.Close,
 	};
 
 	private ContentDialog BuildSimpleCustomContentDialog() => new ContentDialog()

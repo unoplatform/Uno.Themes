@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml.Shapes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Uno.Cupertino;
 using Uno.UI.RuntimeTests;
+using Windows.Foundation;
 using Windows.UI;
 
 namespace Uno.Themes.Samples.RuntimeTests;
@@ -193,6 +194,58 @@ public class Given_CupertinoContainers
 		}
 		finally
 		{
+			UnitTestsUIContentHelper.Content = null;
+		}
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_ContentDialogShown_Then_ItIsAnAlertOnThickGlass()
+	{
+		var container = CreateThemedContainer();
+		var dialog = new ContentDialog
+		{
+			Title = "Delete note?",
+			Content = "This cannot be undone.",
+			PrimaryButtonText = "Delete",
+			CloseButtonText = "Cancel",
+			DefaultButton = ContentDialogButton.Primary,
+			Style = Resource<Style>(container, "ContentDialogStyle"),
+		};
+		IAsyncOperation<ContentDialogResult>? showing = null;
+
+		try
+		{
+			var anchor = await Load(container, new Button { Content = "Anchor" });
+			dialog.XamlRoot = anchor.XamlRoot;
+			showing = dialog.ShowAsync();
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			var glass = FindDescendant<GlassPanel>(dialog) ?? throw new AssertFailedException("no glass behind the alert");
+			Assert.AreEqual(GlassMaterial.Thick, glass.Material);
+			Assert.AreEqual(30d, glass.CornerRadius.TopLeft, "the alert radius");
+			Assert.AreEqual(ColorOf(container, "CupertinoDialogTintBrush"), ColorOf(glass.Tint), "the alert tint");
+			// Uno dims through the popup's light-dismiss overlay (an internal property), painted from this resource.
+			Assert.AreEqual(Color.FromArgb(0x59, 0, 0, 0), ColorOf(container, "ContentDialogLightDismissOverlayBackground"), "the dimming layer");
+
+			var primary = FindDescendant<Button>(dialog, "PrimaryButton") ?? throw new AssertFailedException("no primary button");
+			var close = FindDescendant<Button>(dialog, "CloseButton") ?? throw new AssertFailedException("no close button");
+			Assert.IsTrue(primary.ActualHeight >= 44, $"an action row is 44 high, was {primary.ActualHeight}");
+			Assert.IsTrue(primary.ActualWidth >= 270, $"an alert is at least 270 wide, was {primary.ActualWidth}");
+			Assert.AreEqual(primary.ActualWidth, close.ActualWidth, "action rows span the alert");
+			Assert.AreEqual(Microsoft.UI.Text.FontWeights.SemiBold.Weight, primary.FontWeight.Weight, "the default action is bold");
+			Assert.AreEqual(Microsoft.UI.Text.FontWeights.Normal.Weight, close.FontWeight.Weight, "the other actions are not");
+			Assert.AreEqual(ColorOf(container, "PrimaryBrush"), ColorOf(close.Foreground), "actions are accent text");
+			Assert.AreEqual(Visibility.Collapsed, FindDescendant<Button>(dialog, "SecondaryButton")?.Visibility, "no secondary action");
+		}
+		finally
+		{
+			dialog.Hide();
+			if (showing is not null)
+			{
+				await showing;
+			}
+
 			UnitTestsUIContentHelper.Content = null;
 		}
 	}
