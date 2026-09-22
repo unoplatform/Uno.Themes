@@ -7,24 +7,24 @@
 	<!-- Lightweight styling of the filled style. The bordered style keeps its Cupertino* keys. -->
 	<ResourceDictionary.ThemeDictionaries>
 		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="CupertinoTextBoxBorderBrush" ResourceKey="CupertinoFieldBorderBrush" />
+			<StaticResource x:Key="CupertinoDeleteButtonTextBoxBrush" ResourceKey="CupertinoFieldBorderBrush" />
 			<StaticResource x:Key="FilledTextBoxForeground" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="FilledTextBoxBackground" ResourceKey="SecondaryContainerBrush" />
 			<StaticResource x:Key="FilledTextBoxPlaceholderForeground" ResourceKey="OnSurfaceVariantBrush" />
 		</ResourceDictionary>
 		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="CupertinoTextBoxBorderBrush" ResourceKey="CupertinoFieldBorderBrush" />
+			<StaticResource x:Key="CupertinoDeleteButtonTextBoxBrush" ResourceKey="CupertinoFieldBorderBrush" />
 			<StaticResource x:Key="FilledTextBoxForeground" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="FilledTextBoxBackground" ResourceKey="SecondaryContainerBrush" />
 			<StaticResource x:Key="FilledTextBoxPlaceholderForeground" ResourceKey="OnSurfaceVariantBrush" />
 		</ResourceDictionary>
+		<ResourceDictionary x:Key="HighContrast">
+			<StaticResource x:Key="CupertinoTextBoxBorderBrush" ResourceKey="CupertinoFieldBorderBrush" />
+			<StaticResource x:Key="CupertinoDeleteButtonTextBoxBrush" ResourceKey="CupertinoFieldBorderBrush" />
+		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
-
-	<SolidColorBrush x:Key="CupertinoTextBoxBorderBrush"
-					 Color="{ThemeResource LabelColor}"
-					 Opacity="0.2" />
-
-	<SolidColorBrush x:Key="CupertinoDeleteButtonTextBoxBrush"
-					 Color="{ThemeResource LabelColor}"
-					 Opacity="0.2" />
 
 	<CornerRadius x:Key="CupertinoTextBoxCornerRadius">5</CornerRadius>
 	<CornerRadius x:Key="CupertinoFilledTextBoxCornerRadius">10</CornerRadius>

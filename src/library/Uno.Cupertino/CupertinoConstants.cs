@@ -48,6 +48,14 @@ internal static class CupertinoConstants
 		("CupertinoPopoverTintBrush", new[] { "SurfaceColor" }),
 		("CupertinoDialogTintBrush", new[] { "SurfaceColor" }),
 
+		// Live field and calendar brushes (opacity remains in CupertinoBrushes.xaml).
+		("CupertinoFieldBorderBrush", new[] { "LabelColor" }),
+		("CupertinoHeaderForegroundBrush", new[] { "LabelColor" }),
+		("CupertinoDetailsLightBrush", new[] { "CupertinoPrimaryGrayColor" }),
+		("CupertinoCalendarViewSelectedBackground", new[] { "CupertinoBlueColor", PrimaryColor }),
+		("CupertinoCalendarDatePickerBorderBrushPointerOver", new[] { "CupertinoPrimaryGrayColor" }),
+		("CupertinoCalendarDatePickerBorderBrushPressed", new[] { "CupertinoPrimaryGrayColor" }),
+
 		// System colors
 		("CupertinoRedBrush", new[] { "CupertinoRedColor" }),
 		("CupertinoOrangeBrush", new[] { "CupertinoOrangeColor" }),

@@ -4,16 +4,24 @@
 					xmlns:not_win="http://uno.ui/not_win"
 					xmlns:uno="using:Uno.UI.Xaml.Controls"
 					mc:Ignorable="not_win">
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="CupertinoDatePickerBorderBrush" ResourceKey="CupertinoFieldBorderBrush" />
+			<StaticResource x:Key="CupertinoDatePickerFlyoutPresenterHighlightFill" ResourceKey="CupertinoQuinaryGrayBrush" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="CupertinoDatePickerBorderBrush" ResourceKey="CupertinoFieldBorderBrush" />
+			<StaticResource x:Key="CupertinoDatePickerFlyoutPresenterHighlightFill" ResourceKey="CupertinoQuinaryGrayBrush" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="HighContrast">
+			<StaticResource x:Key="CupertinoDatePickerBorderBrush" ResourceKey="CupertinoFieldBorderBrush" />
+			<StaticResource x:Key="CupertinoDatePickerFlyoutPresenterHighlightFill" ResourceKey="CupertinoQuinaryGrayBrush" />
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
 
 	<x:Double x:Key="CupertinoDateTimeFlyoutBorderThickness">1</x:Double>
 	<x:Double x:Key="MaterialDatePickerSpacerThemeWidth">1</x:Double>
 	<Thickness x:Key="MaterialDatePickerHostPadding">24,24,8,8</Thickness>
-
-	<SolidColorBrush x:Key="CupertinoDatePickerFlyoutPresenterHighlightFill"
-					 Color="{ThemeResource CupertinoQuinaryGrayColor}" />
-	<SolidColorBrush x:Key="CupertinoDatePickerBorderBrush"
-					 Opacity="0.2"
-					 Color="{ThemeResource LabelColor}" />
 
 	<CornerRadius x:Key="CupertinoDatePickerCornerRadius">5</CornerRadius>
 

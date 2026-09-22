@@ -3,6 +3,17 @@
 					xmlns:uc="using:Uno.Cupertino"
 					xmlns:uno="using:Uno.UI.Xaml.Controls"
 					xmlns:ut="using:Uno.Themes">
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="CupertinoComboBoxBorderBrush" ResourceKey="CupertinoFieldBorderBrush" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="CupertinoComboBoxBorderBrush" ResourceKey="CupertinoFieldBorderBrush" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="HighContrast">
+			<StaticResource x:Key="CupertinoComboBoxBorderBrush" ResourceKey="CupertinoFieldBorderBrush" />
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
 
 	<!-- Converters -->
 	<ut:FromNullToValueConverter x:Key="NullToVisible"
@@ -11,10 +22,6 @@
 
 	<!-- Brushes -->
 	<x:Double x:Key="ComboBoxPopupMaxHeight">300</x:Double>
-
-	<SolidColorBrush x:Key="CupertinoComboBoxBorderBrush"
-					 Color="{ThemeResource LabelColor}"
-					 Opacity="0.2" />
 
 	<CornerRadius x:Key="CupertinoComboBoxCornerRadius">5</CornerRadius>
 

@@ -8,10 +8,6 @@
 
 	<StaticResource x:Key="CupertinoCalendarViewAccentBrush" ResourceKey="CupertinoBlueBrush" />
 
-	<SolidColorBrush x:Key="CupertinoCalendarViewSelectedBackground"
-					 Color="{ThemeResource CupertinoBlueColor}"
-					 Opacity="0.27" />
-
 	<SolidColorBrush x:Key="TransparentBrush"
 					 Color="Transparent" />
 
@@ -63,9 +59,9 @@
 		<not_win:Setter Property="CalendarItemCornerRadius"
 						Value="40" />
 		<not_win:Setter Property="SelectedBackground"
-						Value="{StaticResource CupertinoCalendarViewSelectedBackground}" />
+						Value="{ThemeResource CupertinoCalendarViewSelectedBackground}" />
 		<not_win:Setter Property="TodaySelectedBackground"
-						Value="{StaticResource CupertinoCalendarViewSelectedBackground}" />
+						Value="{ThemeResource CupertinoCalendarViewSelectedBackground}" />
 		<not_win:Setter Property="TodayBackground"
 						Value="Transparent" />
 		<Setter Property="Template">
