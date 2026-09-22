@@ -13,10 +13,16 @@ Uno Themes provides a **semantic style abstraction layer** that lets you write t
 
 ## How It Works
 
-Each theme's `_Resources.xaml` defines `<StaticResource>` aliases that map semantic keys to theme-specific styles:
+Each theme's `SemanticStyles.xaml` defines `<StaticResource>` aliases that map semantic keys to theme-specific styles:
 
 - **Material**: `FilledButtonStyle` &rarr; `MaterialFilledButtonStyle`
 - **Simple**: `FilledButtonStyle` &rarr; `SimpleFilledButtonStyle`
+
+### Runtime discovery (for tooling)
+
+Semantic resources are declared in dictionaries of type `Uno.Themes.SemanticResources`, a `ResourceDictionary` subclass with no members: the type is the signal. This covers the style aliases above, the shared colour palette and brushes, the shared typography tokens, and the generated spacing, shape and density scales. Theme-prefixed keys are never declared in one.
+
+A tool walking a theme's dictionaries treats a key as semantic when any dictionary declaring it is a `SemanticResources`, or is one of the `ThemeDictionaries` of a `SemanticResources` (a file loaded through `Source` copies its theme dictionaries in as plain `ResourceDictionary` instances). `MergedDictionaries` do not inherit the marker. Read the theme dictionaries through the `ThemeDictionaries` indexer rather than by enumerating its values: a dictionary loaded through `Source` holds them as lazy initializers until first indexed.
 
 ## Control Style Mappings
 
