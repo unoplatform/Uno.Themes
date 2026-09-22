@@ -514,9 +514,11 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="MenuFlyoutSeparator">
+					<!-- Layout rounding would round a half-pixel hairline away. -->
 					<Rectangle Fill="{TemplateBinding Background}"
 							   Height="0.5"
-							   Margin="{TemplateBinding Padding}" />
+							   Margin="{TemplateBinding Padding}"
+							   UseLayoutRounding="False" />
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>

@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Microsoft.UI.Xaml.Shapes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Uno.Cupertino;
 using Uno.UI.RuntimeTests;
@@ -154,6 +155,44 @@ public class Given_CupertinoContainers
 		finally
 		{
 			menu.Hide();
+			UnitTestsUIContentHelper.Content = null;
+		}
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_ListViewRendered_Then_ItIsAnInsetGroupOf44PxRows()
+	{
+		var container = CreateThemedContainer();
+		var listView = new ListView { Style = Resource<Style>(container, "ListViewStyle"), Width = 300 };
+		listView.Items.Add(new ListViewItem { Content = "First" });
+		listView.Items.Add(new ListViewItem { Content = "Second", IsSelected = true });
+		listView.Items.Add(new ListViewItem { Content = "Third", IsEnabled = false });
+
+		try
+		{
+			await Load(container, listView);
+
+			var group = FindDescendant<Border>(listView, "Group") ?? throw new AssertFailedException("the group border is missing");
+			Assert.AreEqual(26d, group.CornerRadius.TopLeft, "the inset-grouped radius");
+			Assert.AreEqual(ColorOf(container, "SurfaceBrush"), ColorOf(group.Background), "the group is a surface");
+
+			var rows = new[] { 0, 1, 2 }.Select(i => (ListViewItem)listView.ContainerFromIndex(i)).ToArray();
+			foreach (var row in rows)
+			{
+				Assert.IsTrue(row.ActualHeight >= 44, $"a row is 44 high, was {row.ActualHeight}");
+				Assert.AreEqual(ColorOf(container, "OnSurfaceBrush"), ColorOf(row.Foreground), "label colour");
+				var separator = FindDescendant<Rectangle>(row, "Separator") ?? throw new AssertFailedException("no hairline");
+				Assert.AreEqual(0.5, separator.ActualHeight, "a hairline");
+				Assert.AreEqual(16d, separator.Margin.Left, "inset from the leading edge");
+			}
+
+			var selected = FindDescendant<Grid>(rows[1], "ContentBorder") ?? throw new AssertFailedException("template root missing");
+			Assert.AreEqual(ColorOf(container, "PrimarySelectedBrush"), ColorOf(selected.Background), "a selected row takes the selection tint");
+			Assert.AreEqual(0.5, FindDescendant<Grid>(rows[2], "ContentBorder")?.Opacity, "a disabled row dims");
+		}
+		finally
+		{
 			UnitTestsUIContentHelper.Content = null;
 		}
 	}

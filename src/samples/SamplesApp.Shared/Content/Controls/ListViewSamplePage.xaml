@@ -33,6 +33,44 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.M3MaterialTemplate>
+			<sample:SamplePageLayout.CupertinoTemplate>
+				<DataTemplate>
+					<StackPanel Spacing="24"
+								Margin="16,0">
+						<!-- An inset group: 44 px rows with hairline separators on a rounded surface -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_ListView_Group"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ListView SelectionMode="Single"
+									  MaxHeight="300">
+								<ListViewItem Content="Wi-Fi" />
+								<ListViewItem Content="Bluetooth"
+											  IsSelected="True" />
+								<ListViewItem Content="Cellular" />
+								<ListViewItem Content="Personal Hotspot"
+											  IsEnabled="False" />
+							</ListView>
+						</smtx:XamlDisplay>
+
+						<!-- Multiple selection -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_ListView_MultiSelection"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ListView SelectionMode="Multiple"
+									  MaxHeight="300">
+								<ListViewItem Content="Apple" />
+								<ListViewItem Content="Banana" />
+								<ListViewItem Content="Cherry" />
+							</ListView>
+						</smtx:XamlDisplay>
+
+						<!-- Bound items -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_ListView_Bound"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ListView ItemsSource="{Binding Data.Letters}"
+									  MaxHeight="300" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.CupertinoTemplate>
 			<sample:SamplePageLayout.SimpleTemplate>
 				<DataTemplate>
 					<StackPanel>

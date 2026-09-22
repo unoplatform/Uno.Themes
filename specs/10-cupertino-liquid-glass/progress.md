@@ -323,7 +323,12 @@ row updated in the same PR.
 
 ### Phase 4 — Containers, navigation, glass interactivity (size L)
 
-- [ ] ListView / ListViewItem (inset grouped, hairline separators, group radius token; no glass).
+- [x] ListView / ListViewItem (2026-09-22): the ListView is the group (`SurfaceBrush`, CR `CupertinoGroupCornerRadius`
+  26, clipped), rows `CupertinoRowMinHeight` 44 with Padding 16,0 and a hairline separator inset 16; hover /
+  pressed = `SecondaryContainerBrush`, selected = `PrimarySelectedBrush`, disabled dims. No glass. The inset
+  itself (16 px from the screen edges) is the consumer's `Margin`. **Ceiling:** every row draws its hairline,
+  so the last one sits on the group's bottom edge (0.5 px of `OutlineVariantBrush` on the surface's edge;
+  invisible in the captures); a per-item "is last" hook would hide it. Ratchet 65 / 72.
 - [ ] ContentDialog (alert on Thick glass over a dimming layer; hairline button rows).
 - [x] Flyout / MenuFlyout family / ToolTip (2026-09-22): `FlyoutPresenter` and `MenuFlyoutPresenter` retemplated
   on a `GlassPanel Material=Thick` tinted with `CupertinoPopoverTintBrush` (the surface at 76 %, painted from

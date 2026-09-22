@@ -4,6 +4,19 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## A 0.5 px `Rectangle` is layout-rounded to nothing on Uno Skia
+
+**Context:** Spec 10, Cupertino lists and menus. The hairline separator, a `Rectangle Height="0.5"`, measured
+`ActualHeight == 0` and drew nothing: layout rounding snaps a half-pixel size down to zero at 100 % scale.
+The menu capture had looked like "a gap" rather than a line and the difference was not noticed.
+
+**How to apply:**
+- Set `UseLayoutRounding="False"` on any element whose size is meant to be fractional (Apple's 0.5 pt
+  hairline; 0.333 / 0.667 rims). It draws at half intensity at 1× and as one crisp pixel at 2×.
+- Assert `ActualHeight` (or capture) for a hairline; a resource or `Height` assertion cannot see the rounding.
+
+---
+
 ## `RadiusFull` (9999) makes a circle out of a square and an ellipse out of anything else on Uno Skia
 
 **Context:** Spec 10, Cupertino buttons. `CornerRadius="9999"` on a 116 × 44 `Grid` rendered an ellipse,
