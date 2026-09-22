@@ -6,6 +6,26 @@
 	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
 	<sample:SamplePageLayout>
+		<sample:SamplePageLayout.CupertinoTemplate>
+			<DataTemplate>
+				<StackPanel Spacing="8">
+					<!-- The macOS tooltip: caption text on the surface, behind a hairline -->
+					<smtx:XamlDisplay UniqueKey="Cupertino_ToolTip_OnButton">
+						<Button Content="Hover over me"
+								ToolTipService.ToolTip="A tooltip" />
+					</smtx:XamlDisplay>
+
+					<smtx:XamlDisplay UniqueKey="Cupertino_ToolTip_LongText">
+						<Button Content="Hover for details">
+							<ToolTipService.ToolTip>
+								<ToolTip Style="{StaticResource CupertinoToolTipStyle}"
+										 Content="A longer tooltip wraps at 320 px, the way a macOS tooltip does when its text runs long." />
+							</ToolTipService.ToolTip>
+						</Button>
+					</smtx:XamlDisplay>
+				</StackPanel>
+			</DataTemplate>
+		</sample:SamplePageLayout.CupertinoTemplate>
 		<sample:SamplePageLayout.SimpleTemplate>
 			<DataTemplate>
 				<StackPanel Spacing="8">

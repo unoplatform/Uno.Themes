@@ -33,8 +33,20 @@
 		   TargetType="uc:GlassPanel" />
 	<Style BasedOn="{StaticResource CupertinoDatePickerFlyoutPresenterStyle}"
 		   TargetType="DatePickerFlyoutPresenter" />
+	<Style BasedOn="{StaticResource CupertinoFlyoutPresenterStyle}"
+		   TargetType="FlyoutPresenter" />
 	<Style BasedOn="{StaticResource CupertinoHyperlinkButtonStyle}"
 		   TargetType="HyperlinkButton" />
+	<Style BasedOn="{StaticResource CupertinoMenuFlyoutItemStyle}"
+		   TargetType="MenuFlyoutItem" />
+	<Style BasedOn="{StaticResource CupertinoMenuFlyoutPresenterStyle}"
+		   TargetType="MenuFlyoutPresenter" />
+	<Style BasedOn="{StaticResource CupertinoMenuFlyoutSeparatorStyle}"
+		   TargetType="MenuFlyoutSeparator" />
+	<Style BasedOn="{StaticResource CupertinoMenuFlyoutSubItemStyle}"
+		   TargetType="MenuFlyoutSubItem" />
+	<Style BasedOn="{StaticResource CupertinoRadioMenuFlyoutItemStyle}"
+		   TargetType="muxc:RadioMenuFlyoutItem" />
 	<Style BasedOn="{StaticResource CupertinoNumberBoxStyle}"
 		   TargetType="muxc:NumberBox" />
 	<Style BasedOn="{StaticResource CupertinoPasswordBoxStyle}"
@@ -53,8 +65,12 @@
 		   TargetType="TextBox" />
 	<Style BasedOn="{StaticResource CupertinoTextToggleButtonStyle}"
 		   TargetType="ToggleButton" />
+	<Style BasedOn="{StaticResource CupertinoToggleMenuFlyoutItemStyle}"
+		   TargetType="ToggleMenuFlyoutItem" />
 	<Style BasedOn="{StaticResource CupertinoToggleSwitchStyle}"
 		   TargetType="ToggleSwitch" />
+	<Style BasedOn="{StaticResource CupertinoToolTipStyle}"
+		   TargetType="ToolTip" />
 
 	<!--
 		Semantic style aliases shared with Material and Simple (doc/semantic-styles.md). Only the keys
@@ -118,6 +134,15 @@
 	<!-- Progress -->
 	<StaticResource x:Key="ProgressBarStyle" ResourceKey="CupertinoProgressBarStyle" />
 	<StaticResource x:Key="ProgressRingStyle" ResourceKey="CupertinoProgressRingStyle" />
+
+	<!-- Popovers and menus -->
+	<StaticResource x:Key="FlyoutPresenterStyle" ResourceKey="CupertinoFlyoutPresenterStyle" />
+	<StaticResource x:Key="MenuFlyoutPresenterStyle" ResourceKey="CupertinoMenuFlyoutPresenterStyle" />
+	<StaticResource x:Key="MenuFlyoutItemStyle" ResourceKey="CupertinoMenuFlyoutItemStyle" />
+	<StaticResource x:Key="MenuFlyoutSeparatorStyle" ResourceKey="CupertinoMenuFlyoutSeparatorStyle" />
+	<StaticResource x:Key="MenuFlyoutSubItemStyle" ResourceKey="CupertinoMenuFlyoutSubItemStyle" />
+	<StaticResource x:Key="ToggleMenuFlyoutItemStyle" ResourceKey="CupertinoToggleMenuFlyoutItemStyle" />
+	<StaticResource x:Key="RadioMenuFlyoutItemStyle" ResourceKey="CupertinoRadioMenuFlyoutItemStyle" />
 
 	<!-- Typography -->
 	<StaticResource x:Key="DisplayLarge" ResourceKey="CupertinoDisplayLarge" />

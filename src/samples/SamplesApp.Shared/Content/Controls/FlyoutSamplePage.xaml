@@ -649,7 +649,65 @@
 			</sample:SamplePageLayout.M3MaterialTemplate>
 			<sample:SamplePageLayout.CupertinoTemplate>
 				<DataTemplate>
-					<StackPanel />
+					<StackPanel Spacing="8">
+						<!-- A popover: content on Thick glass -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_Flyout_Popover"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="Show popover">
+								<Button.Flyout>
+									<Flyout>
+										<StackPanel Spacing="12"
+													Width="240">
+											<TextBlock Text="Popover"
+													   Style="{StaticResource TitleMedium}" />
+											<TextBlock Text="Content sits on Thick glass, behind a hairline, in a 26 px rounded corner."
+													   TextWrapping="Wrap" />
+											<Button Content="Done"
+													Style="{StaticResource CupertinoProminentButtonStyle}"
+													HorizontalAlignment="Right" />
+										</StackPanel>
+									</Flyout>
+								</Button.Flyout>
+							</Button>
+						</smtx:XamlDisplay>
+
+						<!-- A menu: 44 px rows on the same glass -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_Flyout_Menu"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="Show menu">
+								<Button.Flyout>
+									<MenuFlyout>
+										<MenuFlyoutItem Text="Cut">
+											<MenuFlyoutItem.Icon>
+												<SymbolIcon Symbol="Cut" />
+											</MenuFlyoutItem.Icon>
+										</MenuFlyoutItem>
+										<MenuFlyoutItem Text="Copy">
+											<MenuFlyoutItem.Icon>
+												<SymbolIcon Symbol="Copy" />
+											</MenuFlyoutItem.Icon>
+										</MenuFlyoutItem>
+										<MenuFlyoutItem Text="Paste"
+														IsEnabled="False">
+											<MenuFlyoutItem.Icon>
+												<SymbolIcon Symbol="Paste" />
+											</MenuFlyoutItem.Icon>
+										</MenuFlyoutItem>
+										<MenuFlyoutSeparator />
+										<ToggleMenuFlyoutItem Text="Show toolbar"
+															  IsChecked="True" />
+										<MenuFlyoutSubItem Text="Sort by">
+											<RadioMenuFlyoutItem Text="Name"
+																 GroupName="CupertinoSort"
+																 IsChecked="True" />
+											<RadioMenuFlyoutItem Text="Date"
+																 GroupName="CupertinoSort" />
+										</MenuFlyoutSubItem>
+									</MenuFlyout>
+								</Button.Flyout>
+							</Button>
+						</smtx:XamlDisplay>
+					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
 			<sample:SamplePageLayout.SimpleTemplate>

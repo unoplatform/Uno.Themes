@@ -325,7 +325,14 @@ row updated in the same PR.
 
 - [ ] ListView / ListViewItem (inset grouped, hairline separators, group radius token; no glass).
 - [ ] ContentDialog (alert on Thick glass over a dimming layer; hairline button rows).
-- [ ] Flyout / MenuFlyout family / ToolTip (Thick glass popovers, 44 pt items, pop-open animation).
+- [x] Flyout / MenuFlyout family / ToolTip (2026-09-22): `FlyoutPresenter` and `MenuFlyoutPresenter` retemplated
+  on a `GlassPanel Material=Thick` tinted with `CupertinoPopoverTintBrush` (the surface at 76 %, painted from
+  `SurfaceColor` through `BrushColorKeys`), CR 26, hairline rim; menu rows 44 high, Padding 16,0, icon leading
+  22 + 10, checkmark for a checked toggle *or radio* row (Apple's menus have no radio glyph), chevron for a
+  sub-item, separator = hairline in an 8 px band; rows highlight with `SecondaryContainerBrush` and dim when
+  disabled. The `ComboBox` popup is the same glass menu (rows 43 → 44). `CupertinoToolTipStyle` is the
+  macOS tooltip, solid. All 7 semantic keys resolve; ratchet 63 / 72. **Cut:** the pop-open scale animation —
+  Uno's own popup transition is what shows today; add when the maintainer wants it after a GPU look.
 - [ ] NavigationView / NavigationViewItem (glass sidebar, top bar), CommandBar / AppBarButton (one shared
   glass slab per group, prominent primary), PipsPager, RatingControl, Expander.
 - [ ] CalendarView, CalendarDatePicker, DatePicker (+ flyout presenter on a glass backplate).

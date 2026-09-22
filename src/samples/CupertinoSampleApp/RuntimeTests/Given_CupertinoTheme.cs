@@ -146,6 +146,7 @@ public class Given_CupertinoTheme
 	[DataRow("CupertinoButtonStyle")]
 	[DataRow("CupertinoTextBoxStyle")]
 	[DataRow("CupertinoToggleSwitchStyle")]
+	[DataRow("CupertinoToolTipStyle")]
 	public void When_ThemeLoaded_Then_ExistingStyleKeysResolve(string key)
 	{
 		var container = CreateThemedContainer(new CupertinoTheme());
@@ -238,8 +239,6 @@ public class Given_CupertinoTheme
 		"ListViewStyle", "ListViewItemStyle", "ContentDialogStyle",
 		"AppBarButtonStyle", "CommandBarStyle", "NavigationViewStyle", "NavigationViewItemStyle",
 		"PipsPagerStyle", "RatingControlStyle",
-		"FlyoutPresenterStyle", "MenuFlyoutPresenterStyle", "MenuFlyoutItemStyle", "MenuFlyoutSeparatorStyle",
-		"MenuFlyoutSubItemStyle", "ToggleMenuFlyoutItemStyle", "RadioMenuFlyoutItemStyle",
 	};
 
 	[TestMethod]

@@ -6,6 +6,90 @@
 	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
 	<sample:SamplePageLayout>
+		<sample:SamplePageLayout.CupertinoTemplate>
+			<DataTemplate>
+				<StackPanel Spacing="8">
+					<!-- Rows of 44 px on Thick glass; icons lead the label -->
+					<smtx:XamlDisplay UniqueKey="Cupertino_MenuFlyout_WithIcons">
+						<Button Content="Edit">
+							<Button.Flyout>
+								<MenuFlyout>
+									<MenuFlyoutItem Text="Cut">
+										<MenuFlyoutItem.Icon>
+											<SymbolIcon Symbol="Cut" />
+										</MenuFlyoutItem.Icon>
+									</MenuFlyoutItem>
+									<MenuFlyoutItem Text="Copy">
+										<MenuFlyoutItem.Icon>
+											<SymbolIcon Symbol="Copy" />
+										</MenuFlyoutItem.Icon>
+									</MenuFlyoutItem>
+									<MenuFlyoutItem Text="Paste"
+													IsEnabled="False">
+										<MenuFlyoutItem.Icon>
+											<SymbolIcon Symbol="Paste" />
+										</MenuFlyoutItem.Icon>
+									</MenuFlyoutItem>
+								</MenuFlyout>
+							</Button.Flyout>
+						</Button>
+					</smtx:XamlDisplay>
+
+					<!-- Groups: a hairline in an 8 px band -->
+					<smtx:XamlDisplay UniqueKey="Cupertino_MenuFlyout_Groups">
+						<Button Content="File">
+							<Button.Flyout>
+								<MenuFlyout>
+									<MenuFlyoutItem Text="New" />
+									<MenuFlyoutItem Text="Open" />
+									<MenuFlyoutSeparator />
+									<MenuFlyoutItem Text="Save" />
+									<MenuFlyoutItem Text="Save As…" />
+									<MenuFlyoutSeparator />
+									<MenuFlyoutItem Text="Close" />
+								</MenuFlyout>
+							</Button.Flyout>
+						</Button>
+					</smtx:XamlDisplay>
+
+					<!-- Checked rows show a checkmark; a radio row is a checked row too -->
+					<smtx:XamlDisplay UniqueKey="Cupertino_MenuFlyout_Checked">
+						<Button Content="View">
+							<Button.Flyout>
+								<MenuFlyout>
+									<ToggleMenuFlyoutItem Text="Show toolbar"
+														  IsChecked="True" />
+									<ToggleMenuFlyoutItem Text="Show status bar" />
+									<MenuFlyoutSeparator />
+									<RadioMenuFlyoutItem Text="Sort by name"
+														 GroupName="CupertinoSortGroup"
+														 IsChecked="True" />
+									<RadioMenuFlyoutItem Text="Sort by date"
+														 GroupName="CupertinoSortGroup" />
+								</MenuFlyout>
+							</Button.Flyout>
+						</Button>
+					</smtx:XamlDisplay>
+
+					<!-- Sub-menus -->
+					<smtx:XamlDisplay UniqueKey="Cupertino_MenuFlyout_SubItem">
+						<Button Content="Format">
+							<Button.Flyout>
+								<MenuFlyout>
+									<MenuFlyoutItem Text="Bold" />
+									<MenuFlyoutItem Text="Italic" />
+									<MenuFlyoutSubItem Text="Text color">
+										<MenuFlyoutItem Text="Red" />
+										<MenuFlyoutItem Text="Green" />
+										<MenuFlyoutItem Text="Blue" />
+									</MenuFlyoutSubItem>
+								</MenuFlyout>
+							</Button.Flyout>
+						</Button>
+					</smtx:XamlDisplay>
+				</StackPanel>
+			</DataTemplate>
+		</sample:SamplePageLayout.CupertinoTemplate>
 		<sample:SamplePageLayout.SimpleTemplate>
 			<DataTemplate>
 				<StackPanel Spacing="8">
