@@ -762,3 +762,25 @@ Result: red (`Missing KnobVisual` / `Missing ThumbVisual`) → fix → green; Cu
 reverted: the rest states set it back explicitly. `Clear` had no other consumer and is now the knob lens
 (sigma 6, saturation 1.1, refraction 9, rim 0.65, veil 0.08 — starting values). Not yet seen on a GPU;
 the user tunes scale, `Translation.Z` and the `Clear` preset on the Mac against the iOS 26 switch.
+
+Follow-up, same day, after the user's Mac capture: the lifted knob rendered as a flat grey pill with a white
+outline — scale worked, the `ThemeShadow` did nothing, and a same-size glass over a flat track has nothing
+to refract. Measured on Windows software Skia with a throwaway luma-profile test (removed):
+
+- `ThemeShadow` on the scaled Grid holding the glass: nothing. Uno's analytic shadow walks the subtree for
+  shape paths and gives up at the backdrop-sampling `SKCanvasElement`; the picture fallback replays the
+  subtree through a drop-shadow filter, where the backdrop read is empty, so only the 1 px rim casts.
+- `ThemeShadow` on a `Border` inside a control template (`PART_Fill`, or `ContentControl > Grid > Border`):
+  nothing, while the same shadow on a bare `Border`, on a `Grid` in the template, or on the control itself
+  renders. Cause not found; worked around, worth an upstream repro.
+- Uno computes the shadow from `Translation.Z` once, when `Shadow` is assigned; later translation changes
+  are ignored. Set the depth first.
+- Controls do **not** clip their template subtree: the 1.4× thumb escapes the 40 × 24 `Thumb`, and the
+  backplate's inflated bounds draw outside the `GlassPanel`.
+
+Fix: the backplate draws the lens itself — drop shadow (dy 4, σ 5, α 0.28, outside the shape only, with the
+element inflated by a −20 px margin), a top-lit gradient rim (0.8 → 0.36) and a blurred inner band along
+the top interior (α 0.16) — driven by two new `GlassPreset` fields, non-zero only for `Clear`. In the Solid
+tier the panel sets `ThemeShadow` + `Translation.Z` 12 on itself. Rest shadows: `ThemeShadow` Z 6 on the
+`SolidKnob` / `SolidThumb` Grids. `Given_GlassPanel.When_ClearMaterial_Then_ShadowFallsBelow` samples the
+pixel 2 px below the panel on both tiers (Regular 255, Clear < 245). Still unmeasured on a GPU.

@@ -51,10 +51,6 @@
 							<VisualStateGroup x:Name="CommonStates">
 
 								<VisualState x:Name="Normal">
-									<VisualState.Setters>
-										<!-- Translation is not a DependencyProperty: a setter on it is applied but not reverted, so rest states set it explicitly. -->
-										<Setter Target="KnobVisual.Translation" Value="{StaticResource CupertinoKnobRestTranslation}" />
-									</VisualState.Setters>
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="KnobScaleTransform"
 														 Storyboard.TargetProperty="ScaleX"
@@ -68,10 +64,6 @@
 								</VisualState>
 
 								<VisualState x:Name="PointerOver">
-									<VisualState.Setters>
-										<!-- Translation is not a DependencyProperty: a setter on it is applied but not reverted, so rest states set it explicitly. -->
-										<Setter Target="KnobVisual.Translation" Value="{StaticResource CupertinoKnobRestTranslation}" />
-									</VisualState.Setters>
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="KnobScaleTransform"
 														 Storyboard.TargetProperty="ScaleX"
@@ -90,7 +82,6 @@
 										<Setter Target="SwitchThumbGlass.Visibility" Value="Visible" />
 										<Setter Target="SwitchThumbGlass.RenderingMode" Value="Auto" />
 										<Setter Target="SolidKnob.Visibility" Value="Collapsed" />
-										<Setter Target="KnobVisual.Translation" Value="{StaticResource CupertinoKnobLiftTranslation}" />
 									</VisualState.Setters>
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="KnobScaleTransform"
@@ -361,11 +352,12 @@
 								<Grid.RenderTransform>
 									<ScaleTransform x:Name="KnobScaleTransform" />
 								</Grid.RenderTransform>
-								<Grid.Shadow>
-									<ThemeShadow />
-								</Grid.Shadow>
 
-								<Grid x:Name="SolidKnob">
+								<Grid x:Name="SolidKnob"
+									  Translation="{StaticResource CupertinoKnobRestTranslation}">
+									<Grid.Shadow>
+										<ThemeShadow />
+									</Grid.Shadow>
 									<Border Background="{TemplateBinding Foreground}"
 											CornerRadius="{ThemeResource Radius300CornerRadius}"
 											x:Name="SwitchKnobOn"

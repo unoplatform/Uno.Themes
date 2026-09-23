@@ -8,7 +8,9 @@ namespace Uno.Cupertino;
 /// <param name="Refraction">Displacement of the backdrop along the edge, in pixels.</param>
 /// <param name="Rim">Alpha of the white specular rim, 0–1.</param>
 /// <param name="Veil">Opacity of the panel's <c>Background</c> over the glass, 0–1. It keeps content on top legible.</param>
-internal readonly record struct GlassPreset(float Sigma, float Saturation, float Refraction, float Rim, float Veil)
+/// <param name="Shadow">Alpha of the drop shadow the surface casts on what is beneath it, 0–1. 0 casts none.</param>
+/// <param name="InnerShadow">Alpha of the dark band inside the lit edge, 0–1, which gives a small lens its curvature.</param>
+internal readonly record struct GlassPreset(float Sigma, float Saturation, float Refraction, float Rim, float Veil, float Shadow = 0, float InnerShadow = 0)
 {
 	// Starting values from spec 10 (token-and-style-mapping.md §7): tuned from Apple's qualitative rules
 	// and Cupertino.Avalonia's presets, still to be measured against the iOS 26 design kit.
@@ -17,9 +19,10 @@ internal readonly record struct GlassPreset(float Sigma, float Saturation, float
 		GlassMaterial.Prominent => new(Sigma: 12, Saturation: 1.0f, Refraction: 7, Rim: 0.18f, Veil: 0.10f),
 		GlassMaterial.Thin => new(Sigma: 4, Saturation: 1.1f, Refraction: 9, Rim: 0.12f, Veil: 0.12f),
 		GlassMaterial.Thick => new(Sigma: 30, Saturation: 1.8f, Refraction: 3, Rim: 0.5f, Veil: 0.55f),
-		// Clear is the lens of a lifted switch/slider knob: barely veiled so the track shows through, with a
-		// bright rim so it reads against a flat track. Unmeasured starting values; tune on a GPU.
-		GlassMaterial.Clear => new(Sigma: 6, Saturation: 1.1f, Refraction: 9, Rim: 0.65f, Veil: 0.08f),
+		// Clear is the lens of a lifted switch/slider knob: barely veiled so the track shows through, a bright
+		// rim, a drop shadow and inner shading so it reads as a lifted lens on a flat track. Unmeasured
+		// starting values; tune on a GPU.
+		GlassMaterial.Clear => new(Sigma: 6, Saturation: 1.1f, Refraction: 9, Rim: 0.8f, Veil: 0.08f, Shadow: 0.28f, InnerShadow: 0.16f),
 		_ => new(Sigma: 12, Saturation: 1.3f, Refraction: 7, Rim: 0.30f, Veil: 0.22f),
 	};
 }

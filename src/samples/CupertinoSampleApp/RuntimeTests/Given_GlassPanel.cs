@@ -160,6 +160,47 @@ public class Given_GlassPanel
 		}
 	}
 
+	// The Clear material is the lifted knob lens: it must cast a visible shadow below itself on both tiers —
+	// drawn by the backplate in Liquid (ThemeShadow cannot see a backdrop-sampling canvas), by ThemeShadow on
+	// the panel in Solid. Regular casts none, so the comparison is not vacuous.
+	[TestMethod]
+	[DataRow(GlassRenderingMode.Liquid)]
+	[DataRow(GlassRenderingMode.Solid)]
+	[RunsOnUIThread]
+	public async Task When_ClearMaterial_Then_ShadowFallsBelow(GlassRenderingMode mode)
+	{
+		try
+		{
+			var container = CreateThemedContainer();
+			container.Background = new SolidColorBrush(Colors.White);
+			var panel = await LoadPanel(container, mode);
+			Assert.AreEqual(mode, panel.ActualRenderingMode);
+
+			// The panel is centered: x 20–180, y 30–70. Sample 2 px below its bottom edge, mid-width.
+			var regular = await LumaBelowAsync(container, panel, GlassMaterial.Regular);
+			var clear = await LumaBelowAsync(container, panel, GlassMaterial.Clear);
+
+			Assert.AreEqual(255, regular, "Regular glass casts no shadow");
+			Assert.IsTrue(clear < 245, $"Clear glass should darken the surface below it, luma was {clear}");
+		}
+		finally
+		{
+			UnitTestsUIContentHelper.Content = null;
+		}
+	}
+
+	private static async Task<int> LumaBelowAsync(Grid container, GlassPanel panel, GlassMaterial material)
+	{
+		panel.Material = material;
+		await UnitTestsUIContentHelper.WaitForIdle();
+		var bitmap = new RenderTargetBitmap();
+		await bitmap.RenderAsync(container);
+		var pixels = (await bitmap.GetPixelsAsync()).ToArray();
+		var scale = bitmap.PixelWidth / container.ActualWidth;
+		var i = (((int)(72 * scale) * bitmap.PixelWidth) + (int)(100 * scale)) * 4;
+		return (pixels[i] + pixels[i + 1] + pixels[i + 2]) / 3;
+	}
+
 	// Largest luminance difference between two neighboring pixels of a BGRA row.
 	private static int SharpestStep(byte[] bgra, int stride, int y, int fromX, int toX)
 	{

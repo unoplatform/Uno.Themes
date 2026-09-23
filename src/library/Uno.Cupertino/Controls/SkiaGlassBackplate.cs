@@ -45,6 +45,17 @@ internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 
 	private const float RimStrokeWidth = 1f;
 
+	// Drop shadow of a preset with Shadow > 0: offset down, blurred. The element is inflated by ShadowMargin
+	// on every side (a negative Margin set by GlassPanel) so the shadow has room outside the glass shape.
+	private const float ShadowDy = 4f;
+	private const float ShadowSigma = 5f;
+	internal const float ShadowMargin = 20f;
+
+	// Inner shadow: a blurred dark stroke pushed down into the shape, so it shows along the top interior.
+	private const float InnerShadowWidth = 6f;
+	private const float InnerShadowSigma = 3f;
+	private const float InnerShadowDy = 2f;
+
 	private static readonly Lazy<SKRuntimeEffect?> _normalMap = new(CreateNormalMap);
 
 	private SKImageFilter? _chain;
@@ -134,9 +145,32 @@ internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 			return;
 		}
 
-		var bounds = new SKRect(0, 0, width, height);
-		var radius = Math.Clamp(Radius, 0, Math.Min(width, height) / 2);
+		var inset = Preset.Shadow > 0 ? ShadowMargin : 0;
+		var bounds = new SKRect(inset, inset, width - inset, height - inset);
+		if (bounds.Width <= 0 || bounds.Height <= 0)
+		{
+			return;
+		}
+
+		var radius = Math.Clamp(Radius, 0, Math.Min(bounds.Width, bounds.Height) / 2);
 		using var shape = new SKRoundRect(bounds, radius);
+
+		if (Preset.Shadow > 0)
+		{
+			// Only outside the shape: the lens stays clear and the shadow does not darken its own backdrop.
+			canvas.Save();
+			canvas.ClipRoundRect(shape, SKClipOperation.Difference, true);
+			canvas.Translate(0, ShadowDy);
+			using var shadowFilter = SKMaskFilter.CreateBlur(SKBlurStyle.Normal, ShadowSigma);
+			using var shadow = new SKPaint
+			{
+				Color = SKColors.Black.WithAlpha((byte)(Preset.Shadow * _layerOpacity * 255)),
+				IsAntialias = true,
+				MaskFilter = shadowFilter,
+			};
+			canvas.DrawRoundRect(shape, shadow);
+			canvas.Restore();
+		}
 
 		var key = (width, height, radius, Preset);
 		if (_chain is null || key != _chainKey)
@@ -155,14 +189,38 @@ internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 		using var layerPaint = new SKPaint { Color = SKColors.White.WithAlpha((byte)(_layerOpacity * 255)) };
 		canvas.SaveLayer(new SKCanvasSaveLayerRec { Bounds = bounds, Backdrop = _chain, Paint = layerPaint });
 
+		if (Preset.InnerShadow > 0)
+		{
+			// The clip keeps the half of the stroke that falls inside the shape.
+			using var innerFilter = SKMaskFilter.CreateBlur(SKBlurStyle.Normal, InnerShadowSigma);
+			using var inner = new SKPaint
+			{
+				Color = SKColors.Black.WithAlpha((byte)(Preset.InnerShadow * 255)),
+				IsAntialias = true,
+				Style = SKPaintStyle.Stroke,
+				StrokeWidth = InnerShadowWidth,
+				MaskFilter = innerFilter,
+			};
+			canvas.Save();
+			canvas.Translate(0, InnerShadowDy);
+			canvas.DrawRoundRect(shape, inner);
+			canvas.Restore();
+		}
+
 		if (Preset.Rim > 0)
 		{
-			// Inset by half the stroke so the clip does not cut the rim in two.
+			// Inset by half the stroke so the clip does not cut the rim in two. Lit from above: full alpha at
+			// the top edge, fading towards the bottom.
 			using var rimShape = new SKRoundRect(bounds, radius);
 			rimShape.Deflate(RimStrokeWidth / 2, RimStrokeWidth / 2);
+			using var rimShader = SKShader.CreateLinearGradient(
+				new SKPoint(bounds.MidX, bounds.Top),
+				new SKPoint(bounds.MidX, bounds.Bottom),
+				new[] { SKColors.White.WithAlpha((byte)(Preset.Rim * 255)), SKColors.White.WithAlpha((byte)(Preset.Rim * 0.45f * 255)) },
+				SKShaderTileMode.Clamp);
 			using var rim = new SKPaint
 			{
-				Color = SKColors.White.WithAlpha((byte)(Preset.Rim * 255)),
+				Shader = rimShader,
 				IsAntialias = true,
 				Style = SKPaintStyle.Stroke,
 				StrokeWidth = RimStrokeWidth,

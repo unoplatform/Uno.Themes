@@ -36,10 +36,6 @@
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal">
-									<VisualState.Setters>
-										<!-- Translation is not a DependencyProperty: a setter on it is applied but not reverted, so rest states set it explicitly. -->
-										<Setter Target="ThumbVisual.Translation" Value="{StaticResource CupertinoSliderThumbRestTranslation}" />
-									</VisualState.Setters>
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="ThumbScaleTransform"
 														 Storyboard.TargetProperty="ScaleX"
@@ -52,10 +48,6 @@
 									</Storyboard>
 								</VisualState>
 								<VisualState x:Name="PointerOver">
-									<VisualState.Setters>
-										<!-- Translation is not a DependencyProperty: a setter on it is applied but not reverted, so rest states set it explicitly. -->
-										<Setter Target="ThumbVisual.Translation" Value="{StaticResource CupertinoSliderThumbRestTranslation}" />
-									</VisualState.Setters>
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="ThumbScaleTransform"
 														 Storyboard.TargetProperty="ScaleX"
@@ -73,7 +65,6 @@
 										<Setter Target="ThumbGlass.Visibility" Value="Visible" />
 										<Setter Target="ThumbGlass.RenderingMode" Value="Auto" />
 										<Setter Target="SolidThumb.Visibility" Value="Collapsed" />
-										<Setter Target="ThumbVisual.Translation" Value="{StaticResource CupertinoKnobLiftTranslation}" />
 									</VisualState.Setters>
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="ThumbScaleTransform"
@@ -99,21 +90,23 @@
 								<VisualState x:Name="Disabled" />
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
-						<!-- The thumb rests on a shadow (legacy 28 pt white thumb with shadow) and lifts higher while pressed. -->
+						<!-- The thumb rests on a shadow (legacy 28 pt white thumb with shadow); the pressed glass draws a deeper one. -->
 						<Grid x:Name="ThumbVisual"
-							  RenderTransformOrigin="0.5,0.5"
-							  Translation="{StaticResource CupertinoSliderThumbRestTranslation}">
+							  RenderTransformOrigin="0.5,0.5">
 							<Grid.RenderTransform>
 								<ScaleTransform x:Name="ThumbScaleTransform" />
 							</Grid.RenderTransform>
-							<Grid.Shadow>
-								<ThemeShadow />
-							</Grid.Shadow>
-							<Border x:Name="SolidThumb"
-									Background="{TemplateBinding Background}"
-									BorderBrush="{TemplateBinding BorderBrush}"
-									BorderThickness="{TemplateBinding BorderThickness}"
-									CornerRadius="{ThemeResource Radius300CornerRadius}" />
+							<!-- The shadow sits on a Grid: a ThemeShadow on a Border inside a control template does not render on Uno Skia. -->
+							<Grid x:Name="SolidThumb"
+								  Translation="{StaticResource CupertinoKnobRestTranslation}">
+								<Grid.Shadow>
+									<ThemeShadow />
+								</Grid.Shadow>
+								<Border Background="{TemplateBinding Background}"
+										BorderBrush="{TemplateBinding BorderBrush}"
+										BorderThickness="{TemplateBinding BorderThickness}"
+										CornerRadius="{ThemeResource Radius300CornerRadius}" />
+							</Grid>
 							<!-- Explicit Solid while hidden releases the per-frame backplate after interaction. -->
 							<uc:GlassPanel x:Name="ThumbGlass"
 										   Material="Clear"

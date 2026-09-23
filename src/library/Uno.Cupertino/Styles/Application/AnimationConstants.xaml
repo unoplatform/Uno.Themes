@@ -17,11 +17,10 @@
 		Knob lift while a switch or slider knob is pressed (HIG Materials: knobs become glass only during
 		interaction). Apple's interactive spring responds in 0.15 s; the BackEase in the templates supplies the
 		overshoot. 1.4 makes a 24 px knob overhang a 28 px track so the lens refracts the track edge.
-		Translation.Z drives the ThemeShadow depth; strings because Vector3 has no XAML literal.
+		The solid knob rests on a ThemeShadow whose depth is Translation.Z (a string: Vector3 has no XAML
+		literal); the pressed glass knob draws its own, deeper shadow.
 	-->
 	<Duration x:Key="CupertinoKnobLiftDuration">0:0:0.15</Duration>
 	<x:Double x:Key="CupertinoKnobLiftScale">1.4</x:Double>
-	<x:String x:Key="CupertinoKnobLiftTranslation">0,0,12</x:String>
-	<x:String x:Key="CupertinoKnobRestTranslation">0,0,0</x:String>
-	<x:String x:Key="CupertinoSliderThumbRestTranslation">0,0,4</x:String>
+	<x:String x:Key="CupertinoKnobRestTranslation">0,0,6</x:String>
 </ResourceDictionary>

@@ -407,5 +407,10 @@ asserted `Visibility` and the tier enum. On a GPU the user saw nothing: blurred 
   non-uniform backdrop, or carry its own shadow and rim; otherwise design the lift (scale, shadow) first.
 - `UIElement.Translation` is a plain CLR property in Uno. A `VisualState` setter on it applies but does not
   revert on state exit — every rest state must set it back explicitly.
-- `ElevatedView` does not follow a scaled child; use `ThemeShadow` + `Translation.Z` on the element that
-  scales.
+- `ElevatedView` does not follow a scaled child. `ThemeShadow` + `Translation.Z` follows the element it is on,
+  but only casts from shape visuals (Border / Grid backgrounds): a backdrop-sampling `SKCanvasElement` casts
+  nothing, so glass draws its own shadow. Uno reads `Translation.Z` once, when `Shadow` is assigned — set the
+  depth first. And on Uno 7.0-dev.701 a `ThemeShadow` on a `Border` nested in a control template never
+  renders while a `Grid` in the same place does — put template shadows on a Grid, or on the control itself.
+- Measure before theorising about the renderer: a throwaway runtime test printing a luma profile below the
+  element settled in one run what three rounds of source reading had not.

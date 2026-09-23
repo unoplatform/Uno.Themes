@@ -1,5 +1,6 @@
 #nullable enable
 using System;
+using System.Numerics;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
@@ -26,6 +27,11 @@ namespace Uno.Cupertino;
 /// does not idle while one is on screen. Use glass for a few large or transient surfaces, never inside
 /// item templates.
 /// </para>
+/// <para>
+/// A material that casts a shadow (<see cref="GlassMaterial.Clear"/>) draws it inside the glass when the
+/// backdrop is drawn; in the solid rendering the panel sets its own <see cref="UIElement.Shadow"/> and
+/// <c>Translation.Z</c> instead, so do not set those on a panel yourself.
+/// </para>
 /// </remarks>
 [TemplatePart(Name = RootPartName, Type = typeof(Grid))]
 [TemplatePart(Name = FillPartName, Type = typeof(Border))]
@@ -33,6 +39,9 @@ public partial class GlassPanel : Control
 {
 	private const string RootPartName = "PART_Root";
 	private const string FillPartName = "PART_Fill";
+
+	// Translation.Z of the Solid tier's fill when the material casts a shadow; the same lift as the Liquid tier's drawn shadow.
+	private const float SolidShadowDepth = 12f;
 
 	private Grid? _root;
 	private Border? _fill;
@@ -160,7 +169,11 @@ public partial class GlassPanel : Control
 			_backplate.Preset = preset;
 			// ponytail: one radius for all four corners; per-corner radii need a second normal map.
 			_backplate.Radius = (float)CornerRadius.TopLeft;
+			// The backplate draws the drop shadow itself: Uno's ThemeShadow derives its silhouette from shape
+			// visuals and cannot see a backdrop-sampling canvas. Inflate it so the shadow has room.
+			_backplate.Margin = preset.Shadow > 0 ? new Thickness(-SkiaGlassBackplate.ShadowMargin) : default;
 			_fill.Opacity = preset.Veil;
+			SetSolidShadow(0);
 			return;
 		}
 
@@ -168,6 +181,18 @@ public partial class GlassPanel : Control
 		_backplate = null;
 #endif
 		_fill.Opacity = 1;
+		SetSolidShadow(GlassPreset.For(Material).Shadow);
+	}
+
+	// Solid tier: the panel is an opaque shape, so ThemeShadow works — on the panel itself. A ThemeShadow on the
+	// fill Border inside the template never renders on Uno Skia (measured; a Grid in the same place does), and
+	// in the Liquid tier the backplate draws the shadow because the analytic shadow cannot see a canvas.
+	private void SetSolidShadow(float shadow)
+	{
+		// Uno computes the shadow from Translation.Z once, when Shadow is assigned, and does not follow later
+		// translation changes: set the depth first and assign a fresh shadow every time.
+		Translation = new Vector3(Translation.X, Translation.Y, shadow > 0 ? SolidShadowDepth : 0);
+		Shadow = shadow > 0 ? new ThemeShadow() : null;
 	}
 
 	private GlassRenderingMode ResolveTier()
