@@ -37,10 +37,6 @@ namespace Uno.Themes.Helpers;
 /// </remarks>
 internal static class SemanticBrushUpdater
 {
-	private const string ColorSuffix = "Color";
-	private const string BrushSuffix = "Brush";
-	private const string OpacitySuffix = "Opacity";
-
 	// The base (state-less) brush declares no Opacity in XAML, so it keeps the default.
 	private const double OpaqueOpacity = 1.0;
 
@@ -61,11 +57,11 @@ internal static class SemanticBrushUpdater
 
 		for (int i = 0; i < colorKeys.Length; i++)
 		{
-			var role = colorKeys[i].Substring(0, colorKeys[i].Length - ColorSuffix.Length);
+			var role = colorKeys[i].Substring(0, colorKeys[i].Length - ThemesConstants.ColorSuffix.Length);
 			keys[i] = new string[states.Length];
 			for (int j = 0; j < states.Length; j++)
 			{
-				keys[i][j] = role + states[j] + BrushSuffix;
+				keys[i][j] = role + states[j] + ThemesConstants.BrushSuffix;
 			}
 		}
 
@@ -79,7 +75,7 @@ internal static class SemanticBrushUpdater
 
 		for (int i = 0; i < states.Length; i++)
 		{
-			keys[i] = states[i].Length == 0 ? null : states[i] + OpacitySuffix;
+			keys[i] = states[i].Length == 0 ? null : states[i] + ThemesConstants.OpacitySuffix;
 		}
 
 		return keys;
