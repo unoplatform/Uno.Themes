@@ -800,3 +800,7 @@ Third Mac round ("not great"): the band ate a third of the knob and the body was
 (a 3.5 px shift, an eighth of the knob, as in the iOS capture), body darkening 0.14 → 0.2 and its inset now
 derived from the shift plus the rim instead of half the band. Checked against the iOS capture on a
 #F2F2F7 background at 4×. Still to be judged on the Mac; a 2× (Retina) screenshot helps.
+
+Fourth Mac round (full-resolution screenshot, cropped 8×): the three zones are there in the right
+proportion; against iOS the band was grey, the body lighter and its edge softer. Added `BandLight` (a white
+cast over the band between rim and body, 0.45), body darkening 0.2 → 0.26 with its blur 2 → 1.

@@ -59,7 +59,7 @@ internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 
 	// Inner shadow: a soft dark fill over the lens body, inset by the refracting band, so the band stays bright
 	// while what shows through the flat centre of the lens reads darker — a thick slab, not a film.
-	private const float InnerShadowSigma = 2f;
+	private const float InnerShadowSigma = 1f;
 
 	private static readonly Lazy<SKRuntimeEffect?> _normalMap = new(CreateNormalMap);
 
@@ -199,21 +199,35 @@ internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 		using var layerPaint = new SKPaint { Color = SKColors.White.WithAlpha((byte)(_layerOpacity * 255)) };
 		canvas.SaveLayer(new SKCanvasSaveLayerRec { Bounds = sampleBounds, Backdrop = _chain, Paint = layerPaint });
 
-		if (Preset.InnerShadow > 0)
+		if (Preset.InnerShadow > 0 || Preset.BandLight > 0)
 		{
 			// The body starts where the inset copy of the surroundings starts: one displacement (half the
-			// DisplacementMap scale) plus the rim in from the edge.
+			// DisplacementMap scale) plus the rim in from the edge. The band between rim and body catches
+			// light; the body reads darker, like looking down through a thick slab.
 			var bodyInset = (Preset.Refraction / 2) + Preset.RimWidth;
 			using var body = new SKRoundRect(bounds, radius);
 			body.Deflate(bodyInset, bodyInset);
-			using var innerFilter = SKMaskFilter.CreateBlur(SKBlurStyle.Normal, InnerShadowSigma);
-			using var inner = new SKPaint
+
+			if (Preset.BandLight > 0)
 			{
-				Color = SKColors.Black.WithAlpha((byte)(Preset.InnerShadow * 255)),
-				IsAntialias = true,
-				MaskFilter = innerFilter,
-			};
-			canvas.DrawRoundRect(body, inner);
+				using var band = new SKPaint { Color = SKColors.White.WithAlpha((byte)(Preset.BandLight * 255)), IsAntialias = true };
+				canvas.Save();
+				canvas.ClipRoundRect(body, SKClipOperation.Difference, true);
+				canvas.DrawRoundRect(shape, band);
+				canvas.Restore();
+			}
+
+			if (Preset.InnerShadow > 0)
+			{
+				using var innerFilter = SKMaskFilter.CreateBlur(SKBlurStyle.Normal, InnerShadowSigma);
+				using var inner = new SKPaint
+				{
+					Color = SKColors.Black.WithAlpha((byte)(Preset.InnerShadow * 255)),
+					IsAntialias = true,
+					MaskFilter = innerFilter,
+				};
+				canvas.DrawRoundRect(body, inner);
+			}
 		}
 
 		if (Preset.Rim > 0)
