@@ -28,6 +28,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `SimpleToggleButtonSmallFontSize`            | `Double`          | `BodyMediumFontSize`             |
 | `SimpleToggleButtonIconSpacing`              | `Double`          | `SimpleSpace200`                 |
 | `SimpleToggleButtonFontFamily`               | `FontFamily`      | Inter                            |
+| `SimpleToggleButtonFontWeight`               | `String`          | Medium                           |
 
 ### Unchecked
 

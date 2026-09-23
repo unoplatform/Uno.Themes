@@ -19,7 +19,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `MaterialSliderThumbDisabledColor`    | `Color`           | #685C64                                        |
 | `MaterialSliderThumbDisabledBrush`    | `SolidColorBrush` | `Color` = `MaterialSliderThumbDisabledColor`   |
 | `SliderFocusVisualMargin`             | `Thickness`       | -7,0                                           |
-| `SliderFontFamily`                    | `FontFamily`      | `MaterialRegularFontFamily`                    |
+| `SliderFontFamily`                    | `FontFamily`      | `DefaultFontFamily`                            |
 | `SliderFontSize`                      | `Double`          | `LabelMediumFontSize`                          |
 | `SliderTrackFill`                     | `SolidColorBrush` | `SurfaceVariantBrush`                          |
 | `SliderTrackFillDisabled`             | `SolidColorBrush` | `OnSurfaceSelectedBrush`                       |

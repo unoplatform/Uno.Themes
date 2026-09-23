@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using Uno.Extensions.Markup.Generator;
 using Uno.Extensions.Markup.Internals;
 

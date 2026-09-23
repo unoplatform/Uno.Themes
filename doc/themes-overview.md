@@ -18,6 +18,13 @@ uid: Uno.Themes.Overview
 - [Simple Overview](simple-getting-started.md)
 - [Fluent Overview](fluent-getting-started.md)
 
+Cross-cutting guides shared by the theme libraries:
+
+- [Seed Color Palette](seed-colors.md) — generate the full Light and Dark color theme from a single seed color (Material and Simple)
+- [Semantic Styles](semantic-styles.md) — design-system-agnostic style names, so you can switch themes without changing your XAML
+- [Design Tokens](design-tokens.md) — spacing, shape, and density values you can adjust globally
+- [Lightweight Styling](lightweight-styling.md) — override individual colors, brushes, and sizes per control without redefining the control template
+
 ## Uno Themes Styles
 
 [Uno Themes](https://github.com/unoplatform/Uno.Themes) is the repository for add-ons enabled through UnoFeatures that can be added to any new or existing Uno solution.
@@ -31,7 +38,7 @@ It contains four libraries:
 
 `Material`, `Cupertino`, and `Simple` libraries help you style your application with a few lines of code including:
 
-- Color system for both Light and Dark themes
+- Color system for both Light and Dark themes — customizable wholesale from a single [seed color](seed-colors.md), or key-by-key via overrides, with helper classes such as `SemanticThemeHelper` for changing colors at runtime
 - Styles for existing WinUI controls like Buttons, TextBox, etc.
 
 ## Fluent Controls Styles

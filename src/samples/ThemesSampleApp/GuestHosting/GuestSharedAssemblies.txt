@@ -1,0 +1,48 @@
+# Share-vs-isolate policy for guest assembly resolution — SINGLE SOURCE OF TRUTH, read by
+# BOTH GuestAssemblyLoadContext (embedded resource) and the _IncludeGuestWasmAssemblies wasm
+# payload filter in ThemesSampleApp.csproj (ReadLinesFromFile). One rule per line:
+#   =Name    share with the default ALC on exact simple-name match; excluded from the wasm payload
+#   ^Prefix  share with the default ALC on prefix match; excluded from the wasm payload
+#   ~Name    share on exact match, but STILL SHIPPED in the payload (the wrapper's own closure
+#            does not carry it, so the guest directory must — this marker is why Uno.UI.Lottie
+#            was once stranded: excluded but unresolvable)
+#   !Prefix  ALWAYS isolate per-ALC on prefix match; always shipped. Isolation wins over sharing.
+# Invariant: every =/^ name MUST be resolvable from the wrapper's default ALC at runtime
+# (its own closure or the shared framework), or wasm guests fail to bind it.
+
+# Repo-built theme libraries under test: deterministic isolation, even when the host has a
+# same-named assembly loaded (the Uno SDK's Debug-only Hot Design tooling eagerly loads the
+# *published* Uno.Themes.WinUI into the default ALC). Prefix match so *.Markup stays isolated.
+!Uno.Themes.WinUI
+!Uno.Material.WinUI
+!Uno.Cupertino.WinUI
+!Uno.Simple.WinUI
+
+# Framework assemblies whose types cross the host/guest boundary (type identity).
+=Uno.UI
+=Uno
+=Uno.UI.Composition
+=Uno.UI.Dispatching
+=Uno.WinUI.Graphics2DSK
+=Microsoft.CSharp
+=netstandard
+=mscorlib
+
+# Not in the wrapper's closure — shared when the host happens to carry it, shipped for wasm.
+~Uno.UI.Lottie
+
+# "Uno.UI.Runtime." keeps its trailing dot so "Uno.UI.RuntimeTests*" stays per-ALC.
+^Uno.UI.Runtime.
+^Uno.UI.FluentTheme
+# Ships in the wrapper's own closure.
+^Uno.UI.Adapter.
+# Prefix (not equals) so Uno.Foundation.Runtime.WebAssembly shares deterministically instead
+# of relying on tier-1 already-loaded luck.
+^Uno.Foundation
+^SkiaSharp
+^HarfBuzzSharp
+^System
+^Microsoft.Extensions.
+# Shared-framework facades resolvable from the default ALC even when the wrapper never loaded them.
+^Microsoft.Win32
+^Microsoft.VisualBasic

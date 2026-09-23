@@ -30,7 +30,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `HyperlinkButtonBorderBrushPressed`           | `SolidColorBrush` | `SystemControlTransparentBrush` |
 | `HyperlinkButtonBorderBrushDisabled`          | `SolidColorBrush` | `SystemControlTransparentBrush` |
 | `HyperlinkButtonFontSize`                     | `Double`          | `LabelLargeFontSize`            |
-| `HyperlinkButtonFontFamily`                   | `FontFamily`      | `MaterialRegularFontFamily`     |
+| `HyperlinkButtonFontFamily`                   | `FontFamily`      | `DefaultFontFamily`             |
 | `HyperlinkButtonBackgroundOpacity`            | `Double`          | 1                               |
 | `HyperlinkButtonBackgroundOpacityPointerOver` | `Double`          | `MediumOpacity`                 |
 | `HyperlinkButtonBackgroundOpacityPressed`     | `Double`          | `LowOpacity`                    |

@@ -1,4 +1,4 @@
-﻿using Microsoft.UI.Text;
+using Microsoft.UI.Text;
 using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
 

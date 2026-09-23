@@ -37,7 +37,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `SimpleButtonSmallFontSize`          | `Double`          | `BodySmallFontSize`              |
 | `SimpleButtonIconSpacing`            | `Double`          | `SimpleSpace200`                 |
 | `SimpleButtonFontFamily`             | `FontFamily`      | Inter                            |
-| `SimpleButtonFontWeight`             | `String`          | Normal                           |
+| `SimpleButtonFontWeight`             | `String`          | Medium                           |
 
 ### IconButton
 

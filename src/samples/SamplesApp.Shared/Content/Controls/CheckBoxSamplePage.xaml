@@ -3,11 +3,9 @@
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	  xmlns:sample="using:Uno.Themes.Samples"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-	  xmlns:android="http://uno.ui/android"
-	  xmlns:ios="http://uno.ui/ios"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:smtx="using:ShowMeTheXAML"
-	  mc:Ignorable="d android ios">
+	  mc:Ignorable="d">
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 		<sample:SamplePageLayout>
@@ -202,19 +200,19 @@
 									  IsChecked="True" />
 						</smtx:XamlDisplay>
 						<!-- CheckBox OFF Disabled -->
-							<smtx:XamlDisplay UniqueKey="Cupertino_CheckBoxSamplePage_OffDisabled">
+						<smtx:XamlDisplay UniqueKey="Cupertino_CheckBoxSamplePage_OffDisabled">
 							<CheckBox Content="DISABLED"
-										  Style="{StaticResource CupertinoCheckBoxStyle}"
-										IsEnabled="False" />
+									  Style="{StaticResource CupertinoCheckBoxStyle}"
+									  IsEnabled="False" />
 						</smtx:XamlDisplay>
 
 						<!-- CheckBox ON Disabled -->
-							<smtx:XamlDisplay UniqueKey="Cupertino_CheckBoxSamplePage_OnDisabled">
-								<CheckBox Content="CHECKED DISABLED"
-										  Style="{StaticResource CupertinoCheckBoxStyle}"
-										  IsEnabled="False"
-										  IsChecked="True" />
-							</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Cupertino_CheckBoxSamplePage_OnDisabled">
+							<CheckBox Content="CHECKED DISABLED"
+									  Style="{StaticResource CupertinoCheckBoxStyle}"
+									  IsEnabled="False"
+									  IsChecked="True" />
+						</smtx:XamlDisplay>
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
@@ -228,25 +226,34 @@
 						</smtx:XamlDisplay>
 						<smtx:XamlDisplay UniqueKey="Simple_CheckBox_Checked"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<CheckBox Content="Checked" IsChecked="True" />
+							<CheckBox Content="Checked"
+									  IsChecked="True" />
 						</smtx:XamlDisplay>
 						<smtx:XamlDisplay UniqueKey="Simple_CheckBox_Indeterminate"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<CheckBox Content="Indeterminate" IsChecked="{x:Null}" IsThreeState="True" />
+							<CheckBox Content="Indeterminate"
+									  IsChecked="{x:Null}"
+									  IsThreeState="True" />
 						</smtx:XamlDisplay>
 
 						<!-- Disabled States -->
 						<smtx:XamlDisplay UniqueKey="Simple_CheckBox_DisabledUnchecked"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<CheckBox Content="Disabled Unchecked" IsEnabled="False" />
+							<CheckBox Content="Disabled Unchecked"
+									  IsEnabled="False" />
 						</smtx:XamlDisplay>
 						<smtx:XamlDisplay UniqueKey="Simple_CheckBox_DisabledChecked"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<CheckBox Content="Disabled Checked" IsChecked="True" IsEnabled="False" />
+							<CheckBox Content="Disabled Checked"
+									  IsChecked="True"
+									  IsEnabled="False" />
 						</smtx:XamlDisplay>
 						<smtx:XamlDisplay UniqueKey="Simple_CheckBox_DisabledIndeterminate"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<CheckBox Content="Disabled Indeterminate" IsChecked="{x:Null}" IsThreeState="True" IsEnabled="False" />
+							<CheckBox Content="Disabled Indeterminate"
+									  IsChecked="{x:Null}"
+									  IsThreeState="True"
+									  IsEnabled="False" />
 						</smtx:XamlDisplay>
 					</StackPanel>
 				</DataTemplate>

@@ -20,12 +20,14 @@ public class Given_DesignTokens
 
 	private static (Grid container, SimpleTheme theme) CreateThemedContainer(
 		Density density = Density.Regular,
-		double cornerRadius = 4.0)
+		double cornerRadius = 4.0,
+		double spacing = double.NaN)
 	{
 		var theme = new SimpleTheme
 		{
 			DefaultDensity = density,
 			DefaultCornerRadius = cornerRadius,
+			DefaultSpacing = spacing,
 		};
 		var container = new Grid();
 		container.Resources.MergedDictionaries.Add(theme);
@@ -175,7 +177,17 @@ public class Given_DesignTokens
 	}
 
 	// ═══════════════════════════════════════════════════════════════════════
-	// 5. RUNTIME SWITCHING
+	// 5. RUNTIME SWITCHING — of the *token resources* only.
+	//
+	// These assert that assigning DefaultDensity / DefaultCornerRadius regenerates the Space* and
+	// Radius* resources. They deliberately do NOT assert anything about rendered controls, because
+	// controls do not restyle: the per-control keys that consume these tokens (ButtonCornerRadius,
+	// ButtonPadding, …) are resolved once when the theme's control-style dictionaries are parsed,
+	// and CornerRadius/Thickness are values with no live instance to update. Both properties are
+	// documented as construction-time settings (see BaseTheme and doc/design-tokens.md); to change
+	// them at runtime an app must recreate its root content.
+	//
+	// Do not "extend" these into control-level assertions expecting them to pass.
 	// ═══════════════════════════════════════════════════════════════════════
 
 	[TestMethod]
@@ -260,7 +272,107 @@ public class Given_DesignTokens
 	}
 
 	// ═══════════════════════════════════════════════════════════════════════
-	// 8. VISUAL INTEGRATION — render actual controls, verify layout values
+	// 8. DEFAULT SPACING — base unit; the density mode scales it (×0.75/×1/×1.25)
+	// ═══════════════════════════════════════════════════════════════════════
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow(6.0, "Space0", 0.0)]     // zero is always zero
+	[DataRow(6.0, "Space050", 3.0)]   // base=6 × 0.5
+	[DataRow(6.0, "Space100", 6.0)]   // base=6 × 1
+	[DataRow(6.0, "Space400", 24.0)]  // base=6 × 4
+	[DataRow(2.5, "Space200", 5.0)]   // fractional base
+	[DataRow(0.0, "Space100", 0.0)]   // zero is a valid base
+	public void When_DefaultSpacingSet_Then_SpaceTokenHasCorrectValue(
+		double spacing, string tokenKey, double expected)
+	{
+		var (container, _) = CreateThemedContainer(Density.Regular, spacing: spacing);
+		var actual = GetResource<double>(container, tokenKey);
+		Assert.AreEqual(expected, actual, 0.001,
+			$"{tokenKey} at DefaultSpacing={spacing}: expected {expected}, got {actual}");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow(Density.Compact, 6.0, 4.5)]  // 6 × 0.75
+	[DataRow(Density.Regular, 6.0, 6.0)]  // 6 × 1
+	[DataRow(Density.Comfy, 6.0, 7.5)]    // 6 × 1.25
+	[DataRow(Density.Compact, 8.0, 6.0)]  // 8 × 0.75
+	public void When_DefaultSpacingAndDensitySet_Then_TheyCompose(
+		Density density, double spacing, double expectedBase)
+	{
+		// Density is a mode over the spacing base unit, not a competing setting:
+		// effective base = DefaultSpacing × density factor.
+		var (container, _) = CreateThemedContainer(density, spacing: spacing);
+		Assert.AreEqual(expectedBase, GetResource<double>(container, "Space100"), 0.001);
+		Assert.AreEqual(expectedBase * 2, GetResource<double>(container, "Space200"), 0.001);
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_DefaultSpacingSet_Then_ThicknessCompanionsDeriveFromIt()
+	{
+		var (container, _) = CreateThemedContainer(Density.Regular, spacing: 6.0);
+
+		Assert.AreEqual(new Thickness(12), GetResource<Thickness>(container, "Space200Thickness"));
+		Assert.AreEqual(new Thickness(6, 0, 6, 0), GetResource<Thickness>(container, "Space100HorizontalThickness"));
+		Assert.AreEqual(new Thickness(0, 6, 0, 0), GetResource<Thickness>(container, "Space100TopThickness"));
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_DefaultSpacingChangedAtRuntime_Then_DensityModeStillApplies()
+	{
+		var (container, theme) = CreateThemedContainer(Density.Comfy);
+		Assert.AreEqual(5.0, GetResource<double>(container, "Space100"), 0.001,
+			"Default base (4) × Comfy (1.25) should be 5");
+
+		theme.DefaultSpacing = 6.0;
+		Assert.AreEqual(7.5, GetResource<double>(container, "Space100"), 0.001,
+			"New base (6) × Comfy (1.25) should be 7.5");
+
+		theme.DefaultSpacing = double.NaN;
+		Assert.AreEqual(5.0, GetResource<double>(container, "Space100"), 0.001,
+			"An invalid base (NaN) should restore the default base (4) × Comfy (1.25)");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow(double.NaN)]
+	[DataRow(-1.0)]
+	[DataRow(double.PositiveInfinity)]
+	[DataRow(double.NegativeInfinity)]
+	public void When_DefaultSpacingInvalid_Then_FallsBackToDefaultBase(double invalid)
+	{
+		var (container, _) = CreateThemedContainer(Density.Comfy, spacing: invalid);
+		Assert.AreEqual(5.0, GetResource<double>(container, "Space100"), 0.001,
+			$"DefaultSpacing={invalid} should fall back to the default base (4) × Comfy (1.25)");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_DefaultSpacingChanges_Then_ShapeTokensAreUnaffected()
+	{
+		var (container, theme) = CreateThemedContainer(spacing: 6.0, cornerRadius: 4.0);
+		Assert.AreEqual(8.0, GetResource<double>(container, "Radius200"), 0.001);
+
+		theme.DefaultSpacing = 10.0;
+		Assert.AreEqual(8.0, GetResource<double>(container, "Radius200"), 0.001);
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_DefaultSpacingSet_Then_FixedTokensAreConstant()
+	{
+		var (container, _) = CreateThemedContainer(spacing: 10.0);
+
+		Assert.AreEqual(40.0, GetResource<double>(container, "ControlHeightMedium"), 0.001);
+		Assert.AreEqual(24.0, GetResource<double>(container, "IconSizeMedium"), 0.001);
+		Assert.AreEqual(48.0, GetResource<double>(container, "TouchTargetMinSize"), 0.001);
+	}
+
+	// ═══════════════════════════════════════════════════════════════════════
+	// 9. VISUAL INTEGRATION — render actual controls, verify layout values
 	// ═══════════════════════════════════════════════════════════════════════
 
 	[TestMethod]
@@ -307,6 +419,80 @@ public class Given_DesignTokens
 		// MinHeight = ControlHeightMedium = 40
 		Assert.AreEqual(40.0, button.MinHeight, 0.001,
 			"Simple button MinHeight should be ControlHeightMedium (40)");
+	}
+
+	// ═══════════════════════════════════════════════════════════════════════
+	// 10. RUNTIME SEAM — the scale measures move controls, not only tokens.
+	// Regenerated Space*/Radius* keys reach a control only if its style reads them through
+	// {ThemeResource}; a {StaticResource} setter snapshots the value at parse time. Asserted on
+	// the application theme (the scope a designer edits), restored in finally.
+	// ═══════════════════════════════════════════════════════════════════════
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_ScaleMeasuresChangeAtRuntime_Then_RealizedButtonFollows()
+	{
+		var theme = SemanticThemeHelper.GetTheme();
+		Assert.IsNotNull(theme, "The Simple sample app must have a BaseTheme in its application resources.");
+
+		var originalSpacing = theme.DefaultSpacing;
+		var originalRadius = theme.DefaultCornerRadius;
+		var originalDensity = theme.DefaultDensity;
+
+		var root = new Grid();
+		var button = new Button
+		{
+			Content = "probe",
+			Style = (Style)Application.Current.Resources["SimpleFilledButtonStyle"],
+		};
+		root.Children.Add(button);
+
+		UnitTestsUIContentHelper.Content = root;
+		await UnitTestsUIContentHelper.WaitForLoaded(button);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		try
+		{
+			// Padding = Space300Thickness, CornerRadius = Radius200CornerRadius at the app's defaults.
+			var paddingBefore = button.Padding;
+			var radiusBefore = button.CornerRadius;
+
+			theme.DefaultSpacing = 10;          // Space300 = 30 at Regular
+			theme.DefaultCornerRadius = 1;      // Radius200 = 2
+			theme.DefaultDensity = Density.Compact; // Space300 = 10 × 0.75 × 3 = 22.5
+
+			// Setters re-resolve on a theme-change pass — the public route to content already realized.
+			root.RequestedTheme = ElementTheme.Light;
+			await UnitTestsUIContentHelper.WaitForIdle();
+			root.RequestedTheme = ElementTheme.Dark;
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			Assert.AreEqual(new Thickness(22.5), button.Padding,
+				$"A realized button must re-resolve Space300Thickness after the spacing changes (was {paddingBefore}).");
+			Assert.AreEqual(new CornerRadius(2), button.CornerRadius,
+				$"A realized button must re-resolve Radius200CornerRadius after the radius changes (was {radiusBefore}).");
+
+			// A control created after the change picks the new scale up without any pass.
+			var later = new Button
+			{
+				Content = "later",
+				Style = (Style)Application.Current.Resources["SimpleFilledButtonStyle"],
+			};
+			root.Children.Add(later);
+			await UnitTestsUIContentHelper.WaitForLoaded(later);
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			Assert.AreEqual(new Thickness(22.5), later.Padding, "A button created after the change must use the new spacing.");
+			Assert.AreEqual(new CornerRadius(2), later.CornerRadius, "A button created after the change must use the new radius.");
+		}
+		finally
+		{
+			theme.DefaultSpacing = originalSpacing;
+			theme.DefaultCornerRadius = originalRadius;
+			theme.DefaultDensity = originalDensity;
+			root.RequestedTheme = ElementTheme.Default;
+			UnitTestsUIContentHelper.Content = null;
+		}
 	}
 
 }

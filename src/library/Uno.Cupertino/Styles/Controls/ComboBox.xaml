@@ -1,10 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:uno="using:Uno.UI.Xaml.Controls"
-					xmlns:ut="using:Uno.Themes"
-					xmlns:xamarin="http://uno.ui/xamarin"
-					mc:Ignorable="xamarin">
+					xmlns:ut="using:Uno.Themes">
 
 	<!-- Converters -->
 	<ut:FromNullToValueConverter x:Key="NullToVisible"
@@ -23,22 +20,14 @@
 	<!-- Style -->
 	<Style x:Key="CupertinoComboBoxItemStyle"
 		   TargetType="ComboBoxItem">
-		<Setter Property="FontFamily"
-				Value="{ThemeResource CupertinoFontFamily}" />
-		<Setter Property="FontSize"
-				Value="13" />
-		<Setter Property="Background"
-				Value="Transparent" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Stretch" />
-		<Setter Property="CornerRadius"
-				Value="5" />
-		<Setter Property="Padding"
-				Value="16, 0" />
-		<Setter Property="Height"
-				Value="43" />
+		<Setter Property="FontFamily" Value="{ThemeResource CupertinoFontFamily}" />
+		<Setter Property="FontSize" Value="13" />
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+		<Setter Property="CornerRadius" Value="5" />
+		<Setter Property="Padding" Value="16,0" />
+		<Setter Property="Height" Value="43" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -80,8 +69,7 @@
 
 								<VisualState x:Name="Selected">
 									<VisualState.Setters>
-										<Setter Target="PressedOverlay.Opacity"
-												Value="1" />
+										<Setter Target="PressedOverlay.Opacity" Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -100,8 +88,7 @@
 
 								<VisualState x:Name="SelectedDisabled">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Opacity"
-												Value="{StaticResource CupertinoDisableStateOpacity}" />
+										<Setter Target="ContentPresenter.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -116,7 +103,7 @@
 							  HorizontalAlignment="Stretch"
 							  Opacity="0" />
 
-						<!-- ContentPresenter-->
+						<!-- ContentPresenter -->
 						<ContentPresenter x:Name="ContentPresenter"
 										  Content="{TemplateBinding Content}"
 										  ContentTemplate="{TemplateBinding ContentTemplate}"
@@ -133,47 +120,25 @@
 
 	<Style x:Key="CupertinoComboBoxStyle"
 		   TargetType="ComboBox">
-		<Setter Property="FontFamily"
-				Value="{ThemeResource CupertinoFontFamily}" />
-		<Setter Property="Foreground"
-				Value="{ThemeResource CupertinoLabelBrush}" />
-		<Setter Property="Background"
-				Value="{ThemeResource CupertinoSystemBackgroundBrush}" />
-		<Setter Property="Padding"
-				Value="0" />
-		<Setter Property="BorderThickness"
-				Value="1" />
-		<Setter Property="BorderBrush"
-				Value="{ThemeResource CupertinoComboBoxBorderBrush}" />
-		<Setter Property="CornerRadius"
-				Value="{StaticResource CupertinoComboBoxCornerRadius}" />
-		<Setter Property="MinHeight"
-				Value="43" />
-		<Setter Property="TabNavigation"
-				Value="Once" />
-		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility"
-				Value="Disabled" />
-		<Setter Property="ScrollViewer.VerticalScrollBarVisibility"
-				Value="Auto" />
-		<Setter Property="ScrollViewer.HorizontalScrollMode"
-				Value="Disabled" />
-		<Setter Property="ScrollViewer.VerticalScrollMode"
-				Value="Auto" />
-		<Setter Property="ScrollViewer.IsVerticalRailEnabled"
-				Value="True" />
-		<Setter Property="ScrollViewer.IsDeferredScrollingEnabled"
-				Value="False" />
-		<Setter Property="ScrollViewer.BringIntoViewOnFocusChange"
-				Value="True" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Stretch" />
-		<Setter Property="HorizontalAlignment"
-				Value="Stretch" />
-		<Setter Property="ItemContainerStyle"
-				Value="{StaticResource CupertinoComboBoxItemStyle}" />
-		<xamarin:Setter Property="uno:ComboBox.DropDownPreferredPlacement"
-						Value="Below" />
-
+		<Setter Property="FontFamily" Value="{ThemeResource CupertinoFontFamily}" />
+		<Setter Property="Foreground" Value="{ThemeResource CupertinoLabelBrush}" />
+		<Setter Property="Background" Value="{ThemeResource CupertinoSystemBackgroundBrush}" />
+		<Setter Property="Padding" Value="0" />
+		<Setter Property="BorderThickness" Value="1" />
+		<Setter Property="BorderBrush" Value="{ThemeResource CupertinoComboBoxBorderBrush}" />
+		<Setter Property="CornerRadius" Value="{StaticResource CupertinoComboBoxCornerRadius}" />
+		<Setter Property="MinHeight" Value="43" />
+		<Setter Property="TabNavigation" Value="Once" />
+		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+		<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+		<Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled" />
+		<Setter Property="ScrollViewer.VerticalScrollMode" Value="Auto" />
+		<Setter Property="ScrollViewer.IsVerticalRailEnabled" Value="True" />
+		<Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
+		<Setter Property="ScrollViewer.BringIntoViewOnFocusChange" Value="True" />
+		<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+		<Setter Property="HorizontalAlignment" Value="Stretch" />
+		<Setter Property="ItemContainerStyle" Value="{StaticResource CupertinoComboBoxItemStyle}" />
 		<Setter Property="ItemsPanel">
 			<Setter.Value>
 				<ItemsPanelTemplate>
@@ -210,8 +175,7 @@
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="RootGrid.Opacity"
-												Value="{StaticResource CupertinoDisableStateOpacity}" />
+										<Setter Target="RootGrid.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -220,10 +184,8 @@
 
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="HighlightBackground.Opacity"
-												Value="1" />
-										<Setter Target="Highlight.Opacity"
-												Value="1" />
+										<Setter Target="HighlightBackground.Opacity" Value="1" />
+										<Setter Target="Highlight.Opacity" Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -234,8 +196,7 @@
 
 								<VisualState x:Name="FocusedDropDown">
 									<VisualState.Setters>
-										<Setter Target="PopupBorder.Visibility"
-												Value="Visible" />
+										<Setter Target="PopupBorder.Visibility" Value="Visible" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -317,7 +278,7 @@
 							<!-- Popup -->
 							<Popup x:Name="Popup">
 								<Border x:Name="PopupBorder">
-									<!-- Workaround for Issue #213 where android PopupBorder doesn't get redrawn properly, adds Background, CornerRadius and Border to ScrollViewer  -->
+									<!-- Workaround for Issue #213 where android PopupBorder doesn't get redrawn properly, adds Background, CornerRadius and Border to ScrollViewer -->
 									<ScrollViewer x:Name="ScrollViewer"
 												  Background="{TemplateBinding Background}"
 												  BorderBrush="{StaticResource CupertinoSenaryGrayColor}"

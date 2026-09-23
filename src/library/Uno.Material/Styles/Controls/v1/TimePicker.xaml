@@ -2,17 +2,14 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:ios="http://uno.ui/ios"
-					mc:Ignorable="d ios">
+					mc:Ignorable="d">
 
 	<!-- TimePicker FlyoutButton Style -->
 	<Style x:Key="TimePickerFlyoutButtonStyle"
 		   TargetType="Button">
 
-		<Setter Property="Background"
-				Value="Transparent" />
-		<Setter Property="Padding"
-				Value="0" />
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="Padding" Value="0" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -27,14 +24,12 @@
 								<VisualState x:Name="PointerOver" />
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="RootGrid.Opacity"
-												Value="0.65" />
+										<Setter Target="RootGrid.Opacity" Value="0.65" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="RootGrid.Opacity"
-												Value="0.65" />
+										<Setter Target="RootGrid.Opacity" Value="0.65" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -55,97 +50,17 @@
 		</Setter>
 	</Style>
 
-	<ios:Style x:Key="MaterialTimePickerFlyoutPresenterStyle"
-			   TargetType="TimePickerFlyoutPresenter">
-
-		<Setter Property="Background"
-				Value="{ThemeResource TimePickerFlyoutPresenterBackground}" />
-		<Setter Property="VerticalAlignment"
-				Value="Stretch" />
-		<Setter Property="HorizontalAlignment"
-				Value="Stretch" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Stretch" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Bottom" />
-		<Setter Property="BorderThickness"
-				Value="0" />
-		<Setter Property="IsTabStop"
-				Value="False" />
-		<Setter Property="AutomationProperties.AutomationId"
-				Value="TimePickerFlyoutPresenter" />
-
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="TimePickerFlyoutPresenter">
-					<Grid x:Name="ContentPanel"
-						  Background="{TemplateBinding Background}"
-						  BorderBrush="{TemplateBinding BorderBrush}"
-						  BorderThickness="{TemplateBinding BorderThickness}"
-						  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-						  VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-
-						<Grid.RowDefinitions>
-							<RowDefinition Height="Auto" />
-							<RowDefinition Height="Auto" />
-						</Grid.RowDefinitions>
-
-						<Grid Grid.Row="0"
-							  x:Name="AcceptDismissHostGrid"
-							  Height="44">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="Auto" />
-								<ColumnDefinition Width="*" />
-								<ColumnDefinition Width="Auto" />
-							</Grid.ColumnDefinitions>
-
-							<Button Grid.Column="0"
-									x:Name="DismissButton"
-									x:Uid="TimePickerFlyoutDismissButton"
-									Content="Cancel"
-									HorizontalAlignment="Left"
-									Foreground="{ThemeResource MaterialPrimaryBrush}"
-									Style="{StaticResource IosPickerFlyoutTextButtonStyle}" />
-
-							<Button Grid.Column="2"
-									x:Name="AcceptButton"
-									x:Uid="TimePickerFlyoutAcceptButton"
-									Content="Done"
-									FontWeight="Bold"
-									HorizontalAlignment="Right"
-									Foreground="{ThemeResource MaterialPrimaryBrush}"
-									Style="{StaticResource IosPickerFlyoutTextButtonStyle}" />
-						</Grid>
-
-						<ContentPresenter Grid.Row="1"
-										  Content="{TemplateBinding Content}"
-										  Foreground="{TemplateBinding Foreground}"
-										  HorizontalAlignment="Stretch"
-										  VerticalAlignment="Stretch"
-										  HorizontalContentAlignment="Stretch"
-										  VerticalContentAlignment="Stretch" />
-					</Grid>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</ios:Style>
 
 
 	<Style x:Key="MaterialTimePickerStyle"
 		   TargetType="TimePicker">
 
-		<Setter Property="Background"
-				Value="{StaticResource TextBoxFilledBackgroundColorBrush}" />
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialPrimaryBrush}" />
-		<Setter Property="BorderBrush"
-				Value="{StaticResource MaterialPrimaryBrush}" />
-		<Setter Property="HorizontalAlignment"
-				Value="Stretch" />
-		<Setter Property="Height"
-				Value="53" />
-		<Setter Property="CornerRadius"
-				Value="4,4,0,0" />
+		<Setter Property="Background" Value="{StaticResource TextBoxFilledBackgroundColorBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource MaterialPrimaryBrush}" />
+		<Setter Property="BorderBrush" Value="{StaticResource MaterialPrimaryBrush}" />
+		<Setter Property="HorizontalAlignment" Value="Stretch" />
+		<Setter Property="Height" Value="53" />
+		<Setter Property="CornerRadius" Value="4,4,0,0" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -158,20 +73,14 @@
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="HeaderTextBlock.Foreground"
-												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="HeaderTextBlock.Foreground" Value="{StaticResource MaterialOnSurfaceLowBrush}" />
 
-										<Setter Target="HourTextBlock.Foreground"
-												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
-										<Setter Target="ColonText.Foreground"
-												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
-										<Setter Target="MinuteTextBlock.Foreground"
-												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
-										<Setter Target="PeriodTextBlock.Foreground"
-												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="HourTextBlock.Foreground" Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="ColonText.Foreground" Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="MinuteTextBlock.Foreground" Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="PeriodTextBlock.Foreground" Value="{StaticResource MaterialOnSurfaceLowBrush}" />
 
-										<Setter Target="BottomBorder.Fill"
-												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="BottomBorder.Fill" Value="{StaticResource MaterialOnSurfaceLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -180,19 +89,15 @@
 
 								<VisualState x:Name="HasTime">
 									<VisualState.Setters>
-										<Setter Target="FlyoutButtonContentGrid.Visibility"
-												Value="Visible" />
-										<Setter Target="PlaceholderContentGrid.Visibility"
-												Value="Collapsed" />
+										<Setter Target="FlyoutButtonContentGrid.Visibility" Value="Visible" />
+										<Setter Target="PlaceholderContentGrid.Visibility" Value="Collapsed" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="HasNoTime">
 									<VisualState.Setters>
-										<Setter Target="PlaceholderContentGrid.Visibility"
-												Value="Visible" />
-										<Setter Target="FlyoutButtonContentGrid.Visibility"
-												Value="Collapsed" />
+										<Setter Target="PlaceholderContentGrid.Visibility" Value="Visible" />
+										<Setter Target="FlyoutButtonContentGrid.Visibility" Value="Collapsed" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
