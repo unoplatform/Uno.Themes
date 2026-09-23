@@ -23,7 +23,7 @@ internal readonly record struct GlassPreset(float Sigma, float Saturation, float
 		// Clear is the lens of a lifted switch/slider knob (iOS 26 switch): no veil and almost no blur so the
 		// track shows through, strong refraction that pulls the surroundings in across the edge band, a thick
 		// bright rim, a soft drop shadow and light inner shading. Unmeasured starting values; tune on a GPU.
-		GlassMaterial.Clear => new(Sigma: 0, Saturation: 1.1f, Refraction: 16, Rim: 0.95f, Veil: 0f, Shadow: 0.22f, InnerShadow: 0.14f, RimWidth: 2),
+		GlassMaterial.Clear => new(Sigma: 0, Saturation: 1.1f, Refraction: 7, Rim: 0.95f, Veil: 0f, Shadow: 0.22f, InnerShadow: 0.2f, RimWidth: 2),
 		_ => new(Sigma: 12, Saturation: 1.3f, Refraction: 7, Rim: 0.30f, Veil: 0.22f),
 	};
 }

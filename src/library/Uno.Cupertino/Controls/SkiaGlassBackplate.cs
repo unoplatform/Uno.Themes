@@ -201,10 +201,11 @@ internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 
 		if (Preset.InnerShadow > 0)
 		{
-			// The body is the shape inset by half the refracting band (the part the SkSL profile leaves flat).
-			var bandInset = Math.Min(radius, MaxRefractionBand) / 2;
+			// The body starts where the inset copy of the surroundings starts: one displacement (half the
+			// DisplacementMap scale) plus the rim in from the edge.
+			var bodyInset = (Preset.Refraction / 2) + Preset.RimWidth;
 			using var body = new SKRoundRect(bounds, radius);
-			body.Deflate(bandInset, bandInset);
+			body.Deflate(bodyInset, bodyInset);
 			using var innerFilter = SKMaskFilter.CreateBlur(SKBlurStyle.Normal, InnerShadowSigma);
 			using var inner = new SKPaint
 			{

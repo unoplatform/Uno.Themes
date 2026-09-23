@@ -795,3 +795,8 @@ iOS shows the track edge shrunk inside the knob; the backdrop the filters read i
 rim can sample outside the glass; the rim is a 2 px top-lit ring; and a soft darkening covers the lens body
 inside the band instead of a stroke along the top. `Clear` = σ 0, saturation 1.1, refraction 16, rim 0.95 × 2 px,
 veil 0, shadow 0.22 (dy 5, σ 6), body darkening 0.14. Still to be judged on the Mac.
+
+Third Mac round ("not great"): the band ate a third of the knob and the body was pale. Refraction 16 → 7
+(a 3.5 px shift, an eighth of the knob, as in the iOS capture), body darkening 0.14 → 0.2 and its inset now
+derived from the shift plus the rim instead of half the band. Checked against the iOS capture on a
+#F2F2F7 background at 4×. Still to be judged on the Mac; a 2× (Retina) screenshot helps.
