@@ -77,6 +77,37 @@ Per-scale keys follow the pattern `{Role}{Size}FontFamily`, `{Role}{Size}FontSiz
 | `IconSizeMedium`           | 24                 |
 | `IconSizeLarge`            | 32                 |
 
+## Listing the Keys from Code
+
+`SemanticResourceKeys` (namespace `Uno.Themes`) lists every semantic key the shared layer declares or generates, one read-only list per family, so tools can enumerate them instead of hard-coding their own copy:
+
+| Property            | Example keys                                          |
+|---------------------|-------------------------------------------------------|
+| `Colors`            | `PrimaryColor`, `OnSurfaceColor`, `ShadowColor`       |
+| `Opacities`         | `HoverOpacity`, `DisabledOpacity`                     |
+| `Brushes`           | `PrimaryBrush`, `PrimaryHoverBrush`                   |
+| `FontFamilies`      | `DefaultFontFamily`, `BodyMediumFontFamily`           |
+| `FontSizes`         | `BodyMediumFontSize`                                  |
+| `FontWeights`       | `BodyMediumFontWeight`                                |
+| `CharacterSpacings` | `BodyMediumCharacterSpacing`                          |
+| `Spacing`           | `Space200`, `Space200Thickness`                       |
+| `Shape`             | `Radius200`, `Radius200CornerRadius`                  |
+| `Density`           | `ControlHeightMedium`, `IconSizeMedium`               |
+
+```csharp
+using Uno.Themes;
+
+foreach (var key in SemanticResourceKeys.Spacing)
+{
+    if (Application.Current.Resources.TryGetValue(key, out var value))
+    {
+        // value is the current token: a double or a Thickness
+    }
+}
+```
+
+The lists hold keys, not values. Resolve a key through the resources of an element or of the application to read its current value. Every key resolves under `MaterialTheme` and `SimpleTheme`. Cupertino doesn't declare them. Keys specific to one design system (such as `SimpleButtonFontFamily`) and semantic style keys (such as `FilledButtonStyle`) are not listed.
+
 ## Overriding Tokens
 
 ### Via Scalar Properties
