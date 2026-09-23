@@ -804,3 +804,11 @@ derived from the shift plus the rim instead of half the band. Checked against th
 Fourth Mac round (full-resolution screenshot, cropped 8×): the three zones are there in the right
 proportion; against iOS the band was grey, the body lighter and its edge softer. Added `BandLight` (a white
 cast over the band between rim and body, 0.45), body darkening 0.2 → 0.26 with its blur 2 → 1.
+
+Fifth round, against an iOS 27 simulator capture cropped 8× beside ours: "no lensing effect at all". Correct.
+The real knob shows the whole backdrop **minified about the centre** (the track at ~50–60 % of its height,
+its end pushed inward, merging with the real track where it continues), bounded by a hairline dark outline
+with a faint highlight, on a soft shadow — no white ring, no bright band, no darkened body. Every previous
+round tuned an edge-band model that cannot produce that. The shader is now a convex lens
+(`disp = (p − c) / max(half)`, shift at the rim = Refraction / 2 along the longer axis), `BandLight` and
+`InnerShadow` are gone, `Outline` (0.22) is new, rim 0.7 × 1 px, refraction 24, shadow 0.18 (σ 7).

@@ -17,35 +17,20 @@ namespace Uno.Cupertino;
 /// </summary>
 internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 {
-	// Encodes the outward normal of a rounded rectangle, weighted by a lens profile over the edge band,
-	// into R / G for SKImageFilter.CreateDisplacementMapEffect. 0.5 is "no displacement". The map is
-	// evaluated in canvas coordinates, so the shape's origin is a uniform. The sample point moves OUTWARD
-	// along the normal, strongest at the rim: what lies just outside the glass is pulled in across the edge
-	// band, the way Liquid Glass shows a shrunken copy of the track edge inside a knob.
-	private const string NormalMapSksl = """
+	// A convex lens: the sample point moves outward from the centre in proportion to its distance from it,
+	// so the glass shows the backdrop minified about the centre — a switch knob shows a shrunken track that
+	// merges with the real one where the track continues (iOS 26). Encoded into R / G for
+	// SKImageFilter.CreateDisplacementMapEffect, where 0.5 is "no displacement" and the shift at the rim
+	// along the longer axis is half the effect's scale. Evaluated in canvas coordinates, hence the origin.
+	private const string LensMapSksl = """
 		uniform float2 origin;
 		uniform float2 size;
-		uniform float radius;
-		uniform float band;
 		half4 main(float2 p) {
-			p -= origin;
 			float2 c = size * 0.5;
-			float2 s = sign(p - c);
-			float2 q = abs(p - c) - (c - radius);
-			float d = length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - radius;
-			float t = clamp(1.0 + d / band, 0.0, 1.0);
-			// A bevelled slab, not a sphere: the outer half of the band is displaced by the full amount, so
-			// what shows through it is a crisp, inset copy of the surroundings; the inner half ramps to zero.
-			float k = smoothstep(0.0, 0.5, t);
-			float2 m = max(q, 0.0);
-			float2 n = (m.x + m.y > 0.0) ? normalize(m) : (q.x > q.y ? float2(1.0, 0.0) : float2(0.0, 1.0));
-			float2 disp = n * s * k;
+			float2 disp = (p - origin - c) / max(c.x, c.y);
 			return half4(0.5 + 0.5 * disp.x, 0.5 + 0.5 * disp.y, 0.0, 1.0);
 		}
 		""";
-
-	// The refraction band never gets wider than this, however large the corner radius is.
-	private const float MaxRefractionBand = 20f;
 
 	// Blurs at or above this sigma are computed on a downsampled layer (k = sigma / 8), as Uno's acrylic does.
 	private const float DownsampleSigma = 16f;
@@ -54,14 +39,10 @@ internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 	// Drop shadow of a preset with Shadow > 0: offset down, blurred. The element is inflated by ShadowMargin
 	// on every side (a negative Margin set by GlassPanel) so the shadow has room outside the glass shape.
 	private const float ShadowDy = 5f;
-	private const float ShadowSigma = 6f;
+	private const float ShadowSigma = 7f;
 	internal const float ShadowMargin = 20f;
 
-	// Inner shadow: a soft dark fill over the lens body, inset by the refracting band, so the band stays bright
-	// while what shows through the flat centre of the lens reads darker — a thick slab, not a film.
-	private const float InnerShadowSigma = 1f;
-
-	private static readonly Lazy<SKRuntimeEffect?> _normalMap = new(CreateNormalMap);
+	private static readonly Lazy<SKRuntimeEffect?> _lensMap = new(CreateLensMap);
 
 	private SKImageFilter? _chain;
 	private (float Width, float Height, float Radius, GlassPreset Preset) _chainKey;
@@ -85,9 +66,9 @@ internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 
 	internal bool IsSubscribed => _isSubscribed;
 
-	private static SKRuntimeEffect? CreateNormalMap()
+	private static SKRuntimeEffect? CreateLensMap()
 	{
-		var effect = SKRuntimeEffect.CreateShader(NormalMapSksl, out var errors);
+		var effect = SKRuntimeEffect.CreateShader(LensMapSksl, out var errors);
 		if (effect is null && typeof(SkiaGlassBackplate).Log().IsEnabled(LogLevel.Warning))
 		{
 			typeof(SkiaGlassBackplate).Log().LogWarning("The glass refraction shader did not compile; glass renders without refraction. {Errors}", errors);
@@ -186,7 +167,7 @@ internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 		if (_chain is null || key != _chainKey)
 		{
 			_chain?.Dispose();
-			_chain = CreateChain(bounds, sampleBounds, radius, Preset);
+			_chain = CreateChain(bounds, sampleBounds, Preset);
 			_chainKey = key;
 		}
 
@@ -199,43 +180,28 @@ internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 		using var layerPaint = new SKPaint { Color = SKColors.White.WithAlpha((byte)(_layerOpacity * 255)) };
 		canvas.SaveLayer(new SKCanvasSaveLayerRec { Bounds = sampleBounds, Backdrop = _chain, Paint = layerPaint });
 
-		if (Preset.InnerShadow > 0 || Preset.BandLight > 0)
+		if (Preset.Outline > 0)
 		{
-			// The body starts where the inset copy of the surroundings starts: one displacement (half the
-			// DisplacementMap scale) plus the rim in from the edge. The band between rim and body catches
-			// light; the body reads darker, like looking down through a thick slab.
-			var bodyInset = (Preset.Refraction / 2) + Preset.RimWidth;
-			using var body = new SKRoundRect(bounds, radius);
-			body.Deflate(bodyInset, bodyInset);
-
-			if (Preset.BandLight > 0)
+			// A hairline at the very edge, inside the clip: the boundary of a clear lens against its surface.
+			using var outlineShape = new SKRoundRect(bounds, radius);
+			outlineShape.Deflate(0.5f, 0.5f);
+			using var outline = new SKPaint
 			{
-				using var band = new SKPaint { Color = SKColors.White.WithAlpha((byte)(Preset.BandLight * 255)), IsAntialias = true };
-				canvas.Save();
-				canvas.ClipRoundRect(body, SKClipOperation.Difference, true);
-				canvas.DrawRoundRect(shape, band);
-				canvas.Restore();
-			}
-
-			if (Preset.InnerShadow > 0)
-			{
-				using var innerFilter = SKMaskFilter.CreateBlur(SKBlurStyle.Normal, InnerShadowSigma);
-				using var inner = new SKPaint
-				{
-					Color = SKColors.Black.WithAlpha((byte)(Preset.InnerShadow * 255)),
-					IsAntialias = true,
-					MaskFilter = innerFilter,
-				};
-				canvas.DrawRoundRect(body, inner);
-			}
+				Color = SKColors.Black.WithAlpha((byte)(Preset.Outline * 255)),
+				IsAntialias = true,
+				Style = SKPaintStyle.Stroke,
+				StrokeWidth = 1,
+			};
+			canvas.DrawRoundRect(outlineShape, outline);
 		}
 
 		if (Preset.Rim > 0)
 		{
-			// Inset by half the stroke so the clip does not cut the rim in two. Lit from above: full alpha at
-			// the top edge, fading towards the bottom.
+			// Just inside the outline, inset by half the stroke so the clip does not cut the rim in two. Lit
+			// from above: full alpha at the top edge, fading towards the bottom.
 			using var rimShape = new SKRoundRect(bounds, radius);
-			rimShape.Deflate(Preset.RimWidth / 2, Preset.RimWidth / 2);
+			var rimInset = (Preset.RimWidth / 2) + (Preset.Outline > 0 ? 1 : 0);
+			rimShape.Deflate(rimInset, rimInset);
 			using var rimShader = SKShader.CreateLinearGradient(
 				new SKPoint(bounds.MidX, bounds.Top),
 				new SKPoint(bounds.MidX, bounds.Bottom),
@@ -257,20 +223,18 @@ internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 
 	// Refraction, then blur, then saturation. Kept in one method: when SkiaSharp exposes runtime-effect
 	// image filters the whole chain collapses into one shader, and the swap stays local.
-	private static SKImageFilter CreateChain(SKRect bounds, SKRect sampleBounds, float radius, GlassPreset preset)
+	private static SKImageFilter CreateChain(SKRect bounds, SKRect sampleBounds, GlassPreset preset)
 	{
 		SKImageFilter? chain = null;
 
-		if (preset.Refraction > 0 && radius > 0 && _normalMap.Value is { } normalMap)
+		if (preset.Refraction > 0 && _lensMap.Value is { } lensMap)
 		{
-			var uniforms = new SKRuntimeEffectUniforms(normalMap)
+			var uniforms = new SKRuntimeEffectUniforms(lensMap)
 			{
 				["origin"] = new[] { bounds.Left, bounds.Top },
 				["size"] = new[] { bounds.Width, bounds.Height },
-				["radius"] = radius,
-				["band"] = Math.Min(radius, MaxRefractionBand),
 			};
-			using var shader = normalMap.ToShader(uniforms);
+			using var shader = lensMap.ToShader(uniforms);
 			using var map = SKImageFilter.CreateShader(shader, false, sampleBounds);
 			chain = SKImageFilter.CreateDisplacementMapEffect(SKColorChannel.R, SKColorChannel.G, preset.Refraction, map, null, sampleBounds);
 		}

@@ -209,7 +209,7 @@ The current styles follow the iOS/iPadOS HIG direction, including capsule switch
 
 | Property | Description |
 | -------- | ----------- |
-| `Material` | The glass variant: `Regular` (default; bars, glass buttons), `Prominent` (meant to carry a tint), `Thin` (small moving parts), `Thick` (popovers, menus, dialogs, sheets) or `Clear` (a lens: barely veiled, bright rim, drop shadow and inner shading; the pressed switch and slider knobs). |
+| `Material` | The glass variant: `Regular` (default; bars, glass buttons), `Prominent` (meant to carry a tint), `Thin` (small moving parts), `Thick` (popovers, menus, dialogs, sheets) or `Clear` (a convex lens: no veil or blur, the backdrop minified, a hairline outline, highlight and drop shadow; the pressed switch and slider knobs). |
 | `Tint` | A brush laid over the glass; its opacity is the tint strength. Default is none. `CupertinoGlassProminentTintBrush` is the accent at 85 %. |
 | `Background` | The fill of the Solid rendering, also laid thinly over the glass to keep content legible. Default is `SurfaceBrush`. |
 | `CornerRadius` | One radius is used for all four corners; a value of half the height gives a capsule. |

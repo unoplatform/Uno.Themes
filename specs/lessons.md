@@ -414,3 +414,6 @@ asserted `Visibility` and the tier enum. On a GPU the user saw nothing: blurred 
   renders while a `Grid` in the same place does — put template shadows on a Grid, or on the control itself.
 - Measure before theorising about the renderer: a throwaway runtime test printing a luma profile below the
   element settled in one run what three rounds of source reading had not.
+- Match the optical model before tuning numbers. Four rounds tuned an edge-band refraction the iOS knob does not
+  have; one 8× side-by-side crop of the reference showed it is a minifying lens. Crop and enlarge the reference
+  first, name the mechanism, then implement it.
