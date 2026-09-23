@@ -126,6 +126,10 @@ public abstract partial class BaseTheme
 
 		foreach (var theme in alive)
 		{
+			// A reload may have rewritten the consumer's override files; force the next rebuild to
+			// re-read them from their Source instead of reusing the resolved copies (#1705).
+			theme._fontOverrideNeedsReresolve = true;
+
 			var dispatcher = theme._hotReloadDispatcher;
 			if (dispatcher is null || dispatcher.HasThreadAccess)
 			{

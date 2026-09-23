@@ -27,6 +27,7 @@ Despite the legacy folder name `src/library/Uno.Themes`, the assembly is `Uno.Th
   - `src/samples/MaterialSampleApp/` — Material sample head.
   - `src/samples/CupertinoSampleApp/` — Cupertino sample head.
   - `src/samples/SimpleSampleApp/` — Simple sample head; **also hosts the runtime tests** under `src/samples/SimpleSampleApp/RuntimeTests/Given_*.cs` (e.g. `Given_SeedColorPalette.cs`, `Given_SemanticStyles.cs`, `Given_ColorOverridePrecedence.cs`).
+  - `src/samples/ThemesSampleApp/` — wrapper head (desktop + browserwasm only) that hosts the three theme sample heads **in-process** via collectible secondary AssemblyLoadContexts (Uno's `AlcContentHost`/`WindowHelper.ContentHostOverride`): launch one app, pick the theme sample to test. Deliberately references **no** theme library and does not import `SamplesApp.Shared`; hosting/loader code lives under `GuestHosting/`. The heads stay fully standalone (`UnoEnableAlcAppSupport` + `new Window()` are the only head-side accommodations). Guests are hosted from their own build output (desktop: sibling `bin` probing; wasm: `GuestApps/` payload packaged at build) — build the heads for the matching TFM first. A scripted hosting smoke (`--smoke` on desktop, `?smoke` in the browser) cycles every guest and verifies ALC reclamation; CI gates it via the `HostingSmoke_Desktop` job (`build/scripts/linux-skia-desktop-hosting-smoke.sh`). See `specs/05-alc-wrapper-app/progress.md` for design, verified behavior, and known upstream limitations.
 - `doc/` — published documentation (see §13).
 
 There is **no separate runtime-tests project** — runtime tests live inside the sample apps and are driven by `Uno.UI.RuntimeTests.Engine` (`PackageReference Include="Uno.UI.RuntimeTests.Engine"` in each sample csproj).
@@ -250,12 +251,48 @@ For the full command reference (filter syntax, headless vs interactive, adding n
 - Use raw strings (`"""..."""`) for expected and actual samples.
 - Avoid manual newline normalization (`Replace("\r\n", "\n")`); rely on the test framework's options where available.
 
-### Format XAML
+### Code formatting
+
+Both formatters are gated in CI by the **Code Style** stage (`build/stage-code-style.yml`),
+which runs the two commands below in verify mode. Run them locally before pushing.
+
+XAML Styler is pinned as a local tool in `.config/dotnet-tools.json` — always invoke it
+through `dotnet xstyler` after `dotnet tool restore`, never through `dotnet dnx`, which
+resolves whatever version is newest and silently changes the formatting baseline.
 
 ```bash
-# Run xaml styler (uses Settings.XamlStyler at the repo root)
-dotnet dnx XamlStyler.Console -r -l Debug -c Settings.XamlStyler -d "."
+# XAML (uses Settings.XamlStyler at the repo root)
+dotnet tool restore
+dotnet xstyler -c Settings.XamlStyler -f "$(git ls-files '*.xaml' | paste -sd,)"
+
+# Verify (this is what CI runs)
+dotnet xstyler -c Settings.XamlStyler --passive -f "$(git ls-files '*.xaml' | paste -sd,)"
 ```
+
+```bash
+# C# whitespace
+TargetFrameworkOverride=desktop dotnet format whitespace Uno.Themes.sln --exclude src/samples/SamplesApp.Shared
+
+# Verify (this is what CI runs)
+TargetFrameworkOverride=desktop dotnet format whitespace Uno.Themes.sln --verify-no-changes --exclude src/samples/SamplesApp.Shared
+```
+
+Three things about these commands are load-bearing:
+
+✅ **Drive the styler from `git ls-files`, not `-d`.** The XamlMerge task writes gitignored
+`mergedpages*.xaml` into `src/library/*/Generated/`, and `-r -d src` checks those too, so the
+gate fails for anyone who built before running it. `-d "."` is worse still — it also sweeps
+agent worktrees under `.claude/` and every `obj/` tree.
+✅ **XAML Styler needs two passes to converge.** Its first pass can leave trailing
+whitespace after a self-closing tag on files that already had some; the second removes it.
+If `--passive` reports failures on files you just formatted, run the format command again
+rather than hand-editing them.
+✅ **`src/samples/SamplesApp.Shared` is excluded from `dotnet format`.** Its files are
+linked into the sample heads through a shared project (`.shproj`/`.projitems`), and
+`dotnet format` does not resolve an `.editorconfig` for those linked documents — it falls
+back to the Roslyn defaults (4 spaces) and would rewrite ~72 tab-indented files against
+the repo convention. Do not "fix" this by dropping the `--exclude`, and do not reformat
+that folder to spaces; `.editorconfig` declares tabs for `.cs` and that is the convention.
 
 ✅ Always run runtime tests as part of verification of theme/style changes — they are not optional manual steps.
 ✅ Maintain or improve passing test count.
@@ -383,6 +420,12 @@ The PR template (`.github/pull_request_template.md`) explicitly calls out `doc/m
 ✅ Prefer updating an existing page over adding a new one.
 ✅ Cross-link relevant pages (e.g. between `lightweight-styling.md` and a per-design-system controls-styles page).
 ✅ Sample pages: add a page under `src/samples/SamplesApp.Shared/Content/` so all sample heads pick it up.
+
+### Docs validations (`build/stage-docs-validations.yml`)
+
+Both the cSpell and markdownlint jobs run over `**/*.md` with **`specs/**` and `.specify/**` excluded** — those are internal working notes (design specs, postmortems), not published documentation.
+
+🚫 **Never add spec/postmortem jargon to `build/cspell.json`.** That dictionary guards the published `doc/` pages; widening it to accommodate runtime and tooling vocabulary (`typeref`, `webcil`, `finalizers`, `llvmpipe`, …) weakens spell checking where it actually matters. If a spelling job starts failing on a file under `specs/`, the exclusion has regressed — restore it rather than adding words.
 
 </coding_directives>
 

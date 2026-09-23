@@ -330,4 +330,60 @@ public class Given_DesignTokens
 			"FilledButton CornerRadius should be 30 at base=6 (Radius500 = 6×5)");
 	}
 
+	// ═══════════════════════════════════════════════════════════════════════
+	// 9. RUNTIME SEAM — the scale measures move controls, not only tokens.
+	// Regenerated Space*/Radius* keys reach a control only if its template reads them through
+	// {ThemeResource}; a {StaticResource} attribute snapshots the value at parse time. Asserted on
+	// the application theme (the scope a designer edits), restored in finally. ContentDialog is
+	// the Material v2 control whose panel padding and corner radius were read statically.
+	// ═══════════════════════════════════════════════════════════════════════
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_ScaleMeasuresChangeAtRuntime_Then_RealizedContentDialogFollows()
+	{
+		var theme = SemanticThemeHelper.GetTheme();
+		Assert.IsNotNull(theme, "The Material sample app must have a BaseTheme in its application resources.");
+
+		var originalSpacing = theme.DefaultSpacing;
+		var originalRadius = theme.DefaultCornerRadius;
+
+		// Declared in the tree like a page-level dialog; its style applies without showing it.
+		var root = new Grid();
+		var dialog = new ContentDialog
+		{
+			Title = "probe",
+			Content = "probe",
+			Style = (Style)Application.Current.Resources["MaterialContentDialogStyle"],
+		};
+		root.Children.Add(dialog);
+
+		UnitTestsUIContentHelper.Content = root;
+		await UnitTestsUIContentHelper.WaitForLoaded(dialog);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		try
+		{
+			var radiusBefore = dialog.CornerRadius;
+
+			theme.DefaultSpacing = 10;      // Space600Thickness = 60
+			theme.DefaultCornerRadius = 1;  // Radius700CornerRadius = 7
+
+			root.RequestedTheme = ElementTheme.Light;
+			await UnitTestsUIContentHelper.WaitForIdle();
+			root.RequestedTheme = ElementTheme.Dark;
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			Assert.AreEqual(new CornerRadius(7), dialog.CornerRadius,
+				$"A realized ContentDialog must re-resolve MaterialContentDialogCornerRadius after the radius changes (was {radiusBefore}).");
+		}
+		finally
+		{
+			theme.DefaultSpacing = originalSpacing;
+			theme.DefaultCornerRadius = originalRadius;
+			root.RequestedTheme = ElementTheme.Default;
+			UnitTestsUIContentHelper.Content = null;
+		}
+	}
+
 }

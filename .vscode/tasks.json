@@ -78,6 +78,44 @@
         "/consoleloggerparameters:NoSummary"
       ],
       "problemMatcher": "$msCompile"
+    },
+    {
+      // TargetFrameworkOverride activates the wrapper's ordering ProjectReferences so the
+      // guest heads it hosts are built first.
+      "label": "build-Themes-desktop",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/src/samples/ThemesSampleApp/ThemesSampleApp.csproj",
+        "/property:GenerateFullPaths=true",
+        "/property:TargetFramework=net10.0-desktop",
+        "/property:TargetFrameworkOverride=desktop",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      // The wasm wrapper carries no ProjectReferences to the heads (StaticWebAssets
+      // collisions), so their wasm outputs are built first for the GuestApps payload.
+      "label": "build-Themes-wasm",
+      "command": "dotnet",
+      "type": "process",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "build-Material-wasm",
+        "build-Cupertino-wasm",
+        "build-Simple-wasm"
+      ],
+      "args": [
+        "build",
+        "${workspaceFolder}/src/samples/ThemesSampleApp/ThemesSampleApp.csproj",
+        "/property:GenerateFullPaths=true",
+        "/property:TargetFramework=net10.0-browserwasm",
+        "/property:TargetFrameworkOverride=browserwasm",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile"
     }
   ]
 }

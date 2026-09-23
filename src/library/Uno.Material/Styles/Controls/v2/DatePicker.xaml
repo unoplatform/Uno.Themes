@@ -1,12 +1,9 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:android="http://uno.ui/android"
-					xmlns:ios="http://uno.ui/ios"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:not_win="http://uno.ui/not_win"
-					xmlns:toolkit="using:Uno.UI.Toolkit"
-					xmlns:wasm="http://uno.ui/wasm"
-					mc:Ignorable="ios android wasm not_win">
+					xmlns:uno="using:Uno.UI.Xaml.Controls"
+					mc:Ignorable="not_win">
 
 	<ResourceDictionary.ThemeDictionaries>
 		<ResourceDictionary x:Key="Default">
@@ -40,7 +37,7 @@
 			<StaticResource x:Key="DatePickerButtonBorderBrushDisabled" ResourceKey="OnSurfaceLowBrush" />
 
 			<!--#region Typo-->
-			<StaticResource x:Key="DatePickerFlyoutPresenterFontFamily" ResourceKey="MaterialRegularFontFamily" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterFontFamily" ResourceKey="DefaultFontFamily" />
 			<StaticResource x:Key="DatePickerFlyoutPresenterFontSize" ResourceKey="ControlContentThemeFontSize" />
 			<!--#endregion-->
 
@@ -96,7 +93,7 @@
 			<StaticResource x:Key="DatePickerButtonBorderBrushDisabled" ResourceKey="OnSurfaceLowBrush" />
 
 			<!--#region Typo-->
-			<StaticResource x:Key="DatePickerFlyoutPresenterFontFamily" ResourceKey="MaterialRegularFontFamily" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterFontFamily" ResourceKey="DefaultFontFamily" />
 			<StaticResource x:Key="DatePickerFlyoutPresenterFontSize" ResourceKey="ControlContentThemeFontSize" />
 			<!--#endregion-->
 
@@ -168,7 +165,7 @@
 	</Style>
 
 	<Style x:Key="MaterialDatePickerFlyoutPresenterStyle"
-				   TargetType="DatePickerFlyoutPresenter">
+		   TargetType="DatePickerFlyoutPresenter">
 		<Setter Property="Width" Value="{ThemeResource DatePickerFlyoutPresenterWidth}" />
 		<Setter Property="MinWidth" Value="{ThemeResource DatePickerFlyoutPresenterMinWidth}" />
 		<Setter Property="MaxHeight" Value="{ThemeResource DatePickerFlyoutPresenterMaxHeight}" />
@@ -184,13 +181,13 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="DatePickerFlyoutPresenter">
-					<toolkit:ElevatedView MaxHeight="{TemplateBinding MaxHeight}"
-										  Background="{TemplateBinding Background}"
-										  BorderBrush="{TemplateBinding BorderBrush}"
-										  BorderThickness="{TemplateBinding BorderThickness}"
-										  CornerRadius="{TemplateBinding CornerRadius}"
-										  Elevation="{ThemeResource DatePickerFlyoutElevation}"
-										  ShadowColor="{StaticResource ShadowColor}">
+					<uno:ElevatedView MaxHeight="{TemplateBinding MaxHeight}"
+									  Background="{TemplateBinding Background}"
+									  BorderBrush="{TemplateBinding BorderBrush}"
+									  BorderThickness="{TemplateBinding BorderThickness}"
+									  CornerRadius="{TemplateBinding CornerRadius}"
+									  Elevation="{ThemeResource DatePickerFlyoutElevation}"
+									  ShadowColor="{StaticResource ShadowColor}">
 						<Border x:Name="Background">
 							<Grid x:Name="ContentPanel">
 
@@ -261,7 +258,7 @@
 								</Grid>
 							</Grid>
 						</Border>
-					</toolkit:ElevatedView>
+					</uno:ElevatedView>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>

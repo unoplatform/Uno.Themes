@@ -4,11 +4,9 @@
 	  xmlns:local="using:Uno.Themes.Samples.Shared.Content"
 	  xmlns:sample="using:Uno.Themes.Samples"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-	  xmlns:android="http://uno.ui/android"
-	  xmlns:ios="http://uno.ui/ios"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:smtx="using:ShowMeTheXAML"
-	  mc:Ignorable="d android ios">
+	  mc:Ignorable="d">
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 		<sample:SamplePageLayout>
@@ -181,9 +179,13 @@
 						<smtx:XamlDisplay UniqueKey="Simple_RadioButton_Basic"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<StackPanel Spacing="12">
-								<RadioButton Content="Option 1" GroupName="SimpleGroup1" IsChecked="True" />
-								<RadioButton Content="Option 2" GroupName="SimpleGroup1" />
-								<RadioButton Content="Option 3" GroupName="SimpleGroup1" />
+								<RadioButton Content="Option 1"
+											 GroupName="SimpleGroup1"
+											 IsChecked="True" />
+								<RadioButton Content="Option 2"
+											 GroupName="SimpleGroup1" />
+								<RadioButton Content="Option 3"
+											 GroupName="SimpleGroup1" />
 							</StackPanel>
 						</smtx:XamlDisplay>
 
@@ -191,18 +193,28 @@
 						<smtx:XamlDisplay UniqueKey="Simple_RadioButton_Disabled"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<StackPanel Spacing="12">
-								<RadioButton Content="Disabled Selected" GroupName="SimpleGroup2" IsChecked="True" IsEnabled="False" />
-								<RadioButton Content="Disabled Unselected" GroupName="SimpleGroup2" IsEnabled="False" />
+								<RadioButton Content="Disabled Selected"
+											 GroupName="SimpleGroup2"
+											 IsChecked="True"
+											 IsEnabled="False" />
+								<RadioButton Content="Disabled Unselected"
+											 GroupName="SimpleGroup2"
+											 IsEnabled="False" />
 							</StackPanel>
 						</smtx:XamlDisplay>
 
 						<!-- Horizontal Layout -->
 						<smtx:XamlDisplay UniqueKey="Simple_RadioButton_Horizontal"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<StackPanel Orientation="Horizontal" Spacing="16">
-								<RadioButton Content="A" GroupName="SimpleGroup3" IsChecked="True" />
-								<RadioButton Content="B" GroupName="SimpleGroup3" />
-								<RadioButton Content="C" GroupName="SimpleGroup3" />
+							<StackPanel Orientation="Horizontal"
+										Spacing="16">
+								<RadioButton Content="A"
+											 GroupName="SimpleGroup3"
+											 IsChecked="True" />
+								<RadioButton Content="B"
+											 GroupName="SimpleGroup3" />
+								<RadioButton Content="C"
+											 GroupName="SimpleGroup3" />
 							</StackPanel>
 						</smtx:XamlDisplay>
 					</StackPanel>

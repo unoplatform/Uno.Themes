@@ -128,6 +128,9 @@ Depending on the type of project template that the Uno Platform application was 
 
 The following guides require the creation of new `ResourceDictionary` files in your application project. For more information on how to define styles and resources in a separate `ResourceDictionary`, refer to the [resource management documentation](xref:Guide.HowTo.Create-Control-Library#moving-the-control-style-in-a-separate-resource-dictionary).
 
+> [!NOTE]
+> [Seed color palette generation](xref:Uno.Themes.SeedColors) is available for the Material and Simple themes only — Cupertino colors are customized through the manual overrides below.
+
 ### Customize Color Palette
 
 1. Add a new Resource Dictionary named `CupertinoColorsOverride.xaml` to the application project, for example, under `Styles/Application`.
@@ -169,7 +172,7 @@ The following guides require the creation of new `ResourceDictionary` files in y
 
 ### Change Default Font
 
-By default, Uno Cupertino comes pre-packaged with the [SF Pro](https://developer.apple.com/fonts/) `FontFamily` and automatically includes them in your application. Upon installation of the Uno Cupertino package, you will have a `CupertinoFontFamily` resource available.
+By default, Uno Cupertino comes pre-packaged with the [SF Pro](https://developer.apple.com/fonts/) `FontFamily` and automatically includes them in your application. Upon installation of the Uno Cupertino package, you will have a `CupertinoFontFamily` resource available. It is an alias of the shared `DefaultFontFamily` root token (see [Design Tokens](design-tokens.md#typography)); Cupertino has no semantic type scale, so `CupertinoFontFamily` stays the key to override.
 
 If you would like Uno Cupertino to use a different font, you can override the default `FontFamily` by following these steps:
 

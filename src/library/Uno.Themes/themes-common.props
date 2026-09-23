@@ -26,7 +26,7 @@
 	</ItemGroup>
 
 	<Choose>
-		<When Condition="$(_IsAndroid) or $(IsIOSOrCatalyst)">
+		<When Condition="$(_IsAndroid) or $(_IsIOS)">
 			<ItemGroup>
 				<IncludeXamlNamespaces Include="mobile" />
 				<ExcludeXamlNamespaces Include="not_mobile" />
@@ -44,11 +44,6 @@
 		<UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
 	</ItemGroup>
 
-	<ItemGroup Condition="$(IsXamarinIOS) or $(IsMonoAndroid) or $(IsXamarinMac)">
-		<EmbeddedResource Include="LinkerConfig.xamarin.xml">
-			<LogicalName>$(AssemblyName).xml</LogicalName>
-		</EmbeddedResource>
-	</ItemGroup>
 
 	<ItemGroup>
 	  <None Remove="Styles\Applications\Common\SharedColorPalette.xaml" />

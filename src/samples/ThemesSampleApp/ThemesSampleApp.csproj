@@ -1,0 +1,291 @@
+<Project Sdk="Uno.Sdk.Private">
+  <!--
+    Expand platform suffix overrides to versioned TFMs (see crosstargeting_override.props.sample).
+    This wrapper head only supports desktop and browserwasm; other overrides (ios, android, ...)
+    fall back to net10.0-desktop so a repo-wide override never leaves this project without a TFM.
+  -->
+  <PropertyGroup Condition="'$(TargetFrameworkOverride)'!=''">
+    <TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('browserwasm'))">$(TargetFrameworks);net10.0-browserwasm</TargetFrameworks>
+    <TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('desktop'))">$(TargetFrameworks);net10.0-desktop</TargetFrameworks>
+    <TargetFrameworks Condition="'$(TargetFrameworks)'==''">net10.0-desktop</TargetFrameworks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFrameworkOverride)'==''">
+    <TargetFrameworks>net10.0-browserwasm;net10.0-desktop</TargetFrameworks>
+  </PropertyGroup>
+  <PropertyGroup>
+
+    <OutputType>Exe</OutputType>
+    <UnoSingleProject>true</UnoSingleProject>
+
+    <!--
+      Keep wrapper types (including its App) out of the guests' Uno.Themes.Samples namespace:
+      samples Directory.Build.props sets that RootNamespace for every project in this tree, and
+      the guest heads' types must stay distinguishable from the wrapper's at runtime.
+    -->
+    <RootNamespace>Uno.Themes.WrapperApp</RootNamespace>
+
+    <!--
+      Required on the host too, not only on the guests: the Uno linker substitutions stub
+      Application.HasSecondaryApps to constant false in trimmed Release publishes when this
+      feature is off, which would silently disable per-ALC resource isolation in the published
+      WASM wrapper. TrimmerRootAssembly does not prevent body substitution. Harmless otherwise.
+      The WASM publish is untrimmed today (see PublishTrimmed below), so no substitution runs —
+      this stays as the guard that keeps that from mattering if trimming is ever re-enabled.
+    -->
+    <UnoEnableAlcAppSupport>true</UnoEnableAlcAppSupport>
+
+    <!--
+      Keep the Uno SDK's Debug-only Hot Design tooling out of this host: Uno.UI.HotDesign
+      depends on the *published* Uno.Themes.WinUI package, which would land in this bin and
+      get eagerly loaded into the default ALC by the dev-server client — violating the
+      no-bleed rule above and (before GuestAssemblyLoadContext grew its isolation list)
+      binding repo-built guests against a mismatched theme base library. Release builds never
+      carry Hot Design (IncludeAssets=None when optimized), so this only affects Debug runs.
+    -->
+    <UnoDisableHotDesign>true</UnoDisableHotDesign>
+
+    <!-- Display name -->
+    <ApplicationTitle>Uno.Themes.Samples</ApplicationTitle>
+    <!-- App Identifier -->
+    <ApplicationId>uno.platform.themes.samples</ApplicationId>
+    <!-- Versions -->
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+    <!-- Package Publisher -->
+    <ApplicationPublisher>Uno Platform</ApplicationPublisher>
+    <!-- Package Description -->
+    <Description>Uno.Themes sample-app host: runs the Material, Cupertino and Simple sample apps in-process via secondary AssemblyLoadContexts.</Description>
+
+    <!--
+      UnoFeatures are used to quickly add and manage features enabled for your app.
+      https://aka.platform.uno/singleproject-features
+    -->
+    <UnoFeatures>
+      SkiaRenderer;
+    </UnoFeatures>
+  </PropertyGroup>
+
+  <!--
+    Asset-only font packages so hosted guests' theme fonts resolve from the wrapper's package
+    root (Material uses Roboto, Themes/Simple use Inter, Cupertino uses system fonts). The
+    wrapper deliberately references no theme library and does not import SamplesApp.Shared.
+  -->
+  <ItemGroup>
+    <PackageReference Include="Uno.Fonts.Roboto" />
+    <PackageReference Include="Uno.Fonts.Inter" />
+  </ItemGroup>
+
+  <!--
+    Same reason as the font packages above, for the fonts that live in the repo rather than in a
+    package: a hosted guest resolves ms-appx:/// against the *host's* package root, and the wasm
+    guest payload carries assemblies only. Without these, Cupertino falls back to a default
+    typeface in the browser (SF-Pro fails to load). Fonts only — the wrapper deliberately does
+    not import SamplesApp.Shared.
+  -->
+  <ItemGroup>
+    <Content Include="../SamplesApp.Shared/Assets/Fonts/**/*.ttf" Link="Assets/Fonts/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UnoIcon Include="../SamplesApp.Shared/Assets/Icons/icon.svg" ForegroundFile="../SamplesApp.Shared/Assets/Icons/icon_foreground.svg" Color="#512BD4" />
+    <UnoSplashScreen Include="../SamplesApp.Shared/Assets/Splash/splash_screen.svg" Color="#512BD4" />
+  </ItemGroup>
+
+  <!--
+    Build ordering only (desktop): the guest heads must be built before the wrapper so their
+    bins exist to host, but nothing of theirs may flow into the wrapper's output (no-bleed:
+    hosting isolation depends on the wrapper not carrying theme assemblies).
+    - Only active when a desktop TargetFrameworkOverride is set (the repo's documented
+      local/CI workflow): without an override, referencing the guests drags their full
+      android/ios restore into any wrapper build, which requires mobile workloads.
+    - Not used for browserwasm: the StaticWebAssets SDK merges referenced projects' web
+      assets regardless of ReferenceOutputAssembly=false, and the heads' identical
+      WasmCSS/Fonts.css collide. The wasm guest payload target warns when guest bins are
+      missing instead, and CI builds the heads before the wrapper's wasm leg.
+  -->
+  <ItemGroup Condition="'$(TargetFrameworkOverride)'!='' and $(TargetFrameworkOverride.Contains('desktop'))">
+    <ProjectReference Include="../MaterialSampleApp/MaterialSampleApp.csproj" ReferenceOutputAssembly="false" Private="false" SkipGetTargetFrameworkProperties="true" SetTargetFramework="TargetFramework=$(TargetFramework)" Condition="'$(TargetFramework)'!='net10.0-browserwasm'" />
+    <ProjectReference Include="../CupertinoSampleApp/CupertinoSampleApp.csproj" ReferenceOutputAssembly="false" Private="false" SkipGetTargetFrameworkProperties="true" SetTargetFramework="TargetFramework=$(TargetFramework)" Condition="'$(TargetFramework)'!='net10.0-browserwasm'" />
+    <ProjectReference Include="../SimpleSampleApp/SimpleSampleApp.csproj" ReferenceOutputAssembly="false" Private="false" SkipGetTargetFrameworkProperties="true" SetTargetFramework="TargetFramework=$(TargetFramework)" Condition="'$(TargetFramework)'!='net10.0-browserwasm'" />
+  </ItemGroup>
+
+  <!--
+    Trimming is incompatible with this host: guests are loaded by reflection at runtime, so
+    ILLink cannot see anything they bind to. It is not only unused code that goes — ILLink also
+    drops type-forwarders from the framework facades, so a trimmed publish ships a
+    System.Runtime with no forward for e.g. System.IO.StringWriter and every guest dies at
+    Assembly.GetTypes() with "TypeLoadException: Could not resolve type with token ... from
+    typeref". Measured 2026-08-11: trimmed System.Runtime is 15 KB vs the runtime pack's 45 KB,
+    with the StringWriter/IAsyncDisposable forwarders gone.
+
+    TrimmerRootAssembly cannot fix this — rooting one assembly only moves the failure to the
+    next missing forwarder — so the publish is untrimmed (~116 MB uncompressed; the static
+    host compresses on the fly). Only this hosting head pays it: the theme sample heads still
+    publish trimmed.
+  -->
+  <PropertyGroup Condition="'$(TargetFramework)'=='net10.0-browserwasm'">
+    <PublishTrimmed>false</PublishTrimmed>
+  </PropertyGroup>
+
+  <!--
+    The guest ALC's share-vs-isolate rules are data in GuestHosting/GuestSharedAssemblies.txt,
+    embedded for GuestAssemblyLoadContext and read below by the wasm payload filter — one
+    source of truth (a hand-mirrored list is exactly how Uno.UI.Lottie was once stranded,
+    excluded-but-unresolvable).
+  -->
+  <ItemGroup>
+    <Content Remove="GuestHosting/GuestSharedAssemblies.txt" />
+    <None Remove="GuestHosting/GuestSharedAssemblies.txt" />
+    <EmbeddedResource Include="GuestHosting/GuestSharedAssemblies.txt" LogicalName="GuestSharedAssemblies.txt" />
+  </ItemGroup>
+
+  <!--
+    Applies the GuestSharedAssemblies.txt rules to a guest's dll list: '='/'^' names resolve
+    from the wrapper's default ALC at runtime and are excluded from the payload; '!' (isolated
+    theme libraries) and '~' (shared-if-present, e.g. Uno.UI.Lottie) always ship.
+  -->
+  <UsingTask TaskName="FilterGuestWasmPayload"
+             TaskFactory="RoslynCodeTaskFactory"
+             AssemblyFile="$(MSBuildToolsPath)/Microsoft.Build.Tasks.Core.dll">
+    <ParameterGroup>
+      <Candidates ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="true" />
+      <Rules ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="true" />
+      <Payload ParameterType="Microsoft.Build.Framework.ITaskItem[]" Output="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System" />
+      <Using Namespace="System.Collections.Generic" />
+      <Using Namespace="System.IO" />
+      <Code Type="Fragment" Language="cs"><![CDATA[
+var isolatedPrefixes = new List<string>();
+var sharedEquals = new HashSet<string>(StringComparer.Ordinal);
+var sharedPrefixes = new List<string>();
+foreach (var rule in Rules)
+{
+	var line = rule.ItemSpec.Trim();
+	if (line.Length < 2 || line[0] == '#')
+	{
+		continue;
+	}
+
+	var name = line.Substring(1).Trim();
+	switch (line[0])
+	{
+		case '!': isolatedPrefixes.Add(name); break;
+		case '=': sharedEquals.Add(name); break;
+		case '^': sharedPrefixes.Add(name); break;
+		// '~': shared when present host-side, but always shipped — nothing to record.
+	}
+}
+
+var payload = new List<Microsoft.Build.Framework.ITaskItem>();
+foreach (var candidate in Candidates)
+{
+	var name = Path.GetFileNameWithoutExtension(candidate.ItemSpec);
+
+	// Isolation wins over sharing, mirroring GuestAssemblyLoadContext's tier order.
+	var isolated = false;
+	foreach (var prefix in isolatedPrefixes)
+	{
+		if (name.StartsWith(prefix, StringComparison.Ordinal))
+		{
+			isolated = true;
+			break;
+		}
+	}
+
+	var shared = false;
+	if (!isolated)
+	{
+		shared = sharedEquals.Contains(name);
+		if (!shared)
+		{
+			foreach (var prefix in sharedPrefixes)
+			{
+				if (name.StartsWith(prefix, StringComparison.Ordinal))
+				{
+					shared = true;
+					break;
+				}
+			}
+		}
+	}
+
+	if (!shared)
+	{
+		payload.Add(candidate);
+	}
+}
+
+Payload = payload.ToArray();
+]]></Code>
+    </Task>
+  </UsingTask>
+
+  <!--
+    Carry the guest heads' WASM assemblies (built separately — see the P2P note above) into
+    the app package: top-level IL dlls only, never wwwroot/_framework (WebCIL, not
+    ALC-loadable). Assemblies the shared rules mark host-resolvable are excluded (see
+    FilterGuestWasmPayload above); theme libraries, ShowMeTheXAML and MSTest stay in. Files
+    ship as .dll.bin so static hosts don't block them; a per-app manifest.txt lists the
+    original file names for the runtime fetch.
+  -->
+  <Target Name="_IncludeGuestWasmAssemblies"
+          Condition="'$(TargetFramework)'=='net10.0-browserwasm'"
+          AfterTargets="ResolveProjectReferences"
+          BeforeTargets="AssignTargetPaths">
+
+    <ItemGroup>
+      <_GuestWasmApp Include="MaterialSampleApp;CupertinoSampleApp;SimpleSampleApp" />
+      <_GuestWasmApp>
+        <RidDir>$(MSBuildProjectDirectory)/../%(Identity)/bin/$(Configuration)/net10.0-browserwasm/browser-wasm</RidDir>
+        <NoRidDir>$(MSBuildProjectDirectory)/../%(Identity)/bin/$(Configuration)/net10.0-browserwasm</NoRidDir>
+      </_GuestWasmApp>
+      <_GuestWasmApp>
+        <BinDir Condition="Exists('%(RidDir)/%(Identity).dll')">%(RidDir)</BinDir>
+        <BinDir Condition="!Exists('%(RidDir)/%(Identity).dll')">%(NoRidDir)</BinDir>
+      </_GuestWasmApp>
+    </ItemGroup>
+
+    <Warning Condition="!Exists('%(_GuestWasmApp.BinDir)/%(_GuestWasmApp.Identity).dll')"
+             Text="ThemesSampleApp: no WASM binaries found for guest %(_GuestWasmApp.Identity); it will not be hostable in this build. Build it first: dotnet build src/samples/%(_GuestWasmApp.Identity)/%(_GuestWasmApp.Identity).csproj -c $(Configuration) -f net10.0-browserwasm -p:TargetFrameworkOverride=browserwasm" />
+
+    <ItemGroup>
+      <_GuestWasmCandidate Include="%(_GuestWasmApp.BinDir)/*.dll" AppName="%(_GuestWasmApp.Identity)" />
+    </ItemGroup>
+
+    <ReadLinesFromFile File="$(MSBuildProjectDirectory)/GuestHosting/GuestSharedAssemblies.txt">
+      <Output TaskParameter="Lines" ItemName="_GuestShareRule" />
+    </ReadLinesFromFile>
+
+    <Error Condition="'@(_GuestShareRule)'==''"
+           Text="ThemesSampleApp: GuestHosting/GuestSharedAssemblies.txt is missing or empty; the guest payload cannot be filtered." />
+
+    <FilterGuestWasmPayload Candidates="@(_GuestWasmCandidate)"
+                            Rules="@(_GuestShareRule)"
+                            Condition="'@(_GuestWasmCandidate)'!=''">
+      <Output TaskParameter="Payload" ItemName="_GuestWasmPayload" />
+    </FilterGuestWasmPayload>
+
+    <ItemGroup>
+      <!-- Metadata refs stay list-qualified: with an empty payload list an unqualified
+           %(AppName) would batch over the whole Content list and fail (MSB4096). -->
+      <Content Include="@(_GuestWasmPayload)"
+               Link="GuestApps/%(_GuestWasmPayload.AppName)/%(_GuestWasmPayload.Filename)%(_GuestWasmPayload.Extension).bin"
+               CopyToOutputDirectory="PreserveNewest" />
+    </ItemGroup>
+
+    <WriteLinesToFile File="$(IntermediateOutputPath)GuestApps/%(_GuestWasmPayload.AppName)/manifest.txt"
+                      Lines="@(_GuestWasmPayload->'%(Filename)%(Extension)')"
+                      Overwrite="true"
+                      WriteOnlyWhenDifferent="true" />
+
+    <ItemGroup>
+      <Content Include="$(IntermediateOutputPath)GuestApps/%(_GuestWasmApp.Identity)/manifest.txt"
+               Link="GuestApps/%(_GuestWasmApp.Identity)/manifest.txt"
+               Condition="Exists('$(IntermediateOutputPath)GuestApps/%(_GuestWasmApp.Identity)/manifest.txt')"
+               CopyToOutputDirectory="PreserveNewest" />
+    </ItemGroup>
+  </Target>
+
+</Project>

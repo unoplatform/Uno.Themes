@@ -11,6 +11,8 @@ uid: Uno.Themes.LightweightStyling
 
 Overriding resources from Uno Material can be done at the App level, Page level, or even at the Control level. The following sections will cover how to override resources at each of these levels.
 
+Lightweight styling is surgical — one key at a time. To change the app's whole color theme at once, generate it from a single [seed color](seed-colors.md) instead; a lightweight override you define always wins over seed-generated values, so the two combine cleanly.
+
 > [!Video https://www.youtube-nocookie.com/embed/5CsJHMTlNAw]
 
 ## App/Page level styling
@@ -234,4 +236,5 @@ Toolkit also has controls that allow lightweight styling, check out [Lightweight
 
 ### Further Reading
 
-[Lightweight Styling (Windows Dev Docs)](https://learn.microsoft.com/windows/apps/design/style/xaml-styles#lightweight-styling)
+- [Lightweight Styling (Windows Dev Docs)](https://learn.microsoft.com/windows/apps/design/style/xaml-styles#lightweight-styling)
+- [Seed Color Palette](seed-colors.md) — generate the entire color theme from one color instead of overriding key by key

@@ -1,11 +1,11 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:local="using:Microsoft.UI.Xaml.Controls"
 					xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
 					xmlns:media="using:Microsoft.UI.Xaml.Media"
 					xmlns:primitives="using:Microsoft.UI.Xaml.Controls.Primitives"
-					xmlns:toolkit="using:Uno.UI.Toolkit"
+					xmlns:unobehaviors="using:Uno.UI.Behaviors"
 					xmlns:um="using:Uno.Material"
 					xmlns:contract4Present="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract,4)"
 					xmlns:contract4NotPresent="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract,4)"
@@ -416,13 +416,13 @@
 			<StaticResource x:Key="TopNavigationViewItemForegroundSelectedPointerOver" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="TopNavigationViewItemForegroundSelectedPressed" ResourceKey="SystemControlTransparentBrush" />
 
-            <StaticResource x:Key="TopNavigationViewItemBackground" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="TopNavigationViewItemBackgroundPointerOver" ResourceKey="PrimaryHoverBrush" />
-            <StaticResource x:Key="TopNavigationViewItemBackgroundPressed" ResourceKey="PrimaryPressedBrush" />
-            <StaticResource x:Key="TopNavigationViewItemBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-            <StaticResource x:Key="TopNavigationViewItemBackgroundSelected" ResourceKey="PrimarySelectedBrush" />
-            <StaticResource x:Key="TopNavigationViewItemBackgroundSelectedPointerOver" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="TopNavigationViewItemBackgroundSelectedPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TopNavigationViewItemBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TopNavigationViewItemBackgroundPointerOver" ResourceKey="PrimaryHoverBrush" />
+			<StaticResource x:Key="TopNavigationViewItemBackgroundPressed" ResourceKey="PrimaryPressedBrush" />
+			<StaticResource x:Key="TopNavigationViewItemBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="TopNavigationViewItemBackgroundSelected" ResourceKey="PrimarySelectedBrush" />
+			<StaticResource x:Key="TopNavigationViewItemBackgroundSelectedPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TopNavigationViewItemBackgroundSelectedPressed" ResourceKey="SystemControlTransparentBrush" />
 
 			<StaticResource x:Key="TopNavigationViewItemSeparatorForeground" ResourceKey="SystemControlTransparentBrush" />
 		</ResourceDictionary>
@@ -610,13 +610,13 @@
 			<StaticResource x:Key="TopNavigationViewItemForegroundSelectedPointerOver" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="TopNavigationViewItemForegroundSelectedPressed" ResourceKey="SystemControlTransparentBrush" />
 
-            <StaticResource x:Key="TopNavigationViewItemBackground" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="TopNavigationViewItemBackgroundPointerOver" ResourceKey="PrimaryHoverBrush" />
-            <StaticResource x:Key="TopNavigationViewItemBackgroundPressed" ResourceKey="PrimaryPressedBrush" />
-            <StaticResource x:Key="TopNavigationViewItemBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-            <StaticResource x:Key="TopNavigationViewItemBackgroundSelected" ResourceKey="PrimarySelectedBrush" />
-            <StaticResource x:Key="TopNavigationViewItemBackgroundSelectedPointerOver" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="TopNavigationViewItemBackgroundSelectedPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TopNavigationViewItemBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TopNavigationViewItemBackgroundPointerOver" ResourceKey="PrimaryHoverBrush" />
+			<StaticResource x:Key="TopNavigationViewItemBackgroundPressed" ResourceKey="PrimaryPressedBrush" />
+			<StaticResource x:Key="TopNavigationViewItemBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="TopNavigationViewItemBackgroundSelected" ResourceKey="PrimarySelectedBrush" />
+			<StaticResource x:Key="TopNavigationViewItemBackgroundSelectedPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TopNavigationViewItemBackgroundSelectedPressed" ResourceKey="SystemControlTransparentBrush" />
 
 			<StaticResource x:Key="TopNavigationViewItemSeparatorForeground" ResourceKey="SystemControlTransparentBrush" />
 		</ResourceDictionary>
@@ -1536,7 +1536,7 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="local:NavigationView">
 					<Grid x:Name="RootGrid"
-						  toolkit:VisibleBoundsPadding.PaddingMask="All"
+						  unobehaviors:VisibleBoundsPadding.PaddingMask="All"
 						  Background="{TemplateBinding Background}">
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="DisplayModeGroup">
@@ -1971,7 +1971,7 @@
 										<Grid x:Name="AutoSuggestArea"
 											  Grid.Row="3"
 											  Height="{ThemeResource NavigationViewAutoSuggestAreaHeight}"
-											  Margin="{StaticResource Space200BottomThickness}"
+											  Margin="{ThemeResource Space200BottomThickness}"
 											  VerticalAlignment="Center">
 
 											<ContentControl x:Name="PaneAutoSuggestBoxPresenter"
@@ -2812,7 +2812,7 @@
 		   x:Key="MUX_NavigationViewItemPresenterStyleWhenOnLeftPane">
 		<Setter Property="Foreground" Value="{ThemeResource NavigationViewItemForeground}" />
 		<Setter Property="Background" Value="{ThemeResource NavigationViewItemBackground}" />
-		<Setter Property="FontFamily" Value="{ThemeResource MaterialMediumFontFamily}" />
+		<Setter Property="FontFamily" Value="{ThemeResource DefaultFontFamily}" />
 		<Setter Property="FontWeight" Value="{ThemeResource LabelLargeFontWeight}" />
 		<Setter Property="FontSize" Value="{ThemeResource LabelLargeFontSize}" />
 		<Setter Property="CharacterSpacing" Value="{ThemeResource LabelLargeCharacterSpacing}" />
@@ -3072,7 +3072,7 @@
 							</todo:Grid>
 
 							<Grid x:Name="ContentGrid"
-								  Padding="{StaticResource Space400Thickness}">
+								  Padding="{ThemeResource Space400Thickness}">
 								<Grid.ColumnDefinitions>
 									<!-- 0: Icon, 1: Content, 2: InfoBadge, 3: Chevron -->
 									<ColumnDefinition x:Name="IconColumn"
@@ -3355,7 +3355,7 @@
 							<Viewbox x:Name="IconBox"
 									 Height="16"
 									 Width="16"
-									 Margin="{StaticResource Space300LeftThickness}"
+									 Margin="{ThemeResource Space300LeftThickness}"
 									 VerticalAlignment="Center"
 									 HorizontalAlignment="Center">
 								<ContentPresenter x:Name="Icon"
@@ -3621,7 +3621,7 @@
 								<Viewbox x:Name="IconBox"
 										 Height="16"
 										 Width="16"
-										 Margin="{StaticResource Space400LeftThickness}"
+										 Margin="{ThemeResource Space400LeftThickness}"
 										 VerticalAlignment="Center"
 										 HorizontalAlignment="Center">
 									<ContentPresenter x:Name="Icon"
@@ -3774,7 +3774,7 @@
 						</VisualStateManager.VisualStateGroups>
 
 						<Grid x:Name="InnerHeaderGrid"
-							  Padding="{StaticResource Space400Thickness}"
+							  Padding="{ThemeResource Space400Thickness}"
 							  HorizontalAlignment="Left"
 							  Margin="{ThemeResource NavigationViewItemInnerHeaderMargin}">
 							<TextBlock x:Name="HeaderText"
