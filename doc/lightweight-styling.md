@@ -19,6 +19,12 @@ Cupertino supports the same [semantic style keys](semantic-styles.md), with its 
 
 `CupertinoBarTintBrush` controls the tint over navigation panes and command groups. Its default follows `SurfaceColor` at 35% opacity; overriding the surface color preserves that opacity while updating existing controls.
 
+Cupertino padding, corners and typography also derive from [semantic design tokens](design-tokens.md).
+Set shared alias targets at application scope; use the corresponding Cupertino key for a local
+override, such as `CupertinoRowPadding` or `CupertinoButtonFontSize`. Geometry and typography changes
+need a theme refresh for existing content; [Cupertino token customization](cupertino-getting-started.md#customize-semantic-design-tokens)
+describes the supported scopes and update behavior.
+
 ## App/Page level styling
 
 The most common way to override resources is at the App level. This is done by adding a new `ResourceDictionary` to the `ResourceDictionary.MergedDictionaries` collection in your `AppResources.xaml` file. The following XAML shows how to override the default resources used with the `FilledButtonStyle` from Uno Themes.

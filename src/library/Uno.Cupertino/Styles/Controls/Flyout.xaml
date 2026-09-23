@@ -18,8 +18,8 @@
 	</ResourceDictionary.ThemeDictionaries>
 
 	<!-- The iOS 26 popover and menu radius; the hairline is Apple's 0.5 pt separator. -->
-	<CornerRadius x:Key="CupertinoPopoverCornerRadius">26</CornerRadius>
-	<Thickness x:Key="CupertinoPopoverPadding">16</Thickness>
+	<StaticResource x:Key="CupertinoPopoverCornerRadius" ResourceKey="Radius650CornerRadius" />
+	<StaticResource x:Key="CupertinoPopoverPadding" ResourceKey="Space400Thickness" />
 	<Thickness x:Key="CupertinoHairlineThickness">0.5</Thickness>
 
 	<Style x:Key="CupertinoFlyoutPresenterStyle"
@@ -27,8 +27,8 @@
 		<Setter Property="Background" Value="{ThemeResource FlyoutPresenterBackground}" />
 		<Setter Property="BorderBrush" Value="{ThemeResource FlyoutPresenterBorderBrush}" />
 		<Setter Property="BorderThickness" Value="{StaticResource CupertinoHairlineThickness}" />
-		<Setter Property="CornerRadius" Value="{StaticResource CupertinoPopoverCornerRadius}" />
-		<Setter Property="Padding" Value="{StaticResource CupertinoPopoverPadding}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource CupertinoPopoverCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource CupertinoPopoverPadding}" />
 		<Setter Property="IsTabStop" Value="False" />
 		<Setter Property="HorizontalContentAlignment" Value="Stretch" />
 		<Setter Property="VerticalContentAlignment" Value="Stretch" />

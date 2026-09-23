@@ -157,6 +157,36 @@ Alongside the shared roles, `CupertinoTheme` keeps the Cupertino vocabulary: the
 
 The brushes are live: overriding a `*Color` key through `Colors.OverrideSource` repaints everything already on screen that uses the matching brush, without re-navigation. To re-tint the accent, override `PrimaryColor` (it reaches the semantic brushes and the Cupertino accent brushes) or `CupertinoBlueColor` (the Cupertino accent only; it wins over `PrimaryColor` and over a seed).
 
+The semantic text and surface roles also reach the Cupertino vocabulary: `OnSurfaceColor` updates
+labels and field borders, `OnSurfaceVariantColor` updates secondary labels and placeholders,
+`BackgroundColor` and `SurfaceColor` update their background families, and `OutlineColor` /
+`OutlineVariantColor` update separators. An explicit Cupertino color such as `LabelColor` takes
+precedence over its semantic counterpart in the same override dictionary. Clearing overrides
+restores the Apple palette on the same brush instances.
+
+### Customize semantic design tokens
+
+Set `DefaultSpacing`, `DefaultDensity` and `DefaultCornerRadius` on the application theme to
+change padding, gaps and corners throughout the styles. Defaults retain the iOS appearance:
+44px control and touch targets, 22px button corners, 10px field corners and 26px popover corners.
+Density scales spacing only; switch travel and other intrinsic control geometry remain fixed.
+
+Fields, menu rows and toolbar labels use `BodyLarge`; buttons use `LabelLarge`; field headers
+use `CaptionLarge`. These controls consume the slots' size, family, weight and character spacing.
+The 19 semantic text styles consume their complete slots. Compatibility controls with no direct
+iOS text style retain their existing control metrics; symbol fonts remain separate from text fonts.
+
+Existing control-specific keys such as `CupertinoRowPadding`, `CupertinoButtonFontSize` and
+`CupertinoTextBoxCornerRadius` remain supported. Their defaults now derive from shared tokens.
+Set shared alias targets at application scope (or typography through `FontOverrideDictionary`);
+use the control-specific key for a local override. Direct shared-token references can be overridden
+locally. Asymmetric paddings such as `CupertinoButtonPadding` derive from the theme's spacing unit
+and density, and can also be overridden directly.
+
+Color changes repaint immediately. After changing geometry or typography at runtime, refresh
+existing content by changing its root `RequestedTheme` away and back, or recreate the content;
+see [runtime token updates](design-tokens.md#via-scalar-properties).
+
 ## Explore the Cupertino Gallery
 
 In the Cupertino sample app, open **Styles > Cupertino Gallery**. It combines settings switches, sliders, labeled forms, date selection, actions and navigation in one page. The individual control pages provide additional states and variations. Use the sample's theme controls to compare light and dark appearances.

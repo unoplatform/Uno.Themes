@@ -25,18 +25,21 @@
 
 	<Style x:Key="DefaultCupertinoToggleSwitchStyle"
 		   TargetType="ToggleSwitch">
-		<Setter Property="FontFamily" Value="{ThemeResource CupertinoFontFamily}" />
+		<Setter Property="FontFamily" Value="{ThemeResource BodySmallFontFamily}" />
 		<Setter Property="Foreground" Value="{ThemeResource CupertinoToggleSwitchOnButtonBrush}" />
 		<Setter Property="Background" Value="{ThemeResource CupertinoToggleSwitchOnBackgroundBrush}" />
 		<Setter Property="MinWidth" Value="{ThemeResource ToggleSwitchThemeMinWidth}" />
+		<Setter Property="MinHeight" Value="{ThemeResource TouchTargetMinSize}" />
 
 		<Setter Property="HorizontalAlignment" Value="Left" />
 		<Setter Property="VerticalAlignment" Value="Center" />
 		<Setter Property="HorizontalContentAlignment" Value="Right" />
-		<Setter Property="FontSize" Value="15" />
+		<Setter Property="FontSize" Value="{ThemeResource BodySmallFontSize}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodySmallFontWeight}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource BodySmallCharacterSpacing}" />
 		<Setter Property="ManipulationMode" Value="System,TranslateX" />
 		<Setter Property="UseSystemFocusVisuals" Value="True" />
-		<Setter Property="CornerRadius" Value="14" />
+		<Setter Property="CornerRadius" Value="{ThemeResource Radius350CornerRadius}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -245,6 +248,10 @@
 						</Grid.ColumnDefinitions>
 
 						<TextBlock Text="{TemplateBinding Header}"
+								   FontFamily="{TemplateBinding FontFamily}"
+								   FontSize="{TemplateBinding FontSize}"
+								   FontWeight="{TemplateBinding FontWeight}"
+								   CharacterSpacing="{TemplateBinding CharacterSpacing}"
 								   Style="{StaticResource CupertinoBaseTextBlockStyle}"
 								   Foreground="{ThemeResource CupertinoLabelBrush}"
 								   Visibility="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsedConverter}, TargetNullValue=Collapsed}"
@@ -298,14 +305,14 @@
 
 							<Grid x:Name="SolidKnob">
 								<Border Background="{TemplateBinding Foreground}"
-										CornerRadius="12"
+										CornerRadius="{ThemeResource Radius300CornerRadius}"
 										x:Name="SwitchKnobOn"
 										Opacity="0"
 										VerticalAlignment="Stretch"
 										HorizontalAlignment="Stretch" />
 
 								<Border Background="{TemplateBinding Foreground}"
-										CornerRadius="12"
+										CornerRadius="{ThemeResource Radius300CornerRadius}"
 										x:Name="SwitchKnobOff"
 										VerticalAlignment="Stretch"
 										HorizontalAlignment="Stretch" />
@@ -316,7 +323,7 @@
 										   RenderingMode="Solid"
 										   Visibility="Collapsed"
 										   Background="{TemplateBinding Foreground}"
-										   CornerRadius="12"
+										   CornerRadius="{ThemeResource Radius300CornerRadius}"
 										   IsHitTestVisible="False" />
 
 							<Grid.RenderTransform>

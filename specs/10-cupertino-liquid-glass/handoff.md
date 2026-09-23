@@ -1,3 +1,25 @@
+# Handoff update — 2026-09-22 semantic token verification
+
+The requested rebase onto latest origin/master (a3b9df00) was a no-op: this branch already contains it.
+The subsequent audit found and fixed semantic-token consumption gaps while preserving the approved
+Cupertino default appearance. This update supersedes the verification counts below.
+
+- Geometry now consumes spacing, radius, control-height, touch-target and applicable icon tokens.
+  Fractional scale variants preserve iOS measurements; density changes spacing only.
+- Typography consumes complete semantic slots, including actual rendered text tracking. An internal
+  default-presenter bridge handles Uno's missing tracking propagation and preserves custom templates.
+- Cupertino labels/fields/backgrounds/separators follow semantic color overrides while explicit
+  Apple-role overrides retain precedence. All 32 color roles / 280 brushes and 19 text slots covered.
+- Existing Cupertino-specific keys remain usable. Alias targets use application scope; local overrides
+  use the control-specific keys. Geometry/font updates need a root theme refresh or recreated content.
+- Cupertino desktop 246/246 Debug and Release; WASM builds. Material 63/63; Simple 272 passed/one existing
+  skip. Formatting and changed published docs pass. Existing warnings 105 desktop / 107 WASM remain.
+- All eight Light/Dark gallery captures match the approved appearance; temporary capture code removed.
+  No native-device/GPU/browser-runtime verification. Intrinsic geometry and compatibility metrics remain
+  design-specific. See progress.md for exact coverage, and the updated published token documentation.
+- Artifacts: %TEMP%/cupertino-tokens. This pass is committed locally, not pushed; inspect git history.
+
+---
 # Handoff update — 2026-09-22 iOS/iPadOS HIG polish
 
 The user confirmed iOS/iPadOS throughout and requested polishing the current styles against Apple's

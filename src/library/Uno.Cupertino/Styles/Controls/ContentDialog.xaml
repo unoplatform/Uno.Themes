@@ -5,6 +5,9 @@
 	<!-- Current iOS alert: leading title and message, filled capsule actions, on Thick glass. -->
 	<ResourceDictionary.ThemeDictionaries>
 		<ResourceDictionary x:Key="Light">
+			<Thickness x:Key="CupertinoAlertActionsMargin">12,0,12,12</Thickness>
+			<Thickness x:Key="CupertinoAlertContentMargin">20,0,20,16</Thickness>
+			<Thickness x:Key="CupertinoAlertTitleMargin">20,20,20,6</Thickness>
 			<StaticResource x:Key="ContentDialogBackground" ResourceKey="SurfaceBrush" />
 			<StaticResource x:Key="ContentDialogBorderBrush" ResourceKey="OutlineVariantBrush" />
 			<StaticResource x:Key="ContentDialogForeground" ResourceKey="OnSurfaceBrush" />
@@ -13,6 +16,9 @@
 			<StaticResource x:Key="ContentDialogLightDismissOverlayBackground" ResourceKey="CupertinoDimmingBrush" />
 		</ResourceDictionary>
 		<ResourceDictionary x:Key="Default">
+			<Thickness x:Key="CupertinoAlertActionsMargin">12,0,12,12</Thickness>
+			<Thickness x:Key="CupertinoAlertContentMargin">20,0,20,16</Thickness>
+			<Thickness x:Key="CupertinoAlertTitleMargin">20,20,20,6</Thickness>
 			<StaticResource x:Key="ContentDialogBackground" ResourceKey="SurfaceBrush" />
 			<StaticResource x:Key="ContentDialogBorderBrush" ResourceKey="OutlineVariantBrush" />
 			<StaticResource x:Key="ContentDialogForeground" ResourceKey="OnSurfaceBrush" />
@@ -28,10 +34,8 @@
 	<!-- Compact theme sizing; the maximum leaves room for longer labels. These are local design tokens. -->
 	<x:Double x:Key="CupertinoAlertMinWidth">270</x:Double>
 	<x:Double x:Key="CupertinoAlertMaxWidth">320</x:Double>
-	<CornerRadius x:Key="CupertinoAlertCornerRadius">30</CornerRadius>
-	<Thickness x:Key="CupertinoAlertTitleMargin">20,20,20,6</Thickness>
-	<Thickness x:Key="CupertinoAlertContentMargin">20,0,20,16</Thickness>
-	<Thickness x:Key="CupertinoAlertEdgeMargin">24</Thickness>
+	<StaticResource x:Key="CupertinoAlertCornerRadius" ResourceKey="Radius750CornerRadius" />
+	<StaticResource x:Key="CupertinoAlertEdgeMargin" ResourceKey="Space600Thickness" />
 
 	<!-- Alert actions remain distinct from the glass surface; the default action is prominent. -->
 	<Style x:Key="CupertinoContentDialogButtonStyle"
@@ -39,9 +43,12 @@
 		   TargetType="Button">
 		<Setter Property="HorizontalAlignment" Value="Stretch" />
 		<Setter Property="HorizontalContentAlignment" Value="Center" />
-		<Setter Property="CornerRadius" Value="{StaticResource CupertinoButtonCornerRadius}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource CupertinoButtonCornerRadius}" />
 		<Setter Property="Foreground" Value="{ThemeResource OnSurfaceBrush}" />
-		<Setter Property="FontWeight" Value="Normal" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyLargeFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
+		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource BodyLargeCharacterSpacing}" />
 		<Setter Property="Background" Value="{ThemeResource CupertinoQuinaryGrayBrush}" />
 		<Setter Property="Template">
 			<Setter.Value>
@@ -75,7 +82,9 @@
 								</VisualState>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
-						<ContentPresenter x:Name="ContentPresenter"
+						<ContentPresenter CharacterSpacing="{TemplateBinding CharacterSpacing}"
+										  uc:CupertinoTypography.BindCharacterSpacing="True"
+										  x:Name="ContentPresenter"
 										  Content="{TemplateBinding Content}"
 										  ContentTemplate="{TemplateBinding ContentTemplate}"
 										  ContentTransitions="{TemplateBinding ContentTransitions}"
@@ -93,7 +102,7 @@
 	<Style x:Key="CupertinoContentDialogDefaultButtonStyle"
 		   BasedOn="{StaticResource CupertinoContentDialogButtonStyle}"
 		   TargetType="Button">
-		<Setter Property="FontWeight" Value="SemiBold" />
+		<Setter Property="FontWeight" Value="{ThemeResource TitleMediumFontWeight}" />
 		<Setter Property="Background" Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="Foreground" Value="{ThemeResource OnPrimaryBrush}" />
 	</Style>
@@ -109,9 +118,11 @@
 		<Setter Property="BorderBrush" Value="{ThemeResource ContentDialogBorderBrush}" />
 		<Setter Property="BorderThickness" Value="{StaticResource CupertinoHairlineThickness}" />
 		<Setter Property="Foreground" Value="{ThemeResource ContentDialogForeground}" />
-		<Setter Property="CornerRadius" Value="{StaticResource CupertinoAlertCornerRadius}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource CupertinoAlertCornerRadius}" />
 		<Setter Property="FontFamily" Value="{ThemeResource BodySmallFontFamily}" />
 		<Setter Property="FontSize" Value="{ThemeResource BodySmallFontSize}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodySmallFontWeight}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource BodySmallCharacterSpacing}" />
 		<Setter Property="HorizontalAlignment" Value="Stretch" />
 		<Setter Property="VerticalAlignment" Value="Stretch" />
 		<Setter Property="IsTabStop" Value="False" />
@@ -219,7 +230,7 @@
 							<Border x:Name="BackgroundElement"
 									MinWidth="{StaticResource CupertinoAlertMinWidth}"
 									MaxWidth="{StaticResource CupertinoAlertMaxWidth}"
-									Margin="{StaticResource CupertinoAlertEdgeMargin}"
+									Margin="{ThemeResource CupertinoAlertEdgeMargin}"
 									FlowDirection="{TemplateBinding FlowDirection}"
 									HorizontalAlignment="Center"
 									VerticalAlignment="Center">
@@ -246,14 +257,17 @@
 															FontFamily="{ThemeResource TitleMediumFontFamily}"
 															FontSize="{ThemeResource TitleMediumFontSize}"
 															HorizontalContentAlignment="Left"
-															FontWeight="SemiBold"
-															Margin="{StaticResource CupertinoAlertTitleMargin}"
+															FontWeight="{ThemeResource TitleMediumFontWeight}"
+															CharacterSpacing="{ThemeResource TitleMediumCharacterSpacing}"
+															Margin="{ThemeResource CupertinoAlertTitleMargin}"
 															HorizontalAlignment="Stretch"
 															VerticalAlignment="Top"
 															IsTabStop="False">
 												<ContentControl.Template>
 													<ControlTemplate TargetType="ContentControl">
-														<ContentPresenter Content="{TemplateBinding Content}"
+														<ContentPresenter CharacterSpacing="{TemplateBinding CharacterSpacing}"
+																		  uc:CupertinoTypography.BindCharacterSpacing="True"
+																		  Content="{TemplateBinding Content}"
 																		  ContentTemplate="{TemplateBinding ContentTemplate}"
 																		  ContentTransitions="{TemplateBinding ContentTransitions}"
 																		  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -267,12 +281,14 @@
 
 											<ScrollViewer x:Name="ContentScrollViewer"
 														  Grid.Row="1"
-														  Margin="{StaticResource CupertinoAlertContentMargin}"
+														  Margin="{ThemeResource CupertinoAlertContentMargin}"
 														  HorizontalScrollBarVisibility="Disabled"
 														  VerticalScrollBarVisibility="Auto"
 														  ZoomMode="Disabled"
 														  IsTabStop="False">
-												<ContentPresenter x:Name="Content"
+												<ContentPresenter CharacterSpacing="{TemplateBinding CharacterSpacing}"
+																  uc:CupertinoTypography.BindCharacterSpacing="True"
+																  x:Name="Content"
 																  Content="{TemplateBinding Content}"
 																  ContentTemplate="{TemplateBinding ContentTemplate}"
 																  Foreground="{TemplateBinding Foreground}"
@@ -283,9 +299,10 @@
 
 											<Grid x:Name="CommandSpace"
 												  Grid.Row="2"
-												  Margin="12,0,12,12"
+												  Margin="{ThemeResource CupertinoAlertActionsMargin}"
 												  XYFocusKeyboardNavigation="Enabled">
-												<uc:CupertinoAlertActionsPanel DefaultButton="{TemplateBinding DefaultButton}">
+												<uc:CupertinoAlertActionsPanel DefaultButton="{TemplateBinding DefaultButton}"
+																			   Spacing="{ThemeResource Space200}">
 													<Button x:Name="PrimaryButton"
 															Content="{TemplateBinding PrimaryButtonText}"
 															IsEnabled="{TemplateBinding IsPrimaryButtonEnabled}"

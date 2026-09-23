@@ -19,7 +19,23 @@ internal static class CupertinoConstants
 	/// <summary>The resource <see cref="CupertinoTheme.GlassRenderingMode"/> is published under, as the enum member's name.</summary>
 	public const string GlassRenderingModeKey = "CupertinoGlassRenderingMode";
 
+	public const string SpacingBaseKey = "Space100";
+	public const string TouchTargetMinSizeKey = "TouchTargetMinSize";
+
 	private const string PrimaryColor = "PrimaryColor";
+
+	// Composite spacing keys retain Apple's default proportions while following the shared spacing base.
+	public static readonly (string Key, double Left, double Top, double Right, double Bottom)[] SpacingMultipliers =
+	{
+		("CupertinoButtonPadding", 4, 1.75, 4, 1.75),
+		("MaterialDatePickerHostPadding", 6, 6, 2, 2),
+		("CupertinoAlertTitleMargin", 5, 5, 5, 1.5),
+		("CupertinoAlertContentMargin", 5, 0, 5, 4),
+		("CupertinoToolTipPadding", 2.5, 1.5, 2.5, 1.5),
+		("CupertinoAlertActionsMargin", 3, 0, 3, 3),
+		("CupertinoCalendarDatePickerPadding", 3, 0, 3, 0.5),
+	};
+
 
 	/// <summary>The accent brushes of <see cref="BrushColorKeys"/> with the color key each is published under.</summary>
 	public static readonly (string Brush, string Color)[] AccentColorKeys =
@@ -50,8 +66,8 @@ internal static class CupertinoConstants
 		("CupertinoDialogTintBrush", new[] { "SurfaceColor" }),
 
 		// Live field and calendar brushes (opacity remains in CupertinoBrushes.xaml).
-		("CupertinoFieldBorderBrush", new[] { "LabelColor" }),
-		("CupertinoHeaderForegroundBrush", new[] { "LabelColor" }),
+		("CupertinoFieldBorderBrush", new[] { "LabelColor", "OnSurfaceColor" }),
+		("CupertinoHeaderForegroundBrush", new[] { "LabelColor", "OnSurfaceColor" }),
 		("CupertinoDetailsLightBrush", new[] { "CupertinoPrimaryGrayColor" }),
 		("CupertinoCalendarViewSelectedBackground", new[] { "CupertinoBlueColor", PrimaryColor }),
 		("CupertinoCalendarDatePickerBorderBrushPointerOver", new[] { "CupertinoPrimaryGrayColor" }),
@@ -81,23 +97,23 @@ internal static class CupertinoConstants
 		("CupertinoSenaryGrayBrush", new[] { "CupertinoSenaryGrayColor" }),
 
 		// Labels, fills, backgrounds, separators
-		("CupertinoLabelBrush", new[] { "LabelColor" }),
-		("CupertinoSecondaryLabelBrush", new[] { "SecondaryLabelColor" }),
-		("CupertinoTertiaryLabelBrush", new[] { "TertiaryLabelColor" }),
-		("CupertinoQuaternaryLabelBrush", new[] { "QuaternaryLabelColor" }),
-		("CupertinoPlaceholderTextBrush", new[] { "PlaceholderTextColor" }),
+		("CupertinoLabelBrush", new[] { "LabelColor", "OnSurfaceColor" }),
+		("CupertinoSecondaryLabelBrush", new[] { "SecondaryLabelColor", "OnSurfaceVariantColor" }),
+		("CupertinoTertiaryLabelBrush", new[] { "TertiaryLabelColor", "OnSurfaceVariantColor" }),
+		("CupertinoQuaternaryLabelBrush", new[] { "QuaternaryLabelColor", "OnSurfaceVariantColor" }),
+		("CupertinoPlaceholderTextBrush", new[] { "PlaceholderTextColor", "OnSurfaceVariantColor" }),
 		("CupertinoSystemFillBrush", new[] { "SystemFillColor" }),
 		("CupertinoSecondarySystemFillBrush", new[] { "SecondarySystemFillColor" }),
 		("CupertinoTertiarySystemFillBrush", new[] { "TertiarySystemFillColor" }),
 		("CupertinoQuaternarySystemFillBrush", new[] { "QuaternarySystemFillColor" }),
-		("CupertinoSystemBackgroundBrush", new[] { "SystemBackgroundColor" }),
-		("CupertinoSecondarySystemBackgroundBrush", new[] { "SecondarySystemBackgroundColor" }),
-		("CupertinoTertiarySystemBackgroundBrush", new[] { "TertiarySystemBackgroundColor" }),
-		("CupertinoSystemGroupedBackgroundBrush", new[] { "SystemGroupedBackgroundColor" }),
-		("CupertinoSecondarySystemGroupedBackgroundBrush", new[] { "SecondarySystemGroupedBackgroundColor" }),
-		("CupertinoTertiarySystemGroupedBackgroundBrush", new[] { "TertiarySystemGroupedBackgroundColor" }),
-		("CupertinoSeparatorBrush", new[] { "SeparatorColor" }),
-		("CupertinoOpaqueSeparatorBrush", new[] { "OpaqueSeparatorColor" }),
+		("CupertinoSystemBackgroundBrush", new[] { "SystemBackgroundColor", "BackgroundColor" }),
+		("CupertinoSecondarySystemBackgroundBrush", new[] { "SecondarySystemBackgroundColor", "SurfaceColor" }),
+		("CupertinoTertiarySystemBackgroundBrush", new[] { "TertiarySystemBackgroundColor", "SurfaceColor" }),
+		("CupertinoSystemGroupedBackgroundBrush", new[] { "SystemGroupedBackgroundColor", "SurfaceVariantColor" }),
+		("CupertinoSecondarySystemGroupedBackgroundBrush", new[] { "SecondarySystemGroupedBackgroundColor", "SurfaceColor" }),
+		("CupertinoTertiarySystemGroupedBackgroundBrush", new[] { "TertiarySystemGroupedBackgroundColor", "SurfaceColor" }),
+		("CupertinoSeparatorBrush", new[] { "SeparatorColor", "OutlineVariantColor" }),
+		("CupertinoOpaqueSeparatorBrush", new[] { "OpaqueSeparatorColor", "OutlineColor" }),
 		("RadioButtonBackgroundBrush", new[] { "RadioButtonBackgroundColor" }),
 	};
 }

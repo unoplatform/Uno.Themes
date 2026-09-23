@@ -7,8 +7,10 @@
 
 	<Style x:Key="DefaultCupertinoCalendarDatePickerStyle"
 		   TargetType="CalendarDatePicker">
-		<Setter Property="FontSize" Value="17" />
-		<Setter Property="FontFamily" Value="{ThemeResource DefaultFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyLargeFontWeight}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource BodyLargeCharacterSpacing}" />
+		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
 		<Setter Property="Foreground" Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="Background" Value="{ThemeResource CupertinoQuinaryGrayBrush}" />
 		<Setter Property="BorderBrush" Value="{ThemeResource CupertinoPrimaryGrayBrush}" />
@@ -24,7 +26,7 @@
 		</Setter>
 		<Setter Property="HorizontalAlignment" Value="Left" />
 		<Setter Property="VerticalAlignment" Value="Center" />
-		<Setter Property="CornerRadius" Value="22" />
+		<Setter Property="CornerRadius" Value="{ThemeResource Radius550CornerRadius}" />
 		<Setter Property="UseSystemFocusVisuals" Value="{ThemeResource IsApplicationFocusVisualKindReveal}" />
 		<Setter Property="Template">
 			<Setter.Value>
@@ -128,7 +130,7 @@
 								<Flyout.FlyoutPresenterStyle>
 									<Style TargetType="FlyoutPresenter"
 										   BasedOn="{StaticResource CupertinoFlyoutPresenterStyle}">
-										<Setter Property="Padding" Value="8" />
+										<Setter Property="Padding" Value="{ThemeResource Space200Thickness}" />
 										<Setter Property="Template">
 											<Setter.Value>
 												<ControlTemplate TargetType="FlyoutPresenter">
@@ -141,7 +143,9 @@
 																	   CornerRadius="{TemplateBinding CornerRadius}" />
 														<Border x:Name="CalendarPopupClip"
 																CornerRadius="{TemplateBinding CornerRadius}">
-															<ContentPresenter Content="{TemplateBinding Content}"
+															<ContentPresenter CharacterSpacing="{TemplateBinding CharacterSpacing}"
+																			  uc:CupertinoTypography.BindCharacterSpacing="True"
+																			  Content="{TemplateBinding Content}"
 																			  ContentTemplate="{TemplateBinding ContentTemplate}"
 																			  ContentTransitions="{TemplateBinding ContentTransitions}"
 																			  Margin="{TemplateBinding Padding}"
@@ -173,8 +177,12 @@
 							<RowDefinition Height="Auto" />
 						</Grid.RowDefinitions>
 
-						<ContentPresenter x:Name="HeaderContentPresenter"
-										  FontSize="13"
+						<ContentPresenter uc:CupertinoTypography.BindCharacterSpacing="True"
+										  x:Name="HeaderContentPresenter"
+										  FontSize="{ThemeResource CaptionLargeFontSize}"
+										  FontFamily="{ThemeResource CaptionLargeFontFamily}"
+										  FontWeight="{ThemeResource CaptionLargeFontWeight}"
+										  CharacterSpacing="{ThemeResource CaptionLargeCharacterSpacing}"
 										  Foreground="{ThemeResource OnSurfaceBrush}"
 										  x:DeferLoadStrategy="Lazy"
 										  Grid.Row="0"
@@ -191,11 +199,11 @@
 								Background="{TemplateBinding Background}"
 								CornerRadius="{TemplateBinding CornerRadius}"
 								Control.IsTemplateFocusTarget="True"
-								MinHeight="44" />
+								MinHeight="{ThemeResource ControlHeightMediumLarge}" />
 						<TextBlock x:Name="DateText"
 								   Grid.Row="1"
 								   HorizontalAlignment="Left"
-								   Padding="12,0,12,2"
+								   Padding="{ThemeResource CupertinoCalendarDatePickerPadding}"
 								   Foreground="{TemplateBinding Foreground}"
 								   Text="{TemplateBinding PlaceholderText}"
 								   VerticalAlignment="Center" />

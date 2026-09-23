@@ -138,8 +138,8 @@
 	<!-- Preserve the stock navigation parts and states; put the pane in the iPadOS glass layer. -->
 	<!-- Template derived from Uno UI Fluent v2 NavigationView.xaml (MIT). -->
 	<!-- The stock left presenter reads this with ThemeResource, so its actual row grows to 44 px. -->
-	<x:Double x:Key="NavigationViewItemOnLeftMinHeight">44</x:Double>
-	<CornerRadius x:Key="CupertinoNavigationViewItemCornerRadius">10</CornerRadius>
+	<StaticResource x:Key="NavigationViewItemOnLeftMinHeight" ResourceKey="ControlHeightMediumLarge" />
+	<StaticResource x:Key="CupertinoNavigationViewItemCornerRadius" ResourceKey="Radius250CornerRadius" />
 
 	<Style x:Key="CupertinoNavigationViewStyle"
 		   TargetType="muxc:NavigationView">
@@ -374,7 +374,7 @@
 												   IsHitTestVisible="False"
 												   x:Name="TopNavigationGlass"
 												   Grid.ColumnSpan="8"
-												   CornerRadius="22" />
+												   CornerRadius="{ThemeResource Radius550CornerRadius}" />
 									<Grid x:Name="TopNavLeftPadding"
 										  Grid.Column="1"
 										  Width="0" />
@@ -553,7 +553,7 @@
 										<Grid x:Name="AutoSuggestArea"
 											  Grid.Row="3"
 											  MinHeight="{ThemeResource NavigationViewAutoSuggestAreaHeight}"
-											  Margin="0,0,0,8"
+											  Margin="{ThemeResource Space200BottomThickness}"
 											  VerticalAlignment="Center">
 											<ContentControl x:Name="PaneAutoSuggestBoxPresenter"
 															Margin="{ThemeResource NavigationViewAutoSuggestBoxMargin}"
@@ -630,7 +630,7 @@
 											</controls:ItemsRepeaterScrollHost>
 											<controls:NavigationViewItemSeparator x:Name="VisualItemsSeparator"
 																				  Grid.Row="1"
-																				  Margin="0,0,0,2"
+																				  Margin="{ThemeResource Space050BottomThickness}"
 																				  Visibility="Collapsed"
 																				  VerticalAlignment="Center"
 																				  HorizontalAlignment="Stretch" />
@@ -639,7 +639,7 @@
 															IsTabStop="False"
 															VerticalContentAlignment="Stretch"
 															HorizontalContentAlignment="Stretch"
-															Margin="0,0,0,4"
+															Margin="{ThemeResource Space100BottomThickness}"
 															Grid.Row="2" />
 											<!-- FooterItems -->
 											<controls:ItemsRepeaterScrollHost Grid.Row="3">
@@ -774,8 +774,8 @@
 	<Style x:Key="CupertinoNavigationViewItemStyle"
 		   TargetType="muxc:NavigationViewItem">
 		<Setter Property="Foreground" Value="{ThemeResource NavigationViewItemForeground}" />
-		<Setter Property="CornerRadius" Value="{StaticResource CupertinoNavigationViewItemCornerRadius}" />
-		<Setter Property="MinHeight" Value="{StaticResource CupertinoRowMinHeight}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource CupertinoNavigationViewItemCornerRadius}" />
+		<Setter Property="MinHeight" Value="{ThemeResource CupertinoRowMinHeight}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="controls:NavigationViewItem">

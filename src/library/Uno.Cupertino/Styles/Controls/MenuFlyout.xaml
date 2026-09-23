@@ -10,6 +10,7 @@
 	-->
 	<ResourceDictionary.ThemeDictionaries>
 		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="CupertinoMenuFlyoutItemIconMargin" ResourceKey="Space250LeftThickness" />
 			<StaticResource x:Key="MenuFlyoutPresenterBackground" ResourceKey="SurfaceBrush" />
 			<StaticResource x:Key="MenuFlyoutPresenterBorderBrush" ResourceKey="OutlineVariantBrush" />
 			<StaticResource x:Key="MenuFlyoutItemForeground" ResourceKey="OnSurfaceBrush" />
@@ -20,6 +21,7 @@
 			<StaticResource x:Key="MenuFlyoutSeparatorBackground" ResourceKey="OutlineVariantBrush" />
 		</ResourceDictionary>
 		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="CupertinoMenuFlyoutItemIconMargin" ResourceKey="Space250LeftThickness" />
 			<StaticResource x:Key="MenuFlyoutPresenterBackground" ResourceKey="SurfaceBrush" />
 			<StaticResource x:Key="MenuFlyoutPresenterBorderBrush" ResourceKey="OutlineVariantBrush" />
 			<StaticResource x:Key="MenuFlyoutItemForeground" ResourceKey="OnSurfaceBrush" />
@@ -32,22 +34,23 @@
 	</ResourceDictionary.ThemeDictionaries>
 
 	<x:Double x:Key="CupertinoMenuFlyoutPresenterMinWidth">250</x:Double>
-	<x:Double x:Key="CupertinoMenuFlyoutItemHeight">44</x:Double>
-	<Thickness x:Key="CupertinoMenuFlyoutItemPadding">16,0</Thickness>
+	<StaticResource x:Key="CupertinoMenuFlyoutItemHeight" ResourceKey="ControlHeightMediumLarge" />
+	<StaticResource x:Key="CupertinoMenuFlyoutItemPadding" ResourceKey="Space400HorizontalThickness" />
 	<x:Double x:Key="CupertinoMenuFlyoutItemIconSize">22</x:Double>
-	<Thickness x:Key="CupertinoMenuFlyoutItemIconMargin">10,0,0,0</Thickness>
 	<x:Double x:Key="CupertinoMenuFlyoutItemGlyphFontSize">13</x:Double>
-	<Thickness x:Key="CupertinoMenuFlyoutSeparatorMargin">0,4</Thickness>
+	<StaticResource x:Key="CupertinoMenuFlyoutSeparatorMargin" ResourceKey="Space100VerticalThickness" />
 
 	<Style x:Key="CupertinoMenuFlyoutPresenterStyle"
 		   TargetType="MenuFlyoutPresenter">
 		<Setter Property="Background" Value="{ThemeResource MenuFlyoutPresenterBackground}" />
 		<Setter Property="BorderBrush" Value="{ThemeResource MenuFlyoutPresenterBorderBrush}" />
 		<Setter Property="BorderThickness" Value="{StaticResource CupertinoHairlineThickness}" />
-		<Setter Property="CornerRadius" Value="{StaticResource CupertinoPopoverCornerRadius}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource CupertinoPopoverCornerRadius}" />
 		<Setter Property="Foreground" Value="{ThemeResource MenuFlyoutItemForeground}" />
 		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
 		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyLargeFontWeight}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource BodyLargeCharacterSpacing}" />
 		<Setter Property="MinWidth" Value="{StaticResource CupertinoMenuFlyoutPresenterMinWidth}" />
 		<Setter Property="Padding" Value="0" />
 		<Setter Property="IsTabStop" Value="False" />
@@ -90,8 +93,10 @@
 		<Setter Property="Foreground" Value="{ThemeResource MenuFlyoutItemForeground}" />
 		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
 		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
-		<Setter Property="MinHeight" Value="{StaticResource CupertinoMenuFlyoutItemHeight}" />
-		<Setter Property="Padding" Value="{StaticResource CupertinoMenuFlyoutItemPadding}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyLargeFontWeight}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource BodyLargeCharacterSpacing}" />
+		<Setter Property="MinHeight" Value="{ThemeResource CupertinoMenuFlyoutItemHeight}" />
+		<Setter Property="Padding" Value="{ThemeResource CupertinoMenuFlyoutItemPadding}" />
 		<Setter Property="HorizontalContentAlignment" Value="Stretch" />
 		<Setter Property="VerticalContentAlignment" Value="Center" />
 		<Setter Property="KeyboardAcceleratorPlacementMode" Value="Hidden" />
@@ -161,7 +166,7 @@
 								 Grid.Column="2"
 								 Width="{StaticResource CupertinoMenuFlyoutItemIconSize}"
 								 Height="{StaticResource CupertinoMenuFlyoutItemIconSize}"
-								 Margin="{StaticResource CupertinoMenuFlyoutItemIconMargin}"
+								 Margin="{ThemeResource CupertinoMenuFlyoutItemIconMargin}"
 								 VerticalAlignment="Center"
 								 Visibility="Collapsed">
 							<ContentPresenter x:Name="IconContent"
@@ -169,22 +174,24 @@
 											  Foreground="{TemplateBinding Foreground}" />
 						</Viewbox>
 
-						<TextBlock x:Name="TextBlock"
+						<TextBlock CharacterSpacing="{TemplateBinding CharacterSpacing}"
+								   x:Name="TextBlock"
 								   Grid.Column="1"
 								   Text="{TemplateBinding Text}"
 								   Foreground="{TemplateBinding Foreground}"
 								   TextTrimming="CharacterEllipsis"
 								   VerticalAlignment="Center" />
 
-						<TextBlock x:Name="KeyboardAcceleratorTextBlock"
+						<TextBlock CharacterSpacing="{TemplateBinding CharacterSpacing}"
+								   x:Name="KeyboardAcceleratorTextBlock"
 								   Grid.Column="3"
 								   Text="{TemplateBinding KeyboardAcceleratorTextOverride}"
 								   Foreground="{ThemeResource MenuFlyoutItemKeyboardAcceleratorTextForeground}"
-								   Margin="{StaticResource CupertinoMenuFlyoutItemIconMargin}"
+								   Margin="{ThemeResource CupertinoMenuFlyoutItemIconMargin}"
 								   VerticalAlignment="Center"
 								   Visibility="Collapsed" />
 						<Border x:Name="CheckGutter"
-								Width="24"
+								Width="{ThemeResource IconSizeMedium}"
 								Visibility="Collapsed" />
 					</Grid>
 				</ControlTemplate>
@@ -198,8 +205,10 @@
 		<Setter Property="Foreground" Value="{ThemeResource MenuFlyoutItemForeground}" />
 		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
 		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
-		<Setter Property="MinHeight" Value="{StaticResource CupertinoMenuFlyoutItemHeight}" />
-		<Setter Property="Padding" Value="{StaticResource CupertinoMenuFlyoutItemPadding}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyLargeFontWeight}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource BodyLargeCharacterSpacing}" />
+		<Setter Property="MinHeight" Value="{ThemeResource CupertinoMenuFlyoutItemHeight}" />
+		<Setter Property="Padding" Value="{ThemeResource CupertinoMenuFlyoutItemPadding}" />
 		<Setter Property="HorizontalContentAlignment" Value="Stretch" />
 		<Setter Property="VerticalContentAlignment" Value="Center" />
 		<Setter Property="KeyboardAcceleratorPlacementMode" Value="Hidden" />
@@ -270,7 +279,7 @@
 								  Glyph=""
 								  FontSize="{StaticResource CupertinoMenuFlyoutItemGlyphFontSize}"
 								  Foreground="{TemplateBinding Foreground}"
-								  Margin="0,0,10,0"
+								  Margin="{ThemeResource Space250RightThickness}"
 								  Opacity="0"
 								  VerticalAlignment="Center"
 								  Width="14" />
@@ -279,7 +288,7 @@
 								 Grid.Column="2"
 								 Width="{StaticResource CupertinoMenuFlyoutItemIconSize}"
 								 Height="{StaticResource CupertinoMenuFlyoutItemIconSize}"
-								 Margin="{StaticResource CupertinoMenuFlyoutItemIconMargin}"
+								 Margin="{ThemeResource CupertinoMenuFlyoutItemIconMargin}"
 								 VerticalAlignment="Center"
 								 Visibility="Collapsed">
 							<ContentPresenter x:Name="IconContent"
@@ -287,18 +296,20 @@
 											  Foreground="{TemplateBinding Foreground}" />
 						</Viewbox>
 
-						<TextBlock x:Name="TextBlock"
+						<TextBlock CharacterSpacing="{TemplateBinding CharacterSpacing}"
+								   x:Name="TextBlock"
 								   Grid.Column="1"
 								   Text="{TemplateBinding Text}"
 								   Foreground="{TemplateBinding Foreground}"
 								   TextTrimming="CharacterEllipsis"
 								   VerticalAlignment="Center" />
 
-						<TextBlock x:Name="KeyboardAcceleratorTextBlock"
+						<TextBlock CharacterSpacing="{TemplateBinding CharacterSpacing}"
+								   x:Name="KeyboardAcceleratorTextBlock"
 								   Grid.Column="3"
 								   Text="{TemplateBinding KeyboardAcceleratorTextOverride}"
 								   Foreground="{ThemeResource MenuFlyoutItemKeyboardAcceleratorTextForeground}"
-								   Margin="{StaticResource CupertinoMenuFlyoutItemIconMargin}"
+								   Margin="{ThemeResource CupertinoMenuFlyoutItemIconMargin}"
 								   VerticalAlignment="Center"
 								   Visibility="Collapsed" />
 					</Grid>
@@ -314,8 +325,10 @@
 		<Setter Property="Foreground" Value="{ThemeResource MenuFlyoutItemForeground}" />
 		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
 		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
-		<Setter Property="MinHeight" Value="{StaticResource CupertinoMenuFlyoutItemHeight}" />
-		<Setter Property="Padding" Value="{StaticResource CupertinoMenuFlyoutItemPadding}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyLargeFontWeight}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource BodyLargeCharacterSpacing}" />
+		<Setter Property="MinHeight" Value="{ThemeResource CupertinoMenuFlyoutItemHeight}" />
+		<Setter Property="Padding" Value="{ThemeResource CupertinoMenuFlyoutItemPadding}" />
 		<Setter Property="HorizontalContentAlignment" Value="Stretch" />
 		<Setter Property="VerticalContentAlignment" Value="Center" />
 		<Setter Property="KeyboardAcceleratorPlacementMode" Value="Hidden" />
@@ -386,7 +399,7 @@
 								  Glyph=""
 								  FontSize="{StaticResource CupertinoMenuFlyoutItemGlyphFontSize}"
 								  Foreground="{TemplateBinding Foreground}"
-								  Margin="0,0,10,0"
+								  Margin="{ThemeResource Space250RightThickness}"
 								  Opacity="0"
 								  VerticalAlignment="Center"
 								  Width="14" />
@@ -395,7 +408,7 @@
 								 Grid.Column="2"
 								 Width="{StaticResource CupertinoMenuFlyoutItemIconSize}"
 								 Height="{StaticResource CupertinoMenuFlyoutItemIconSize}"
-								 Margin="{StaticResource CupertinoMenuFlyoutItemIconMargin}"
+								 Margin="{ThemeResource CupertinoMenuFlyoutItemIconMargin}"
 								 VerticalAlignment="Center"
 								 Visibility="Collapsed">
 							<ContentPresenter x:Name="IconContent"
@@ -403,18 +416,20 @@
 											  Foreground="{TemplateBinding Foreground}" />
 						</Viewbox>
 
-						<TextBlock x:Name="TextBlock"
+						<TextBlock CharacterSpacing="{TemplateBinding CharacterSpacing}"
+								   x:Name="TextBlock"
 								   Grid.Column="1"
 								   Text="{TemplateBinding Text}"
 								   Foreground="{TemplateBinding Foreground}"
 								   TextTrimming="CharacterEllipsis"
 								   VerticalAlignment="Center" />
 
-						<TextBlock x:Name="KeyboardAcceleratorTextBlock"
+						<TextBlock CharacterSpacing="{TemplateBinding CharacterSpacing}"
+								   x:Name="KeyboardAcceleratorTextBlock"
 								   Grid.Column="3"
 								   Text="{TemplateBinding KeyboardAcceleratorTextOverride}"
 								   Foreground="{ThemeResource MenuFlyoutItemKeyboardAcceleratorTextForeground}"
-								   Margin="{StaticResource CupertinoMenuFlyoutItemIconMargin}"
+								   Margin="{ThemeResource CupertinoMenuFlyoutItemIconMargin}"
 								   VerticalAlignment="Center"
 								   Visibility="Collapsed" />
 					</Grid>
@@ -429,8 +444,10 @@
 		<Setter Property="Foreground" Value="{ThemeResource MenuFlyoutItemForeground}" />
 		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
 		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
-		<Setter Property="MinHeight" Value="{StaticResource CupertinoMenuFlyoutItemHeight}" />
-		<Setter Property="Padding" Value="{StaticResource CupertinoMenuFlyoutItemPadding}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyLargeFontWeight}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource BodyLargeCharacterSpacing}" />
+		<Setter Property="MinHeight" Value="{ThemeResource CupertinoMenuFlyoutItemHeight}" />
+		<Setter Property="Padding" Value="{ThemeResource CupertinoMenuFlyoutItemPadding}" />
 		<Setter Property="HorizontalContentAlignment" Value="Stretch" />
 		<Setter Property="VerticalContentAlignment" Value="Center" />
 		<Setter Property="Template">
@@ -496,7 +513,7 @@
 								 Grid.Column="2"
 								 Width="{StaticResource CupertinoMenuFlyoutItemIconSize}"
 								 Height="{StaticResource CupertinoMenuFlyoutItemIconSize}"
-								 Margin="{StaticResource CupertinoMenuFlyoutItemIconMargin}"
+								 Margin="{ThemeResource CupertinoMenuFlyoutItemIconMargin}"
 								 VerticalAlignment="Center"
 								 Visibility="Collapsed">
 							<ContentPresenter x:Name="IconContent"
@@ -504,7 +521,8 @@
 											  Foreground="{TemplateBinding Foreground}" />
 						</Viewbox>
 
-						<TextBlock x:Name="TextBlock"
+						<TextBlock CharacterSpacing="{TemplateBinding CharacterSpacing}"
+								   x:Name="TextBlock"
 								   Grid.Column="1"
 								   Text="{TemplateBinding Text}"
 								   Foreground="{TemplateBinding Foreground}"
@@ -519,7 +537,7 @@
 								  MirroredWhenRightToLeft="True"
 								  VerticalAlignment="Center" />
 						<Border x:Name="CheckGutter"
-								Width="24"
+								Width="{ThemeResource IconSizeMedium}"
 								Visibility="Collapsed" />
 					</Grid>
 				</ControlTemplate>
@@ -530,7 +548,7 @@
 	<Style x:Key="CupertinoMenuFlyoutSeparatorStyle"
 		   TargetType="MenuFlyoutSeparator">
 		<Setter Property="Background" Value="{ThemeResource MenuFlyoutSeparatorBackground}" />
-		<Setter Property="Padding" Value="{StaticResource CupertinoMenuFlyoutSeparatorMargin}" />
+		<Setter Property="Padding" Value="{ThemeResource CupertinoMenuFlyoutSeparatorMargin}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="MenuFlyoutSeparator">

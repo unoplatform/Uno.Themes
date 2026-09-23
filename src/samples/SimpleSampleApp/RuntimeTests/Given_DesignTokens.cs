@@ -126,7 +126,19 @@ public class Given_DesignTokens
 	[RunsOnUIThread]
 	[DataRow(4.0, "Radius0", 0.0)]
 	[DataRow(4.0, "Radius100", 4.0)]
+	[DataRow(4.0, "Radius125", 5.0)]
+	[DataRow(6.0, "Radius125", 7.5)]
 	[DataRow(4.0, "Radius200", 8.0)]
+	[DataRow(4.0, "Radius250", 10.0)]
+	[DataRow(4.0, "Radius350", 14.0)]
+	[DataRow(4.0, "Radius550", 22.0)]
+	[DataRow(4.0, "Radius650", 26.0)]
+	[DataRow(4.0, "Radius750", 30.0)]
+	[DataRow(6.0, "Radius250", 15.0)]
+	[DataRow(6.0, "Radius350", 21.0)]
+	[DataRow(6.0, "Radius550", 33.0)]
+	[DataRow(6.0, "Radius650", 39.0)]
+	[DataRow(6.0, "Radius750", 45.0)]
 	[DataRow(4.0, "Radius500", 20.0)]
 	[DataRow(6.0, "Radius100", 6.0)]
 	[DataRow(6.0, "Radius300", 18.0)]
@@ -151,6 +163,28 @@ public class Given_DesignTokens
 		Assert.AreEqual(new CornerRadius(4), GetResource<CornerRadius>(container, "Radius100CornerRadius"));
 		Assert.AreEqual(new CornerRadius(8), GetResource<CornerRadius>(container, "Radius200CornerRadius"));
 		Assert.AreEqual(new CornerRadius(9999), GetResource<CornerRadius>(container, "RadiusFullCornerRadius"));
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow(Density.Compact, 0.75)]
+	[DataRow(Density.Regular, 1.0)]
+	[DataRow(Density.Comfy, 1.25)]
+	public void When_FractionalSpacingVariantsResolve_Then_AllCompanionsFollowDensity(Density density, double factor)
+	{
+		var (container, _) = CreateThemedContainer(density);
+		foreach (var (variant, normal) in new[] { ("125", 5d), ("175", 7d), ("225", 9d), ("250", 10d) })
+		{
+			var value = normal * factor;
+			Assert.AreEqual(value, GetResource<double>(container, "Space" + variant));
+			Assert.AreEqual(new Thickness(value), GetResource<Thickness>(container, "Space" + variant + "Thickness"));
+			Assert.AreEqual(new Thickness(value, 0, value, 0), GetResource<Thickness>(container, "Space" + variant + "HorizontalThickness"));
+			Assert.AreEqual(new Thickness(0, value, 0, value), GetResource<Thickness>(container, "Space" + variant + "VerticalThickness"));
+			Assert.AreEqual(new Thickness(value, 0, 0, 0), GetResource<Thickness>(container, "Space" + variant + "LeftThickness"));
+			Assert.AreEqual(new Thickness(0, value, 0, 0), GetResource<Thickness>(container, "Space" + variant + "TopThickness"));
+			Assert.AreEqual(new Thickness(0, 0, value, 0), GetResource<Thickness>(container, "Space" + variant + "RightThickness"));
+			Assert.AreEqual(new Thickness(0, 0, 0, value), GetResource<Thickness>(container, "Space" + variant + "BottomThickness"));
+		}
 	}
 
 	// ═══════════════════════════════════════════════════════════════════════

@@ -11,7 +11,17 @@ namespace Uno.Cupertino;
 // two-button row, or first when localization/text sizing or a third action requires a vertical stack.
 internal sealed class CupertinoAlertActionsPanel : Panel
 {
-	private const double ActionSpacing = 8;
+	public double Spacing
+	{
+		get => (double)GetValue(SpacingProperty);
+		set => SetValue(SpacingProperty, value);
+	}
+
+	public static readonly DependencyProperty SpacingProperty = DependencyProperty.Register(
+		nameof(Spacing), typeof(double), typeof(CupertinoAlertActionsPanel),
+		new PropertyMetadata(8d, (sender, _) => ((CupertinoAlertActionsPanel)sender).InvalidateMeasure()));
+
+	private double ActionSpacing => double.IsFinite(Spacing) && Spacing >= 0 ? Spacing : 8;
 	private readonly List<UIElement> _ordered = new(3);
 	private bool _horizontal;
 

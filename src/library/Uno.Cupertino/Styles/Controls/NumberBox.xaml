@@ -1,14 +1,18 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:uc="using:Uno.Cupertino"
 					xmlns:muxc="using:Microsoft.UI.Xaml.Controls">
 	<ResourceDictionary.ThemeDictionaries>
 		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="CupertinoHeaderFontSize" ResourceKey="CaptionLargeFontSize" />
 			<StaticResource x:Key="CupertinoTextBoxBorderBrush" ResourceKey="CupertinoFieldBorderBrush" />
 		</ResourceDictionary>
 		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="CupertinoHeaderFontSize" ResourceKey="CaptionLargeFontSize" />
 			<StaticResource x:Key="CupertinoTextBoxBorderBrush" ResourceKey="CupertinoFieldBorderBrush" />
 		</ResourceDictionary>
 		<ResourceDictionary x:Key="HighContrast">
+			<StaticResource x:Key="CupertinoHeaderFontSize" ResourceKey="CaptionLargeFontSize" />
 			<StaticResource x:Key="CupertinoTextBoxBorderBrush" ResourceKey="CupertinoFieldBorderBrush" />
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
@@ -16,19 +20,19 @@
 	<x:String x:Key="PlusGlyphPathStyle">M0.578125 5.67236H4.29688V9.47412H5.6416V5.67236H9.36035V4.32764H5.6416V0.525879H4.29688V4.32764H0.578125V5.67236Z</x:String>
 	<x:String x:Key="MinusGlyphPathStyle">M0 1.67236H5.57812V0.327637H0V1.67236Z</x:String>
 
-	<x:Double x:Key="CupertinoHeaderFontSize">13</x:Double>
-
-	<CornerRadius x:Key="CupertinoCornerRadius">10</CornerRadius>
+	<StaticResource x:Key="CupertinoCornerRadius" ResourceKey="Radius250CornerRadius" />
 
 	<Style x:Name="CupertinoNumberBoxStyle"
 		   TargetType="muxc:NumberBox">
-		<Setter Property="FontFamily" Value="{ThemeResource DefaultFontFamily}" />
-		<Setter Property="FontSize" Value="17" />
+		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyLargeFontWeight}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource BodyLargeCharacterSpacing}" />
 		<Setter Property="Background" Value="{ThemeResource CupertinoSystemBackgroundBrush}" />
-		<Setter Property="CornerRadius" Value="{StaticResource CupertinoCornerRadius}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource CupertinoCornerRadius}" />
 		<Setter Property="BorderThickness" Value="1" />
 		<Setter Property="BorderBrush" Value="{ThemeResource CupertinoTextBoxBorderBrush}" />
-		<Setter Property="Padding" Value="7" />
+		<Setter Property="Padding" Value="{ThemeResource Space175Thickness}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="muxc:NumberBox">
@@ -73,12 +77,16 @@
 							<TextBox x:Name="InputBox"
 									 Grid.Column="0"
 									 Style="{StaticResource NumberBoxTextBoxStyle}"
+									 FontFamily="{TemplateBinding FontFamily}"
+									 FontSize="{TemplateBinding FontSize}"
+									 FontWeight="{TemplateBinding FontWeight}"
+									 CharacterSpacing="{TemplateBinding CharacterSpacing}"
 									 Text="{TemplateBinding Text}"
 									 Header="{TemplateBinding Header}"
 									 HeaderTemplate="{TemplateBinding HeaderTemplate}"
 									 PlaceholderText="{TemplateBinding PlaceholderText}" />
 
-							<StackPanel CornerRadius="22"
+							<StackPanel CornerRadius="{ThemeResource Radius550CornerRadius}"
 										VerticalAlignment="Center"
 										Background="{ThemeResource CupertinoQuinaryGrayBrush}"
 										Orientation="Horizontal"
@@ -104,10 +112,10 @@
 		   TargetType="RepeatButton">
 		<Style.Setters>
 			<Setter Property="IsTabStop" Value="False" />
-			<Setter Property="Width" Value="44" />
-			<Setter Property="Height" Value="44" />
+			<Setter Property="Width" Value="{ThemeResource TouchTargetMinSize}" />
+			<Setter Property="Height" Value="{ThemeResource TouchTargetMinSize}" />
 			<Setter Property="FontSize" Value="22" />
-			<Setter Property="Padding" Value="7" />
+			<Setter Property="Padding" Value="{ThemeResource Space175Thickness}" />
 			<Setter Property="VerticalAlignment" Value="Center" />
 			<Setter Property="HorizontalAlignment" Value="Center" />
 			<Setter Property="Background" Value="{ThemeResource CupertinoQuinaryGrayBrush}" />
@@ -160,10 +168,10 @@
 		   TargetType="RepeatButton">
 		<Style.Setters>
 			<Setter Property="IsTabStop" Value="False" />
-			<Setter Property="Width" Value="44" />
-			<Setter Property="Height" Value="44" />
+			<Setter Property="Width" Value="{ThemeResource TouchTargetMinSize}" />
+			<Setter Property="Height" Value="{ThemeResource TouchTargetMinSize}" />
 			<Setter Property="FontSize" Value="22" />
-			<Setter Property="Padding" Value="7" />
+			<Setter Property="Padding" Value="{ThemeResource Space175Thickness}" />
 			<Setter Property="VerticalAlignment" Value="Center" />
 			<Setter Property="HorizontalAlignment" Value="Center" />
 			<Setter Property="Background" Value="{ThemeResource CupertinoQuinaryGrayBrush}" />
@@ -214,13 +222,15 @@
 
 	<Style x:Key="NumberBoxTextBoxStyle"
 		   TargetType="TextBox">
-		<Setter Property="FontFamily" Value="{ThemeResource DefaultFontFamily}" />
-		<Setter Property="FontSize" Value="17" />
+		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyLargeFontWeight}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource BodyLargeCharacterSpacing}" />
 		<Setter Property="Background" Value="Transparent" />
 		<Setter Property="Foreground" Value="{ThemeResource CupertinoLabelBrush}" />
 		<Setter Property="HorizontalContentAlignment" Value="Left" />
 		<Setter Property="VerticalContentAlignment" Value="Center" />
-		<Setter Property="Padding" Value="5" />
+		<Setter Property="Padding" Value="{ThemeResource Space125Thickness}" />
 		<Setter Property="InputScope" Value="Number" />
 		<Setter Property="PlaceholderForeground" Value="{ThemeResource CupertinoPlaceholderTextBrush}" />
 
@@ -260,10 +270,14 @@
 								<RowDefinition Height="*" />
 							</Grid.RowDefinitions>
 
-							<ContentPresenter x:Name="HeaderContentPresenter"
+							<ContentPresenter uc:CupertinoTypography.BindCharacterSpacing="True"
+											  x:Name="HeaderContentPresenter"
 											  Content="{TemplateBinding Header}"
 											  ContentTemplate="{TemplateBinding HeaderTemplate}"
-											  FontSize="{StaticResource CupertinoHeaderFontSize}"
+											  FontSize="{ThemeResource CupertinoHeaderFontSize}"
+											  FontFamily="{ThemeResource CaptionLargeFontFamily}"
+											  FontWeight="{ThemeResource CaptionLargeFontWeight}"
+											  CharacterSpacing="{ThemeResource CaptionLargeCharacterSpacing}"
 											  Foreground="{ThemeResource CupertinoHeaderForegroundBrush}"
 											  TextWrapping="Wrap"
 											  VerticalAlignment="Top" />

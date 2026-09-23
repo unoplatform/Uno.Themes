@@ -89,7 +89,28 @@ public class CupertinoTheme(ResourceDictionary colorOverride = null, ResourceDic
 		SemanticBrushUpdater.Apply(_cupertinoBrushes, ColorLayers, CupertinoConstants.BrushColorKeys);
 		AddThemeDictionary(_cupertinoBrushes);
 		AddThemeDictionary(BuildAccentColors(_cupertinoBrushes));
+		AddThemeDictionary(BuildSpacingResources());
 		AddThemeDictionary(new ResourceDictionary { [CupertinoConstants.GlassRenderingModeKey] = GlassRenderingMode.ToString() });
+	}
+
+	// Asymmetric iOS paddings cannot be represented by a uniform shared Thickness token.
+	// Regenerate the existing lightweight keys along with the shared spacing scale.
+	private ResourceDictionary BuildSpacingResources()
+	{
+		// BaseTheme has already appended the validated, density-adjusted spacing scale.
+		var spacing = TryGetValue(CupertinoConstants.SpacingBaseKey, out var value) && value is double unit ? unit : 4;
+		var resources = new ResourceDictionary();
+		foreach (var appearance in CupertinoConstants.AccentThemeKeys)
+		{
+			// Cupertino preserves the iOS 44-point hit target independently of spacing density.
+			var themed = new ResourceDictionary { [CupertinoConstants.TouchTargetMinSizeKey] = 44d };
+			foreach (var (key, left, top, right, bottom) in CupertinoConstants.SpacingMultipliers)
+			{
+				themed[key] = new Thickness(left * spacing, top * spacing, right * spacing, bottom * spacing);
+			}
+			resources.ThemeDictionaries[appearance] = themed;
+		}
+		return resources;
 	}
 
 	// The accent brushes follow the semantic primary (a seed, or a PrimaryColor override) while their *Color

@@ -32,7 +32,7 @@
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 	<!-- Stock CommandBar reads this token dynamically for its compact content and more button. -->
-	<x:Double x:Key="AppBarThemeCompactHeight">44</x:Double>
+	<StaticResource x:Key="AppBarThemeCompactHeight" ResourceKey="ControlHeightMediumLarge" />
 	<!-- Each CommandBar is one floating group of related actions, independent of its title/content. -->
 
 	<!--
@@ -1236,7 +1236,7 @@
 											HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 											VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 											IsTabStop="False"
-											Margin="0,0,12,0" />
+											Margin="{ThemeResource Space300RightThickness}" />
 							<Popup x:Name="OverflowPopup"
 								   IsTabStop="False">
 								<Popup.RenderTransform>
@@ -1276,7 +1276,7 @@
 							<Grid x:Name="CommandGroup"
 								  Grid.Column="1"
 								  HorizontalAlignment="Right"
-								  MinHeight="44">
+								  MinHeight="{ThemeResource ControlHeightMediumLarge}">
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition x:Name="PrimaryItemsControlColumnDefinition"
 													  Width="*" />
@@ -1287,7 +1287,7 @@
 											   Material="Regular"
 											   Background="{TemplateBinding Background}"
 											   Tint="{ThemeResource CupertinoBarTintBrush}"
-											   CornerRadius="22"
+											   CornerRadius="{ThemeResource Radius550CornerRadius}"
 											   IsHitTestVisible="False" />
 								<ItemsControl x:Name="PrimaryItemsControl"
 											  HorizontalAlignment="Right"
@@ -1314,7 +1314,7 @@
 											   BasedOn="{StaticResource CupertinoIconButtonStyle}">
 											<Setter Property="Foreground" Value="{ThemeResource OnSurfaceBrush}" />
 											<Setter Property="Background" Value="Transparent" />
-											<Setter Property="Width" Value="44" />
+											<Setter Property="Width" Value="{ThemeResource ControlHeightMediumLarge}" />
 											<Setter Property="Padding" Value="0" />
 										</Style>
 									</Button.Style>

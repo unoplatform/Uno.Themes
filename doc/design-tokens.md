@@ -39,8 +39,12 @@ Per-scale keys follow the pattern `{Role}{Size}FontFamily`, `{Role}{Size}FontSiz
 | `Space0`    | 0          | `Space0Thickness`    |
 | `Space050`  | 2          | `Space050Thickness`  |
 | `Space100`  | 4          | `Space100Thickness`  |
+| `Space125`  | 5          | `Space125Thickness`  |
 | `Space150`  | 6          | `Space150Thickness`  |
+| `Space175`  | 7          | `Space175Thickness`  |
 | `Space200`  | 8          | `Space200Thickness`  |
+| `Space225`  | 9          | `Space225Thickness`  |
+| `Space250`  | 10         | `Space250Thickness`  |
 | `Space300`  | 12         | `Space300Thickness`  |
 | `Space400`  | 16         | `Space400Thickness`  |
 | `Space500`  | 20         | `Space500Thickness`  |
@@ -58,10 +62,17 @@ Per-scale keys follow the pattern `{Role}{Size}FontFamily`, `{Role}{Size}FontSiz
 | `Radius0`    | 0          | `Radius0CornerRadius`    |
 | `Radius050`  | 2          | `Radius050CornerRadius`  |
 | `Radius100`  | 4          | `Radius100CornerRadius`  |
+| `Radius125`  | 5          | `Radius125CornerRadius`  |
 | `Radius200`  | 8          | `Radius200CornerRadius`  |
+| `Radius250`  | 10         | `Radius250CornerRadius`  |
 | `Radius300`  | 12         | `Radius300CornerRadius`  |
+| `Radius350`  | 14         | `Radius350CornerRadius`  |
 | `Radius400`  | 16         | `Radius400CornerRadius`  |
+| `Radius500`  | 20         | `Radius500CornerRadius`  |
+| `Radius550`  | 22         | `Radius550CornerRadius`  |
+| `Radius650`  | 26         | `Radius650CornerRadius`  |
 | `Radius700`  | 28         | `Radius700CornerRadius`  |
+| `Radius750`  | 30         | `Radius750CornerRadius`  |
 | `RadiusFull` | 9999       | `RadiusFullCornerRadius` |
 
 ### Density
@@ -77,6 +88,11 @@ Per-scale keys follow the pattern `{Role}{Size}FontFamily`, `{Role}{Size}FontSiz
 | `IconSizeMedium`           | 24                 |
 | `IconSizeLarge`            | 32                 |
 
+Cupertino uses a 44px `TouchTargetMinSize` default. Its spacing and shape variants preserve the
+iOS geometry at the default base units; for example, `Radius550CornerRadius` gives a 22px button
+corner and `Radius650CornerRadius` a 26px popover corner. Density changes spacing, not control
+heights, hit targets, icon sizes or switch travel.
+
 ## Overriding Tokens
 
 ### Via Scalar Properties
@@ -88,7 +104,7 @@ Set `DefaultCornerRadius` (shape) or `DefaultSpacing` (spacing) on the theme to 
 <MaterialTheme DefaultCornerRadius="4" DefaultSpacing="6" />
 ```
 
-This generates all `Radius*` / `Space*` tokens as multiples of the base value. The same properties are available on `SimpleTheme`.
+This generates all `Radius*` / `Space*` tokens as multiples of the base value. The same properties are available on `SimpleTheme` and `CupertinoTheme`.
 
 For spacing, the [density mode](#density-modes) (`DefaultDensity`) composes with the base unit rather than replacing it: the effective spacing base is `DefaultSpacing × density factor` (`Compact` ×0.75, `Regular` ×1, `Comfy` ×1.25). With the default base of 4, the modes yield 3 / 4 / 5.
 
@@ -118,7 +134,7 @@ To override individual tokens without changing the whole scale, use standard XAM
 | `DefaultDensity`      | `Density`    | Density mode that scales the spacing base unit (`Compact` ×0.75, `Regular` ×1, `Comfy` ×1.25). Runtime-settable.                            |
 | `DefaultFontFamily`   | `FontFamily` | The font the type scale is generated from: the `DefaultFontFamily` token and every `*FontFamily` key derived from it. Runtime-settable.     |
 
-These properties are defined on `BaseTheme` and inherited by `MaterialTheme`, `SimpleTheme`, and their toolkit wrappers (`MaterialToolkitTheme`, `SimpleToolkitTheme`). All four regenerate their tokens when assigned at runtime; content already on screen re-resolves on a theme-change pass — see the note above and [Typography Font Swap](#typography-font-swap). The color configuration on the separate `Colors` property (`ThemeColors`) changes live — see [Seed Color Palette](seed-colors.md).
+These properties are defined on `BaseTheme` and inherited by `MaterialTheme`, `SimpleTheme`, `CupertinoTheme`, and their toolkit wrappers. They regenerate their tokens when assigned at runtime; content already on screen re-resolves on a theme-change pass — see the note above and [Typography Font Swap](#typography-font-swap). The color configuration on the separate `Colors` property (`ThemeColors`) changes live — see [Seed Color Palette](seed-colors.md).
 
 ### Density Modes
 

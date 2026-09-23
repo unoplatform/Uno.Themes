@@ -4,6 +4,24 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## Generated tokens must reach rendered controls
+
+**Context:** Spec 10 token audit. Cupertino generated the shared spacing and radius scales, but
+most styles still consumed fixed local metrics. Control-level character-spacing assertions also
+passed while generated presenter text retained zero tracking.
+
+**How to apply:**
+
+- Verify semantic token overrides on rendered control parts, then verify clear/reset and a theme
+  refresh. Resource-resolution tests alone prove availability, not consumption.
+- Preserve the approved default geometry when replacing literals with tokens; add fractional scale
+  variants where needed rather than rounding a design measurement to a different shape.
+- Preserve existing control-specific override keys and test their precedence. Alias targets resolve
+  against application resources; a nested theme can shadow those targets and invalidate a test setup.
+- Check generated presenter text separately from its owning control. Uno's presenter/control tracking
+  properties currently do not propagate to default text, unlike font size and weight.
+
+---
 ## Semantic coverage does not prove fidelity to the design reference
 
 **Context:** Spec 10, Cupertino Liquid Glass. The user inspected the shipped styles against Apple's

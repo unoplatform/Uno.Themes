@@ -16,7 +16,7 @@
 
 	<x:Double x:Key="CupertinoProgressBarHeight">4</x:Double>
 	<x:Double x:Key="CupertinoProgressBarMinWidth">250</x:Double>
-	<CornerRadius x:Key="CupertinoProgressBarCornerRadius">2</CornerRadius>
+	<StaticResource x:Key="CupertinoProgressBarCornerRadius" ResourceKey="Radius050CornerRadius" />
 
 	<Style x:Key="CupertinoProgressBarStyle"
 		   TargetType="muxc:ProgressBar">
@@ -24,7 +24,7 @@
 		<Setter Property="Background" Value="{ThemeResource ProgressBarBackground}" />
 		<Setter Property="Height" Value="{StaticResource CupertinoProgressBarHeight}" />
 		<Setter Property="MinWidth" Value="{StaticResource CupertinoProgressBarMinWidth}" />
-		<Setter Property="CornerRadius" Value="{StaticResource CupertinoProgressBarCornerRadius}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource CupertinoProgressBarCornerRadius}" />
 	</Style>
 
 </ResourceDictionary>

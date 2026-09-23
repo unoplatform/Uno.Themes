@@ -88,8 +88,12 @@ public abstract partial class BaseTheme
 		("0",    0.0),
 		("050",  0.5),
 		("100",  1.0),
+		("125",  1.25),
 		("150",  1.5),
+		("175",  1.75),
 		("200",  2.0),
+		("225",  2.25),
+		("250",  2.5),
 		("300",  3.0),
 		("400",  4.0),
 		("500",  5.0),
@@ -105,14 +109,14 @@ public abstract partial class BaseTheme
 	/// Variants that have a HorizontalThickness companion (N,0,N,0).
 	/// </summary>
 	private static readonly HashSet<string> HorizontalThicknessVariants =
-		new() { "0", "050", "100", "150", "200", "300", "400", "500", "600", "800" };
+		new() { "0", "050", "100", "125", "150", "175", "200", "225", "250", "300", "400", "500", "600", "800" };
 
 	/// <summary>
 	/// Variants that have directional Thickness companions
 	/// (VerticalThickness, TopThickness, BottomThickness, LeftThickness, RightThickness).
 	/// </summary>
 	private static readonly HashSet<string> DirectionalThicknessVariants =
-		new() { "0", "050", "100", "150", "200", "300", "400", "500", "600", "800" };
+		new() { "0", "050", "100", "125", "150", "175", "200", "225", "250", "300", "400", "500", "600", "800" };
 
 	/// <summary>
 	/// Multiplier table for shape (corner radius) tokens.
@@ -123,11 +127,17 @@ public abstract partial class BaseTheme
 		("0",   0.0),
 		("050", 0.5),
 		("100", 1.0),
+		("125", 1.25),
 		("200", 2.0),
+		("250", 2.5),
 		("300", 3.0),
+		("350", 3.5),
 		("400", 4.0),
 		("500", 5.0),
+		("550", 5.5),
+		("650", 6.5),
 		("700", 7.0),
+		("750", 7.5),
 	};
 
 	/// <summary>

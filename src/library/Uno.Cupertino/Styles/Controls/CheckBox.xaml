@@ -9,7 +9,7 @@
 	<GridLength x:Key="CheckAreaLength">40</GridLength>
 	<x:Double x:Key="FocusAreaSize">40</x:Double>
 	<x:Double x:Key="CheckAreaSize">18</x:Double>
-	<CornerRadius x:Key="CheckAreaCornerRadius">4</CornerRadius>
+	<StaticResource x:Key="CheckAreaCornerRadius" ResourceKey="Radius100CornerRadius" />
 	<StaticResource x:Key="CupertinoCheckBoxBorderBrush" ResourceKey="CupertinoOnSurfaceMediumBrush" />
 
 	<Style x:Key="CupertinoCheckBoxStyle"
@@ -19,13 +19,13 @@
 		<Setter Property="Foreground" Value="{ThemeResource CupertinoWhiteBrush}" />
 		<Setter Property="BorderBrush" Value="{ThemeResource CupertinoBlueBrush}" />
 		<Setter Property="BorderThickness" Value="1" />
-		<Setter Property="Padding" Value="8,0,0,0" />
+		<Setter Property="Padding" Value="{ThemeResource Space200LeftThickness}" />
 		<Setter Property="HorizontalAlignment" Value="Left" />
 		<Setter Property="VerticalAlignment" Value="Stretch" />
 		<Setter Property="HorizontalContentAlignment" Value="Left" />
 		<Setter Property="VerticalContentAlignment" Value="Center" />
-		<Setter Property="MinWidth" Value="{ThemeResource CupertinoButtonMinHeight}" />
-		<Setter Property="MinHeight" Value="{ThemeResource CupertinoButtonMinHeight}" />
+		<Setter Property="MinWidth" Value="{ThemeResource TouchTargetMinSize}" />
+		<Setter Property="MinHeight" Value="{ThemeResource TouchTargetMinSize}" />
 		<Setter Property="UseSystemFocusVisuals" Value="False" />
 
 		<Setter Property="Template">
@@ -208,12 +208,12 @@
 								  Background="{ThemeResource CupertinoSystemBackgroundBrush}"
 								  BorderBrush="{TemplateBinding BorderBrush}"
 								  BorderThickness="{TemplateBinding BorderThickness}"
-								  CornerRadius="{StaticResource CheckAreaCornerRadius}" />
+								  CornerRadius="{ThemeResource CheckAreaCornerRadius}" />
 
 							<Grid x:Name="CheckedBackgroundBorder"
 								  Background="{TemplateBinding Background}"
 								  Opacity="0"
-								  CornerRadius="{StaticResource CheckAreaCornerRadius}" />
+								  CornerRadius="{ThemeResource CheckAreaCornerRadius}" />
 
 							<Path x:Name="HyphenGlyph"
 								  Data="{StaticResource HyphenGlyphPathStyle}"

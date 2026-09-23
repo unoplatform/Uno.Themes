@@ -1,12 +1,12 @@
 # 10 — Cupertino v2: Liquid Glass era theme on the semantic system
 
-Status: **Current iOS/iPadOS HIG polish implemented and verified** (2026-09-22).
+Status: **HIG polish and semantic-token response verified** (2026-09-22).
 All 72 semantic keys resolve. The requested visual audit and fixes supersede the earlier solid-bar and
 optional-polish deferrals below. See [HIG polish](hig-polish.md) and [handoff](handoff.md) for the current result.
 
-Cupertino desktop passes **188/188 Debug and Release**; WASM builds. Material passes **63/63**;
-Simple passes **257 with 1 existing skip**. Light/Dark visual review and source formatting pass.
-Hardware/device and browser-runtime visuals remain unverified. The user authorized pushing this work.
+Cupertino desktop passes **246/246 Debug and Release**; WASM builds. Material passes **63/63**;
+Simple passes **272 with 1 existing skip**. Light/Dark visual review and source formatting pass.
+Hardware/device and browser-runtime visuals remain unverified. This token-verification pass is local; not pushed.
 D-1 (amended: no V1, no compatibility classes) / D-2 / D-3 / D-5 / D-7 taken.
 Branch: `dev/sb/cupertino-v2`.
 
@@ -17,6 +17,45 @@ Companion documents in this folder:
   legacy-key compatibility and breaking changes.
 - `liquid-glass-rendering.md` — how the glass is drawn on Uno Skia (two-tier `GlassPanel`), evidence, spike.
 - `reference-cupertino-avalonia.md` — cross-check values and prior art from `jsuarezruiz/Cupertino.Avalonia`.
+
+## Semantic token verification — 2026-09-22
+
+The user requested rebasing onto the latest master and verifying that the polished Cupertino
+styles respond to all semantic design tokens. Preserve the approved default iOS/iPadOS appearance.
+
+- [x] Fetch origin and rebase onto latest master (a3b9df00); branch already contains it, no replay needed.
+- [x] Audit color, typography, spacing, shape, density, and lightweight override consumption.
+- [x] Add rendered regressions for identified gaps, reproduce failures, then fix token bindings.
+- [x] Verify override, clear/reset, Light/Dark, and documented runtime refresh behavior.
+- [x] Build Cupertino desktop Debug/Release and WebAssembly; run Cupertino and shared regressions.
+- [x] Run formatting, review final changes, and document precise coverage and limitations.
+
+### Review and verification results
+
+- Latest fetched master is a3b9df00. The branch already contains it, so rebase performed no replay.
+- Fixed styles that generated semantic resources but bypassed them with fixed dimensions or metrics.
+  Shared fractional spacing/radius variants preserve the approved default appearance. Existing local
+  Cupertino keys remain supported; composite padding derives from the regenerated spacing unit.
+- Verified all 32 shared color roles and all 280 available role/state brushes, including live color and
+  opacity replacement and clear. Added semantic fallbacks for Cupertino labels, fields, backgrounds,
+  and separators while preserving explicit Apple-role precedence.
+- Verified all 19 typography slots, applicable default controls and actual rendered labels. A small
+  internal presenter bridge supplies missing Uno character-spacing propagation without replacing
+  consumer content templates. Content replacement, custom content, reload and collection tests pass.
+- Geometry regressions cover Light/Dark spacing, density, corners, zero/reset, local override precedence,
+  independent control height, hit targets, menu icon gutter and measured alert action gaps.
+- Cupertino desktop Debug and Release: 246/246 each. Debug WASM build passes. Material desktop Debug:
+  63/63. Simple desktop Debug: 272 passed, one existing skipped hot-reload collection scenario.
+- Existing warning counts remain: Cupertino desktop 105 and WASM 107; no dependencies or suppressions added.
+- All 210 tracked source XAML files, solution C# whitespace and four changed published docs pass checks.
+- Eight new gallery captures reviewed against all eight previously approved Light/Dark captures:
+  default appearance preserved (only expected progress-animation frame differences). Temporary capture
+  tests were removed before final permanent test runs.
+- Artifacts: %TEMP%/cupertino-tokens (red/fix/green logs/XML, final tests/builds, captures and scratch source).
+- Runtime geometry/font changes require the documented root theme refresh or content recreation. Alias
+  targets use application scope; override a Cupertino-specific key locally. Intrinsic glyph geometry,
+  switch travel, circular date selections and compatibility control metrics remain design-specific.
+  No native device, GPU or browser-runtime verification was performed.
 
 ## Context
 

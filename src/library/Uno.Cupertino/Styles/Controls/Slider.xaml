@@ -52,14 +52,14 @@
 								Background="{TemplateBinding Background}"
 								BorderBrush="{TemplateBinding BorderBrush}"
 								BorderThickness="{TemplateBinding BorderThickness}"
-								CornerRadius="12" />
+								CornerRadius="{ThemeResource Radius300CornerRadius}" />
 						<!-- Explicit Solid while hidden releases the per-frame backplate after interaction. -->
 						<uc:GlassPanel x:Name="ThumbGlass"
 									   Material="Regular"
 									   RenderingMode="Solid"
 									   Visibility="Collapsed"
 									   Background="{TemplateBinding Background}"
-									   CornerRadius="12"
+									   CornerRadius="{ThemeResource Radius300CornerRadius}"
 									   IsHitTestVisible="False" />
 					</Grid>
 				</ControlTemplate>
@@ -164,7 +164,7 @@
 
 							<!-- HorizontalTemplate -->
 							<Grid x:Name="HorizontalTemplate"
-								  MinHeight="{ThemeResource CupertinoButtonMinHeight}">
+								  MinHeight="{ThemeResource TouchTargetMinSize}">
 
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="Auto" />
@@ -228,7 +228,7 @@
 												  Width="40"
 												  Height="24"
 												  Background="Transparent"
-												  CornerRadius="12"
+												  CornerRadius="{ThemeResource Radius300CornerRadius}"
 												  Elevation="3"
 												  ShadowColor="{StaticResource ShadowColor}">
 
@@ -245,7 +245,7 @@
 
 							<!-- VerticalTemplate -->
 							<Grid x:Name="VerticalTemplate"
-								  MinWidth="{ThemeResource CupertinoButtonMinHeight}"
+								  MinWidth="{ThemeResource TouchTargetMinSize}"
 								  Visibility="Collapsed">
 
 								<Grid.RowDefinitions>
@@ -311,7 +311,7 @@
 												  Width="24"
 												  Height="40"
 												  Background="Transparent"
-												  CornerRadius="12"
+												  CornerRadius="{ThemeResource Radius300CornerRadius}"
 												  Elevation="3"
 												  ShadowColor="{StaticResource ShadowColor}">
 									<Thumb x:Name="VerticalThumb"
