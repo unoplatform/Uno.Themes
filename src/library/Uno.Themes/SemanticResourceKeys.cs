@@ -8,14 +8,15 @@ namespace Uno.Themes;
 /// </summary>
 /// <remarks>
 /// <para>
-/// Every key resolves under a <see cref="BaseTheme"/> — <c>MaterialTheme</c> and <c>SimpleTheme</c> — in
-/// both the light and dark theme dictionaries. Cupertino is not a <see cref="BaseTheme"/> and does not
-/// declare them.
+/// The keys come from the shared dictionaries and generated scales that <c>SimpleTheme</c> and the
+/// version 2 styles of <c>MaterialTheme</c> merge, under both the light and dark theme dictionaries.
+/// Material's version 1 styles use their own palette, and Cupertino merges neither.
 /// </para>
 /// <para>
 /// The lists hold keys only; resolve a key through the resources of the element or application to read
 /// its current value. Design-system specific keys (such as <c>SimpleButtonFontFamily</c>) and semantic
-/// style keys (such as <c>FilledButtonStyle</c>) are not listed.
+/// style keys (such as <c>FilledButtonStyle</c>) are not listed. The order of keys within a list is not
+/// part of the contract.
 /// </para>
 /// </remarks>
 public static class SemanticResourceKeys
@@ -44,7 +45,7 @@ public static class SemanticResourceKeys
 	/// <c>{Role}{Size}FontFamily</c> key per type-scale slot, such as <c>BodyMediumFontFamily</c>.
 	/// Each resolves to a <c>FontFamily</c>.
 	/// </summary>
-	public static IReadOnlyList<string> FontFamilies { get; } = Array.AsReadOnly(ThemesConstants.TypefaceScaleKeys);
+	public static IReadOnlyList<string> FontFamilies { get; } = Array.AsReadOnly((string[])ThemesConstants.TypefaceScaleKeys.Clone());
 
 	/// <summary>
 	/// Gets the typography font size keys, one per type-scale slot, such as <c>BodyMediumFontSize</c>.
@@ -65,7 +66,8 @@ public static class SemanticResourceKeys
 	public static IReadOnlyList<string> CharacterSpacings { get; } = WithSuffix(ThemesConstants.CharacterSpacingSlots, "CharacterSpacing");
 
 	/// <summary>
-	/// Gets the spacing keys generated from <see cref="BaseTheme.DefaultSpacing"/>: each <c>Space*</c> value,
+	/// Gets the spacing keys generated from <see cref="BaseTheme.DefaultSpacing"/> scaled by
+	/// <see cref="BaseTheme.DefaultDensity"/>: each <c>Space*</c> value,
 	/// such as <c>Space200</c>, and its <c>Thickness</c> companions, such as <c>Space200Thickness</c> and
 	/// <c>Space200HorizontalThickness</c>.
 	/// </summary>
@@ -79,10 +81,11 @@ public static class SemanticResourceKeys
 	public static IReadOnlyList<string> Shape { get; } = KeysOf(DesignTokenScales.ShapeTokens(1));
 
 	/// <summary>
-	/// Gets the fixed density keys: control heights, icon sizes and the touch target, such as
-	/// <c>ControlHeightMedium</c>. Each resolves to a <see cref="double"/>.
+	/// Gets the fixed control size keys: control heights, icon sizes and the touch target, such as
+	/// <c>ControlHeightMedium</c>. These stay constant across <see cref="BaseTheme.DefaultDensity"/> modes.
+	/// Each resolves to a <see cref="double"/>.
 	/// </summary>
-	public static IReadOnlyList<string> Density { get; } = KeysOf(DesignTokenScales.DensityTokens());
+	public static IReadOnlyList<string> ControlSizes { get; } = KeysOf(DesignTokenScales.DensityTokens());
 
 	private static IReadOnlyList<string> BuildColors()
 	{

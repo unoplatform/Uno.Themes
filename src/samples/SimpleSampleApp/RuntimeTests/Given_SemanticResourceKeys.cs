@@ -34,7 +34,7 @@ public class Given_SemanticResourceKeys
 		yield return (nameof(SemanticResourceKeys.CharacterSpacings), SemanticResourceKeys.CharacterSpacings);
 		yield return (nameof(SemanticResourceKeys.Spacing), SemanticResourceKeys.Spacing);
 		yield return (nameof(SemanticResourceKeys.Shape), SemanticResourceKeys.Shape);
-		yield return (nameof(SemanticResourceKeys.Density), SemanticResourceKeys.Density);
+		yield return (nameof(SemanticResourceKeys.ControlSizes), SemanticResourceKeys.ControlSizes);
 	}
 
 	private static ResourceDictionary LoadCommonDictionary(string fileName)
@@ -149,19 +149,21 @@ public class Given_SemanticResourceKeys
 	[DataRow(nameof(SemanticResourceKeys.Spacing), "Space100", "Default")]
 	[DataRow(nameof(SemanticResourceKeys.Shape), "Radius100", "Light")]
 	[DataRow(nameof(SemanticResourceKeys.Shape), "Radius100", "Default")]
-	[DataRow(nameof(SemanticResourceKeys.Density), "ControlHeightMedium", "Light")]
-	[DataRow(nameof(SemanticResourceKeys.Density), "ControlHeightMedium", "Default")]
+	[DataRow(nameof(SemanticResourceKeys.ControlSizes), "ControlHeightMedium", "Light")]
+	[DataRow(nameof(SemanticResourceKeys.ControlSizes), "ControlHeightMedium", "Default")]
 	public void When_GeneratedScaleInspected_Then_ListMatchesItsKeys(string listName, string probeKey, string themeKey)
 	{
 		var theme = new SimpleTheme();
 		var listed = AllLists().Single(list => list.Name == listName).Keys;
 
-		var generated = theme.MergedDictionaries
+		var candidates = theme.MergedDictionaries
 			.Select(dictionary => dictionary.ThemeDictionaries.TryGetValue(themeKey, out var themed) ? themed as ResourceDictionary : null)
-			.SingleOrDefault(themed => themed is not null && themed.ContainsKey(probeKey));
+			.Where(themed => themed is not null && themed.ContainsKey(probeKey))
+			.ToList();
 
-		Assert.IsNotNull(generated, $"Expected one generated '{themeKey}' dictionary carrying '{probeKey}'.");
-		AssertSameKeys(generated.Keys.OfType<string>(), listed, $"Generated {listName} [{themeKey}]");
+		Assert.AreEqual(1, candidates.Count,
+			$"Expected exactly one merged '{themeKey}' dictionary carrying '{probeKey}', found {candidates.Count}.");
+		AssertSameKeys(candidates[0]!.Keys.OfType<string>(), listed, $"Generated {listName} [{themeKey}]");
 	}
 
 	// ─────────────────────────────────────────────────────────────────────
@@ -193,7 +195,7 @@ public class Given_SemanticResourceKeys
 	[DataRow(nameof(SemanticResourceKeys.FontSizes), typeof(double))]
 	[DataRow(nameof(SemanticResourceKeys.FontWeights), typeof(string))]
 	[DataRow(nameof(SemanticResourceKeys.CharacterSpacings), typeof(int))]
-	[DataRow(nameof(SemanticResourceKeys.Density), typeof(double))]
+	[DataRow(nameof(SemanticResourceKeys.ControlSizes), typeof(double))]
 	public void When_ThemeMerged_Then_EachKeyResolvesToItsDocumentedType(string listName, Type expectedType)
 	{
 		var container = new Grid();
@@ -208,6 +210,31 @@ public class Given_SemanticResourceKeys
 	}
 
 	// ─────────────────────────────────────────────────────────────────────
+	// The lists are public API: a changed size is a reviewed test edit.
+	// The generated families are also compared with their own generator
+	// above, which cannot see a removed step on its own.
+	// ─────────────────────────────────────────────────────────────────────
+
+	[TestMethod]
+	[DataRow(nameof(SemanticResourceKeys.Colors), 33)]
+	[DataRow(nameof(SemanticResourceKeys.Opacities), 8)]
+	[DataRow(nameof(SemanticResourceKeys.Brushes), 280)]
+	[DataRow(nameof(SemanticResourceKeys.FontFamilies), 20)]
+	[DataRow(nameof(SemanticResourceKeys.FontSizes), 19)]
+	[DataRow(nameof(SemanticResourceKeys.FontWeights), 19)]
+	[DataRow(nameof(SemanticResourceKeys.CharacterSpacings), 11)]
+	[DataRow(nameof(SemanticResourceKeys.Spacing), 88)]
+	[DataRow(nameof(SemanticResourceKeys.Shape), 18)]
+	[DataRow(nameof(SemanticResourceKeys.ControlSizes), 8)]
+	public void When_ListRead_Then_ItHoldsThePublishedNumberOfKeys(string listName, int expectedCount)
+	{
+		var listed = AllLists().Single(list => list.Name == listName).Keys;
+
+		Assert.AreEqual(expectedCount, listed.Count,
+			$"{listName} changed size. Keys are public API: confirm the change is intended, then update this count and doc/design-tokens.md.");
+	}
+
+	// ─────────────────────────────────────────────────────────────────────
 	// Edge case: a consumer cannot write through a list.
 	// ─────────────────────────────────────────────────────────────────────
 
@@ -216,8 +243,12 @@ public class Given_SemanticResourceKeys
 	{
 		foreach (var (name, keys) in AllLists())
 		{
-			Assert.IsInstanceOfType<IList<string>>(keys, $"{name} is expected to expose IList<string>.");
-			var mutable = (IList<string>)keys;
+			Assert.IsNotInstanceOfType<string[]>(keys, $"{name} must not hand out an array.");
+
+			if (keys is not IList<string> mutable)
+			{
+				continue;
+			}
 
 			Assert.ThrowsExactly<NotSupportedException>(() => mutable[0] = "Tampered", $"{name} indexer write");
 			Assert.ThrowsExactly<NotSupportedException>(() => mutable.Add("Tampered"), $"{name}.Add");

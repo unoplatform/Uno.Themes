@@ -82,6 +82,7 @@ internal static class ThemesConstants
 	/// shape scales are generated from their base unit — makes one font family reach every scale on
 	/// every theme regardless.
 	/// </remarks>
+	// Must stay below TypeScaleSlots: static field initializers run in declaration order.
 	public static readonly string[] TypefaceScaleKeys = BuildTypefaceScaleKeys();
 
 	/// <summary>
