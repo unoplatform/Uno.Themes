@@ -259,13 +259,15 @@ internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 		}
 
 		// Rec. 709 luma weights; a saturation above 1 is what makes content behind the glass look vibrant.
+		// Brightness below 1 dims the whole view through the lens, as a thick clear knob does on iOS.
 		var s = preset.Saturation;
+		var v = preset.Brightness;
 		float r = 0.2126f * (1 - s), g = 0.7152f * (1 - s), b = 0.0722f * (1 - s);
 		using var saturation = SKColorFilter.CreateColorMatrix(new[]
 		{
-			r + s, g, b, 0, 0,
-			r, g + s, b, 0, 0,
-			r, g, b + s, 0, 0,
+			(r + s) * v, g * v, b * v, 0, 0,
+			r * v, (g + s) * v, b * v, 0, 0,
+			r * v, g * v, (b + s) * v, 0, 0,
 			0, 0, 0, 1, 0,
 		});
 		return SKImageFilter.CreateColorFilter(saturation, chain);

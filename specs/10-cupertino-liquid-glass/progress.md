@@ -812,3 +812,7 @@ with a faint highlight, on a soft shadow — no white ring, no bright band, no d
 round tuned an edge-band model that cannot produce that. The shader is now a convex lens
 (`disp = (p − c) / max(half)`, shift at the rim = Refraction / 2 along the longer axis), `BandLight` and
 `InnerShadow` are gone, `Outline` (0.22) is new, rim 0.7 × 1 px, refraction 24, shadow 0.18 (σ 7).
+
+Sixth round (Mac, 8× crop): the minifying lens shows the right structure; the view through it was at full
+brightness so the shrunken track read near-white, where iOS dims everything seen through the knob. Added
+`Brightness` (gain in the colour matrix), Clear 0.88.
