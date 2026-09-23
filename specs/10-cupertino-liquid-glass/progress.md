@@ -784,3 +784,14 @@ the top interior (α 0.16) — driven by two new `GlassPreset` fields, non-zero 
 tier the panel sets `ThemeShadow` + `Translation.Z` 12 on itself. Rest shadows: `ThemeShadow` Z 6 on the
 `SolidKnob` / `SolidThumb` Grids. `Given_GlassPanel.When_ClearMaterial_Then_ShadowFallsBelow` samples the
 pixel 2 px below the panel on both tiers (Regular 255, Clear < 245). Still unmeasured on a GPU.
+
+Second Mac round: "better, but not the same — not very translucent, doesn't lens like iOS". Compared with the
+iOS 26 capture and iterated against 4× software-Skia renders of the pressed knobs (throwaway capture test,
+removed): the lens now has no blur and no veil; the normal map's origin follows the inset bounds (it had been
+assuming the shape at 0,0, so the band was 20 px off once the element was inflated); the sample point moves
+outward, not inward; the profile is a bevelled slab (`smoothstep(0, 0.5, t)`: the outer half of the band
+shifted by the full amount) so the surroundings appear as a crisp inset copy inside a bright band, the way
+iOS shows the track edge shrunk inside the knob; the backdrop the filters read is the inflated bounds so the
+rim can sample outside the glass; the rim is a 2 px top-lit ring; and a soft darkening covers the lens body
+inside the band instead of a stroke along the top. `Clear` = σ 0, saturation 1.1, refraction 16, rim 0.95 × 2 px,
+veil 0, shadow 0.22 (dy 5, σ 6), body darkening 0.14. Still to be judged on the Mac.
