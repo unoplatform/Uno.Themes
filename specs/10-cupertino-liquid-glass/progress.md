@@ -743,3 +743,22 @@ Debug failures of the sample heads. That was an unverified guess and it was wron
 `fix(samples): make the sample heads build and start in Debug on Uno 7`. Slices 1–5 above were verified in
 Release only at the time; the Cupertino suite has since been run in **Debug** as well (67 / 67), which also
 exercises XamlMerge's unmerged Debug output.
+
+### Interactive knob lift — 2026-09-23
+
+The user compared a pressed iOS 26 switch with ours on a GPU: the transient knob glass was wired but
+invisible (same size as the knob, no shadow, 22 % veil over a flat track). Apple's knob scales up,
+casts a shadow and refracts the track edge. `ThemeShadow` + `Translation.Z` is the shadow API here,
+not `ElevatedView`, which does not follow a scaled child.
+
+- [x] ToggleSwitch: knob visual scales with a short eased storyboard and lifts on a `ThemeShadow` in Pressed.
+- [x] Slider: same lift on the thumb; `ElevatedView` wrappers replaced by `ThemeShadow` on the thumb visual.
+- [x] Knob glass uses the `Clear` material, retuned for a lens (low veil, strong rim); `Clear` had no other consumer.
+- [x] `Given_CupertinoHigSelection` asserts scale, `Translation.Z` and shadow in Pressed and at rest.
+- [x] Cupertino desktop suite, formatters, doc note; visual acceptance on the Mac GPU by the user.
+
+Result: red (`Missing KnobVisual` / `Missing ThumbVisual`) → fix → green; Cupertino desktop Debug **246/246**.
+`Translation` is not a `DependencyProperty` in Uno, so a visual-state setter on it is applied but never
+reverted: the rest states set it back explicitly. `Clear` had no other consumer and is now the knob lens
+(sigma 6, saturation 1.1, refraction 9, rim 0.65, veil 0.08 — starting values). Not yet seen on a GPU;
+the user tunes scale, `Translation.Z` and the `Clear` preset on the Mac against the iOS 26 switch.

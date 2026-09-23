@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Shapes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Uno.Cupertino;
@@ -101,14 +102,18 @@ public class Given_CupertinoHigSelection
 		{
 			await Load(toggle, "ToggleSwitchStyle");
 			var glass = Find<GlassPanel>(toggle, "SwitchThumbGlass");
+			var knob = Find<Grid>(toggle, "KnobVisual");
 			AssertRest(glass);
+			AssertAtRest(knob, restZ: 0);
 			Assert.IsTrue(VisualStateManager.GoToState(toggle, "Pressed", false));
-			await UnitTestsUIContentHelper.WaitForIdle();
+			await WaitForLift();
 			Assert.AreEqual(Visibility.Visible, glass.Visibility);
 			Assert.AreEqual(GlassRenderingMode.Auto, glass.RenderingMode);
+			AssertLifted(knob);
 			Assert.IsTrue(VisualStateManager.GoToState(toggle, "Normal", false));
-			await UnitTestsUIContentHelper.WaitForIdle();
+			await WaitForLift();
 			AssertRest(glass);
+			AssertAtRest(knob, restZ: 0);
 		}
 		finally { UnitTestsUIContentHelper.Content = null; }
 	}
@@ -127,16 +132,40 @@ public class Given_CupertinoHigSelection
 			Assert.AreEqual(orientation == Orientation.Horizontal ? 40d : 24d, thumb.ActualWidth);
 			Assert.AreEqual(orientation == Orientation.Horizontal ? 24d : 40d, thumb.ActualHeight);
 			var glass = Find<GlassPanel>(thumb, "ThumbGlass");
+			var visual = Find<Grid>(thumb, "ThumbVisual");
 			AssertRest(glass);
+			AssertAtRest(visual, restZ: 4);
 			Assert.IsTrue(VisualStateManager.GoToState(thumb, "Pressed", false));
-			await UnitTestsUIContentHelper.WaitForIdle();
+			await WaitForLift();
 			Assert.AreEqual(Visibility.Visible, glass.Visibility);
 			Assert.AreEqual(GlassRenderingMode.Auto, glass.RenderingMode);
+			AssertLifted(visual);
 			Assert.IsTrue(VisualStateManager.GoToState(thumb, "Normal", false));
-			await UnitTestsUIContentHelper.WaitForIdle();
+			await WaitForLift();
 			AssertRest(glass);
+			AssertAtRest(visual, restZ: 4);
 		}
 		finally { UnitTestsUIContentHelper.Content = null; }
+	}
+
+	// The lift storyboard runs 0.15 s with an overshoot; give it room to settle before reading the transform.
+	private static Task WaitForLift() => Task.Delay(500);
+
+	/// <summary>HIG Materials: a pressed knob lifts off its track — scaled up on a deeper ThemeShadow.</summary>
+	private static void AssertLifted(FrameworkElement visual)
+	{
+		var scale = (ScaleTransform)visual.RenderTransform;
+		Assert.IsTrue(scale.ScaleX > 1.3 && scale.ScaleY > 1.3, $"Knob scale was {scale.ScaleX}×{scale.ScaleY}");
+		Assert.IsInstanceOfType<ThemeShadow>(visual.Shadow);
+		Assert.IsTrue(visual.Translation.Z >= 12, $"Knob Translation.Z was {visual.Translation.Z}");
+	}
+
+	private static void AssertAtRest(FrameworkElement visual, float restZ)
+	{
+		var scale = (ScaleTransform)visual.RenderTransform;
+		Assert.AreEqual(1d, scale.ScaleX, 0.01);
+		Assert.AreEqual(1d, scale.ScaleY, 0.01);
+		Assert.AreEqual(restZ, visual.Translation.Z);
 	}
 
 	private static void AssertRest(GlassPanel glass)

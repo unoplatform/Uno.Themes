@@ -2,7 +2,6 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:uc="using:Uno.Cupertino"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:uno="using:Uno.UI.Xaml.Controls"
 					xmlns:not_win="http://uno.ui/not_win"
 					mc:Ignorable="not_win">
 
@@ -36,31 +35,94 @@
 					<Grid>
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
-								<VisualState x:Name="Normal" />
-								<VisualState x:Name="PointerOver" />
+								<VisualState x:Name="Normal">
+									<VisualState.Setters>
+										<!-- Translation is not a DependencyProperty: a setter on it is applied but not reverted, so rest states set it explicitly. -->
+										<Setter Target="ThumbVisual.Translation" Value="{StaticResource CupertinoSliderThumbRestTranslation}" />
+									</VisualState.Setters>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="ThumbScaleTransform"
+														 Storyboard.TargetProperty="ScaleX"
+														 To="1"
+														 Duration="{StaticResource CupertinoKnobLiftDuration}" />
+										<DoubleAnimation Storyboard.TargetName="ThumbScaleTransform"
+														 Storyboard.TargetProperty="ScaleY"
+														 To="1"
+														 Duration="{StaticResource CupertinoKnobLiftDuration}" />
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<!-- Translation is not a DependencyProperty: a setter on it is applied but not reverted, so rest states set it explicitly. -->
+										<Setter Target="ThumbVisual.Translation" Value="{StaticResource CupertinoSliderThumbRestTranslation}" />
+									</VisualState.Setters>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="ThumbScaleTransform"
+														 Storyboard.TargetProperty="ScaleX"
+														 To="1"
+														 Duration="{StaticResource CupertinoKnobLiftDuration}" />
+										<DoubleAnimation Storyboard.TargetName="ThumbScaleTransform"
+														 Storyboard.TargetProperty="ScaleY"
+														 To="1"
+														 Duration="{StaticResource CupertinoKnobLiftDuration}" />
+									</Storyboard>
+								</VisualState>
+								<!-- HIG: the thumb becomes glass only while interacting; it lifts (scale + deeper shadow) so it refracts the track. -->
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="ThumbGlass.Visibility" Value="Visible" />
 										<Setter Target="ThumbGlass.RenderingMode" Value="Auto" />
 										<Setter Target="SolidThumb.Visibility" Value="Collapsed" />
+										<Setter Target="ThumbVisual.Translation" Value="{StaticResource CupertinoKnobLiftTranslation}" />
 									</VisualState.Setters>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="ThumbScaleTransform"
+														 Storyboard.TargetProperty="ScaleX"
+														 To="{StaticResource CupertinoKnobLiftScale}"
+														 Duration="{StaticResource CupertinoKnobLiftDuration}">
+											<DoubleAnimation.EasingFunction>
+												<BackEase EasingMode="EaseOut"
+														  Amplitude="0.3" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+										<DoubleAnimation Storyboard.TargetName="ThumbScaleTransform"
+														 Storyboard.TargetProperty="ScaleY"
+														 To="{StaticResource CupertinoKnobLiftScale}"
+														 Duration="{StaticResource CupertinoKnobLiftDuration}">
+											<DoubleAnimation.EasingFunction>
+												<BackEase EasingMode="EaseOut"
+														  Amplitude="0.3" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+									</Storyboard>
 								</VisualState>
 								<VisualState x:Name="Disabled" />
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
-						<Border x:Name="SolidThumb"
-								Background="{TemplateBinding Background}"
-								BorderBrush="{TemplateBinding BorderBrush}"
-								BorderThickness="{TemplateBinding BorderThickness}"
-								CornerRadius="{ThemeResource Radius300CornerRadius}" />
-						<!-- Explicit Solid while hidden releases the per-frame backplate after interaction. -->
-						<uc:GlassPanel x:Name="ThumbGlass"
-									   Material="Regular"
-									   RenderingMode="Solid"
-									   Visibility="Collapsed"
-									   Background="{TemplateBinding Background}"
-									   CornerRadius="{ThemeResource Radius300CornerRadius}"
-									   IsHitTestVisible="False" />
+						<!-- The thumb rests on a shadow (legacy 28 pt white thumb with shadow) and lifts higher while pressed. -->
+						<Grid x:Name="ThumbVisual"
+							  RenderTransformOrigin="0.5,0.5"
+							  Translation="{StaticResource CupertinoSliderThumbRestTranslation}">
+							<Grid.RenderTransform>
+								<ScaleTransform x:Name="ThumbScaleTransform" />
+							</Grid.RenderTransform>
+							<Grid.Shadow>
+								<ThemeShadow />
+							</Grid.Shadow>
+							<Border x:Name="SolidThumb"
+									Background="{TemplateBinding Background}"
+									BorderBrush="{TemplateBinding BorderBrush}"
+									BorderThickness="{TemplateBinding BorderThickness}"
+									CornerRadius="{ThemeResource Radius300CornerRadius}" />
+							<!-- Explicit Solid while hidden releases the per-frame backplate after interaction. -->
+							<uc:GlassPanel x:Name="ThumbGlass"
+										   Material="Clear"
+										   RenderingMode="Solid"
+										   Visibility="Collapsed"
+										   Background="{TemplateBinding Background}"
+										   CornerRadius="{ThemeResource Radius300CornerRadius}"
+										   IsHitTestVisible="False" />
+						</Grid>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
@@ -222,25 +284,17 @@
 										 Grid.ColumnSpan="3" />
 
 								<!-- HorizontalThumb -->
-								<uno:ElevatedView Grid.Row="0"
-												  Grid.RowSpan="3"
-												  Grid.Column="1"
-												  Width="40"
-												  Height="24"
-												  Background="Transparent"
-												  CornerRadius="{ThemeResource Radius300CornerRadius}"
-												  Elevation="3"
-												  ShadowColor="{StaticResource ShadowColor}">
-
-									<Thumb x:Name="HorizontalThumb"
-										   Style="{StaticResource CupertinoSliderThumbStyle}"
-										   Background="{ThemeResource CupertinoSliderThumbBrush}"
-										   DataContext="{TemplateBinding Value}"
-										   Height="24"
-										   Width="40"
-										   FocusVisualMargin="-14,-6,-14,-6"
-										   AutomationProperties.AccessibilityView="Raw" />
-								</uno:ElevatedView>
+								<Thumb x:Name="HorizontalThumb"
+									   Grid.Row="0"
+									   Grid.RowSpan="3"
+									   Grid.Column="1"
+									   Style="{StaticResource CupertinoSliderThumbStyle}"
+									   Background="{ThemeResource CupertinoSliderThumbBrush}"
+									   DataContext="{TemplateBinding Value}"
+									   Height="24"
+									   Width="40"
+									   FocusVisualMargin="-14,-6,-14,-6"
+									   AutomationProperties.AccessibilityView="Raw" />
 							</Grid>
 
 							<!-- VerticalTemplate -->
@@ -305,24 +359,17 @@
 										 Grid.RowSpan="3" />
 
 								<!-- VerticalThumb -->
-								<uno:ElevatedView Grid.Row="1"
-												  Grid.Column="0"
-												  Grid.ColumnSpan="3"
-												  Width="24"
-												  Height="40"
-												  Background="Transparent"
-												  CornerRadius="{ThemeResource Radius300CornerRadius}"
-												  Elevation="3"
-												  ShadowColor="{StaticResource ShadowColor}">
-									<Thumb x:Name="VerticalThumb"
-										   Style="{StaticResource CupertinoSliderThumbStyle}"
-										   Background="{ThemeResource CupertinoSliderThumbBrush}"
-										   DataContext="{TemplateBinding Value}"
-										   Width="24"
-										   Height="40"
-										   FocusVisualMargin="-6,-14,-6,-14"
-										   AutomationProperties.AccessibilityView="Raw" />
-								</uno:ElevatedView>
+								<Thumb x:Name="VerticalThumb"
+									   Grid.Row="1"
+									   Grid.Column="0"
+									   Grid.ColumnSpan="3"
+									   Style="{StaticResource CupertinoSliderThumbStyle}"
+									   Background="{ThemeResource CupertinoSliderThumbBrush}"
+									   DataContext="{TemplateBinding Value}"
+									   Width="24"
+									   Height="40"
+									   FocusVisualMargin="-6,-14,-6,-14"
+									   AutomationProperties.AccessibilityView="Raw" />
 							</Grid>
 						</Grid>
 					</Grid>

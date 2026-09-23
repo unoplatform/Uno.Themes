@@ -1,4 +1,4 @@
----
+﻿---
 uid: Uno.Themes.Cupertino.Styles
 ---
 
@@ -124,7 +124,7 @@ Each variant reads two brushes. There are no per-state keys: the states dim the 
 
 `CupertinoToggleSwitchStyle` uses a 64 by 28 track and a 40 by 24 capsule thumb, measured from Apple's current [iOS toggle artwork](https://developer.apple.com/design/human-interface-guidelines/toggles). Its thumb moves 20 pixels between states. `CupertinoSliderStyle` uses a 40 by 24 horizontal thumb, rotated in the vertical layout; this size is a theme choice based on the elongated shape in Apple's [slider examples](https://developer.apple.com/design/human-interface-guidelines/sliders). The horizontal slider keeps at least 44 pixels of target height, and the vertical slider keeps at least 44 pixels of target width, around the smaller thumb silhouette.
 
-The thumbs are solid at rest. During a press they use `Regular` glass where the renderer supports it, then return to solid when interaction ends. This avoids continuous glass rendering for idle settings controls.
+The thumbs are solid at rest. While pressed they lift, following Apple's rule that knobs become glass only during interaction: the knob scales to 1.4 times its size over 150 milliseconds with a slight overshoot, rises on a `ThemeShadow` (`Translation.Z` 12) and swaps to `Clear` glass where the renderer supports it, so the lens refracts the track edge. The slider thumb rests on a shallower `ThemeShadow` (`Translation.Z` 4). Both return to solid when interaction ends, so idle settings controls do no glass rendering. The lift values live in `AnimationConstants.xaml` (`CupertinoKnobLiftDuration`, `CupertinoKnobLiftScale`, `CupertinoKnobLiftTranslation`).
 
 ## Text fields and pickers
 

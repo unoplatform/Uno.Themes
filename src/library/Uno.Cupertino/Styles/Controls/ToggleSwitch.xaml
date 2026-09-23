@@ -50,15 +50,68 @@
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 
-								<VisualState x:Name="Normal" />
+								<VisualState x:Name="Normal">
+									<VisualState.Setters>
+										<!-- Translation is not a DependencyProperty: a setter on it is applied but not reverted, so rest states set it explicitly. -->
+										<Setter Target="KnobVisual.Translation" Value="{StaticResource CupertinoKnobRestTranslation}" />
+									</VisualState.Setters>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="KnobScaleTransform"
+														 Storyboard.TargetProperty="ScaleX"
+														 To="1"
+														 Duration="{StaticResource CupertinoKnobLiftDuration}" />
+										<DoubleAnimation Storyboard.TargetName="KnobScaleTransform"
+														 Storyboard.TargetProperty="ScaleY"
+														 To="1"
+														 Duration="{StaticResource CupertinoKnobLiftDuration}" />
+									</Storyboard>
+								</VisualState>
 
-								<VisualState x:Name="PointerOver" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<!-- Translation is not a DependencyProperty: a setter on it is applied but not reverted, so rest states set it explicitly. -->
+										<Setter Target="KnobVisual.Translation" Value="{StaticResource CupertinoKnobRestTranslation}" />
+									</VisualState.Setters>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="KnobScaleTransform"
+														 Storyboard.TargetProperty="ScaleX"
+														 To="1"
+														 Duration="{StaticResource CupertinoKnobLiftDuration}" />
+										<DoubleAnimation Storyboard.TargetName="KnobScaleTransform"
+														 Storyboard.TargetProperty="ScaleY"
+														 To="1"
+														 Duration="{StaticResource CupertinoKnobLiftDuration}" />
+									</Storyboard>
+								</VisualState>
+
+								<!-- HIG: the knob becomes glass only while interacting; it lifts (scale + shadow) so it refracts the track edge. -->
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="SwitchThumbGlass.Visibility" Value="Visible" />
 										<Setter Target="SwitchThumbGlass.RenderingMode" Value="Auto" />
 										<Setter Target="SolidKnob.Visibility" Value="Collapsed" />
+										<Setter Target="KnobVisual.Translation" Value="{StaticResource CupertinoKnobLiftTranslation}" />
 									</VisualState.Setters>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="KnobScaleTransform"
+														 Storyboard.TargetProperty="ScaleX"
+														 To="{StaticResource CupertinoKnobLiftScale}"
+														 Duration="{StaticResource CupertinoKnobLiftDuration}">
+											<DoubleAnimation.EasingFunction>
+												<BackEase EasingMode="EaseOut"
+														  Amplitude="0.3" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+										<DoubleAnimation Storyboard.TargetName="KnobScaleTransform"
+														 Storyboard.TargetProperty="ScaleY"
+														 To="{StaticResource CupertinoKnobLiftScale}"
+														 Duration="{StaticResource CupertinoKnobLiftDuration}">
+											<DoubleAnimation.EasingFunction>
+												<BackEase EasingMode="EaseOut"
+														  Amplitude="0.3" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+									</Storyboard>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
@@ -303,28 +356,39 @@
 							  Width="44"
 							  Height="24">
 
-							<Grid x:Name="SolidKnob">
-								<Border Background="{TemplateBinding Foreground}"
-										CornerRadius="{ThemeResource Radius300CornerRadius}"
-										x:Name="SwitchKnobOn"
-										Opacity="0"
-										VerticalAlignment="Stretch"
-										HorizontalAlignment="Stretch" />
+							<Grid x:Name="KnobVisual"
+								  RenderTransformOrigin="0.5,0.5">
+								<Grid.RenderTransform>
+									<ScaleTransform x:Name="KnobScaleTransform" />
+								</Grid.RenderTransform>
+								<Grid.Shadow>
+									<ThemeShadow />
+								</Grid.Shadow>
 
-								<Border Background="{TemplateBinding Foreground}"
-										CornerRadius="{ThemeResource Radius300CornerRadius}"
-										x:Name="SwitchKnobOff"
-										VerticalAlignment="Stretch"
-										HorizontalAlignment="Stretch" />
+								<Grid x:Name="SolidKnob">
+									<Border Background="{TemplateBinding Foreground}"
+											CornerRadius="{ThemeResource Radius300CornerRadius}"
+											x:Name="SwitchKnobOn"
+											Opacity="0"
+											VerticalAlignment="Stretch"
+											HorizontalAlignment="Stretch" />
 
+									<Border Background="{TemplateBinding Foreground}"
+											CornerRadius="{ThemeResource Radius300CornerRadius}"
+											x:Name="SwitchKnobOff"
+											VerticalAlignment="Stretch"
+											HorizontalAlignment="Stretch" />
+
+								</Grid>
+								<!-- Explicit Solid while hidden releases the per-frame backplate after interaction. -->
+								<uc:GlassPanel x:Name="SwitchThumbGlass"
+											   Material="Clear"
+											   RenderingMode="Solid"
+											   Visibility="Collapsed"
+											   Background="{TemplateBinding Foreground}"
+											   CornerRadius="{ThemeResource Radius300CornerRadius}"
+											   IsHitTestVisible="False" />
 							</Grid>
-							<uc:GlassPanel x:Name="SwitchThumbGlass"
-										   Material="Regular"
-										   RenderingMode="Solid"
-										   Visibility="Collapsed"
-										   Background="{TemplateBinding Foreground}"
-										   CornerRadius="{ThemeResource Radius300CornerRadius}"
-										   IsHitTestVisible="False" />
 
 							<Grid.RenderTransform>
 								<TranslateTransform x:Name="KnobTranslateTransform" />

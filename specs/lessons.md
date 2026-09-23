@@ -393,3 +393,19 @@ next file to need an override didn't get it.
 
 **Verification trap (the more important lesson):** these font tests **passed in the minimal dedicated `Uno.Themes.RuntimeTests` host but failed in `SimpleSampleApp`** (and therefore in CI). The dedicated host merges `<SimpleTheme/>` app-wide, which "warms" the ambient resolution scope so the fragile `<StaticResource>` aliases happen to resolve to the right weight — a **false positive**. The real consumer-like host (`SimpleSampleApp`, also what CI runs) exposed the bug.
 - **Always verify font/typography/resource-precedence changes in `SimpleSampleApp` (the CI host), not only in a minimal host.** A minimal single-theme host can mask cross-dictionary resolution and merge-order bugs. If two hosts disagree, trust the one that matches CI.
+
+## Wiring a visual state is not the visual (2026-09-23)
+
+**Context:** The HIG digest said switch and slider knobs become glass during interaction. The Pressed state
+swapped the solid knob for a `GlassPanel` of the same size with no shadow or scale, and the runtime test
+asserted `Visibility` and the tier enum. On a GPU the user saw nothing: blurred flat gray is gray.
+
+**Rules:**
+- A rendered-comparison claim needs a captured comparison. A test that asserts visibility or an enum
+  guards the wiring, not the look; say so in the progress notes instead of ticking a HIG row.
+- Glass is only visible where it has something to refract. A glass element must overhang or sit on a
+  non-uniform backdrop, or carry its own shadow and rim; otherwise design the lift (scale, shadow) first.
+- `UIElement.Translation` is a plain CLR property in Uno. A `VisualState` setter on it applies but does not
+  revert on state exit — every rest state must set it back explicitly.
+- `ElevatedView` does not follow a scaled child; use `ThemeShadow` + `Translation.Z` on the element that
+  scales.

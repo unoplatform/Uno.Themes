@@ -17,7 +17,9 @@ internal readonly record struct GlassPreset(float Sigma, float Saturation, float
 		GlassMaterial.Prominent => new(Sigma: 12, Saturation: 1.0f, Refraction: 7, Rim: 0.18f, Veil: 0.10f),
 		GlassMaterial.Thin => new(Sigma: 4, Saturation: 1.1f, Refraction: 9, Rim: 0.12f, Veil: 0.12f),
 		GlassMaterial.Thick => new(Sigma: 30, Saturation: 1.8f, Refraction: 3, Rim: 0.5f, Veil: 0.55f),
-		GlassMaterial.Clear => new(Sigma: 8, Saturation: 1.0f, Refraction: 7, Rim: 0.30f, Veil: 0.05f),
+		// Clear is the lens of a lifted switch/slider knob: barely veiled so the track shows through, with a
+		// bright rim so it reads against a flat track. Unmeasured starting values; tune on a GPU.
+		GlassMaterial.Clear => new(Sigma: 6, Saturation: 1.1f, Refraction: 9, Rim: 0.65f, Veil: 0.08f),
 		_ => new(Sigma: 12, Saturation: 1.3f, Refraction: 7, Rim: 0.30f, Veil: 0.22f),
 	};
 }
