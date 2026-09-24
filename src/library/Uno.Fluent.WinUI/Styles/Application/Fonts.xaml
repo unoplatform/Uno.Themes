@@ -3,16 +3,16 @@
 
 	<!--
 		Fluent — Font Family Mappings
-
+		
 		Every semantic slot uses the platform-default Fluent font via
 		ContentControlThemeFontFamily (Segoe UI (Variable) on Windows, the
 		platform/Uno default elsewhere — spec 05, D11). No font package ships.
-
+		
 		LOAD-BEARING (specs/lessons.md): this file is merged AFTER
 		SharedTypography.xaml inside BaseDictionaries.xaml so the root token and
 		the slot->family mappings deterministically win over the shared Segoe UI
 		baseline.
-
+		
 		Unlike Material/Simple, which declare only the DefaultFontFamily root and
 		let SharedTypography.xaml's slot aliases (slot -> DefaultFontFamily)
 		cascade from it, Fluent's root is itself an ALIAS (to the platform token),

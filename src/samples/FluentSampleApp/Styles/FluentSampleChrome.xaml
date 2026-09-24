@@ -1,371 +1,371 @@
 ﻿<!--
-    The Fluent head's sample chrome, in the manner of the WinUI Gallery. Merged after the shared sample dictionaries,
-    it replaces their page layout, overview cards, sample boxes and appearance toggle. It is written against the
-    semantic layer (SurfaceBrush, OutlineVariantBrush, OnSurfaceVariantBrush, DisplaySmall, TitleLarge, Space* and
-    Radius* tokens, the semantic button styles), so a correct Fluent mapping of those keys is what makes it look native.
-    The shared dictionaries stay as they are for the other heads.
+	The Fluent head's sample chrome, in the manner of the WinUI Gallery. Merged after the shared sample dictionaries,
+	it replaces their page layout, overview cards, sample boxes and appearance toggle. It is written against the
+	semantic layer (SurfaceBrush, OutlineVariantBrush, OnSurfaceVariantBrush, DisplaySmall, TitleLarge, Space* and
+	Radius* tokens, the semantic button styles), so a correct Fluent mapping of those keys is what makes it look native.
+	The shared dictionaries stay as they are for the other heads.
 -->
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="using:Uno.Themes.Samples"
-                    xmlns:smtx="using:ShowMeTheXAML">
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:local="using:Uno.Themes.Samples"
+					xmlns:smtx="using:ShowMeTheXAML">
 
-    <!-- The appearance toggle is a subtle icon button with a sun or a moon, like a title-bar command. -->
-    <Style x:Key="DarkLightToggleTheme"
-           TargetType="ToggleButton">
-        <Setter Property="Width" Value="40" />
-        <Setter Property="Height" Value="36" />
-        <Setter Property="Foreground" Value="{ThemeResource OnSurfaceBrush}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="ToggleButton">
-                    <Grid x:Name="Root"
-                          Background="Transparent"
-                          CornerRadius="{ThemeResource Radius100CornerRadius}">
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal" />
-                                <VisualState x:Name="PointerOver">
-                                    <VisualState.Setters>
-                                        <Setter Target="Root.Background" Value="{ThemeResource OnSurfaceHoverBrush}" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="Pressed">
-                                    <VisualState.Setters>
-                                        <Setter Target="Root.Background" Value="{ThemeResource OnSurfacePressedBrush}" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="Disabled" />
-                                <VisualState x:Name="Checked">
-                                    <VisualState.Setters>
-                                        <Setter Target="Glyph.Glyph" Value="&#xE708;" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="CheckedPointerOver">
-                                    <VisualState.Setters>
-                                        <Setter Target="Glyph.Glyph" Value="&#xE708;" />
-                                        <Setter Target="Root.Background" Value="{ThemeResource OnSurfaceHoverBrush}" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="CheckedPressed">
-                                    <VisualState.Setters>
-                                        <Setter Target="Glyph.Glyph" Value="&#xE708;" />
-                                        <Setter Target="Root.Background" Value="{ThemeResource OnSurfacePressedBrush}" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-                        <!-- Brightness (E706) in Light, QuietHours (E708) in Dark. -->
-                        <FontIcon x:Name="Glyph"
-                                  Glyph="&#xE706;"
-                                  FontSize="16"
-                                  Foreground="{TemplateBinding Foreground}" />
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+	<!-- The appearance toggle is a subtle icon button with a sun or a moon, like a title-bar command. -->
+	<Style x:Key="DarkLightToggleTheme"
+		   TargetType="ToggleButton">
+		<Setter Property="Width" Value="40" />
+		<Setter Property="Height" Value="36" />
+		<Setter Property="Foreground" Value="{ThemeResource OnSurfaceBrush}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="ToggleButton">
+					<Grid x:Name="Root"
+						  Background="Transparent"
+						  CornerRadius="{ThemeResource Radius100CornerRadius}">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="Root.Background" Value="{ThemeResource OnSurfaceHoverBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="Root.Background" Value="{ThemeResource OnSurfacePressedBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled" />
+								<VisualState x:Name="Checked">
+									<VisualState.Setters>
+										<Setter Target="Glyph.Glyph" Value="&#xE708;" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedPointerOver">
+									<VisualState.Setters>
+										<Setter Target="Glyph.Glyph" Value="&#xE708;" />
+										<Setter Target="Root.Background" Value="{ThemeResource OnSurfaceHoverBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedPressed">
+									<VisualState.Setters>
+										<Setter Target="Glyph.Glyph" Value="&#xE708;" />
+										<Setter Target="Root.Background" Value="{ThemeResource OnSurfacePressedBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						<!-- Brightness (E706) in Light, QuietHours (E708) in Dark. -->
+						<FontIcon x:Name="Glyph"
+								  Glyph="&#xE706;"
+								  FontSize="16"
+								  Foreground="{TemplateBinding Foreground}" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 
-    <!-- "See XAML" is a subtle command in the sample card's footer; its flyout keeps the shared behavior. -->
-    <Style x:Key="SeeXamlFlyoutButtonStyle"
-           TargetType="Button">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Button Style="{StaticResource TextButtonStyle}">
-                        <StackPanel Orientation="Horizontal"
-                                    Spacing="8">
-                            <FontIcon Glyph="&#xE943;"
-                                      FontSize="14" />
-                            <TextBlock Text="Source code"
-                                       Style="{StaticResource BodyMedium}" />
-                        </StackPanel>
-                        <Button.Flyout>
-                            <Flyout Placement="Bottom">
-                                <Flyout.FlyoutPresenterStyle>
-                                    <Style TargetType="FlyoutPresenter"
-                                           BasedOn="{StaticResource FlyoutPresenterStyle}">
-                                        <Setter Property="MaxWidth" Value="720" />
-                                        <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Enabled" />
-                                        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
-                                    </Style>
-                                </Flyout.FlyoutPresenterStyle>
-                                <TextBlock Text="{TemplateBinding Content}"
-                                           IsTextSelectionEnabled="True"
-                                           TextWrapping="NoWrap"
-                                           FontFamily="Consolas"
-                                           Style="{StaticResource BodySmall}" />
-                            </Flyout>
-                        </Button.Flyout>
-                    </Button>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+	<!-- "See XAML" is a subtle command in the sample card's footer; its flyout keeps the shared behavior. -->
+	<Style x:Key="SeeXamlFlyoutButtonStyle"
+		   TargetType="Button">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Button Style="{StaticResource TextButtonStyle}">
+						<StackPanel Orientation="Horizontal"
+									Spacing="8">
+							<FontIcon Glyph="&#xE943;"
+									  FontSize="14" />
+							<TextBlock Text="Source code"
+									   Style="{StaticResource BodyMedium}" />
+						</StackPanel>
+						<Button.Flyout>
+							<Flyout Placement="Bottom">
+								<Flyout.FlyoutPresenterStyle>
+									<Style TargetType="FlyoutPresenter"
+										   BasedOn="{StaticResource FlyoutPresenterStyle}">
+										<Setter Property="MaxWidth" Value="720" />
+										<Setter Property="ScrollViewer.HorizontalScrollMode" Value="Enabled" />
+										<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+									</Style>
+								</Flyout.FlyoutPresenterStyle>
+								<TextBlock Text="{TemplateBinding Content}"
+										   IsTextSelectionEnabled="True"
+										   TextWrapping="NoWrap"
+										   FontFamily="Consolas"
+										   Style="{StaticResource BodySmall}" />
+							</Flyout>
+						</Button.Flyout>
+					</Button>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 
-    <!-- A WinUI Gallery example card: the sample on the card surface, "Source code" in a footer strip. -->
-    <Style x:Key="XamlDisplayBelowStyle"
-           TargetType="smtx:XamlDisplay">
-        <Setter Property="Margin" Value="{ThemeResource Space400TopThickness}" />
-        <Setter Property="Formatter" Value="{StaticResource NiceFormatter}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="smtx:XamlDisplay">
-                    <Border Background="{ThemeResource SurfaceBrush}"
-                            BorderBrush="{ThemeResource OutlineVariantBrush}"
-                            BorderThickness="1"
-                            CornerRadius="{ThemeResource Radius200CornerRadius}">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <ContentPresenter Content="{TemplateBinding Content}"
-                                              Padding="{ThemeResource Space400Thickness}" />
-                            <Border Grid.Row="1"
-                                    Background="{ThemeResource SurfaceVariantBrush}"
-                                    BorderBrush="{ThemeResource OutlineVariantBrush}"
-                                    BorderThickness="0,1,0,0"
-                                    Padding="{ThemeResource Space100Thickness}">
-                                <Button Content="{TemplateBinding Xaml}"
-                                        Style="{StaticResource SeeXamlFlyoutButtonStyle}" />
-                            </Border>
-                        </Grid>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+	<!-- A WinUI Gallery example card: the sample on the card surface, "Source code" in a footer strip. -->
+	<Style x:Key="XamlDisplayBelowStyle"
+		   TargetType="smtx:XamlDisplay">
+		<Setter Property="Margin" Value="{ThemeResource Space400TopThickness}" />
+		<Setter Property="Formatter" Value="{StaticResource NiceFormatter}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="smtx:XamlDisplay">
+					<Border Background="{ThemeResource SurfaceBrush}"
+							BorderBrush="{ThemeResource OutlineVariantBrush}"
+							BorderThickness="1"
+							CornerRadius="{ThemeResource Radius200CornerRadius}">
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
+							</Grid.RowDefinitions>
+							<ContentPresenter Content="{TemplateBinding Content}"
+											  Padding="{ThemeResource Space400Thickness}" />
+							<Border Grid.Row="1"
+									Background="{ThemeResource SurfaceVariantBrush}"
+									BorderBrush="{ThemeResource OutlineVariantBrush}"
+									BorderThickness="0,1,0,0"
+									Padding="{ThemeResource Space100Thickness}">
+								<Button Content="{TemplateBinding Xaml}"
+										Style="{StaticResource SeeXamlFlyoutButtonStyle}" />
+							</Border>
+						</Grid>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 
-    <Style x:Key="ExpandingXamlDisplayStyle"
-           TargetType="smtx:XamlDisplay"
-           BasedOn="{StaticResource XamlDisplayBelowStyle}">
-        <Setter Property="Formatter" Value="{x:Null}" />
-    </Style>
+	<Style x:Key="ExpandingXamlDisplayStyle"
+		   TargetType="smtx:XamlDisplay"
+		   BasedOn="{StaticResource XamlDisplayBelowStyle}">
+		<Setter Property="Formatter" Value="{x:Null}" />
+	</Style>
 
-    <Style x:Key="XamlDisplayOnTheSideStyle"
-           TargetType="smtx:XamlDisplay">
-        <Setter Property="Margin" Value="{ThemeResource Space200TopThickness}" />
-        <Setter Property="Formatter" Value="{StaticResource NiceFormatter}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="smtx:XamlDisplay">
-                    <StackPanel Orientation="Horizontal"
-                                Spacing="12">
-                        <ContentPresenter Content="{TemplateBinding Content}" />
-                        <Button Content="{TemplateBinding Xaml}"
-                                VerticalAlignment="Center"
-                                Style="{StaticResource SeeXamlFlyoutButtonStyle}" />
-                    </StackPanel>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+	<Style x:Key="XamlDisplayOnTheSideStyle"
+		   TargetType="smtx:XamlDisplay">
+		<Setter Property="Margin" Value="{ThemeResource Space200TopThickness}" />
+		<Setter Property="Formatter" Value="{StaticResource NiceFormatter}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="smtx:XamlDisplay">
+					<StackPanel Orientation="Horizontal"
+								Spacing="12">
+						<ContentPresenter Content="{TemplateBinding Content}" />
+						<Button Content="{TemplateBinding Xaml}"
+								VerticalAlignment="Center"
+								Style="{StaticResource SeeXamlFlyoutButtonStyle}" />
+					</StackPanel>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 
-    <Style TargetType="smtx:XamlDisplay"
-           BasedOn="{StaticResource XamlDisplayOnTheSideStyle}" />
+	<Style TargetType="smtx:XamlDisplay"
+		   BasedOn="{StaticResource XamlDisplayOnTheSideStyle}" />
 
-    <!-- Under the page title: the description, then a Documentation link, as a WinUI Gallery page header. -->
-    <DataTemplate x:Key="FluentSamplePageLayoutHeaderTemplate">
-        <StackPanel Spacing="8"
-                    Margin="{ThemeResource Space200BottomThickness}">
-            <TextBlock Text="{Binding Description}"
-                       Style="{StaticResource BodyMedium}"
-                       Visibility="{Binding Description, Converter={StaticResource IsNullOrEmptyToCollapsed}, FallbackValue=Collapsed}" />
-            <HyperlinkButton NavigateUri="{Binding DocumentationLink}"
-                             Padding="0"
-                             Style="{StaticResource HyperlinkButtonStyle}"
-                             Visibility="{Binding DocumentationLink, Converter={StaticResource IsNullOrEmptyToCollapsed}, FallbackValue=Collapsed}">
-                <StackPanel Orientation="Horizontal"
-                            Spacing="6">
-                    <FontIcon Glyph="&#xE8A5;"
-                              FontSize="14" />
-                    <TextBlock Text="Documentation"
-                               Style="{StaticResource BodyMedium}" />
-                </StackPanel>
-            </HyperlinkButton>
-        </StackPanel>
-    </DataTemplate>
+	<!-- Under the page title: the description, then a Documentation link, as a WinUI Gallery page header. -->
+	<DataTemplate x:Key="FluentSamplePageLayoutHeaderTemplate">
+		<StackPanel Spacing="8"
+					Margin="{ThemeResource Space200BottomThickness}">
+			<TextBlock Text="{Binding Description}"
+					   Style="{StaticResource BodyMedium}"
+					   Visibility="{Binding Description, Converter={StaticResource IsNullOrEmptyToCollapsed}, FallbackValue=Collapsed}" />
+			<HyperlinkButton NavigateUri="{Binding DocumentationLink}"
+							 Padding="0"
+							 Style="{StaticResource HyperlinkButtonStyle}"
+							 Visibility="{Binding DocumentationLink, Converter={StaticResource IsNullOrEmptyToCollapsed}, FallbackValue=Collapsed}">
+				<StackPanel Orientation="Horizontal"
+							Spacing="6">
+					<FontIcon Glyph="&#xE8A5;"
+							  FontSize="14" />
+					<TextBlock Text="Documentation"
+							   Style="{StaticResource BodyMedium}" />
+				</StackPanel>
+			</HyperlinkButton>
+		</StackPanel>
+	</DataTemplate>
 
-    <!--
-        A WinUI Gallery page: the title in the Title Large ramp step (semantic DisplaySmall), the header, then the Fluent
-        sample. The Material tabs, sticky tabs, mobile top bar and version picker are code-behind parts, so they stay,
-        collapsed.
-    -->
-    <Style TargetType="local:SamplePageLayout">
-        <Setter Property="HeaderTemplate" Value="{StaticResource FluentSamplePageLayoutHeaderTemplate}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="local:SamplePageLayout">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
+	<!--
+		A WinUI Gallery page: the title in the Title Large ramp step (semantic DisplaySmall), the header, then the Fluent
+		sample. The Material tabs, sticky tabs, mobile top bar and version picker are code-behind parts, so they stay,
+		collapsed.
+	-->
+	<Style TargetType="local:SamplePageLayout">
+		<Setter Property="HeaderTemplate" Value="{StaticResource FluentSamplePageLayoutHeaderTemplate}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="local:SamplePageLayout">
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="*" />
+						</Grid.RowDefinitions>
 
-                        <TextBlock x:Name="StickyTitle"
-                                   Text="{TemplateBinding Title}"
-                                   MaxLines="1"
-                                   TextWrapping="NoWrap"
-                                   Style="{StaticResource DisplaySmall}"
-                                   Margin="36,24,36,12" />
+						<TextBlock x:Name="StickyTitle"
+								   Text="{TemplateBinding Title}"
+								   MaxLines="1"
+								   TextWrapping="NoWrap"
+								   Style="{StaticResource DisplaySmall}"
+								   Margin="36,24,36,12" />
 
-                        <Grid x:Name="PART_MobileTopBar"
-                              Visibility="Collapsed" />
+						<Grid x:Name="PART_MobileTopBar"
+							  Visibility="Collapsed" />
 
-                        <ScrollViewer x:Name="PART_ScrollViewer"
-                                      Grid.Row="1">
-                            <StackPanel x:Name="ScrollingContent"
-                                        MaxWidth="1100"
-                                        HorizontalAlignment="Stretch"
-                                        Margin="36,0,36,36">
+						<ScrollViewer x:Name="PART_ScrollViewer"
+									  Grid.Row="1">
+							<StackPanel x:Name="ScrollingContent"
+										MaxWidth="1100"
+										HorizontalAlignment="Stretch"
+										Margin="36,0,36,36">
 
-                                <TextBlock x:Name="ScrollingTitle"
-                                           Text="{TemplateBinding Title}"
-                                           MaxLines="1"
-                                           TextWrapping="NoWrap"
-                                           Style="{StaticResource HeadlineMedium}"
-                                           Margin="0,16,0,8"
-                                           Visibility="Collapsed" />
+								<TextBlock x:Name="ScrollingTitle"
+										   Text="{TemplateBinding Title}"
+										   MaxLines="1"
+										   TextWrapping="NoWrap"
+										   Style="{StaticResource HeadlineMedium}"
+										   Margin="0,16,0,8"
+										   Visibility="Collapsed" />
 
-                                <ContentPresenter Content="{TemplateBinding Content}"
-                                                  ContentTemplate="{TemplateBinding HeaderTemplate}" />
+								<ContentPresenter Content="{TemplateBinding Content}"
+												  ContentTemplate="{TemplateBinding HeaderTemplate}" />
 
-                                <StackPanel x:Name="PART_ScrollingTabs"
-                                            Visibility="Collapsed">
-                                    <RadioButton x:Name="PART_MaterialRadioButton" />
-                                    <RadioButton x:Name="PART_CupertinoRadioButton" />
-                                </StackPanel>
+								<StackPanel x:Name="PART_ScrollingTabs"
+											Visibility="Collapsed">
+									<RadioButton x:Name="PART_MaterialRadioButton" />
+									<RadioButton x:Name="PART_CupertinoRadioButton" />
+								</StackPanel>
 
-                                <ComboBox x:Name="MaterialVersionComboBox"
-                                          Visibility="Collapsed">
-                                    <x:String>M2</x:String>
-                                    <x:String>M3</x:String>
-                                </ComboBox>
+								<ComboBox x:Name="MaterialVersionComboBox"
+										  Visibility="Collapsed">
+									<x:String>M2</x:String>
+									<x:String>M3</x:String>
+								</ComboBox>
 
-                                <ContentPresenter x:Name="FluentContentContainer"
-                                                  Content="{TemplateBinding Content}"
-                                                  ContentTemplate="{TemplateBinding FluentTemplate}" />
-                            </StackPanel>
-                        </ScrollViewer>
+								<ContentPresenter x:Name="FluentContentContainer"
+												  Content="{TemplateBinding Content}"
+												  ContentTemplate="{TemplateBinding FluentTemplate}" />
+							</StackPanel>
+						</ScrollViewer>
 
-                        <StackPanel x:Name="PART_StickyTabs"
-                                    Grid.Row="1"
-                                    Visibility="Collapsed">
-                            <RadioButton x:Name="PART_StickyMaterialRadioButton"
-                                         Visibility="Collapsed" />
-                            <RadioButton x:Name="PART_StickyCupertinoRadioButton"
-                                         Visibility="Collapsed" />
-                        </StackPanel>
+						<StackPanel x:Name="PART_StickyTabs"
+									Grid.Row="1"
+									Visibility="Collapsed">
+							<RadioButton x:Name="PART_StickyMaterialRadioButton"
+										 Visibility="Collapsed" />
+							<RadioButton x:Name="PART_StickyCupertinoRadioButton"
+										 Visibility="Collapsed" />
+						</StackPanel>
 
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="FormFactors">
-                                <VisualState x:Name="Desktop">
-                                    <VisualState.StateTriggers>
-                                        <AdaptiveTrigger MinWindowWidth="{StaticResource DesktopAdaptiveThresholdWidth}" />
-                                    </VisualState.StateTriggers>
-                                </VisualState>
-                                <VisualState x:Name="Mobile">
-                                    <VisualState.StateTriggers>
-                                        <AdaptiveTrigger MinWindowWidth="0" />
-                                    </VisualState.StateTriggers>
-                                    <VisualState.Setters>
-                                        <Setter Target="ScrollingContent.Margin" Value="16,0,16,24" />
-                                        <Setter Target="ScrollingTitle.Visibility" Value="Visible" />
-                                        <Setter Target="StickyTitle.Visibility" Value="Collapsed" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="FormFactors">
+								<VisualState x:Name="Desktop">
+									<VisualState.StateTriggers>
+										<AdaptiveTrigger MinWindowWidth="{StaticResource DesktopAdaptiveThresholdWidth}" />
+									</VisualState.StateTriggers>
+								</VisualState>
+								<VisualState x:Name="Mobile">
+									<VisualState.StateTriggers>
+										<AdaptiveTrigger MinWindowWidth="0" />
+									</VisualState.StateTriggers>
+									<VisualState.Setters>
+										<Setter Target="ScrollingContent.Margin" Value="16,0,16,24" />
+										<Setter Target="ScrollingTitle.Visibility" Value="Visible" />
+										<Setter Target="StickyTitle.Visibility" Value="Collapsed" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 
-    <!--
-        An Overview entry is a card: the control's name, description and a "View component" command on the leading
-        side, the live sample on the trailing side, split by a divider; stacked on narrow windows.
-    -->
-    <Style TargetType="local:OverviewSampleView">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="local:OverviewSampleView">
-                    <Grid Margin="{ThemeResource Space300TopThickness}"
-                          Background="{ThemeResource SurfaceBrush}"
-                          BorderBrush="{ThemeResource OutlineVariantBrush}"
-                          BorderThickness="1"
-                          CornerRadius="{ThemeResource Radius200CornerRadius}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition x:Name="TextColumn"
-                                              Width="280" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
+	<!--
+		An Overview entry is a card: the control's name, description and a "View component" command on the leading
+		side, the live sample on the trailing side, split by a divider; stacked on narrow windows.
+	-->
+	<Style TargetType="local:OverviewSampleView">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="local:OverviewSampleView">
+					<Grid Margin="{ThemeResource Space300TopThickness}"
+						  Background="{ThemeResource SurfaceBrush}"
+						  BorderBrush="{ThemeResource OutlineVariantBrush}"
+						  BorderThickness="1"
+						  CornerRadius="{ThemeResource Radius200CornerRadius}">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition x:Name="TextColumn"
+											  Width="280" />
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="*" />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+						</Grid.RowDefinitions>
 
-                        <StackPanel x:Name="TextPart"
-                                    Padding="{ThemeResource Space500Thickness}"
-                                    Spacing="8">
-                            <TextBlock Text="{Binding Sample.Title, RelativeSource={RelativeSource TemplatedParent}}"
-                                       Style="{StaticResource TitleLarge}" />
-                            <TextBlock Text="{Binding Sample.Description, RelativeSource={RelativeSource TemplatedParent}}"
-                                       Visibility="{Binding Sample.Description, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource IsNullOrEmptyToCollapsed}, FallbackValue=Collapsed}"
-                                       Foreground="{ThemeResource OnSurfaceVariantBrush}"
-                                       TextWrapping="Wrap"
-                                       Style="{StaticResource BodyMedium}" />
-                            <Button x:Name="PART_ViewButton"
-                                    Margin="{ThemeResource Space200TopThickness}"
-                                    Style="{StaticResource OutlinedButtonStyle}">
-                                <StackPanel Orientation="Horizontal"
-                                            Spacing="8">
-                                    <TextBlock Text="View component" />
-                                    <FontIcon Glyph="&#xE76C;"
-                                              FontSize="12" />
-                                </StackPanel>
-                            </Button>
-                        </StackPanel>
+						<StackPanel x:Name="TextPart"
+									Padding="{ThemeResource Space500Thickness}"
+									Spacing="8">
+							<TextBlock Text="{Binding Sample.Title, RelativeSource={RelativeSource TemplatedParent}}"
+									   Style="{StaticResource TitleLarge}" />
+							<TextBlock Text="{Binding Sample.Description, RelativeSource={RelativeSource TemplatedParent}}"
+									   Visibility="{Binding Sample.Description, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource IsNullOrEmptyToCollapsed}, FallbackValue=Collapsed}"
+									   Foreground="{ThemeResource OnSurfaceVariantBrush}"
+									   TextWrapping="Wrap"
+									   Style="{StaticResource BodyMedium}" />
+							<Button x:Name="PART_ViewButton"
+									Margin="{ThemeResource Space200TopThickness}"
+									Style="{StaticResource OutlinedButtonStyle}">
+								<StackPanel Orientation="Horizontal"
+											Spacing="8">
+									<TextBlock Text="View component" />
+									<FontIcon Glyph="&#xE76C;"
+											  FontSize="12" />
+								</StackPanel>
+							</Button>
+						</StackPanel>
 
-                        <Rectangle x:Name="Divider"
-                                   Grid.Column="1"
-                                   Width="1"
-                                   Fill="{ThemeResource OutlineVariantBrush}" />
+						<Rectangle x:Name="Divider"
+								   Grid.Column="1"
+								   Width="1"
+								   Fill="{ThemeResource OutlineVariantBrush}" />
 
-                        <ContentControl x:Name="SamplePart"
-                                        Grid.Column="2"
-                                        Padding="{ThemeResource Space500Thickness}"
-                                        Content="{TemplateBinding Content}"
-                                        ContentTemplate="{TemplateBinding ContentTemplate}"
-                                        HorizontalContentAlignment="Stretch"
-                                        VerticalContentAlignment="Center" />
+						<ContentControl x:Name="SamplePart"
+										Grid.Column="2"
+										Padding="{ThemeResource Space500Thickness}"
+										Content="{TemplateBinding Content}"
+										ContentTemplate="{TemplateBinding ContentTemplate}"
+										HorizontalContentAlignment="Stretch"
+										VerticalContentAlignment="Center" />
 
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="FormFactors">
-                                <VisualState x:Name="Desktop">
-                                    <VisualState.StateTriggers>
-                                        <AdaptiveTrigger MinWindowWidth="{StaticResource DesktopAdaptiveThresholdWidth}" />
-                                    </VisualState.StateTriggers>
-                                </VisualState>
-                                <VisualState x:Name="Mobile">
-                                    <VisualState.StateTriggers>
-                                        <AdaptiveTrigger MinWindowWidth="0" />
-                                    </VisualState.StateTriggers>
-                                    <VisualState.Setters>
-                                        <Setter Target="TextColumn.Width" Value="*" />
-                                        <Setter Target="Divider.Visibility" Value="Collapsed" />
-                                        <Setter Target="SamplePart.(Grid.Row)" Value="1" />
-                                        <Setter Target="SamplePart.(Grid.Column)" Value="0" />
-                                        <Setter Target="SamplePart.(Grid.ColumnSpan)" Value="3" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="FormFactors">
+								<VisualState x:Name="Desktop">
+									<VisualState.StateTriggers>
+										<AdaptiveTrigger MinWindowWidth="{StaticResource DesktopAdaptiveThresholdWidth}" />
+									</VisualState.StateTriggers>
+								</VisualState>
+								<VisualState x:Name="Mobile">
+									<VisualState.StateTriggers>
+										<AdaptiveTrigger MinWindowWidth="0" />
+									</VisualState.StateTriggers>
+									<VisualState.Setters>
+										<Setter Target="TextColumn.Width" Value="*" />
+										<Setter Target="Divider.Visibility" Value="Collapsed" />
+										<Setter Target="SamplePart.(Grid.Row)" Value="1" />
+										<Setter Target="SamplePart.(Grid.Column)" Value="0" />
+										<Setter Target="SamplePart.(Grid.ColumnSpan)" Value="3" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 </ResourceDictionary>

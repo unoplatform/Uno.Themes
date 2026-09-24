@@ -6,7 +6,7 @@
 		Uno.XamlMerge task (via the Styles\Application\ glob) so that a single
 		Source=mergedpages.xaml on BaseTheme brings in the default converter and
 		typography resources the theme needs.
-
+		
 		Order matters: entries listed LATER win at lookup time (MergedDictionaries
 		are searched in reverse). Typography.xaml and Fonts.xaml are merged AFTER
 		SharedTypography.xaml so the Fluent slot values (type-ramp sizes/weights and
@@ -15,7 +15,7 @@
 		ms-appx Source rather than through the merged pages: theme-branch resources
 		inside the merged bundle do not resolve reliably in Release builds, while
 		Source-merged standalone dictionaries do (see specs/lessons.md).
-
+		
 		Colour resources are intentionally NOT included here: SharedColors, the
 		shared palette and the code-built Fluent palette (FluentColorPalette,
 		mechanism C) are added dynamically by BaseTheme.UpdateSource so they

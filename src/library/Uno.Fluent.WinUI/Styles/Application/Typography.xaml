@@ -3,13 +3,13 @@
 
 	<!--
 		Fluent — Semantic Typography Overrides
-
+		
 		Maps the 19 semantic type slots to the Fluent (WinUI) type ramp per the
 		hybrid rule of spec 05, D7: where Fluent has a counterpart slot, adopt its
 		size/weight; where it doesn't, keep the shared (M3) size and apply Fluent
 		weight conventions (SemiBold for Display/Headline/Title/Label emphasis
 		slots, Regular for Body/Caption).
-
+		
 		Fluent ramp anchors:
 		Display     (68, SemiBold) -> DisplayLarge
 		Title Large (40, SemiBold) -> DisplaySmall
@@ -19,19 +19,19 @@
 		Body Large  (18, Regular)  -> BodyLarge
 		Body        (14, Regular)  -> BodyMedium
 		Caption     (12, Regular)  -> CaptionMedium
-
+		
 		DisplayMedium (54) is interpolated: 68 x (45/57) — no Fluent slot exists
 		between Display (68) and Title Large (40).
-
+		
 		Fluent does not use letter-spacing: CharacterSpacing is 0 for every slot
 		that the shared layer defines a *CharacterSpacing key for.
-
+		
 		Font family: not declared here. Every *FontFamily slot (and the
 		DefaultFontFamily root) is declared once, in Fonts.xaml — merged after
 		this file — aliased directly to the platform token (spec 05 D11/D16).
 		This file overrides size, weight and character spacing only, like the
 		other design systems' Typography files.
-
+		
 		LOAD PATH (specs/lessons.md): this file is EXCLUDED from the XamlMerge
 		bundle and merged by BaseDictionaries.xaml via its ms-appx Source, after
 		SharedTypography.xaml — theme-branch resources inside the merged bundle
