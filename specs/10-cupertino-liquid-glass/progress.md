@@ -880,3 +880,32 @@ control (a green speck from the toggle above had appeared on the slider thumb).
 Slider at rest beside iOS: the inactive track was the primary grey (mid grey) where iOS uses the tertiary
 system fill, and the rest shadow was tight. `CupertinoSliderTrackBrush` → `CupertinoTertiarySystemFillBrush`
 (Light and Default), rest `Translation.Z` 6 → 10 for the switch knob and slider thumb.
+
+### Whole-theme review against the HIG and iOS — 2026-09-24
+
+The maintainer asked for a full review of the theme against Apple's HIG and real iOS, fixes, and a report. Report:
+[hig-review-2026-09-24.md](hig-review-2026-09-24.md). Method: 25 HIG pages and all 643 artwork files they
+reference downloaded and measured; the gallery and every popup rendered at 2× in Light and Dark; four
+independent XAML audits by control family.
+
+- [x] Red tests for every finding (`Given_CupertinoHigReview`, 30 cases; 27 red on `a6337afc`), then the fixes.
+- [x] Separators in `CupertinoSeparatorBrush` (were systemGray5 on white, invisible); translucent system fills for
+  hover / pressed / selected in lists, menus and the sidebar (were `#1C1C1F` on `#1C1C1E` in Dark); neutral list
+  selection; no hairline under an inset group's last row.
+- [x] Progress bar: 4 pt system-fill capsule track (the stock template drew Fluent's 1 px hairline), Apple
+  paused / error colours.
+- [x] Switch glides (0.2 s eased) instead of jumping; checkbox keeps its check while pressed off-Windows and is
+  outlined in gray when unchecked; dark radio is an outline, not a disc; slider ticks / secondary styles no
+  longer reference a `Color` or undefined brushes.
+- [x] ComboBox is the compact-picker gray capsule with an accent chevron; NumberBox header sits above a 44 pt
+  frame; DatePicker / CalendarDatePicker dead Fluent states removed, wheel rows 20 pt; calendar weekday letters
+  13 pt semibold secondary.
+- [x] Alert message 13 pt, title no longer clamped to two lines; NavigationView loses Fluent's card stroke and
+  corner and gets the 34 pt bold large title; palette alphas rounded to Apple's bytes.
+- [x] Today's calendar number stays visible: Uno Skia does not paint the highlighted day item while
+  `DayItemCornerRadius` is non-zero (repro in the report), so `IsTodayHighlighted` is off until fixed upstream.
+- [x] Docs, five updated test expectations, formatters, cspell and markdownlint on the changed doc.
+
+Result: Cupertino desktop Debug **278 / 278**. Open items (row height 52, popover shadows, per-row menu
+hairlines, state opacities, hover idiom, button weight, NavigationView buttons, glass adaptivity) are listed
+in the report with the reason each was left.

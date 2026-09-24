@@ -4,6 +4,29 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## Measure Apple's own artwork and our own pixels; a brush that resolves is not a brush that shows (2026-09-24)
+
+**Context:** Spec 10, whole-theme HIG review. Every list, menu and dialog separator resolved to a valid brush
+and every test passed, yet no separator was visible: the alias pointed at `OutlineVariantBrush` (systemGray5,
+`#E5E5EA`), which on a white row is invisible. Hover, pressed and selected fills were an opaque `#1C1C1F` on a
+`#1C1C1E` surface in Dark. The stock progress bar drew a 1 px Fluent hairline under our 4 px setter. A
+calendar's "today" cell rendered nothing at all. None of this shows in a resource-resolution test.
+
+**How to apply:**
+
+- Download the HIG artwork (`developer.apple.com/tutorials/images/com.apple.HIG/<name>@2x.png`) and measure it:
+  row heights, separator colour, track thickness are all there even when the HIG text publishes no number.
+- Render ours at 2× in both appearances and scan the pixels where a line or fill should be; assert a luma
+  difference, not a brush name. Read expected colours from the theme's own dictionaries (a scoped
+  `Resources.TryGetValue` resolves against the application theme, so a Light container returns Dark values).
+- Translucent system fills (`787880 @ 0.08 / 0.20`) read on any surface; pre-composited opaque grays do not.
+- When a stock template is reused, override its own keys (`ProgressBarTrackHeight`, …); a `Height` setter on
+  the control does not reach the track.
+- When a control vanishes, bisect the framework property that hides it before theorising (today + rounded
+  day corners → nothing painted; radius 0 → painted). Mitigate in the theme, record the repro, file upstream.
+
+---
+
 ## Generated tokens must reach rendered controls
 
 **Context:** Spec 10 token audit. Cupertino generated the shared spacing and radius scales, but
