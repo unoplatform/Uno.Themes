@@ -12,6 +12,11 @@
 			<TextBlock Text="Controls for your everyday tasks."
 					   Style="{StaticResource BodyLarge}"
 					   TextWrapping="Wrap" />
+			<!-- Holds every switch knob and slider thumb in its Pressed (glass) state, to inspect the lens without a finger on it. -->
+			<CheckBox x:Name="HoldKnobs"
+					  Content="Hold knobs pressed (for screenshots)"
+					  Checked="HoldKnobsChanged"
+					  Unchecked="HoldKnobsChanged" />
 			<StackPanel Spacing="8">
 				<TextBlock Text="Preferences"
 						   Style="{StaticResource TitleMedium}" />

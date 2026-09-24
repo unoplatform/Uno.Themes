@@ -13,6 +13,27 @@ public sealed partial class CupertinoGalleryPage : Page
 		InitializeComponent();
 	}
 
+	// Pointer events on a knob will still move it out of the held state; keep the pointer off the controls.
+	private void HoldKnobsChanged(object sender, RoutedEventArgs args)
+	{
+		var state = HoldKnobs.IsChecked == true ? "Pressed" : "Normal";
+		HoldKnobState(GalleryScroll, state);
+	}
+
+	private static void HoldKnobState(DependencyObject root, string state)
+	{
+		for (var i = 0; i < VisualTreeHelper.GetChildrenCount(root); i++)
+		{
+			var child = VisualTreeHelper.GetChild(root, i);
+			if (child is ToggleSwitch or Microsoft.UI.Xaml.Controls.Primitives.Thumb)
+			{
+				VisualStateManager.GoToState((Control)child, state, false);
+			}
+
+			HoldKnobState(child, state);
+		}
+	}
+
 	private async void ShowAlert(object sender, RoutedEventArgs args)
 	{
 		try
