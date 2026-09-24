@@ -820,3 +820,8 @@ brightness so the shrunken track read near-white, where iOS dims everything seen
 Seventh round (Mac, 8× crop): uniform dimming flattened the knob to one grey; iOS keeps the page inside the
 knob light and deepens only the mid-tones. `Brightness` replaced by `Contrast` anchored at white
 (out = c·in + 1 − c, offset column in 0–1 units — 0–255 turns the view black), Clear 1.6.
+
+Eighth round (Mac, 8× crop): a grey band with a white sliver ringed the shrunken track — the lens was
+sampling the knob's own drop shadow, drawn onto the canvas before the backdrop read. The shadow is now
+drawn after the glass layer (still clipped to outside the shape). Rendered on a white card like the sample
+row: white interior, inset grey track merging to the right, hairline edge, shadow outside — the iOS crop.

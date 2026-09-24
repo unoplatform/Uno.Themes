@@ -141,23 +141,6 @@ internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 		var radius = Math.Clamp(Radius, 0, Math.Min(bounds.Width, bounds.Height) / 2);
 		using var shape = new SKRoundRect(bounds, radius);
 
-		if (Preset.Shadow > 0)
-		{
-			// Only outside the shape: the lens stays clear and the shadow does not darken its own backdrop.
-			canvas.Save();
-			canvas.ClipRoundRect(shape, SKClipOperation.Difference, true);
-			canvas.Translate(0, ShadowDy);
-			using var shadowFilter = SKMaskFilter.CreateBlur(SKBlurStyle.Normal, ShadowSigma);
-			using var shadow = new SKPaint
-			{
-				Color = SKColors.Black.WithAlpha((byte)(Preset.Shadow * _layerOpacity * 255)),
-				IsAntialias = true,
-				MaskFilter = shadowFilter,
-			};
-			canvas.DrawRoundRect(shape, shadow);
-			canvas.Restore();
-		}
-
 		// The backdrop the filters read is wider than the shape when the element is inflated, so that the
 		// refraction can sample what lies just outside the glass instead of reading transparent.
 		var sampleBounds = bounds;
@@ -219,6 +202,24 @@ internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 
 		canvas.Restore();
 		canvas.Restore();
+
+		if (Preset.Shadow > 0)
+		{
+			// After the backdrop was read, so the lens does not show its own shadow (iOS does not), and only
+			// outside the shape, so the glass stays clear.
+			canvas.Save();
+			canvas.ClipRoundRect(shape, SKClipOperation.Difference, true);
+			canvas.Translate(0, ShadowDy);
+			using var shadowFilter = SKMaskFilter.CreateBlur(SKBlurStyle.Normal, ShadowSigma);
+			using var shadow = new SKPaint
+			{
+				Color = SKColors.Black.WithAlpha((byte)(Preset.Shadow * _layerOpacity * 255)),
+				IsAntialias = true,
+				MaskFilter = shadowFilter,
+			};
+			canvas.DrawRoundRect(shape, shadow);
+			canvas.Restore();
+		}
 	}
 
 	// Refraction, then blur, then saturation. Kept in one method: when SkiaSharp exposes runtime-effect
