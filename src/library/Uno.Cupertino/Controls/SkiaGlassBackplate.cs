@@ -34,7 +34,9 @@ internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 			float2 q = abs(v) - (c - radius);
 			float d = length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - radius;
 			float t = clamp(1.0 + d / min(c.x, c.y), 0.0, 1.0);
-			float w = 1.0 - smoothstep(0.7, 1.0, t);
+			// The falloff must be gentle enough that the sample position never runs backwards (a fold reads
+			// as a hard step): with a 60 % shift it needs to start no later than 0.4.
+			float w = 1.0 - smoothstep(0.4, 1.0, t);
 			float2 disp = v / max(c.x, c.y) * w;
 			return half4(0.5 + 0.5 * disp.x, 0.5 + 0.5 * disp.y, 0.0, 1.0);
 		}

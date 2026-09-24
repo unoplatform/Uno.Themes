@@ -831,3 +831,7 @@ zero over the last ~30 % before the rim, so the edge shows what lies directly be
 track flares out to meet the real one. The shader now weights the shift by 1 − smoothstep(0.7, 1, t) with
 t from the rounded-rect SDF (radius uniform back). Verified in the 4× render: flare at the right rim of the
 off knob and the left rim of the on knob.
+
+Tenth round: the flare showed as a hard step. A falloff over the last 30 % is steep enough for the sample
+position to run backwards (a fold) with a 60 % shift; the falloff now starts at 0.4 of the radius, which
+keeps the mapping monotonic and gives the smooth bow of the iOS capture.
