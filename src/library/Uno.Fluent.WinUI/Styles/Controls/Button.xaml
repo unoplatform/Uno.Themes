@@ -12,17 +12,19 @@
         resource scope without changing standard buttons or copying a template.
     -->
 
-	<!-- Fluent "subtle button": transparent at rest. The Foreground setter
-	     consumes the semantic lightweight key via ThemeResource — resolved per
-	     ELEMENT scope, so page/subtree-scoped consumer overrides of
-	     TextButtonForeground reach these buttons directly (spec 05 §10;
-	     defaults are provided by FluentLightweightBridge). -->
-	<Style x:Key="FluentTextButtonStyle"
-		   TargetType="Button"
-		   BasedOn="{StaticResource DefaultButtonStyle}">
+    <!--
+        Fluent "subtle button": transparent at rest. The Foreground setter
+        consumes the semantic lightweight key via ThemeResource — resolved per
+        ELEMENT scope, so page/subtree-scoped consumer overrides of
+        TextButtonForeground reach these buttons directly (spec 05 §10;
+        defaults are provided by FluentLightweightBridge).
+    -->
+    <Style x:Key="FluentTextButtonStyle"
+           TargetType="Button"
+           BasedOn="{StaticResource DefaultButtonStyle}">
         <Setter Property="Background" Value="{ThemeResource TextButtonBackground}" />
         <Setter Property="BorderBrush" Value="{ThemeResource TextButtonBorderBrush}" />
-		<Setter Property="Foreground" Value="{ThemeResource TextButtonForeground}" />
+        <Setter Property="Foreground" Value="{ThemeResource TextButtonForeground}" />
         <Setter Property="fluent:FluentTextButtonResources.ForegroundPointerOver" Value="{ThemeResource TextButtonForegroundPointerOver}" />
         <Setter Property="fluent:FluentTextButtonResources.ForegroundPressed" Value="{ThemeResource TextButtonForegroundPressed}" />
         <Setter Property="fluent:FluentTextButtonResources.ForegroundDisabled" Value="{ThemeResource TextButtonForegroundDisabled}" />
@@ -32,21 +34,21 @@
         <Setter Property="fluent:FluentTextButtonResources.BorderBrushPointerOver" Value="{ThemeResource TextButtonBorderBrushPointerOver}" />
         <Setter Property="fluent:FluentTextButtonResources.BorderBrushPressed" Value="{ThemeResource TextButtonBorderBrushPressed}" />
         <Setter Property="fluent:FluentTextButtonResources.BorderBrushDisabled" Value="{ThemeResource TextButtonBorderBrushDisabled}" />
-	</Style>
+    </Style>
 
-	<!-- Fluent icon button: square padding, transparent rest -->
-	<Style x:Key="FluentIconButtonStyle"
-		   TargetType="Button"
-		   BasedOn="{StaticResource DefaultButtonStyle}">
-		<Setter Property="Background" Value="Transparent" />
-		<Setter Property="BorderBrush" Value="Transparent" />
-		<Setter Property="Foreground" Value="{ThemeResource IconButtonForeground}" />
-		<Setter Property="Padding" Value="8" />
-		<Setter Property="MinWidth" Value="40" />
-		<Setter Property="MinHeight" Value="40" />
-	</Style>
+    <!-- Fluent icon button: square padding, transparent rest -->
+    <Style x:Key="FluentIconButtonStyle"
+           TargetType="Button"
+           BasedOn="{StaticResource DefaultButtonStyle}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="Foreground" Value="{ThemeResource IconButtonForeground}" />
+        <Setter Property="Padding" Value="8" />
+        <Setter Property="MinWidth" Value="40" />
+        <Setter Property="MinHeight" Value="40" />
+    </Style>
 
-	<!--
+    <!--
 		The semantic aliases (TextButtonStyle / IconButtonStyle) are late-bound
 		in code (FluentTheme): <StaticResource> alias elements resolve at parse
 		time against the app-level scope only — when the theme is instantiated
