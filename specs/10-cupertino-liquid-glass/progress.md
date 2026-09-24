@@ -858,3 +858,8 @@ Fourteenth round: full-strength sheen with hard stops read as chrome on the Mac,
 at the caps on the GPU. Back to 1 − u² with the long-axis shift at 0.5 and Refraction 32; Sheen 0.3 with
 soft, flat stops (white 0.09 α above the middle, black 0.04 α below). Lesson: a shading guess needs a GPU
 look before it is pushed; software renders understate how much a gradient reads.
+
+Fifteenth round (end position beside iOS): the inner track was too thin and too long. Refraction 32 → 22
+(waist ≈ 55 %), long-axis shift 0.5 → 0.8 of the short-axis one (monotonic while the short-axis factor is
+≤ 0.6, i.e. Refraction ≤ 24 on a 40 px knob) so the track's end is pushed further in, and the lift scale
+1.4 → 1.5 so the pressed knob overhangs the track as the iOS knob does.

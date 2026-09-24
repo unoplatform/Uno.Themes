@@ -21,9 +21,10 @@ internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 	// so the glass shows the backdrop minified, strongest at the centre and easing to nothing at the tips, so
 	// what shows at the rim is what lies beneath it: a track running through the knob shows as an hourglass,
 	// narrowest in the middle and widening until it meets the real track at both caps; a track ending under
-	// the knob shows its end pushed in (iOS 26). The long-axis shift is half the short-axis one so that,
-	// with the 1 − u² ease, the mapping never runs backwards along the length (a fold would read as a hard
-	// step); a steeper ease aliases at the caps on the GPU.
+	// the knob shows its end pushed in (iOS 26). The long-axis shift is 0.8 of the short-axis one, which with
+	// the 1 − u² ease stays monotonic along the length while the short-axis factor is at most 0.6
+	// (Refraction ≤ 24 on a 40 px knob); beyond that the mapping runs backwards and a fold reads as a hard
+	// step. A steeper ease aliases at the caps on the GPU.
 	// Encoded into R / G for SKImageFilter.CreateDisplacementMapEffect, where 0.5 is "no displacement" and
 	// the full shift along the longer axis is half the effect's scale. Evaluated in canvas coordinates,
 	// hence the origin.
@@ -37,7 +38,7 @@ internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 			float u = horizontal ? abs(v.x) / c.x : abs(v.y) / c.y;
 			float w = 1.0 - u * u;
 			float2 disp = v / max(c.x, c.y) * w;
-			if (horizontal) { disp.x *= 0.5; } else { disp.y *= 0.5; }
+			if (horizontal) { disp.x *= 0.8; } else { disp.y *= 0.8; }
 			return half4(0.5 + 0.5 * disp.x, 0.5 + 0.5 * disp.y, 0.0, 1.0);
 		}
 		""";
