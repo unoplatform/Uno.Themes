@@ -3,9 +3,14 @@
 	<!--
 		Later merged dictionaries win. Keep Material typography above the shared
 		type scale; themed entries in the merged root would lose to the base layer.
+		The base layer is listed here rather than through Common/BaseDictionaries.xaml:
+		that file is a XamlMerge input for v1, so it is not compiled as a standalone
+		page and cannot be loaded by Source in a Release build.
 	-->
 	<ResourceDictionary.MergedDictionaries>
-		<ResourceDictionary Source="ms-appx:///Uno.Material.WinUI/Styles/Application/Common/BaseDictionaries.xaml" />
+		<ResourceDictionary Source="ms-appx:///Uno.Themes.WinUI/Styles/Applications/Common/Converters.xaml" />
+		<ResourceDictionary Source="ms-appx:///Uno.Themes.WinUI/Styles/Applications/Common/SharedTypography.xaml" />
+		<ResourceDictionary Source="ms-appx:///Uno.Material.WinUI/Styles/Application/Common/Fonts.xaml" />
 		<ResourceDictionary Source="ms-appx:///Uno.Material.WinUI/Styles/Application/v2/Typography.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

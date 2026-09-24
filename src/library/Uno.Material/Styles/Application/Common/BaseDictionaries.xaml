@@ -3,8 +3,8 @@
 
 	<!--
 		Static base layer for MaterialTheme. Merged directly into mergedpages.v1.xaml;
-		v2 loads it through its own BaseDictionaries.xaml before the Material v2 type
-		scale. A single Source=mergedpages.<ver>.xaml on BaseTheme brings in the default
+		v2 lists the same dictionaries in its own BaseDictionaries.xaml, before the
+		Material v2 type scale (keep the two lists in sync). A single Source=mergedpages.<ver>.xaml on BaseTheme brings in the default
 		converter, typography and font resources the theme needs.
 
 		Order matters: entries listed LATER win at lookup time (MergedDictionaries are

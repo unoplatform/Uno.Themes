@@ -1,5 +1,6 @@
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml.Media;
+using Windows.UI.Text;
 using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
 
