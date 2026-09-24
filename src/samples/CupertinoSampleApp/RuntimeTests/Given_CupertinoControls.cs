@@ -349,7 +349,7 @@ public class Given_CupertinoControls
 			var toggle = await Load(container, new ToggleSwitch { IsOn = true }, "ToggleSwitchStyle");
 
 			Assert.AreSame(Resource<Brush>(container, "CupertinoBlueBrush"), slider.Foreground, "slider active track");
-			Assert.AreSame(Resource<Brush>(container, "CupertinoPrimaryGrayBrush"), slider.Background, "slider track");
+			Assert.AreSame(Resource<Brush>(container, "CupertinoTertiarySystemFillBrush"), slider.Background, "slider track");
 			Assert.AreSame(Resource<Brush>(container, "CupertinoGreenBrush"), toggle.Background, "switch on-background");
 			Assert.AreSame(Resource<Brush>(container, "CupertinoWhiteBrush"), toggle.Foreground, "switch knob");
 		}
