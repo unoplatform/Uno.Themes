@@ -34,10 +34,11 @@ internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 			float2 n = (p - origin - c) / c;
 			bool horizontal = c.x >= c.y;
 			float u = horizontal ? abs(n.x) : abs(n.y);
-			// Linear ease across the length gives the full hourglass; the long-axis pull is kept small so the
-			// rim samples what lies just beyond the glass rather than far down the track.
-			float w = 1.0 - u;
-			float2 disp = n * n * n * (c / max(c.x, c.y));
+			// Smooth ease across the length (a linear one has a kink at the centre line); the long-axis pull is
+			// kept small so the rim samples what lies just beyond the glass rather than far down the track.
+			float w = 1.0 - u * u;
+			// Capped at half the half-side so the rim never reads content from a neighbouring control.
+			float2 disp = clamp(n * n * n, -0.5, 0.5) * (c / max(c.x, c.y));
 			if (horizontal) { disp.y *= w; disp.x *= 0.3; } else { disp.x *= w; disp.y *= 0.3; }
 			return half4(0.5 + 0.5 * disp.x, 0.5 + 0.5 * disp.y, 0.0, 1.0);
 		}

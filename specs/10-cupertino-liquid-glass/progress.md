@@ -870,3 +870,9 @@ alone and bends it only at the rims, so the lens is now **cubic**: s = n (1 + K 
 1.7), effect scale 2 K × longer half-side; monotonic for any K. Linear ease 1 − u across the length for the
 hourglass, long-axis pull 0.3 so the rim samples just beyond the glass, not far down the track. Contrast
 1.6 → 1.3, Sheen 0.3 → 0.2. Refraction is 0 on the blurred materials until measured.
+
+Seventeenth round (Mac): the slider thumb took a lavender tint (contrast × saturation amplifying the page's
+blue-grey) and the toggle's inner track was too tall with a kinked edge (linear ease has a corner at the
+centre line; cubic strength too low on the GPU). Contrast and saturation neutral on Clear, ease back to
+1 − u², K 1.7 → 2.2, and the rim pull capped at half the half-side so a rim never reads a neighbouring
+control (a green speck from the toggle above had appeared on the slider thumb).
