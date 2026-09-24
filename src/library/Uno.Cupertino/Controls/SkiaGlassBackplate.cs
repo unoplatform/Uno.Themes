@@ -18,16 +18,24 @@ namespace Uno.Cupertino;
 internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 {
 	// A convex lens: the sample point moves outward from the centre in proportion to its distance from it,
-	// so the glass shows the backdrop minified about the centre — a switch knob shows a shrunken track that
-	// merges with the real one where the track continues (iOS 26). Encoded into R / G for
-	// SKImageFilter.CreateDisplacementMapEffect, where 0.5 is "no displacement" and the shift at the rim
-	// along the longer axis is half the effect's scale. Evaluated in canvas coordinates, hence the origin.
+	// so the glass shows the backdrop minified about the centre. Over the last stretch before the rim the
+	// shift falls back to zero, so what shows at the edge is what lies directly beneath it: the shrunken
+	// image bends outward to meet the real content outside — a switch knob shows a small track that flares
+	// into the real one where the track continues (iOS 26). Encoded into R / G for
+	// SKImageFilter.CreateDisplacementMapEffect, where 0.5 is "no displacement" and the full shift along
+	// the longer axis is half the effect's scale. Evaluated in canvas coordinates, hence the origin.
 	private const string LensMapSksl = """
 		uniform float2 origin;
 		uniform float2 size;
+		uniform float radius;
 		half4 main(float2 p) {
 			float2 c = size * 0.5;
-			float2 disp = (p - origin - c) / max(c.x, c.y);
+			float2 v = p - origin - c;
+			float2 q = abs(v) - (c - radius);
+			float d = length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - radius;
+			float t = clamp(1.0 + d / min(c.x, c.y), 0.0, 1.0);
+			float w = 1.0 - smoothstep(0.7, 1.0, t);
+			float2 disp = v / max(c.x, c.y) * w;
 			return half4(0.5 + 0.5 * disp.x, 0.5 + 0.5 * disp.y, 0.0, 1.0);
 		}
 		""";
@@ -150,7 +158,7 @@ internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 		if (_chain is null || key != _chainKey)
 		{
 			_chain?.Dispose();
-			_chain = CreateChain(bounds, sampleBounds, Preset);
+			_chain = CreateChain(bounds, sampleBounds, radius, Preset);
 			_chainKey = key;
 		}
 
@@ -224,7 +232,7 @@ internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 
 	// Refraction, then blur, then saturation. Kept in one method: when SkiaSharp exposes runtime-effect
 	// image filters the whole chain collapses into one shader, and the swap stays local.
-	private static SKImageFilter CreateChain(SKRect bounds, SKRect sampleBounds, GlassPreset preset)
+	private static SKImageFilter CreateChain(SKRect bounds, SKRect sampleBounds, float radius, GlassPreset preset)
 	{
 		SKImageFilter? chain = null;
 
@@ -234,6 +242,7 @@ internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 			{
 				["origin"] = new[] { bounds.Left, bounds.Top },
 				["size"] = new[] { bounds.Width, bounds.Height },
+				["radius"] = radius,
 			};
 			using var shader = lensMap.ToShader(uniforms);
 			using var map = SKImageFilter.CreateShader(shader, false, sampleBounds);

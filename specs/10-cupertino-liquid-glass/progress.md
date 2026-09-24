@@ -825,3 +825,9 @@ Eighth round (Mac, 8× crop): a grey band with a white sliver ringed the shrunke
 sampling the knob's own drop shadow, drawn onto the canvas before the backdrop read. The shadow is now
 drawn after the glass layer (still clipped to outside the shape). Rendered on a white card like the sample
 row: white interior, inset grey track merging to the right, hairline edge, shadow outside — the iOS crop.
+
+Ninth round, against a larger iOS capture: the lens minified but did not "bend". On iOS the shift falls to
+zero over the last ~30 % before the rim, so the edge shows what lies directly beneath and the shrunken
+track flares out to meet the real one. The shader now weights the shift by 1 − smoothstep(0.7, 1, t) with
+t from the rounded-rect SDF (radius uniform back). Verified in the 4× render: flare at the right rim of the
+off knob and the left rim of the on knob.
