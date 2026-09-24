@@ -332,7 +332,9 @@ public class Given_SimpleSemanticOverrideStates
 		{
 			if (Equals(entry.Key, key))
 			{
-				return entry.Value as Style;
+				// Enumeration yields a not-yet-materialized XAML resource as its lazy initializer; resolve it
+				// through the dictionary that declares it (its own entry wins, so there is no ambient fallback).
+				return dictionary.TryGetValue(key, out var value) ? value as Style : null;
 			}
 		}
 		foreach (var merged in dictionary.MergedDictionaries)
