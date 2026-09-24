@@ -17,28 +17,28 @@ namespace Uno.Cupertino;
 /// </summary>
 internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 {
-	// A capsule lens. The sample point moves outward from the centre in proportion to its distance from it,
-	// so the glass shows the backdrop minified, strongest at the centre and easing to nothing at the tips, so
-	// what shows at the rim is what lies beneath it: a track running through the knob shows as an hourglass,
-	// narrowest in the middle and widening until it meets the real track at both caps; a track ending under
-	// the knob shows its end pushed in (iOS 26). The long-axis shift is 0.8 of the short-axis one, which with
-	// the 1 − u² ease stays monotonic along the length while the short-axis factor is at most 0.6
-	// (Refraction ≤ 24 on a 40 px knob); beyond that the mapping runs backwards and a fold reads as a hard
-	// step. A steeper ease aliases at the caps on the GPU.
-	// Encoded into R / G for SKImageFilter.CreateDisplacementMapEffect, where 0.5 is "no displacement" and
-	// the full shift along the longer axis is half the effect's scale. Evaluated in canvas coordinates,
-	// hence the origin.
+	// A capsule lens with a cubic profile: with n the position across the glass in −1…1, the sample point
+	// is taken at n (1 + K n²). Near the centre the glass is flat (a thin slider track passes through almost
+	// unchanged); towards the rim the surroundings are drawn in (a switch track that fills most of the knob
+	// shows narrowed). Across the short axis the drawing-in eases to nothing towards the tips, so what shows
+	// at the rim is what lies beneath it: a track running through a knob reads as an hourglass meeting the
+	// real track at both caps, a track ending under it shows its end pushed in (iOS 26). A cubic is monotonic
+	// for any K, so the mapping never folds. Encoded into R / G for SKImageFilter.CreateDisplacementMapEffect,
+	// where 0.5 is "no displacement" and the effect's scale is 2 K × the longer half-side. Evaluated in
+	// canvas coordinates, hence the origin.
 	private const string LensMapSksl = """
 		uniform float2 origin;
 		uniform float2 size;
 		half4 main(float2 p) {
 			float2 c = size * 0.5;
-			float2 v = p - origin - c;
+			float2 n = (p - origin - c) / c;
 			bool horizontal = c.x >= c.y;
-			float u = horizontal ? abs(v.x) / c.x : abs(v.y) / c.y;
-			float w = 1.0 - u * u;
-			float2 disp = v / max(c.x, c.y) * w;
-			if (horizontal) { disp.x *= 0.8; } else { disp.y *= 0.8; }
+			float u = horizontal ? abs(n.x) : abs(n.y);
+			// Linear ease across the length gives the full hourglass; the long-axis pull is kept small so the
+			// rim samples what lies just beyond the glass rather than far down the track.
+			float w = 1.0 - u;
+			float2 disp = n * n * n * (c / max(c.x, c.y));
+			if (horizontal) { disp.y *= w; disp.x *= 0.3; } else { disp.x *= w; disp.y *= 0.3; }
 			return half4(0.5 + 0.5 * disp.x, 0.5 + 0.5 * disp.y, 0.0, 1.0);
 		}
 		""";
@@ -270,7 +270,8 @@ internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 			};
 			using var shader = lensMap.ToShader(uniforms);
 			using var map = SKImageFilter.CreateShader(shader, false, sampleBounds);
-			chain = SKImageFilter.CreateDisplacementMapEffect(SKColorChannel.R, SKColorChannel.G, preset.Refraction, map, null, sampleBounds);
+			var scale = 2 * preset.Refraction * Math.Max(bounds.Width, bounds.Height) / 2;
+			chain = SKImageFilter.CreateDisplacementMapEffect(SKColorChannel.R, SKColorChannel.G, scale, map, null, sampleBounds);
 		}
 
 		if (preset.Sigma > 0)

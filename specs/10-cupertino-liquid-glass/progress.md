@@ -863,3 +863,10 @@ Fifteenth round (end position beside iOS): the inner track was too thin and too 
 (waist ≈ 55 %), long-axis shift 0.5 → 0.8 of the short-axis one (monotonic while the short-axis factor is
 ≤ 0.6, i.e. Refraction ≤ 24 on a 40 px knob) so the track's end is pushed further in, and the lift scale
 1.4 → 1.5 so the pressed knob overhangs the track as the iOS knob does.
+
+Sixteenth round (slider beside iOS): the linear lens narrowed the thin slider track as much as the toggle's
+fat one, and the white-anchored contrast turned the mid-grey track black. iOS leaves the slider track almost
+alone and bends it only at the rims, so the lens is now **cubic**: s = n (1 + K n²), K = `Refraction` (Clear
+1.7), effect scale 2 K × longer half-side; monotonic for any K. Linear ease 1 − u across the length for the
+hourglass, long-axis pull 0.3 so the rim samples just beyond the glass, not far down the track. Contrast
+1.6 → 1.3, Sheen 0.3 → 0.2. Refraction is 0 on the blurred materials until measured.
