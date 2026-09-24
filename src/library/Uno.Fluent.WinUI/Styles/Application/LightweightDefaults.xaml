@@ -86,18 +86,37 @@
                              Color="#9E000000" />
             <SolidColorBrush x:Key="TextButtonBackground"
                              Color="Transparent" />
-            <StaticResource x:Key="TextButtonBackgroundPointerOver" ResourceKey="ButtonBackgroundPointerOver" />
-            <StaticResource x:Key="TextButtonBackgroundPressed" ResourceKey="ButtonBackgroundPressed" />
+            <!--
+                The text button is Fluent's subtle button: SubtleFillColorSecondary / Tertiary on hover / press,
+                TextFillColorDisabled when disabled, no border (literal per branch: a StaticResource alias to a native
+                key here resolves against the appearance active at load, spec 05 spike S1 case 4).
+            -->
+            <!-- SubtleFillColorSecondary -->
+            <SolidColorBrush x:Key="TextButtonBackgroundPointerOver"
+                             Color="#09000000" />
+            <!-- SubtleFillColorTertiary -->
+            <SolidColorBrush x:Key="TextButtonBackgroundPressed"
+                             Color="#06000000" />
             <SolidColorBrush x:Key="TextButtonBorderBrush"
                              Color="Transparent" />
-            <StaticResource x:Key="TextButtonForegroundDisabled" ResourceKey="ButtonForegroundDisabled" />
-            <StaticResource x:Key="TextButtonBackgroundDisabled" ResourceKey="ButtonBackgroundDisabled" />
-            <StaticResource x:Key="TextButtonBorderBrushPointerOver" ResourceKey="ButtonBorderBrushPointerOver" />
-            <StaticResource x:Key="TextButtonBorderBrushPressed" ResourceKey="ButtonBorderBrushPressed" />
-            <StaticResource x:Key="TextButtonBorderBrushDisabled" ResourceKey="ButtonBorderBrushDisabled" />
+            <!-- TextFillColorDisabled -->
+            <SolidColorBrush x:Key="TextButtonForegroundDisabled"
+                             Color="#5C000000" />
+            <!-- SubtleFillColorDisabled -->
+            <SolidColorBrush x:Key="TextButtonBackgroundDisabled"
+                             Color="Transparent" />
+            <SolidColorBrush x:Key="TextButtonBorderBrushPointerOver"
+                             Color="Transparent" />
+            <SolidColorBrush x:Key="TextButtonBorderBrushPressed"
+                             Color="Transparent" />
+            <SolidColorBrush x:Key="TextButtonBorderBrushDisabled"
+                             Color="Transparent" />
             <!-- TextFillColorSecondary -->
             <SolidColorBrush x:Key="IconButtonForeground"
                              Color="#9E000000" />
+            <!-- TextFillColorDisabled -->
+            <SolidColorBrush x:Key="IconButtonForegroundDisabled"
+                             Color="#5C000000" />
 
             <!-- TextBox (both semantic families — one Fluent TextBox), rest state. -->
             <!-- ControlFillColorDefault -->
@@ -178,18 +197,37 @@
                              Color="#C5FFFFFF" />
             <SolidColorBrush x:Key="TextButtonBackground"
                              Color="Transparent" />
-            <StaticResource x:Key="TextButtonBackgroundPointerOver" ResourceKey="ButtonBackgroundPointerOver" />
-            <StaticResource x:Key="TextButtonBackgroundPressed" ResourceKey="ButtonBackgroundPressed" />
+            <!--
+                The text button is Fluent's subtle button: SubtleFillColorSecondary / Tertiary on hover / press,
+                TextFillColorDisabled when disabled, no border (literal per branch: a StaticResource alias to a native
+                key here resolves against the appearance active at load, spec 05 spike S1 case 4).
+            -->
+            <!-- SubtleFillColorSecondary -->
+            <SolidColorBrush x:Key="TextButtonBackgroundPointerOver"
+                             Color="#0FFFFFFF" />
+            <!-- SubtleFillColorTertiary -->
+            <SolidColorBrush x:Key="TextButtonBackgroundPressed"
+                             Color="#0AFFFFFF" />
             <SolidColorBrush x:Key="TextButtonBorderBrush"
                              Color="Transparent" />
-            <StaticResource x:Key="TextButtonForegroundDisabled" ResourceKey="ButtonForegroundDisabled" />
-            <StaticResource x:Key="TextButtonBackgroundDisabled" ResourceKey="ButtonBackgroundDisabled" />
-            <StaticResource x:Key="TextButtonBorderBrushPointerOver" ResourceKey="ButtonBorderBrushPointerOver" />
-            <StaticResource x:Key="TextButtonBorderBrushPressed" ResourceKey="ButtonBorderBrushPressed" />
-            <StaticResource x:Key="TextButtonBorderBrushDisabled" ResourceKey="ButtonBorderBrushDisabled" />
+            <!-- TextFillColorDisabled -->
+            <SolidColorBrush x:Key="TextButtonForegroundDisabled"
+                             Color="#5DFFFFFF" />
+            <!-- SubtleFillColorDisabled -->
+            <SolidColorBrush x:Key="TextButtonBackgroundDisabled"
+                             Color="Transparent" />
+            <SolidColorBrush x:Key="TextButtonBorderBrushPointerOver"
+                             Color="Transparent" />
+            <SolidColorBrush x:Key="TextButtonBorderBrushPressed"
+                             Color="Transparent" />
+            <SolidColorBrush x:Key="TextButtonBorderBrushDisabled"
+                             Color="Transparent" />
             <!-- TextFillColorSecondary -->
             <SolidColorBrush x:Key="IconButtonForeground"
                              Color="#C5FFFFFF" />
+            <!-- TextFillColorDisabled -->
+            <SolidColorBrush x:Key="IconButtonForegroundDisabled"
+                             Color="#5DFFFFFF" />
 
             <!-- ControlFillColorDefault -->
             <SolidColorBrush x:Key="FilledTextBoxBackground"

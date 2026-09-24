@@ -43,6 +43,19 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="Foreground" Value="{ThemeResource IconButtonForeground}" />
+        <!--
+            The glyph keeps IconButtonForeground through hover and press and dims with IconButtonForegroundDisabled
+            (as in Material and Simple); the fills are the text button's subtle ones.
+        -->
+        <Setter Property="fluent:FluentTextButtonResources.ForegroundPointerOver" Value="{ThemeResource IconButtonForeground}" />
+        <Setter Property="fluent:FluentTextButtonResources.ForegroundPressed" Value="{ThemeResource IconButtonForeground}" />
+        <Setter Property="fluent:FluentTextButtonResources.ForegroundDisabled" Value="{ThemeResource IconButtonForegroundDisabled}" />
+        <Setter Property="fluent:FluentTextButtonResources.BackgroundPointerOver" Value="{ThemeResource TextButtonBackgroundPointerOver}" />
+        <Setter Property="fluent:FluentTextButtonResources.BackgroundPressed" Value="{ThemeResource TextButtonBackgroundPressed}" />
+        <Setter Property="fluent:FluentTextButtonResources.BackgroundDisabled" Value="{ThemeResource TextButtonBackgroundDisabled}" />
+        <Setter Property="fluent:FluentTextButtonResources.BorderBrushPointerOver" Value="{ThemeResource TextButtonBorderBrushPointerOver}" />
+        <Setter Property="fluent:FluentTextButtonResources.BorderBrushPressed" Value="{ThemeResource TextButtonBorderBrushPressed}" />
+        <Setter Property="fluent:FluentTextButtonResources.BorderBrushDisabled" Value="{ThemeResource TextButtonBorderBrushDisabled}" />
         <Setter Property="Padding" Value="8" />
         <Setter Property="MinWidth" Value="40" />
         <Setter Property="MinHeight" Value="40" />

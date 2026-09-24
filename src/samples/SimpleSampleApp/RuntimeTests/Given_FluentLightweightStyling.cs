@@ -197,6 +197,104 @@ public class Given_FluentLightweightStyling
 		}
 	}
 
+	// The icon button keeps its semantic foreground through hover and press (IconButtonForeground) and dims with
+	// IconButtonForegroundDisabled, as Material and Simple do; it had set only the rest color, so the built-in
+	// template swapped in the standard button's state foregrounds and a brand color turned neutral on hover.
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow(ElementTheme.Light, "PointerOver")]
+	[DataRow(ElementTheme.Dark, "PointerOver")]
+	[DataRow(ElementTheme.Light, "Pressed")]
+	[DataRow(ElementTheme.Dark, "Pressed")]
+	[DataRow(ElementTheme.Light, "Disabled")]
+	[DataRow(ElementTheme.Dark, "Disabled")]
+	public async Task When_IconButtonStateRendered_ItsForegroundFollowsTheSemanticKeys(ElementTheme appearance, string state)
+	{
+		var theme = new FluentTheme
+		{
+			Colors = new ThemeColors
+			{
+				OverrideDictionary = new ResourceDictionary
+				{
+					["IconButtonForeground"] = new SolidColorBrush(Colors.Magenta),
+					["IconButtonForegroundDisabled"] = new SolidColorBrush(Colors.Lime),
+				},
+			},
+		};
+		var appDictionaries = Application.Current.Resources.MergedDictionaries;
+		appDictionaries.Add(theme);
+		try
+		{
+			var host = new StackPanel { RequestedTheme = appearance };
+			var button = new Button { Content = new SymbolIcon(Symbol.Favorite), Style = (Style)theme["IconButtonStyle"] };
+			host.Children.Add(button);
+			UnitTestsUIContentHelper.Content = host;
+			await UnitTestsUIContentHelper.WaitForLoaded(button);
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			Assert.IsTrue(VisualStateManager.GoToState(button, state, false), $"Icon button must support {state}.");
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			var expected = state == "Disabled" ? Colors.Lime : Colors.Magenta;
+			Assert.AreEqual(expected, ((SolidColorBrush)FindButtonPresenter(button).Foreground).Color, $"{state} foreground");
+		}
+		finally
+		{
+			UnitTestsUIContentHelper.Content = null;
+			appDictionaries.Remove(theme);
+		}
+	}
+
+	// The text button is Fluent's subtle button: transparent at rest, SubtleFillColorSecondary / Tertiary on hover /
+	// press, TextFillColorDisabled when disabled, no border. The defaults aliased the *standard* button's keys inside
+	// the theme branches, which Uno resolves against the appearance active at load (spec 05 spike S1 case 4), so the
+	// Light branch held Dark values (or the reverse) and the hover fill was the standard button's.
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow("Light", "TextButtonBackgroundPointerOver", "#09000000")]
+	[DataRow("Light", "TextButtonBackgroundPressed", "#06000000")]
+	[DataRow("Light", "TextButtonBackgroundDisabled", "#00FFFFFF")]
+	[DataRow("Light", "TextButtonForegroundDisabled", "#5C000000")]
+	[DataRow("Light", "TextButtonBorderBrushPointerOver", "#00FFFFFF")]
+	[DataRow("Light", "TextButtonBorderBrushPressed", "#00FFFFFF")]
+	[DataRow("Light", "TextButtonBorderBrushDisabled", "#00FFFFFF")]
+	[DataRow("Default", "TextButtonBackgroundPointerOver", "#0FFFFFFF")]
+	[DataRow("Default", "TextButtonBackgroundPressed", "#0AFFFFFF")]
+	[DataRow("Default", "TextButtonBackgroundDisabled", "#00FFFFFF")]
+	[DataRow("Default", "TextButtonForegroundDisabled", "#5DFFFFFF")]
+	[DataRow("Default", "TextButtonBorderBrushPointerOver", "#00FFFFFF")]
+	[DataRow("Default", "TextButtonBorderBrushPressed", "#00FFFFFF")]
+	[DataRow("Default", "TextButtonBorderBrushDisabled", "#00FFFFFF")]
+	public void When_TextButtonStateDefaultsResolve_EachBranchHoldsItsSubtleValue(string branch, string key, string expected)
+	{
+		var theme = new FluentTheme();
+		var container = new Grid();
+		container.Resources.MergedDictionaries.Add(theme);
+
+		var brush = Assert.IsInstanceOfType<SolidColorBrush>(FindBranchResource(theme, branch, key), $"[{branch}] {key}");
+		Assert.AreEqual(expected, brush.Color.ToString(), $"[{branch}] {key}");
+	}
+
+	private static object? FindBranchResource(ResourceDictionary dictionary, string branch, string key)
+	{
+		if (dictionary.ThemeDictionaries.TryGetValue(branch, out var themed)
+			&& themed is ResourceDictionary scoped
+			&& scoped.TryGetValue(key, out var value))
+		{
+			return value;
+		}
+
+		for (var i = dictionary.MergedDictionaries.Count - 1; i >= 0; i--)
+		{
+			if (FindBranchResource(dictionary.MergedDictionaries[i], branch, key) is { } nested)
+			{
+				return nested;
+			}
+		}
+
+		return null;
+	}
+
 	private static ContentPresenter FindButtonPresenter(DependencyObject parent)
 	{
 		for (var i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
@@ -323,6 +421,7 @@ public class Given_FluentLightweightStyling
 	[DataRow("TextButtonBackground")]
 	[DataRow("TextButtonBorderBrush")]
 	[DataRow("IconButtonForeground")]
+	[DataRow("IconButtonForegroundDisabled")]
 	public void When_SemanticButtonKey_ResolvesAsBrush(string key)
 	{
 		var container = CreateThemedContainer();
@@ -335,6 +434,10 @@ public class Given_FluentLightweightStyling
 	[DataRow("TextButtonForeground", "TextFillColorPrimary")]
 	[DataRow("TextButtonForegroundPressed", "TextFillColorSecondary")]
 	[DataRow("IconButtonForeground", "TextFillColorSecondary")]
+	[DataRow("IconButtonForegroundDisabled", "TextFillColorDisabled")]
+	[DataRow("TextButtonBackgroundPointerOver", "SubtleFillColorSecondary")]
+	[DataRow("TextButtonBackgroundPressed", "SubtleFillColorTertiary")]
+	[DataRow("TextButtonForegroundDisabled", "TextFillColorDisabled")]
 	[DataRow("OutlinedButtonBorderBrush", "ControlStrongStrokeColorDefault")]
 	[DataRow("OutlinedButtonBackground", "ControlFillColorDefault")]
 	[DataRow("FilledTextBoxBackground", "ControlFillColorDefault")]
@@ -635,6 +738,16 @@ public class Given_FluentLightweightStyling
 	[TestMethod]
 	[RunsOnUIThread]
 	[DataRow("CheckBoxGlyphForegroundChecked", "CheckBoxCheckGlyphForegroundChecked")]
+	[DataRow("CheckBoxGlyphForegroundUncheckedPointerOver", "CheckBoxCheckGlyphForegroundUncheckedPointerOver")]
+	[DataRow("CheckBoxGlyphForegroundUncheckedPressed", "CheckBoxCheckGlyphForegroundUncheckedPressed")]
+	[DataRow("CheckBoxGlyphForegroundUncheckedDisabled", "CheckBoxCheckGlyphForegroundUncheckedDisabled")]
+	[DataRow("CheckBoxGlyphForegroundCheckedPointerOver", "CheckBoxCheckGlyphForegroundCheckedPointerOver")]
+	[DataRow("CheckBoxGlyphForegroundCheckedPressed", "CheckBoxCheckGlyphForegroundCheckedPressed")]
+	[DataRow("CheckBoxGlyphForegroundCheckedDisabled", "CheckBoxCheckGlyphForegroundCheckedDisabled")]
+	[DataRow("CheckBoxGlyphForegroundIndeterminate", "CheckBoxCheckGlyphForegroundIndeterminate")]
+	[DataRow("CheckBoxGlyphForegroundIndeterminatePointerOver", "CheckBoxCheckGlyphForegroundIndeterminatePointerOver")]
+	[DataRow("CheckBoxGlyphForegroundIndeterminatePressed", "CheckBoxCheckGlyphForegroundIndeterminatePressed")]
+	[DataRow("CheckBoxGlyphForegroundIndeterminateDisabled", "CheckBoxCheckGlyphForegroundIndeterminateDisabled")]
 	[DataRow("ToggleSwitchKnobOnFill", "ToggleSwitchKnobFillOn")]
 	[DataRow("ToggleSwitchOffOuterBorderFill", "ToggleSwitchFillOff")]
 	public void When_DivergentKeyOverridden_FluentPerControlKeyFollows(string semanticKey, string fluentKey)

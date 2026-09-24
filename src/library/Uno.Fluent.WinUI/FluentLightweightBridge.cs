@@ -150,7 +150,17 @@ internal static class FluentLightweightBridge
 		// CheckBox — every other documented CheckBox key name matches WinUI's
 		// natively (no bridging needed); only the glyph family diverges.
 		("CheckBoxGlyphForegroundUnchecked", "CheckBoxCheckGlyphForegroundUnchecked"),
+		("CheckBoxGlyphForegroundUncheckedPointerOver", "CheckBoxCheckGlyphForegroundUncheckedPointerOver"),
+		("CheckBoxGlyphForegroundUncheckedPressed", "CheckBoxCheckGlyphForegroundUncheckedPressed"),
+		("CheckBoxGlyphForegroundUncheckedDisabled", "CheckBoxCheckGlyphForegroundUncheckedDisabled"),
 		("CheckBoxGlyphForegroundChecked", "CheckBoxCheckGlyphForegroundChecked"),
+		("CheckBoxGlyphForegroundCheckedPointerOver", "CheckBoxCheckGlyphForegroundCheckedPointerOver"),
+		("CheckBoxGlyphForegroundCheckedPressed", "CheckBoxCheckGlyphForegroundCheckedPressed"),
+		("CheckBoxGlyphForegroundCheckedDisabled", "CheckBoxCheckGlyphForegroundCheckedDisabled"),
+		("CheckBoxGlyphForegroundIndeterminate", "CheckBoxCheckGlyphForegroundIndeterminate"),
+		("CheckBoxGlyphForegroundIndeterminatePointerOver", "CheckBoxCheckGlyphForegroundIndeterminatePointerOver"),
+		("CheckBoxGlyphForegroundIndeterminatePressed", "CheckBoxCheckGlyphForegroundIndeterminatePressed"),
+		("CheckBoxGlyphForegroundIndeterminateDisabled", "CheckBoxCheckGlyphForegroundIndeterminateDisabled"),
 
 		// ToggleSwitch — Material's key names diverge from WinUI's.
 		// The unprefixed OuterBorder* family is the ON state.
@@ -192,6 +202,7 @@ internal static class FluentLightweightBridge
 		"TextButtonBorderBrushPressed",
 		"TextButtonBorderBrushDisabled",
 		"IconButtonForeground",
+		"IconButtonForegroundDisabled",
 	};
 
 	/// <summary>
