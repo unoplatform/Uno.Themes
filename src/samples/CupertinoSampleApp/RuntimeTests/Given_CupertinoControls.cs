@@ -82,8 +82,8 @@ public class Given_CupertinoControls
 	[DataRow("TextButtonStyle", "PrimaryBrush", null)]
 	[DataRow("FilledButtonStyle", "OnPrimaryBrush", "PrimaryBrush")]
 	[DataRow("FilledTonalButtonStyle", "PrimaryBrush", "PrimaryContainerBrush")]
-	[DataRow("OutlinedButtonStyle", "PrimaryBrush", "SecondaryContainerBrush")]
-	[DataRow("ElevatedButtonStyle", "PrimaryBrush", "SecondaryContainerBrush")]
+	[DataRow("OutlinedButtonStyle", "PrimaryBrush", "CupertinoTertiarySystemFillBrush")]
+	[DataRow("ElevatedButtonStyle", "PrimaryBrush", "CupertinoTertiarySystemFillBrush")]
 	[DataRow("CupertinoDestructiveButtonStyle", "ErrorBrush", null)]
 	[DataRow("CupertinoButtonStyle", "PrimaryBrush", null)]
 	[DataRow("CupertinoContainedButtonStyle", "OnPrimaryBrush", "PrimaryBrush")]
@@ -204,7 +204,7 @@ public class Given_CupertinoControls
 			var container = CreateThemedContainer();
 			var toggle = await Load(container, new ToggleButton { Content = "Toggle" }, styleKey);
 			var root = FindDescendant<Grid>(toggle, "Root") ?? throw new AssertFailedException("template root missing");
-			Assert.AreSame(Resource<Brush>(container, "SecondaryContainerBrush"), root.Background, "unchecked");
+			Assert.AreSame(Resource<Brush>(container, "CupertinoTertiarySystemFillBrush"), root.Background, "unchecked");
 
 			toggle.IsChecked = true;
 			await UnitTestsUIContentHelper.WaitForIdle();
@@ -218,7 +218,7 @@ public class Given_CupertinoControls
 			toggle.IsChecked = false;
 			await UnitTestsUIContentHelper.WaitForIdle();
 
-			Assert.AreSame(Resource<Brush>(container, "SecondaryContainerBrush"), root.Background, "unchecked again");
+			Assert.AreSame(Resource<Brush>(container, "CupertinoTertiarySystemFillBrush"), root.Background, "unchecked again");
 		}
 		finally
 		{
@@ -254,7 +254,7 @@ public class Given_CupertinoControls
 		try
 		{
 			var container = CreateThemedContainer();
-			var fill = Resource<Brush>(container, "SecondaryContainerBrush");
+			var fill = Resource<Brush>(container, "CupertinoTertiarySystemFillBrush");
 
 			var text = await Load(container, new TextBox(), "FilledTextBoxStyle");
 			var password = await Load(container, new PasswordBox(), "FilledPasswordBoxStyle");

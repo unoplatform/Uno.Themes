@@ -538,6 +538,30 @@ public class Given_CupertinoHigReview
 		Assert.AreEqual((byte)alpha, ThemedColor(theme, key).A, $"{key}: {ThemedColor(theme, key)}");
 	}
 
+	// Gray buttons, filled fields, text toggles and top-navigation highlights use tertiarySystemFill, a
+	// translucent gray that reads on any surface. An opaque gray pre-composited over black (#1C1C1F) vanished
+	// on a dark inset group (#1C1C1E).
+	[TestMethod]
+	[DataRow("OutlinedButtonBackground")]
+	[DataRow("TextToggleButtonBackground")]
+	[DataRow("FilledTextBoxBackground")]
+	[DataRow("FilledPasswordBoxBackground")]
+	[DataRow("TopNavigationViewItemBackgroundPointerOver")]
+	[DataRow("TopNavigationViewItemBackgroundPressed")]
+	[RunsOnUIThread]
+	public void When_GrayFillSitsOnADarkGroup_Then_ItStaysVisible(string key)
+	{
+		var fill = ThemedColor(ElementTheme.Dark, key);
+		var surface = ThemedColor(ElementTheme.Dark, "SurfaceBrush");
+		double Over(byte f, byte s) => (fill.A * f + (255 - fill.A) * s) / 255d;
+		double LumaOf(double r, double g, double b) => 0.2126 * r + 0.7152 * g + 0.0722 * b;
+
+		var shown = LumaOf(Over(fill.R, surface.R), Over(fill.G, surface.G), Over(fill.B, surface.B));
+		var ground = LumaOf(surface.R, surface.G, surface.B);
+
+		Assert.IsTrue(shown - ground >= 12, $"{key} ({fill}) over the group surface ({surface}) lifts luma by only {shown - ground:0.0}");
+	}
+
 	// An iOS stepper field: the header sits above a 44 pt frame, as for every other field; the header had
 	// been drawn inside an outlined box that grew to 62 pt around 48 pt spin buttons.
 	[TestMethod]

@@ -93,7 +93,7 @@ Each variant reads two brushes. There are no per-state keys: the states dim the 
 | `TextButtonForeground` / `TextButtonBackground` | `PrimaryBrush` / transparent |
 | `FilledButtonForeground` / `FilledButtonBackground` | `OnPrimaryBrush` / `PrimaryBrush` |
 | `FilledTonalButtonForeground` / `FilledTonalButtonBackground` | `PrimaryBrush` / `PrimaryContainerBrush` |
-| `OutlinedButtonForeground` / `OutlinedButtonBackground` | `PrimaryBrush` / `SecondaryContainerBrush` |
+| `OutlinedButtonForeground` / `OutlinedButtonBackground` | `PrimaryBrush` / `CupertinoTertiarySystemFillBrush` |
 | `IconButtonForeground` / `IconButtonBackground` | `PrimaryBrush` / transparent |
 | `CupertinoDestructiveButtonForeground` / `CupertinoDestructiveButtonBackground` | `ErrorBrush` / transparent |
 | `CupertinoGlassButtonForeground` / `CupertinoGlassButtonBackground` | `OnSurfaceBrush` / transparent (the background of a glass button is its tint) |
@@ -115,7 +115,7 @@ Each variant reads two brushes. There are no per-state keys: the states dim the 
 
 | Key | Default |
 | --- | ------- |
-| `TextToggleButtonForeground` / `TextToggleButtonBackground` | `OnSurfaceBrush` / `SecondaryContainerBrush` |
+| `TextToggleButtonForeground` / `TextToggleButtonBackground` | `OnSurfaceBrush` / `CupertinoTertiarySystemFillBrush` |
 | `TextToggleButtonForegroundChecked` / `TextToggleButtonBackgroundChecked` | `PrimaryBrush` / `PrimaryContainerBrush` |
 | `HyperlinkButtonForeground` | `PrimaryBrush` |
 | `SecondaryHyperlinkButtonForeground` | `OnSurfaceVariantBrush` |
@@ -130,7 +130,7 @@ The thumbs are solid at rest, sitting on a soft `ThemeShadow` (`Translation.Z` 1
 
 `CupertinoTextBoxStyle` and `CupertinoPasswordBoxStyle` keep `Header` and `HeaderTemplate` above the input, so the label remains visible after typing. They use 17 pixel body text, a 44 pixel minimum input row and 10 pixel field corners. The text field's trailing clear button keeps its small glyph inside a 44 by 44 target, following the trailing clear affordance in Apple's [Text fields](https://developer.apple.com/design/human-interface-guidelines/text-fields) guidance.
 
-`FilledTextBoxStyle` and `FilledPasswordBoxStyle` use the same input behavior on a gray fill without a border. `OutlinedTextBoxStyle` and `OutlinedPasswordBoxStyle` retain the bordered variants. These are text-entry surfaces; they remain solid.
+`FilledTextBoxStyle` and `FilledPasswordBoxStyle` use the same input behavior on a gray fill without a border. The gray buttons, text toggles and filled fields share `CupertinoTertiarySystemFillBrush`, a translucent fill that stays visible on the grouped background and on inset group surfaces in both appearances. `OutlinedTextBoxStyle` and `OutlinedPasswordBoxStyle` retain the bordered variants. These are text-entry surfaces; they remain solid.
 
 `CupertinoNumberBoxStyle` places its header above a 44 pixel frame that pairs the editable value with a horizontal minus/plus stepper, like every other field. Each stepper button is 44 by 44, the value uses 17 pixel text, and the header uses 13 pixel text. This follows the value-and-stepper relationship in Apple's [Steppers](https://developer.apple.com/design/human-interface-guidelines/steppers) guidance while retaining Uno's numeric formatting and increment behavior.
 
@@ -217,7 +217,7 @@ The thumbs are solid at rest, sitting on a soft `ThemeShadow` (`Translation.Z` 1
 
 ## Navigation and command bars
 
-`NavigationViewStyle` places `Regular` glass behind the pane and top navigation while retaining Uno's navigation behavior. The content area has no card stroke or rounded corner, and `Header` renders as the 34 pixel bold large title in a 44 pixel bar (`CupertinoNavigationViewHeaderStyle`). Navigation and command-bar glass use the live `CupertinoBarTintBrush`, which follows `SurfaceColor` at 35% opacity and repaints when the color override changes. `NavigationViewItemStyle` uses 44 pixel minimum rows and 10 pixel corners. Sidebar icons use `PrimaryBrush`. Selection uses a rounded `PrimarySelectedBrush` row with `PrimaryBrush` text; the separate WinUI selection line is transparent. Hover and pressed backgrounds use `SecondaryContainerBrush`. Both left and top navigation are supported.
+`NavigationViewStyle` places `Regular` glass behind the pane and top navigation while retaining Uno's navigation behavior. The content area has no card stroke or rounded corner, and `Header` renders as the 34 pixel bold large title in a 44 pixel bar (`CupertinoNavigationViewHeaderStyle`). Navigation and command-bar glass use the live `CupertinoBarTintBrush`, which follows `SurfaceColor` at 35% opacity and repaints when the color override changes. `NavigationViewItemStyle` uses 44 pixel minimum rows and 10 pixel corners, with labels in the body type slot (`BodyLarge*`); the pane title uses the headline slot (`TitleMedium*`). Sidebar icons use `PrimaryBrush`. Selection uses a rounded `PrimarySelectedBrush` row with `PrimaryBrush` text; the separate WinUI selection line is transparent. Hover and pressed backgrounds use `CupertinoQuaternarySystemFillBrush` and `CupertinoSystemFillBrush`, on the left and top panes alike. Both left and top navigation are supported.
 
 For a visible blurred backdrop, compose your page background or content beneath the navigation glass. Uno's `SplitView` does not synthesize the native iPadOS background extension; a uniform surface behind the pane produces a uniform glass result.
 

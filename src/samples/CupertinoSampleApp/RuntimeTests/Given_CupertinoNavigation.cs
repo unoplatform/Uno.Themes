@@ -138,6 +138,50 @@ public class Given_CupertinoNavigation
 		}
 	}
 
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_SidebarRealized_Then_TextUsesTheTypeSlots()
+	{
+		var container = new Grid { Width = 800, Height = 500 };
+		container.Resources.MergedDictionaries.Add(new CupertinoTheme());
+		var item = new NavigationViewItem { Content = "Library", Icon = new SymbolIcon(Symbol.Library), Style = Resource<Style>(container, "NavigationViewItemStyle") };
+		var navigation = new NavigationView
+		{
+			Style = Resource<Style>(container, "NavigationViewStyle"),
+			PaneDisplayMode = NavigationViewPaneDisplayMode.Left,
+			PaneTitle = "Library",
+			IsPaneOpen = true,
+			IsSettingsVisible = false,
+			IsBackButtonVisible = NavigationViewBackButtonVisible.Collapsed,
+		};
+		navigation.MenuItems.Add(item);
+		container.Children.Add(navigation);
+
+		try
+		{
+			UnitTestsUIContentHelper.Content = container;
+			await UnitTestsUIContentHelper.WaitForLoaded(navigation);
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			// iPadOS sidebar rows are Body; without it they fall back to the framework font at 14 px.
+			var label = FindDescendant<ContentPresenter>(item, "ContentPresenter");
+			Assert.IsNotNull(label);
+			Assert.AreEqual(Resource<FontFamily>(container, "BodyLargeFontFamily").Source, label.FontFamily.Source);
+			Assert.AreEqual(Resource<double>(container, "BodyLargeFontSize"), label.FontSize);
+
+			// The pane title reads as an inline navigation-bar title: Headline, 17 pt semibold.
+			var title = FindDescendant<TextBlock>(navigation, "PaneTitleTextBlock");
+			Assert.IsNotNull(title);
+			Assert.AreEqual(Resource<FontFamily>(container, "TitleMediumFontFamily").Source, title.FontFamily.Source);
+			Assert.AreEqual(Resource<double>(container, "TitleMediumFontSize"), title.FontSize);
+			Assert.AreEqual(Microsoft.UI.Text.FontWeights.SemiBold.Weight, title.FontWeight.Weight);
+		}
+		finally
+		{
+			UnitTestsUIContentHelper.Content = null;
+		}
+	}
+
 	private static void AssertSelected(ElementTheme theme, NavigationViewItem item)
 	{
 		var presenter = FindDescendant<NavigationViewItemPresenter>(item, "NavigationViewItemPresenter");

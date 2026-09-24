@@ -76,8 +76,8 @@
 			<StaticResource x:Key="TopNavigationViewItemForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 			<StaticResource x:Key="TopNavigationViewItemForegroundSelectedPointerOver" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="TopNavigationViewItemForegroundSelectedPressed" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="TopNavigationViewItemBackgroundPointerOver" ResourceKey="SecondaryContainerBrush" />
-			<StaticResource x:Key="TopNavigationViewItemBackgroundPressed" ResourceKey="SecondaryContainerBrush" />
+			<StaticResource x:Key="TopNavigationViewItemBackgroundPointerOver" ResourceKey="CupertinoQuaternarySystemFillBrush" />
+			<StaticResource x:Key="TopNavigationViewItemBackgroundPressed" ResourceKey="CupertinoSystemFillBrush" />
 			<StaticResource x:Key="TopNavigationViewItemBackgroundSelected" ResourceKey="PrimarySelectedBrush" />
 			<StaticResource x:Key="TopNavigationViewItemBackgroundSelectedPointerOver" ResourceKey="PrimarySelectedBrush" />
 			<StaticResource x:Key="TopNavigationViewItemBackgroundSelectedPressed" ResourceKey="PrimarySelectedBrush" />
@@ -145,8 +145,8 @@
 
 			<StaticResource x:Key="TopNavigationViewItemForegroundSelectedPointerOver" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="TopNavigationViewItemForegroundSelectedPressed" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="TopNavigationViewItemBackgroundPointerOver" ResourceKey="SecondaryContainerBrush" />
-			<StaticResource x:Key="TopNavigationViewItemBackgroundPressed" ResourceKey="SecondaryContainerBrush" />
+			<StaticResource x:Key="TopNavigationViewItemBackgroundPointerOver" ResourceKey="CupertinoQuaternarySystemFillBrush" />
+			<StaticResource x:Key="TopNavigationViewItemBackgroundPressed" ResourceKey="CupertinoSystemFillBrush" />
 			<StaticResource x:Key="TopNavigationViewItemBackgroundSelected" ResourceKey="PrimarySelectedBrush" />
 			<StaticResource x:Key="TopNavigationViewItemBackgroundSelectedPointerOver" ResourceKey="PrimarySelectedBrush" />
 			<StaticResource x:Key="TopNavigationViewItemBackgroundSelectedPressed" ResourceKey="PrimarySelectedBrush" />
@@ -783,7 +783,10 @@
 											   Text="{TemplateBinding PaneTitle}"
 											   HorizontalAlignment="Left"
 											   VerticalAlignment="Center"
-											   Style="{StaticResource NavigationViewItemHeaderTextStyle}" />
+											   Style="{StaticResource NavigationViewItemHeaderTextStyle}"
+											   FontFamily="{ThemeResource TitleMediumFontFamily}"
+											   FontSize="{ThemeResource TitleMediumFontSize}"
+											   FontWeight="{ThemeResource TitleMediumFontWeight}" />
 								</Button>
 								<Grid x:Name="PaneTitleHolder"
 									  Height="40"
@@ -801,9 +804,13 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
+	<!-- Sidebar rows are Body, as iPadOS lists are; without these the label falls back to the framework font. -->
 	<Style x:Key="CupertinoNavigationViewItemStyle"
 		   TargetType="muxc:NavigationViewItem">
 		<Setter Property="Foreground" Value="{ThemeResource NavigationViewItemForeground}" />
+		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyLargeFontWeight}" />
 		<Setter Property="CornerRadius" Value="{ThemeResource CupertinoNavigationViewItemCornerRadius}" />
 		<Setter Property="MinHeight" Value="{ThemeResource CupertinoRowMinHeight}" />
 		<Setter Property="Template">
