@@ -853,3 +853,8 @@ Thirteenth round (mid-track and end-position crops beside iOS): geometry matched
 narrower (~45 %) and flares later, and its body is shaded. Ease 1 − u² → 1 − u³ with the long-axis shift at
 0.3 (monotonic with Refraction 36, ×0.53 at the centre); new `Sheen` preset (Clear 1): a vertical gradient
 inside the shape, white up to 0.4 α above the middle, black up to 0.16 α below it.
+
+Fourteenth round: full-strength sheen with hard stops read as chrome on the Mac, and the 1 − u³ ease aliased
+at the caps on the GPU. Back to 1 − u² with the long-axis shift at 0.5 and Refraction 32; Sheen 0.3 with
+soft, flat stops (white 0.09 α above the middle, black 0.04 α below). Lesson: a shading guess needs a GPU
+look before it is pushed; software renders understate how much a gradient reads.
