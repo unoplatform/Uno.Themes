@@ -3,6 +3,7 @@
 [SamplePage(
 	SampleCategory.Controls,
 	"Navigation View (WUX)",
+	IconPath = Icons.Controls.NavigationView,
 	Description = "This control is used for application navigation from a menu.",
 	DocumentationLink = "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/navigationview",
 	SupportedDesigns = new[] { Design.Material })]

@@ -240,51 +240,59 @@
 			</sample:SamplePageLayout.M3MaterialTemplate>
 			<sample:SamplePageLayout.CupertinoTemplate>
 				<DataTemplate>
+					<!-- iOS settings rows: the label leads, the switch trails. -->
 					<StackPanel>
-
-						<!-- Primary -->
-						<TextBlock Margin="12,16,12,20"
-								   Style="{StaticResource CupertinoTertiaryTitle}"
-								   Text="ToggleSwitch" />
-
-						<!-- ToggleSwitch No Label -->
-						<smtx:XamlDisplay Margin="12,0"
-										  UniqueKey="Cupertino_ToggleSwitchSamplePage_NoLabel">
-							<ToggleSwitch Style="{StaticResource CupertinoToggleSwitchStyle}" />
+						<smtx:XamlDisplay UniqueKey="Cupertino_ToggleSwitchSamplePage_Off"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Grid ColumnDefinitions="*,Auto">
+								<TextBlock Text="Off"
+										   VerticalAlignment="Center"
+										   Style="{StaticResource BodyLarge}" />
+								<ToggleSwitch Grid.Column="1"
+											  OnContent=""
+											  OffContent=""
+											  AutomationProperties.Name="Off" />
+							</Grid>
 						</smtx:XamlDisplay>
-
-						<!-- ToggleSwitch OFF -->
-						<smtx:XamlDisplay Margin="12,0"
-										  UniqueKey="Cupertino_ToggleSwitchSamplePage_Off">
-							<ToggleSwitch Header="OFF"
-										  IsOn="False"
-										  Style="{StaticResource CupertinoToggleSwitchStyle}" />
+						<smtx:XamlDisplay UniqueKey="Cupertino_ToggleSwitchSamplePage_On"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Grid ColumnDefinitions="*,Auto">
+								<TextBlock Text="On"
+										   VerticalAlignment="Center"
+										   Style="{StaticResource BodyLarge}" />
+								<ToggleSwitch Grid.Column="1"
+											  OnContent=""
+											  OffContent=""
+											  IsOn="True"
+											  AutomationProperties.Name="On" />
+							</Grid>
 						</smtx:XamlDisplay>
-
-						<!-- ToggleSwitch ON -->
-						<smtx:XamlDisplay Margin="12,0"
-										  UniqueKey="Cupertino_ToggleSwitchSamplePage_On">
-							<ToggleSwitch Header="ON"
-										  IsOn="True"
-										  Style="{StaticResource CupertinoToggleSwitchStyle}" />
+						<smtx:XamlDisplay UniqueKey="Cupertino_ToggleSwitchSamplePage_OffDisabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Grid ColumnDefinitions="*,Auto">
+								<TextBlock Text="Off, disabled"
+										   VerticalAlignment="Center"
+										   Style="{StaticResource BodyLarge}" />
+								<ToggleSwitch Grid.Column="1"
+											  OnContent=""
+											  OffContent=""
+											  IsEnabled="False"
+											  AutomationProperties.Name="Off, disabled" />
+							</Grid>
 						</smtx:XamlDisplay>
-
-						<!-- ToggleSwitch OFF Disabled -->
-						<smtx:XamlDisplay Margin="12,0"
-										  UniqueKey="Cupertino_ToggleSwitchSamplePage_OffDisabled">
-							<ToggleSwitch Header="OFF DISABLED"
-										  IsEnabled="False"
-										  IsOn="False"
-										  Style="{StaticResource CupertinoToggleSwitchStyle}" />
-						</smtx:XamlDisplay>
-
-						<!-- ToggleSwitch ON Disabled -->
-						<smtx:XamlDisplay Margin="12,0"
-										  UniqueKey="Cupertino_ToggleSwitchSamplePage_OnDisabled">
-							<ToggleSwitch Header="ON DISABLED"
-										  IsEnabled="False"
-										  IsOn="True"
-										  Style="{StaticResource CupertinoToggleSwitchStyle}" />
+						<smtx:XamlDisplay UniqueKey="Cupertino_ToggleSwitchSamplePage_OnDisabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Grid ColumnDefinitions="*,Auto">
+								<TextBlock Text="On, disabled"
+										   VerticalAlignment="Center"
+										   Style="{StaticResource BodyLarge}" />
+								<ToggleSwitch Grid.Column="1"
+											  OnContent=""
+											  OffContent=""
+											  IsEnabled="False"
+											  IsOn="True"
+											  AutomationProperties.Name="On, disabled" />
+							</Grid>
 						</smtx:XamlDisplay>
 					</StackPanel>
 				</DataTemplate>

@@ -3,6 +3,7 @@ namespace Uno.Themes.Samples.Content;
 [SamplePage(
 	SampleCategory.Styles,
 	"Cupertino Gallery",
+	IconPath = Icons.Styles.Gallery,
 	Description = "Everyday iOS and iPadOS controls in context, including settings, forms, actions and navigation.",
 	SortOrder = 0,
 	SupportedDesigns = new[] { Design.Cupertino })]

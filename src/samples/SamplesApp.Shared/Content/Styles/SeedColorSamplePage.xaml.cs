@@ -6,7 +6,7 @@ namespace Uno.Themes.Samples.Content.Styles;
 [SamplePage(
 	SampleCategory.Styles,
 	"Seed Color",
-	IconPath = Icons.Styles.Colors,
+	IconPath = Icons.Styles.SeedColor,
 	Description = "Generate a full color palette from a single seed color using the HCT color space.",
 	SupportedDesigns = new[] { Design.Material, Design.Simple })]
 public sealed partial class SeedColorSamplePage : Page

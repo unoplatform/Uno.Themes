@@ -1,6 +1,6 @@
 namespace Uno.Themes.Samples.Content.Controls;
 
-[SamplePage(SampleCategory.Controls, "AutoSuggestBox", Description = "A text control that makes suggestions to users as they type, useful for search scenarios.", DocumentationLink = "https://learn.microsoft.com/en-us/windows/apps/design/controls/auto-suggest-box", SupportedDesigns = new[] { Design.Simple })]
+[SamplePage(SampleCategory.Controls, "AutoSuggestBox", IconPath = Icons.Controls.AutoSuggestBox, Description = "A text control that makes suggestions to users as they type, useful for search scenarios.", DocumentationLink = "https://learn.microsoft.com/en-us/windows/apps/design/controls/auto-suggest-box", SupportedDesigns = new[] { Design.Simple })]
 public sealed partial class AutoSuggestBoxSamplePage : Page
 {
 	private readonly string[] _fruits = new[]

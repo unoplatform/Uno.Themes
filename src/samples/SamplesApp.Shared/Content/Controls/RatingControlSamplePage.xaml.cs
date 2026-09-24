@@ -1,6 +1,6 @@
 ﻿namespace Uno.Themes.Samples.Content.Controls;
 
-[SamplePage(SampleCategory.Controls, "RatingControl", Description = "This control allows a user to enter a star rating.", DocumentationLink = "https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.ratingcontrol", SupportedDesigns = new[] { Design.Material, Design.Simple, Design.Cupertino })]
+[SamplePage(SampleCategory.Controls, "RatingControl", IconPath = Icons.Controls.RatingControl, Description = "This control allows a user to enter a star rating.", DocumentationLink = "https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.ratingcontrol", SupportedDesigns = new[] { Design.Material, Design.Simple, Design.Cupertino })]
 public sealed partial class RatingControlSamplePage : Page
 {
 	public RatingControlSamplePage()

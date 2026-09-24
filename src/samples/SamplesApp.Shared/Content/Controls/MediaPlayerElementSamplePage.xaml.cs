@@ -3,7 +3,7 @@ using Uno.Themes.Samples.Content.NestedSamples;
 
 namespace Uno.Themes.Samples.Content.Controls;
 
-[SamplePage(SampleCategory.Controls, "MediaPlayerElement", Description = "Represents an object that uses a MediaPlayer to render audio and video to the display.", DocumentationLink = "https://learn.microsoft.com/en-us/uwp/api/controls.mediaplayerelement", SupportedDesigns = new[] { Design.Material })]
+[SamplePage(SampleCategory.Controls, "MediaPlayerElement", IconPath = Icons.Controls.MediaPlayerElement, Description = "Represents an object that uses a MediaPlayer to render audio and video to the display.", DocumentationLink = "https://learn.microsoft.com/en-us/uwp/api/controls.mediaplayerelement", SupportedDesigns = new[] { Design.Material })]
 public sealed partial class MediaPlayerElementSamplePage : Page
     {
         public MediaPlayerElementSamplePage()

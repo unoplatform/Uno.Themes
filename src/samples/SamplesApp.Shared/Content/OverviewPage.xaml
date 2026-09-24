@@ -249,78 +249,95 @@
 
 					<!-- Button -->
 					<sample:OverviewSampleView SamplePageType="samples:ButtonSamplePage">
-						<StackPanel Spacing="8">
-
-							<Button AutomationProperties.AutomationId="CupertinoDefaultButton"
-									Content="DEFAULT"
-									Style="{StaticResource CupertinoButtonStyle}" />
-
-							<Button AutomationProperties.AutomationId="CupertinoContainedButton"
-									Content="CONTAINED"
-									Style="{StaticResource CupertinoContainedButtonStyle}" />
+						<StackPanel Spacing="12">
+							<StackPanel Orientation="Horizontal"
+										Spacing="12">
+								<Button AutomationProperties.AutomationId="CupertinoProminentButton"
+										Content="Prominent"
+										Style="{StaticResource CupertinoProminentButtonStyle}" />
+								<Button AutomationProperties.AutomationId="CupertinoTintedButton"
+										Content="Tinted"
+										Style="{StaticResource CupertinoTintedButtonStyle}" />
+							</StackPanel>
+							<StackPanel Orientation="Horizontal"
+										Spacing="12">
+								<Button AutomationProperties.AutomationId="CupertinoGrayButton"
+										Content="Gray"
+										Style="{StaticResource CupertinoGrayButtonStyle}" />
+								<Button AutomationProperties.AutomationId="CupertinoPlainButton"
+										Content="Plain"
+										Style="{StaticResource CupertinoPlainButtonStyle}" />
+							</StackPanel>
 						</StackPanel>
 					</sample:OverviewSampleView>
 
 					<!-- TextBox -->
 					<sample:OverviewSampleView SamplePageType="samples:TextBoxSamplePage">
-						<StackPanel Spacing="8">
-
+						<StackPanel Spacing="12">
 							<TextBox AutomationProperties.AutomationId="CupertinoTextBox"
-									 PlaceholderText="Placeholder Text"
-									 Style="{StaticResource CupertinoTextBoxStyle}" />
-
-							<TextBox VerticalContentAlignment="Top"
+									 Header="Name"
+									 PlaceholderText="Full name" />
+							<TextBox AutomationProperties.AutomationId="CupertinoMultilineTextBox"
+									 Header="Notes"
+									 Height="96"
 									 AcceptsReturn="True"
-									 AutomationProperties.AutomationId="CupertinoTextBox"
-									 Style="{StaticResource CupertinoTextBoxStyle}"
-									 Text="Multine TextBox. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent pretium augue ut lectus consequat lobortis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque suscipit, diam eu aliquet egestas, dolor sem mattis tortor, eu congue augue ipsum et nulla."
-									 TextWrapping="Wrap" />
+									 TextWrapping="Wrap"
+									 VerticalContentAlignment="Top"
+									 Text="Pick up the keys at the front desk after 3 PM." />
 						</StackPanel>
 					</sample:OverviewSampleView>
 
 					<!-- CheckBox -->
 					<sample:OverviewSampleView SamplePageType="samples:CheckBoxSamplePage">
 						<StackPanel Spacing="8">
-
 							<CheckBox Content="Checked"
-									  IsChecked="True"
-									  Style="{StaticResource CupertinoCheckBoxStyle}" />
-
+									  IsChecked="True" />
 							<CheckBox Content="Unchecked"
-									  IsChecked="False"
-									  Style="{StaticResource CupertinoCheckBoxStyle}" />
-
+									  IsChecked="False" />
 							<CheckBox Content="Indeterminate"
 									  IsChecked="{x:Null}"
-									  IsThreeState="True"
-									  Style="{StaticResource CupertinoCheckBoxStyle}" />
+									  IsThreeState="True" />
 						</StackPanel>
 					</sample:OverviewSampleView>
 
 					<!-- RadioButton -->
 					<sample:OverviewSampleView SamplePageType="samples:RadioButtonSamplePage">
 						<StackPanel Spacing="8">
-
 							<RadioButton Content="Checked"
-										 IsChecked="True"
-										 Style="{StaticResource CupertinoRadioButtonStyle}" />
-
+										 GroupName="CupertinoOverview"
+										 IsChecked="True" />
 							<RadioButton Content="Unchecked"
-										 Style="{StaticResource CupertinoRadioButtonStyle}" />
+										 GroupName="CupertinoOverview" />
 						</StackPanel>
 					</sample:OverviewSampleView>
 
-					<!-- ToggleSwitch -->
+					<!-- ToggleSwitch: iOS settings rows -->
 					<sample:OverviewSampleView SamplePageType="samples:ToggleSwitchSamplePage">
-						<StackPanel Spacing="8">
-
-							<ToggleSwitch Header="ToggleSwitch"
-										  IsOn="True"
-										  Style="{StaticResource CupertinoToggleSwitchStyle}" />
-
-							<ToggleSwitch Header="Disabled"
-										  IsEnabled="False"
-										  Style="{StaticResource CupertinoToggleSwitchStyle}" />
+						<StackPanel>
+							<Grid ColumnDefinitions="*,Auto">
+								<TextBlock Text="Wi-Fi"
+										   VerticalAlignment="Center"
+										   Style="{StaticResource BodyLarge}" />
+								<ToggleSwitch Grid.Column="1"
+											  IsOn="True"
+											  OnContent=""
+											  OffContent=""
+											  AutomationProperties.Name="Wi-Fi" />
+							</Grid>
+							<Rectangle Height="0.5"
+									   Margin="0,11"
+									   Fill="{ThemeResource CupertinoSeparatorBrush}"
+									   UseLayoutRounding="False" />
+							<Grid ColumnDefinitions="*,Auto">
+								<TextBlock Text="Airplane Mode"
+										   VerticalAlignment="Center"
+										   Style="{StaticResource BodyLarge}" />
+								<ToggleSwitch Grid.Column="1"
+											  IsEnabled="False"
+											  OnContent=""
+											  OffContent=""
+											  AutomationProperties.Name="Airplane Mode" />
+							</Grid>
 						</StackPanel>
 					</sample:OverviewSampleView>
 				</StackPanel>
