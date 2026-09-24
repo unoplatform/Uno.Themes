@@ -324,7 +324,7 @@ public class Given_CupertinoControls
 			var bar = await Load(container, new ProgressBar { Value = 50, HorizontalAlignment = HorizontalAlignment.Stretch }, styleKey);
 
 			Assert.AreSame(Resource<Brush>(container, "PrimaryBrush"), bar.Foreground, "Foreground");
-			Assert.AreSame(Resource<Brush>(container, "OutlineVariantBrush"), bar.Background, "Background");
+			Assert.AreSame(Resource<Brush>(container, "CupertinoSystemFillBrush"), bar.Background, "Background");
 			Assert.AreEqual(4, bar.ActualHeight, 0.5);
 			Assert.AreEqual(400, bar.ActualWidth, 0.5, "the bar used to be pinned to 250 px");
 		}

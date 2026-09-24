@@ -10,14 +10,15 @@
 	<x:Double x:Key="FocusAreaSize">40</x:Double>
 	<x:Double x:Key="CheckAreaSize">18</x:Double>
 	<StaticResource x:Key="CheckAreaCornerRadius" ResourceKey="Radius100CornerRadius" />
-	<StaticResource x:Key="CupertinoCheckBoxBorderBrush" ResourceKey="CupertinoOnSurfaceMediumBrush" />
+	<!-- An unchecked box is outlined in systemGray3 over the surface, as the macOS checkbox is; the accent only fills a checked box. -->
+	<StaticResource x:Key="CupertinoCheckBoxBorderBrush" ResourceKey="CupertinoTertiaryGrayBrush" />
 
 	<Style x:Key="CupertinoCheckBoxStyle"
 		   TargetType="CheckBox">
 		<Setter Property="FontFamily" Value="{ThemeResource CupertinoFontFamily}" />
 		<Setter Property="Background" Value="{ThemeResource CupertinoBlueBrush}" />
 		<Setter Property="Foreground" Value="{ThemeResource CupertinoWhiteBrush}" />
-		<Setter Property="BorderBrush" Value="{ThemeResource CupertinoBlueBrush}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource CupertinoCheckBoxBorderBrush}" />
 		<Setter Property="BorderThickness" Value="1" />
 		<Setter Property="Padding" Value="{ThemeResource Space200LeftThickness}" />
 		<Setter Property="HorizontalAlignment" Value="Left" />
@@ -72,6 +73,11 @@
 								</VisualState>
 
 								<VisualState x:Name="CheckedPressed">
+									<VisualState.Setters>
+										<Setter Target="BackgroundBorder.Opacity" Value="0" />
+										<Setter Target="CheckedBackgroundBorder.Opacity" Value="1" />
+										<Setter Target="CheckGlyph.Opacity" Value="1" />
+									</VisualState.Setters>
 									<!-- https://github.com/unoplatform/uno/issues/5099 -->
 									<win:Storyboard>
 										<DoubleAnimation Storyboard.TargetName="BackgroundBorder"
@@ -130,6 +136,11 @@
 								</VisualState>
 
 								<VisualState x:Name="IndeterminatePressed">
+									<VisualState.Setters>
+										<Setter Target="BackgroundBorder.Opacity" Value="0" />
+										<Setter Target="CheckedBackgroundBorder.Opacity" Value="1" />
+										<Setter Target="HyphenGlyph.Opacity" Value="1" />
+									</VisualState.Setters>
 									<!-- https://github.com/unoplatform/uno/issues/5099 -->
 									<win:Storyboard>
 										<DoubleAnimation Storyboard.TargetName="BackgroundBorder"
@@ -163,8 +174,8 @@
 
 								<VisualState x:Name="IndeterminateDisabled">
 									<VisualState.Setters>
-										<Setter Target="CheckBoxContainer.Opacity" Value="{StaticResource CupertinoLowOpacity}" />
-										<Setter Target="ContentPresenter.Opacity" Value="{StaticResource CupertinoLowOpacity}" />
+										<Setter Target="CheckBoxContainer.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+										<Setter Target="ContentPresenter.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
 										<Setter Target="BackgroundBorder.Opacity" Value="0" />
 										<Setter Target="CheckedBackgroundBorder.Opacity" Value="1" />
 										<Setter Target="HyphenGlyph.Opacity" Value="1" />
@@ -205,7 +216,7 @@
 							  Width="{StaticResource CheckAreaSize}">
 
 							<Grid x:Name="BackgroundBorder"
-								  Background="{ThemeResource CupertinoSystemBackgroundBrush}"
+								  Background="Transparent"
 								  BorderBrush="{TemplateBinding BorderBrush}"
 								  BorderThickness="{TemplateBinding BorderThickness}"
 								  CornerRadius="{ThemeResource CheckAreaCornerRadius}" />
@@ -260,7 +271,7 @@
 		   TargetType="CheckBox"
 		   BasedOn="{StaticResource CupertinoCheckBoxStyle}">
 
-		<Setter Property="Background" Value="{ThemeResource CupertinoSecondaryBrush}" />
-		<Setter Property="Foreground" Value="{ThemeResource CupertinoOnSecondaryBrush}" />
+		<Setter Property="Background" Value="{ThemeResource SecondaryBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OnSecondaryBrush}" />
 	</Style>
 </ResourceDictionary>

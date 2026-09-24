@@ -87,6 +87,7 @@ public class Given_CupertinoHigSelection
 			Assert.AreEqual(0d, ((TranslateTransform)movingKnob.RenderTransform).X);
 			toggle.IsOn = true;
 			await UnitTestsUIContentHelper.WaitForIdle();
+			await Task.Delay(500); // the knob glides over CupertinoToggleDuration
 			Assert.AreEqual(20d, ((TranslateTransform)movingKnob.RenderTransform).X);
 			Assert.AreEqual(1d, Find<Border>(toggle, "SwitchKnobOn").Opacity);
 		}

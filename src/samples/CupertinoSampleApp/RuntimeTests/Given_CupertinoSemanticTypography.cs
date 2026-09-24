@@ -297,7 +297,7 @@ public class Given_CupertinoSemanticTypography
 	{
 		var scope = new Grid { Width = 600, Height = 500, Children = { new Button { Content = "Host" } } };
 		var dialog = new ContentDialog { Title = "Header", Content = "Body", CloseButtonText = "Close" };
-		foreach (var slot in new[] { "TitleMedium", "BodySmall" })
+		foreach (var slot in new[] { "TitleMedium", "CaptionLarge" })
 		{
 			dialog.Resources[slot + "FontSize"] = 23d;
 			dialog.Resources[slot + "FontFamily"] = new FontFamily("Arial");

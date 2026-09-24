@@ -23,7 +23,8 @@
 	<!-- Brushes -->
 	<x:Double x:Key="ComboBoxPopupMaxHeight">300</x:Double>
 
-	<StaticResource x:Key="CupertinoComboBoxCornerRadius" ResourceKey="Radius250CornerRadius" />
+	<!-- A pop-up button is a gray capsule like the compact date pickers; iOS has no outlined controls. -->
+	<StaticResource x:Key="CupertinoComboBoxCornerRadius" ResourceKey="Radius550CornerRadius" />
 
 	<!-- Style -->
 	<Style x:Key="CupertinoComboBoxItemStyle"
@@ -137,9 +138,9 @@
 		<Setter Property="CharacterSpacing" Value="{ThemeResource BodyLargeCharacterSpacing}" />
 		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
 		<Setter Property="Foreground" Value="{ThemeResource CupertinoLabelBrush}" />
-		<Setter Property="Background" Value="{ThemeResource CupertinoSystemBackgroundBrush}" />
+		<Setter Property="Background" Value="{ThemeResource CupertinoQuinaryGrayBrush}" />
 		<Setter Property="Padding" Value="0" />
-		<Setter Property="BorderThickness" Value="1" />
+		<Setter Property="BorderThickness" Value="0" />
 		<Setter Property="BorderBrush" Value="{ThemeResource CupertinoComboBoxBorderBrush}" />
 		<Setter Property="CornerRadius" Value="{ThemeResource CupertinoComboBoxCornerRadius}" />
 		<Setter Property="MinHeight" Value="{ThemeResource ControlHeightMediumLarge}" />
@@ -193,12 +194,7 @@
 
 							<VisualStateGroup x:Name="FocusStates">
 
-								<VisualState x:Name="Focused">
-									<VisualState.Setters>
-										<Setter Target="HighlightBackground.Opacity" Value="1" />
-										<Setter Target="Highlight.Opacity" Value="1" />
-									</VisualState.Setters>
-								</VisualState>
+								<VisualState x:Name="Focused" />
 
 								<VisualState x:Name="FocusedPressed" />
 
@@ -265,26 +261,9 @@
 							  BorderBrush="{TemplateBinding BorderBrush}"
 							  BorderThickness="{TemplateBinding BorderThickness}">
 
-							<!-- Drop Down Border -->
-							<Rectangle Fill="{ThemeResource CupertinoSystemBackgroundBrush}"
-									   Width="1"
-									   HorizontalAlignment="Right" />
-
-							<!-- Pressed Background -->
+							<!-- Pressed: the system fill over the capsule, as a pressed iOS button darkens. -->
 							<Rectangle x:Name="PressedBackground"
-									   Fill="{ThemeResource CupertinoSystemBackgroundBrush}"
-									   Opacity="0" />
-
-							<!-- Highlight Background -->
-							<Border x:Name="HighlightBackground"
-									Background="{ThemeResource CupertinoSystemBackgroundBrush}"
-									Opacity="0"
-									CornerRadius="{ThemeResource Radius100CornerRadius}" />
-
-							<!-- Highlight -->
-							<Rectangle x:Name="Highlight"
-									   Fill="{ThemeResource CupertinoSystemBackgroundBrush}"
-									   Margin="{TemplateBinding BorderThickness}"
+									   Fill="{ThemeResource CupertinoSystemFillBrush}"
 									   Opacity="0" />
 
 							<Grid Margin="{ThemeResource Space400HorizontalThickness}">
@@ -295,9 +274,9 @@
 								<FontIcon x:Name="DropDownGlyph"
 										  Grid.Column="1"
 										  Glyph="&#xE70D;"
-										  FontSize="12"
+										  FontSize="13"
 										  FontFamily="{ThemeResource SymbolThemeFontFamily}"
-										  Foreground="{TemplateBinding Foreground}"
+										  Foreground="{ThemeResource PrimaryBrush}"
 										  Margin="{ThemeResource Space300LeftThickness}"
 										  VerticalAlignment="Center"
 										  IsHitTestVisible="False" />

@@ -27,6 +27,8 @@
 		<Setter Property="HorizontalAlignment" Value="Left" />
 		<Setter Property="VerticalAlignment" Value="Center" />
 		<Setter Property="CornerRadius" Value="{ThemeResource Radius550CornerRadius}" />
+		<!-- The picker pushes its own IsTodayHighlighted into its calendar; see CalendarView.xaml for why it is off. -->
+		<Setter Property="IsTodayHighlighted" Value="False" />
 		<Setter Property="UseSystemFocusVisuals" Value="{ThemeResource IsApplicationFocusVisualKindReveal}" />
 		<Setter Property="Template">
 			<Setter.Value>
@@ -37,76 +39,33 @@
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
 
-								<VisualState x:Name="PointerOver">
-
-									<Storyboard>
-										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background"
-																	   Storyboard.TargetProperty="BorderBrush">
-											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource CupertinoCalendarDatePickerBorderBrushPointerOver}" />
-										</ObjectAnimationUsingKeyFrames>
-									</Storyboard>
-								</VisualState>
+								<!-- The capsule has no border to recolour: a press dims it like the DatePicker's, disabled dims the whole control. -->
+								<VisualState x:Name="PointerOver" />
 
 								<VisualState x:Name="Pressed">
-
-									<Storyboard>
-										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background"
-																	   Storyboard.TargetProperty="BorderBrush">
-											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource CupertinoCalendarDatePickerBorderBrushPressed}" />
-										</ObjectAnimationUsingKeyFrames>
-									</Storyboard>
+									<VisualState.Setters>
+										<Setter Target="Background.Opacity" Value="0.65" />
+									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Disabled">
-									<Storyboard>
-										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeaderContentPresenter"
-																	   Storyboard.TargetProperty="Foreground">
-											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource CalendarDatePickerHeaderForegroundDisabled}" />
-										</ObjectAnimationUsingKeyFrames>
-										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="DateText"
-																	   Storyboard.TargetProperty="Foreground">
-											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource CalendarDatePickerTextForegroundDisabled}" />
-										</ObjectAnimationUsingKeyFrames>
-										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="CalendarGlyph"
-																	   Storyboard.TargetProperty="Foreground">
-											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource CalendarDatePickerCalendarGlyphForegroundDisabled}" />
-										</ObjectAnimationUsingKeyFrames>
-									</Storyboard>
+									<VisualState.Setters>
+										<Setter Target="Root.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+									</VisualState.Setters>
 								</VisualState>
 
 							</VisualStateGroup>
 							<VisualStateGroup x:Name="FocusStates">
 								<VisualState x:Name="Unfocused" />
 								<VisualState x:Name="PointerFocused" />
-								<VisualState x:Name="Focused">
-
-									<Storyboard>
-										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background"
-																	   Storyboard.TargetProperty="Background">
-											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource CalendarDatePickerBackgroundFocused}" />
-										</ObjectAnimationUsingKeyFrames>
-									</Storyboard>
-								</VisualState>
+								<!-- No fill change on focus (a Fluent idiom); the system focus visual is enough. -->
+								<VisualState x:Name="Focused" />
 
 							</VisualStateGroup>
 							<VisualStateGroup x:Name="SelectionStates">
 								<VisualState x:Name="Unselected" />
 
-								<VisualState x:Name="Selected">
-
-									<Storyboard>
-										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="DateText"
-																	   Storyboard.TargetProperty="Foreground">
-											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource CalendarDatePickerTextForegroundSelected}" />
-										</ObjectAnimationUsingKeyFrames>
-									</Storyboard>
-								</VisualState>
+								<!-- The value stays tinted once a date is chosen, as the compact iOS picker's does. -->
+								<VisualState x:Name="Selected" />
 
 							</VisualStateGroup>
 							<VisualStateGroup x:Name="HeaderStates">

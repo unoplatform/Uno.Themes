@@ -263,7 +263,7 @@
 								<!-- HorizontalInlineTickBar -->
 								<TickBar x:Name="HorizontalInlineTickBar"
 										 Visibility="Collapsed"
-										 Fill="{StaticResource CupertinoBlueColor}"
+										 Fill="{ThemeResource CupertinoSliderActiveTrackBrush}"
 										 Height="4"
 										 Grid.Row="1"
 										 Grid.ColumnSpan="3" />
@@ -338,7 +338,7 @@
 								<!-- VerticalInlineTickBar -->
 								<TickBar x:Name="VerticalInlineTickBar"
 										 Visibility="Collapsed"
-										 Fill="{StaticResource CupertinoBlueColor}"
+										 Fill="{ThemeResource CupertinoSliderActiveTrackBrush}"
 										 Width="4"
 										 Grid.Column="1"
 										 Grid.RowSpan="3" />
@@ -377,6 +377,6 @@
 		   BasedOn="{StaticResource CupertinoSliderStyle}"
 		   TargetType="Slider">
 
-		<Setter Property="Foreground" Value="{ThemeResource CupertinoSecondaryBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource SecondaryBrush}" />
 	</Style>
 </ResourceDictionary>

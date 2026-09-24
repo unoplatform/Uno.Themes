@@ -46,9 +46,9 @@
 			<SolidColorBrush x:Key="NavigationViewItemBackground"
 							 Color="Transparent" />
 			<StaticResource x:Key="NavigationViewItemForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="NavigationViewItemBackgroundPointerOver" ResourceKey="SecondaryContainerBrush" />
+			<StaticResource x:Key="NavigationViewItemBackgroundPointerOver" ResourceKey="CupertinoQuaternarySystemFillBrush" />
 			<StaticResource x:Key="NavigationViewItemForegroundPressed" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="NavigationViewItemBackgroundPressed" ResourceKey="SecondaryContainerBrush" />
+			<StaticResource x:Key="NavigationViewItemBackgroundPressed" ResourceKey="CupertinoSystemFillBrush" />
 			<StaticResource x:Key="NavigationViewItemForegroundSelected" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="NavigationViewItemBackgroundSelected" ResourceKey="PrimarySelectedBrush" />
 			<StaticResource x:Key="NavigationViewItemForegroundSelectedPointerOver" ResourceKey="PrimaryBrush" />
@@ -59,7 +59,16 @@
 			<SolidColorBrush x:Key="NavigationViewItemBackgroundDisabled"
 							 Color="Transparent" />
 			<StaticResource x:Key="NavigationViewSelectionIndicatorForeground" ResourceKey="TransparentBrush" />
-			<StaticResource x:Key="NavigationViewItemSeparatorForeground" ResourceKey="OutlineVariantBrush" />
+			<StaticResource x:Key="NavigationViewItemSeparatorForeground" ResourceKey="CupertinoSeparatorBrush" />
+			<!-- An iPadOS detail column has no card stroke or rounded corner; these blank Fluent's. -->
+			<SolidColorBrush x:Key="NavigationViewContentGridBorderBrush"
+							 Color="Transparent" />
+			<Thickness x:Key="NavigationViewContentGridBorderThickness">0</Thickness>
+			<CornerRadius x:Key="NavigationViewContentGridCornerRadius">0</CornerRadius>
+			<Thickness x:Key="NavigationViewMinimalContentGridBorderThickness">0</Thickness>
+			<CornerRadius x:Key="NavigationViewMinimalContentGridCornerRadius">0</CornerRadius>
+			<Thickness x:Key="TopNavigationViewContentGridBorderThickness">0</Thickness>
+			<CornerRadius x:Key="TopNavigationViewContentGridCornerRadius">0</CornerRadius>
 			<StaticResource x:Key="TopNavigationViewItemForeground" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="TopNavigationViewItemForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="TopNavigationViewItemForegroundPressed" ResourceKey="OnSurfaceBrush" />
@@ -97,10 +106,10 @@
 							 Color="Transparent" />
 
 			<StaticResource x:Key="NavigationViewItemForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="NavigationViewItemBackgroundPointerOver" ResourceKey="SecondaryContainerBrush" />
+			<StaticResource x:Key="NavigationViewItemBackgroundPointerOver" ResourceKey="CupertinoQuaternarySystemFillBrush" />
 
 			<StaticResource x:Key="NavigationViewItemForegroundPressed" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="NavigationViewItemBackgroundPressed" ResourceKey="SecondaryContainerBrush" />
+			<StaticResource x:Key="NavigationViewItemBackgroundPressed" ResourceKey="CupertinoSystemFillBrush" />
 
 			<StaticResource x:Key="NavigationViewItemForegroundSelected" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="NavigationViewItemBackgroundSelected" ResourceKey="PrimarySelectedBrush" />
@@ -117,7 +126,16 @@
 
 			<StaticResource x:Key="NavigationViewSelectionIndicatorForeground" ResourceKey="TransparentBrush" />
 
-			<StaticResource x:Key="NavigationViewItemSeparatorForeground" ResourceKey="OutlineVariantBrush" />
+			<StaticResource x:Key="NavigationViewItemSeparatorForeground" ResourceKey="CupertinoSeparatorBrush" />
+			<!-- An iPadOS detail column has no card stroke or rounded corner; these blank Fluent's. -->
+			<SolidColorBrush x:Key="NavigationViewContentGridBorderBrush"
+							 Color="Transparent" />
+			<Thickness x:Key="NavigationViewContentGridBorderThickness">0</Thickness>
+			<CornerRadius x:Key="NavigationViewContentGridCornerRadius">0</CornerRadius>
+			<Thickness x:Key="NavigationViewMinimalContentGridBorderThickness">0</Thickness>
+			<CornerRadius x:Key="NavigationViewMinimalContentGridCornerRadius">0</CornerRadius>
+			<Thickness x:Key="TopNavigationViewContentGridBorderThickness">0</Thickness>
+			<CornerRadius x:Key="TopNavigationViewContentGridCornerRadius">0</CornerRadius>
 
 			<StaticResource x:Key="TopNavigationViewItemForeground" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="TopNavigationViewItemForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
@@ -135,6 +153,18 @@
 		</ResourceDictionary>
 
 	</ResourceDictionary.ThemeDictionaries>
+
+	<!-- The page header is the iOS large title: 34 pt bold, in a 44 pt bar. Fluent's 28 pt semibold is not used. -->
+	<Style x:Key="CupertinoNavigationViewHeaderStyle"
+		   TargetType="ContentControl">
+		<Setter Property="FontFamily" Value="{ThemeResource DisplayMediumFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource DisplayMediumFontSize}" />
+		<Setter Property="FontWeight" Value="{ThemeResource DisplayMediumFontWeight}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource DisplayMediumCharacterSpacing}" />
+		<Setter Property="Margin" Value="{ThemeResource Space400HorizontalThickness}" />
+		<Setter Property="VerticalAlignment" Value="Stretch" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+	</Style>
 	<!-- Preserve the stock navigation parts and states; put the pane in the iPadOS glass layer. -->
 	<!-- Template derived from Uno UI Fluent v2 NavigationView.xaml (MIT). -->
 	<!-- The stock left presenter reads this with ThemeResource, so its actual row grows to 44 px. -->
@@ -682,13 +712,13 @@
 										<ContentControl x:Name="HeaderContent"
 														Grid.Row="1"
 														Grid.Column="1"
-														MinHeight="{StaticResource PaneToggleButtonHeight}"
+														MinHeight="{ThemeResource ControlHeightMediumLarge}"
 														IsTabStop="False"
 														Content="{TemplateBinding Header}"
 														ContentTemplate="{TemplateBinding HeaderTemplate}"
 														VerticalContentAlignment="Stretch"
 														HorizontalContentAlignment="Stretch"
-														Style="{StaticResource NavigationViewTitleHeaderContentControlTextStyle}" />
+														Style="{StaticResource CupertinoNavigationViewHeaderStyle}" />
 										<ContentPresenter x:Name="ContentPresenter"
 														  AutomationProperties.LandmarkType="Main"
 														  Grid.Row="2"

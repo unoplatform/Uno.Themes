@@ -12,19 +12,21 @@
 			<StaticResource x:Key="ListViewBackground" ResourceKey="SurfaceBrush" />
 			<StaticResource x:Key="ListViewBorderBrush" ResourceKey="OutlineVariantBrush" />
 			<StaticResource x:Key="ListViewItemForeground" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="ListViewItemBackgroundPointerOver" ResourceKey="SecondaryContainerBrush" />
-			<StaticResource x:Key="ListViewItemBackgroundPressed" ResourceKey="SecondaryContainerBrush" />
-			<StaticResource x:Key="ListViewItemBackgroundSelected" ResourceKey="PrimarySelectedBrush" />
-			<StaticResource x:Key="ListViewItemSeparatorBrush" ResourceKey="OutlineVariantBrush" />
+			<!-- Translucent system fills read on any row surface, in both appearances; a selected iPhone row is neutral gray, never the accent. -->
+			<StaticResource x:Key="ListViewItemBackgroundPointerOver" ResourceKey="CupertinoQuaternarySystemFillBrush" />
+			<StaticResource x:Key="ListViewItemBackgroundPressed" ResourceKey="CupertinoSystemFillBrush" />
+			<StaticResource x:Key="ListViewItemBackgroundSelected" ResourceKey="CupertinoSystemFillBrush" />
+			<StaticResource x:Key="ListViewItemSeparatorBrush" ResourceKey="CupertinoSeparatorBrush" />
 		</ResourceDictionary>
 		<ResourceDictionary x:Key="Default">
 			<StaticResource x:Key="ListViewBackground" ResourceKey="SurfaceBrush" />
 			<StaticResource x:Key="ListViewBorderBrush" ResourceKey="OutlineVariantBrush" />
 			<StaticResource x:Key="ListViewItemForeground" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="ListViewItemBackgroundPointerOver" ResourceKey="SecondaryContainerBrush" />
-			<StaticResource x:Key="ListViewItemBackgroundPressed" ResourceKey="SecondaryContainerBrush" />
-			<StaticResource x:Key="ListViewItemBackgroundSelected" ResourceKey="PrimarySelectedBrush" />
-			<StaticResource x:Key="ListViewItemSeparatorBrush" ResourceKey="OutlineVariantBrush" />
+			<!-- Translucent system fills read on any row surface, in both appearances; a selected iPhone row is neutral gray, never the accent. -->
+			<StaticResource x:Key="ListViewItemBackgroundPointerOver" ResourceKey="CupertinoQuaternarySystemFillBrush" />
+			<StaticResource x:Key="ListViewItemBackgroundPressed" ResourceKey="CupertinoSystemFillBrush" />
+			<StaticResource x:Key="ListViewItemBackgroundSelected" ResourceKey="CupertinoSystemFillBrush" />
+			<StaticResource x:Key="ListViewItemSeparatorBrush" ResourceKey="CupertinoSeparatorBrush" />
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 
@@ -106,7 +108,7 @@
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
 
-						<!-- ponytail: every row draws one, so the last row's hairline sits on the group's edge; hide it per item if it ever shows. -->
+						<!-- Every row draws one; the group's ItemsPresenter is pulled up by a pixel so the last row's hairline falls outside the group. -->
 						<Rectangle x:Name="Separator"
 								   Fill="{ThemeResource ListViewItemSeparatorBrush}"
 								   Height="0.5"
@@ -160,7 +162,9 @@
 									  IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
 									  BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}"
 									  AutomationProperties.AccessibilityView="Raw">
-							<ItemsPresenter Header="{TemplateBinding Header}"
+							<!-- The negative margin hides the last row's separator: an inset group has no line under its last row. -->
+							<ItemsPresenter Margin="0,0,0,-1"
+											Header="{TemplateBinding Header}"
 											HeaderTemplate="{TemplateBinding HeaderTemplate}"
 											HeaderTransitions="{TemplateBinding HeaderTransitions}"
 											Footer="{TemplateBinding Footer}"

@@ -81,7 +81,8 @@
 		<Setter Property="IsTabStop" Value="False" />
 		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
 		<Setter Property="FontWeight" Value="Normal" />
-		<Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
+		<!-- Wheel rows read at 20 pt, close to the iOS picker's 23 pt, inside the 44 px selection band. -->
+		<Setter Property="FontSize" Value="{ThemeResource HeadlineSmallFontSize}" />
 		<Setter Property="Background" Value="Transparent" />
 		<Setter Property="AutomationProperties.AutomationId" Value="DatePickerFlyoutPresenter" />
 		<Setter Property="BorderThickness" Value="{StaticResource CupertinoDateTimeFlyoutBorderThickness}" />
@@ -218,9 +219,10 @@
 								   HorizontalAlignment="Stretch"
 								   VerticalAlignment="Top"
 								   Foreground="{ThemeResource OnSurfaceBrush}"
-								   Style="{StaticResource CupertinoBody}"
+								   Style="{StaticResource CupertinoFootnote}"
 								   Text="{TemplateBinding Header}"
-								   TextWrapping="Wrap" />
+								   TextWrapping="Wrap"
+								   Visibility="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}}" />
 						<!-- Flyout Button -->
 						<Button x:Name="FlyoutButton"
 								Grid.Row="1"
@@ -269,8 +271,8 @@
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="DateText.Foreground" Value="{ThemeResource CupertinoPrimaryGrayColor}" />
-										<Setter Target="HeaderTextBlock.Foreground" Value="{ThemeResource CupertinoPrimaryGrayColor}" />
+										<Setter Target="DateText.Foreground" Value="{ThemeResource CupertinoPrimaryGrayBrush}" />
+										<Setter Target="HeaderTextBlock.Foreground" Value="{ThemeResource CupertinoPrimaryGrayBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>

@@ -122,7 +122,7 @@ Each variant reads two brushes. There are no per-state keys: the states dim the 
 
 ## Switches and sliders
 
-`CupertinoToggleSwitchStyle` uses a 64 by 28 track and a 40 by 24 capsule thumb, measured from Apple's current [iOS toggle artwork](https://developer.apple.com/design/human-interface-guidelines/toggles). Its thumb moves 20 pixels between states. `CupertinoSliderStyle` uses a 40 by 24 horizontal thumb, rotated in the vertical layout; this size is a theme choice based on the elongated shape in Apple's [slider examples](https://developer.apple.com/design/human-interface-guidelines/sliders). The horizontal slider keeps at least 44 pixels of target height, and the vertical slider keeps at least 44 pixels of target width, around the smaller thumb silhouette.
+`CupertinoToggleSwitchStyle` uses a 64 by 28 track and a 40 by 24 capsule thumb, measured from Apple's current [iOS toggle artwork](https://developer.apple.com/design/human-interface-guidelines/toggles). Its thumb moves 20 pixels between states, gliding while the track cross-fades over `CupertinoToggleDuration` (200 milliseconds, eased out). `CupertinoSliderStyle` uses a 40 by 24 horizontal thumb, rotated in the vertical layout; this size is a theme choice based on the elongated shape in Apple's [slider examples](https://developer.apple.com/design/human-interface-guidelines/sliders). The horizontal slider keeps at least 44 pixels of target height, and the vertical slider keeps at least 44 pixels of target width, around the smaller thumb silhouette.
 
 The thumbs are solid at rest, sitting on a soft `ThemeShadow` (`Translation.Z` 10). The slider's inactive track is the tertiary system fill, barely darker than the page, as on iOS. While pressed they lift, following Apple's rule that knobs become glass only during interaction: the knob scales to 1.5 times its size over 150 milliseconds with a slight overshoot and swaps to `Clear` glass, a convex lens with a cubic profile, flat at the centre and drawing the surroundings in towards the rim, so a switch track that fills the knob reads as a narrowed hourglass meeting the real track at both ends while a thin slider track passes through almost unchanged, shaded light above the middle and dark below it, bounded by a hairline outline and a faint top-lit highlight on a soft drop shadow, the way the iOS 26 switch knob does. Both return to solid when interaction ends, so idle settings controls do no glass rendering. The lift values live in `AnimationConstants.xaml` (`CupertinoKnobLiftDuration`, `CupertinoKnobLiftScale`, `CupertinoKnobRestTranslation`); the lens parameters are the `Clear` preset.
 
@@ -132,9 +132,9 @@ The thumbs are solid at rest, sitting on a soft `ThemeShadow` (`Translation.Z` 1
 
 `FilledTextBoxStyle` and `FilledPasswordBoxStyle` use the same input behavior on a gray fill without a border. `OutlinedTextBoxStyle` and `OutlinedPasswordBoxStyle` retain the bordered variants. These are text-entry surfaces; they remain solid.
 
-`CupertinoNumberBoxStyle` pairs an editable value with a horizontal minus/plus stepper. Each stepper button is 44 by 44, the value uses 17 pixel text, and the header uses 13 pixel text. This follows the value-and-stepper relationship in Apple's [Steppers](https://developer.apple.com/design/human-interface-guidelines/steppers) guidance while retaining Uno's numeric formatting and increment behavior.
+`CupertinoNumberBoxStyle` places its header above a 44 pixel frame that pairs the editable value with a horizontal minus/plus stepper, like every other field. Each stepper button is 44 by 44, the value uses 17 pixel text, and the header uses 13 pixel text. This follows the value-and-stepper relationship in Apple's [Steppers](https://developer.apple.com/design/human-interface-guidelines/steppers) guidance while retaining Uno's numeric formatting and increment behavior.
 
-`CupertinoComboBoxStyle` uses a 44 pixel minimum field and 17 pixel text, with its choices in a glass popup. Date controls use a rounded gray compact affordance with accent date text and a separate neutral label. The date picker sizes to its content by default; set `HorizontalAlignment="Stretch"` when it should fill its container. Its empty-state prompt can be localized through the `CupertinoDatePickerPlaceholder.Text` resource. `CupertinoCalendarViewStyle` uses 20 pixel day labels and 17 pixel month/year labels, a tinted circular selection, and the accent for today. Both date-picker popups use rounded `Thick` glass. The calendar leaves unselected and adjacent-month day backgrounds transparent; the wheel picker uses a rounded selection band. These presentations follow Apple's [compact, inline and wheel picker examples](https://developer.apple.com/design/human-interface-guidelines/pickers); date ordering and selection remain the responsibility of the underlying Uno controls.
+`CupertinoComboBoxStyle` is a gray capsule (`CupertinoQuinaryGrayBrush`, no border, `CupertinoComboBoxCornerRadius` 22) with a 44 pixel minimum field, 17 pixel text and an accent chevron, matching the compact date controls; its choices open in a glass popup, and a press darkens the capsule with the system fill. Date controls use a rounded gray compact affordance with accent date text and a separate neutral label. The date picker sizes to its content by default; set `HorizontalAlignment="Stretch"` when it should fill its container. Its empty-state prompt can be localized through the `CupertinoDatePickerPlaceholder.Text` resource. `CupertinoCalendarViewStyle` uses 20 pixel day labels, 13 pixel semibold weekday letters in the secondary label color, 17 pixel month/year labels and a tinted circular selection. Today is not highlighted: Uno's Skia renderer does not paint the highlighted day item while day corners are rounded, so the theme keeps the number visible instead of tinting it until that is fixed upstream. Both date-picker popups use rounded `Thick` glass. The calendar leaves unselected and adjacent-month day backgrounds transparent; the wheel picker uses a rounded selection band. These presentations follow Apple's [compact, inline and wheel picker examples](https://developer.apple.com/design/human-interface-guidelines/pickers); date ordering and selection remain the responsibility of the underlying Uno controls.
 
 ## Progress bar and ring
 
@@ -148,20 +148,20 @@ The thumbs are solid at rest, sitting on a soft `ThemeShadow` (`Translation.Z` 1
 
 | Key | Default |
 | --- | ------- |
-| `ProgressBarForeground` / `ProgressBarBackground` | `PrimaryBrush` / `OutlineVariantBrush` |
+| `ProgressBarForeground` / `ProgressBarBackground` | `PrimaryBrush` / `CupertinoSystemFillBrush` |
 | `CupertinoProgressBarHeight` / `CupertinoProgressBarMinWidth` / `CupertinoProgressBarCornerRadius` | `4` / `250` / `2` |
 
 ## Lists
 
-`CupertinoListViewStyle` (`ListViewStyle`, and the implicit `ListView`) is an inset-grouped list: the list itself is the group, a surface with a 26 px rounded corner, and `CupertinoListViewItemStyle` (`ListViewItemStyle`, the implicit `ListViewItem`) is a 44 px row with a hairline separator inset 16 px from the leading edge. A row highlights with the gray fill while hovered or pressed, takes the selection tint when selected and dims when disabled. Give the list a `Margin` to inset the group from the edges of the page; a list is content, so it has no glass.
+`CupertinoListViewStyle` (`ListViewStyle`, and the implicit `ListView`) is an inset-grouped list: the list itself is the group, a surface with a 26 px rounded corner, and `CupertinoListViewItemStyle` (`ListViewItemStyle`, the implicit `ListViewItem`) is a 44 px row with a hairline separator inset 16 px from the leading edge. A row highlights with the gray fill while hovered or pressed, takes the selection tint when selected and dims when disabled. Give the list a `Margin` to inset the group from the edges of the page; a list is content, so it has no glass. Rows are separated by half-point hairlines in `CupertinoSeparatorBrush`, the label at 29 %, with none under the last row; a selected row is highlighted with the neutral `CupertinoSystemFillBrush`, never the accent, as on iPhone.
 
 | Key | Default |
 | --- | ------- |
 | `ListViewBackground` / `ListViewBorderBrush` | `SurfaceBrush` / `OutlineVariantBrush` |
 | `ListViewItemForeground` | `OnSurfaceBrush` |
-| `ListViewItemBackgroundPointerOver` / `ListViewItemBackgroundPressed` | `SecondaryContainerBrush` |
-| `ListViewItemBackgroundSelected` | `PrimarySelectedBrush` |
-| `ListViewItemSeparatorBrush` | `OutlineVariantBrush` |
+| `ListViewItemBackgroundPointerOver` / `ListViewItemBackgroundPressed` | `CupertinoQuaternarySystemFillBrush` / `CupertinoSystemFillBrush` |
+| `ListViewItemBackgroundSelected` | `CupertinoSystemFillBrush` |
+| `ListViewItemSeparatorBrush` | `CupertinoSeparatorBrush` |
 
 | Key | Default | Description |
 | --- | ------- | ----------- |
@@ -199,9 +199,9 @@ The thumbs are solid at rest, sitting on a soft `ThemeShadow` (`Translation.Z` 1
 | `FlyoutPresenterBackground` / `FlyoutPresenterBorderBrush` | `SurfaceBrush` / `OutlineVariantBrush` (the glass panel's fill and rim) |
 | `MenuFlyoutPresenterBackground` / `MenuFlyoutPresenterBorderBrush` | `SurfaceBrush` / `OutlineVariantBrush` |
 | `MenuFlyoutItemForeground` | `OnSurfaceBrush` |
-| `MenuFlyoutItemBackgroundPointerOver` / `MenuFlyoutItemBackgroundPressed` | `SecondaryContainerBrush` |
+| `MenuFlyoutItemBackgroundPointerOver` / `MenuFlyoutItemBackgroundPressed` | `CupertinoQuaternarySystemFillBrush` / `CupertinoSystemFillBrush` |
 | `MenuFlyoutItemKeyboardAcceleratorTextForeground` / `MenuFlyoutSubItemChevron` | `OnSurfaceVariantBrush` |
-| `MenuFlyoutSeparatorBackground` | `OutlineVariantBrush` |
+| `MenuFlyoutSeparatorBackground` | `CupertinoSecondarySystemFillBrush` |
 | `ToolTipBackground` / `ToolTipBorderBrush` / `ToolTipForeground` | `SurfaceBrush` / `OutlineVariantBrush` / `OnSurfaceBrush` |
 | `CupertinoPopoverTintBrush` | The surface color at 76 % opacity, laid over the glass |
 
@@ -212,12 +212,12 @@ The thumbs are solid at rest, sitting on a soft `ThemeShadow` (`Translation.Z` 1
 | `CupertinoMenuFlyoutPresenterMinWidth` | `250` | |
 | `CupertinoMenuFlyoutItemHeight` / `CupertinoMenuFlyoutItemPadding` | `44` / `16,0` | Also the `ComboBox` rows. |
 | `CupertinoMenuFlyoutItemIconSize` / `CupertinoMenuFlyoutItemIconMargin` | `22` / `0,0,10,0` | |
-| `CupertinoMenuFlyoutSeparatorMargin` | `0,4` | |
+| `CupertinoMenuFlyoutSeparatorMargin` / `CupertinoMenuFlyoutSeparatorHeight` | `0` / `8` | The band of fill between two menu groups. |
 | `CupertinoToolTipPadding` / `CupertinoToolTipCornerRadius` / `CupertinoToolTipMaxWidth` | `10,6` / `8` / `320` | |
 
 ## Navigation and command bars
 
-`NavigationViewStyle` places `Regular` glass behind the pane and top navigation while retaining Uno's navigation behavior. Navigation and command-bar glass use the live `CupertinoBarTintBrush`, which follows `SurfaceColor` at 35% opacity and repaints when the color override changes. `NavigationViewItemStyle` uses 44 pixel minimum rows and 10 pixel corners. Sidebar icons use `PrimaryBrush`. Selection uses a rounded `PrimarySelectedBrush` row with `PrimaryBrush` text; the separate WinUI selection line is transparent. Hover and pressed backgrounds use `SecondaryContainerBrush`. Both left and top navigation are supported.
+`NavigationViewStyle` places `Regular` glass behind the pane and top navigation while retaining Uno's navigation behavior. The content area has no card stroke or rounded corner, and `Header` renders as the 34 pixel bold large title in a 44 pixel bar (`CupertinoNavigationViewHeaderStyle`). Navigation and command-bar glass use the live `CupertinoBarTintBrush`, which follows `SurfaceColor` at 35% opacity and repaints when the color override changes. `NavigationViewItemStyle` uses 44 pixel minimum rows and 10 pixel corners. Sidebar icons use `PrimaryBrush`. Selection uses a rounded `PrimarySelectedBrush` row with `PrimaryBrush` text; the separate WinUI selection line is transparent. Hover and pressed backgrounds use `SecondaryContainerBrush`. Both left and top navigation are supported.
 
 For a visible blurred backdrop, compose your page background or content beneath the navigation glass. Uno's `SplitView` does not synthesize the native iPadOS background extension; a uniform surface behind the pane produces a uniform glass result.
 
@@ -237,6 +237,6 @@ Use the theme's `Colors.OverrideDictionary` to override color keys. These brushe
 
 ## Compatibility controls
 
-`CheckBox`, `RadioButton`, `RatingControl` and `ToolTip` remain available for applications that use those Uno APIs. They share the Cupertino palette and preserve their familiar behavior, but do not claim a direct native iOS control equivalent. Checkboxes and radio buttons retain their small glyphs inside minimum 44 by 44 targets; short toggle-button labels also keep that minimum target. The FAB semantic aliases likewise map to Cupertino floating circular buttons. `PipsPager` provides discrete page selection; it does not implement UIKit's continuous page-control scrubbing.
+`CheckBox`, `RadioButton`, `RatingControl` and `ToolTip` remain available for applications that use those Uno APIs. They share the Cupertino palette and preserve their familiar behavior, but do not claim a direct native iOS control equivalent. Checkboxes and radio buttons retain their small glyphs inside minimum 44 by 44 targets, outlined in gray until the accent fills them when checked; short toggle-button labels also keep that minimum target. The FAB semantic aliases likewise map to Cupertino floating circular buttons. `PipsPager` provides discrete page selection; it does not implement UIKit's continuous page-control scrubbing.
 
 In `Auto`, glass falls back to a solid surface on software rendering and unsupported native renderers. Explicitly requesting `Liquid` on Skia can render Uno's custom blur and refraction in software, including diagnostic screenshots. Those captures do not certify Apple's native adaptive optical behavior or hardware performance. See [Liquid Glass](cupertino-getting-started.md#liquid-glass) for rendering modes.

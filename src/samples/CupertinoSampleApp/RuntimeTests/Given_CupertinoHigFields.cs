@@ -149,7 +149,7 @@ public class Given_CupertinoHigFields
 			await Load(host, field, "CupertinoComboBoxStyle");
 			Assert.AreEqual(17d, field.FontSize);
 			Assert.IsTrue(field.ActualHeight >= 44);
-			Assert.AreEqual(new CornerRadius(10), field.CornerRadius);
+			Assert.AreEqual(new CornerRadius(22), field.CornerRadius, "a capsule, like the compact date pickers");
 		}
 		finally
 		{

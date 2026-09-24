@@ -35,8 +35,9 @@
 
 	<Style x:Key="DeleteButtonStyle"
 		   TargetType="Button">
-		<Setter Property="MinWidth" Value="{ThemeResource TouchTargetMinSize}" />
-		<Setter Property="MinHeight" Value="{ThemeResource TouchTargetMinSize}" />
+		<!-- 44, the field's own height: a 48 target grew the field by four pixels as soon as it held text. -->
+		<Setter Property="MinWidth" Value="{ThemeResource ControlHeightMediumLarge}" />
+		<Setter Property="MinHeight" Value="{ThemeResource ControlHeightMediumLarge}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">

@@ -22,6 +22,12 @@
 		<Setter Property="PressedBorderBrush" Value="{ThemeResource CupertinoCalendarViewAccentBrush}" />
 		<Setter Property="CalendarItemBorderBrush" Value="{ThemeResource CalendarViewCalendarItemRevealBorderBrush}" />
 		<Setter Property="TodayForeground" Value="{ThemeResource CupertinoCalendarViewAccentBrush}" />
+		<!--
+			Uno Skia does not paint the day item that is "today" while DayItemCornerRadius is non-zero (the
+			whole item, background included; radius 0 shows it). Until that is fixed upstream today is not
+			highlighted so its number stays on screen; iOS would tint it (specs/10, hig-review-2026-09-24).
+		-->
+		<Setter Property="IsTodayHighlighted" Value="False" />
 		<Setter Property="BlackoutForeground" Value="{ThemeResource CalendarViewBlackoutForeground}" />
 		<win:Setter Property="SelectedForeground"
 					Value="{ThemeResource CalendarViewSelectedForeground}" />
@@ -75,9 +81,11 @@
 							BorderThickness="{TemplateBinding BorderThickness}"
 							CornerRadius="{TemplateBinding CornerRadius}">
 						<Border.Resources>
+							<!-- Weekday letters: 13 pt semibold in the secondary label colour (iOS inline date picker). -->
 							<Style x:Key="WeekDayNameStyle"
-								   BasedOn="{StaticResource CaptionTextBlockStyle}"
+								   BasedOn="{StaticResource CupertinoFootnote}"
 								   TargetType="TextBlock">
+								<Setter Property="FontWeight" Value="SemiBold" />
 								<Setter Property="HorizontalAlignment" Value="Center" />
 								<Setter Property="VerticalAlignment" Value="Center" />
 							</Style>
@@ -278,37 +286,37 @@
 											<ColumnDefinition Width="*" />
 										</Grid.ColumnDefinitions>
 										<TextBlock x:Name="WeekDay1"
-												   Foreground="{TemplateBinding CalendarItemForeground}"
+												   Foreground="{ThemeResource CupertinoSecondaryLabelBrush}"
 												   Style="{StaticResource WeekDayNameStyle}"
 												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.WeekDay1}" />
 										<TextBlock x:Name="WeekDay2"
 												   Grid.Column="1"
-												   Foreground="{TemplateBinding CalendarItemForeground}"
+												   Foreground="{ThemeResource CupertinoSecondaryLabelBrush}"
 												   Style="{StaticResource WeekDayNameStyle}"
 												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.WeekDay2}" />
 										<TextBlock x:Name="WeekDay3"
 												   Grid.Column="2"
-												   Foreground="{TemplateBinding CalendarItemForeground}"
+												   Foreground="{ThemeResource CupertinoSecondaryLabelBrush}"
 												   Style="{StaticResource WeekDayNameStyle}"
 												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.WeekDay3}" />
 										<TextBlock x:Name="WeekDay4"
 												   Grid.Column="3"
-												   Foreground="{TemplateBinding CalendarItemForeground}"
+												   Foreground="{ThemeResource CupertinoSecondaryLabelBrush}"
 												   Style="{StaticResource WeekDayNameStyle}"
 												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.WeekDay4}" />
 										<TextBlock x:Name="WeekDay5"
 												   Grid.Column="4"
-												   Foreground="{TemplateBinding CalendarItemForeground}"
+												   Foreground="{ThemeResource CupertinoSecondaryLabelBrush}"
 												   Style="{StaticResource WeekDayNameStyle}"
 												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.WeekDay5}" />
 										<TextBlock x:Name="WeekDay6"
 												   Grid.Column="5"
-												   Foreground="{TemplateBinding CalendarItemForeground}"
+												   Foreground="{ThemeResource CupertinoSecondaryLabelBrush}"
 												   Style="{StaticResource WeekDayNameStyle}"
 												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.WeekDay6}" />
 										<TextBlock x:Name="WeekDay7"
 												   Grid.Column="6"
-												   Foreground="{TemplateBinding CalendarItemForeground}"
+												   Foreground="{ThemeResource CupertinoSecondaryLabelBrush}"
 												   Style="{StaticResource WeekDayNameStyle}"
 												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.WeekDay7}" />
 									</Grid>

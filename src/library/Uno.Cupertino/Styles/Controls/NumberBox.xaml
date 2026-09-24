@@ -21,6 +21,8 @@
 	<x:String x:Key="MinusGlyphPathStyle">M0 1.67236H5.57812V0.327637H0V1.67236Z</x:String>
 
 	<StaticResource x:Key="CupertinoCornerRadius" ResourceKey="Radius250CornerRadius" />
+	<!-- Horizontal only: the 44 pt spin buttons set the frame's height, as a TextBox is 44 pt. -->
+	<Thickness x:Key="CupertinoNumberBoxPadding">7,0,7,0</Thickness>
 
 	<Style x:Name="CupertinoNumberBoxStyle"
 		   TargetType="muxc:NumberBox">
@@ -32,11 +34,17 @@
 		<Setter Property="CornerRadius" Value="{ThemeResource CupertinoCornerRadius}" />
 		<Setter Property="BorderThickness" Value="1" />
 		<Setter Property="BorderBrush" Value="{ThemeResource CupertinoTextBoxBorderBrush}" />
-		<Setter Property="Padding" Value="{ThemeResource Space175Thickness}" />
+		<Setter Property="MinHeight" Value="{ThemeResource ControlHeightMediumLarge}" />
+		<Setter Property="Padding" Value="{StaticResource CupertinoNumberBoxPadding}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="muxc:NumberBox">
-					<Grid>
+					<!-- The header sits above the frame, as for every other field; iOS draws no header inside a box. -->
+					<Grid x:Name="RootGrid">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="*" />
+						</Grid.RowDefinitions>
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
@@ -44,7 +52,7 @@
 								<VisualState x:Name="Pressed" />
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="GridRoot.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+										<Setter Target="RootGrid.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -61,13 +69,29 @@
 
 						</VisualStateManager.VisualStateGroups>
 
+						<ContentPresenter uc:CupertinoTypography.BindCharacterSpacing="True"
+										  x:Name="Header"
+										  Content="{TemplateBinding Header}"
+										  ContentTemplate="{TemplateBinding HeaderTemplate}"
+										  FontSize="{ThemeResource CupertinoHeaderFontSize}"
+										  FontFamily="{ThemeResource CaptionLargeFontFamily}"
+										  FontWeight="{ThemeResource CaptionLargeFontWeight}"
+										  CharacterSpacing="{ThemeResource CaptionLargeCharacterSpacing}"
+										  Foreground="{ThemeResource CupertinoHeaderForegroundBrush}"
+										  Margin="{ThemeResource Space100BottomThickness}"
+										  TextWrapping="Wrap"
+										  Visibility="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}}" />
+
 						<Border x:Name="ContentBorder"
+								Grid.Row="1"
+								MinHeight="{TemplateBinding MinHeight}"
 								Background="{TemplateBinding Background}"
 								BorderBrush="{TemplateBinding BorderBrush}"
 								BorderThickness="{TemplateBinding BorderThickness}"
 								CornerRadius="{TemplateBinding CornerRadius}" />
 
 						<Grid x:Name="GridRoot"
+							  Grid.Row="1"
 							  Margin="{TemplateBinding Padding}">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="*" />
@@ -82,8 +106,6 @@
 									 FontWeight="{TemplateBinding FontWeight}"
 									 CharacterSpacing="{TemplateBinding CharacterSpacing}"
 									 Text="{TemplateBinding Text}"
-									 Header="{TemplateBinding Header}"
-									 HeaderTemplate="{TemplateBinding HeaderTemplate}"
 									 PlaceholderText="{TemplateBinding PlaceholderText}" />
 
 							<StackPanel CornerRadius="{ThemeResource Radius550CornerRadius}"
@@ -112,8 +134,8 @@
 		   TargetType="RepeatButton">
 		<Style.Setters>
 			<Setter Property="IsTabStop" Value="False" />
-			<Setter Property="Width" Value="{ThemeResource TouchTargetMinSize}" />
-			<Setter Property="Height" Value="{ThemeResource TouchTargetMinSize}" />
+			<Setter Property="Width" Value="{ThemeResource ControlHeightMediumLarge}" />
+			<Setter Property="Height" Value="{ThemeResource ControlHeightMediumLarge}" />
 			<Setter Property="FontSize" Value="22" />
 			<Setter Property="Padding" Value="{ThemeResource Space175Thickness}" />
 			<Setter Property="VerticalAlignment" Value="Center" />
@@ -168,8 +190,8 @@
 		   TargetType="RepeatButton">
 		<Style.Setters>
 			<Setter Property="IsTabStop" Value="False" />
-			<Setter Property="Width" Value="{ThemeResource TouchTargetMinSize}" />
-			<Setter Property="Height" Value="{ThemeResource TouchTargetMinSize}" />
+			<Setter Property="Width" Value="{ThemeResource ControlHeightMediumLarge}" />
+			<Setter Property="Height" Value="{ThemeResource ControlHeightMediumLarge}" />
 			<Setter Property="FontSize" Value="22" />
 			<Setter Property="Padding" Value="{ThemeResource Space175Thickness}" />
 			<Setter Property="VerticalAlignment" Value="Center" />

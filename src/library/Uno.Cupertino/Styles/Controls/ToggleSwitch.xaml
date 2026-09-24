@@ -213,7 +213,41 @@
 
 								<VisualState x:Name="Dragging" />
 
-								<VisualState x:Name="Off" />
+								<!-- The knob glides and the track cross-fades in both directions (UISwitch); the knobs swap at once, both are white. -->
+								<VisualState x:Name="Off">
+									<Storyboard>
+
+										<DoubleAnimation Storyboard.TargetName="KnobTranslateTransform"
+														 Storyboard.TargetProperty="X"
+														 To="0"
+														 Duration="{StaticResource CupertinoToggleDuration}"
+														 EasingFunction="{StaticResource CupertinoEaseOutFunction}" />
+
+										<DoubleAnimation Storyboard.TargetName="HighlightBorder"
+														 Storyboard.TargetProperty="Opacity"
+														 To="0"
+														 Duration="{StaticResource CupertinoToggleDuration}"
+														 EasingFunction="{StaticResource CupertinoEaseOutFunction}" />
+
+										<DoubleAnimation Storyboard.TargetName="OuterBorder"
+														 Storyboard.TargetProperty="Opacity"
+														 To="1"
+														 Duration="{StaticResource CupertinoToggleDuration}"
+														 EasingFunction="{StaticResource CupertinoEaseOutFunction}" />
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOn"
+																	   Storyboard.TargetProperty="Opacity">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="0" />
+										</ObjectAnimationUsingKeyFrames>
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOff"
+																	   Storyboard.TargetProperty="Opacity">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="1" />
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
 
 								<VisualState x:Name="On">
 									<Storyboard>
@@ -221,19 +255,20 @@
 										<DoubleAnimation Storyboard.TargetName="KnobTranslateTransform"
 														 Storyboard.TargetProperty="X"
 														 To="20"
-														 Duration="0" />
+														 Duration="{StaticResource CupertinoToggleDuration}"
+														 EasingFunction="{StaticResource CupertinoEaseOutFunction}" />
 
-										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="HighlightBorder"
-																	   Storyboard.TargetProperty="Opacity">
-											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="1" />
-										</ObjectAnimationUsingKeyFrames>
+										<DoubleAnimation Storyboard.TargetName="HighlightBorder"
+														 Storyboard.TargetProperty="Opacity"
+														 To="1"
+														 Duration="{StaticResource CupertinoToggleDuration}"
+														 EasingFunction="{StaticResource CupertinoEaseOutFunction}" />
 
-										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterBorder"
-																	   Storyboard.TargetProperty="Opacity">
-											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="0" />
-										</ObjectAnimationUsingKeyFrames>
+										<DoubleAnimation Storyboard.TargetName="OuterBorder"
+														 Storyboard.TargetProperty="Opacity"
+														 To="0"
+														 Duration="{StaticResource CupertinoToggleDuration}"
+														 EasingFunction="{StaticResource CupertinoEaseOutFunction}" />
 
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOn"
 																	   Storyboard.TargetProperty="Opacity">

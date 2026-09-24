@@ -189,7 +189,7 @@ public class Given_CupertinoContainers
 			}
 
 			var selected = FindDescendant<Grid>(rows[1], "ContentBorder") ?? throw new AssertFailedException("template root missing");
-			Assert.AreEqual(ColorOf(container, "PrimarySelectedBrush"), ColorOf(selected.Background), "a selected row takes the selection tint");
+			Assert.AreEqual(ColorOf(container, "CupertinoSystemFillBrush"), ColorOf(selected.Background), "a selected row takes the neutral system fill");
 			Assert.AreEqual(0.5, FindDescendant<Grid>(rows[2], "ContentBorder")?.Opacity, "a disabled row dims");
 		}
 		finally
