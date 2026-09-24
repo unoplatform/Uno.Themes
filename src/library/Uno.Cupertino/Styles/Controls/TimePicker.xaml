@@ -1,0 +1,268 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					xmlns:not_win="http://uno.ui/not_win"
+					xmlns:uc="using:Uno.Cupertino"
+					mc:Ignorable="not_win">
+
+	<!-- The compact time shares the compact date's capsule, and its wheel the date wheel's brushes (DatePicker.xaml). -->
+	<StaticResource x:Key="CupertinoTimePickerCornerRadius" ResourceKey="Radius550CornerRadius" />
+
+	<!--
+		The time wheel popover: Cancel / title / Done over hour, minute and period wheels, on the same Thick glass and
+		capsule selection band as the date wheel. Part names are the ones TimePickerFlyoutPresenter looks up.
+	-->
+	<Style x:Key="CupertinoTimePickerFlyoutPresenterStyle"
+		   TargetType="TimePickerFlyoutPresenter">
+		<Setter Property="Width" Value="296" />
+		<Setter Property="MinWidth" Value="296" />
+		<Setter Property="MaxHeight" Value="398" />
+		<Setter Property="IsTabStop" Value="False" />
+		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="FontWeight" Value="Normal" />
+		<!-- Wheel rows read at 20 pt, close to the iOS picker's 23 pt, inside the 44 px selection band. -->
+		<Setter Property="FontSize" Value="{ThemeResource HeadlineSmallFontSize}" />
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="AutomationProperties.AutomationId" Value="TimePickerFlyoutPresenter" />
+		<Setter Property="BorderThickness" Value="{StaticResource CupertinoDateTimeFlyoutBorderThickness}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource CupertinoDatePickerBorderBrush}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource Radius650CornerRadius}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="TimePickerFlyoutPresenter">
+					<Grid MaxHeight="398">
+						<uc:GlassPanel Material="Thick"
+									   BorderBrush="{TemplateBinding BorderBrush}"
+									   BorderThickness="{TemplateBinding BorderThickness}"
+									   Tint="{ThemeResource CupertinoPopoverTintBrush}"
+									   CornerRadius="{TemplateBinding CornerRadius}" />
+						<Border x:Name="Background"
+								CornerRadius="{TemplateBinding CornerRadius}">
+							<Grid x:Name="ContentPanel">
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="*" />
+								</Grid.RowDefinitions>
+								<Grid x:Name="AcceptDismissHostGrid"
+									  Height="{ThemeResource TimePickerFlyoutPresenterAcceptDismissHostGridHeight}"
+									  Background="{TemplateBinding Background}">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="Auto" />
+									</Grid.ColumnDefinitions>
+									<Rectangle Grid.ColumnSpan="3"
+											   Height="{ThemeResource MaterialDatePickerSpacerThemeWidth}"
+											   VerticalAlignment="Bottom"
+											   Fill="{ThemeResource CupertinoOpaqueSeparatorBrush}" />
+									<Button x:Name="DismissButton"
+											Grid.Column="0"
+											Margin="{ThemeResource Space300LeftThickness}"
+											Content="Cancel"
+											Style="{StaticResource CupertinoButtonStyle}" />
+									<TextBlock x:Name="TimePickerFlyoutHeader"
+											   Grid.Column="1"
+											   Text="Enter Time"
+											   HorizontalAlignment="Center"
+											   VerticalAlignment="Center"
+											   TextWrapping="NoWrap"
+											   TextTrimming="CharacterEllipsis"
+											   Style="{StaticResource CupertinoTitleMedium}" />
+									<Button x:Name="AcceptButton"
+											Grid.Column="2"
+											Margin="{ThemeResource Space300RightThickness}"
+											Content="Done"
+											Style="{StaticResource CupertinoButtonStyle}" />
+								</Grid>
+								<Grid x:Name="PickerHostGrid"
+									  Grid.Row="1"
+									  Background="{TemplateBinding Background}">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition x:Name="FirstPickerHostColumn"
+														  Width="*" />
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition x:Name="SecondPickerHostColumn"
+														  Width="*" />
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition x:Name="ThirdPickerHostColumn"
+														  Width="*" />
+									</Grid.ColumnDefinitions>
+									<Rectangle x:Name="HighlightRect"
+											   Grid.ColumnSpan="5"
+											   Height="{ThemeResource TimePickerFlyoutPresenterHighlightHeight}"
+											   Margin="{ThemeResource Space150HorizontalThickness}"
+											   VerticalAlignment="Center"
+											   Fill="{ThemeResource CupertinoDatePickerFlyoutPresenterHighlightFill}"
+											   RadiusX="18"
+											   RadiusY="18" />
+									<Border x:Name="FirstPickerHost"
+											Grid.Column="0" />
+									<Rectangle x:Name="FirstPickerSpacing"
+											   Grid.Column="1"
+											   Width="0" />
+									<Border x:Name="SecondPickerHost"
+											Grid.Column="2" />
+									<Rectangle x:Name="SecondPickerSpacing"
+											   Grid.Column="3"
+											   Width="0" />
+									<Border x:Name="ThirdPickerHost"
+											Grid.Column="4" />
+								</Grid>
+							</Grid>
+						</Border>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!--
+		iOS's compact time picker: "9:41 AM" in the compact date's gray capsule, opening the time wheel. The control
+		moves HourTextBlock, MinuteTextBlock and PeriodTextBlock into the three hosts in the locale's order and toggles
+		the dividers: the first divider is the colon, the second the space before the period.
+	-->
+	<Style x:Key="CupertinoTimePickerStyle"
+		   TargetType="TimePicker">
+		<Setter Property="IsTabStop" Value="False" />
+		<Setter Property="MinWidth" Value="0" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyLargeFontWeight}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource BodyLargeCharacterSpacing}" />
+		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="Background" Value="{ThemeResource CupertinoQuinaryGrayBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource PrimaryBrush}" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="CornerRadius" Value="{ThemeResource CupertinoTimePickerCornerRadius}" />
+		<not_win:Setter Property="FlyoutPresenterStyle"
+						Value="{StaticResource CupertinoTimePickerFlyoutPresenterStyle}" />
+		<!-- The header is a caption; a TextBlock carries its tracking, which a ContentPresenter does not pass on. -->
+		<Setter Property="HeaderTemplate">
+			<Setter.Value>
+				<DataTemplate>
+					<TextBlock Text="{Binding}"
+							   FontSize="{ThemeResource CaptionLargeFontSize}"
+							   FontFamily="{ThemeResource CaptionLargeFontFamily}"
+							   FontWeight="{ThemeResource CaptionLargeFontWeight}"
+							   CharacterSpacing="{ThemeResource CaptionLargeCharacterSpacing}"
+							   TextWrapping="Wrap" />
+				</DataTemplate>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="TimePicker">
+					<Grid x:Name="LayoutRoot"
+						  Margin="{TemplateBinding Padding}">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="*" />
+						</Grid.RowDefinitions>
+
+						<ContentPresenter x:Name="HeaderContentPresenter"
+										  Content="{TemplateBinding Header}"
+										  ContentTemplate="{TemplateBinding HeaderTemplate}"
+										  Foreground="{ThemeResource OnSurfaceBrush}"
+										  Margin="{ThemeResource Space100BottomThickness}"
+										  HorizontalAlignment="Stretch"
+										  VerticalAlignment="Top"
+										  Visibility="Collapsed"
+										  AutomationProperties.AccessibilityView="Raw" />
+
+						<Button x:Name="FlyoutButton"
+								Grid.Row="1"
+								HorizontalAlignment="Left"
+								IsEnabled="{TemplateBinding IsEnabled}"
+								MinHeight="{ThemeResource ControlHeightMediumLarge}"
+								Style="{StaticResource CupertinoDatePickerFlyoutButtonStyle}"
+								UseSystemFocusVisuals="{TemplateBinding UseSystemFocusVisuals}">
+							<Grid x:Name="FlyoutButtonContentGrid"
+								  MinHeight="{ThemeResource ControlHeightMediumLarge}"
+								  Padding="{ThemeResource Space400HorizontalThickness}"
+								  Background="{TemplateBinding Background}"
+								  CornerRadius="{TemplateBinding CornerRadius}">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition x:Name="FirstTextBlockColumn"
+													  Width="*" />
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition x:Name="SecondTextBlockColumn"
+													  Width="*" />
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition x:Name="ThirdTextBlockColumn"
+													  Width="*" />
+								</Grid.ColumnDefinitions>
+								<!-- The columns share one width, so the hour hugs the colon and the minute and period lead. -->
+								<Border x:Name="FirstPickerHost"
+										Grid.Column="0">
+									<TextBlock x:Name="HourTextBlock"
+											   TextAlignment="Right"
+											   VerticalAlignment="Center"
+											   Foreground="{TemplateBinding Foreground}"
+											   FontFamily="{TemplateBinding FontFamily}"
+											   FontWeight="{TemplateBinding FontWeight}"
+											   FontSize="{TemplateBinding FontSize}"
+											   CharacterSpacing="{TemplateBinding CharacterSpacing}"
+											   AutomationProperties.AccessibilityView="Raw" />
+								</Border>
+								<TextBlock x:Name="FirstColumnDivider"
+										   Grid.Column="1"
+										   Text=":"
+										   VerticalAlignment="Center"
+										   Foreground="{TemplateBinding Foreground}"
+										   FontFamily="{TemplateBinding FontFamily}"
+										   FontWeight="{TemplateBinding FontWeight}"
+										   FontSize="{TemplateBinding FontSize}" />
+								<Border x:Name="SecondPickerHost"
+										Grid.Column="2">
+									<TextBlock x:Name="MinuteTextBlock"
+											   TextAlignment="Left"
+											   VerticalAlignment="Center"
+											   Foreground="{TemplateBinding Foreground}"
+											   FontFamily="{TemplateBinding FontFamily}"
+											   FontWeight="{TemplateBinding FontWeight}"
+											   FontSize="{TemplateBinding FontSize}"
+											   CharacterSpacing="{TemplateBinding CharacterSpacing}"
+											   AutomationProperties.AccessibilityView="Raw" />
+								</Border>
+								<Border x:Name="SecondColumnDivider"
+										Grid.Column="3"
+										Width="5" />
+								<Border x:Name="ThirdPickerHost"
+										Grid.Column="4">
+									<TextBlock x:Name="PeriodTextBlock"
+											   TextAlignment="Left"
+											   VerticalAlignment="Center"
+											   Foreground="{TemplateBinding Foreground}"
+											   FontFamily="{TemplateBinding FontFamily}"
+											   FontWeight="{TemplateBinding FontWeight}"
+											   FontSize="{TemplateBinding FontSize}"
+											   CharacterSpacing="{TemplateBinding CharacterSpacing}"
+											   AutomationProperties.AccessibilityView="Raw" />
+								</Border>
+							</Grid>
+						</Button>
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="HourTextBlock.Foreground" Value="{ThemeResource CupertinoPrimaryGrayBrush}" />
+										<Setter Target="MinuteTextBlock.Foreground" Value="{ThemeResource CupertinoPrimaryGrayBrush}" />
+										<Setter Target="PeriodTextBlock.Foreground" Value="{ThemeResource CupertinoPrimaryGrayBrush}" />
+										<Setter Target="FirstColumnDivider.Foreground" Value="{ThemeResource CupertinoPrimaryGrayBrush}" />
+										<Setter Target="HeaderContentPresenter.Foreground" Value="{ThemeResource CupertinoPrimaryGrayBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="HasTimeStates">
+								<VisualState x:Name="HasTime" />
+								<VisualState x:Name="HasNoTime" />
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+</ResourceDictionary>

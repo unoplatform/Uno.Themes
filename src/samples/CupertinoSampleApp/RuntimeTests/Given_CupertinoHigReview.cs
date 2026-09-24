@@ -518,6 +518,24 @@ public class Given_CupertinoHigReview
 		}
 	}
 
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_TimePickerDisabled_Then_TheValueDims()
+	{
+		var container = CreateThemedContainer();
+		try
+		{
+			var picker = await Load(container, new TimePicker { IsEnabled = false, SelectedTime = new System.TimeSpan(9, 41, 0), VerticalAlignment = VerticalAlignment.Top });
+			var gray = ThemedColor(ElementTheme.Light, "CupertinoPrimaryGrayBrush");
+			Assert.AreEqual(gray, ColorOf(Find<TextBlock>(picker, "HourTextBlock").Foreground), "a dimmed hour");
+			Assert.AreEqual(gray, ColorOf(Find<TextBlock>(picker, "MinuteTextBlock").Foreground), "a dimmed minute");
+		}
+		finally
+		{
+			UnitTestsUIContentHelper.Content = null;
+		}
+	}
+
 	// Apple's semantic alphas, rounded to the nearest byte (0.30 → 0x4D, 0.18 → 0x2E, 0.16 → 0x29, 0.29 → 0x4A),
 	// read from the live brushes the theme paints from its palette.
 	[TestMethod]

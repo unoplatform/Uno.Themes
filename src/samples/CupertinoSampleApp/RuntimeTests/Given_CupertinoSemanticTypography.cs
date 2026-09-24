@@ -15,6 +15,7 @@ public class Given_CupertinoSemanticTypography
 	[DataRow("ComboBox", "BodyLarge")]
 	[DataRow("DatePicker", "BodyLarge")]
 	[DataRow("CalendarDatePicker", "BodyLarge")]
+	[DataRow("TimePicker", "BodyLarge")]
 	[DataRow("Button", "LabelLarge")]
 	[DataRow("ToggleButton", "LabelLarge")]
 	[DataRow("ToggleSwitch", "BodySmall")]
@@ -86,6 +87,7 @@ public class Given_CupertinoSemanticTypography
 	[DataRow("ComboBox")]
 	[DataRow("DatePicker")]
 	[DataRow("CalendarDatePicker")]
+	[DataRow("TimePicker")]
 	public async Task When_CaptionOverridden_Then_FieldHeaderUsesCaptionMetrics(string controlName)
 	{
 		var control = CreateControl(controlName);
@@ -479,6 +481,7 @@ public class Given_CupertinoSemanticTypography
 		"ComboBox" => new ComboBox { Header = "Header", Items = { "Body" }, SelectedIndex = 0 },
 		"DatePicker" => new DatePicker { Header = "Header" },
 		"CalendarDatePicker" => new CalendarDatePicker { Header = "Header" },
+		"TimePicker" => new TimePicker { Header = "Header" },
 		"Button" => new Button { Content = "Body" },
 		"ToggleButton" => new Microsoft.UI.Xaml.Controls.Primitives.ToggleButton { Content = "Body" },
 		"ToggleSwitch" => new ToggleSwitch { Header = "Header" },

@@ -215,6 +215,67 @@ public class Given_CupertinoHigFields
 		}
 	}
 
+	// iOS's compact time picker: "9:41 AM" in the same gray capsule as the compact date.
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_TimePickerLoaded_Then_CompactTimeHasRoundedTouchTarget()
+	{
+		var host = Container();
+		var field = new TimePicker { ClockIdentifier = "12HourClock", SelectedTime = new System.TimeSpan(9, 41, 0) };
+		try
+		{
+			await Load(host, field, "CupertinoTimePickerStyle");
+			var button = Find<Button>(field, "FlyoutButton");
+			Assert.IsNotNull(button);
+			Assert.IsTrue(button.ActualHeight >= 44, $"touch target {button.ActualHeight}");
+			Assert.AreEqual(new CornerRadius(22), field.CornerRadius);
+			Assert.AreEqual(17d, field.FontSize);
+			Assert.AreEqual(":", Find<TextBlock>(field, "FirstColumnDivider")?.Text, "hour and minute are joined by a colon");
+			Assert.AreEqual("41", Find<TextBlock>(field, "MinuteTextBlock")?.Text);
+			Assert.IsTrue(field.ActualWidth < 160, $"the capsule hugs its value; was {field.ActualWidth}");
+		}
+		finally
+		{
+			UnitTestsUIContentHelper.Content = null;
+		}
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_TimeWheelPresented_Then_PopoverUsesGlassAndCapsuleSelection()
+	{
+		var host = Container();
+		var target = new Border { Width = 100, Height = 40 };
+		var flyout = new TimePickerFlyout();
+		try
+		{
+			host.Children.Add(target);
+			UnitTestsUIContentHelper.Content = host;
+			await UnitTestsUIContentHelper.WaitForLoaded(target);
+			flyout.ShowAt(target);
+			await UnitTestsUIContentHelper.WaitForIdle();
+			var presenter = VisualTreeHelper.GetOpenPopupsForXamlRoot(target.XamlRoot)
+				.Select(popup => popup.Child)
+				.OfType<TimePickerFlyoutPresenter>()
+				.FirstOrDefault() ?? throw new AssertFailedException("The time wheel did not open");
+			await UnitTestsUIContentHelper.WaitForLoaded(presenter);
+			var glass = Find<GlassPanel>(presenter);
+			Assert.IsNotNull(glass, "The time wheel popover must match the other Cupertino popovers.");
+			Assert.AreEqual(GlassMaterial.Thick, glass.Material);
+			Assert.AreEqual(new CornerRadius(26), glass.CornerRadius);
+			var highlight = Find<Rectangle>(presenter, "HighlightRect");
+			Assert.IsNotNull(highlight);
+			Assert.IsTrue(highlight.RadiusX >= 16 && highlight.RadiusY >= 16, "Selection band must have capsule ends.");
+			Assert.AreEqual("Done", (Find<Button>(presenter, "AcceptButton")?.Content)?.ToString());
+			Assert.AreEqual("Cancel", (Find<Button>(presenter, "DismissButton")?.Content)?.ToString());
+		}
+		finally
+		{
+			flyout.Hide();
+			UnitTestsUIContentHelper.Content = null;
+		}
+	}
+
 	[TestMethod]
 	[RunsOnUIThread]
 	public async Task When_WheelPickerPresented_Then_PopoverUsesGlassAndCapsuleSelection()
