@@ -876,3 +876,7 @@ blue-grey) and the toggle's inner track was too tall with a kinked edge (linear 
 centre line; cubic strength too low on the GPU). Contrast and saturation neutral on Clear, ease back to
 1 − u², K 1.7 → 2.2, and the rim pull capped at half the half-side so a rim never reads a neighbouring
 control (a green speck from the toggle above had appeared on the slider thumb).
+
+Slider at rest beside iOS: the inactive track was the primary grey (mid grey) where iOS uses the tertiary
+system fill, and the rest shadow was tight. `CupertinoSliderTrackBrush` → `CupertinoTertiarySystemFillBrush`
+(Light and Default), rest `Translation.Z` 6 → 10 for the switch knob and slider thumb.
