@@ -43,6 +43,33 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.MaterialTemplate>
+			<sample:SamplePageLayout.CupertinoTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- The compact time: a gray capsule that opens the time wheel -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_TimePickerSamplePage_Default"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TimePicker Header="Alarm"
+										ClockIdentifier="12HourClock"
+										SelectedTime="07:30:00" />
+						</smtx:XamlDisplay>
+
+						<smtx:XamlDisplay UniqueKey="Cupertino_TimePickerSamplePage_24Hour"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TimePicker Header="24-hour clock"
+										ClockIdentifier="24HourClock"
+										SelectedTime="18:45:00" />
+						</smtx:XamlDisplay>
+
+						<smtx:XamlDisplay UniqueKey="Cupertino_TimePickerSamplePage_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TimePicker Header="Disabled"
+										SelectedTime="09:41:00"
+										IsEnabled="False" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.CupertinoTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

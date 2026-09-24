@@ -58,8 +58,17 @@ Light and Dark) before and after.
   CheckBox / RadioButton / ToggleSwitch / ComboBox labels are sentence case; ToggleSwitch and ComboBox are iOS
   rows. Colors lists every brush as a chip plus key in grouped lists, legible in both appearances. The
   NavigationView sample opens its sidebar with real items. ListView's bound sample has data in every design.
-- **Deferred.** TimePicker left the Cupertino app: the theme has no TimePicker style, and the page's Cupertino
-  template was empty. A compact-capsule TimePicker like the DatePicker is the follow-up.
+- **TimePicker (follow-up, 2026-09-24).** `CupertinoTimePickerStyle` (implicit) is the compact capsule of the
+  date picker showing "9:41 AM" / "18:45": the control re-parents the hour, minute and period TextBlocks into
+  its hosts in locale order and toggles the dividers, so the first divider is a ":" TextBlock and the second a
+  5 px space; the equal star columns align hour right and minute / period left so the value reads as one
+  string. The caption header is a default `HeaderTemplate` TextBlock, because a ContentPresenter did not pass
+  `CharacterSpacing` on (the caption typography test caught it). `CupertinoTimePickerFlyoutPresenterStyle`
+  (implicit, as the non-native Skia flyout reads the implicit presenter style) mirrors the date wheel at the
+  same 296 px width; both wheel titles now use `CupertinoTitleMedium` instead of Fluent's
+  `BodyTextBlockStyle`, which wrapped "Enter Time". Tests: compact capsule, open wheel (via a real
+  `TimePickerFlyout`, the presenter has no public constructor), disabled dims, two typography rows; all
+  red before the style. The TimePicker page and the Gallery show it again.
 - **Verification.** Every Cupertino page captured through the real Shell, Light and Dark, before and after.
   Cupertino runtime tests 293/293, Simple 273 (1 existing skip), Material 63; XAML Styler and `dotnet format whitespace` verify clean; markdownlint and
   cSpell pass on the changed doc.
