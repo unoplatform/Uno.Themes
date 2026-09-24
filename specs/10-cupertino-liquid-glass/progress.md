@@ -842,3 +842,9 @@ with fold streaks. The model that reproduces the iOS capture is a **capsule lens
 measured along the long axis only. Straight section = cylinder (straight narrower pill), caps = weaker
 compression (smooth flare into the real track on the continuing side, rounded pushed-in end on the other).
 `radius` uniform back for the cap extent.
+
+Twelfth round, with the knob forced to mid-track beside iOS: iOS shows an hourglass — narrowest at the
+centre, widening continuously to meet the real track at both caps. The capsule model's straight section
+produced a step. The shift now eases with 1 − u² along the long axis in both components, the long-axis one
+at half strength so the mapping stays monotonic; the end-position look (pushed-in track end) is preserved
+because the pressed knob overhangs the track end.
