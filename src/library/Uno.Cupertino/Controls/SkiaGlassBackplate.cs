@@ -17,13 +17,15 @@ namespace Uno.Cupertino;
 /// </summary>
 internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 {
-	// A convex lens: the sample point moves outward from the centre in proportion to its distance from it,
-	// so the glass shows the backdrop minified about the centre. Over the last stretch before the rim the
-	// shift falls back to zero, so what shows at the edge is what lies directly beneath it: the shrunken
-	// image bends outward to meet the real content outside — a switch knob shows a small track that flares
-	// into the real one where the track continues (iOS 26). Encoded into R / G for
-	// SKImageFilter.CreateDisplacementMapEffect, where 0.5 is "no displacement" and the full shift along
-	// the longer axis is half the effect's scale. Evaluated in canvas coordinates, hence the origin.
+	// A capsule lens. The sample point moves outward from the centre in proportion to its distance from it,
+	// so the glass shows the backdrop minified: along the straight section the lens is a cylinder and the
+	// image is a straight, narrower copy of what lies beneath; over the rounded caps the compression eases
+	// towards the tip, so the image bows outward to meet the real content at the rim — a switch knob shows a
+	// small track that flares into the real one where the track continues, and the track's end pushed in
+	// where it stops (iOS 26). The ease is gentle enough that the mapping never runs backwards (a fold would
+	// read as a hard step). Encoded into R / G for SKImageFilter.CreateDisplacementMapEffect, where 0.5 is
+	// "no displacement" and the full shift along the longer axis is half the effect's scale. Evaluated in
+	// canvas coordinates, hence the origin.
 	private const string LensMapSksl = """
 		uniform float2 origin;
 		uniform float2 size;
@@ -31,12 +33,11 @@ internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 		half4 main(float2 p) {
 			float2 c = size * 0.5;
 			float2 v = p - origin - c;
-			float2 q = abs(v) - (c - radius);
-			float d = length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - radius;
-			float t = clamp(1.0 + d / min(c.x, c.y), 0.0, 1.0);
-			// The falloff must be gentle enough that the sample position never runs backwards (a fold reads
-			// as a hard step): with a 60 % shift it needs to start no later than 0.4.
-			float w = 1.0 - smoothstep(0.4, 1.0, t);
+			// How far into a cap this point is, measured along the capsule's long axis only.
+			float along = c.x >= c.y ? abs(v.x) : abs(v.y);
+			float straight = max(c.x, c.y) - radius;
+			float k = clamp((along - straight) / radius, 0.0, 1.0);
+			float w = 1.0 - 0.7 * smoothstep(0.0, 1.0, k);
 			float2 disp = v / max(c.x, c.y) * w;
 			return half4(0.5 + 0.5 * disp.x, 0.5 + 0.5 * disp.y, 0.0, 1.0);
 		}
@@ -244,7 +245,7 @@ internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 			{
 				["origin"] = new[] { bounds.Left, bounds.Top },
 				["size"] = new[] { bounds.Width, bounds.Height },
-				["radius"] = radius,
+				["radius"] = Math.Max(radius, 1),
 			};
 			using var shader = lensMap.ToShader(uniforms);
 			using var map = SKImageFilter.CreateShader(shader, false, sampleBounds);

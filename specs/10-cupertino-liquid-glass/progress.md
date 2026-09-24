@@ -835,3 +835,10 @@ off knob and the left rim of the on knob.
 Tenth round: the flare showed as a hard step. A falloff over the last 30 % is steep enough for the sample
 position to run backwards (a fold) with a 60 % shift; the falloff now starts at 0.4 of the radius, which
 keeps the mapping monotonic and gives the smooth bow of the iOS capture.
+
+Eleventh round: the SDF falloff bowed with a square corner and an ellipse-based falloff produced an hourglass
+with fold streaks. The model that reproduces the iOS capture is a **capsule lens**: uniform minification
+(shift ∝ distance from centre, Refraction 30 → ×0.57) whose factor eases to 30 % over the rounded caps,
+measured along the long axis only. Straight section = cylinder (straight narrower pill), caps = weaker
+compression (smooth flare into the real track on the continuing side, rounded pushed-in end on the other).
+`radius` uniform back for the cap extent.
