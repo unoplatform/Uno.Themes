@@ -159,10 +159,15 @@ internal static class SemanticBrushUpdater
 	/// them wins, and within a layer the first listed wins — so a brush can name its own color first and a
 	/// semantic role second, and follow a seed without losing a consumer override of its own color.
 	/// </param>
+	/// <param name="fallbackKeepsOwnAlpha">
+	/// When a later key supplies the color, keep the alpha of the brush's own (first) color: the semantic role
+	/// then only tints a translucent brush, such as a system fill, instead of making it opaque.
+	/// </param>
 	internal static void Apply(
 		ResourceDictionary brushes,
 		IReadOnlyList<ResourceDictionary> colorLayers,
-		IReadOnlyList<(string Brush, string[] Colors)> brushColorKeys)
+		IReadOnlyList<(string Brush, string[] Colors)> brushColorKeys,
+		bool fallbackKeepsOwnAlpha = false)
 	{
 		foreach (var (brushTheme, colorThemes) in ThemesConstants.BrushThemeSources)
 		{
@@ -176,53 +181,66 @@ internal static class SemanticBrushUpdater
 				var (brushKey, colorKeys) = brushColorKeys[i];
 				if (themedBrushes.TryGetValue(brushKey, out var value)
 					&& value is SolidColorBrush brush
-					&& TryResolveAny(colorLayers, colorThemes, colorKeys, out var color)
-					&& !brush.Color.Equals(color))
+					&& TryResolveAny(colorLayers, colorThemes, colorKeys, colorKeys.Length, out var color, out var matched))
 				{
-					brush.Color = color;
+					if (fallbackKeepsOwnAlpha
+						&& matched > 0
+						&& TryResolveAny(colorLayers, colorThemes, colorKeys, 1, out var own, out _))
+					{
+						color = Color.FromArgb(own.A, color.R, color.G, color.B);
+					}
+
+					if (!brush.Color.Equals(color))
+					{
+						brush.Color = color;
+					}
 				}
 			}
 		}
 	}
 
+	// Only the first keyCount keys are candidates; matched is the index of the one that supplied the color.
 	private static bool TryResolveAny(
-		IReadOnlyList<ResourceDictionary> colorLayers, string[] themeKeys, string[] keys, out Color resolved)
+		IReadOnlyList<ResourceDictionary> colorLayers, string[] themeKeys, string[] keys, int keyCount, out Color resolved, out int matched)
 	{
 		for (int i = colorLayers.Count - 1; i >= 0; i--)
 		{
-			if (TryResolveAnyInLayer(colorLayers[i], themeKeys, keys, out resolved))
+			if (TryResolveAnyInLayer(colorLayers[i], themeKeys, keys, keyCount, out resolved, out matched))
 			{
 				return true;
 			}
 		}
 
 		resolved = default;
+		matched = -1;
 		return false;
 	}
 
 	// A dictionary merged into a layer is a layer of its own, above its parent: every candidate key is tried
 	// there before any is tried on the parent. Trying the candidates per top-level layer instead would let the
 	// parent's first candidate shadow a nested override of the second one.
-	private static bool TryResolveAnyInLayer(ResourceDictionary layer, string[] themeKeys, string[] keys, out Color resolved)
+	private static bool TryResolveAnyInLayer(ResourceDictionary layer, string[] themeKeys, string[] keys, int keyCount, out Color resolved, out int matched)
 	{
 		var merged = layer.MergedDictionaries;
 		for (int m = merged.Count - 1; m >= 0; m--)
 		{
-			if (TryResolveAnyInLayer(merged[m], themeKeys, keys, out resolved))
+			if (TryResolveAnyInLayer(merged[m], themeKeys, keys, keyCount, out resolved, out matched))
 			{
 				return true;
 			}
 		}
 
-		for (int k = 0; k < keys.Length; k++)
+		for (int k = 0; k < keyCount; k++)
 		{
 			if (TryResolveOwn(layer, themeKeys, keys[k], out resolved))
 			{
+				matched = k;
 				return true;
 			}
 		}
 
 		resolved = default;
+		matched = -1;
 		return false;
 	}
 

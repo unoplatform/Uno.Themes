@@ -87,6 +87,7 @@ public class CupertinoTheme(ResourceDictionary colorOverride = null, ResourceDic
 	{
 		_cupertinoBrushes ??= new ResourceDictionary { Source = new Uri(CupertinoConstants.Brushes) };
 		SemanticBrushUpdater.Apply(_cupertinoBrushes, ColorLayers, CupertinoConstants.BrushColorKeys);
+		SemanticBrushUpdater.Apply(_cupertinoBrushes, ColorLayers, CupertinoConstants.FillBrushColorKeys, fallbackKeepsOwnAlpha: true);
 		AddThemeDictionary(_cupertinoBrushes);
 		AddThemeDictionary(BuildAccentColors(_cupertinoBrushes));
 		AddThemeDictionary(BuildSpacingResources());

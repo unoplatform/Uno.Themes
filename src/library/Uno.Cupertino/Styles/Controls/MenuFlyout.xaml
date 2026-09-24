@@ -39,7 +39,7 @@
 	<x:Double x:Key="CupertinoMenuFlyoutItemIconSize">22</x:Double>
 	<x:Double x:Key="CupertinoMenuFlyoutItemGlyphFontSize">13</x:Double>
 	<Thickness x:Key="CupertinoMenuFlyoutSeparatorMargin">0</Thickness>
-	<x:Double x:Key="CupertinoMenuFlyoutSeparatorHeight">8</x:Double>
+	<StaticResource x:Key="CupertinoMenuFlyoutSeparatorHeight" ResourceKey="Space200" />
 
 	<Style x:Key="CupertinoMenuFlyoutPresenterStyle"
 		   TargetType="MenuFlyoutPresenter">
@@ -554,7 +554,7 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="MenuFlyoutSeparator">
 					<Rectangle Fill="{TemplateBinding Background}"
-							   Height="{StaticResource CupertinoMenuFlyoutSeparatorHeight}"
+							   Height="{ThemeResource CupertinoMenuFlyoutSeparatorHeight}"
 							   Margin="{TemplateBinding Padding}" />
 				</ControlTemplate>
 			</Setter.Value>

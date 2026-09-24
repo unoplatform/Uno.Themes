@@ -311,4 +311,106 @@ public class Given_CupertinoSemanticGeometry
 			UnitTestsUIContentHelper.Content = null;
 		}
 	}
+
+	// Parts the 2026-09-24 review restyled: the NumberBox padding, the menu group band and the progress
+	// track must follow the spacing, radius and progress-bar keys rather than literals.
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_ReviewedPartTokensOverridden_Then_TheyFollow()
+	{
+		var resources = Application.Current.Resources;
+		var overrides = new (string Key, object Value)[]
+		{
+			("Space175HorizontalThickness", new Thickness(13, 0, 13, 0)),
+			("Space200", 11d),
+			("CupertinoProgressBarHeight", 6d),
+			("Radius050CornerRadius", new CornerRadius(3)),
+		};
+		var saved = overrides.Select(o => (o.Key, Had: resources.Keys.Contains(o.Key), Value: resources.Keys.Contains(o.Key) ? resources[o.Key] : null)).ToArray();
+		foreach (var (key, value) in overrides)
+		{
+			resources[key] = value;
+		}
+
+		var host = new StackPanel { Width = 400 };
+		var number = new NumberBox { Value = 1 };
+		var bar = new ProgressBar { Value = 50, Width = 300 };
+		var anchor = new Button { Content = "Anchor" };
+		host.Children.Add(number);
+		host.Children.Add(bar);
+		host.Children.Add(anchor);
+		var separator = new MenuFlyoutSeparator();
+		var menu = new MenuFlyout();
+		menu.Items.Add(new MenuFlyoutItem { Text = "Copy" });
+		menu.Items.Add(separator);
+		menu.Items.Add(new MenuFlyoutItem { Text = "Delete" });
+		try
+		{
+			UnitTestsUIContentHelper.Content = host;
+			await UnitTestsUIContentHelper.WaitForLoaded(bar);
+			await UnitTestsUIContentHelper.WaitForIdle();
+			menu.ShowAt(anchor);
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			Assert.AreEqual(new Thickness(13, 0, 13, 0), number.Padding, "NumberBox padding follows Space175");
+			Assert.AreEqual(11d, Descendant<Microsoft.UI.Xaml.Shapes.Rectangle>(separator).ActualHeight, "menu band follows Space200");
+			var track = Descendant<Microsoft.UI.Xaml.Shapes.Rectangle>(bar, "ProgressBarTrack");
+			Assert.AreEqual(6d, track.ActualHeight, "track height follows CupertinoProgressBarHeight");
+			Assert.AreEqual(3d, track.RadiusX, "track radius follows Radius050");
+		}
+		finally
+		{
+			menu.Hide();
+			foreach (var (key, had, value) in saved)
+			{
+				resources.Remove(key);
+				if (had)
+				{
+					resources[key] = value;
+				}
+			}
+
+			UnitTestsUIContentHelper.Content = null;
+		}
+	}
+
+	private static T Descendant<T>(DependencyObject root, string? name = null)
+		where T : FrameworkElement
+	{
+		for (var i = 0; i < VisualTreeHelper.GetChildrenCount(root); i++)
+		{
+			var child = VisualTreeHelper.GetChild(root, i);
+			if (child is T match && (name is null || match.Name == name))
+			{
+				return match;
+			}
+
+			if (FindOrNull<T>(child, name) is { } nested)
+			{
+				return nested;
+			}
+		}
+
+		throw new AssertFailedException($"Missing {typeof(T).Name} {name}");
+	}
+
+	private static T? FindOrNull<T>(DependencyObject root, string? name)
+		where T : FrameworkElement
+	{
+		for (var i = 0; i < VisualTreeHelper.GetChildrenCount(root); i++)
+		{
+			var child = VisualTreeHelper.GetChild(root, i);
+			if (child is T match && (name is null || match.Name == name))
+			{
+				return match;
+			}
+
+			if (FindOrNull<T>(child, name) is { } nested)
+			{
+				return nested;
+			}
+		}
+
+		return null;
+	}
 }

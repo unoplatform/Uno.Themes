@@ -158,9 +158,11 @@ Alongside the shared roles, `CupertinoTheme` keeps the Cupertino vocabulary: the
 The brushes are live: overriding a `*Color` key through `Colors.OverrideSource` repaints everything already on screen that uses the matching brush, without re-navigation. To re-tint the accent, override `PrimaryColor` (it reaches the semantic brushes and the Cupertino accent brushes) or `CupertinoBlueColor` (the Cupertino accent only; it wins over `PrimaryColor` and over a seed).
 
 The semantic text and surface roles also reach the Cupertino vocabulary: `OnSurfaceColor` updates
-labels and field borders, `OnSurfaceVariantColor` updates secondary labels and placeholders,
+labels and field borders, `OnSurfaceVariantColor` updates secondary labels and placeholders and
+tints the four system fills (which keep Apple's translucency, so hover, pressed and selected states
+still read on any surface),
 `BackgroundColor` and `SurfaceColor` update their background families, and `OutlineColor` /
-`OutlineVariantColor` update separators. An explicit Cupertino color such as `LabelColor` takes
+`OutlineVariantColor` update separators and the checkbox outline. An explicit Cupertino color such as `LabelColor` takes
 precedence over its semantic counterpart in the same override dictionary. Clearing overrides
 restores the Apple palette on the same brush instances.
 

@@ -10,8 +10,8 @@
 	<x:Double x:Key="FocusAreaSize">40</x:Double>
 	<x:Double x:Key="CheckAreaSize">18</x:Double>
 	<StaticResource x:Key="CheckAreaCornerRadius" ResourceKey="Radius100CornerRadius" />
-	<!-- An unchecked box is outlined in systemGray3 over the surface, as the macOS checkbox is; the accent only fills a checked box. -->
-	<StaticResource x:Key="CupertinoCheckBoxBorderBrush" ResourceKey="CupertinoTertiaryGrayBrush" />
+	<!-- An unchecked box is outlined in the opaque separator gray (it follows OutlineColor), as the macOS checkbox is; the accent only fills a checked box. -->
+	<StaticResource x:Key="CupertinoCheckBoxBorderBrush" ResourceKey="CupertinoOpaqueSeparatorBrush" />
 
 	<Style x:Key="CupertinoCheckBoxStyle"
 		   TargetType="CheckBox">

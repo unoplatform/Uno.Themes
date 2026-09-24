@@ -48,9 +48,9 @@ internal static class CupertinoConstants
 	public static readonly string[] AccentThemeKeys = { "Light", "Default" };
 
 	/// <summary>
-	/// Every brush in <c>CupertinoBrushes.xaml</c> with the color keys that may supply it. A XAML-backed
-	/// dictionary cannot be enumerated on Uno, so this list is the source of truth — keep it in sync with
-	/// that file. The accent brushes name the semantic primary second, so they follow a seed color or a
+	/// Every brush in <c>CupertinoBrushes.xaml</c> but the system fills (<see cref="FillBrushColorKeys"/>) with
+	/// the color keys that may supply it. A XAML-backed dictionary cannot be enumerated on Uno, so these two
+	/// lists are the source of truth — keep them in sync with that file. The accent brushes name the semantic primary second, so they follow a seed color or a
 	/// <c>PrimaryColor</c> override while a consumer override of their own color still wins.
 	/// </summary>
 	public static readonly (string Brush, string[] Colors)[] BrushColorKeys =
@@ -102,10 +102,6 @@ internal static class CupertinoConstants
 		("CupertinoTertiaryLabelBrush", new[] { "TertiaryLabelColor", "OnSurfaceVariantColor" }),
 		("CupertinoQuaternaryLabelBrush", new[] { "QuaternaryLabelColor", "OnSurfaceVariantColor" }),
 		("CupertinoPlaceholderTextBrush", new[] { "PlaceholderTextColor", "OnSurfaceVariantColor" }),
-		("CupertinoSystemFillBrush", new[] { "SystemFillColor" }),
-		("CupertinoSecondarySystemFillBrush", new[] { "SecondarySystemFillColor" }),
-		("CupertinoTertiarySystemFillBrush", new[] { "TertiarySystemFillColor" }),
-		("CupertinoQuaternarySystemFillBrush", new[] { "QuaternarySystemFillColor" }),
 		("CupertinoSystemBackgroundBrush", new[] { "SystemBackgroundColor", "BackgroundColor" }),
 		("CupertinoSecondarySystemBackgroundBrush", new[] { "SecondarySystemBackgroundColor", "SurfaceColor" }),
 		("CupertinoTertiarySystemBackgroundBrush", new[] { "TertiarySystemBackgroundColor", "SurfaceColor" }),
@@ -115,5 +111,19 @@ internal static class CupertinoConstants
 		("CupertinoSeparatorBrush", new[] { "SeparatorColor", "OutlineVariantColor" }),
 		("CupertinoOpaqueSeparatorBrush", new[] { "OpaqueSeparatorColor", "OutlineColor" }),
 		("RadioButtonBackgroundBrush", new[] { "RadioButtonBackgroundColor" }),
+	};
+
+	/// <summary>
+	/// The translucent system fills of <c>CupertinoBrushes.xaml</c>, kept apart from <see cref="BrushColorKeys"/>
+	/// because their semantic fallback supplies only a hue: <c>OnSurfaceVariantColor</c> (a seed or an override)
+	/// tints them, while the alpha stays Apple's for the appearance, so hover, pressed and selected fills keep
+	/// reading on any surface. An explicit Apple fill color still wins, alpha included.
+	/// </summary>
+	public static readonly (string Brush, string[] Colors)[] FillBrushColorKeys =
+	{
+		("CupertinoSystemFillBrush", new[] { "SystemFillColor", "OnSurfaceVariantColor" }),
+		("CupertinoSecondarySystemFillBrush", new[] { "SecondarySystemFillColor", "OnSurfaceVariantColor" }),
+		("CupertinoTertiarySystemFillBrush", new[] { "TertiarySystemFillColor", "OnSurfaceVariantColor" }),
+		("CupertinoQuaternarySystemFillBrush", new[] { "QuaternarySystemFillColor", "OnSurfaceVariantColor" }),
 	};
 }

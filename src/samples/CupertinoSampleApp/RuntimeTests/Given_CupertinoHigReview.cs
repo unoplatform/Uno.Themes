@@ -475,6 +475,31 @@ public class Given_CupertinoHigReview
 		}
 	}
 
+	// A pressed compact picker dims like a pressed button, through the same token.
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_CompactPickerPressed_Then_ItDimsWithTheButtonPressedOpacity()
+	{
+		var container = CreateThemedContainer();
+		try
+		{
+			var calendar = await Load(container, new CalendarDatePicker { VerticalAlignment = VerticalAlignment.Top });
+			var date = await Load(container, new DatePicker { VerticalAlignment = VerticalAlignment.Bottom });
+			var expected = Resource<double>(container, "CupertinoButtonPressedOpacity");
+
+			Assert.IsTrue(VisualStateManager.GoToState(calendar, "Pressed", false), "calendar picker Pressed state");
+			Assert.AreEqual(expected, Find<Border>(calendar, "Background").Opacity, "calendar picker");
+
+			var button = Find<Button>(date, "FlyoutButton");
+			Assert.IsTrue(VisualStateManager.GoToState(button, "Pressed", false), "date picker Pressed state");
+			Assert.AreEqual(expected, Find<Grid>(button, "RootGrid").Opacity, "date picker");
+		}
+		finally
+		{
+			UnitTestsUIContentHelper.Content = null;
+		}
+	}
+
 	// The disabled state assigned a Color to a Brush property, so the value never dimmed.
 	[TestMethod]
 	[RunsOnUIThread]

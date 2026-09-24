@@ -22,7 +22,7 @@
 
 	<StaticResource x:Key="CupertinoCornerRadius" ResourceKey="Radius250CornerRadius" />
 	<!-- Horizontal only: the 44 pt spin buttons set the frame's height, as a TextBox is 44 pt. -->
-	<Thickness x:Key="CupertinoNumberBoxPadding">7,0,7,0</Thickness>
+	<StaticResource x:Key="CupertinoNumberBoxPadding" ResourceKey="Space175HorizontalThickness" />
 
 	<Style x:Name="CupertinoNumberBoxStyle"
 		   TargetType="muxc:NumberBox">
@@ -35,7 +35,7 @@
 		<Setter Property="BorderThickness" Value="1" />
 		<Setter Property="BorderBrush" Value="{ThemeResource CupertinoTextBoxBorderBrush}" />
 		<Setter Property="MinHeight" Value="{ThemeResource ControlHeightMediumLarge}" />
-		<Setter Property="Padding" Value="{StaticResource CupertinoNumberBoxPadding}" />
+		<Setter Property="Padding" Value="{ThemeResource CupertinoNumberBoxPadding}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="muxc:NumberBox">

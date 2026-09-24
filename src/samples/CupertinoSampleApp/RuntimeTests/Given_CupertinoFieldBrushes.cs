@@ -65,6 +65,8 @@ public class Given_CupertinoFieldBrushes
 	[DataRow("CupertinoCalendarDatePickerBorderBrushPressed", "CupertinoPrimaryGrayColor", 0.4)]
 	[DataRow("CupertinoDatePickerFlyoutPresenterHighlightFill", "CupertinoQuinaryGrayColor", 1.0)]
 	[DataRow("CupertinoCalendarViewSelectedBackground", "CupertinoBlueColor", 0.27)]
+	[DataRow("CupertinoCheckBoxBorderBrush", "OpaqueSeparatorColor", 1.0)]
+	[DataRow("CupertinoCheckBoxBorderBrush", "OutlineColor", 1.0)]
 	public void When_FieldColorOverridden_Then_ExistingBrushRepaintsAndKeepsOpacity(string brushKey, string colorKey, double opacity)
 	{
 		// Aliases resolve through the application scope, as they do in a consumer's App.xaml.
@@ -82,6 +84,42 @@ public class Given_CupertinoFieldBrushes
 			theme.Colors = new ThemeColors { OverrideDictionary = new ResourceDictionary { [colorKey] = second } };
 			Assert.AreSame(brush, Application.Current.Resources[brushKey], "the brush instance must survive");
 			Assert.AreEqual(second, brush.Color, brushKey + " replacement override");
+		}
+		finally
+		{
+			theme.Colors = original;
+		}
+
+		Assert.AreEqual(originalColor, brush.Color, "clearing the override must restore the palette");
+	}
+
+	// The system fills follow the semantic OnSurfaceVariantColor for their hue and keep Apple's translucency,
+	// so hover, pressed and selected states still read on any surface; an explicit Apple fill color wins.
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow("CupertinoSystemFillBrush", "SystemFillColor")]
+	[DataRow("CupertinoSecondarySystemFillBrush", "SecondarySystemFillColor")]
+	[DataRow("CupertinoTertiarySystemFillBrush", "TertiarySystemFillColor")]
+	[DataRow("CupertinoQuaternarySystemFillBrush", "QuaternarySystemFillColor")]
+	public void When_OnSurfaceVariantOverridden_Then_FillTakesItsHueAndKeepsAppleAlpha(string brushKey, string appleKey)
+	{
+		var theme = (CupertinoTheme)Application.Current.GetTheme();
+		var original = theme.Colors;
+		var brush = (SolidColorBrush)Application.Current.Resources[brushKey];
+		var originalColor = brush.Color;
+		var hue = Color.FromArgb(255, 18, 52, 86);
+		var explicitFill = Color.FromArgb(0x40, 101, 67, 33);
+		try
+		{
+			theme.Colors = new ThemeColors { OverrideDictionary = new ResourceDictionary { ["OnSurfaceVariantColor"] = hue } };
+			Assert.AreSame(brush, Application.Current.Resources[brushKey], "the brush instance must survive");
+			Assert.AreEqual(Color.FromArgb(originalColor.A, hue.R, hue.G, hue.B), brush.Color, brushKey + " semantic hue, Apple alpha");
+
+			theme.Colors = new ThemeColors
+			{
+				OverrideDictionary = new ResourceDictionary { ["OnSurfaceVariantColor"] = hue, [appleKey] = explicitFill },
+			};
+			Assert.AreEqual(explicitFill, brush.Color, brushKey + " an explicit Apple fill wins over the semantic role");
 		}
 		finally
 		{

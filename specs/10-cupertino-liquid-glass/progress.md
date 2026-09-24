@@ -909,3 +909,24 @@ independent XAML audits by control family.
 Result: Cupertino desktop Debug **278 / 278**. Open items (row height 52, popover shadows, per-row menu
 hairlines, state opacities, hover idiom, button weight, NavigationView buttons, glass adaptivity) are listed
 in the report with the reason each was left.
+
+### Token and semantic follow-up to the review — 2026-09-24
+
+The maintainer asked whether the review's changes were still driven by the semantic resources and tokens.
+Four had regressed to literals, and the new fill aliases had lost semantic reach. Fixed, red → green:
+
+- [x] `CupertinoNumberBoxPadding` → `Space175HorizontalThickness`, `CupertinoMenuFlyoutSeparatorHeight` → `Space200`,
+  progress `ProgressBarTrackHeight` / `ProgressBarMinHeight` → `CupertinoProgressBarHeight` and
+  `ProgressBarTrackCornerRadius` → `CupertinoProgressBarCornerRadius` (the unused `ProgressBarCornerRadius` override
+  dropped: the indicator binds the control's CornerRadius). All consumed through `{ThemeResource}`.
+- [x] Compact pickers' pressed opacity → `CupertinoButtonPressedOpacity` (was a literal 0.65).
+- [x] System fills take `OnSurfaceVariantColor` as a semantic fallback that supplies only the hue
+  (`SemanticBrushUpdater.Apply(..., fallbackKeepsOwnAlpha: true)`, `CupertinoConstants.FillBrushColorKeys`); an
+  explicit Apple fill color still wins. Checkbox outline → `CupertinoOpaqueSeparatorBrush` (falls back to `OutlineColor`).
+- [x] Tests: `Given_CupertinoSemanticGeometry.When_ReviewedPartTokensOverridden_Then_TheyFollow`,
+  `Given_CupertinoFieldBrushes.When_OnSurfaceVariantOverridden_Then_FillTakesItsHueAndKeepsAppleAlpha` (4 rows) and
+  two checkbox rows, `Given_CupertinoHigReview.When_CompactPickerPressed_Then_ItDimsWithTheButtonPressedOpacity`.
+
+Result: Cupertino **286 / 286**, Simple 273 (1 existing skip), Material 63 / 63; formatters and doc lints pass.
+The ComboBox and date pickers stay on `CupertinoQuinaryGrayBrush` (a gray-scale color with no semantic fallback),
+as the date pickers were before the review.
