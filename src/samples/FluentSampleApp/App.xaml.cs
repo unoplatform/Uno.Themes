@@ -17,6 +17,7 @@ sealed partial class App : Application
 	{
 		ConfigureXamlDisplay();
 		SamplePageLayout.ActiveDesign = Design.Fluent;
+		NavigationHelper.IconOverride = FluentSampleIcons.Create;
 
 		this.InitializeComponent();
 

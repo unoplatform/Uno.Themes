@@ -310,6 +310,56 @@ listed at all.
   Phase 4 (StaticResources inside the *other* designs' templates and the shared
   brush dictionary), not Fluent-template misses.
 
+## Phase 9 — Fluent sample chrome and semantic-contract fixes (2026-09-24)
+
+Owner request: a fully Fluent, polished Fluent sample app, and a Fluent theme that honors the semantic contract.
+Evidence: every Fluent page rendered through the real `Shell` (scratch capture, 1280×1000, Light and Dark)
+before and after; a read-only audit diffed Fluent's semantic keys against Material v2 and Simple.
+
+Findings (before):
+
+- The app turned purple once the Seed Color page had been visited: the page applied its `#6750A4` default seed
+  on construction. Under Material that default is the baseline purple, which hid it; under Fluent every accent
+  control lost the system accent for the rest of the session.
+- Every page showed a "Documentation" link and an empty description line when it had neither: the shared
+  `IsNullOrEmptyToCollapsed` converter treated `null` as "not empty" (all heads).
+- Chrome was the shared Fluent-ish scaffold: a light 34 px title indented past the content, "SOURCE
+  WinUI/Uno.UI", gray boxes with 10 px "See Xaml" buttons, the purple Material appearance toggle, placeholder
+  diamonds for every nav item, and placeholder items in the NavigationView samples.
+- Audit, confirmed: (1) the seven `TextButton*` state defaults were `<StaticResource>` aliases to the
+  *standard* button's native keys inside the theme branches, which Uno resolves against the appearance active
+  at load (spike S1 case 4), so one branch held the other's values, and the hover fill was not the subtle one;
+  (2) `IconButtonStyle` set only its rest foreground, so hover / press / disable swapped in the standard
+  button's foregrounds, and `IconButtonForegroundDisabled` did not exist; (3) only 2 of the 12
+  `CheckBoxGlyphForeground*` keys were bridged, though the docs said the family was.
+
+- [x] Seed Color page previews without applying: the picker shows the current `PrimaryColor` and a seed is
+  applied only once one is picked (`Given_FluentSamplePages.When_SeedPageVisited_Then_TheAppKeepsItsAccent`,
+  red first).
+- [x] Converter treats `null` as empty (`When_SampleHasNoDocumentationLink_TheHeaderHidesIt`, red on the old
+  converter, green on the fix).
+- [x] `FluentSampleApp/Styles/FluentSampleChrome.xaml`, merged last in the Fluent head, re-templates the page
+  layout (title in the Title Large ramp step via semantic `DisplaySmall`, description, Documentation link),
+  each sample (a WinUI Gallery card: `SurfaceBrush`, `OutlineVariantBrush` stroke, `Radius200` corners, a
+  `SurfaceVariantBrush` "Source code" footer with a subtle button), Overview entries (card with text, "View
+  component" standard button and live sample split by a divider) and the appearance toggle (a subtle icon
+  button, Brightness / QuietHours). Written against the semantic layer, so its native look is itself a check
+  of the Fluent mapping.
+- [x] Nav icons: `NavigationHelper.IconOverride` lets a head supply its own icon; the Fluent head maps every
+  entry to a Segoe Fluent Icons glyph (`FluentSampleIcons.cs`, code points from the official list).
+- [x] NavigationView samples use real items (Library / Media / Music / Videos / Photos / Downloads / Mail) and
+  the left sample opens its pane; PasswordBox samples lead instead of centering.
+- [x] Theme: `TextButton*` state defaults are literal per branch (`SubtleFillColorSecondary` / `Tertiary`,
+  `TextFillColorDisabled`, transparent borders), guarded by `When_TextButtonStateDefaultsResolve_...` (both
+  branches) and new `When_AmbientDefaults_MatchLiveTokens` rows; `FluentIconButtonStyle` routes its state
+  foregrounds / subtle fills through `FluentTextButtonResources`, with an `IconButtonForegroundDisabled`
+  default (`When_IconButtonStateRendered_...`); ten `CheckBoxGlyphForeground*` repoint rows
+  (`When_DivergentKeyOverridden_...`). All red before the fix.
+- [x] Docs: `lightweight-styling.md`, `styles/Button.md`, `styles/TextBox.md` (header hover / focus brushes
+  have no Fluent counterpart).
+- Not changed: the solid accent row of a multi-select ListView is Uno's stock `ListViewItemBackgroundSelected`
+  (probed identical in a bare `XamlControlsResources`), not a FluentTheme mapping.
+
 ## Gap audit — 2026-09-04
 
 Requested with the master integration: a full inspection of the adapter, its

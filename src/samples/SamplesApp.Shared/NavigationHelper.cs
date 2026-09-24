@@ -15,6 +15,12 @@ public static class NavigationHelper
 	/// </summary>
 	public static Action<Sample> ShellNavigateToHandler { get; set; }
 
+	/// <summary>
+	/// Optionally set by a sample head to supply its design system's own navigation icon for a menu entry
+	/// (a sample title or category name); returning null falls back to the shared path icon.
+	/// </summary>
+	public static Func<string, IconElement?>? IconOverride { get; set; }
+
 	public static void NavigateTo(Shell shell, Sample sample, bool trySynchronizeCurrentItem)
 	{
 		var nv = shell.NavigationView;
@@ -98,7 +104,7 @@ public static class NavigationHelper
 				parentItem = new MUXC.NavigationViewItem
 				{
 					Content = category.Key.GetDescription() ?? category.Key.ToString(),
-					Icon = CreateIconElement(GetCategoryIconSource()),
+					Icon = IconOverride?.Invoke(category.Key.ToString()) ?? CreateIconElement(GetCategoryIconSource()),
 					SelectsOnInvoked = false,
 				};
 				AutomationProperties.SetAutomationId(parentItem, "Section_" + parentItem.Content);
@@ -123,7 +129,7 @@ public static class NavigationHelper
 				var item = new MUXC.NavigationViewItem
 				{
 					Content = sample.Title,
-					Icon = CreateIconElement(sample.IconSource),
+					Icon = IconOverride?.Invoke(sample.Title) ?? CreateIconElement(sample.IconSource),
 					DataContext = sample,
 				};
 				AutomationProperties.SetAutomationId(item, "Section_" + item.Content);

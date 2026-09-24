@@ -96,6 +96,59 @@ public class Given_FluentSamplePages
 			$"{pages.Count} Fluent-enabled pages inflated; failures:\n{failures}");
 	}
 
+	// Visiting the Seed Color page applied its purple default seed to the app, so every Fluent control lost the
+	// system accent until the app restarted. Under Material the default equals the baseline and hid this.
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_SeedPageVisited_Then_TheAppKeepsItsAccent()
+	{
+		var seedBefore = SemanticThemeHelper.PrimarySeed;
+		var seedColorModeBefore = SemanticThemeHelper.SeedColorMode;
+		SemanticThemeHelper.PrimarySeed = null;
+		try
+		{
+			var page = new Content.Styles.SeedColorSamplePage();
+			UnitTestsUIContentHelper.Content = page;
+			await UnitTestsUIContentHelper.WaitForLoaded(page);
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			Assert.IsNull(SemanticThemeHelper.PrimarySeed, "opening the page must not seed the application palette");
+		}
+		finally
+		{
+			UnitTestsUIContentHelper.Content = null;
+			SemanticThemeHelper.SeedColorMode = seedColorModeBefore;
+			SemanticThemeHelper.PrimarySeed = seedBefore;
+		}
+	}
+
+	// A sample without a description or documentation link has null for them; the header's
+	// IsNullOrEmptyToCollapsed treated null as "not empty" and showed an empty line and a dead link.
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_SampleHasNoDocumentationLink_TheHeaderHidesIt()
+	{
+		var shell = NavigationHelper.BuildShell();
+		var container = new Grid { Width = 1280, Height = 900 };
+		container.Children.Add(shell);
+		try
+		{
+			UnitTestsUIContentHelper.Content = container;
+			await UnitTestsUIContentHelper.WaitForLoaded(shell);
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			var layout = Assert.IsInstanceOfType<SamplePageLayout>(shell.FindFirstDescendant<SamplePageLayout>());
+			var sample = Assert.IsInstanceOfType<Sample>(layout.DataContext, "the landing page is the Overview sample");
+			Assert.IsNull(sample.DocumentationLink, "the Overview declares no documentation link");
+			var link = Assert.IsInstanceOfType<HyperlinkButton>(layout.FindFirstDescendant<HyperlinkButton>());
+			Assert.AreEqual(Visibility.Collapsed, link.Visibility);
+		}
+		finally
+		{
+			UnitTestsUIContentHelper.Content = null;
+		}
+	}
+
 	[TestMethod]
 	public void When_CorePagesDeclareFluent()
 	{

@@ -143,33 +143,35 @@
 									  Style="{StaticResource XamlDisplayBelowStyle}">
 						<sample:ClippedGrid MinHeight="400">
 							<muxc:NavigationView OpenPaneLength="260"
+												 PaneDisplayMode="Left"
+												 IsSettingsVisible="False"
 												 IsBackButtonVisible="Collapsed"
 												 IsBackEnabled="False"
 												 Style="{StaticResource NavigationViewStyle}">
 								<muxc:NavigationView.MenuItems>
-									<muxc:NavigationViewItemHeader Content="Main Section" />
+									<muxc:NavigationViewItemHeader Content="Library" />
 									<muxc:NavigationViewItem Icon="Library"
-															 Content="Parent for 1~3"
+															 Content="Media"
 															 SelectsOnInvoked="False"
 															 Style="{StaticResource NavigationViewItemStyle}">
 										<muxc:NavigationViewItem.MenuItems>
-											<muxc:NavigationViewItem Icon="Placeholder"
-																	 Content="Item 1"
+											<muxc:NavigationViewItem Icon="Audio"
+																	 Content="Music"
 																	 Style="{StaticResource NavigationViewItemStyle}" />
-											<muxc:NavigationViewItem Icon="Placeholder"
-																	 Content="Item 2"
+											<muxc:NavigationViewItem Icon="Video"
+																	 Content="Videos"
 																	 Style="{StaticResource NavigationViewItemStyle}" />
-											<muxc:NavigationViewItem Icon="Placeholder"
-																	 Content="Item 3"
+											<muxc:NavigationViewItem Icon="Pictures"
+																	 Content="Photos"
 																	 Style="{StaticResource NavigationViewItemStyle}" />
 										</muxc:NavigationViewItem.MenuItems>
 									</muxc:NavigationViewItem>
-									<muxc:NavigationViewItem Icon="Placeholder"
-															 Content="Item 4"
+									<muxc:NavigationViewItem Icon="Download"
+															 Content="Downloads"
 															 Style="{StaticResource NavigationViewItemStyle}" />
 									<muxc:NavigationViewItemSeparator />
-									<muxc:NavigationViewItem Icon="Placeholder"
-															 Content="Item 5"
+									<muxc:NavigationViewItem Icon="Mail"
+															 Content="Mail (disabled)"
 															 IsEnabled="False"
 															 Style="{StaticResource NavigationViewItemStyle}" />
 								</muxc:NavigationView.MenuItems>

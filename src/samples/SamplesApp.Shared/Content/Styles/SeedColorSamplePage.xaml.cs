@@ -11,7 +11,11 @@ namespace Uno.Themes.Samples.Content.Styles;
 	SupportedDesigns = new[] { Design.Material, Design.Simple, Design.Fluent })]
 public sealed partial class SeedColorSamplePage : Page
 {
-	private static Color _lastSeed = Color.FromArgb(0xFF, 0x67, 0x50, 0xA4);
+	// The seed picked on this page, if any. Until one is picked, a visit only previews: applying a default seed
+	// on load repainted the whole app (FluentTheme loses the system accent; Material's baseline hid it).
+	private static Color? _lastSeed;
+	private static readonly Color DefaultPreviewSeed = Color.FromArgb(0xFF, 0x67, 0x50, 0xA4);
+	private bool _initializing;
 	private static SeedColorMode _lastSeedColorMode = SeedColorMode.Fidelity;
 
 	// The theme element name for the XAML snippet, per active design.
@@ -33,20 +37,40 @@ public sealed partial class SeedColorSamplePage : Page
 			DesignNote.Visibility = Visibility.Visible;
 		}
 
-		SeedColorPicker.Color = _lastSeed;
+		var shown = _lastSeed ?? CurrentPrimary() ?? DefaultPreviewSeed;
+		_initializing = true;
+		SeedColorPicker.Color = shown;
 		SeedColorModeCombo.SelectedIndex = _lastSeedColorMode == SeedColorMode.Fidelity ? 0 : 1;
-		ApplySeedColor(_lastSeed);
+		_initializing = false;
+
+		if (_lastSeed is { } seed)
+		{
+			ApplySeedColor(seed);
+		}
+		else
+		{
+			ShowSeed(shown);
+		}
 	}
+
+	private static Color? CurrentPrimary()
+		=> Application.Current.Resources.TryGetValue("PrimaryColor", out var value) && value is Color color ? color : null;
 
 	private void SeedColorPicker_ColorChanged(ColorPicker sender, ColorChangedEventArgs args)
 	{
-		ApplySeedColor(args.NewColor);
+		if (!_initializing)
+		{
+			ApplySeedColor(args.NewColor);
+		}
 	}
 
 	private void SeedColorModeCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
 	{
 		_lastSeedColorMode = SeedColorModeCombo.SelectedIndex == 1 ? SeedColorMode.TonalSpot : SeedColorMode.Fidelity;
-		ApplySeedColor(_lastSeed);
+		if (!_initializing)
+		{
+			ApplySeedColor(SeedColorPicker.Color);
+		}
 	}
 
 	private void ApplySeedColor(Color seed)
@@ -54,7 +78,11 @@ public sealed partial class SeedColorSamplePage : Page
 		_lastSeed = seed;
 		SemanticThemeHelper.SeedColorMode = _lastSeedColorMode;
 		SemanticThemeHelper.PrimarySeed = seed;
+		ShowSeed(seed);
+	}
 
+	private void ShowSeed(Color seed)
+	{
 		var hct = HctColor.FromArgb(ColorToArgb(seed));
 
 		SeedSwatch.Background = new SolidColorBrush(seed);
