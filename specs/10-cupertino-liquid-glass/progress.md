@@ -816,3 +816,7 @@ round tuned an edge-band model that cannot produce that. The shader is now a con
 Sixth round (Mac, 8× crop): the minifying lens shows the right structure; the view through it was at full
 brightness so the shrunken track read near-white, where iOS dims everything seen through the knob. Added
 `Brightness` (gain in the colour matrix), Clear 0.88.
+
+Seventh round (Mac, 8× crop): uniform dimming flattened the knob to one grey; iOS keeps the page inside the
+knob light and deepens only the mid-tones. `Brightness` replaced by `Contrast` anchored at white
+(out = c·in + 1 − c, offset column in 0–1 units — 0–255 turns the view black), Clear 1.6.
