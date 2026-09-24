@@ -17,6 +17,18 @@
 					  Content="Hold knobs pressed (for screenshots)"
 					  Checked="HoldKnobsChanged"
 					  Unchecked="HoldKnobsChanged" />
+			<!-- While held: where along its travel every switch knob sits, 0 = off end, 100 = on end. -->
+			<StackPanel x:Name="KnobPositionPanel"
+						Visibility="Collapsed"
+						Spacing="4">
+				<TextBlock Text="Knob position"
+						   Style="{StaticResource BodySmall}" />
+				<Slider x:Name="KnobPosition"
+						Minimum="0"
+						Maximum="100"
+						Value="50"
+						ValueChanged="KnobPositionChanged" />
+			</StackPanel>
 			<StackPanel Spacing="8">
 				<TextBlock Text="Preferences"
 						   Style="{StaticResource TitleMedium}" />
