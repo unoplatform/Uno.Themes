@@ -848,3 +848,8 @@ centre, widening continuously to meet the real track at both caps. The capsule m
 produced a step. The shift now eases with 1 − u² along the long axis in both components, the long-axis one
 at half strength so the mapping stays monotonic; the end-position look (pushed-in track end) is preserved
 because the pressed knob overhangs the track end.
+
+Thirteenth round (mid-track and end-position crops beside iOS): geometry matched but iOS holds the waist
+narrower (~45 %) and flares later, and its body is shaded. Ease 1 − u² → 1 − u³ with the long-axis shift at
+0.3 (monotonic with Refraction 36, ×0.53 at the centre); new `Sheen` preset (Clear 1): a vertical gradient
+inside the shape, white up to 0.4 α above the middle, black up to 0.16 α below it.

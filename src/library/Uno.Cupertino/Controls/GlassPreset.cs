@@ -12,7 +12,8 @@ namespace Uno.Cupertino;
 /// <param name="Shadow">Alpha of the drop shadow the surface casts on what is beneath it, 0–1. 0 casts none.</param>
 /// <param name="Outline">Alpha of the thin dark line at the very edge of the glass, 0–1, which separates a clear lens from what it sits on.</param>
 /// <param name="Contrast">Contrast of what shows through, anchored at white: 1 leaves it alone, above 1 keeps light surfaces light and deepens mid-tones, as a thick clear lens does.</param>
-internal readonly record struct GlassPreset(float Sigma, float Saturation, float Refraction, float Rim, float Veil, float Shadow = 0, float RimWidth = 1, float Outline = 0, float Contrast = 1)
+/// <param name="Sheen">Strength of the body shading, 0–1: a light band above the middle and a dark band below it, the light caught in a thick lens.</param>
+internal readonly record struct GlassPreset(float Sigma, float Saturation, float Refraction, float Rim, float Veil, float Shadow = 0, float RimWidth = 1, float Outline = 0, float Contrast = 1, float Sheen = 0)
 {
 	// Starting values from spec 10 (token-and-style-mapping.md §7): tuned from Apple's qualitative rules
 	// and Cupertino.Avalonia's presets, still to be measured against the iOS 26 design kit.
@@ -24,7 +25,7 @@ internal readonly record struct GlassPreset(float Sigma, float Saturation, float
 		// Clear is the lens of a lifted switch/slider knob (iOS 26 switch): no veil, no blur, and a strong lens
 		// that shows the track and page beneath it minified to about 60 %, bounded by a hairline outline and a
 		// faint top-lit highlight, on a soft shadow. Starting values matched to an iOS 27 simulator capture.
-		GlassMaterial.Clear => new(Sigma: 0, Saturation: 1.05f, Refraction: 30, Rim: 0.7f, Veil: 0f, Shadow: 0.18f, RimWidth: 1, Outline: 0.22f, Contrast: 1.6f),
+		GlassMaterial.Clear => new(Sigma: 0, Saturation: 1.05f, Refraction: 36, Rim: 0.7f, Veil: 0f, Shadow: 0.18f, RimWidth: 1, Outline: 0.22f, Contrast: 1.6f, Sheen: 1),
 		_ => new(Sigma: 12, Saturation: 1.3f, Refraction: 7, Rim: 0.30f, Veil: 0.22f),
 	};
 }

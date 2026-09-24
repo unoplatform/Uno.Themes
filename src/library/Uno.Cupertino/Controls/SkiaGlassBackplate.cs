@@ -21,8 +21,9 @@ internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 	// so the glass shows the backdrop minified, strongest at the centre and easing to nothing at the tips, so
 	// what shows at the rim is what lies beneath it: a track running through the knob shows as an hourglass,
 	// narrowest in the middle and widening until it meets the real track at both caps; a track ending under
-	// the knob shows its end pushed in (iOS 26). The long-axis shift is half the short-axis one so that,
-	// with its own ease, the mapping never runs backwards along the length (a fold would read as a hard step).
+	// the knob shows its end pushed in (iOS 26). The ease (1 − u³) holds the waist narrow and flares late; the
+	// long-axis shift is 0.3 of the short-axis one so that, with that ease, the mapping never runs backwards
+	// along the length (a fold would read as a hard step).
 	// Encoded into R / G for SKImageFilter.CreateDisplacementMapEffect, where 0.5 is "no displacement" and
 	// the full shift along the longer axis is half the effect's scale. Evaluated in canvas coordinates,
 	// hence the origin.
@@ -34,9 +35,9 @@ internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 			float2 v = p - origin - c;
 			bool horizontal = c.x >= c.y;
 			float u = horizontal ? abs(v.x) / c.x : abs(v.y) / c.y;
-			float w = 1.0 - u * u;
+			float w = 1.0 - u * u * u;
 			float2 disp = v / max(c.x, c.y) * w;
-			if (horizontal) { disp.x *= 0.5; } else { disp.y *= 0.5; }
+			if (horizontal) { disp.x *= 0.3; } else { disp.y *= 0.3; }
 			return half4(0.5 + 0.5 * disp.x, 0.5 + 0.5 * disp.y, 0.0, 1.0);
 		}
 		""";
@@ -171,6 +172,27 @@ internal sealed partial class SkiaGlassBackplate : SKCanvasElement
 
 		using var layerPaint = new SKPaint { Color = SKColors.White.WithAlpha((byte)(_layerOpacity * 255)) };
 		canvas.SaveLayer(new SKCanvasSaveLayerRec { Bounds = sampleBounds, Backdrop = _chain, Paint = layerPaint });
+
+		if (Preset.Sheen > 0)
+		{
+			// Body shading across the short axis: light caught above the middle, shadow below it.
+			var vertical = bounds.Width >= bounds.Height;
+			using var sheenShader = SKShader.CreateLinearGradient(
+				vertical ? new SKPoint(bounds.MidX, bounds.Top) : new SKPoint(bounds.Left, bounds.MidY),
+				vertical ? new SKPoint(bounds.MidX, bounds.Bottom) : new SKPoint(bounds.Right, bounds.MidY),
+				new[]
+				{
+					SKColors.White.WithAlpha((byte)(Preset.Sheen * 0.10f * 255)),
+					SKColors.White.WithAlpha((byte)(Preset.Sheen * 0.40f * 255)),
+					SKColors.Transparent,
+					SKColors.Black.WithAlpha((byte)(Preset.Sheen * 0.16f * 255)),
+					SKColors.Black.WithAlpha((byte)(Preset.Sheen * 0.06f * 255)),
+				},
+				new[] { 0f, 0.32f, 0.5f, 0.68f, 1f },
+				SKShaderTileMode.Clamp);
+			using var sheen = new SKPaint { Shader = sheenShader, IsAntialias = true };
+			canvas.DrawRoundRect(shape, sheen);
+		}
 
 		if (Preset.Outline > 0)
 		{
