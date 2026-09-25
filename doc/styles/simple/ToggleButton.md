@@ -4,6 +4,8 @@ uid: Uno.Themes.Simple.Styles.ToggleButton
 
 # ToggleButton Control
 
+Both Simple variants consume `TextToggleButton*` brush resources. The separate icon template does not read Material's `IconToggleButton*` brush family, so shared overrides using those keys are ineffective under Simple. The default style derives from the text variant; see [semantic override compatibility](../../semantic-styles.md#override-compatibility).
+
 ## Styles
 
 | Style Key                          | IsDefaultStyle\* |
