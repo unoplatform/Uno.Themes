@@ -280,7 +280,7 @@ public class Given_DefaultFontFamily
 		{
 			Assert.AreEqual(ChosenSource, GetFontSource(container, key),
 				$"'{key}' is declared by SharedTypography.xaml and must follow DefaultFontFamily; " +
-				"if this fails for a newly added slot, add it to ThemesConstants.TypefaceScaleKeys.");
+				"if this fails for a newly added slot, add it to ThemesConstants.TypeScaleSlots.");
 		}
 	}
 
