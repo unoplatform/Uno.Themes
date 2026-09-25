@@ -134,56 +134,56 @@ internal sealed class SeedColorPaletteGenerator
 		// being that PrimaryColor renders the exact hex the consumer supplied. Dark stays
 		// derived at tone 80: a dark brand color pinned onto a dark surface is unreadable.
 		int lightPrimary = preserveSeedColor ? seedArgb : primary.GetArgb(40);
-		lightDict["PrimaryColor"] = ArgbToColor(lightPrimary);
-		darkDict["PrimaryColor"] = ArgbToColor(primary.GetArgb(80));
+		lightDict[SemanticColorKeys.Primary] = ArgbToColor(lightPrimary);
+		darkDict[SemanticColorKeys.Primary] = ArgbToColor(primary.GetArgb(80));
 
-		lightDict["OnPrimaryColor"] = ArgbToColor(
+		lightDict[SemanticColorKeys.OnPrimary] = ArgbToColor(
 			preserveSeedColor ? PickOnColor(lightPrimary, primary) : primary.GetArgb(100));
-		darkDict["OnPrimaryColor"] = ArgbToColor(primary.GetArgb(20));
+		darkDict[SemanticColorKeys.OnPrimary] = ArgbToColor(primary.GetArgb(20));
 
-		SetColor(lightDict, darkDict, "PrimaryContainerColor", primary, 90, 30);
-		SetColor(lightDict, darkDict, "OnPrimaryContainerColor", primary, 10, 90);
-		SetColor(lightDict, darkDict, "PrimaryInverseColor", primary, 80, 40);
-		SetColor(lightDict, darkDict, "PrimaryVariantDarkColor", primary, 30, 30);
-		SetColor(lightDict, darkDict, "PrimaryVariantLightColor", primary, 70, 80);
+		SetColor(lightDict, darkDict, SemanticColorKeys.PrimaryContainer, primary, 90, 30);
+		SetColor(lightDict, darkDict, SemanticColorKeys.OnPrimaryContainer, primary, 10, 90);
+		SetColor(lightDict, darkDict, SemanticColorKeys.PrimaryInverse, primary, 80, 40);
+		SetColor(lightDict, darkDict, SemanticColorKeys.PrimaryVariantDark, primary, 30, 30);
+		SetColor(lightDict, darkDict, SemanticColorKeys.PrimaryVariantLight, primary, 70, 80);
 
 		// Secondary
-		SetColor(lightDict, darkDict, "SecondaryColor", secondary, 40, 80);
-		SetColor(lightDict, darkDict, "OnSecondaryColor", secondary, 100, 20);
-		SetColor(lightDict, darkDict, "SecondaryContainerColor", secondary, 90, 30);
-		SetColor(lightDict, darkDict, "OnSecondaryContainerColor", secondary, 10, 90);
-		SetColor(lightDict, darkDict, "SecondaryVariantDarkColor", secondary, 30, 30);
-		SetColor(lightDict, darkDict, "SecondaryVariantLightColor", secondary, 70, 80);
+		SetColor(lightDict, darkDict, SemanticColorKeys.Secondary, secondary, 40, 80);
+		SetColor(lightDict, darkDict, SemanticColorKeys.OnSecondary, secondary, 100, 20);
+		SetColor(lightDict, darkDict, SemanticColorKeys.SecondaryContainer, secondary, 90, 30);
+		SetColor(lightDict, darkDict, SemanticColorKeys.OnSecondaryContainer, secondary, 10, 90);
+		SetColor(lightDict, darkDict, SemanticColorKeys.SecondaryVariantDark, secondary, 30, 30);
+		SetColor(lightDict, darkDict, SemanticColorKeys.SecondaryVariantLight, secondary, 70, 80);
 
 		// Tertiary
-		SetColor(lightDict, darkDict, "TertiaryColor", tertiary, 40, 80);
-		SetColor(lightDict, darkDict, "OnTertiaryColor", tertiary, 100, 20);
-		SetColor(lightDict, darkDict, "TertiaryContainerColor", tertiary, 90, 30);
-		SetColor(lightDict, darkDict, "OnTertiaryContainerColor", tertiary, 10, 90);
+		SetColor(lightDict, darkDict, SemanticColorKeys.Tertiary, tertiary, 40, 80);
+		SetColor(lightDict, darkDict, SemanticColorKeys.OnTertiary, tertiary, 100, 20);
+		SetColor(lightDict, darkDict, SemanticColorKeys.TertiaryContainer, tertiary, 90, 30);
+		SetColor(lightDict, darkDict, SemanticColorKeys.OnTertiaryContainer, tertiary, 10, 90);
 
 		// Background
-		SetColor(lightDict, darkDict, "BackgroundColor", neutral, 99, 10);
-		SetColor(lightDict, darkDict, "OnBackgroundColor", neutral, 10, 90);
+		SetColor(lightDict, darkDict, SemanticColorKeys.Background, neutral, 99, 10);
+		SetColor(lightDict, darkDict, SemanticColorKeys.OnBackground, neutral, 10, 90);
 
 		// Surface
-		SetColor(lightDict, darkDict, "SurfaceColor", neutral, 99, 20);
-		SetColor(lightDict, darkDict, "OnSurfaceColor", neutral, 10, 90);
-		SetColor(lightDict, darkDict, "SurfaceVariantColor", neutralVariant, 90, 30);
-		SetColor(lightDict, darkDict, "OnSurfaceVariantColor", neutralVariant, 30, 80);
-		SetColor(lightDict, darkDict, "SurfaceInverseColor", neutral, 20, 90);
-		SetColor(lightDict, darkDict, "OnSurfaceInverseColor", neutral, 95, 20);
+		SetColor(lightDict, darkDict, SemanticColorKeys.Surface, neutral, 99, 20);
+		SetColor(lightDict, darkDict, SemanticColorKeys.OnSurface, neutral, 10, 90);
+		SetColor(lightDict, darkDict, SemanticColorKeys.SurfaceVariant, neutralVariant, 90, 30);
+		SetColor(lightDict, darkDict, SemanticColorKeys.OnSurfaceVariant, neutralVariant, 30, 80);
+		SetColor(lightDict, darkDict, SemanticColorKeys.SurfaceInverse, neutral, 20, 90);
+		SetColor(lightDict, darkDict, SemanticColorKeys.OnSurfaceInverse, neutral, 95, 20);
 		// SurfaceTint is M3's alias of Primary, so it follows the pinned value.
-		lightDict["SurfaceTintColor"] = ArgbToColor(lightPrimary);
-		darkDict["SurfaceTintColor"] = ArgbToColor(primary.GetArgb(80));
+		lightDict[SemanticColorKeys.SurfaceTint] = ArgbToColor(lightPrimary);
+		darkDict[SemanticColorKeys.SurfaceTint] = ArgbToColor(primary.GetArgb(80));
 
 		// Outline
-		SetColor(lightDict, darkDict, "OutlineColor", neutralVariant, 50, 60);
-		SetColor(lightDict, darkDict, "OutlineVariantColor", neutralVariant, 80, 30);
+		SetColor(lightDict, darkDict, SemanticColorKeys.Outline, neutralVariant, 50, 60);
+		SetColor(lightDict, darkDict, SemanticColorKeys.OutlineVariant, neutralVariant, 80, 30);
 
 		// Shadow (fixed, not derived from seed)
 		var shadowColor = Color.FromArgb(0x33, 0x00, 0x00, 0x00);
-		lightDict["ShadowColor"] = shadowColor;
-		darkDict["ShadowColor"] = shadowColor;
+		lightDict[SemanticColorKeys.Shadow] = shadowColor;
+		darkDict[SemanticColorKeys.Shadow] = shadowColor;
 
 		var result = new ResourceDictionary();
 		result.ThemeDictionaries["Light"] = lightDict;

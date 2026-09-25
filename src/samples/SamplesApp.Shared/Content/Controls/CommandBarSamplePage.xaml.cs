@@ -3,7 +3,7 @@ using Uno.Themes.Samples.Content.NestedSamples;
 namespace Uno.Themes.Samples.Content.Controls;
 
 [SamplePage(SampleCategory.Controls, "CommandBar", Description = "This control provides navigation and related actions for the current page.",
-	DocumentationLink = "https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.commandbar", SupportedDesigns = new[] { Design.Material })]
+	DocumentationLink = "https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.commandbar", SupportedDesigns = new[] { Design.Material, Design.Fluent })]
 public sealed partial class CommandBarSamplePage : Page
 {
 	public CommandBarSamplePage()

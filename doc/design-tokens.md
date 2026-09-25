@@ -14,7 +14,7 @@ A single root typeface token cascades to all type-scale keys:
 
 | Key                 | Default                                                       | Role             |
 |---------------------|---------------------------------------------------------------|------------------|
-| `DefaultFontFamily` | Segoe UI (Material: Roboto, Simple: Inter, Cupertino: SF Pro) | Every type scale |
+| `DefaultFontFamily` | Segoe UI (Material: Roboto, Simple: Inter, Cupertino: SF Pro, Fluent: the platform default via `ContentControlThemeFontFamily`) | Every type scale |
 
 Per-scale variation is expressed through the `*FontWeight` tokens, not through separate font
 families: the root points at a single family whose weights resolve from one reference (a variable
@@ -113,7 +113,7 @@ To override individual tokens without changing the whole scale, use standard XAM
 
 | Property              | Type         | Description                                                                                                                                 |
 |-----------------------|--------------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| `DefaultCornerRadius` | `double`     | Base corner radius unit; generates the full `Radius*` scale. Runtime-settable.                                                              |
+| `DefaultCornerRadius` | `double`     | Base corner radius unit; generates the full `Radius*` scale. Runtime-settable. Under `FluentTheme` it also re-points the platform `ControlCornerRadius` / `OverlayCornerRadius` tokens the built-in templates read. |
 | `DefaultSpacing`      | `double`     | Base spacing unit (default 4); generates the full `Space*` scale, scaled by the `DefaultDensity` mode. Runtime-settable.                    |
 | `DefaultDensity`      | `Density`    | Density mode that scales the spacing base unit (`Compact` ×0.75, `Regular` ×1, `Comfy` ×1.25). Runtime-settable.                            |
 | `DefaultFontFamily`   | `FontFamily` | The font the type scale is generated from: the `DefaultFontFamily` token and every `*FontFamily` key derived from it. Runtime-settable.     |

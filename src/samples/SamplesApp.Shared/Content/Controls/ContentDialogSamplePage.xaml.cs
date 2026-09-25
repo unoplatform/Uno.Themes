@@ -5,7 +5,7 @@
 	nameof(ContentDialog),
 	Description = "Represents a dialog box that can be customized to contain checkboxes, hyperlinks, buttons and any other XAML content.",
 	DocumentationLink = "https://docs.microsoft.com/en-us/uwp/api/Windows.UI.Xaml.Controls.ContentDialog",
-	SupportedDesigns = new[] { Design.Material, Design.Simple }
+	SupportedDesigns = new[] { Design.Material, Design.Simple, Design.Fluent }
 )]
 public sealed partial class ContentDialogSamplePage : Page
 {
@@ -28,15 +28,31 @@ public sealed partial class ContentDialogSamplePage : Page
 			[nameof(BuildSimpleCustomContentDialog)] = BuildSimpleCustomContentDialog,
 		};
 
-		if ((sender as Button)?.Tag is string context && mappings.TryGetValue(context, out var builder))
+		try
 		{
-			var dialog = builder();
+			if ((sender as Button)?.Tag is string context && mappings.TryGetValue(context, out var builder))
+			{
+				var dialog = builder();
+				dialog.XamlRoot = XamlRoot;
 
-			await dialog.ShowAsync();
+				await dialog.ShowAsync();
+			}
+			else
+			{
+				throw new KeyNotFoundException($"The given key '{(sender as Button)?.Tag as string}' was not present in the dictionary.");
+			}
 		}
-		else
+		catch (KeyNotFoundException exception)
 		{
-			throw new KeyNotFoundException($"The given key '{(sender as Button)?.Tag as string}' was not present in the dictionary.");
+			Console.Error.WriteLine($"Unknown content dialog sample: {exception}");
+		}
+		catch (InvalidOperationException exception)
+		{
+			Console.Error.WriteLine($"Unable to open the content dialog sample: {exception}");
+		}
+		catch (Exception exception)
+		{
+			Console.Error.WriteLine($"Content dialog sample failed: {exception}");
 		}
 	}
 
