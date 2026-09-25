@@ -347,3 +347,11 @@ next file to need an override didn't get it.
 
 **Verification trap (the more important lesson):** these font tests **passed in the minimal dedicated `Uno.Themes.RuntimeTests` host but failed in `SimpleSampleApp`** (and therefore in CI). The dedicated host merges `<SimpleTheme/>` app-wide, which "warms" the ambient resolution scope so the fragile `<StaticResource>` aliases happen to resolve to the right weight — a **false positive**. The real consumer-like host (`SimpleSampleApp`, also what CI runs) exposed the bug.
 - **Always verify font/typography/resource-precedence changes in `SimpleSampleApp` (the CI host), not only in a minimal host.** A minimal single-theme host can mask cross-dictionary resolution and merge-order bugs. If two hosts disagree, trust the one that matches CI.
+
+## A `ResourceDictionary` subclass declared in XAML with `Source` loses its type; `BaseDictionaries.xaml` feeds the deprecated bundles too (#1728)
+
+**Context:** #1728 marks semantic resources by dictionary type (`SemanticResources : ResourceDictionary`). Declaring `<themes:SemanticResources Source="…/SharedTypography.xaml"/>` in `BaseDictionaries.xaml` compiled and resolved, but a runtime walk showed the entry as a plain `ResourceDictionary`: the Uno XAML generator emits the registered dictionary for a Source-merged entry and ignores the declared type. The first fix removed `SharedTypography.xaml` from `BaseDictionaries.xaml` and re-merged it from C#, which silently stripped the shared type tokens from `MaterialResourcesV1`/`V2` because the `Common` glob feeds `mergedpages.v1` and `.v2` as well.
+
+**How to apply:**
+- Anything that must carry a dictionary *type* is created in C# (`new SemanticResources { Source = … }`), never declared in XAML. Verify the type at runtime, not by reading the markup.
+- Treat `Styles/Application/Common/BaseDictionaries.xaml` as shared with the deprecated Material bundles: prefer adding a layer over removing an entry, and check `MaterialResourcesV1`/`V2` before editing it.

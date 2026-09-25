@@ -21,6 +21,8 @@ public class MaterialResourcesV2 : ResourceDictionary
 	public MaterialResourcesV2()
 	{
 		Source = new Uri(MaterialConstants.ResourcePaths.Version2.MergedPages);
+		MergedDictionaries.Insert(0, new SemanticResources { Source = new Uri(ThemesConstants.SharedTypographyResourcePath) });
+		MergedDictionaries.Add(new SemanticResources { Source = new Uri(MaterialConstants.ResourcePaths.Version2.SemanticStyles) });
 		MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ThemesConstants.ConverterResourcePath) });
 		MergedDictionaries.Add(new MaterialFonts());
 		MergedDictionaries.Add(new MaterialColorsV2());
