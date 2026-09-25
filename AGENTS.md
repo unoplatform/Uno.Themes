@@ -6,15 +6,16 @@ This document defines strict guardrails for any AI-assisted or automated agent c
 
 ## Repository overview
 
-Uno.Themes ships the design-system theme libraries used by Uno Platform / WinUI apps (Material Design, Cupertino / iOS-style, and the Simple density-driven theme), plus the shared Uno Themes core (semantic palette, seed-color generation, design tokens) and C# Markup helpers. The repo produces seven NuGet packages:
+Uno.Themes ships the design-system theme libraries used by Uno Platform / WinUI apps (Material Design, Cupertino / iOS-style, the Simple density-driven theme, and the Fluent semantic adapter), plus the shared Uno Themes core (semantic palette, seed-color generation, design tokens) and C# Markup helpers. The repo produces eight NuGet packages:
 
 - `Uno.Themes.WinUI` — base theme infrastructure (semantic palette, seed-color generation, design tokens, shared converters/extensions). Built from `src/library/Uno.Themes/Uno.Themes.WinUI.csproj`. All other theme libraries reference it.
 - `Uno.Material.WinUI` — Material Design 3 styles and resources. Built from `src/library/Uno.Material/Uno.Material.WinUI.csproj`. Has a v1/v2 style split (see `Styles/Application/v1`, `Styles/Application/v2`, etc.).
 - `Uno.Cupertino.WinUI` — Cupertino / iOS-style theme. Built from `src/library/Uno.Cupertino/Uno.Cupertino.WinUI.csproj`.
 - `Uno.Simple.WinUI` — minimal density-driven theme (see `Density.cs`, `SimpleTheme.cs`). Built from `src/library/Uno.Simple.WinUI/Uno.Simple.WinUI.csproj`.
+- `Uno.Fluent.WinUI` — semantic styles, palette, typography, and override mappings over built-in `XamlControlsResources` templates. Built from `src/library/Uno.Fluent.WinUI/Uno.Fluent.WinUI.csproj`.
 - `Uno.Themes.WinUI.Markup`, `Uno.Material.WinUI.Markup`, `Uno.Simple.WinUI.Markup` — C# Markup helpers (extension methods, brush/color/style accessors) layered on top of the corresponding theme library.
 
-Despite the legacy folder name `src/library/Uno.Themes`, the assembly is `Uno.Themes.WinUI` (see `AssemblyName` in the csproj). Internals of the base library are visible to `Uno.Material(.WinUI)`, `Uno.Cupertino(.WinUI)`, and `Uno.Simple.WinUI` via `InternalsVisibleTo` (see `themes-common.props`).
+Despite the legacy folder name `src/library/Uno.Themes`, the assembly is `Uno.Themes.WinUI` (see `AssemblyName` in the csproj). Internals of the base library are visible to `Uno.Material(.WinUI)`, `Uno.Cupertino(.WinUI)`, `Uno.Simple.WinUI`, and `Uno.Fluent.WinUI` via `InternalsVisibleTo` (see `themes-common.props`).
 
 ## Solution layout
 

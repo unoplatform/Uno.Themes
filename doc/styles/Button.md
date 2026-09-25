@@ -5,7 +5,7 @@ uid: Uno.Themes.Styles.Button
 # Button Control
 
 > [!NOTE]
-> The tables below describe Material v2. Under Simple, `OutlinedButtonStyle` uses the tonal template: override `FilledTonalButton*` to change it; the declared `OutlinedButton*` aliases are not consumed. Under the [Fluent theme](../fluent-getting-started.md), buttons are rendered by the built-in WinUI templates. The `FilledButton*`, `OutlinedButton*`, `TextButton*`, `IconButtonForeground`, and `IconButtonForegroundDisabled` brush keys below are bridged: they resolve with Fluent default values, and app-wide overrides (via `Colors.OverrideDictionary`) re-point the corresponding Fluent per-control resources (`AccentButton*`, `Button*`). See [Lightweight Styling — Fluent theme](../lightweight-styling.md#fluent-theme) for the override channels and the keys that are not bridged.
+> The tables below describe Material v2. Under Simple, `OutlinedButtonStyle` uses its own `OutlinedButton*` brushes, with defaults matching the tonal variant. Under [Fluent](../fluent-getting-started.md), supported `FilledButton*` and `OutlinedButton*` brush overrides go through the theme's color-override channel to native `AccentButton*` and `Button*` resources. `TextButtonForeground*`, `TextButtonBackground*`, and `TextButtonBorderBrush*` also work at element scope, including pointer-over, pressed, and disabled states; `IconButtonForeground` and `IconButtonForegroundDisabled` color the icon-button glyph in every state. Some other state keys accept overrides without supplying defaults. See [Fluent lightweight styling](../lightweight-styling.md#fluent-theme) for the supported families and scope rules.
 
 ## Styles
 
