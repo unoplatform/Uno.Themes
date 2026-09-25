@@ -12,6 +12,8 @@ public sealed partial class MediaPlayerElementSample_NestedPage1 : Page
 
 	private void MediaPlayerElementSample_NestedPage1_Unloaded(object sender, RoutedEventArgs e)
 	{
-		MediaPlayerElementSample1.MediaPlayer.Pause();
+		// MediaPlayer is null when no MediaPlayer extension is registered (e.g. Skia desktop without a
+		// media backend). Throwing here would break the back navigation that triggered the unload.
+		MediaPlayerElementSample1.MediaPlayer?.Pause();
 	}
 }

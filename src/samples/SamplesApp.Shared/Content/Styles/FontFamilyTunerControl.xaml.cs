@@ -39,7 +39,9 @@ public sealed partial class FontFamilyTunerControl : UserControl
 		{
 			_isInitializing = true;
 
-			var theme = SemanticThemeHelper.GetTheme();
+			// Not SemanticThemeHelper: it resolves Application.Current, which is the wrapper app —
+			// not this head — when the head is hosted in a secondary ALC by ThemesSampleApp.
+			var theme = SampleThemeHelper.GetTheme();
 
 			FamilyCombo.SelectedIndex = IndexOfSource(theme?.DefaultFontFamily?.Source);
 
@@ -82,7 +84,7 @@ public sealed partial class FontFamilyTunerControl : UserControl
 
 	private void Apply()
 	{
-		var theme = SemanticThemeHelper.GetTheme();
+		var theme = SampleThemeHelper.GetTheme();
 		if (theme is null)
 		{
 			ReportState(null);
