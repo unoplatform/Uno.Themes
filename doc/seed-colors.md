@@ -183,6 +183,24 @@ if (theme?.Colors is { } colors)
 
 `SemanticThemeHelper.GetTheme()` is equivalent to `Application.Current.GetTheme()`.
 
+Both find the theme **wherever the application's resource graph merges it**, not only at the top level. That matters because the recommended layout puts it one level down: `App.xaml` itself yields no reloadable type, so moving the design system into a `ResourceDictionary` of its own is what makes theme edits reach a running app through hot reload.
+
+```xml
+<!-- App.xaml -->
+<ResourceDictionary Source="Styles/AppTheme.xaml" />
+
+<!-- Styles/AppTheme.xaml — the theme is one level below Application.Resources -->
+<ResourceDictionary xmlns:material="using:Uno.Material">
+    <ResourceDictionary.MergedDictionaries>
+        <material:MaterialTheme />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>
+```
+
+`MergedDictionaries` is walked breadth-first, so the shallowest theme wins and a repeated dictionary — the diamonds resource graphs form by construction — is visited once.
+
+**Across load contexts:** the match is by type, so the lookup does not reach a hosted guest when the host isolates `Uno.Themes` per context — the guest's `BaseTheme` is then a different type, and the lookup returns `null` at any depth. A hosted application should resolve its own `Application` from inside its own context and call `GetTheme()` on that.
+
 > [!TIP]
 > The Material and Simple sample apps in this repository include a **Seed Color** page (under *Styles*) with a live color picker — drag it and watch the entire app re-theme in real time, and switch between the two generation modes to compare them.
 
@@ -214,21 +232,21 @@ Used as the value for `BaseTheme.Colors` (i.e., `MaterialTheme.Colors` or `Simpl
 
 Static convenience class for runtime theme configuration.
 
-| Member          | Type     | Description                                                                                        |
-|-----------------|----------|----------------------------------------------------------------------------------------------------|
-| `GetTheme()`    | Method   | Returns the `BaseTheme` instance from `Application.Current.Resources`, or `null` if none is found. |
-| `PrimarySeed`   | Property | Gets or sets the primary seed color on the active theme. Setting regenerates the full palette.     |
-| `SecondarySeed` | Property | Gets or sets the secondary seed color. `null` to auto-derive from primary.                         |
-| `TertiarySeed`  | Property | Gets or sets the tertiary seed color. `null` to auto-derive from primary.                          |
-| `SeedColorMode` | Property | Gets or sets the generation mode on the active theme: `Fidelity` (default) or `TonalSpot`.         |
+| Member          | Type     | Description                                                                                         |
+|-----------------|----------|-----------------------------------------------------------------------------------------------------|
+| `GetTheme()`    | Method   | Returns the `BaseTheme` from `Application.Current.Resources` at any merge depth, or `null` if none. |
+| `PrimarySeed`   | Property | Gets or sets the primary seed color on the active theme. Setting regenerates the full palette.      |
+| `SecondarySeed` | Property | Gets or sets the secondary seed color. `null` to auto-derive from primary.                          |
+| `TertiarySeed`  | Property | Gets or sets the tertiary seed color. `null` to auto-derive from primary.                           |
+| `SeedColorMode` | Property | Gets or sets the generation mode on the active theme: `Fidelity` (default) or `TonalSpot`.          |
 
 ### `ApplicationExtensions`
 
 Extension methods on `Application` for theme access.
 
-| Member                       | Type             | Description                                                                                          |
-|------------------------------|------------------|------------------------------------------------------------------------------------------------------|
-| `GetTheme(this Application)` | Extension method | Returns the `BaseTheme` instance from the given application's resources, or `null` if none is found. |
+| Member                       | Type             | Description                                                                                           |
+|------------------------------|------------------|-------------------------------------------------------------------------------------------------------|
+| `GetTheme(this Application)` | Extension method | Returns the `BaseTheme` from the given application's resources at any merge depth, or `null` if none. |
 
 ## Color Precedence
 
