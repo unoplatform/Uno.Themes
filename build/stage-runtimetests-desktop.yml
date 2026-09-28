@@ -63,6 +63,10 @@ jobs:
       ProjectPath: '$(ProjectPath)'
       SampleAppName: '$(SampleAppName)'
       UNO_RUNTIME_TESTS_RUN_TESTS: '{}'
+      # The engine otherwise shards by SYSTEM_JOBPOSITIONINPHASE, treating each matrix leg as a
+      # slice of one suite. Every leg is a different head, so each must run its full suite.
+      UNO_RUNTIME_TESTS_SHARD_INDEX: '1'
+      UNO_RUNTIME_TESTS_TOTAL_SHARDS: '1'
       UNO_RUNTIME_TESTS_THEME: '$(RuntimeTestsTheme)'
       UNO_RUNTIME_TESTS_OUTPUT_PATH: '$(Common.TestResultsDirectory)/runtime-tests-$(SampleAppName)$(RuntimeTestsTheme).xml'
 
