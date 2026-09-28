@@ -107,3 +107,23 @@ Final review follow-up: native resource loaders now catch the supported InvalidO
 - Note for #1719: several of its Fluent "limitation" claims (accent read once, `PrimaryBrush`/`OnPrimary*` not cascading, merged dictionaries not inspected, only rest-state `TextButton*` consumed, `DatePickerFlyoutPresenterStyle` GAP) describe the adapter before fbdc81f4 and are contradicted by the code in its own base. Re-verify before merging that layer.
 
 Verification (Windows, Debug net10.0-desktop): Fluent and Simple heads build clean; full Simple suite Light 608 passed / 0 failed / 1 pre-existing skip; Fluent + override-precedence suites under Dark 354 passed / 0 failed. Release desktop restore failed locally only on a missing `Microsoft.NETCore.App.Runtime.Mono.win-x64 10.0.1` pack (environment). iOS not built locally.
+
+## 2026-09-28 skeptic pass (full stack) and sample run
+
+Integration check: `origin/dev/sb/fluent-theme-3-semantic-fixes` merged onto the updated #1695 head in a worktree (doc conflicts only, stack side kept). Simple suite 721 passed / 0 failed / 1 skip under both Light and Dark; Material 79/79; Fluent head 4/4; all three heads build clean on Debug desktop.
+
+Sample run: Fluent AppBarButton page used `Content=` (Material/Simple templates render it, the native Fluent template only renders `Label`), so labels were missing under Fluent. Switched the Fluent template to `Label`. The 68px standalone width is WinUI's own `DefaultAppBarButtonStyle`.
+
+Fluent library (#1695) - fix-first before packaging:
+1. `FluentTheme.Resources.cs:82-87` merges `_lightweightDefaults` under a second parent (`baseline`) while it is already merged in the theme. `ResourceDictionaryExtensions.cs:47` records that WinAppSDK rejects the same dictionary instance under two parents; this runs from the constructor, so a WinUI-native app could fail at `<FluentTheme/>`. No head targets `net10.0-windows`, so every `!HAS_UNO` path is unexercised. Fix: build the baseline from a clone, and add a Windows head build (at least) to CI.
+2. `FluentTextButtonResources.cs:136-140` roots up to 9 brushes + 18 bindings per text/icon button on theme-owned brushes; the only leak guard clears the style first. Add a guard that drops a styled button without re-styling.
+3. `FluentTextButtonResources.FindExplicitOverride` (`:195-245`) enumerates every ancestor dictionary on each Loaded/ActualThemeChanged, which materializes lazy consumer resources (lessons.md hazard) and misses template-generated elements whose `Parent` is null.
+4. `FluentLightweightBridge.CaptureNativeFallbacks` (`:237`) captures the ambient branch only; clearing an override re-binds the Dark-branch retained brush to the Light value in a `RequestedTheme="Dark"` subtree.
+5. Nits: `SeedColorMode` re-derived instead of consumed (`FluentTheme.cs:179` vs `BaseTheme.cs:744`), library XAML edits ignored by hot reload, theme-key/token strings not in `FluentConstants`, per-rebuild allocation of two platform closures + bridge + fallbacks.
+
+Stack (#1719 docs, #1721 fixes):
+1. `ThemeResourceResolver.cs:38` enumerates every entry of every color layer per key per appearance per rebuild (Uno materializes lazy entries on enumeration; runs per color-picker tick). Replaces hash lookups; no `OverrideSource` XAML test with StaticResource-bearing values.
+2. New resolver stops at the first existing appearance branch; the old `SemanticBrushUpdater` probed Dark then Default per key. Behavior change for Material/Simple consumers with partial Dark overrides, not in the BREAKING body and untested.
+3. Markup breaking change is defensible (old generics were unusable as typed) but needs the justification in the PR body.
+4. Simple default rendering changes for non-overriding consumers: `OutlinedButtonStyle` re-targeted, `SecondaryVariant*` grayscale, new public `ButtonBorderThickness` key - need changelog/doc entries.
+5. #1719 documents behavior (accent refresh, nested overrides, TextButton states, radius normalization, `SimpleDatePickerFlyoutPresenterStyle`) that only exists in #1721, and edits `BaseTheme.cs`; not mergeable alone. Recommend squashing #1719 into #1721 and landing two PRs.
