@@ -12,12 +12,24 @@ jobs:
       Material:
         SampleAppName: MaterialSampleApp
         ProjectPath: src/samples/MaterialSampleApp
+        RuntimeTestsTheme: Default
       Simple:
         SampleAppName: SimpleSampleApp
         ProjectPath: src/samples/SimpleSampleApp
+        RuntimeTestsTheme: Light
+      # The theme suites assert resource values against the ambient appearance, so the
+      # Dark branches are only exercised by a second run under a Dark application theme.
+      SimpleDark:
+        SampleAppName: SimpleSampleApp
+        ProjectPath: src/samples/SimpleSampleApp
+        RuntimeTestsTheme: Dark
+      Fluent:
+        SampleAppName: FluentSampleApp
+        ProjectPath: src/samples/FluentSampleApp
+        RuntimeTestsTheme: Default
 
   variables:
-    ArtifactName: runtimetests-desktop-$(SampleAppName)
+    ArtifactName: runtimetests-desktop-$(SampleAppName)$(RuntimeTestsTheme)
 
   steps:
   - checkout: self
@@ -51,18 +63,23 @@ jobs:
       ProjectPath: '$(ProjectPath)'
       SampleAppName: '$(SampleAppName)'
       UNO_RUNTIME_TESTS_RUN_TESTS: '{}'
-      UNO_RUNTIME_TESTS_OUTPUT_PATH: '$(Common.TestResultsDirectory)/runtime-tests-$(SampleAppName).xml'
+      # The engine otherwise shards by SYSTEM_JOBPOSITIONINPHASE, treating each matrix leg as a
+      # slice of one suite. Every leg is a different head, so each must run its full suite.
+      UNO_RUNTIME_TESTS_SHARD_INDEX: '1'
+      UNO_RUNTIME_TESTS_TOTAL_SHARDS: '1'
+      UNO_RUNTIME_TESTS_THEME: '$(RuntimeTestsTheme)'
+      UNO_RUNTIME_TESTS_OUTPUT_PATH: '$(Common.TestResultsDirectory)/runtime-tests-$(SampleAppName)$(RuntimeTestsTheme).xml'
 
   - task: PublishTestResults@2
     displayName: 'Publish Runtime Tests Results'
     condition: always()
     inputs:
-      testRunTitle: 'Runtime Tests - $(SampleAppName)'
+      testRunTitle: 'Runtime Tests - $(SampleAppName) $(RuntimeTestsTheme)'
       testResultsFormat: 'NUnit'
-      testResultsFiles: '$(Common.TestResultsDirectory)/runtime-tests-$(SampleAppName).xml'
+      testResultsFiles: '$(Common.TestResultsDirectory)/runtime-tests-$(SampleAppName)$(RuntimeTestsTheme).xml'
       failTaskOnFailedTests: true
 
-# ThemesSampleApp hosts the three theme heads in secondary ALCs; building alone cannot catch a
+# ThemesSampleApp hosts the four theme heads in secondary ALCs; building alone cannot catch a
 # hosting regression (this repo's history: a wasm payload that fetched HTTP 200 but failed to
 # boot, and a Win32 run-loop bug X11 verification missed). This job actually loads every guest,
 # unloads, and asserts per-cycle ALC reclamation via the wrapper's --smoke mode.
@@ -85,7 +102,7 @@ jobs:
   - template: templates/gitversion.yml
 
   # TargetFrameworkOverride activates the wrapper's ordering ProjectReferences, building the
-  # three guest heads first so their sibling bins exist for the runtime probe.
+  # four guest heads first so their sibling bins exist for the runtime probe.
   - pwsh: |
       dotnet build -c Release -f net10.0-desktop -p:TargetFrameworkOverride=desktop `
         src/samples/ThemesSampleApp/ThemesSampleApp.csproj `

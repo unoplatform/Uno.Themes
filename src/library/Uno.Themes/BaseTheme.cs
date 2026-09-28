@@ -532,6 +532,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 
 	protected void UpdateSource()
 	{
+		PrepareThemeResources();
 		// Build every dynamic layer BEFORE touching MergedDictionaries. Parsing a consumer-supplied
 		// override, generating the seed palette and sweeping the brushes can all throw, and this runs
 		// from property-changed callbacks and the hot-reload handler. Committing only once the new
@@ -567,6 +568,8 @@ public abstract partial class BaseTheme : ResourceDictionary
 		// edit to the override file would otherwise never reach the theme (unoplatform/Uno.Themes#1705).
 		// Unrelated rebuilds (a seed-color change, a spacing tweak) reuse the resolved copy.
 		var fontOverride = ResolveFontOverride();
+		ResolvedColorOverride = resolvedOverride;
+		ResolvedFontOverride = fontOverride;
 
 		// ── Commit. Nothing below parses XAML or runs consumer-supplied code. ──
 
@@ -614,6 +617,15 @@ public abstract partial class BaseTheme : ResourceDictionary
 		{
 			AddThemeDictionary(fontOverride);
 		}
+	}
+
+	// Design-system adapters consume exactly the same successfully resolved dictionaries as
+	// the shared layer; they must not parse a Source again after the replacement is committed.
+	internal ResourceDictionary ResolvedColorOverride { get; private set; }
+	internal ResourceDictionary ResolvedFontOverride { get; private set; }
+
+	internal virtual void PrepareThemeResources()
+	{
 	}
 
 	// The last successfully resolved copy of a URI-backed font override, the consumer instance it

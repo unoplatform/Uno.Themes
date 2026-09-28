@@ -12,11 +12,14 @@ public class FromStringToValueConverter : IValueConverter
 
 	public object Convert(object value, Type targetType, object parameter, string language)
 	{
-		if (value is string text)
+		// A null string is "null or empty": without this, a sample with no description or documentation link
+		// showed the empty text and the link.
+		if (value is null or string)
 		{
+			var text = value as string;
 			if (Check == CheckMethod.IsEqualToParameterValue && parameter is string param)
 			{
-				return text.Equals(param) ? TrueValue : FalseValue;
+				return param.Equals(text) ? TrueValue : FalseValue;
 			}
 			else if (Check == CheckMethod.IsNullOrEmpty)
 			{

@@ -1,0 +1,97 @@
+namespace Uno.Themes.Samples;
+
+/// <summary>
+/// Provides application-specific behavior to supplement the default Application class.
+/// </summary>
+sealed partial class App : Application
+{
+	public static Microsoft.UI.Xaml.Window MainWindow { get; private set; }
+
+	static App() =>
+		InitializeLogging();
+
+	/// <summary>
+	/// Initializes the singleton application object.
+	/// </summary>
+	public App()
+	{
+		// Application.Current only ever points at the default-ALC application, so a head hosted in a
+		// secondary ALC by ThemesSampleApp must hand sample pages its own instance for theme lookups.
+		SampleThemeHelper.CurrentApplication = this;
+
+		ConfigureXamlDisplay();
+		SamplePageLayout.ActiveDesign = Design.Fluent;
+		NavigationHelper.IconOverride = FluentSampleIcons.Create;
+
+		this.InitializeComponent();
+
+#if HAS_UNO || NETFX_CORE
+		this.Suspending += OnSuspending;
+#endif
+	}
+
+	/// <summary>
+	/// Invoked when the application is launched normally by the end user.
+	/// </summary>
+	protected override void OnLaunched(LaunchActivatedEventArgs e)
+	{
+		// Do not use Window.Current here: it is a process-wide static in the shared Uno.UI, so when
+		// this app is hosted in a secondary ALC (ThemesSampleApp) it would grab the host's window.
+		// The first new Window() maps to the main window on single-window platforms, so this stays
+		// correct standalone too.
+		MainWindow = new Microsoft.UI.Xaml.Window();
+		NavigationHelper.MainWindow = MainWindow;
+
+		var shell = MainWindow.Content as Shell ?? NavigationHelper.BuildShell();
+		MainWindow.Content = shell;
+
+		NavigationHelper.ShellNavigateToHandler = sample =>
+			NavigationHelper.NavigateTo(shell, sample, trySynchronizeCurrentItem: true);
+
+		MainWindow.Activate();
+	}
+
+	private void OnSuspending(object sender, SuspendingEventArgs e)
+	{
+		var deferral = e.SuspendingOperation.GetDeferral();
+		deferral.Complete();
+	}
+
+	public static void InitializeLogging()
+	{
+#if DEBUG
+		var factory = LoggerFactory.Create(builder =>
+		{
+			var UINamespace = typeof(UIElement).Namespace ?? string.Empty;
+#if __WASM__
+			builder.AddProvider(new global::Uno.Extensions.Logging.WebAssembly.WebAssemblyConsoleLoggerProvider());
+#elif __IOS__ || __MACCATALYST__
+			builder.AddProvider(new global::Uno.Extensions.Logging.OSLogLoggerProvider());
+#else
+			builder.AddConsole();
+#endif
+
+			builder.SetMinimumLevel(LogLevel.Information);
+			builder.AddFilter("Uno", LogLevel.Warning);
+			builder.AddFilter("Windows", LogLevel.Warning);
+			builder.AddFilter("Microsoft", LogLevel.Warning);
+		});
+
+		global::Uno.Extensions.LogExtensionPoint.AmbientLoggerFactory = factory;
+
+#if HAS_UNO
+		global::Uno.UI.Adapter.Microsoft.Extensions.Logging.LoggingAdapter.Initialize();
+#endif
+#endif
+	}
+
+	// Name our own assembly explicitly: with no argument, XamlDisplay.Init() looks for the
+	// generated ShowMeTheXAML.XamlDictionary in Assembly.GetEntryAssembly(), which is the
+	// ThemesSampleApp wrapper when this app is hosted in a secondary ALC. That probe misses
+	// silently — unregistered keys resolve to an empty string — so every "show me the XAML"
+	// pane renders blank. Standalone this is a no-op: the entry assembly is already this one.
+	static void ConfigureXamlDisplay()
+	{
+		XamlDisplay.Init(typeof(App).Assembly);
+	}
+}

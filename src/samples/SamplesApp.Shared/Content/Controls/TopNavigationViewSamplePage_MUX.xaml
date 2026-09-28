@@ -82,6 +82,48 @@
 					</smtx:XamlDisplay>
 				</DataTemplate>
 			</sample:SamplePageLayout.M3MaterialTemplate>
+			<sample:SamplePageLayout.FluentTemplate>
+				<DataTemplate>
+					<smtx:XamlDisplay UniqueKey="Fluent_TopNavigationView_MUX"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<sample:ClippedGrid MinHeight="400">
+							<muxc:NavigationView OpenPaneLength="260"
+												 IsBackButtonVisible="Collapsed"
+												 PaneDisplayMode="Top"
+												 IsBackEnabled="False"
+												 Style="{StaticResource NavigationViewStyle}">
+								<muxc:NavigationView.MenuItems>
+									<muxc:NavigationViewItemHeader Content="Library" />
+									<muxc:NavigationViewItem Icon="Library"
+															 Content="Media"
+															 SelectsOnInvoked="False"
+															 Style="{StaticResource NavigationViewItemStyle}">
+										<muxc:NavigationViewItem.MenuItems>
+											<muxc:NavigationViewItem Icon="Audio"
+																	 Content="Music"
+																	 Style="{StaticResource NavigationViewItemStyle}" />
+											<muxc:NavigationViewItem Icon="Video"
+																	 Content="Videos"
+																	 Style="{StaticResource NavigationViewItemStyle}" />
+											<muxc:NavigationViewItem Icon="Pictures"
+																	 Content="Photos"
+																	 Style="{StaticResource NavigationViewItemStyle}" />
+										</muxc:NavigationViewItem.MenuItems>
+									</muxc:NavigationViewItem>
+									<muxc:NavigationViewItem Icon="Download"
+															 Content="Downloads"
+															 Style="{StaticResource NavigationViewItemStyle}" />
+									<muxc:NavigationViewItemSeparator />
+									<muxc:NavigationViewItem Icon="Mail"
+															 Content="Mail (disabled)"
+															 IsEnabled="False"
+															 Style="{StaticResource NavigationViewItemStyle}" />
+								</muxc:NavigationView.MenuItems>
+							</muxc:NavigationView>
+						</sample:ClippedGrid>
+					</smtx:XamlDisplay>
+				</DataTemplate>
+			</sample:SamplePageLayout.FluentTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

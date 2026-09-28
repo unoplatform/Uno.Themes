@@ -55,7 +55,7 @@ internal static class SemanticBrushUpdater
 
 	private static string[][] BuildBrushKeys()
 	{
-		var colorKeys = ThemesConstants.SemanticColorKeys;
+		var colorKeys = SemanticColorKeys.All;
 		var states = ThemesConstants.BrushStateSuffixes;
 		var keys = new string[colorKeys.Length][];
 
@@ -96,7 +96,7 @@ internal static class SemanticBrushUpdater
 	/// </param>
 	internal static void Apply(ResourceDictionary brushes, IReadOnlyList<ResourceDictionary> colorLayers)
 	{
-		var colorKeys = ThemesConstants.SemanticColorKeys;
+		var colorKeys = SemanticColorKeys.All;
 		var states = ThemesConstants.BrushStateSuffixes;
 		Span<double> opacities = stackalloc double[states.Length];
 

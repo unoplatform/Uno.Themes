@@ -1,6 +1,6 @@
 namespace Uno.Themes.Samples.Content.Controls;
 
-[SamplePage(SampleCategory.Controls, "CalendarDatePicker", IconSymbol = Symbol.CalendarWeek, SupportedDesigns = new[] { Design.Simple })]
+[SamplePage(SampleCategory.Controls, "CalendarDatePicker", IconSymbol = Symbol.CalendarWeek, SupportedDesigns = new[] { Design.Simple, Design.Fluent })]
 public sealed partial class CalendarDatePickerSamplePage : Page
 {
 	public CalendarDatePickerSamplePage()

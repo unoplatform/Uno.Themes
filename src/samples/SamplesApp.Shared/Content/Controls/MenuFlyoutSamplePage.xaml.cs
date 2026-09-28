@@ -2,7 +2,7 @@ using Microsoft.UI.Xaml.Controls;
 
 namespace Uno.Themes.Samples.Content.Controls;
 
-[SamplePage(SampleCategory.Controls, "MenuFlyout", IconSymbol = Symbol.List, SupportedDesigns = new[] { Design.Simple })]
+[SamplePage(SampleCategory.Controls, "MenuFlyout", IconSymbol = Symbol.List, SupportedDesigns = new[] { Design.Simple, Design.Fluent })]
 public sealed partial class MenuFlyoutSamplePage : Page
 {
 	public MenuFlyoutSamplePage()

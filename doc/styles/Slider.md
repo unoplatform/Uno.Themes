@@ -4,6 +4,9 @@ uid: Uno.Themes.Styles.Slider
 
 # Slider Control
 
+> [!NOTE]
+> Under the [Fluent theme](../fluent-getting-started.md), the brush keys below (`SliderTrackFill*`, `SliderTrackValueFill*`, `SliderThumbBackground*`, `SliderTickBarFill`) are WinUI's own per-control resource names — overrides reach Fluent-styled sliders natively at any scope, with no theme involvement. See [Lightweight Styling — Fluent theme](../lightweight-styling.md#fluent-theme).
+
 ## Styles
 
 | Style Key     | IsDefaultStyle\* |
