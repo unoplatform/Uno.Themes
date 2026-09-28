@@ -571,26 +571,26 @@
 									<MenuFlyout MenuFlyoutPresenterStyle="{StaticResource MaterialMenuFlyoutPresenterStyle}">
 
 										<muxc:RadioMenuFlyoutItem Text="Landscape"
-															 GroupName="OrientationGroup"
-															 Style="{StaticResource MaterialRadioMenuFlyoutItemStyle}" />
+																  GroupName="OrientationGroup"
+																  Style="{StaticResource MaterialRadioMenuFlyoutItemStyle}" />
 
 										<muxc:RadioMenuFlyoutItem Text="Portrait"
-															 GroupName="OrientationGroup"
-															 Style="{StaticResource MaterialRadioMenuFlyoutItemStyle}" />
+																  GroupName="OrientationGroup"
+																  Style="{StaticResource MaterialRadioMenuFlyoutItemStyle}" />
 
 										<MenuFlyoutSeparator Style="{StaticResource MaterialMenuFlyoutSeparatorStyle}" />
 
 										<muxc:RadioMenuFlyoutItem Text="Small"
-															 GroupName="SizeGroup"
-															 Style="{StaticResource MaterialRadioMenuFlyoutItemStyle}" />
+																  GroupName="SizeGroup"
+																  Style="{StaticResource MaterialRadioMenuFlyoutItemStyle}" />
 
 										<muxc:RadioMenuFlyoutItem Text="Medium"
-															 GroupName="SizeGroup"
-															 Style="{StaticResource MaterialRadioMenuFlyoutItemStyle}" />
+																  GroupName="SizeGroup"
+																  Style="{StaticResource MaterialRadioMenuFlyoutItemStyle}" />
 
 										<muxc:RadioMenuFlyoutItem Text="Large"
-															 GroupName="SizeGroup"
-															 Style="{StaticResource MaterialRadioMenuFlyoutItemStyle}" />
+																  GroupName="SizeGroup"
+																  Style="{StaticResource MaterialRadioMenuFlyoutItemStyle}" />
 									</MenuFlyout>
 								</Button.Flyout>
 							</Button>
@@ -661,7 +661,8 @@
 									Content="Show Flyout">
 								<Button.Flyout>
 									<Flyout>
-										<StackPanel Spacing="8" Padding="8">
+										<StackPanel Spacing="8"
+													Padding="8">
 											<TextBlock Text="This is a simple flyout." />
 											<Button Content="Close"
 													Click="CloseFlyout"
@@ -679,9 +680,11 @@
 									Content="Confirm Action">
 								<Button.Flyout>
 									<Flyout>
-										<StackPanel Spacing="12" Padding="8">
+										<StackPanel Spacing="12"
+													Padding="8">
 											<TextBlock Text="Are you sure you want to proceed?" />
-											<StackPanel Orientation="Horizontal" Spacing="8">
+											<StackPanel Orientation="Horizontal"
+														Spacing="8">
 												<Button Content="Yes"
 														Click="CloseFlyout"
 														Tag="{Binding ElementName=ShowSimpleConfirmFlyoutButton}" />

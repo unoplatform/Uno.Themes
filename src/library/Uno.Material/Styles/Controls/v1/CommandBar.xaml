@@ -24,7 +24,7 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="AppBarButton">
 					<um:Ripple Feedback="{TemplateBinding Foreground}"
-									 FeedbackOpacity="{StaticResource MaterialPressedOpacity}">
+							   FeedbackOpacity="{StaticResource MaterialPressedOpacity}">
 						<Viewbox x:Name="ContentViewbox"
 								 Height="{ThemeResource AppBarButtonContentHeight}"
 								 Width="{ThemeResource AppBarButtonContentHeight}"
@@ -131,7 +131,8 @@
 	<Style x:Key="MaterialCommandBarStyle"
 		   TargetType="CommandBar"
 		   BasedOn="{StaticResource BaseMaterialCommandBarStyle}">
-		<ios:Setter Property="Height" Value="NaN" />
+		<ios:Setter Property="Height"
+					Value="NaN" />
 	</Style>
 
 </ResourceDictionary>

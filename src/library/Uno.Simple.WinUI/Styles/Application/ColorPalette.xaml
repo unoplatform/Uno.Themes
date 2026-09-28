@@ -1,15 +1,15 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<!--
 		Simple Design System — Color Palette
-
+		
 		This file provides:
-		  1. SharedColorPalette overrides — Simple's flat grayscale values for all
-		     shared color roles (Primary, Error, Surface, Outline, etc.).
-		  2. Utility-only primitives — Pink scale + hardcoded utility colors that
-		     have no shared equivalent.
-
+		1. SharedColorPalette overrides — Simple's flat grayscale values for all
+		shared color roles (Primary, Error, Surface, Outline, etc.).
+		2. Utility-only primitives — Pink scale + hardcoded utility colors that
+		have no shared equivalent.
+		
 		All control styles reference shared semantic brushes directly
 		(from SharedColors.xaml). No SDS alias brushes remain in this file.
 	-->
@@ -17,12 +17,12 @@
 	<ResourceDictionary.ThemeDictionaries>
 
 		<!-- ═══════════════════════════════════════════════════════════════════ -->
-		<!-- LIGHT THEME                                                       -->
+		<!-- LIGHT THEME -->
 		<!-- ═══════════════════════════════════════════════════════════════════ -->
 		<ResourceDictionary x:Key="Light">
 
 			<!-- ─────────────────────────────────────────────────────────────── -->
-			<!-- SharedColorPalette Overrides                                   -->
+			<!-- SharedColorPalette Overrides -->
 			<!-- ─────────────────────────────────────────────────────────────── -->
 
 			<!-- Primary (SDS Brand) -->
@@ -73,7 +73,7 @@
 			<Color x:Key="ShadowColor">#33000000</Color>
 
 			<!-- ─────────────────────────────────────────────────────────────── -->
-			<!-- Utility-only Primitives (Pink — used by measurement brushes)   -->
+			<!-- Utility-only Primitives (Pink — used by measurement brushes) -->
 			<!-- ─────────────────────────────────────────────────────────────── -->
 			<Color x:Key="SimplePink200Color">#FAE1FA</Color>
 			<Color x:Key="SimplePink400Color">#F19EDC</Color>
@@ -81,27 +81,36 @@
 			<Color x:Key="SimplePink800Color">#8A226F</Color>
 
 			<!-- ─────────────────────────────────────────────────────────────── -->
-			<!-- Utility Brushes (Simple-specific, no shared equivalent)        -->
+			<!-- Utility Brushes (Simple-specific, no shared equivalent) -->
 			<!-- ─────────────────────────────────────────────────────────────── -->
-			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesBlanketBrush" Color="#B2000000" />
-			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesMeasurementBrush" Color="{StaticResource SimplePink200Color}" />
-			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesOverlayBrush" Color="#80000000" />
-			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesScrimBrush" Color="#CCFFFFFF" />
-			<SolidColorBrush x:Key="SimpleTextUtilitiesOnMeasurementBrush" Color="{StaticResource SimplePink800Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesBlanketBrush"
+							 Color="#B2000000" />
+			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesMeasurementBrush"
+							 Color="{StaticResource SimplePink200Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesOverlayBrush"
+							 Color="#80000000" />
+			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesScrimBrush"
+							 Color="#CCFFFFFF" />
+			<SolidColorBrush x:Key="SimpleTextUtilitiesOnMeasurementBrush"
+							 Color="{StaticResource SimplePink800Color}" />
 			<StaticResource x:Key="SimpleTextUtilitiesOnOverlayBrush" ResourceKey="OnSurfaceInverseBrush" />
-			<SolidColorBrush x:Key="SimpleIconUtilitiesBrush" Color="{StaticResource SimplePink600Color}" />
-			<SolidColorBrush x:Key="SimpleIconUtilitiesOnMeasurementBrush" Color="{StaticResource SimplePink800Color}" />
-			<SolidColorBrush x:Key="SimpleBorderUtilitiesMeasurementBrush" Color="{StaticResource SimplePink400Color}" />
-			<SolidColorBrush x:Key="SimpleBorderUtilitiesSwatchBrush" Color="#3D000000" />
+			<SolidColorBrush x:Key="SimpleIconUtilitiesBrush"
+							 Color="{StaticResource SimplePink600Color}" />
+			<SolidColorBrush x:Key="SimpleIconUtilitiesOnMeasurementBrush"
+							 Color="{StaticResource SimplePink800Color}" />
+			<SolidColorBrush x:Key="SimpleBorderUtilitiesMeasurementBrush"
+							 Color="{StaticResource SimplePink400Color}" />
+			<SolidColorBrush x:Key="SimpleBorderUtilitiesSwatchBrush"
+							 Color="#3D000000" />
 		</ResourceDictionary>
 
 		<!-- ═══════════════════════════════════════════════════════════════════ -->
-		<!-- DARK THEME (Default)                                              -->
+		<!-- DARK THEME (Default) -->
 		<!-- ═══════════════════════════════════════════════════════════════════ -->
 		<ResourceDictionary x:Key="Default">
 
 			<!-- ─────────────────────────────────────────────────────────────── -->
-			<!-- SharedColorPalette Overrides                                   -->
+			<!-- SharedColorPalette Overrides -->
 			<!-- ─────────────────────────────────────────────────────────────── -->
 
 			<!-- Primary (SDS Brand) -->
@@ -152,7 +161,7 @@
 			<Color x:Key="ShadowColor">#33000000</Color>
 
 			<!-- ─────────────────────────────────────────────────────────────── -->
-			<!-- Utility-only Primitives (Pink — used by measurement brushes)   -->
+			<!-- Utility-only Primitives (Pink — used by measurement brushes) -->
 			<!-- ─────────────────────────────────────────────────────────────── -->
 			<Color x:Key="SimplePink200Color">#FAE1FA</Color>
 			<Color x:Key="SimplePink400Color">#F19EDC</Color>
@@ -160,18 +169,27 @@
 			<Color x:Key="SimplePink800Color">#8A226F</Color>
 
 			<!-- ─────────────────────────────────────────────────────────────── -->
-			<!-- Utility Brushes (Simple-specific, no shared equivalent)        -->
+			<!-- Utility Brushes (Simple-specific, no shared equivalent) -->
 			<!-- ─────────────────────────────────────────────────────────────── -->
-			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesBlanketBrush" Color="#B2000000" />
-			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesMeasurementBrush" Color="{StaticResource SimplePink800Color}" />
-			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesOverlayBrush" Color="#80000000" />
-			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesScrimBrush" Color="#CC000000" />
-			<SolidColorBrush x:Key="SimpleTextUtilitiesOnMeasurementBrush" Color="{StaticResource SimplePink200Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesBlanketBrush"
+							 Color="#B2000000" />
+			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesMeasurementBrush"
+							 Color="{StaticResource SimplePink800Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesOverlayBrush"
+							 Color="#80000000" />
+			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesScrimBrush"
+							 Color="#CC000000" />
+			<SolidColorBrush x:Key="SimpleTextUtilitiesOnMeasurementBrush"
+							 Color="{StaticResource SimplePink200Color}" />
 			<StaticResource x:Key="SimpleTextUtilitiesOnOverlayBrush" ResourceKey="OnSurfaceBrush" />
-			<SolidColorBrush x:Key="SimpleIconUtilitiesBrush" Color="{StaticResource SimplePink400Color}" />
-			<SolidColorBrush x:Key="SimpleIconUtilitiesOnMeasurementBrush" Color="{StaticResource SimplePink200Color}" />
-			<SolidColorBrush x:Key="SimpleBorderUtilitiesMeasurementBrush" Color="{StaticResource SimplePink600Color}" />
-			<SolidColorBrush x:Key="SimpleBorderUtilitiesSwatchBrush" Color="#3DFFFFFF" />
+			<SolidColorBrush x:Key="SimpleIconUtilitiesBrush"
+							 Color="{StaticResource SimplePink400Color}" />
+			<SolidColorBrush x:Key="SimpleIconUtilitiesOnMeasurementBrush"
+							 Color="{StaticResource SimplePink200Color}" />
+			<SolidColorBrush x:Key="SimpleBorderUtilitiesMeasurementBrush"
+							 Color="{StaticResource SimplePink600Color}" />
+			<SolidColorBrush x:Key="SimpleBorderUtilitiesSwatchBrush"
+							 Color="#3DFFFFFF" />
 		</ResourceDictionary>
 
 	</ResourceDictionary.ThemeDictionaries>

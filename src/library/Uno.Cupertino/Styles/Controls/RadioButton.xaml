@@ -15,30 +15,18 @@
 
 	<Style x:Key="CupertinoRadioButtonStyle"
 		   TargetType="RadioButton">
-		<Setter Property="FontFamily"
-				Value="{ThemeResource CupertinoFontFamily}" />
-		<Setter Property="Background"
-				Value="{ThemeResource CupertinoWhiteBrush}" />
-		<Setter Property="Foreground"
-				Value="{ThemeResource CupertinoLabelBrush}" />
-		<Setter Property="BorderBrush"
-				Value="{ThemeResource RadioButtonBorderBrush}" />
-		<Setter Property="Padding"
-				Value="9,0,0,0" />
-		<Setter Property="HorizontalAlignment"
-				Value="Left" />
-		<Setter Property="VerticalAlignment"
-				Value="Stretch" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Left" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
-		<Setter Property="MinWidth"
-				Value="120" />
-		<Setter Property="MinHeight"
-				Value="{StaticResource RadioCheckAreaSize}" />
-		<Setter Property="UseSystemFocusVisuals"
-				Value="False" />
+		<Setter Property="FontFamily" Value="{ThemeResource CupertinoFontFamily}" />
+		<Setter Property="Background" Value="{ThemeResource CupertinoWhiteBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource CupertinoLabelBrush}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource RadioButtonBorderBrush}" />
+		<Setter Property="Padding" Value="9,0,0,0" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="VerticalAlignment" Value="Stretch" />
+		<Setter Property="HorizontalContentAlignment" Value="Left" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="MinWidth" Value="120" />
+		<Setter Property="MinHeight" Value="{StaticResource RadioCheckAreaSize}" />
+		<Setter Property="UseSystemFocusVisuals" Value="False" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -55,8 +43,7 @@
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="RootGrid.Opacity"
-												Value="{StaticResource CupertinoDisableStateOpacity}" />
+										<Setter Target="RootGrid.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -65,12 +52,9 @@
 
 								<VisualState x:Name="Checked">
 									<VisualState.Setters>
-										<Setter Target="CheckEllipse.Opacity"
-												Value="1" />
-										<Setter Target="OuterEllipse_Checked.Opacity"
-												Value="1" />
-										<Setter Target="UncheckEllipse.Opacity"
-												Value="0" />
+										<Setter Target="CheckEllipse.Opacity" Value="1" />
+										<Setter Target="OuterEllipse_Checked.Opacity" Value="1" />
+										<Setter Target="UncheckEllipse.Opacity" Value="0" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -83,8 +67,7 @@
 
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="FocusRing.Opacity"
-												Value="{StaticResource CupertinoFocusedOpacity}" />
+										<Setter Target="FocusRing.Opacity" Value="{StaticResource CupertinoFocusedOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 

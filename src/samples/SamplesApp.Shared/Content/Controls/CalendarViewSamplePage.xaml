@@ -8,7 +8,7 @@
 	  xmlns:sample="using:Uno.Themes.Samples"
 	  xmlns:smtx="using:ShowMeTheXAML"
 	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-	
+
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 		<sample:SamplePageLayout>
 			<sample:SamplePageLayout.MaterialTemplate>
@@ -79,19 +79,19 @@
 								   Margin="0,8,0,0" />
 						<smtx:XamlDisplay UniqueKey="Simple_CalendarView_MonthDisplay"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
-										  <Grid ColumnDefinitions="*,*">
-											<CalendarView DisplayMode="{Binding SelectedItem.Content, ElementName=DisplayModeComboBox}" />
-											<ComboBox x:Name="DisplayModeComboBox"
-													  Grid.Column="1"
-													  SelectedIndex="0"
-													  VerticalAlignment="Top"
-													  Margin="8,0,0,0">
-												<ComboBoxItem Content="Month" />
-												<ComboBoxItem Content="Year" />
-												<ComboBoxItem Content="Decade" />
-											</ComboBox>
-										  </Grid>
-							
+							<Grid ColumnDefinitions="*,*">
+								<CalendarView DisplayMode="{Binding SelectedItem.Content, ElementName=DisplayModeComboBox}" />
+								<ComboBox x:Name="DisplayModeComboBox"
+										  Grid.Column="1"
+										  SelectedIndex="0"
+										  VerticalAlignment="Top"
+										  Margin="8,0,0,0">
+									<ComboBoxItem Content="Month" />
+									<ComboBoxItem Content="Year" />
+									<ComboBoxItem Content="Decade" />
+								</ComboBox>
+							</Grid>
+
 						</smtx:XamlDisplay>
 					</StackPanel>
 				</DataTemplate>

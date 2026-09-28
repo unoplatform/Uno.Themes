@@ -1,4 +1,4 @@
-﻿#if WinUI
+#if WinUI
 using Microsoft.UI.Xaml;
 #else
 using Windows.UI.Xaml;

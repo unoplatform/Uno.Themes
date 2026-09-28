@@ -182,13 +182,14 @@
 														  VerticalAlignment="Stretch"
 														  HorizontalAlignment="Stretch"
 														  Visibility="Collapsed" />
-									<!-- Simple Content -->
-									<ContentPresenter x:Name="SimpleContentContainer"
-													  Content="{TemplateBinding Content}"
-													  ContentTemplate="{TemplateBinding SimpleTemplate}"
-													  VerticalAlignment="Stretch"
-													  HorizontalAlignment="Stretch"
-													  Visibility="Collapsed" />									</Grid>
+										<!-- Simple Content -->
+										<ContentPresenter x:Name="SimpleContentContainer"
+														  Content="{TemplateBinding Content}"
+														  ContentTemplate="{TemplateBinding SimpleTemplate}"
+														  VerticalAlignment="Stretch"
+														  HorizontalAlignment="Stretch"
+														  Visibility="Collapsed" />
+									</Grid>
 
 									<!-- Optional link to documentation -->
 									<StackPanel Visibility="{Binding DocumentationLink, Converter={StaticResource IsNullOrEmptyToCollapsed}}">

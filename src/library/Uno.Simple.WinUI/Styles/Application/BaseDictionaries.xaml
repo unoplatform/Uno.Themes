@@ -1,4 +1,4 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<!--
@@ -6,7 +6,7 @@
 		Uno.XamlMerge task (via the Styles\Application\ glob) so that a single
 		Source=mergedpages.xaml on BaseTheme brings in the default converter,
 		typography, font and thickness resources the theme needs.
-
+		
 		Order matters: entries listed LATER win at lookup time (MergedDictionaries
 		are searched in reverse), and a merged dictionary beats mergedpages' OWN theme
 		dictionaries. So a file left in the Styles\Application\ glob — whose resources
@@ -15,7 +15,7 @@
 		a shared default must therefore be removed from the glob (see simple-common.props)
 		and merged here, AFTER the dictionary it overrides. That is why Typography.xaml,
 		Fonts.xaml and Thickness.xaml are listed below.
-
+		
 		Colour resources are intentionally NOT included here: SharedColors, the
 		shared/seed palettes and Simple's grayscale palette are added (and removed)
 		dynamically by BaseTheme.UpdateSource so they rebuild on seed-color and

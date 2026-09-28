@@ -1,0 +1,42 @@
+jobs:
+- job: Code_Style
+  cancelTimeoutInMinutes: 0
+  displayName: 'Code Style Validation'
+  container: unoplatform/wasm-build:3.0
+
+  pool:
+    vmImage: 'ubuntu-latest'
+
+  variables:
+    # dotnet format has no -p: switch, so the single-platform override is passed as an
+    # environment variable; MSBuild reads it as a global property. Keeping the whole job on
+    # the desktop TFM keeps the restore graph (and therefore the job) small.
+    TargetFrameworkOverride: desktop
+
+  steps:
+  - checkout: self
+    fetchDepth: 1
+    clean: true
+
+  - template: templates/dotnet-install-linux.yml
+    parameters:
+      UnoCheckParameters: '--tfm net10.0-desktop'
+
+  - bash: dotnet restore Uno.Themes.sln -p:TargetFrameworkOverride=desktop
+    displayName: Restore (desktop)
+
+  # src/samples/SamplesApp.Shared is excluded: its files are linked into the sample heads
+  # through a shared project (.shproj/.projitems), and dotnet format does not resolve an
+  # .editorconfig for those linked documents — it falls back to the Roslyn defaults (4
+  # spaces) and would rewrite ~72 tab-indented files against the repo convention.
+  - bash: dotnet format whitespace Uno.Themes.sln --verify-no-changes --no-restore --exclude src/samples/SamplesApp.Shared
+    displayName: Verify C# formatting
+
+  - bash: dotnet tool restore
+    displayName: Restore local tools (XAML Styler)
+
+  # Driven from git ls-files rather than -d src: the XamlMerge task writes gitignored
+  # mergedpages*.xaml into src/library/*/Generated/, and -r would check those too, so the
+  # gate would fail for anyone who built before running it.
+  - bash: dotnet xstyler -c Settings.XamlStyler --passive -f "$(git ls-files '*.xaml' | paste -sd,)"
+    displayName: Verify XAML formatting

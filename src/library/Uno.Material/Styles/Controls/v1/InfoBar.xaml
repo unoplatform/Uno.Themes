@@ -6,7 +6,7 @@
 					xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
 					mc:Ignorable="">
 
-	<!--  Documented variables  -->
+	<!-- Documented variables -->
 	<Color x:Key="InfoBarWarningSeverityColor">#FFCC44</Color>
 	<Color x:Key="InfoBarSuccessSeverityColor">#85D174</Color>
 
@@ -17,14 +17,12 @@
 	<SolidColorBrush x:Key="InfoBarSuccessSeverityBrush"
 					 Color="{StaticResource InfoBarSuccessSeverityColor}" />
 
-	<!--  Style  -->
+	<!-- Style -->
 	<Style x:Key="MaterialInfoBarStyle"
 		   TargetType="muxc:InfoBar">
 
-		<Setter Property="IsTabStop"
-				Value="False" />
-		<Setter Property="Background"
-				Value="{StaticResource MaterialBackgroundBrush}" />
+		<Setter Property="IsTabStop" Value="False" />
+		<Setter Property="Background" Value="{StaticResource MaterialBackgroundBrush}" />
 		<win:Setter Property="BorderBrush"
 					Value="Black" />
 		<win:Setter Property="BorderThickness"
@@ -53,34 +51,25 @@
 
 								<VisualState x:Name="Error">
 									<VisualState.Setters>
-										<Setter Target="SeverityLevel.BorderBrush"
-												Value="{StaticResource MaterialErrorBrush}" />
-										<Setter Target="SeverityLevel.BorderThickness"
-												Value="0,0,0,4" />
-										<Setter Target="StandardIcon.Glyph"
-												Value="{StaticResource InfoBarSuccessIconGlyph}" />
+										<Setter Target="SeverityLevel.BorderBrush" Value="{StaticResource MaterialErrorBrush}" />
+										<Setter Target="SeverityLevel.BorderThickness" Value="0,0,0,4" />
+										<Setter Target="StandardIcon.Glyph" Value="{StaticResource InfoBarSuccessIconGlyph}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Warning">
 									<VisualState.Setters>
-										<Setter Target="SeverityLevel.BorderBrush"
-												Value="{StaticResource InfoBarWarningSeverityBrush}" />
-										<Setter Target="SeverityLevel.BorderThickness"
-												Value="0,0,0,4" />
-										<Setter Target="StandardIcon.Glyph"
-												Value="{StaticResource InfoBarSuccessIconGlyph}" />
+										<Setter Target="SeverityLevel.BorderBrush" Value="{StaticResource InfoBarWarningSeverityBrush}" />
+										<Setter Target="SeverityLevel.BorderThickness" Value="0,0,0,4" />
+										<Setter Target="StandardIcon.Glyph" Value="{StaticResource InfoBarSuccessIconGlyph}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Success">
 									<VisualState.Setters>
-										<Setter Target="SeverityLevel.BorderBrush"
-												Value="{StaticResource InfoBarSuccessSeverityBrush}" />
-										<Setter Target="SeverityLevel.BorderThickness"
-												Value="0,0,0,4" />
-										<Setter Target="StandardIcon.Glyph"
-												Value="{StaticResource InfoBarSuccessIconGlyph}" />
+										<Setter Target="SeverityLevel.BorderBrush" Value="{StaticResource InfoBarSuccessSeverityBrush}" />
+										<Setter Target="SeverityLevel.BorderThickness" Value="0,0,0,4" />
+										<Setter Target="StandardIcon.Glyph" Value="{StaticResource InfoBarSuccessIconGlyph}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -88,19 +77,15 @@
 							<VisualStateGroup x:Name="IconStates">
 								<VisualState x:Name="StandardIconVisible">
 									<VisualState.Setters>
-										<Setter Target="StandardIcon.Visibility"
-												Value="Visible" />
-										<Setter Target="UserIconBorder.Visibility"
-												Value="Collapsed" />
+										<Setter Target="StandardIcon.Visibility" Value="Visible" />
+										<Setter Target="UserIconBorder.Visibility" Value="Collapsed" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="UserIconVisible">
 									<VisualState.Setters>
-										<Setter Target="UserIconBorder.Visibility"
-												Value="Visible" />
-										<Setter Target="StandardIcon.Visibility"
-												Value="Collapsed" />
+										<Setter Target="UserIconBorder.Visibility" Value="Visible" />
+										<Setter Target="StandardIcon.Visibility" Value="Collapsed" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -116,8 +101,7 @@
 								<VisualState x:Name="InfoBarVisible" />
 								<VisualState x:Name="InfoBarCollapsed">
 									<VisualState.Setters>
-										<Setter Target="ContentRoot.Visibility"
-												Value="Collapsed" />
+										<Setter Target="ContentRoot.Visibility" Value="Collapsed" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -126,10 +110,8 @@
 								<VisualState x:Name="ForegroundNotSet" />
 								<VisualState x:Name="ForegroundSet">
 									<VisualState.Setters>
-										<Setter Target="Title.Foreground"
-												Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" />
-										<Setter Target="Message.Foreground"
-												Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" />
+										<Setter Target="Title.Foreground" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" />
+										<Setter Target="Message.Foreground" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -158,7 +140,7 @@
 										<ColumnDefinition Width="Auto" />
 									</Grid.ColumnDefinitions>
 
-									<!--  Font Icon  -->
+									<!-- Font Icon -->
 									<FontIcon x:Name="StandardIcon"
 											  Margin="16,0,0,0"
 											  Grid.Column="0"
@@ -169,7 +151,7 @@
 											  Glyph="{StaticResource InfoBarInformationalIconGlyph}"
 											  Visibility="Collapsed" />
 
-									<!--  Icon Parent  -->
+									<!-- Icon Parent -->
 									<Border x:Name="UserIconBorder"
 											Width="40"
 											Height="40"
@@ -183,21 +165,21 @@
 												Margin="24,0,0,0"
 												Grid.Column="1">
 
-										<!--  Title  -->
+										<!-- Title -->
 										<TextBlock x:Name="Title"
 												   Style="{StaticResource MaterialSubtitle2}"
 												   Text="{TemplateBinding Title}"
 												   Visibility="{Binding Title, Converter={StaticResource EmptyToVisibleConverter}, FallbackValue=Collapsed}"
 												   TextWrapping="Wrap" />
 
-										<!--  Message  -->
+										<!-- Message -->
 										<TextBlock x:Name="Message"
 												   Style="{StaticResource MaterialBody2}"
 												   Text="{TemplateBinding Message}"
 												   TextWrapping="Wrap" />
 									</StackPanel>
 
-									<!--  Action Button  -->
+									<!-- Action Button -->
 									<ContentPresenter HorizontalAlignment="Right"
 													  VerticalAlignment="Center"
 													  Content="{TemplateBinding ActionButton}"
@@ -205,7 +187,7 @@
 
 								</Grid>
 
-								<!--  Content  -->
+								<!-- Content -->
 								<ContentPresenter Grid.Row="1"
 												  VerticalAlignment="Bottom"
 												  HorizontalAlignment="Right"

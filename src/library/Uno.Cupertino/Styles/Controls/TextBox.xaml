@@ -14,7 +14,7 @@
 
 	<CornerRadius x:Key="CupertinoTextBoxCornerRadius">5</CornerRadius>
 
-	<!--  TODO : Update when design is ready  -->
+	<!-- TODO : Update when design is ready -->
 	<x:String x:Key="ClearGlyphPathData">M10.661012,7.5689991L7.5990001,10.650999 12.939089,15.997999 7.5990001,21.336999 10.661012,24.405 16.007082,19.065 21.369997,24.405 24.430058,21.336999 24.429081,21.336 19.088991,15.998999 24.429081,10.662001 21.345095,7.5819996 16.007082,12.919001z M15.997072,0C24.828983,0 31.994999,7.1770013 31.994999,15.999998 31.994999,24.826997 24.828007,31.999999 15.997072,31.999999 7.1569835,31.999999 1.5270052E-07,24.826997 0,15.999998 1.5270052E-07,7.1799997 7.1569835,0 15.997072,0z</x:String>
 
 	<Style x:Key="DeleteButtonStyle"
@@ -32,8 +32,7 @@
 								<VisualState x:Name="Pressed" />
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="ButtonLayoutGrid.Opacity"
-												Value="0" />
+										<Setter Target="ButtonLayoutGrid.Opacity" Value="0" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -56,28 +55,18 @@
 
 	<Style x:Key="CupertinoTextBoxStyle"
 		   TargetType="TextBox">
-		<Setter Property="FontFamily"
-				Value="{ThemeResource CupertinoFontFamily}" />
-		<Setter Property="Background"
-				Value="Transparent" />
-		<!--  Issue with updating foreground on theme change https://github.com/unoplatform/Uno.Themes/issues/522  -->
-		<Setter Property="Foreground"
-				Value="{ThemeResource CupertinoLabelBrush}" />
-		<Setter Property="PlaceholderForeground"
-				Value="{ThemeResource CupertinoPlaceholderTextBrush}" />
-		<Setter Property="BorderThickness"
-				Value="1" />
-		<Setter Property="BorderBrush"
-				Value="{ThemeResource CupertinoTextBoxBorderBrush}" />
-		<Setter Property="CornerRadius"
-				Value="{StaticResource CupertinoTextBoxCornerRadius}" />
+		<Setter Property="FontFamily" Value="{ThemeResource CupertinoFontFamily}" />
+		<Setter Property="Background" Value="Transparent" />
+		<!-- Issue with updating foreground on theme change https://github.com/unoplatform/Uno.Themes/issues/522 -->
+		<Setter Property="Foreground" Value="{ThemeResource CupertinoLabelBrush}" />
+		<Setter Property="PlaceholderForeground" Value="{ThemeResource CupertinoPlaceholderTextBrush}" />
+		<Setter Property="BorderThickness" Value="1" />
+		<Setter Property="BorderBrush" Value="{ThemeResource CupertinoTextBoxBorderBrush}" />
+		<Setter Property="CornerRadius" Value="{StaticResource CupertinoTextBoxCornerRadius}" />
 
-		<Setter Property="HorizontalContentAlignment"
-				Value="Left" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
-		<Setter Property="Padding"
-				Value="10" />
+		<Setter Property="HorizontalContentAlignment" Value="Left" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="Padding" Value="10" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -92,10 +81,8 @@
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="ContentBorder.Opacity"
-												Value="{StaticResource CupertinoDisableStateOpacity}" />
-										<Setter Target="ContentElement.Opacity"
-												Value="{StaticResource CupertinoDisableStateOpacity}" />
+										<Setter Target="ContentBorder.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+										<Setter Target="ContentElement.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -104,8 +91,7 @@
 							<VisualStateGroup x:Name="ButtonStates">
 								<VisualState x:Name="ButtonVisible">
 									<VisualState.Setters>
-										<Setter Target="DeleteButton.Visibility"
-												Value="Visible" />
+										<Setter Target="DeleteButton.Visibility" Value="Visible" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="ButtonCollapsed" />
@@ -114,8 +100,7 @@
 								<VisualState x:Name="NotEmpty" />
 								<VisualState x:Name="Empty">
 									<VisualState.Setters>
-										<Setter Target="PlaceholderElement.Opacity"
-												Value="1" />
+										<Setter Target="PlaceholderElement.Opacity" Value="1" />
 									</VisualState.Setters>
 									<VisualState.StateTriggers>
 										<StateTrigger IsActive="{Binding Text, Converter={StaticResource EmptyToTrueConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
