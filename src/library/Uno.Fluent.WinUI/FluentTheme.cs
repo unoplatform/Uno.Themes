@@ -293,6 +293,10 @@ public partial class FluentTheme : BaseTheme
 			{
 				_bundleAliasStyles[semanticKey] = bundleStyle;
 			}
+			else
+			{
+				FluentDiagnostics.LogWarning($"FluentTheme: bundle style '{bundleKey}' not found; '{semanticKey}' stays unaliased.");
+			}
 		}
 	}
 }
