@@ -54,7 +54,7 @@ public sealed partial class SeedColorSamplePage : Page
 	}
 
 	private static Color? CurrentPrimary()
-		=> Application.Current.Resources.TryGetValue("PrimaryColor", out var value) && value is Color color ? color : null;
+		=> (SampleThemeHelper.CurrentApplication ?? Application.Current).Resources.TryGetValue("PrimaryColor", out var value) && value is Color color ? color : (Color?)null;
 
 	private void SeedColorPicker_ColorChanged(ColorPicker sender, ColorChangedEventArgs args)
 	{
@@ -76,8 +76,12 @@ public sealed partial class SeedColorSamplePage : Page
 	private void ApplySeedColor(Color seed)
 	{
 		_lastSeed = seed;
-		SemanticThemeHelper.SeedColorMode = _lastSeedColorMode;
-		SemanticThemeHelper.PrimarySeed = seed;
+
+		// Not SemanticThemeHelper: it resolves Application.Current, which is the wrapper app — not
+		// this head — when the head is hosted in a secondary ALC by ThemesSampleApp.
+		var colors = SampleThemeHelper.GetColorsOrThrow();
+		colors.SeedColorMode = _lastSeedColorMode;
+		colors.PrimarySeed = seed;
 		ShowSeed(seed);
 	}
 

@@ -18,6 +18,15 @@
     <!-- Runtime Tests Engine: suppress warnings from injected source package -->
     <NoWarn>$(NoWarn);CS8619;CS8602;Uno0001;IL2026;IL2070;IL2072;IL2075</NoWarn>
     <DefineConstants>$(DefineConstants);IS_UNO_RUNTIMETEST_PROJECT</DefineConstants>
+
+    <!--
+      The Uno SDK adds Hot Design and the App MCP client to Debug (non-optimized) builds. On Uno 7 they
+      bring packages built against the pre-7 Uno assemblies (Uno.Toolkit.WinUI, SkiaSharp.Views.Windows),
+      so Debug builds fail with CS0012 on 'CoreDispatcher' and ambiguous VisualTreeHelperEx references.
+      Release builds do not include them. Remove these once the tooling ships Uno 7 builds.
+    -->
+    <UnoDisableHotDesign>true</UnoDisableHotDesign>
+    <UnoDisableMCPSupport>true</UnoDisableMCPSupport>
   </PropertyGroup>
 
   <Import Project="..\..\Directory.Build.props" />

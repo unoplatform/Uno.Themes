@@ -249,7 +249,7 @@ parsed) and was then immediately torn down.
 - **6.5.153 → 6.7.0-dev.815**: heads' implicit `Uno.WinUI.*` packages jump two dev-minor versions. Expect at most NU1608-class unification warnings (libraries reference lower Uno.WinUI); watch for theme-style/rendering diffs and `Uno.ShowMeTheXAML 2.0.0-dev0015` / `Uno.UI.RuntimeTests.Engine 2.0.0-dev.60` binary compat. Runtime tests are the gate. Dev packages can be evicted from `unoplatformdev` — re-pin to a stable 6.7 once released.
 - **Dual-TFM wrapper build** enters each guest project twice with different global properties; if per-project targets race, use the Phase 5 fallback.
 - **`new Window()` migration** changes head startup on all four TFMs — covered by the existing CI matrix + standalone smoke.
-- **Known v1 limitations** (accepted): guest satellite assemblies and `Assets/**` are not carried on WASM (neutral-language strings; some guest images may 404 — fonts mitigated via wrapper font packages); WASM ALC unload can leave residual roots (functionally harmless; matches studio.live behavior); the desktop wrapper output is not self-contained (probes sibling bins — the `GuestApps/` probe path is the seam for a future packaged layout).
+- **Known v1 limitations** (accepted): guest satellite assemblies are not carried (neutral-language strings); WASM ALC unload can leave residual roots (functionally harmless; matches studio.live behavior); the desktop wrapper output is not self-contained (probes sibling bins — the `GuestApps/` probe path is the seam for a future packaged layout).
 
 ## Verification
 
@@ -279,7 +279,7 @@ parsed) and was then immediately torn down.
 3. [uno#24075](https://github.com/unoplatform/uno/issues/24075) — Guest finalizers during unload re-populate property-system caches after `ExitAlcApplication`'s sweep.
 4. [uno#24076](https://github.com/unoplatform/uno/issues/24076) — Native X11 window/GL context (+ render threads) leak per ALC-guest window create/close cycle (~12-15 MB native/cycle; managed side fully reclaimed). Reproduces with and without an explicit pre-Exit `Window.Close()`.
 
-**Accepted v1 limitations**: the native leak above (bounded by switch count in a dev tool); guest `Assets/**`/satellites not carried (some guest images may 404 — fonts covered by wrapper font packages); desktop wrapper output not self-contained (probes sibling bins; `GuestApps/` probe is the packaged-layout seam); single guest at a time by design.
+**Accepted v1 limitations**: the native leak above (bounded by switch count in a dev tool); guest satellites not carried; desktop wrapper output not self-contained (probes sibling bins; `GuestApps/` probe is the packaged-layout seam); single guest at a time by design.
 
 **Post-review fixes (2026-07-20)** — a seven-lens review panel (verdict: fix-first, nothing block-merge) was applied in full except three tracked follow-ups. Fixed: late-guest-content race on the load-timeout teardown path (re-clear + verify before unload); stuck-run-loop is now a surfaced, latched terminal state (`_faulted` — hosting disabled until restart, no more false "unloaded" success) with the binding-provider restore moved ahead of the early-out; WASM unload no longer burns a fixed 5 s (run loop observed after `Exit()`, where it can actually complete); a partial WASM payload download can no longer poison the MEMFS cache (`.partial` staging + rename, cleanup on failure); payload fetch streams instead of double-buffering each dll; the post-unload sweep dispatch result is checked and logged; per-sweep isolation + a not-found warning on the nav-handler prune; UI dispatches that time out are flagged so they can't run late against an unloading ALC; the wasm payload-exclusion filter is now exactly the ALC-shareable set (**fixes `Uno.UI.Lottie` being stranded on wasm** — neither shipped nor shareable; `Microsoft.Win32*`/`Microsoft.VisualBasic*`/`Uno.UI.Adapter.*` added to the ALC share prefixes to keep every exclusion resolvable) with reciprocal keep-in-sync comments; desktop sibling-bin probe anchored on `SamplesApp.Shared` (no DLL execution from arbitrary same-named trees); locate-before-teardown (a click on a missing guest no longer destroys the running session); `Reload` targets only accepted requests; tier-1 ALC resolution uses an invalidation-cached name map; manifest entries validated against path separators; reflection lookups can no longer crash type initialization; guest-list sync sites documented at the catalog; catalog types made internal. Re-verified after the fixes: desktop e2e (Material/Cupertino/Simple, unload, reload) + 3-cycle soak with per-cycle ALC collection, desktop and wasm builds clean, Lottie present in all three wasm payload manifests.
 
@@ -300,4 +300,134 @@ parsed) and was then immediately torn down.
 - The desktop CI artifact carries no guests (sibling-bin probe layout) — noted in `stage-build-desktop.yml`; the `HostingSmoke_Desktop` job is the hosting gate.
 - Verify the staging host compresses `.dll.bin` responses (the wasm publish is untrimmed, ~116 MB uncompressed); pre-compress the payload if it doesn't.
 
+**Post-delivery fix (2026-09-21) — sample pages could not reach their own theme when hosted**
+
+Reported: hosting a head and opening **Seed Color** failed with `InvalidOperationException: No BaseTheme
+(MaterialTheme, SimpleTheme, etc.) found in Application.Current.Resources.MergedDictionaries`, thrown from
+`SeedColorSamplePage`'s constructor (`ApplySeedColor` -> `SemanticThemeHelper.SeedColorMode` ->
+`GetThemeOrThrow`).
+
+- **Root cause — `Application.Current` is the *host* inside a hosted guest.** Verified from the pinned
+  `Uno.UI.dll` (`Uno.Sdk.Private 7.0.0-dev.701`) IL, not from docs: `Application..ctor` calls `set_Current(this)` ->
+  `SetCurrentApplication`, which assigns the `_current` static **only** when the app's assembly is in the
+  default ALC. A secondary-ALC app is instead put in `_applicationsByAlc`
+  (`ConditionalWeakTable<AssemblyLoadContext, Application>`), given an `AlcRegistrationId`, and latches
+  `_hasSecondaryApps` — `_current` is never touched. So from guest code `Application.Current` is the wrapper
+  `App`, which is deliberately theme-free. `BaseTheme` is also ALC-isolated (`!Uno.Themes.WinUI`), so the
+  lookup could not match a host theme even if the host had one: `OfType<BaseTheme>()` compares against the
+  *guest's* `BaseTheme` type.
+- **No public accessor exists** for a guest's own `Application`: `Application.GetForAssemblyLoadContext`,
+  `GetForInstance`, `GetForType`, `EnumerateSecondaryApplications`, `GetLatestSecondaryApplicationForType`
+  and `AlcContentHost.SourceApplicationOverride` are all `internal`. `GetForInstance`/`GetForType` also fall
+  back to `Application.Current` for default-ALC types, so they answer "the host" for the shared framework
+  types most of a guest tree is made of.
+- **Fix (samples layer; the shipping libraries are unchanged).** `SamplesApp.Shared/Helpers/SampleThemeHelper.cs`
+  holds the head's own `Application` (`CurrentApplication`, defaulting to `Application.Current`) and exposes
+  `GetTheme()` / `GetColorsOrThrow()`; each head's `App` constructor registers itself as its first statement.
+  The shared project compiles into the head assembly, so the handle is per-head — and per-ALC when hosted —
+  the same mechanism `NavigationHelper.MainWindow` and `SamplePageLayout.ActiveDesign` already depend on.
+  `SeedColorSamplePage` and `FontFamilyTunerControl` (3 call sites) route through it; `FontFamilyTunerControl`
+  keeps its deliberate null-tolerance, the page keeps failing loudly (the message now names the missing
+  registration). Runtime tests that call `SemanticThemeHelper` directly are correct as-is — they run
+  standalone, where both routes agree.
+- **Library change is documentation only:** a remark on `SemanticThemeHelper.GetTheme()` stating that every
+  member resolves `Application.Current` and is therefore wrong for a secondary-ALC-hosted app, pointing at
+  `ApplicationExtensions.GetTheme(Application)`. No resource key, API or style changed.
+- **Verified.** A throwaway in-ALC probe (reflection into the live guest, reverted) reported for Material and
+  Simple: `Application.Current => Uno.Themes.WrapperApp.App`,
+  `SemanticThemeHelper.GetTheme() => NULL`, `SampleThemeHelper.CurrentApplication => Uno.Themes.Samples.App`,
+  `SampleThemeHelper.GetTheme() => {Material,Simple}Theme`, and `new SeedColorSamplePage() => OK`.
+  Cupertino returns `NULL` from both routes because that head merges no `BaseTheme` at all (`CupertinoColors`
+  / `CupertinoFonts` / `CupertinoResources`); neither `SeedColorSamplePage` nor `DesignTokensSamplePage`
+  lists `Design.Cupertino`, so no page is affected. Also run: `--smoke` across all three guests (PASS), the
+  full Simple runtime suite (259 passed / 1 pre-existing `[Ignore]` skip / 0 failed), and the new
+  `Given_SampleThemeAccess` (3 tests) alongside the untouched `Given_ApplicationExtensions` (3 tests).
+- **Follow-up (not applied):** the hosted path is verified manually, not gated in CI. Gating it would mean a
+  guest-side `--sample=<name>` deep link (the extension point `GuestAppDeepLink`'s remark already anticipates)
+  plus a second hosting-smoke pass; deliberately left out — the signal would be an indirect 30 s content-ready
+  timeout per guest, for ~2 extra minutes of `HostingSmoke_Desktop`.
+
 **Follow-ups (not applied)**: file the four upstream unoplatform/uno issues from `upstream-issues.md` and replace the spec-pointer comment in `GuestAppLoader.Sweeps.cs` with the issue URLs; run the in-browser wasm smoke/soak (`?smoke`, headless Chrome scraping `[HOSTING-SMOKE] RESULT:`) against a published build — the desktop smoke is CI-gated, the wasm one has the harness but no CI driver yet.
+
+
+---
+
+## Post-v1 — Uno 7 follow-ups (2026-09-18)
+
+Two defects reported against the hosted **Material** guest on the ControlExtensions sample page
+(*Helpers → ControlExtensions*): the `BitmapIcon` example blank, and the `TextBox`/`ComboBox`
+`ControlExtensions.Icon` examples blank. Both reproduce only when hosted — the standalone
+`MaterialSampleApp` renders all of them. Diagnosed by rendering the page inside the guest ALC
+and reading the realized template parts.
+
+### Fixed: guest `ms-appx:///Assets/**` 404s (the `BitmapIcon`)
+
+A hosted guest resolves `ms-appx:///` against the **host's** package root, and the wrapper
+carried only `Assets/Fonts/**/*.ttf`. `ms-appx:///Assets/UnoLogo.png` therefore resolved to a
+path under the wrapper's bin that does not exist; `StorageFile.GetFileFromApplicationUriAsync`
+still succeeds (it does not probe), so nothing logs and the `BitmapIcon` simply lays out at
+zero width (measured `0x20` hosted vs `20x20` standalone).
+
+The wrapper's content glob now mirrors `SamplesApp.Shared.projitems`' own `Assets\**\*.*`
+instead of fonts only, less the Resizetizer inputs (`Assets/Icons/**`, `Assets/Splash/**`,
+which the `UnoIcon`/`UnoSplashScreen` items already consume). Verified **desktop, Debug**:
+`BitmapIcon` measures `20x20` hosted and the Uno logo renders.
+
+**WASM not rebuilt.** The same glob should cover the browser leg, but that was not built or
+run, and it adds ~22 MB (including ~3.8 MB of sample `.mp4`) to a package that already
+publishes untrimmed at ~116 MB. Re-verify the wasm leg — and its StaticWebAssets behavior,
+which has collided before on the heads' identical `WasmCSS/Fonts.css` — before treating the
+"guest images may 404" limitation as retired there.
+
+### Fixed: the issue-3 sweep had been silently dead since the Uno 7 retarget
+
+`Application.CleanupNonDefaultAlcCaches()` gained a `dyingAlc` parameter in Uno 7. The
+reflective invoke passed no arguments, threw `TargetParameterCountException` on every guest
+teardown, and the `catch` downgraded it to a warning — so the post-finalizer cache sweep never
+ran. `GuestAppLoader.Sweeps.cs` now adapts to the method's arity and passes the dying ALC.
+Verified: the warning is gone and the hosting smoke still passes.
+
+### Not fixed (upstream): the `TextBox`/`ComboBox` icons
+
+Attached-property binding paths (`{Binding Path=(ut:ControlExtensions.Icon), …}`) read `null`
+once more than one `Uno.Themes.WinUI` is loaded, although the attached property, the style and
+the type-keyed DP lookup are all correct. The mechanism is not pinned down (by-name owner-type
+resolution is the suspicion, not an observation). Repro and measurements in
+`upstream-issues.md` § 5.
+Repairing the issue-3 sweep does **not** fix it, and no host-side workaround was found —
+loading Material first in a session avoids it.
+
+### Fixed: ShowMeTheXaml panes were blank in every hosted guest
+
+Reported separately: the "show me the XAML" pane renders nothing for any guest, on any sample
+page. Standalone heads are unaffected.
+
+`Uno.ShowMeTheXAML.MSBuild` generates a `ShowMeTheXAML.XamlDictionary` per head whose static
+constructor feeds `XamlResolver`; `XamlDisplay.Init()` is what triggers it. With no argument,
+`Init()` looks the type up on `Assembly.GetEntryAssembly()` — which under hosting is
+`ThemesSampleApp`, and the wrapper does not reference ShowMeTheXAML at all. The `GetType` miss
+is silent, and `XamlResolver.Resolve` answers an unregistered key with `""` rather than
+throwing, so the whole feature degrades to blank panes with nothing logged. (`Init()`'s
+`GetCallingAssembly()` fallback only runs when the entry assembly is `null`, so it never
+covered this.)
+
+Each head now passes its own assembly: `XamlDisplay.Init(typeof(App).Assembly)`. Standalone
+behaviour is unchanged — the entry assembly is already that assembly, and
+`RunClassConstructor` on an initialized type is a no-op.
+
+Guarded by the hosting smoke rather than a `Given_*` runtime test: the defect exists *only*
+under ALC hosting, so a runtime test in `SimpleSampleApp` would have been green before the fix
+and proven nothing. `GuestHostingSmoke` now reads each hosted guest's `XamlResolver.DebugView`
+count through the guest ALC and fails the run at zero — real red/green, and already CI-gated by
+`HostingSmoke_Desktop`. Verified **desktop, Debug**: before the fix all three guests reported
+`0` snippets and the smoke exited `1`; after, each reports `589` and the smoke exits `0`.
+
+The probe reads the resolver through the guest ALC, which only works because
+`Uno.ShowMeTheXAML` is absent from every `=`/`^` rule in `GuestSharedAssemblies.txt` and is not
+in the wrapper's own closure, so it falls to tier 3 and loads per-ALC. If that ever changes the
+smoke reports a distinct "could not read" failure rather than blaming `Init()` again.
+
+**WASM not rebuilt or run.** `Init(assembly)` takes the explicit-assemblies branch before the
+`IsMonoWebAssembly` guard is reached, so the browser leg should be at least as correct as
+desktop and no longer depends on `GetEntryAssembly()` being non-null there — but that was not
+verified, same caveat as the assets fix above.

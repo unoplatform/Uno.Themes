@@ -15,12 +15,19 @@ jobs:
       Simple:
         SampleAppName: SimpleSampleApp
         ProjectPath: src/samples/SimpleSampleApp
+        RuntimeTestsTheme: Light
+      # The theme suites assert resource values against the ambient appearance, so the
+      # Dark branches are only exercised by a second run under a Dark application theme.
+      SimpleDark:
+        SampleAppName: SimpleSampleApp
+        ProjectPath: src/samples/SimpleSampleApp
+        RuntimeTestsTheme: Dark
       Fluent:
         SampleAppName: FluentSampleApp
         ProjectPath: src/samples/FluentSampleApp
 
   variables:
-    ArtifactName: runtimetests-desktop-$(SampleAppName)
+    ArtifactName: runtimetests-desktop-$(SampleAppName)$(RuntimeTestsTheme)
 
   steps:
   - checkout: self
@@ -54,15 +61,16 @@ jobs:
       ProjectPath: '$(ProjectPath)'
       SampleAppName: '$(SampleAppName)'
       UNO_RUNTIME_TESTS_RUN_TESTS: '{}'
-      UNO_RUNTIME_TESTS_OUTPUT_PATH: '$(Common.TestResultsDirectory)/runtime-tests-$(SampleAppName).xml'
+      UNO_RUNTIME_TESTS_THEME: '$(RuntimeTestsTheme)'
+      UNO_RUNTIME_TESTS_OUTPUT_PATH: '$(Common.TestResultsDirectory)/runtime-tests-$(SampleAppName)$(RuntimeTestsTheme).xml'
 
   - task: PublishTestResults@2
     displayName: 'Publish Runtime Tests Results'
     condition: always()
     inputs:
-      testRunTitle: 'Runtime Tests - $(SampleAppName)'
+      testRunTitle: 'Runtime Tests - $(SampleAppName) $(RuntimeTestsTheme)'
       testResultsFormat: 'NUnit'
-      testResultsFiles: '$(Common.TestResultsDirectory)/runtime-tests-$(SampleAppName).xml'
+      testResultsFiles: '$(Common.TestResultsDirectory)/runtime-tests-$(SampleAppName)$(RuntimeTestsTheme).xml'
       failTaskOnFailedTests: true
 
 # ThemesSampleApp hosts the four theme heads in secondary ALCs; building alone cannot catch a
