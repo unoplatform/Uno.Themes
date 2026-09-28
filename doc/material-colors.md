@@ -9,7 +9,9 @@ uid: Uno.Themes.Material.Colors
 
 ## Colors
 
-The values below are the **defaults**. All of them (except the four `Error*` keys) can be replaced wholesale by setting a single seed color on the theme — see [Seed Color Palette Generation](xref:Uno.Themes.SeedColors) — or individually via color overrides.
+The values below are the **Material defaults**. The 33 color keys and 280 brush keys are shared with Simple and Fluent, which supply their own palettes. Use these role names with [semantic styles](semantic-styles.md) for portable XAML.
+
+Setting a seed color generates the primary, secondary, tertiary, surface, background, and outline roles — see [Seed Color Palette Generation](xref:Uno.Themes.SeedColors). The four `Error*` keys retain the base palette, and `ShadowColor` is fixed by the generator. All color roles can be changed individually through `ThemeColors.OverrideDictionary` or `OverrideSource`.
 
 | Key                          | LightValue | DarkValue |
 |------------------------------|------------|-----------|
@@ -45,9 +47,11 @@ The values below are the **defaults**. All of them (except the four `Error*` key
 | `SurfaceTintColor`           | `#5946D2`  | `#C7BFFF` |
 | `OutlineColor`               | `#79747E`  | `#928F99` |
 | `OutlineVariantColor`        | `#C9C5D0`  | `#57545D` |
-| `ShadowColor`                | `#000000`  | `#000000` |
+| `ShadowColor`                | `#33000000` | `#33000000` |
 
 ## Opacities
+
+These shared state tokens can also be supplied through the theme's color override dictionary. They set the opacity of the corresponding semantic brushes; they do not change the base color's alpha.
 
 | Key             | Value |
 |-----------------|-------|
@@ -61,6 +65,8 @@ The values below are the **defaults**. All of them (except the four `Error*` key
 | DisabledOpacity | 0.12  |
 
 ## Brushes
+
+There are nine brushes for each of 31 color roles: the base brush and eight state/emphasis variants. `SurfaceTintColor` provides only `SurfaceTintBrush`, and `ShadowColor` has no shared brush family, giving 280 keys in total. Reference brushes with `{ThemeResource ...}`. To override a particular control or visual state, use its [lightweight styling keys](lightweight-styling.md); replacing a palette color through the theme updates its semantic brushes together.
 
 | Key                                | Color                        | Opacity           |
 |------------------------------------|------------------------------|-------------------|

@@ -4,6 +4,8 @@ uid: Uno.Themes.Styles.RatingControl
 
 # RatingControl Control
 
+The tables below describe Material. Currently, `PointerOverSet` reads `RatingControlSelectedForeground` (or `SecondaryRatingControlSelectedForeground` for the secondary style), so the separate selected-foreground `PointerOver` keys are declared but ineffective. Normal selected-foreground overrides also affect that hover state.
+
 ## Styles
 
 | Style Key                     | IsDefaultStyle\* |

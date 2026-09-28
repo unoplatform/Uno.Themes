@@ -17,6 +17,9 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 ## Lightweight Styling
 
+> [!NOTE]
+> Current implementation limitation: for both filled and outlined styles, the `*HeaderForegroundPointerOver`, `*HeaderForegroundFocused`, `*PlaceholderForegroundPointerOver`, and `*PlaceholderForegroundFocused` keys resolve as resources but are not read by the templates. Headers and placeholders retain their base foreground during hover and focus. Their disabled keys are consumed. Input text, background, and border state overrides are consumed normally.
+
 ### Structural Resources
 
 | Key                                                | Type              | Value                                      |

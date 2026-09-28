@@ -4,6 +4,8 @@ uid: Uno.Themes.Styles.CalendarDatePicker
 
 # CalendarDatePicker Control
 
+The tables below describe Material. Its normal calendar glyph currently inherits its foreground and does not read `CalendarDatePickerCalendarGlyphForeground`, so that override is ineffective. The separate `CalendarDatePickerCalendarGlyphForegroundDisabled` key is consumed by the disabled state.
+
 ## Styles
 
 | Style Key                 | IsDefaultStyle\* |
