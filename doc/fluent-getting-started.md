@@ -62,7 +62,13 @@ The step-by-step process to enable Fluent design styles within an existing Uno P
 
 ### Installation
 
-Add a reference to the `Uno.Fluent.WinUI` NuGet package to your application project.
+In a single-project app, add `FluentTheme` to the list of `UnoFeatures` in your project file (`PROJECT_NAME.csproj`):
+
+```xml
+<UnoFeatures>FluentTheme</UnoFeatures>
+```
+
+Otherwise, add a reference to the `Uno.Fluent.WinUI` NuGet package to your application project.
 
 A runnable showcase lives in the repository at `src/samples/FluentSampleApp` — the shared Uno Themes sample gallery rendered through `FluentTheme`: Fluent sample tabs for every control the semantic layer covers, plus the Overview, Semantic Styling, Colors, Seed Color and Design Tokens pages.
 
