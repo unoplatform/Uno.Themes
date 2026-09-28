@@ -10,7 +10,7 @@
 		Semantic keys (source of truth in ThemeDictionary):
 		FilledButton*       = Primary variant
 		FilledTonalButton*  = Neutral variant
-		OutlinedButton*     = alias for FilledTonalButton*
+		OutlinedButton*     = independent variant with FilledTonalButton defaults
 		TextButton*         = Subtle variant
 		IconButton*         = Primary icon variant (aliases FilledButton*)
 		
@@ -60,7 +60,7 @@
 			<StaticResource x:Key="FilledTonalButtonBorderBrushPointerOver" ResourceKey="OutlineBrush" />
 			<StaticResource x:Key="FilledTonalButtonBorderBrushPressed" ResourceKey="OutlineBrush" />
 			<StaticResource x:Key="FilledTonalButtonBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
-			<!-- OutlinedButton aliases (read parity — point to FilledTonalButton*) -->
+			<!-- OutlinedButton defaults (independent overrides) -->
 			<StaticResource x:Key="OutlinedButtonForeground" ResourceKey="FilledTonalButtonForeground" />
 			<StaticResource x:Key="OutlinedButtonForegroundPointerOver" ResourceKey="FilledTonalButtonForegroundPointerOver" />
 			<StaticResource x:Key="OutlinedButtonForegroundPressed" ResourceKey="FilledTonalButtonForegroundPressed" />
@@ -135,7 +135,7 @@
 			<StaticResource x:Key="FilledTonalButtonBorderBrushPointerOver" ResourceKey="OutlineBrush" />
 			<StaticResource x:Key="FilledTonalButtonBorderBrushPressed" ResourceKey="OutlineBrush" />
 			<StaticResource x:Key="FilledTonalButtonBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
-			<!-- OutlinedButton aliases (read parity — point to FilledTonalButton*) -->
+			<!-- OutlinedButton defaults (independent overrides) -->
 			<StaticResource x:Key="OutlinedButtonForeground" ResourceKey="FilledTonalButtonForeground" />
 			<StaticResource x:Key="OutlinedButtonForegroundPointerOver" ResourceKey="FilledTonalButtonForegroundPointerOver" />
 			<StaticResource x:Key="OutlinedButtonForegroundPressed" ResourceKey="FilledTonalButtonForegroundPressed" />
@@ -182,6 +182,7 @@
 
 	<StaticResource x:Key="SimpleButtonCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
 	<StaticResource x:Key="SimpleButtonBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />
+	<StaticResource x:Key="ButtonBorderThickness" ResourceKey="SimpleButtonBorderThickness" />
 	<StaticResource x:Key="SimpleButtonIconSpacing" ResourceKey="SimpleSpace200" />
 	<StaticResource x:Key="SimpleIconButtonCornerRadius" ResourceKey="SimpleRadiusFullCornerRadius" />
 	<StaticResource x:Key="SimpleIconButtonBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />
@@ -198,12 +199,12 @@
 	<Style x:Key="SimpleBaseButtonStyle"
 		   TargetType="Button">
 		<Setter Property="FontFamily" Value="{ThemeResource SimpleButtonFontFamily}" />
-		<Setter Property="FontSize" Value="{StaticResource LabelLargeFontSize}" />
+		<Setter Property="FontSize" Value="{ThemeResource LabelLargeFontSize}" />
 		<Setter Property="FontWeight" Value="{StaticResource SimpleButtonFontWeight}" />
 		<Setter Property="MinHeight" Value="{StaticResource ControlHeightMedium}" />
 		<Setter Property="Padding" Value="{ThemeResource SimpleSpace300Thickness}" />
 		<Setter Property="CornerRadius" Value="{ThemeResource SimpleButtonCornerRadius}" />
-		<Setter Property="BorderThickness" Value="{StaticResource SimpleButtonBorderThickness}" />
+		<Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThickness}" />
 		<Setter Property="HorizontalAlignment" Value="Left" />
 		<Setter Property="VerticalAlignment" Value="Center" />
 		<Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -344,6 +345,88 @@
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledTonalButtonForegroundDisabled}" />
 										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource FilledTonalButtonForegroundDisabled}" />
 										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource FilledTonalButtonForegroundDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<StackPanel Orientation="Horizontal"
+									HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+									VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+									Spacing="{ThemeResource SimpleButtonIconSpacing}">
+
+							<ContentPresenter x:Name="LeadingIconPresenter"
+											  Content="{Binding Path=(ut:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}}"
+											  Foreground="{TemplateBinding Foreground}"
+											  Visibility="{Binding Path=(ut:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
+											  VerticalAlignment="Center" />
+
+							<ContentPresenter x:Name="ContentPresenter"
+											  Content="{TemplateBinding Content}"
+											  ContentTemplate="{TemplateBinding ContentTemplate}"
+											  ContentTransitions="{TemplateBinding ContentTransitions}"
+											  Foreground="{TemplateBinding Foreground}"
+											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+
+							<ContentPresenter x:Name="TrailingIconPresenter"
+											  Content="{Binding Path=(ut:ControlExtensions.TrailingIcon), RelativeSource={RelativeSource TemplatedParent}}"
+											  Foreground="{TemplateBinding Foreground}"
+											  Visibility="{Binding Path=(ut:ControlExtensions.TrailingIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
+											  VerticalAlignment="Center" />
+						</StackPanel>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- Outlined variant: tonal defaults with independent semantic overrides. -->
+	<Style x:Key="SimpleOutlinedButtonStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource SimpleBaseButtonStyle}">
+		<Setter Property="Foreground" Value="{ThemeResource OutlinedButtonForeground}" />
+		<Setter Property="Background" Value="{ThemeResource OutlinedButtonBackground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource OutlinedButtonBorderBrush}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid x:Name="Root"
+						  Background="{TemplateBinding Background}"
+						  BorderBrush="{TemplateBinding BorderBrush}"
+						  BorderThickness="{TemplateBinding BorderThickness}"
+						  CornerRadius="{TemplateBinding CornerRadius}"
+						  Padding="{TemplateBinding Padding}"
+						  AutomationProperties.AccessibilityView="Raw">
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="Root.Background" Value="{ThemeResource OutlinedButtonBackgroundPointerOver}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource OutlinedButtonBorderBrushPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource OutlinedButtonForegroundPointerOver}" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource OutlinedButtonForegroundPointerOver}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource OutlinedButtonForegroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="Root.Background" Value="{ThemeResource OutlinedButtonBackgroundPressed}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource OutlinedButtonBorderBrushPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource OutlinedButtonForegroundPressed}" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource OutlinedButtonForegroundPressed}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource OutlinedButtonForegroundPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="Root.Background" Value="{ThemeResource OutlinedButtonBackgroundDisabled}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource OutlinedButtonBorderBrushDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource OutlinedButtonForegroundDisabled}" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource OutlinedButtonForegroundDisabled}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource OutlinedButtonForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>

@@ -6,13 +6,13 @@ This document defines strict guardrails for any AI-assisted or automated agent c
 
 ## Repository overview
 
-Uno.Themes ships the design-system theme libraries used by Uno Platform / WinUI apps (Material Design, Cupertino / iOS-style, the Simple density-driven theme, and the Fluent adapter over the built-in WinUI styles), plus the shared Uno Themes core (semantic palette, seed-color generation, design tokens) and C# Markup helpers. The repo produces eight NuGet packages:
+Uno.Themes ships the design-system theme libraries used by Uno Platform / WinUI apps (Material Design, Cupertino / iOS-style, the Simple density-driven theme, and the Fluent semantic adapter), plus the shared Uno Themes core (semantic palette, seed-color generation, design tokens) and C# Markup helpers. The repo produces eight NuGet packages:
 
 - `Uno.Themes.WinUI` — base theme infrastructure (semantic palette, seed-color generation, design tokens, shared converters/extensions). Built from `src/library/Uno.Themes/Uno.Themes.WinUI.csproj`. All other theme libraries reference it.
 - `Uno.Material.WinUI` — Material Design 3 styles and resources. Built from `src/library/Uno.Material/Uno.Material.WinUI.csproj`. Has a v1/v2 style split (see `Styles/Application/v1`, `Styles/Application/v2`, etc.).
 - `Uno.Cupertino.WinUI` — Cupertino / iOS-style theme. Built from `src/library/Uno.Cupertino/Uno.Cupertino.WinUI.csproj`.
 - `Uno.Simple.WinUI` — minimal density-driven theme (see `Density.cs`, `SimpleTheme.cs`). Built from `src/library/Uno.Simple.WinUI/Uno.Simple.WinUI.csproj`.
-- `Uno.Fluent.WinUI` — Fluent adapter theme (`FluentTheme`): aliases the semantic style/color/typography keys onto the built-in `XamlControlsResources` instead of shipping templates. Built from `src/library/Uno.Fluent.WinUI/Uno.Fluent.WinUI.csproj`.
+- `Uno.Fluent.WinUI` — semantic styles, palette, typography, and override mappings over built-in `XamlControlsResources` templates. Built from `src/library/Uno.Fluent.WinUI/Uno.Fluent.WinUI.csproj`.
 - `Uno.Themes.WinUI.Markup`, `Uno.Material.WinUI.Markup`, `Uno.Simple.WinUI.Markup` — C# Markup helpers (extension methods, brush/color/style accessors) layered on top of the corresponding theme library.
 
 Despite the legacy folder name `src/library/Uno.Themes`, the assembly is `Uno.Themes.WinUI` (see `AssemblyName` in the csproj). Internals of the base library are visible to `Uno.Material(.WinUI)`, `Uno.Cupertino(.WinUI)`, `Uno.Simple.WinUI`, and `Uno.Fluent.WinUI` via `InternalsVisibleTo` (see `themes-common.props`).
@@ -28,7 +28,7 @@ Despite the legacy folder name `src/library/Uno.Themes`, the assembly is `Uno.Th
   - `src/samples/MaterialSampleApp/` — Material sample head.
   - `src/samples/CupertinoSampleApp/` — Cupertino sample head.
   - `src/samples/SimpleSampleApp/` — Simple sample head; **also hosts the runtime tests** under `src/samples/SimpleSampleApp/RuntimeTests/Given_*.cs` (e.g. `Given_SeedColorPalette.cs`, `Given_SemanticStyles.cs`, `Given_ColorOverridePrecedence.cs`).
-  - `src/samples/FluentSampleApp/` — Fluent sample head (`Uno.Fluent.WinUI`, the semantic adapter over the built-in `XamlControlsResources` styles). The Fluent library runtime tests (`Given_Fluent*.cs`) live in `SimpleSampleApp/RuntimeTests/`, the CI-parity host (see `specs/05-fluent-theme/spec.md` D14); only the sample-page regressions (`Given_FluentSamplePages.cs`) live here.
+  - `src/samples/FluentSampleApp/` — Fluent sample head (`Uno.Fluent.WinUI`, the semantic adapter over the built-in `XamlControlsResources` styles). Note the Fluent runtime tests (`Given_Fluent*.cs`) live in `SimpleSampleApp/RuntimeTests/`, not here — that is the CI-parity host (see `specs/05-fluent-theme/spec.md` D14).
   - `src/samples/ThemesSampleApp/` — wrapper head (desktop + browserwasm only) that hosts the four theme sample heads **in-process** via collectible secondary AssemblyLoadContexts (Uno's `AlcContentHost`/`WindowHelper.ContentHostOverride`): launch one app, pick the theme sample to test. Deliberately references **no** theme library and does not import `SamplesApp.Shared`; hosting/loader code lives under `GuestHosting/`. The heads stay fully standalone (`UnoEnableAlcAppSupport` + `new Window()` are the only head-side accommodations). Guests are hosted from their own build output (desktop: sibling `bin` probing; wasm: `GuestApps/` payload packaged at build) — build the heads for the matching TFM first. A scripted hosting smoke (`--smoke` on desktop, `?smoke` in the browser) cycles every guest and verifies ALC reclamation; CI gates it via the `HostingSmoke_Desktop` job (`build/scripts/linux-skia-desktop-hosting-smoke.sh`). See `specs/05-alc-wrapper-app/progress.md` for design, verified behavior, and known upstream limitations.
 - `doc/` — published documentation (see §13).
 

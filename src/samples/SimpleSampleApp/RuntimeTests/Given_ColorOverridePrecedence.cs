@@ -24,6 +24,93 @@ namespace Uno.Themes.Samples.RuntimeTests;
 [TestClass]
 public class Given_ColorOverridePrecedence
 {
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow(false, false)]
+	[DataRow(false, true)]
+	[DataRow(true, false)]
+	[DataRow(true, true)]
+	public void When_ColorOverridesAreNested_SharedBrushesPreserveBothAppearances(bool fluent, bool nestedInsideAppearance)
+	{
+		var overrides = new ResourceDictionary();
+		var earlier = new ResourceDictionary { ["PrimaryColor"] = Microsoft.UI.Colors.Yellow };
+		var child = new ResourceDictionary();
+		var light = new ResourceDictionary { ["PrimaryColor"] = Microsoft.UI.Colors.Red, ["HoverOpacity"] = 0.21 };
+		var dark = new ResourceDictionary { ["PrimaryColor"] = Microsoft.UI.Colors.Blue, ["HoverOpacity"] = 0.67 };
+		if (nestedInsideAppearance)
+		{
+			var lightWrapper = new ResourceDictionary();
+			lightWrapper.MergedDictionaries.Add(light);
+			var darkWrapper = new ResourceDictionary();
+			darkWrapper.MergedDictionaries.Add(dark);
+			child.ThemeDictionaries["Light"] = lightWrapper;
+			child.ThemeDictionaries["Default"] = darkWrapper;
+		}
+		else
+		{
+			child.ThemeDictionaries["Light"] = light;
+			child.ThemeDictionaries["Default"] = dark;
+		}
+		overrides.MergedDictionaries.Add(earlier);
+		overrides.MergedDictionaries.Add(child);
+		BaseTheme theme = fluent ? new FluentTheme() : new SimpleTheme();
+		theme.Colors = new ThemeColors { PrimarySeed = SeedPurple, OverrideDictionary = overrides };
+		AssertBranchBrush(theme, "Light", "PrimaryBrush", Microsoft.UI.Colors.Red, 1);
+		AssertBranchBrush(theme, "Default", "PrimaryBrush", Microsoft.UI.Colors.Blue, 1);
+		AssertBranchBrush(theme, "Light", "PrimaryHoverBrush", Microsoft.UI.Colors.Red, 0.21);
+		AssertBranchBrush(theme, "Default", "PrimaryHoverBrush", Microsoft.UI.Colors.Blue, 0.67);
+
+		// An own value outranks merged children in normal XAML resolution.
+		overrides["PrimaryColor"] = Microsoft.UI.Colors.Green;
+		theme.DefaultSpacing = 6;
+		AssertBranchBrush(theme, "Light", "PrimaryBrush", Microsoft.UI.Colors.Green, 1);
+		AssertBranchBrush(theme, "Default", "PrimaryBrush", Microsoft.UI.Colors.Green, 1);
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_HighContrastOverrideIsAbsent_SharedBrushesPreferDarkOverDefault()
+	{
+		var overrides = new ResourceDictionary();
+		overrides.ThemeDictionaries["Dark"] = new ResourceDictionary { ["PrimaryColor"] = Microsoft.UI.Colors.Blue };
+		overrides.ThemeDictionaries["Default"] = new ResourceDictionary { ["PrimaryColor"] = Microsoft.UI.Colors.Red };
+		var theme = new SimpleTheme { Colors = new ThemeColors { OverrideDictionary = overrides } };
+		AssertBranchBrush(theme, "HighContrast", "PrimaryBrush", Microsoft.UI.Colors.Blue, 1);
+		overrides.ThemeDictionaries["HighContrast"] = new ResourceDictionary { ["PrimaryColor"] = Microsoft.UI.Colors.Green };
+		theme.DefaultSpacing = 6;
+		AssertBranchBrush(theme, "HighContrast", "PrimaryBrush", Microsoft.UI.Colors.Green, 1);
+	}
+
+	private static void AssertBranchBrush(ResourceDictionary dictionary, string appearance, string key, Color color, double opacity)
+	{
+		var brush = FindOwnBranchBrush(dictionary, appearance, key);
+		Assert.IsNotNull(brush, $"[{appearance}] {key} must resolve from the theme's own dictionaries.");
+		Assert.AreEqual(color, brush.Color, $"[{appearance}] {key}");
+		Assert.AreEqual(opacity, brush.Opacity, 0.001, $"[{appearance}] {key} opacity");
+	}
+
+	private static SolidColorBrush? FindOwnBranchBrush(ResourceDictionary dictionary, string appearance, string key)
+	{
+		for (var i = dictionary.MergedDictionaries.Count - 1; i >= 0; i--)
+		{
+			if (FindOwnBranchBrush(dictionary.MergedDictionaries[i], appearance, key) is { } merged)
+			{
+				return merged;
+			}
+		}
+		if (dictionary.ThemeDictionaries.TryGetValue(appearance, out var value) && value is ResourceDictionary branch)
+		{
+			foreach (var entry in branch)
+			{
+				if (Equals(entry.Key, key) && entry.Value is SolidColorBrush brush)
+				{
+					return brush;
+				}
+			}
+		}
+		return null;
+	}
+
 	// A distinctive blue that is clearly not from any default palette.
 	private static readonly Color OverrideBlue = Color.FromArgb(0xFF, 0x21, 0x96, 0xF3);
 

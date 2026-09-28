@@ -15,6 +15,13 @@ namespace Uno.Themes;
 
 public abstract partial class BaseTheme
 {
+	private const double DefaultCornerRadiusValue = 4.0;
+
+	internal static double NormalizeCornerRadius(double value)
+		// Radius700 is the largest generated multiple; keep every token finite.
+		=> double.IsFinite(value) && value >= 0 && value <= double.MaxValue / 7
+			? value : DefaultCornerRadiusValue;
+
 	/// <summary>
 	/// Theme dictionary keys used when generating token ResourceDictionaries.
 	/// </summary>
@@ -176,6 +183,7 @@ public abstract partial class BaseTheme
 	/// </summary>
 	private static ResourceDictionary GenerateShapeScale(double baseValue)
 	{
+		baseValue = NormalizeCornerRadius(baseValue);
 		var dict = new ResourceDictionary();
 
 		foreach (var themeKey in ThemeKeys)

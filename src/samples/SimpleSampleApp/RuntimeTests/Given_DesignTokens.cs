@@ -14,6 +14,32 @@ namespace Uno.Themes.Samples.RuntimeTests;
 [TestClass]
 public class Given_DesignTokens
 {
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow(-1.0)]
+	[DataRow(double.NaN)]
+	[DataRow(double.PositiveInfinity)]
+	[DataRow(double.NegativeInfinity)]
+	[DataRow(double.MaxValue)]
+	public void When_CornerRadiusIsInvalid_SemanticAndNativeTokensUseValidDefaults(double radius)
+	{
+		foreach (BaseTheme theme in new BaseTheme[] { new SimpleTheme(), new Uno.Fluent.FluentTheme() })
+		{
+			theme.DefaultCornerRadius = radius;
+			Assert.AreEqual(0.0, (double)theme["Radius0"]);
+			Assert.AreEqual(4.0, (double)theme["Radius100"]);
+			Assert.AreEqual(new CornerRadius(20), (CornerRadius)theme["Radius500CornerRadius"]);
+			if (theme is Uno.Fluent.FluentTheme)
+			{
+				Assert.AreEqual(new CornerRadius(4), (CornerRadius)theme["ControlCornerRadius"]);
+			}
+			theme.DefaultCornerRadius = 0;
+			Assert.AreEqual(new CornerRadius(0), (CornerRadius)theme["Radius500CornerRadius"], "Zero is an explicit valid shape setting.");
+			theme.DefaultCornerRadius = 6;
+			Assert.AreEqual(new CornerRadius(30), (CornerRadius)theme["Radius500CornerRadius"]);
+		}
+	}
+
 	// ─────────────────────────────────────────────────────────────────────
 	// Helpers
 	// ─────────────────────────────────────────────────────────────────────

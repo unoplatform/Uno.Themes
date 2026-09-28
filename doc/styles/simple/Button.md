@@ -4,22 +4,23 @@ uid: Uno.Themes.Simple.Styles.Button
 
 # Button Control
 
-Semantic `OutlinedButtonStyle` maps to `SimpleFilledTonalButtonStyle`. Its template consumes `FilledTonalButton*`, so the declared `OutlinedButton*` aliases do not customize it independently. Override the tonal family to affect both variants; see [semantic override compatibility](../../semantic-styles.md#override-compatibility).
+Semantic `OutlinedButtonStyle` maps to `SimpleOutlinedButtonStyle`, which consumes its own `OutlinedButton*` brushes. Its defaults match the tonal variant, while overrides can customize the variants independently. See [semantic override compatibility](../../semantic-styles.md#override-compatibility).
 
 ## Styles
 
-| Style Key                                 | IsDefaultStyle\* |
-|-------------------------------------------|------------------|
-| `SimpleFilledButtonStyle`                | True             |
-| `SimpleFilledTonalButtonStyle`                |                  |
-| `SimpleTextButtonStyle`                 |                  |
-| `SimpleDangerPrimaryButtonStyle`          |                  |
-| `SimpleDangerSubtleButtonStyle`           |                  |
-| `SimpleIconButtonStyle`            |                  |
-| `SimpleIconButtonNeutralStyle`            |                  |
-| `SimpleIconButtonSubtleStyle`             |                  |
-| `SimpleIconButtonDangerPrimaryStyle`      |                  |
-| `SimpleIconButtonDangerSubtleStyle`       |                  |
+| Style Key | IsDefaultStyle\* |
+| ------------------------------------------- | ------------------ |
+| `SimpleFilledButtonStyle` | True |
+| `SimpleFilledTonalButtonStyle` | |
+| `SimpleOutlinedButtonStyle` | |
+| `SimpleTextButtonStyle` | |
+| `SimpleDangerPrimaryButtonStyle` | |
+| `SimpleDangerSubtleButtonStyle` | |
+| `SimpleIconButtonStyle` | |
+| `SimpleIconButtonNeutralStyle` | |
+| `SimpleIconButtonSubtleStyle` | |
+| `SimpleIconButtonDangerPrimaryStyle` | |
+| `SimpleIconButtonDangerSubtleStyle` | |
 
 IsDefaultStyle\*: Styles in this column will be set as the default implicit style for the matching control
 
@@ -27,10 +28,13 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 ### Button
 
+The text-button base consumes `ButtonBorderThickness` and `LabelLargeFontSize` through theme resources. `ButtonBorderThickness` defaults to `SimpleButtonBorderThickness`; the existing Simple corner-radius and padding keys retain their scope.
+
 | Key                                  | Type              | Value                            |
 |--------------------------------------|-------------------|----------------------------------|
 | `SimpleButtonCornerRadius`           | `CornerRadius`    | `SimpleRadius200CornerRadius`    |
 | `SimpleButtonBorderThickness`        | `Thickness`       | `SimpleStrokeBorderThickness`    |
+| `ButtonBorderThickness`              | `Thickness`       | `SimpleButtonBorderThickness`    |
 | `SimpleButtonMediumPadding`          | `Thickness`       | `SimpleSpace300Thickness`        |
 | `SimpleButtonSmallPadding`           | `Thickness`       | `SimpleSpace200Thickness`        |
 | `SimpleButtonMediumMinHeight`        | `Double`          | `SimpleIconLarge`                |
@@ -105,24 +109,24 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 ### IconButton Variant
 
-| Key                                                  | Type              | Value                              |
-|------------------------------------------------------|-------------------|------------------------------------|
-| `IconButtonForeground`                               | `SolidColorBrush` | `FilledButtonForeground`           |
-| `IconButtonForegroundPointerOver`                    | `SolidColorBrush` | `FilledButtonForegroundPointerOver`|
-| `IconButtonForegroundPressed`                        | `SolidColorBrush` | `FilledButtonForegroundPressed`    |
-| `IconButtonForegroundDisabled`                       | `SolidColorBrush` | `FilledButtonForegroundDisabled`   |
-| `IconButtonBackground`                               | `SolidColorBrush` | `FilledButtonBackground`           |
-| `IconButtonBackgroundPointerOver`                    | `SolidColorBrush` | `FilledButtonBackgroundPointerOver`|
-| `IconButtonBackgroundPressed`                        | `SolidColorBrush` | `FilledButtonBackgroundPressed`    |
-| `IconButtonBackgroundDisabled`                       | `SolidColorBrush` | `FilledButtonBackgroundDisabled`   |
-| `IconButtonBorderBrush`                              | `SolidColorBrush` | `FilledButtonBorderBrush`          |
-| `IconButtonBorderBrushPointerOver`                   | `SolidColorBrush` | `FilledButtonBorderBrushPointerOver`|
-| `IconButtonBorderBrushPressed`                       | `SolidColorBrush` | `FilledButtonBorderBrushPressed`   |
-| `IconButtonBorderBrushDisabled`                      | `SolidColorBrush` | `FilledButtonBorderBrushDisabled`  |
+| Key | Type | Value |
+| ------------------------------------------------------ | ------------------- | ------------------------------------ |
+| `IconButtonForeground` | `SolidColorBrush` | `FilledButtonForeground` |
+| `IconButtonForegroundPointerOver` | `SolidColorBrush` | `FilledButtonForegroundPointerOver` |
+| `IconButtonForegroundPressed` | `SolidColorBrush` | `FilledButtonForegroundPressed` |
+| `IconButtonForegroundDisabled` | `SolidColorBrush` | `FilledButtonForegroundDisabled` |
+| `IconButtonBackground` | `SolidColorBrush` | `FilledButtonBackground` |
+| `IconButtonBackgroundPointerOver` | `SolidColorBrush` | `FilledButtonBackgroundPointerOver` |
+| `IconButtonBackgroundPressed` | `SolidColorBrush` | `FilledButtonBackgroundPressed` |
+| `IconButtonBackgroundDisabled` | `SolidColorBrush` | `FilledButtonBackgroundDisabled` |
+| `IconButtonBorderBrush` | `SolidColorBrush` | `FilledButtonBorderBrush` |
+| `IconButtonBorderBrushPointerOver` | `SolidColorBrush` | `FilledButtonBorderBrushPointerOver` |
+| `IconButtonBorderBrushPressed` | `SolidColorBrush` | `FilledButtonBorderBrushPressed` |
+| `IconButtonBorderBrushDisabled` | `SolidColorBrush` | `FilledButtonBorderBrushDisabled` |
 
 ### Outlined Variant (Compatibility Aliases)
 
-These keys alias the Neutral (FilledTonal) variant for cross-design-system compatibility.
+These keys default to the Neutral (FilledTonal) brushes and are consumed independently by `SimpleOutlinedButtonStyle`.
 
 | Key                                                  | Type              | Value                                    |
 |------------------------------------------------------|-------------------|------------------------------------------|

@@ -15,20 +15,20 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 ## Lightweight Styling
 
 > [!NOTE]
-> Current implementation limitation: the label uses `CheckBoxForegroundUnchecked` at rest in all three check states. Hover, pressed, and disabled labels also use the corresponding `CheckBoxForegroundUnchecked*` keys, including when checked or indeterminate. The declared `CheckBoxForegroundChecked*` and `CheckBoxForegroundIndeterminate*` keys do not currently affect the label. Glyph, background, and border overrides still use their matching check-state keys. See [semantic styles](../../semantic-styles.md) for cross-theme mappings.
+The label uses the matching `CheckBoxForegroundUnchecked*`, `CheckBoxForegroundChecked*`, or `CheckBoxForegroundIndeterminate*` family for its check state, including normal, pointer-over, pressed, and disabled interactions. Glyph, background, and border overrides also use their matching check-state keys. See [semantic styles](../../semantic-styles.md) for cross-theme mappings.
 
 ### Structural Resources
 
-| Key                                    | Type              | Value                              |
-|----------------------------------------|-------------------|------------------------------------|
-| `SimpleCheckBoxSize`                   | `StaticResource`  | `SimpleSpace400`                   |
-| `SimpleCheckBoxCornerRadius`           | `StaticResource`  | `SimpleRadius100CornerRadius`      |
-| `SimpleCheckBoxStrokeThickness`        | `StaticResource`  | `SimpleStrokeBorder`               |
-| `SimpleCheckBoxContentMargin`          | `Thickness`       | 16,0,0,0                          |
-| `SimpleCheckBoxColumnWidth`            | `GridLength`      | 20                                 |
-| `SimpleCheckBoxGlyphSize`             | `Double`          | 10                                 |
-| `SimpleCheckBoxCheckGlyphPathData`     | `String`          | *(SVG path data)*                  |
-| `SimpleCheckBoxHyphenGlyphPathData`    | `String`          | *(SVG path data)*                  |
+| Key | Type | Value |
+| ---------------------------------------- | ------------------- | ------------------------------------ |
+| `SimpleCheckBoxSize` | `StaticResource` | `SimpleSpace400` |
+| `SimpleCheckBoxCornerRadius` | `StaticResource` | `SimpleRadius100CornerRadius` |
+| `SimpleCheckBoxStrokeThickness` | `StaticResource` | `SimpleStrokeBorder` |
+| `SimpleCheckBoxContentMargin` | `Thickness` | 16,0,0,0 |
+| `SimpleCheckBoxColumnWidth` | `GridLength` | 20 |
+| `SimpleCheckBoxGlyphSize` | `Double` | 10 |
+| `SimpleCheckBoxCheckGlyphPathData` | `String` | *(SVG path data)* |
+| `SimpleCheckBoxHyphenGlyphPathData` | `String` | *(SVG path data)* |
 
 ### Brush Resources
 

@@ -18,12 +18,12 @@ Implement the findings from `specs/semantic-implementation-review/review.md` (do
 
 ## Remaining layer
 
-- [ ] Fix shared nested appearance resolution and normalize invalid shape values.
-- [ ] Fix Simple outlined/icon-toggle/state resources, missing styles, grayscale legacy roles, and button measurements/typography.
-- [ ] Fix Material rating/calendar state resources and typography precedence.
-- [ ] Correct typed markup helpers and complete missing style/font/color helpers with consumer coverage.
-- [ ] Run focused red/green cases and full relevant suites; build Desktop and WebAssembly.
-- [ ] Commit, restack documentation, update docs, and publish the new stacked PR.
+- [x] Fix shared nested appearance resolution and normalize invalid shape values.
+- [x] Fix Simple outlined/icon-toggle/state resources, missing styles, grayscale legacy roles, and button measurements/typography.
+- [x] Fix Material rating/calendar state resources and typography precedence.
+- [x] Correct typed markup helpers and complete missing style/font/color helpers with consumer coverage.
+- [x] Run focused red/green cases and full relevant suites; build Desktop and WebAssembly.
+- [x] Complete the remaining fix layer, restack documentation, and prepare the validated stacked PR for publication.
 
 ## Validation
 
@@ -42,3 +42,22 @@ Commands use `dotnet build src/samples/SimpleSampleApp/SimpleSampleApp.csproj -c
 Final Fluent layer: complete Desktop suites passed in both real application appearances: 558 passed, 0 failed, 1 existing skipped test each (fluent-final-light.xml / fluent-final-dark.xml). Desktop build: 90 warnings, 0 errors; final WebAssembly build: 92 warnings, 0 errors. XAML Styler ran on the three changed dictionaries; unchanged existing token formatting was retained to avoid unrelated churn.
 
 The text-button guard exposed a real Uno-specific lifetime defect in the new adapter: plain PropertyMetadata on shared Brush-valued attached properties creates an inherited context whose associated parent can survive clearing to null. Registering these resource inputs with ValueDoesNotInheritDataContext under HAS_UNO fixes the retention. Native-style baseline and semantic-style teardown now both pass. The observer test and all existing tests remain enabled; only the branch's pre-existing ignored hot-reload guard is skipped.
+
+### Remaining fixes and final review
+
+- Shared/Simple runtime red: 104 failed, 565 passed, one existing skip in `remaining-all-red.xml`. Two palette cases initially timed out because empty Borders had no size; the corrected 20×20 consumers then reproduced the grayscale defect (`remaining-first-green.xml`).
+- Material red: seven failures and 64 passes (`material-red.xml`): selected-rating hover, calendar glyph, and Light LabelExtraSmall weight. Final Material suite: 74 passed, zero failed (`material-final.xml`), including v1 typography preservation and actual Pips path-string resources.
+- Markup compilation reproduced the unusable FontWeight/Pips generic signatures and missing helpers (`markup-red-build.log`). Runtime tests additionally reproduced eleven incorrect style TargetType attributes. All corrected typed consumers and metadata tests pass.
+- Final Simple host suites: **671 passed, zero failed, one pre-existing skipped hot-reload guard in each real Light and Dark application appearance** (`remaining-verified-light.xml`, `remaining-verified-dark.xml`). Includes all Fluent tests, shared resources, Simple rendered-state/geometry/palette cases, and markup consumers.
+- Final review added a HighContrast guard that reproduced a regression in the initial resolver extraction: shared brushes must retain HighContrast → Dark → Default palette selection. The shared resolver now accepts that explicit fallback list while Fluent retains its native appearance policy; the new guard passes.
+- Desktop builds passed: Simple host 85 warnings, Material host 87 warnings, zero errors. Final WebAssembly builds passed: Simple host 93 warnings and Material host 91 warnings, zero errors. Warnings include existing obsolete API/nullability/trim warnings and NuGet advisories; no new warnings point to the changed tests or helper implementations.
+- XamlStyler ran on all changed Simple and Material dictionaries. Unchanged lexical tokens kept their existing formatting; edited/new C#/XAML uses repository line-ending and indentation conventions.
+
+The existing documentation branch was restacked above the Fluent commit. Because `gh stack add` appends to the stack, the remaining fixes use `dev/sb/fluent-theme-3-semantic-fixes` above `dev/sb/fluent-theme-2-semantic-docs`, preserving the published documentation PR. No runtime test was removed or disabled.
+
+Platform limits: runtime execution was Uno Desktop; WebAssembly was compiled/linked, not run in a browser. Native WinUI, mobile runtimes, pixel screenshots, and an actual OS accent change were not validated. Markup consumer tests establish the resource scope before applying typed bindings, consistent with the current Markup package's eager resource lookup; they do not claim to fix upstream Markup resource-scope behavior.
+
+- Independent final review reproduced finite radius overflow with `double.MaxValue` (`radius-overflow-red.xml`: one failed, 54 passed). Values above `double.MaxValue / 7` now use the default scale; the final 671-test appearance runs include this guard.
+- Published-document validation passed: markdownlint and cSpell over all 17 changed published Markdown files (zero spelling issues). Table-only formatting corrections satisfy the current MD060 rule without relaxing the repository configuration.
+
+- [x] Published all three branches with `gh stack submit --auto`: Fluent #1695, documentation #1719, and remaining fixes #1721 in stack #1720. The new PR is a draft and targets the documentation layer. The repository's commitsar 0.11.2 requires the breaking-change body to start with `BREAKING CHANGE:`; the commit message was reordered accordingly after its first CI check.
