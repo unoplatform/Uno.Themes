@@ -9,7 +9,7 @@ Pick one color — typically your brand color — and Uno Themes builds the enti
 Seed color generation is **opt-in**: by default, `MaterialTheme`, `SimpleTheme`, and `FluentTheme` use their built-in palettes (for Fluent, the platform accent and neutrals). The generator only runs when you explicitly set `PrimarySeed` on a `ThemeColors` object.
 
 > [!TIP]
-> New to Uno Themes? Set up a theme first — see [Material getting started](xref:Uno.Themes.Material.GetStarted) or [Simple getting started](xref:Uno.Themes.Simple.GetStarted) — then come back here. Everything on this page assumes a `MaterialTheme` or `SimpleTheme` is already in your `App.xaml`.
+> New to Uno Themes? Set up a theme first — see [Material getting started](xref:Uno.Themes.Material.GetStarted), [Simple getting started](xref:Uno.Themes.Simple.GetStarted), or [Fluent getting started](xref:Uno.Themes.Fluent.GetStarted) — then come back here. Everything on this page assumes a `MaterialTheme`, `SimpleTheme`, or `FluentTheme` is already in your `App.xaml`.
 
 ## How it works, in plain terms
 
@@ -162,7 +162,7 @@ SemanticThemeHelper.PrimarySeed = null;
 ```
 
 > [!NOTE]
-> The helper works on the theme merged into `Application.Current.Resources`. Its properties throw an `InvalidOperationException` if no `MaterialTheme`/`SimpleTheme` is merged yet — set up the theme in `App.xaml` first. `GetTheme()` is the non-throwing alternative: it returns `null` when no theme is found.
+> The helper works on the theme merged into `Application.Current.Resources`. Its properties throw an `InvalidOperationException` if no `MaterialTheme`/`SimpleTheme`/`FluentTheme` is merged yet — set up the theme in `App.xaml` first. `GetTheme()` is the non-throwing alternative: it returns `null` when no theme is found.
 
 ### Direct Access via `ThemeColors`
 
@@ -195,7 +195,7 @@ if (theme?.Colors is { } colors)
 `SemanticThemeHelper.GetTheme()` is equivalent to `Application.Current.GetTheme()`.
 
 > [!TIP]
-> The Material and Simple sample apps in this repository include a **Seed Color** page (under *Styles*) with a live color picker — drag it and watch the entire app re-theme in real time, and switch between the two generation modes to compare them.
+> The Material, Simple, and Fluent sample apps in this repository include a **Seed Color** page (under *Styles*) with a live color picker — drag it and watch the entire app re-theme in real time, and switch between the two generation modes to compare them.
 
 ## Upgrading from 7.x
 
@@ -210,7 +210,7 @@ Version 8.0 changes what the generator produces. **If you never set `PrimarySeed
 
 ### `ThemeColors`
 
-Used as the value for `BaseTheme.Colors` (i.e., `MaterialTheme.Colors` or `SimpleTheme.Colors`).
+Used as the value for `BaseTheme.Colors` (i.e., `MaterialTheme.Colors`, `SimpleTheme.Colors`, or `FluentTheme.Colors`).
 
 | Property             | Type                 | Description                                                                                                                                                         |
 |----------------------|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|

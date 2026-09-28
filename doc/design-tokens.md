@@ -88,7 +88,7 @@ Set `DefaultCornerRadius` (shape) or `DefaultSpacing` (spacing) on the theme to 
 <MaterialTheme DefaultCornerRadius="4" DefaultSpacing="6" />
 ```
 
-This generates all `Radius*` / `Space*` tokens as multiples of the base value. The same properties are available on `SimpleTheme`.
+This generates all `Radius*` / `Space*` tokens as multiples of the base value. The same properties are available on `SimpleTheme` and `FluentTheme`.
 
 For spacing, the [density mode](#density-modes) (`DefaultDensity`) composes with the base unit rather than replacing it: the effective spacing base is `DefaultSpacing × density factor` (`Compact` ×0.75, `Regular` ×1, `Comfy` ×1.25). With the default base of 4, the modes yield 3 / 4 / 5.
 
@@ -118,7 +118,7 @@ To override individual tokens without changing the whole scale, use standard XAM
 | `DefaultDensity`      | `Density`    | Density mode that scales the spacing base unit (`Compact` ×0.75, `Regular` ×1, `Comfy` ×1.25). Runtime-settable.                            |
 | `DefaultFontFamily`   | `FontFamily` | The font the type scale is generated from: the `DefaultFontFamily` token and every `*FontFamily` key derived from it. Runtime-settable.     |
 
-These properties are defined on `BaseTheme` and inherited by `MaterialTheme`, `SimpleTheme`, and their toolkit wrappers (`MaterialToolkitTheme`, `SimpleToolkitTheme`). All four regenerate their tokens when assigned at runtime; content already on screen re-resolves on a theme-change pass — see the note above and [Typography Font Swap](#typography-font-swap). The color configuration on the separate `Colors` property (`ThemeColors`) changes live — see [Seed Color Palette](seed-colors.md).
+These properties are defined on `BaseTheme` and inherited by `MaterialTheme`, `SimpleTheme`, `FluentTheme`, and the toolkit wrappers (`MaterialToolkitTheme`, `SimpleToolkitTheme`). All of them regenerate their tokens when assigned at runtime; content already on screen re-resolves on a theme-change pass — see the note above and [Typography Font Swap](#typography-font-swap). The color configuration on the separate `Colors` property (`ThemeColors`) changes live — see [Seed Color Palette](seed-colors.md).
 
 ### Density Modes
 

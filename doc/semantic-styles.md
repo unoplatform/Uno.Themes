@@ -177,6 +177,7 @@ FAB is a Material-specific concept. Under Simple theme, FAB keys resolve to exis
 | Semantic Key | Material | Simple | Fluent | Notes |
 |---|---|---|---|---|
 | `DatePickerStyle` | `MaterialDatePickerStyle` | `SimpleDatePickerStyle` | `DefaultDatePickerStyle` | Direct match |
+| `DatePickerFlyoutPresenterStyle` | `MaterialDatePickerFlyoutPresenterStyle` | GAP | built-in&nbsp;¹ | Simple has no flyout presenter style |
 
 ### MediaPlayerElement
 
