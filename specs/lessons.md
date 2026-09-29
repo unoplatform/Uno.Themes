@@ -4,6 +4,36 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## Uno's `AppBarButton` hijacks the template part named `Content` — never use that name for a presenter that is not meant to show `Icon ?? Content`
+
+**Context:** unoplatform/Uno.Themes#1735 (2026-09-29). In the Material v2 and Simple `AppBarButton` styles, a
+`UIElement` assigned to `AppBarButton.Content` (e.g. a `Grid` wrapping a `TextBlock`) rendered nothing, while a
+plain string in `Content` rendered fine. Both templates have two presenters: `ContentPresenter x:Name="Content"`
+bound to `Icon`, nested in a `Viewbox` that collapses when `Icon` is null, and `ContentPresenter
+x:Name="ContentPresenter"` bound to `Content`.
+
+**Root cause:** `AppBarButton.uno.cs` (`SetupContentUpdate`, run from `OnApplyTemplate` / `OnLoaded`) does
+`GetTemplateChild<ContentPresenter>("Content")` and force-sets that presenter's `Content` to `Icon ?? Content`,
+re-applying it whenever either property changes. It exists so that WinUI's icon-only template still shows
+something when only `Content` is set (Uno issue #19649). In our templates the part named `Content` is the icon
+presenter inside the collapsed `Viewbox`. With no `Icon`, Uno pushes the user's `Content` into it; a
+`UIElement` can only have one visual parent, so it is torn out of the visible `ContentPresenter` and ends up
+under a collapsed element. A string is not subject to the single-parent rule, which is why every string-based
+sample and test passed and the bug went unnoticed.
+
+**How to apply:**
+- In an `AppBarButton` template, never name a template part `Content` unless it is meant to display
+  `Icon ?? Content`. Our templates name the icon presenter `IconPresenter` and the content presenter
+  `ContentPresenter`; keep it that way in both Material v2 and Simple (the v1 `MaterialAppBarButton` in
+  `CommandBar.xaml` is icon-only and intentionally relies on the fallback).
+- When a template splits a control's properties across several presenters, add at least one runtime test
+  that sets a `UIElement` (not a string) into each of them — strings hide re-parenting bugs.
+- Before naming a part in a retemplated framework control, check the Uno implementation for
+  `GetTemplateChild("...")` lookups; Uno adds a few beyond WinUI's (`AppBarButton`: `Content`,
+  `KeyboardAcceleratorTextLabel`).
+
+---
+
 ## `Application.Current` is the HOST app inside an ALC-hosted guest — anything resolving the theme through it silently looks at the wrong application
 
 **Context:** `ThemesSampleApp` hosting (2026-09-21, `specs/05-alc-wrapper-app/`). Opening the **Seed Color**
