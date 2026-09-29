@@ -94,11 +94,7 @@ public class Given_AppBarButton
 
 		await LoadAsync(container, button);
 
-		// Pick the visible TextBlock: a string may legitimately be hosted by more than one presenter.
-		var text = button.EnumerateDescendants()
-			.OfType<TextBlock>()
-			.FirstOrDefault(x => x.Text == "Hello"
-				&& x.FindFirstAncestor<FrameworkElement>(a => a.Visibility == Visibility.Collapsed) is null);
+		var text = FindVisibleText(button, "Hello");
 		AssertRenderedInside(button, text, "The string Content");
 	}
 
@@ -114,4 +110,48 @@ public class Given_AppBarButton
 
 		AssertRenderedInside(button, icon, "The Icon");
 	}
+
+	/// <summary>
+	/// Mirrors a NavigationBar / CommandBar toolbar whose PrimaryCommands mix Icon-only, Content-only and
+	/// Icon + Content buttons, the way Uno.Toolkit.UI.NavigationBar hosts them (its primary commands use a
+	/// style based on the theme AppBarButton style).
+	/// </summary>
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_HostedAsCommandBarPrimaryCommands_Then_IconAndContentVariantsAllRender()
+	{
+		var (container, _) = CreateThemedButton();
+		container.Children.Clear();
+		var style = (Style)container.Resources[StyleKey];
+
+		var iconOnly = new SymbolIcon(Symbol.Add);
+		var stringMarker = "Save";
+		var elementMarker = new TextBlock { Text = "Hello" };
+		var bothIcon = new SymbolIcon(Symbol.Edit);
+		var bothLabel = "Edit";
+
+		var commandBar = new CommandBar { IsOpen = false, IsDynamicOverflowEnabled = false };
+		commandBar.PrimaryCommands.Add(new AppBarButton { Style = style, Icon = iconOnly });
+		commandBar.PrimaryCommands.Add(new AppBarButton { Style = style, Content = stringMarker });
+		commandBar.PrimaryCommands.Add(new AppBarButton { Style = style, Content = new Grid { Children = { elementMarker } } });
+		commandBar.PrimaryCommands.Add(new AppBarButton { Style = style, Icon = bothIcon, Content = bothLabel });
+		container.Children.Add(commandBar);
+
+		UnitTestsUIContentHelper.Content = container;
+		await UnitTestsUIContentHelper.WaitForLoaded(commandBar);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		var buttons = commandBar.PrimaryCommands.Cast<AppBarButton>().ToArray();
+		AssertRenderedInside(buttons[0], iconOnly, "The icon-only command's Icon");
+		AssertRenderedInside(buttons[1], FindVisibleText(buttons[1], stringMarker), "The string-content command's Content");
+		AssertRenderedInside(buttons[2], elementMarker, "The UIElement-content command's Content");
+		AssertRenderedInside(buttons[3], bothIcon, "The icon + content command's Icon");
+		AssertRenderedInside(buttons[3], FindVisibleText(buttons[3], bothLabel), "The icon + content command's Content");
+	}
+
+	// A string may legitimately be hosted by more than one presenter; the visible one is what matters.
+	private static TextBlock? FindVisibleText(AppBarButton button, string text) => button.EnumerateDescendants()
+		.OfType<TextBlock>()
+		.FirstOrDefault(x => x.Text == text
+			&& x.FindFirstAncestor<FrameworkElement>(a => a.Visibility == Visibility.Collapsed) is null);
 }
