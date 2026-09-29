@@ -44,9 +44,14 @@ internal static class SemanticBrushUpdater
 	// The base (state-less) brush declares no Opacity in XAML, so it keeps the default.
 	private const double OpaqueOpacity = 1.0;
 
-	// role index -> brush keys for that role, one per interaction state. Precomputed because
-	// Apply runs on every theme rebuild — including once per frame while a color picker is
-	// dragged — and building ~288 key strings each pass would be pure garbage on WASM.
+	// Every swept color role: the stateful ones first, then the base-brush-only ones.
+	private static readonly string[] _colorKeys =
+		[.. ThemesConstants.SemanticColorKeys, .. ThemesConstants.BaseBrushOnlyColorKeys];
+
+	// role index -> brush keys for that role, one per interaction state (just the base brush for a
+	// base-brush-only role). Precomputed because Apply runs on every theme rebuild — including once
+	// per frame while a color picker is dragged — and building ~300 key strings each pass would be
+	// pure garbage on WASM.
 	private static readonly string[][] _brushKeys = BuildBrushKeys();
 
 	// Opacity token per interaction state, parallel to ThemesConstants.BrushStateSuffixes.
@@ -55,15 +60,19 @@ internal static class SemanticBrushUpdater
 
 	private static string[][] BuildBrushKeys()
 	{
-		var colorKeys = ThemesConstants.SemanticColorKeys;
+		var statefulCount = ThemesConstants.SemanticColorKeys.Length;
 		var states = ThemesConstants.BrushStateSuffixes;
-		var keys = new string[colorKeys.Length][];
+		var keys = new string[_colorKeys.Length][];
 
-		for (int i = 0; i < colorKeys.Length; i++)
+		for (int i = 0; i < _colorKeys.Length; i++)
 		{
-			var role = colorKeys[i].Substring(0, colorKeys[i].Length - ColorSuffix.Length);
-			keys[i] = new string[states.Length];
-			for (int j = 0; j < states.Length; j++)
+			var role = _colorKeys[i].Substring(0, _colorKeys[i].Length - ColorSuffix.Length);
+
+			// Index 0 of BrushStateSuffixes is the state-less base brush, so a base-brush-only role
+			// keeps Apply's role/state indexing unchanged.
+			var stateCount = i < statefulCount ? states.Length : 1;
+			keys[i] = new string[stateCount];
+			for (int j = 0; j < stateCount; j++)
 			{
 				keys[i][j] = role + states[j] + BrushSuffix;
 			}
@@ -96,7 +105,7 @@ internal static class SemanticBrushUpdater
 	/// </param>
 	internal static void Apply(ResourceDictionary brushes, IReadOnlyList<ResourceDictionary> colorLayers)
 	{
-		var colorKeys = ThemesConstants.SemanticColorKeys;
+		var colorKeys = _colorKeys;
 		var states = ThemesConstants.BrushStateSuffixes;
 		Span<double> opacities = stackalloc double[states.Length];
 

@@ -91,9 +91,10 @@ internal static class ThemesConstants
 	};
 
 	/// <summary>
-	/// Every semantic color role declared in <c>SharedColorPalette.xaml</c> and consumed by the
-	/// brushes in <c>SharedColors.xaml</c>. Order is irrelevant; completeness is not — a role
-	/// missing here keeps its parse-time brush color when a seed or override changes it.
+	/// Every semantic color role declared in <c>SharedColorPalette.xaml</c> whose brushes in
+	/// <c>SharedColors.xaml</c> come in every <see cref="BrushStateSuffixes"/> state. Order is
+	/// irrelevant; completeness is not — a role missing here keeps its parse-time brush color when a
+	/// seed or override changes it.
 	/// </summary>
 	public static readonly string[] SemanticColorKeys =
 	{
@@ -107,6 +108,19 @@ internal static class ThemesConstants
 		"SurfaceColor", "OnSurfaceColor", "SurfaceVariantColor", "OnSurfaceVariantColor",
 		"SurfaceInverseColor", "OnSurfaceInverseColor", "SurfaceTintColor",
 		"OutlineColor", "OutlineVariantColor",
+	};
+
+	/// <summary>
+	/// The semantic color roles whose only brush is the opaque base brush — M3's tone-based surface
+	/// roles. Kept apart from <see cref="SemanticColorKeys"/> because their names end in state
+	/// words: deriving state brushes for <c>SurfaceContainer</c> would claim
+	/// <c>SurfaceContainerLowBrush</c>, which is <c>SurfaceContainerLow</c>'s own base brush.
+	/// </summary>
+	public static readonly string[] BaseBrushOnlyColorKeys =
+	{
+		"SurfaceDimColor", "SurfaceBrightColor",
+		"SurfaceContainerLowestColor", "SurfaceContainerLowColor", "SurfaceContainerColor",
+		"SurfaceContainerHighColor", "SurfaceContainerHighestColor",
 	};
 
 	/// <summary>
