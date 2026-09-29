@@ -106,18 +106,19 @@ internal static class ThemesConstants
 		"ErrorColor", "OnErrorColor", "ErrorContainerColor", "OnErrorContainerColor",
 		"BackgroundColor", "OnBackgroundColor",
 		"SurfaceColor", "OnSurfaceColor", "SurfaceVariantColor", "OnSurfaceVariantColor",
-		"SurfaceInverseColor", "OnSurfaceInverseColor", "SurfaceTintColor",
+		"SurfaceInverseColor", "OnSurfaceInverseColor",
 		"OutlineColor", "OutlineVariantColor",
 	};
 
 	/// <summary>
-	/// The semantic color roles whose only brush is the opaque base brush — M3's tone-based surface
-	/// roles. Kept apart from <see cref="SemanticColorKeys"/> because their names end in state
-	/// words: deriving state brushes for <c>SurfaceContainer</c> would claim
+	/// The semantic color roles whose only brush is the opaque base brush: <c>SurfaceTint</c> and
+	/// M3's tone-based surface roles. No state keys are derived for them, because the surface
+	/// role names end in state words: <c>SurfaceContainer</c> + <c>Low</c> would claim
 	/// <c>SurfaceContainerLowBrush</c>, which is <c>SurfaceContainerLow</c>'s own base brush.
 	/// </summary>
 	public static readonly string[] BaseBrushOnlyColorKeys =
 	{
+		"SurfaceTintColor",
 		"SurfaceDimColor", "SurfaceBrightColor",
 		"SurfaceContainerLowestColor", "SurfaceContainerLowColor", "SurfaceContainerColor",
 		"SurfaceContainerHighColor", "SurfaceContainerHighestColor",
