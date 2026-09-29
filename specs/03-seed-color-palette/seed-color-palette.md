@@ -172,9 +172,22 @@ Each tonal palette maps to semantic color roles at specific tone levels:
 | SurfaceInverse | 20 | 90 | Neutral |
 | OnSurfaceInverse | 95 | 20 | Neutral |
 | SurfaceTint | 40 | 80 | Primary |
+| SurfaceDim | 87 | 6 | Neutral |
+| SurfaceBright | 98 | 24 | Neutral |
+| SurfaceContainerLowest | 100 | 4 | Neutral |
+| SurfaceContainerLow | 96 | 10 | Neutral |
+| SurfaceContainer | 94 | 12 | Neutral |
+| SurfaceContainerHigh | 92 | 17 | Neutral |
+| SurfaceContainerHighest | 90 | 22 | Neutral |
 | Outline | 50 | 60 | Neutral Variant |
 | OutlineVariant | 80 | 30 | Neutral Variant |
 | Shadow | #33000000 | #33000000 | Fixed |
+
+The tone-based surface roles (`SurfaceDim` … `SurfaceContainerHighest`, unoplatform/Uno.Themes#1442) use
+material-color-utilities' tones. Each has a single opaque base brush and no state brushes, and is swept
+from `ThemesConstants.BaseBrushOnlyColorKeys`: deriving state keys for `SurfaceContainer` would claim
+`SurfaceContainerLowBrush`. `Background` and `Surface` keep their existing tones (99/10, 99/20) rather
+than material-color-utilities' 98/6, so in the dark theme the lower tiers sit below `SurfaceColor`.
 
 ### Accessibility
 

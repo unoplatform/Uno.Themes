@@ -345,6 +345,22 @@ The values below are the **defaults**. All of them (except the four `Error*` key
 | OutlineVariantDisabledBrush        | `OutlineVariantColor`        | `DisabledOpacity` |
 | SurfaceTintBrush                   | `SurfaceTintColor`           | 1                 |
 
+## Surface Containers
+
+Material 3's tone-based surface roles. Each container tier sits one step further from the page than the one before it, so nested regions stay distinct without shadows or tint overlays; `SurfaceDim` and `SurfaceBright` bracket the tiers. A seed color regenerates them from its neutral palette, like `SurfaceColor`.
+
+Each role has one opaque brush and no interaction-state variants: `SurfaceContainerLowBrush` is the `SurfaceContainerLow` fill, not `SurfaceContainer` at `LowOpacity`.
+
+| Key                            | LightValue | DarkValue | Brush                          |
+|--------------------------------|------------|-----------|--------------------------------|
+| `SurfaceDimColor`              | `#DDD9DD`  | `#141316` | `SurfaceDimBrush`              |
+| `SurfaceBrightColor`           | `#FCF8FD`  | `#3A383C` | `SurfaceBrightBrush`           |
+| `SurfaceContainerLowestColor`  | `#FFFFFF`  | `#0E0E11` | `SurfaceContainerLowestBrush`  |
+| `SurfaceContainerLowColor`     | `#F7F2F7`  | `#1C1B1F` | `SurfaceContainerLowBrush`     |
+| `SurfaceContainerColor`        | `#F1ECF1`  | `#201F23` | `SurfaceContainerBrush`        |
+| `SurfaceContainerHighColor`    | `#EBE7EC`  | `#2A292D` | `SurfaceContainerHighBrush`    |
+| `SurfaceContainerHighestColor` | `#E5E1E6`  | `#353438` | `SurfaceContainerHighestBrush` |
+
 ## Further Reading
 
 - [Seed Color Palette Generation](xref:Uno.Themes.SeedColors) — derive every color role in the tables above from a single seed color
