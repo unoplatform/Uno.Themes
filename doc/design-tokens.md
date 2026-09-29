@@ -77,6 +77,39 @@ Per-scale keys follow the pattern `{Role}{Size}FontFamily`, `{Role}{Size}FontSiz
 | `IconSizeMedium`           | 24                 |
 | `IconSizeLarge`            | 32                 |
 
+## Listing the Keys from Code
+
+`SemanticResourceKeys` (namespace `Uno.Themes`) lists every semantic key the shared layer declares or generates, one read-only list per family, so tools can enumerate them instead of hard-coding their own copy:
+
+| Property            | Example keys                                          |
+|---------------------|-------------------------------------------------------|
+| `Colors`            | `PrimaryColor`, `OnSurfaceColor`, `ShadowColor`       |
+| `Opacities`         | `HoverOpacity`, `DisabledOpacity`                     |
+| `Brushes`           | `PrimaryBrush`, `PrimaryHoverBrush`                   |
+| `FontFamilies`      | `DefaultFontFamily`, `BodyMediumFontFamily`           |
+| `FontSizes`         | `BodyMediumFontSize`                                  |
+| `FontWeights`       | `BodyMediumFontWeight`                                |
+| `CharacterSpacings` | `BodyMediumCharacterSpacing`                          |
+| `Spacing`           | `Space200`, `Space200Thickness`                       |
+| `Shape`             | `Radius200`, `Radius200CornerRadius`                  |
+| `ControlSizes`      | `ControlHeightMedium`, `IconSizeMedium`               |
+
+```csharp
+using Uno.Themes;
+
+foreach (var key in SemanticResourceKeys.Spacing)
+{
+    if (Application.Current.Resources.TryGetValue(key, out var value))
+    {
+        // value is the current token: a double or a Thickness
+    }
+}
+```
+
+The lists hold keys, not values. Resolve a key through the resources of an element or of the application to read its current value. The keys come from the shared layer that `SimpleTheme` and Material's version 2 styles merge. Material's version 1 styles use their own palette, and Cupertino doesn't merge the shared layer. Keys specific to one design system (such as `SimpleButtonFontFamily`) and semantic style keys (such as `FilledButtonStyle`) are not listed.
+
+The `Spacing`, `Shape` and `ControlSizes` keys are regenerated each time the theme rebuilds its resources, such as when a scale property changes. To change one of them for good, override it in a resource dictionary (see [Via Lightweight Styling](#via-lightweight-styling)), not by writing into the generated values.
+
 ## Overriding Tokens
 
 ### Via Scalar Properties

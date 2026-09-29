@@ -182,8 +182,8 @@ internal sealed class SeedColorPaletteGenerator
 
 		// Shadow (fixed, not derived from seed)
 		var shadowColor = Color.FromArgb(0x33, 0x00, 0x00, 0x00);
-		lightDict["ShadowColor"] = shadowColor;
-		darkDict["ShadowColor"] = shadowColor;
+		lightDict[ThemesConstants.ShadowColorKey] = shadowColor;
+		darkDict[ThemesConstants.ShadowColorKey] = shadowColor;
 
 		var result = new ResourceDictionary();
 		result.ThemeDictionaries["Light"] = lightDict;

@@ -20,8 +20,58 @@ internal static class ThemesConstants
 	public const string DefaultFontFamilyKey = "DefaultFontFamily";
 
 	/// <summary>
-	/// Every semantic type-scale family key generated from <c>BaseTheme.DefaultFontFamily</c>,
-	/// alongside the root typeface token they derive from.
+	/// The semantic type-scale slots <c>SharedTypography.xaml</c> declares, as <c>{Role}{Size}</c> names.
+	/// Each slot carries a <c>FontFamily</c>, <c>FontSize</c> and <c>FontWeight</c> key.
+	/// </summary>
+	/// <remarks>
+	/// A slot added to <c>SharedTypography.xaml</c> must be added here too;
+	/// <c>Given_SemanticResourceKeys.When_TypographyInspected_Then_EachFacetMatchesItsThemedKeys</c>
+	/// guards the two against drifting.
+	/// </remarks>
+	public static readonly string[] TypeScaleSlots =
+	{
+		"DisplayLarge",
+		"DisplayMedium",
+		"DisplaySmall",
+		"HeadlineLarge",
+		"HeadlineMedium",
+		"HeadlineSmall",
+		"TitleLarge",
+		"TitleMedium",
+		"TitleSmall",
+		"LabelLarge",
+		"LabelMedium",
+		"LabelSmall",
+		"LabelExtraSmall",
+		"BodyLarge",
+		"BodyMedium",
+		"BodySmall",
+		"CaptionLarge",
+		"CaptionMedium",
+		"CaptionSmall",
+	};
+
+	/// <summary>
+	/// The subset of <see cref="TypeScaleSlots"/> that also declares a <c>CharacterSpacing</c> key.
+	/// </summary>
+	public static readonly string[] CharacterSpacingSlots =
+	{
+		"DisplayLarge",
+		"LabelLarge",
+		"LabelMedium",
+		"LabelSmall",
+		"LabelExtraSmall",
+		"BodyLarge",
+		"BodyMedium",
+		"BodySmall",
+		"CaptionLarge",
+		"CaptionMedium",
+		"CaptionSmall",
+	};
+
+	/// <summary>
+	/// Every semantic type-scale family key generated from <c>BaseTheme.DefaultFontFamily</c>: the root
+	/// typeface token followed by one <c>FontFamily</c> key per <see cref="TypeScaleSlots"/> entry.
 	/// </summary>
 	/// <remarks>
 	/// The keys are listed here — rather than left to the <c>StaticResource</c> aliases
@@ -30,33 +80,10 @@ internal static class ThemesConstants
 	/// alias-only cascade depends on where each design system declares its slots and in which order
 	/// its dictionaries merge. Generating the slot keys from the root — the same way the spacing and
 	/// shape scales are generated from their base unit — makes one font family reach every scale on
-	/// every theme regardless. A slot added to <c>SharedTypography.xaml</c> must be added here too;
-	/// <c>Given_DefaultFontFamily.When_DefaultFontFamilySet_Then_EverySharedTypographySlotFollows</c>
-	/// guards the two against drifting.
+	/// every theme regardless.
 	/// </remarks>
-	public static readonly string[] TypefaceScaleKeys =
-	{
-		DefaultFontFamilyKey,
-		"DisplayLargeFontFamily",
-		"DisplayMediumFontFamily",
-		"DisplaySmallFontFamily",
-		"HeadlineLargeFontFamily",
-		"HeadlineMediumFontFamily",
-		"HeadlineSmallFontFamily",
-		"TitleLargeFontFamily",
-		"TitleMediumFontFamily",
-		"TitleSmallFontFamily",
-		"LabelLargeFontFamily",
-		"LabelMediumFontFamily",
-		"LabelSmallFontFamily",
-		"LabelExtraSmallFontFamily",
-		"BodyLargeFontFamily",
-		"BodyMediumFontFamily",
-		"BodySmallFontFamily",
-		"CaptionLargeFontFamily",
-		"CaptionMediumFontFamily",
-		"CaptionSmallFontFamily",
-	};
+	// Must stay below TypeScaleSlots: static field initializers run in declaration order.
+	public static readonly string[] TypefaceScaleKeys = BuildTypefaceScaleKeys();
 
 	/// <summary>
 	/// Theme dictionary keys the color layer is generated for. "Default" is the dark theme.
@@ -91,6 +118,27 @@ internal static class ThemesConstants
 	};
 
 	/// <summary>
+	/// The suffix every semantic color key ends with.
+	/// </summary>
+	public const string ColorSuffix = "Color";
+
+	/// <summary>
+	/// The suffix every semantic brush key ends with.
+	/// </summary>
+	public const string BrushSuffix = "Brush";
+
+	/// <summary>
+	/// The suffix every interaction-state opacity key ends with.
+	/// </summary>
+	public const string OpacitySuffix = "Opacity";
+
+	/// <summary>
+	/// The semantic shadow color. Seed-generated and overridable like the other roles, but
+	/// <c>SharedColors.xaml</c> declares no brush for it, so it is not in <see cref="SemanticColorKeys"/>.
+	/// </summary>
+	public const string ShadowColorKey = "ShadowColor";
+
+	/// <summary>
 	/// Every semantic color role declared in <c>SharedColorPalette.xaml</c> and consumed by the
 	/// brushes in <c>SharedColors.xaml</c>. Order is irrelevant; completeness is not — a role
 	/// missing here keeps its parse-time brush color when a seed or override changes it.
@@ -110,6 +158,12 @@ internal static class ThemesConstants
 	};
 
 	/// <summary>
+	/// Color roles <c>SharedColors.xaml</c> declares only the opaque base brush for, with no
+	/// interaction-state variants.
+	/// </summary>
+	public static readonly string[] BaseBrushOnlyColorKeys = { "SurfaceTintColor" };
+
+	/// <summary>
 	/// The interaction-state suffixes <c>SharedColors.xaml</c> appends between a color role and
 	/// <c>Brush</c> — e.g. <c>Primary</c> + <c>Hover</c> + <c>Brush</c>. The empty entry is the
 	/// opaque base brush.
@@ -118,4 +172,17 @@ internal static class ThemesConstants
 	{
 		"", "Hover", "Focused", "Pressed", "Dragged", "Selected", "Medium", "Low", "Disabled",
 	};
+
+	private static string[] BuildTypefaceScaleKeys()
+	{
+		var keys = new string[TypeScaleSlots.Length + 1];
+		keys[0] = DefaultFontFamilyKey;
+
+		for (var i = 0; i < TypeScaleSlots.Length; i++)
+		{
+			keys[i + 1] = TypeScaleSlots[i] + "FontFamily";
+		}
+
+		return keys;
+	}
 }
