@@ -4,6 +4,119 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+<<<<<<< HEAD
+=======
+## Uno's `AppBarButton` hijacks the template part named `Content` — never use that name for a presenter that is not meant to show `Icon ?? Content`
+
+**Context:** unoplatform/Uno.Themes#1735 (2026-09-29). In the Material v2 and Simple `AppBarButton` styles, a
+`UIElement` assigned to `AppBarButton.Content` (e.g. a `Grid` wrapping a `TextBlock`) rendered nothing, while a
+plain string in `Content` rendered fine. Both templates have two presenters: `ContentPresenter x:Name="Content"`
+bound to `Icon`, nested in a `Viewbox` that collapses when `Icon` is null, and `ContentPresenter
+x:Name="ContentPresenter"` bound to `Content`.
+
+**Root cause:** `AppBarButton.uno.cs` (`SetupContentUpdate`, run from `OnApplyTemplate` / `OnLoaded`) does
+`GetTemplateChild<ContentPresenter>("Content")` and force-sets that presenter's `Content` to `Icon ?? Content`,
+re-applying it whenever either property changes. It exists so that WinUI's icon-only template still shows
+something when only `Content` is set (Uno issue #19649). In our templates the part named `Content` is the icon
+presenter inside the collapsed `Viewbox`. With no `Icon`, Uno pushes the user's `Content` into it; a
+`UIElement` can only have one visual parent, so it is torn out of the visible `ContentPresenter` and ends up
+under a collapsed element. A string is not subject to the single-parent rule, which is why every string-based
+sample and test passed and the bug went unnoticed.
+
+**How to apply:**
+- In an `AppBarButton` template, never name a template part `Content` unless it is meant to display
+  `Icon ?? Content`. Our templates name the icon presenter `IconPresenter` and the content presenter
+  `ContentPresenter`; keep it that way in both Material v2 and Simple (the v1 `MaterialAppBarButton` in
+  `CommandBar.xaml` is icon-only and intentionally relies on the fallback).
+- When a template splits a control's properties across several presenters, add at least one runtime test
+  that sets a `UIElement` (not a string) into each of them — strings hide re-parenting bugs.
+- Before naming a part in a retemplated framework control, check the Uno implementation for
+  `GetTemplateChild("...")` lookups; Uno adds a few beyond WinUI's (`AppBarButton`: `Content`,
+  `KeyboardAcceleratorTextLabel`).
+
+---
+
+## `Application.Current` is the HOST app inside an ALC-hosted guest — anything resolving the theme through it silently looks at the wrong application
+
+**Context:** `ThemesSampleApp` hosting (2026-09-21, `specs/05-alc-wrapper-app/`). Opening the **Seed Color**
+page in a hosted head threw `InvalidOperationException: No BaseTheme ... found in
+Application.Current.Resources.MergedDictionaries` from the page's constructor, while the same page works
+standalone and the rest of the hosted guest renders correctly themed.
+
+**Root cause:** verified in the pinned `Uno.UI.dll` IL, unchanged between `Uno.Sdk.Private` 6.7.0-dev.815
+and 7.0.0-dev.701 (Uno 7 only renames the null-path sweep to `CleanupAllSecondaryAlcCaches`).
+`Application..ctor` calls
+`set_Current(this)` -> `SetCurrentApplication`, which writes the `_current` static **only** when
+`AssemblyLoadContext.GetLoadContext(app.GetType().Assembly) == Default`. A secondary-ALC app is registered in
+`_applicationsByAlc` (`ConditionalWeakTable<ALC, Application>`) with an `AlcRegistrationId` and latches
+`_hasSecondaryApps`; `_current` is left alone. `Application.Current` therefore stays the *hosting* app for the
+whole process, which is exactly what makes host-wins resource resolution work — and exactly what breaks any
+guest-side code that treats it as "my app". Type isolation compounds it: with `Uno.Themes.WinUI` loaded
+per-ALC, `Application.Current.Resources.MergedDictionaries.OfType<BaseTheme>()` evaluated in guest code can
+never match a host theme, because it is a different `BaseTheme` type.
+
+**How to apply:**
+- In code that may run inside an ALC-hosted app, treat `Application.Current`, `Window.Current` and every
+  process-wide static in the shared `Uno.UI` as *the host's*. The hosted head must capture its own instance
+  (`this` in its `App` constructor) and pass it along — the instance-scoped
+  `ApplicationExtensions.GetTheme(Application)` exists for exactly this; the static
+  `SemanticThemeHelper` wrapper does not work hosted, by construction.
+- Put that handle in code that compiles **into the head** (a shared-project type, like
+  `NavigationHelper.MainWindow` / `SamplePageLayout.ActiveDesign` / `SampleThemeHelper.CurrentApplication`).
+  Statics there are per-head, hence per-ALC when hosted, with no ALC API involved.
+- Do **not** try to discover the guest's `Application` from Uno: `GetForAssemblyLoadContext`, `GetForInstance`,
+  `GetForType`, `EnumerateSecondaryApplications`, `GetLatestSecondaryApplicationForType` and
+  `AlcContentHost.SourceApplicationOverride` are all `internal`, and the `GetFor*` pair falls back to
+  `Application.Current` for default-ALC types — i.e. it answers "the host" for the shared framework types most
+  of a guest's visual tree is built from. Do not reach for a live-instance registry either: within one ALC it
+  cannot tell an app-level theme from one a page or test constructed.
+- A bug that only manifests hosted cannot be red-proven by a runtime test (those run standalone, in the
+  default ALC). Prove it with a throwaway in-ALC probe through the wrapper (`--app=<head>`, reflection into the
+  guest ALC, reverted afterwards) and say plainly in the report that the hosted path is verified manually and
+  not CI-gated.
+
+---
+
+## `CommandBarExtensions.NavigationCommand` only renders under the Material **v1** CommandBar template
+
+**Context:** the five `Content/NestedSamples/MediaPlayerElementSample_NestedPage*.xaml` pages declared
+their back button through `uno:CommandBarExtensions.NavigationCommand`. Under Material v2 — the default
+since `MaterialTheme.DefaultStylesSource` points at `Version2.MergedPages` — none of them rendered a
+button at all, so the full-screen nested samples were a dead end on every platform without a system
+back affordance (Skia desktop, Windows).
+
+**Root cause:** the navigation-command slot is not a framework feature, it is a `ContentControl` inside
+the *hand-written* `XamlMaterialCommandBarTemplate` in `Styles/Controls/v1/CommandBar.xaml` (its own
+comment says so: *"Simplified CommandBar template that adds support for
+Uno.UI.CommandBarExtensions.NavigationCommand on Windows"*). v2's `MaterialCommandBarStyle` sets no
+`Template` at all, so the default WinUI template applies and the attached property is simply ignored.
+`doc/material-migration.md` also records that the native iOS/Android CommandBar path is gone, so there
+is no platform where v2 picks the property up. The same pages referenced `MaterialAppBarButton` (a v1-only
+key; v2 has `MaterialAppBarButtonStyle`) and `ms-appx:///Assets/Close.png`, which does not exist in the
+repo — both fail silently as `Uno.UI.ResourceResolver` warnings.
+
+**How to apply:**
+- **In shared sample XAML, put command-bar buttons in `CommandBar.PrimaryCommands`**, not in
+  `CommandBarExtensions.NavigationCommand`, unless the page is pinned to Material v1. PrimaryCommands is
+  rendered by the default template, so it survives a v1→v2 switch and works in every head.
+- Pair it with `OverflowButtonVisibility="Collapsed"` and `IsDynamicOverflowEnabled="False"` when the
+  button is the only way out of a page — dynamic overflow will otherwise fold it into a `…` menu at
+  narrow widths.
+- **A green build proves nothing about resource keys.** Unresolved `{StaticResource}` and a missing
+  template slot both compile clean; they surface as `warn: Uno.UI.ResourceResolver` lines at runtime and
+  as missing UI. Verify sample-UI changes by running the app or a runtime test, never by building.
+- **`MediaPlayerElement.MediaPlayer` is null when no media extension is registered** (Skia desktop).
+  `MediaPlayerElementSample_NestedPage5` threw an NRE from its constructor because of it, and all five
+  pages would have thrown from their `Unloaded` handler *during* back navigation. Null-conditional these.
+- **Do not run the `AGENTS.md` §5 XamlStyler command over existing XAML without checking the diff.**
+  `Settings.XamlStyler` declares no `IndentWithTabs`/`IndentSize`, so `XamlStyler.Console` defaults to
+  4 spaces and rewrites every line of a tab-indented file — the repo's XAML is tabs (`.editorconfig`).
+  It turned a 17-line diff into a 105-line one. Either hand-format to match the file, or revert the
+  whitespace churn afterwards.
+
+---
+
+>>>>>>> db9c7df (fix(themes): render UIElement Content in Material and Simple AppBarButton (#1736))
 ## A generated layer is always a *merged* dictionary, so it can only shadow keys declared inside `ThemeDictionaries`
 
 **Context:** Spec 09 (`DefaultFontFamily`, PR #1707). `When_DefaultFontFamilySet_Then_ThemeAliasKeysFollow`
