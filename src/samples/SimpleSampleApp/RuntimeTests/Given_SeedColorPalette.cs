@@ -367,36 +367,59 @@ public class Given_SeedColorPalette
 
 	[TestMethod]
 	[RunsOnUIThread]
-	[DataRow("SurfaceDimColor", 87, 6)]
-	[DataRow("SurfaceBrightColor", 98, 24)]
-	[DataRow("SurfaceContainerLowestColor", 100, 4)]
-	[DataRow("SurfaceContainerLowColor", 96, 10)]
-	[DataRow("SurfaceContainerColor", 94, 12)]
-	[DataRow("SurfaceContainerHighColor", 92, 17)]
-	[DataRow("SurfaceContainerHighestColor", 90, 22)]
-	public void When_SeedIsSet_Then_SurfaceRoleSitsAtItsNeutralTone(string colorKey, int lightTone, int darkTone)
+	// material-color-utilities' TonalPalette.fromHueAndChroma(hue, min(chroma / 12, 4)).tone(t) for
+	// seed #006495 at tones 87/6, 98/24, 100/4, 96/10, 94/12, 92/17 and 90/22.
+	[DataRow("SurfaceDimColor", unchecked((int)0xFFDADADC), unchecked((int)0xFF121416))]
+	[DataRow("SurfaceBrightColor", unchecked((int)0xFFF9F9FC), unchecked((int)0xFF38393B))]
+	[DataRow("SurfaceContainerLowestColor", unchecked((int)0xFFFFFFFF), unchecked((int)0xFF0C0E10))]
+	[DataRow("SurfaceContainerLowColor", unchecked((int)0xFFF4F3F6), unchecked((int)0xFF1A1C1E))]
+	[DataRow("SurfaceContainerColor", unchecked((int)0xFFEEEDF0), unchecked((int)0xFF1E2022))]
+	[DataRow("SurfaceContainerHighColor", unchecked((int)0xFFE8E8EA), unchecked((int)0xFF282A2C))]
+	[DataRow("SurfaceContainerHighestColor", unchecked((int)0xFFE2E2E5), unchecked((int)0xFF333537))]
+	public void When_SeedIsSet_Then_SurfaceRoleSitsAtItsNeutralTone(string colorKey, int lightArgb, int darkArgb)
 	{
 		var seed = ToColor(unchecked((int)0xFF006495));
-		var seedHct = HctColor.FromArgb(ToArgb(seed));
 
-		// Fidelity's Neutral palette: the seed's hue, at a twelfth of its chroma capped at 4.
-		var neutral = new TonalPalette(seedHct.Hue, Math.Min(seedHct.Chroma / 12.0, 4.0));
+		Assert.AreEqual(ToColor(lightArgb), GetGeneratedColor(seed, "Light", colorKey),
+			$"Light {colorKey} does not match the reference implementation's Neutral tone.");
+		Assert.AreEqual(ToColor(darkArgb), GetGeneratedColor(seed, "Default", colorKey),
+			$"Dark {colorKey} does not match the reference implementation's Neutral tone.");
+	}
 
-		Assert.AreEqual(ToColor(neutral.GetArgb(lightTone)), GetGeneratedColor(seed, "Light", colorKey),
-			$"Light {colorKey} should be Neutral tone {lightTone}.");
-		Assert.AreEqual(ToColor(neutral.GetArgb(darkTone)), GetGeneratedColor(seed, "Default", colorKey),
-			$"Dark {colorKey} should be Neutral tone {darkTone}.");
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_OverrideSetsSurfaceContainerColor_Then_OnlyItsOwnBrushFollows()
+	{
+		// SurfaceContainer + the Low state suffix spells SurfaceContainerLowBrush, a different role's
+		// base brush. Recoloring SurfaceContainer must reach its own brush and leave that one alone.
+		var red = ToColor(unchecked((int)0xFFFF0000));
+		var overrides = new ResourceDictionary();
+		foreach (var themeKey in new[] { "Light", "Default" })
+		{
+			overrides.ThemeDictionaries[themeKey] = new ResourceDictionary { ["SurfaceContainerColor"] = red };
+		}
+
+		var theme = new SimpleTheme { Colors = new ThemeColors { OverrideDictionary = overrides } };
+		var container = new Grid();
+		container.Resources.MergedDictionaries.Add(theme);
+
+		Assert.AreEqual(red, GetBrush(container, "SurfaceContainerBrush").Color,
+			"SurfaceContainerBrush should follow the overridden SurfaceContainerColor.");
+
+		var low = GetBrush(container, "SurfaceContainerLowBrush");
+		Assert.AreEqual(GetColor(container, "SurfaceContainerLowColor"), low.Color,
+			"SurfaceContainerLowBrush must keep its own role's color, not SurfaceContainer's.");
+		Assert.AreEqual(1.0, low.Opacity, 0.0001, "SurfaceContainerLowBrush is an opaque fill, not a Low state brush.");
 	}
 
 	[TestMethod]
 	[RunsOnUIThread]
 	[DataRow("Light")]
 	[DataRow("Default")]
-	public void When_NoSeed_Then_SurfaceContainerTiersStepAwayFromThePage(string themeKey)
+	public void When_NoSeed_Then_SurfaceContainerTiersAreOrdered(string themeKey)
 	{
-		// The unseeded palettes are hand-written hex. Each tier must sit one step further from the
-		// page than the one before it — darker in Light, lighter in Dark — or layered containers
-		// stop reading as layers.
+		// The unseeded palettes are hand-written hex. Each tier must sit one tone step past the one
+		// before it — darker in Light, lighter in Dark — so the tiers keep their emphasis order.
 		var palettes = new (string Name, ResourceDictionary Palette)[]
 		{
 			("SharedColorPalette.xaml", new ResourceDictionary { Source = new Uri(SharedColorPaletteUri) }),
@@ -409,9 +432,9 @@ public class Given_SeedColorPalette
 			foreach (var tierKey in SurfaceContainerTierKeys)
 			{
 				double tone = HctColor.FromArgb(ToArgb(GetPaletteColor(palette, themeKey, tierKey))).Tone;
-				bool stepsAway = themeKey == "Light" ? tone < previousTone : tone > previousTone;
-				Assert.IsTrue(stepsAway,
-					$"{name} {themeKey} {tierKey} (tone {tone:F1}) should step away from the page past the previous tier (tone {previousTone:F1}).");
+				bool isPastPrevious = themeKey == "Light" ? tone < previousTone : tone > previousTone;
+				Assert.IsTrue(isPastPrevious,
+					$"{name} {themeKey} {tierKey} (tone {tone:F1}) should sit past the previous tier (tone {previousTone:F1}).");
 				previousTone = tone;
 			}
 
