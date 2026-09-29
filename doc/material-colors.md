@@ -347,9 +347,11 @@ The values below are the **defaults**. All of them (except the four `Error*` key
 
 ## Surface Containers
 
-Material 3's tone-based surface roles. Each container tier sits one step further from the page than the one before it, so nested regions stay distinct without shadows or tint overlays; `SurfaceDim` and `SurfaceBright` bracket the tiers. A seed color regenerates them from its neutral palette, like `SurfaceColor`.
+Material 3's tone-based surface roles: five container tiers in order of emphasis, from `SurfaceContainerLowest` to `SurfaceContainerHighest`, bracketed by `SurfaceDim` and `SurfaceBright`. They use Material's current tones, while `BackgroundColor` and `SurfaceColor` keep this library's older ones. In the dark theme that means `SurfaceContainerLowColor` matches `BackgroundColor`, and every tier below `SurfaceContainerHighest` is darker than `SurfaceColor`.
 
 Each role has one opaque brush and no interaction-state variants: `SurfaceContainerLowBrush` is the `SurfaceContainerLow` fill, not `SurfaceContainer` at `LowOpacity`.
+
+A seed color regenerates these roles from its neutral palette. Without a seed, a color override that leaves them out keeps the default values below, whatever its `SurfaceColor` is, so define them alongside it. If your app already declares any of these keys in its own `App.xaml` theme dictionaries, move them into the theme's color override: the theme's values take precedence over the app's.
 
 | Key                            | LightValue | DarkValue | Brush                          |
 |--------------------------------|------------|-----------|--------------------------------|

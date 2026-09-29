@@ -184,10 +184,12 @@ Each tonal palette maps to semantic color roles at specific tone levels:
 | Shadow | #33000000 | #33000000 | Fixed |
 
 The tone-based surface roles (`SurfaceDim` … `SurfaceContainerHighest`, unoplatform/Uno.Themes#1442) use
-material-color-utilities' tones. Each has a single opaque base brush and no state brushes, and is swept
-from `ThemesConstants.BaseBrushOnlyColorKeys`: deriving state keys for `SurfaceContainer` would claim
-`SurfaceContainerLowBrush`. `Background` and `Surface` keep their existing tones (99/10, 99/20) rather
-than material-color-utilities' 98/6, so in the dark theme the lower tiers sit below `SurfaceColor`.
+material-color-utilities' tones. Like `SurfaceTint`, each has a single opaque base brush and no state
+brushes, and is swept from `ThemesConstants.BaseBrushOnlyColorKeys`: deriving state keys for
+`SurfaceContainer` would claim `SurfaceContainerLowBrush`. `Background` and `Surface` keep their existing
+tones (99/10, 99/20) rather than material-color-utilities' 98/6, so in the dark theme
+`SurfaceContainerLow` equals `Background` (both Neutral 10) and every tier below `SurfaceContainerHighest`
+is darker than `Surface`. Moving `Background`/`Surface` is an open decision, not part of this change.
 
 ### Accessibility
 
