@@ -30,6 +30,7 @@ The Light and Dark ThemeDictionaries for ContentDialog are empty -- no control-s
 | `SimpleContentDialogMaxWidth`                    | `Double`          | 560                           |
 | `SimpleContentDialogMaxHeight`                   | `Double`          | 560                           |
 | `SimpleContentDialogButtonSpacing`               | `GridLength`      | 8                             |
+| `SimpleContentDialogEdgeMargin`                  | `Thickness`       | 0                             |
 | `SimpleContentDialogTitleToContentMargin`        | `Thickness`       | 0,0,0,8                       |
 | `SimpleContentDialogCommandSpaceToContentMargin` | `Thickness`       | 0,24,0,0                      |
 

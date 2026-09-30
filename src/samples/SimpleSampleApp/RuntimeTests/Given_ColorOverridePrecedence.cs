@@ -159,6 +159,23 @@ public class Given_ColorOverridePrecedence
 
 	[TestMethod]
 	[RunsOnUIThread]
+	public void When_ConstructedWithColorOverride_Then_OverrideResolvesThroughTheTheme()
+	{
+		// SimpleTheme merges the constructor override into its URI-backed palette, which BaseTheme
+		// then clones on WinUI. The clone re-reads the palette's Source, so this guards that the
+		// runtime-merged override is carried over rather than dropped with the reload.
+		const string MarkerKey = "CtorOverrideMarkerColor";
+		var theme = new SimpleTheme(colorOverride: CreateColorAndBrushOverride(MarkerKey, "CtorOverrideMarkerBrush", OverrideBlue));
+		var container = new Grid();
+		container.Resources.MergedDictionaries.Add(theme);
+
+		Assert.IsTrue(container.Resources.TryGetValue(MarkerKey, out var value),
+			"A key from the constructor color override should resolve through the theme.");
+		Assert.AreEqual(OverrideBlue, (Color)value);
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
 	public void When_OverrideSourceDoesNotResolve_Then_ThemeKeepsWorking()
 	{
 		// Well-formed URI, nonexistent dictionary — the common typo case. Uri.TryCreate passes,

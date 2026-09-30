@@ -76,15 +76,19 @@ public static class NavigationHelper
 		return shell;
 	}
 
+	/// <summary>
+	/// The sample pages listed for the active design, scanned from the shared assembly.
+	/// </summary>
+	public static IEnumerable<Sample> GetSamples() => typeof(OverviewPage).Assembly.DefinedTypes
+		.Where(x => x.Namespace?.StartsWith("Uno.Themes.Samples") == true)
+		.Select(x => new { TypeInfo = x, SamplePageAttribute = x.GetCustomAttribute<SamplePageAttribute>() })
+		.Where(x => x.SamplePageAttribute != null)
+		.Select(x => new Sample(x.SamplePageAttribute, x.TypeInfo.AsType()))
+		.Where(x => x.SupportedDesigns.Contains(SamplePageLayout.ActiveDesign));
+
 	private static void AddNavigationItems(MUXC.NavigationView nv)
 	{
-		// Scan the shared assembly for sample pages
-		var categories = typeof(OverviewPage).Assembly.DefinedTypes
-			.Where(x => x.Namespace?.StartsWith("Uno.Themes.Samples") == true)
-			.Select(x => new { TypeInfo = x, SamplePageAttribute = x.GetCustomAttribute<SamplePageAttribute>() })
-			.Where(x => x.SamplePageAttribute != null)
-			.Select(x => new Sample(x.SamplePageAttribute, x.TypeInfo.AsType()))
-			.Where(x => x.SupportedDesigns.Contains(SamplePageLayout.ActiveDesign))
+		var categories = GetSamples()
 			.OrderByDescending(x => x.SortOrder.HasValue)
 			.ThenBy(x => x.SortOrder)
 			.ThenBy(x => x.Title)

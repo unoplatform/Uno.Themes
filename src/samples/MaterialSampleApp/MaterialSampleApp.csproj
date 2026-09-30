@@ -9,9 +9,11 @@
     <TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('android'))">$(TargetFrameworks);net10.0-android</TargetFrameworks>
     <TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('browserwasm'))">$(TargetFrameworks);net10.0-browserwasm</TargetFrameworks>
     <TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('desktop'))">$(TargetFrameworks);net10.0-desktop</TargetFrameworks>
+    <TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFrameworkOverride)'==''">
     <TargetFrameworks>net10.0-android;net10.0-ios;net10.0-browserwasm;net10.0-desktop</TargetFrameworks>
+    <TargetFrameworks Condition="'$(Build_Windows)'=='true'">$(TargetFrameworks);net10.0-windows10.0.19041</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup>
 
@@ -43,6 +45,15 @@
   </PropertyGroup>
 
 
+  <PropertyGroup Condition="$(TargetFramework.Contains('-windows'))">
+    <!--
+      On WinAppSDK, the Uno.UI.HotDesign package the SDK adds in Debug transitively deploys Uno.Toolkit.WinUI
+      without the Uno.UI.Toolkit assembly its XAML metadata provider needs, so WinUI's first type lookup
+      (XamlControlsResources in App.xaml) fails fast. Its global usings also clash with the samples' helpers.
+    -->
+    <UnoDisableHotDesign>true</UnoDisableHotDesign>
+  </PropertyGroup>
+
   <Import Project="..\SamplesApp.Shared\SamplesApp.Shared.projitems" Label="Shared" />
 
   <ItemGroup>
@@ -55,10 +66,20 @@
     <PackageReference Include="Uno.UI.RuntimeTests.Engine" />
     <PackageReference Include="MSTest.TestFramework" />
   </ItemGroup>
-
   <ItemGroup>
     <UnoIcon Include="../SamplesApp.Shared/Assets/Icons/icon.svg" ForegroundFile="../SamplesApp.Shared/Assets/Icons/icon_foreground.svg" Color="#512BD4" />
     <UnoSplashScreen Include="../SamplesApp.Shared/Assets/Splash/splash_screen.svg" Color="#512BD4" />
   </ItemGroup>
+
+  <!--
+    On WinAppSDK, Uno.Resizetizer falls back to Link=Identity for an icon outside the project folder, so the
+    generated Package.appxmanifest points at '..\SamplesApp.Shared\...' logos, which MSIX rejects and which
+    are never copied to the output. Give the shared icon a project-relative link instead.
+  -->
+  <Target Name="LinkSharedUnoIcon" AfterTargets="UpdatePathOfUnoIcon" BeforeTargets="UnoResizetizeCollectItems" Condition="'$(TargetPlatformIdentifier)'=='windows'">
+    <ItemGroup>
+      <UnoIcon Update="@(UnoIcon)" Link="Assets\Icons\%(Filename)%(Extension)" />
+    </ItemGroup>
+  </Target>
 
 </Project>
