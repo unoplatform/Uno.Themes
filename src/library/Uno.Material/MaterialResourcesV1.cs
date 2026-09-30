@@ -18,6 +18,7 @@ public class MaterialResourcesV1 : ResourceDictionary
 	{
 		MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ThemesConstants.ConverterResourcePath) });
 		Source = new Uri(MaterialConstants.ResourcePaths.Version1.MergedPages);
+		MergedDictionaries.Insert(0, new SemanticResources { Source = new Uri(ThemesConstants.SharedTypographyResourcePath) });
 	}
 
 	public bool WithImplicitStyles { set => ExportImplicitStyles(value); }
