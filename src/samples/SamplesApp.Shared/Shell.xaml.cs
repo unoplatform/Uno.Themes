@@ -18,7 +18,7 @@ public sealed partial class Shell : UserControl
 
 		NestedSampleFrame.RegisterPropertyChangedCallback(ContentControl.ContentProperty, OnNestedSampleFrameChanged);
 
-#if !WINDOWS_WINUI
+#if HAS_UNO
 		SystemNavigationManager.GetForCurrentView().BackRequested += (s, e) => e.Handled = BackNavigateFromNestedSample();
 #endif
 	}
@@ -64,7 +64,7 @@ public sealed partial class Shell : UserControl
 	private void InitializeSafeArea()
 	{
 		var full = NavigationHelper.MainWindow.Bounds;
-#if !WINDOWS_WINUI
+#if HAS_UNO
 		var bounds = ApplicationView.GetForCurrentView().VisibleBounds;
 #else
 		var bounds = new Rect(0, 0, 0, 0);
@@ -140,7 +140,7 @@ public sealed partial class Shell : UserControl
 			? Visibility.Visible
 			: Visibility.Collapsed;
 
-#if !WINDOWS_WINUI
+#if HAS_UNO
 		// toggle built-in back button for wasm (from browser) and uwp (on title bar)
 		SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = isInsideNestedSample
 			? AppViewBackButtonVisibility.Visible
