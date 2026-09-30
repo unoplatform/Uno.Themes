@@ -42,6 +42,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `SimpleMenuFlyoutItemAcceleratorMargin` | `Thickness` | 16,0,0,0 |
 | `SimpleMenuFlyoutCheckGlyphMargin`      | `Thickness` | 0,0,8,0  |
 | `SimpleMenuFlyoutSeparatorPadding`      | `Thickness` | 16,4     |
+| `SimpleMenuFlyoutSeparatorHeight`       | `Double`    | 1        |
 
 > [!NOTE]
 > The MenuFlyout styles reference shared theme brushes directly in setters and visual states (e.g., `SurfaceBrush`, `OutlineBrush`, `OnSurfaceBrush`, `OnSurfaceMediumBrush`, `PrimaryBrush`, `OnPrimaryBrush`, `PrimaryVariantDarkBrush`, `OnSurfaceDisabledBrush`) rather than defining control-specific lightweight styling keys for each state. Only `SimpleMenuFlyoutItemBackground` is exposed as an overridable themed resource. The styles also reference `SimpleMenuFlyoutItemHeight` and `SimpleMenuFlyoutSeparatorHeight` via `{StaticResource}`, but these keys are not defined in the MenuFlyout XAML file itself -- they are expected to be provided by a shared resource dictionary.
