@@ -6,6 +6,8 @@
 		SemanticResources dictionary, so tooling can tell these keys from the Simple-prefixed ones.
 	-->
 
+	<!-- Portable lightweight resources below keep their original theme scopes and values. -->
+
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Semantic aliases (design-system-agnostic) -->
 	<!-- These map Material-derived semantic names to Simple equivalents. -->
@@ -126,5 +128,1088 @@
 	<StaticResource x:Key="CaptionLarge" ResourceKey="SimpleCaptionLarge" />
 	<StaticResource x:Key="CaptionMedium" ResourceKey="SimpleCaptionMedium" />
 	<StaticResource x:Key="CaptionSmall" ResourceKey="SimpleCaptionSmall" />
+
+
+	<!-- ComboBox.xaml lightweight resources -->
+	<StaticResource x:Key="ComboBoxCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+	<StaticResource x:Key="ComboBoxMinHeight" ResourceKey="SimpleIconLarge" />
+	<StaticResource x:Key="ComboBoxBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />
+	<Thickness x:Key="ComboBoxPadding">16,10,12,10</Thickness>
+
+	<!-- Slider.xaml lightweight resources -->
+	<StaticResource x:Key="SliderThumbWidth" ResourceKey="SimpleSpace400" />
+	<StaticResource x:Key="SliderThumbHeight" ResourceKey="SimpleSpace400" />
+	<StaticResource x:Key="SliderThumbCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+	<StaticResource x:Key="SliderTrackThickness" ResourceKey="SimpleSpace100" />
+	<StaticResource x:Key="SliderFillThickness" ResourceKey="SimpleSpace200" />
+	<x:Double x:Key="SliderPreContentMargin">14</x:Double>
+	<x:Double x:Key="SliderPostContentMargin">14</x:Double>
+	<StaticResource x:Key="SliderHorizontalHeight" ResourceKey="SimpleIconMedium" />
+	<StaticResource x:Key="SliderVerticalWidth" ResourceKey="SimpleIconMedium" />
+	<CornerRadius x:Key="SliderHorizontalFillCornerRadius">4,0,0,4</CornerRadius>
+	<CornerRadius x:Key="SliderVerticalFillCornerRadius">0,0,4,4</CornerRadius>
+	<StaticResource x:Key="SliderCornerRadius" ResourceKey="Radius050CornerRadius" />
+	<Thickness x:Key="SliderFocusVisualMargin">-7,0</Thickness>
+	<Thickness x:Key="SliderHorizontalFocusVisualMargin">-14,-6,-14,-6</Thickness>
+	<Thickness x:Key="SliderVerticalFocusVisualMargin">-6,-14,-6,-14</Thickness>
+	<StaticResource x:Key="SliderHeaderMargin" ResourceKey="Space100BottomThickness" />
+
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Light">
+
+			<!-- AppBarButton.xaml lightweight resources -->
+			<x:Double x:Key="AppBarButtonHeight">64</x:Double>
+			<x:Double x:Key="AppBarButtonWidth">64</x:Double>
+			<StaticResource x:Key="AppBarButtonForeground" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="AppBarButtonForegroundPointerOver" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="AppBarButtonForegroundPressed" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="AppBarButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="AppBarButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="AppBarButtonBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="AppBarButtonBackgroundPressed" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="AppBarButtonBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="AppBarButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="AppBarButtonBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="AppBarButtonBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="AppBarButtonBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- Button.xaml lightweight resources -->
+			<StaticResource x:Key="FilledButtonForeground" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="FilledButtonForegroundPointerOver" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="FilledButtonForegroundPressed" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="FilledButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledButtonBackground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="FilledButtonBackgroundPointerOver" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="FilledButtonBackgroundPressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="FilledButtonBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledButtonBorderBrush" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="FilledButtonBorderBrushPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="FilledButtonBorderBrushPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="FilledButtonBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="FilledTonalButtonForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTonalButtonForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTonalButtonForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTonalButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackground" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackgroundPointerOver" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackgroundPressed" ResourceKey="TertiaryContainerBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledTonalButtonBorderBrush" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="FilledTonalButtonBorderBrushPointerOver" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="FilledTonalButtonBorderBrushPressed" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="FilledTonalButtonBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="OutlinedButtonForeground" ResourceKey="FilledTonalButtonForeground" />
+			<StaticResource x:Key="OutlinedButtonForegroundPointerOver" ResourceKey="FilledTonalButtonForegroundPointerOver" />
+			<StaticResource x:Key="OutlinedButtonForegroundPressed" ResourceKey="FilledTonalButtonForegroundPressed" />
+			<StaticResource x:Key="OutlinedButtonForegroundDisabled" ResourceKey="FilledTonalButtonForegroundDisabled" />
+			<StaticResource x:Key="OutlinedButtonBackground" ResourceKey="FilledTonalButtonBackground" />
+			<StaticResource x:Key="OutlinedButtonBackgroundPointerOver" ResourceKey="FilledTonalButtonBackgroundPointerOver" />
+			<StaticResource x:Key="OutlinedButtonBackgroundPressed" ResourceKey="FilledTonalButtonBackgroundPressed" />
+			<StaticResource x:Key="OutlinedButtonBackgroundDisabled" ResourceKey="FilledTonalButtonBackgroundDisabled" />
+			<StaticResource x:Key="OutlinedButtonBorderBrush" ResourceKey="FilledTonalButtonBorderBrush" />
+			<StaticResource x:Key="OutlinedButtonBorderBrushPointerOver" ResourceKey="FilledTonalButtonBorderBrushPointerOver" />
+			<StaticResource x:Key="OutlinedButtonBorderBrushPressed" ResourceKey="FilledTonalButtonBorderBrushPressed" />
+			<StaticResource x:Key="OutlinedButtonBorderBrushDisabled" ResourceKey="FilledTonalButtonBorderBrushDisabled" />
+			<StaticResource x:Key="TextButtonForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextButtonForegroundPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextButtonForegroundPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="TextButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TextButtonBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="TextButtonBackgroundPressed" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="TextButtonBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="TextButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TextButtonBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TextButtonBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TextButtonBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="IconButtonForeground" ResourceKey="FilledButtonForeground" />
+			<StaticResource x:Key="IconButtonForegroundPointerOver" ResourceKey="FilledButtonForegroundPointerOver" />
+			<StaticResource x:Key="IconButtonForegroundPressed" ResourceKey="FilledButtonForegroundPressed" />
+			<StaticResource x:Key="IconButtonForegroundDisabled" ResourceKey="FilledButtonForegroundDisabled" />
+			<StaticResource x:Key="IconButtonBackground" ResourceKey="FilledButtonBackground" />
+			<StaticResource x:Key="IconButtonBackgroundPointerOver" ResourceKey="FilledButtonBackgroundPointerOver" />
+			<StaticResource x:Key="IconButtonBackgroundPressed" ResourceKey="FilledButtonBackgroundPressed" />
+			<StaticResource x:Key="IconButtonBackgroundDisabled" ResourceKey="FilledButtonBackgroundDisabled" />
+			<StaticResource x:Key="IconButtonBorderBrush" ResourceKey="FilledButtonBorderBrush" />
+			<StaticResource x:Key="IconButtonBorderBrushPointerOver" ResourceKey="FilledButtonBorderBrushPointerOver" />
+			<StaticResource x:Key="IconButtonBorderBrushPressed" ResourceKey="FilledButtonBorderBrushPressed" />
+			<StaticResource x:Key="IconButtonBorderBrushDisabled" ResourceKey="FilledButtonBorderBrushDisabled" />
+
+			<!-- CalendarDatePicker.xaml lightweight resources -->
+			<StaticResource x:Key="CalendarDatePickerCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<StaticResource x:Key="CalendarDatePickerFlyoutPresenterCornerRadius" ResourceKey="SimpleRadius400CornerRadius" />
+			<StaticResource x:Key="CalendarDatePickerBorderThemeThickness" ResourceKey="SimpleStrokeBorderThickness" />
+			<StaticResource x:Key="CalendarDatePickerFlyoutPresenterPadding" ResourceKey="SimpleSpace0Thickness" />
+			<Thickness x:Key="CalendarDatePickerContentMargin">16,10,16,10</Thickness>
+			<StaticResource x:Key="CalendarDatePickerHeight" ResourceKey="SimpleIconLarge" />
+			<StaticResource x:Key="CalendarDatePickerMinHeight" ResourceKey="SimpleIconLarge" />
+			<StaticResource x:Key="CalendarDatePickerHeaderMargin" ResourceKey="Space200BottomThickness" />
+			<StaticResource x:Key="CalendarDatePickerCalendarGlyphMargin" ResourceKey="Space300LeftThickness" />
+			<StaticResource x:Key="CalendarDatePickerForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CalendarDatePickerForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="CalendarDatePickerTextForeground" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="CalendarDatePickerTextForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="CalendarDatePickerTextForegroundSelected" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CalendarDatePickerCalendarGlyphForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CalendarDatePickerCalendarGlyphForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="CalendarDatePickerHeaderForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CalendarDatePickerHeaderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="CalendarDatePickerBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="CalendarDatePickerBackgroundPointerOver" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="CalendarDatePickerBackgroundPressed" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="CalendarDatePickerBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="CalendarDatePickerBackgroundFocused" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="CalendarDatePickerBorderBrush" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="CalendarDatePickerBorderBrushPointerOver" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="CalendarDatePickerBorderBrushPressed" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="CalendarDatePickerBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="CalendarDatePickerBorderBrushFocused" ResourceKey="PrimaryMediumBrush" />
+
+			<!-- CheckBox.xaml lightweight resources -->
+			<StaticResource x:Key="CheckBoxBackgroundUnchecked" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="CheckBoxBackgroundUncheckedPointerOver" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="CheckBoxBackgroundUncheckedPressed" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="CheckBoxBackgroundUncheckedDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushUnchecked" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushUncheckedPointerOver" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushUncheckedPressed" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushUncheckedDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="CheckBoxBackgroundChecked" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="CheckBoxBackgroundCheckedPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="CheckBoxBackgroundCheckedPressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="CheckBoxBackgroundCheckedDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushChecked" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushCheckedPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushCheckedPressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushCheckedDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="CheckBoxGlyphForegroundChecked" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="CheckBoxGlyphForegroundCheckedPointerOver" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="CheckBoxGlyphForegroundCheckedPressed" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="CheckBoxGlyphForegroundCheckedDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="CheckBoxBackgroundIndeterminate" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="CheckBoxBackgroundIndeterminatePointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="CheckBoxBackgroundIndeterminatePressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="CheckBoxBackgroundIndeterminateDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushIndeterminate" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushIndeterminatePointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushIndeterminatePressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushIndeterminateDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="CheckBoxGlyphForegroundIndeterminate" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="CheckBoxGlyphForegroundIndeterminatePointerOver" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="CheckBoxGlyphForegroundIndeterminatePressed" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="CheckBoxGlyphForegroundIndeterminateDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="CheckBoxForegroundUnchecked" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CheckBoxForegroundUncheckedPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CheckBoxForegroundUncheckedPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CheckBoxForegroundUncheckedDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="CheckBoxForegroundChecked" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CheckBoxForegroundCheckedPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CheckBoxForegroundCheckedPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CheckBoxForegroundCheckedDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="CheckBoxForegroundIndeterminate" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CheckBoxForegroundIndeterminatePointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CheckBoxForegroundIndeterminatePressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CheckBoxForegroundIndeterminateDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<!-- ComboBox.xaml lightweight resources -->
+			<StaticResource x:Key="ComboBoxBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ComboBoxBackgroundPointerOver" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ComboBoxBackgroundPressed" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ComboBoxBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="ComboBoxBorderBrush" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="ComboBoxBorderBrushPointerOver" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="ComboBoxBorderBrushPressed" ResourceKey="PrimaryMediumBrush" />
+			<StaticResource x:Key="ComboBoxBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="ComboBoxForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="ComboBoxPlaceHolderForeground" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ComboBoxDropDownGlyphForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxDropDownGlyphForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="ComboBoxDropDownBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ComboBoxDropDownBorderBrush" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="ComboBoxItemBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundPressed" ResourceKey="TertiaryContainerBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundSelected" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundSelectedPointerOver" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundSelectedPressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxItemForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundSelected" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundSelectedPointerOver" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundSelectedPressed" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<!-- DatePicker.xaml lightweight resources -->
+			<StaticResource x:Key="DatePickerFlyoutButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterBorderBrush" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterSpacerFill" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterHighlightFill" ResourceKey="PrimaryVariantLightBrush" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterCornerRadius" ResourceKey="SimpleRadius400CornerRadius" />
+			<x:Double x:Key="DatePickerFlyoutPresenterWidth">296</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterMinWidth">296</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterMaxHeight">398</x:Double>
+			<StaticResource x:Key="DatePickerFlyoutPresenterHighlightHeight" ResourceKey="SimpleIconLarge" />
+			<x:Double x:Key="DatePickerFlyoutPresenterAcceptDismissHostGridHeight">52</x:Double>
+			<StaticResource x:Key="DatePickerSpacerThemeWidth" ResourceKey="SimpleStrokeBorder" />
+			<StaticResource x:Key="DatePickerFlyoutBorderThickness" ResourceKey="SimpleStrokeBorder" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterFontFamily" ResourceKey="DefaultFontFamily" />
+			<StaticResource x:Key="DatePickerButtonBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="DatePickerButtonBackgroundPointerOver" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="DatePickerButtonBackgroundPressed" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="DatePickerButtonBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="DatePickerButtonForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="DatePickerButtonForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="DatePickerButtonForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="DatePickerButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="DatePickerButtonBorderBrush" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="DatePickerButtonBorderBrushPointerOver" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="DatePickerButtonBorderBrushPressed" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="DatePickerButtonBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="DatePickerButtonDateTextForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="DatePickerButtonDateTextForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="DatePickerButtonDateTextForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="DatePickerButtonDateTextForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="DatePickerPlaceholderTextForeground" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="DatePickerHeaderForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="DatePickerHeaderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="DatePickerCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<StaticResource x:Key="DatePickerBorderThemeThickness" ResourceKey="SimpleStrokeBorderThickness" />
+			<Thickness x:Key="DatePickerContentMargin">16,10,16,10</Thickness>
+			<StaticResource x:Key="DatePickerFlyoutButtonPadding" ResourceKey="SimpleSpace0Thickness" />
+			<StaticResource x:Key="DatePickerMinHeight" ResourceKey="ControlHeightMediumLarge" />
+			<x:Double x:Key="DatePickerFlyoutButtonOpacityPressed">0.8</x:Double>
+			<x:Double x:Key="DatePickerFlyoutButtonOpacityDisabled">0.5</x:Double>
+			<StaticResource x:Key="DatePickerHeaderMargin" ResourceKey="Space100BottomThickness" />
+
+			<!-- Flyout.xaml lightweight resources -->
+			<StaticResource x:Key="FlyoutPresenterBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="FlyoutPresenterBorderBrush" ResourceKey="OutlineBrush" />
+
+			<!-- HyperlinkButton.xaml lightweight resources -->
+			<StaticResource x:Key="HyperlinkButtonForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="HyperlinkButtonForegroundPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="HyperlinkButtonForegroundPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="HyperlinkButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<SolidColorBrush x:Key="HyperlinkButtonBackgroundPointerOver"
+							 Color="Transparent" />
+			<SolidColorBrush x:Key="HyperlinkButtonBackgroundPressed"
+							 Color="Transparent" />
+			<StaticResource x:Key="SecondaryHyperlinkButtonForeground" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="SecondaryHyperlinkButtonForegroundPointerOver" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="SecondaryHyperlinkButtonForegroundPressed" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="SecondaryHyperlinkButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<!-- ListView.xaml lightweight resources -->
+			<StaticResource x:Key="ListViewBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ListViewBorderBrush" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="ListViewItemBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ListViewItemForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ListViewItemBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="ListViewItemForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ListViewItemBackgroundPressed" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="ListViewItemForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ListViewItemBackgroundSelected" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ListViewItemForegroundSelected" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="ListViewItemBackgroundPointerOverSelected" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="ListViewItemForegroundPointerOverSelected" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="ListViewItemBackgroundPressedSelected" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="ListViewItemForegroundPressedSelected" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="ListViewItemForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<!-- NavigationView.xaml lightweight resources -->
+			<StaticResource x:Key="NavigationViewContentBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="NavigationViewDefaultPaneBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="NavigationViewExpandedPaneBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="NavigationViewTopPaneBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="NavigationViewButtonForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="NavigationViewButtonForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="NavigationViewButtonForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="NavigationViewButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<SolidColorBrush x:Key="NavigationViewButtonBackgroundPointerOver"
+							 Color="Transparent" />
+			<SolidColorBrush x:Key="NavigationViewButtonBackgroundPressed"
+							 Color="Transparent" />
+			<SolidColorBrush x:Key="NavigationViewButtonBackgroundDisabled"
+							 Color="Transparent" />
+			<StaticResource x:Key="NavigationViewItemForeground" ResourceKey="OnSurfaceBrush" />
+			<SolidColorBrush x:Key="NavigationViewItemBackground"
+							 Color="Transparent" />
+			<StaticResource x:Key="NavigationViewItemForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="NavigationViewItemBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="NavigationViewItemForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="NavigationViewItemBackgroundPressed" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="NavigationViewItemForegroundSelected" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="NavigationViewItemBackgroundSelected" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="NavigationViewItemForegroundSelectedPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="NavigationViewItemBackgroundSelectedPointerOver" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="NavigationViewItemForegroundSelectedPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="NavigationViewItemBackgroundSelectedPressed" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="NavigationViewItemForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<SolidColorBrush x:Key="NavigationViewItemBackgroundDisabled"
+							 Color="Transparent" />
+			<StaticResource x:Key="NavigationViewSelectionIndicatorForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="NavigationViewItemSeparatorForeground" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="TopNavigationViewItemForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TopNavigationViewItemForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TopNavigationViewItemForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TopNavigationViewItemForegroundSelected" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TopNavigationViewItemForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<!-- PasswordBox.xaml lightweight resources -->
+			<StaticResource x:Key="FilledPasswordBoxCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<StaticResource x:Key="FilledPasswordBoxBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />
+			<StaticResource x:Key="FilledPasswordBoxFocusedBorderThickness" ResourceKey="SimpleStrokeFocusRingThickness" />
+			<Thickness x:Key="FilledPasswordBoxPadding">16,10,16,10</Thickness>
+			<StaticResource x:Key="FilledPasswordBoxMinHeight" ResourceKey="SimpleIconLarge" />
+			<Thickness x:Key="FilledPasswordBoxHeaderMargin">0,0,0,4</Thickness>
+			<StaticResource x:Key="FilledPasswordBoxForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledPasswordBoxBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="FilledPasswordBoxBorderBrush" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="FilledPasswordBoxPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="FilledPasswordBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledPasswordBoxBackgroundPointerOver" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="FilledPasswordBoxBorderBrushPointerOver" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="FilledPasswordBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledPasswordBoxBackgroundFocused" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="FilledPasswordBoxBorderBrushFocused" ResourceKey="PrimaryMediumBrush" />
+			<StaticResource x:Key="FilledPasswordBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledPasswordBoxBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledPasswordBoxBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="FilledPasswordBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledPasswordBoxRevealForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledPasswordBoxRevealForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledPasswordBoxRevealForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledPasswordBoxHeaderForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledPasswordBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<StaticResource x:Key="OutlinedPasswordBoxBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />
+			<StaticResource x:Key="OutlinedPasswordBoxFocusedBorderThickness" ResourceKey="SimpleStrokeFocusRingThickness" />
+			<Thickness x:Key="OutlinedPasswordBoxPadding">16,10,16,10</Thickness>
+			<StaticResource x:Key="OutlinedPasswordBoxMinHeight" ResourceKey="SimpleIconLarge" />
+			<Thickness x:Key="OutlinedPasswordBoxHeaderMargin">0,0,0,4</Thickness>
+			<StaticResource x:Key="OutlinedPasswordBoxForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxBorderBrush" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxBackgroundPointerOver" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxBorderBrushPointerOver" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxBackgroundFocused" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxBorderBrushFocused" ResourceKey="PrimaryMediumBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxRevealForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxRevealForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxRevealForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxHeaderForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<!-- PipsPager.xaml lightweight resources -->
+			<StaticResource x:Key="PipsPagerSelectionIndicatorForeground" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="PipsPagerSelectionIndicatorForegroundSelected" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<SolidColorBrush x:Key="PipsPagerNavigationButtonBackground"
+							 Color="Transparent" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBackgroundPressed" ResourceKey="PrimaryContainerBrush" />
+
+			<!-- ProgressBar.xaml lightweight resources -->
+			<StaticResource x:Key="ProgressBarForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ProgressBarBackground" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="ProgressBarForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="ProgressBarBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<!-- ProgressRing.xaml lightweight resources -->
+			<StaticResource x:Key="ProgressRingForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ProgressRingBackground" ResourceKey="SurfaceVariantBrush" />
+
+			<!-- RadioButton.xaml lightweight resources -->
+			<StaticResource x:Key="RadioButtonOuterEllipseFill" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseFillPointerOver" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseFillPressed" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseStroke" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseStrokePointerOver" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseStrokePressed" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseStrokeDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedFill" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedFillPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedFillPressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedStroke" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokeDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="RadioButtonForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="RadioButtonForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="RadioButtonForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="RadioButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<!-- RatingControl.xaml lightweight resources -->
+			<StaticResource x:Key="RatingControlForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RatingControlSelectedForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RatingControlUnselectedForeground" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="RatingControlPlaceholderForeground" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="RatingControlPlaceholderForegroundPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RatingControlSelectedForegroundPointerOver" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="RatingControlUnselectedForegroundPointerOver" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="RatingControlSelectedForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="RatingControlCaptionForeground" ResourceKey="OnSurfaceMediumBrush" />
+
+			<!-- Slider.xaml lightweight resources -->
+			<StaticResource x:Key="SliderThumbBackground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="SliderTrackValueFill" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="SliderTrackFill" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="SliderThumbBackgroundPressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="SliderTrackValueFillPressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="SliderThumbBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="SliderTrackValueFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="SliderTrackFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<!-- TextBox.xaml lightweight resources -->
+			<StaticResource x:Key="FilledTextBoxCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<Thickness x:Key="FilledTextBoxBorderThicknessNormal">0</Thickness>
+			<Thickness x:Key="FilledTextBoxBorderThicknessFocused">0</Thickness>
+			<Thickness x:Key="FilledTextBoxPadding">16,10,16,10</Thickness>
+			<StaticResource x:Key="FilledTextBoxMinHeight" ResourceKey="SimpleIconLarge" />
+			<StaticResource x:Key="FilledTextBoxForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledTextBoxPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="FilledTextBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="FilledTextBoxBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="FilledTextBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxBackgroundFocused" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxBorderBrushFocused" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundFocused" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="FilledTextBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledTextBoxBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledTextBoxBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledTextBoxHeaderForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxHeaderForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxHeaderForegroundFocused" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="OutlinedTextBoxCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<StaticResource x:Key="OutlinedTextBoxBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />
+			<StaticResource x:Key="OutlinedTextBoxBorderThicknessFocused" ResourceKey="SimpleStrokeFocusRingThickness" />
+			<Thickness x:Key="OutlinedTextBoxPadding">16,10,16,10</Thickness>
+			<StaticResource x:Key="OutlinedTextBoxMinHeight" ResourceKey="SimpleIconLarge" />
+			<StaticResource x:Key="OutlinedTextBoxForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBorderBrush" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="OutlinedTextBoxPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="OutlinedTextBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBackgroundPointerOver" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBorderBrushPointerOver" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="OutlinedTextBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBackgroundFocused" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBorderBrushFocused" ResourceKey="PrimaryMediumBrush" />
+			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundFocused" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="OutlinedTextBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="OutlinedTextBoxHeaderForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundFocused" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<!-- ToggleButton.xaml lightweight resources -->
+			<StaticResource x:Key="TextToggleButtonForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="TextToggleButtonBackground" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundPointerOver" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundPressed" ResourceKey="TertiaryContainerBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrush" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushPointerOver" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushPressed" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundChecked" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundCheckedPointerOver" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundCheckedPressed" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundCheckedDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundChecked" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundCheckedPointerOver" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundCheckedPressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundCheckedDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushChecked" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushCheckedPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushCheckedPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushCheckedDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundIndeterminate" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundIndeterminatePointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundIndeterminatePressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundIndeterminateDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundIndeterminate" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundIndeterminatePointerOver" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundIndeterminatePressed" ResourceKey="TertiaryContainerBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundIndeterminateDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushIndeterminate" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushIndeterminatePointerOver" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushIndeterminatePressed" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushIndeterminateDisabled" ResourceKey="OutlineDisabledBrush" />
+
+			<!-- ToggleSwitch.xaml lightweight resources -->
+			<StaticResource x:Key="ToggleSwitchOuterBorderFill" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="ToggleSwitchOuterBorderStroke" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="ToggleSwitchOuterBorderFillPressed" ResourceKey="TertiaryContainerBrush" />
+			<StaticResource x:Key="ToggleSwitchOuterBorderFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="ToggleSwitchOuterBorderStrokeDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobBoundsFill" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobBoundsFillPressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobBoundsFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOffFill" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOnFill" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="ToggleSwitchContentForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ToggleSwitchContentForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="Default">
+
+			<!-- AppBarButton.xaml lightweight resources -->
+			<x:Double x:Key="AppBarButtonHeight">64</x:Double>
+			<x:Double x:Key="AppBarButtonWidth">64</x:Double>
+			<StaticResource x:Key="AppBarButtonForeground" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="AppBarButtonForegroundPointerOver" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="AppBarButtonForegroundPressed" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="AppBarButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="AppBarButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="AppBarButtonBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="AppBarButtonBackgroundPressed" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="AppBarButtonBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="AppBarButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="AppBarButtonBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="AppBarButtonBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="AppBarButtonBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- Button.xaml lightweight resources -->
+			<StaticResource x:Key="FilledButtonForeground" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="FilledButtonForegroundPointerOver" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="FilledButtonForegroundPressed" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="FilledButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledButtonBackground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="FilledButtonBackgroundPointerOver" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="FilledButtonBackgroundPressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="FilledButtonBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledButtonBorderBrush" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="FilledButtonBorderBrushPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="FilledButtonBorderBrushPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="FilledButtonBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="FilledTonalButtonForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTonalButtonForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTonalButtonForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTonalButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackground" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackgroundPointerOver" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackgroundPressed" ResourceKey="TertiaryContainerBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledTonalButtonBorderBrush" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="FilledTonalButtonBorderBrushPointerOver" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="FilledTonalButtonBorderBrushPressed" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="FilledTonalButtonBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="OutlinedButtonForeground" ResourceKey="FilledTonalButtonForeground" />
+			<StaticResource x:Key="OutlinedButtonForegroundPointerOver" ResourceKey="FilledTonalButtonForegroundPointerOver" />
+			<StaticResource x:Key="OutlinedButtonForegroundPressed" ResourceKey="FilledTonalButtonForegroundPressed" />
+			<StaticResource x:Key="OutlinedButtonForegroundDisabled" ResourceKey="FilledTonalButtonForegroundDisabled" />
+			<StaticResource x:Key="OutlinedButtonBackground" ResourceKey="FilledTonalButtonBackground" />
+			<StaticResource x:Key="OutlinedButtonBackgroundPointerOver" ResourceKey="FilledTonalButtonBackgroundPointerOver" />
+			<StaticResource x:Key="OutlinedButtonBackgroundPressed" ResourceKey="FilledTonalButtonBackgroundPressed" />
+			<StaticResource x:Key="OutlinedButtonBackgroundDisabled" ResourceKey="FilledTonalButtonBackgroundDisabled" />
+			<StaticResource x:Key="OutlinedButtonBorderBrush" ResourceKey="FilledTonalButtonBorderBrush" />
+			<StaticResource x:Key="OutlinedButtonBorderBrushPointerOver" ResourceKey="FilledTonalButtonBorderBrushPointerOver" />
+			<StaticResource x:Key="OutlinedButtonBorderBrushPressed" ResourceKey="FilledTonalButtonBorderBrushPressed" />
+			<StaticResource x:Key="OutlinedButtonBorderBrushDisabled" ResourceKey="FilledTonalButtonBorderBrushDisabled" />
+			<StaticResource x:Key="TextButtonForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextButtonForegroundPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextButtonForegroundPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="TextButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TextButtonBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="TextButtonBackgroundPressed" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="TextButtonBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="TextButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TextButtonBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TextButtonBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TextButtonBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="IconButtonForeground" ResourceKey="FilledButtonForeground" />
+			<StaticResource x:Key="IconButtonForegroundPointerOver" ResourceKey="FilledButtonForegroundPointerOver" />
+			<StaticResource x:Key="IconButtonForegroundPressed" ResourceKey="FilledButtonForegroundPressed" />
+			<StaticResource x:Key="IconButtonForegroundDisabled" ResourceKey="FilledButtonForegroundDisabled" />
+			<StaticResource x:Key="IconButtonBackground" ResourceKey="FilledButtonBackground" />
+			<StaticResource x:Key="IconButtonBackgroundPointerOver" ResourceKey="FilledButtonBackgroundPointerOver" />
+			<StaticResource x:Key="IconButtonBackgroundPressed" ResourceKey="FilledButtonBackgroundPressed" />
+			<StaticResource x:Key="IconButtonBackgroundDisabled" ResourceKey="FilledButtonBackgroundDisabled" />
+			<StaticResource x:Key="IconButtonBorderBrush" ResourceKey="FilledButtonBorderBrush" />
+			<StaticResource x:Key="IconButtonBorderBrushPointerOver" ResourceKey="FilledButtonBorderBrushPointerOver" />
+			<StaticResource x:Key="IconButtonBorderBrushPressed" ResourceKey="FilledButtonBorderBrushPressed" />
+			<StaticResource x:Key="IconButtonBorderBrushDisabled" ResourceKey="FilledButtonBorderBrushDisabled" />
+
+			<!-- CalendarDatePicker.xaml lightweight resources -->
+			<StaticResource x:Key="CalendarDatePickerCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<StaticResource x:Key="CalendarDatePickerFlyoutPresenterCornerRadius" ResourceKey="SimpleRadius400CornerRadius" />
+			<StaticResource x:Key="CalendarDatePickerBorderThemeThickness" ResourceKey="SimpleStrokeBorderThickness" />
+			<StaticResource x:Key="CalendarDatePickerFlyoutPresenterPadding" ResourceKey="SimpleSpace0Thickness" />
+			<Thickness x:Key="CalendarDatePickerContentMargin">16,10,16,10</Thickness>
+			<StaticResource x:Key="CalendarDatePickerMinHeight" ResourceKey="SimpleIconLarge" />
+			<StaticResource x:Key="CalendarDatePickerHeaderMargin" ResourceKey="Space200BottomThickness" />
+			<StaticResource x:Key="CalendarDatePickerCalendarGlyphMargin" ResourceKey="Space300LeftThickness" />
+			<StaticResource x:Key="CalendarDatePickerForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CalendarDatePickerForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="CalendarDatePickerTextForeground" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="CalendarDatePickerTextForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="CalendarDatePickerTextForegroundSelected" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CalendarDatePickerCalendarGlyphForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CalendarDatePickerCalendarGlyphForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="CalendarDatePickerHeaderForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CalendarDatePickerHeaderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="CalendarDatePickerBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="CalendarDatePickerBackgroundPointerOver" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="CalendarDatePickerBackgroundPressed" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="CalendarDatePickerBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="CalendarDatePickerBackgroundFocused" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="CalendarDatePickerBorderBrush" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="CalendarDatePickerBorderBrushPointerOver" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="CalendarDatePickerBorderBrushPressed" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="CalendarDatePickerBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="CalendarDatePickerBorderBrushFocused" ResourceKey="PrimaryMediumBrush" />
+
+			<!-- CheckBox.xaml lightweight resources -->
+			<StaticResource x:Key="CheckBoxBackgroundUnchecked" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="CheckBoxBackgroundUncheckedPointerOver" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="CheckBoxBackgroundUncheckedPressed" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="CheckBoxBackgroundUncheckedDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushUnchecked" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushUncheckedPointerOver" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushUncheckedPressed" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushUncheckedDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="CheckBoxBackgroundChecked" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="CheckBoxBackgroundCheckedPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="CheckBoxBackgroundCheckedPressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="CheckBoxBackgroundCheckedDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushChecked" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushCheckedPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushCheckedPressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushCheckedDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="CheckBoxGlyphForegroundChecked" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="CheckBoxGlyphForegroundCheckedPointerOver" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="CheckBoxGlyphForegroundCheckedPressed" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="CheckBoxGlyphForegroundCheckedDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="CheckBoxBackgroundIndeterminate" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="CheckBoxBackgroundIndeterminatePointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="CheckBoxBackgroundIndeterminatePressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="CheckBoxBackgroundIndeterminateDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushIndeterminate" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushIndeterminatePointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushIndeterminatePressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushIndeterminateDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="CheckBoxGlyphForegroundIndeterminate" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="CheckBoxGlyphForegroundIndeterminatePointerOver" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="CheckBoxGlyphForegroundIndeterminatePressed" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="CheckBoxGlyphForegroundIndeterminateDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="CheckBoxForegroundUnchecked" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CheckBoxForegroundUncheckedPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CheckBoxForegroundUncheckedPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CheckBoxForegroundUncheckedDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="CheckBoxForegroundChecked" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CheckBoxForegroundCheckedPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CheckBoxForegroundCheckedPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CheckBoxForegroundCheckedDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="CheckBoxForegroundIndeterminate" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CheckBoxForegroundIndeterminatePointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CheckBoxForegroundIndeterminatePressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CheckBoxForegroundIndeterminateDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<!-- ComboBox.xaml lightweight resources -->
+			<StaticResource x:Key="ComboBoxBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ComboBoxBackgroundPointerOver" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ComboBoxBackgroundPressed" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ComboBoxBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="ComboBoxBorderBrush" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="ComboBoxBorderBrushPointerOver" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="ComboBoxBorderBrushPressed" ResourceKey="PrimaryMediumBrush" />
+			<StaticResource x:Key="ComboBoxBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="ComboBoxForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="ComboBoxPlaceHolderForeground" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ComboBoxDropDownGlyphForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxDropDownGlyphForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="ComboBoxDropDownBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ComboBoxDropDownBorderBrush" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="ComboBoxItemBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundPressed" ResourceKey="TertiaryContainerBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundSelected" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundSelectedPointerOver" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundSelectedPressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxItemForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundSelected" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundSelectedPointerOver" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundSelectedPressed" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<!-- DatePicker.xaml lightweight resources -->
+			<StaticResource x:Key="DatePickerFlyoutButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterBorderBrush" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterSpacerFill" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterHighlightFill" ResourceKey="PrimaryVariantLightBrush" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterCornerRadius" ResourceKey="SimpleRadius400CornerRadius" />
+			<x:Double x:Key="DatePickerFlyoutPresenterWidth">296</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterMinWidth">296</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterMaxHeight">398</x:Double>
+			<StaticResource x:Key="DatePickerFlyoutPresenterHighlightHeight" ResourceKey="SimpleIconLarge" />
+			<x:Double x:Key="DatePickerFlyoutPresenterAcceptDismissHostGridHeight">52</x:Double>
+			<StaticResource x:Key="DatePickerSpacerThemeWidth" ResourceKey="SimpleStrokeBorder" />
+			<StaticResource x:Key="DatePickerFlyoutBorderThickness" ResourceKey="SimpleStrokeBorder" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterFontFamily" ResourceKey="DefaultFontFamily" />
+			<StaticResource x:Key="DatePickerButtonBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="DatePickerButtonBackgroundPointerOver" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="DatePickerButtonBackgroundPressed" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="DatePickerButtonBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="DatePickerButtonForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="DatePickerButtonForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="DatePickerButtonForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="DatePickerButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="DatePickerButtonBorderBrush" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="DatePickerButtonBorderBrushPointerOver" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="DatePickerButtonBorderBrushPressed" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="DatePickerButtonBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="DatePickerButtonDateTextForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="DatePickerButtonDateTextForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="DatePickerButtonDateTextForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="DatePickerButtonDateTextForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="DatePickerPlaceholderTextForeground" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="DatePickerHeaderForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="DatePickerHeaderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="DatePickerCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<StaticResource x:Key="DatePickerBorderThemeThickness" ResourceKey="SimpleStrokeBorderThickness" />
+			<Thickness x:Key="DatePickerContentMargin">16,10,16,10</Thickness>
+			<StaticResource x:Key="DatePickerFlyoutButtonPadding" ResourceKey="SimpleSpace0Thickness" />
+			<StaticResource x:Key="DatePickerMinHeight" ResourceKey="ControlHeightMediumLarge" />
+			<x:Double x:Key="DatePickerFlyoutButtonOpacityPressed">0.8</x:Double>
+			<x:Double x:Key="DatePickerFlyoutButtonOpacityDisabled">0.5</x:Double>
+			<StaticResource x:Key="DatePickerHeaderMargin" ResourceKey="Space100BottomThickness" />
+
+			<!-- Flyout.xaml lightweight resources -->
+			<StaticResource x:Key="FlyoutPresenterBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="FlyoutPresenterBorderBrush" ResourceKey="OutlineBrush" />
+
+			<!-- HyperlinkButton.xaml lightweight resources -->
+			<StaticResource x:Key="HyperlinkButtonForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="HyperlinkButtonForegroundPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="HyperlinkButtonForegroundPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="HyperlinkButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<SolidColorBrush x:Key="HyperlinkButtonBackgroundPointerOver"
+							 Color="Transparent" />
+			<SolidColorBrush x:Key="HyperlinkButtonBackgroundPressed"
+							 Color="Transparent" />
+			<StaticResource x:Key="SecondaryHyperlinkButtonForeground" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="SecondaryHyperlinkButtonForegroundPointerOver" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="SecondaryHyperlinkButtonForegroundPressed" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="SecondaryHyperlinkButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<!-- ListView.xaml lightweight resources -->
+			<StaticResource x:Key="ListViewBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ListViewBorderBrush" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="ListViewItemBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ListViewItemForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ListViewItemBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="ListViewItemForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ListViewItemBackgroundPressed" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="ListViewItemForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ListViewItemBackgroundSelected" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ListViewItemForegroundSelected" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="ListViewItemBackgroundPointerOverSelected" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="ListViewItemForegroundPointerOverSelected" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="ListViewItemBackgroundPressedSelected" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="ListViewItemForegroundPressedSelected" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="ListViewItemForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<!-- NavigationView.xaml lightweight resources -->
+			<StaticResource x:Key="NavigationViewContentBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="NavigationViewDefaultPaneBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="NavigationViewExpandedPaneBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="NavigationViewTopPaneBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="NavigationViewButtonForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="NavigationViewButtonForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="NavigationViewButtonForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="NavigationViewButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<SolidColorBrush x:Key="NavigationViewButtonBackgroundPointerOver"
+							 Color="Transparent" />
+			<SolidColorBrush x:Key="NavigationViewButtonBackgroundPressed"
+							 Color="Transparent" />
+			<SolidColorBrush x:Key="NavigationViewButtonBackgroundDisabled"
+							 Color="Transparent" />
+			<StaticResource x:Key="NavigationViewItemForeground" ResourceKey="OnSurfaceBrush" />
+			<SolidColorBrush x:Key="NavigationViewItemBackground"
+							 Color="Transparent" />
+			<StaticResource x:Key="NavigationViewItemForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="NavigationViewItemBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="NavigationViewItemForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="NavigationViewItemBackgroundPressed" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="NavigationViewItemForegroundSelected" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="NavigationViewItemBackgroundSelected" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="NavigationViewItemForegroundSelectedPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="NavigationViewItemBackgroundSelectedPointerOver" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="NavigationViewItemForegroundSelectedPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="NavigationViewItemBackgroundSelectedPressed" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="NavigationViewItemForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<SolidColorBrush x:Key="NavigationViewItemBackgroundDisabled"
+							 Color="Transparent" />
+			<StaticResource x:Key="NavigationViewSelectionIndicatorForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="NavigationViewItemSeparatorForeground" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="TopNavigationViewItemForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TopNavigationViewItemForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TopNavigationViewItemForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TopNavigationViewItemForegroundSelected" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TopNavigationViewItemForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<!-- PasswordBox.xaml lightweight resources -->
+			<StaticResource x:Key="FilledPasswordBoxCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<StaticResource x:Key="FilledPasswordBoxBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />
+			<StaticResource x:Key="FilledPasswordBoxFocusedBorderThickness" ResourceKey="SimpleStrokeFocusRingThickness" />
+			<Thickness x:Key="FilledPasswordBoxPadding">16,10,16,10</Thickness>
+			<StaticResource x:Key="FilledPasswordBoxMinHeight" ResourceKey="SimpleIconLarge" />
+			<Thickness x:Key="FilledPasswordBoxHeaderMargin">0,0,0,4</Thickness>
+			<StaticResource x:Key="FilledPasswordBoxForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledPasswordBoxBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="FilledPasswordBoxBorderBrush" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="FilledPasswordBoxPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="FilledPasswordBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledPasswordBoxBackgroundPointerOver" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="FilledPasswordBoxBorderBrushPointerOver" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="FilledPasswordBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledPasswordBoxBackgroundFocused" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="FilledPasswordBoxBorderBrushFocused" ResourceKey="PrimaryMediumBrush" />
+			<StaticResource x:Key="FilledPasswordBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledPasswordBoxBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledPasswordBoxBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="FilledPasswordBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledPasswordBoxRevealForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledPasswordBoxRevealForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledPasswordBoxRevealForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledPasswordBoxHeaderForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledPasswordBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<StaticResource x:Key="OutlinedPasswordBoxBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />
+			<StaticResource x:Key="OutlinedPasswordBoxFocusedBorderThickness" ResourceKey="SimpleStrokeFocusRingThickness" />
+			<Thickness x:Key="OutlinedPasswordBoxPadding">16,10,16,10</Thickness>
+			<StaticResource x:Key="OutlinedPasswordBoxMinHeight" ResourceKey="SimpleIconLarge" />
+			<Thickness x:Key="OutlinedPasswordBoxHeaderMargin">0,0,0,4</Thickness>
+			<StaticResource x:Key="OutlinedPasswordBoxForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxBorderBrush" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxBackgroundPointerOver" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxBorderBrushPointerOver" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxBackgroundFocused" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxBorderBrushFocused" ResourceKey="PrimaryMediumBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxRevealForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxRevealForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxRevealForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxHeaderForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedPasswordBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<!-- PipsPager.xaml lightweight resources -->
+			<StaticResource x:Key="PipsPagerSelectionIndicatorForeground" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="PipsPagerSelectionIndicatorForegroundSelected" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<SolidColorBrush x:Key="PipsPagerNavigationButtonBackground"
+							 Color="Transparent" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBackgroundPressed" ResourceKey="PrimaryContainerBrush" />
+
+			<!-- ProgressBar.xaml lightweight resources -->
+			<StaticResource x:Key="ProgressBarForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ProgressBarBackground" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="ProgressBarForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="ProgressBarBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<!-- ProgressRing.xaml lightweight resources -->
+			<StaticResource x:Key="ProgressRingForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ProgressRingBackground" ResourceKey="OutlineBrush" />
+
+			<!-- RadioButton.xaml lightweight resources -->
+			<StaticResource x:Key="RadioButtonOuterEllipseFill" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseFillPointerOver" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseFillPressed" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseStroke" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseStrokePointerOver" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseStrokePressed" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseStrokeDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedFill" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedFillPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedFillPressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedStroke" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokeDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="RadioButtonForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="RadioButtonForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="RadioButtonForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="RadioButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<!-- RatingControl.xaml lightweight resources -->
+			<StaticResource x:Key="RatingControlForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RatingControlSelectedForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RatingControlUnselectedForeground" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="RatingControlPlaceholderForeground" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="RatingControlPlaceholderForegroundPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RatingControlSelectedForegroundPointerOver" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="RatingControlUnselectedForegroundPointerOver" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="RatingControlSelectedForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="RatingControlCaptionForeground" ResourceKey="OnSurfaceMediumBrush" />
+
+			<!-- Slider.xaml lightweight resources -->
+			<StaticResource x:Key="SliderThumbBackground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="SliderTrackValueFill" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="SliderTrackFill" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="SliderThumbBackgroundPressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="SliderTrackValueFillPressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="SliderThumbBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="SliderTrackValueFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="SliderTrackFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<!-- TextBox.xaml lightweight resources -->
+			<StaticResource x:Key="FilledTextBoxCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<Thickness x:Key="FilledTextBoxBorderThicknessNormal">0</Thickness>
+			<Thickness x:Key="FilledTextBoxBorderThicknessFocused">0</Thickness>
+			<Thickness x:Key="FilledTextBoxPadding">16,10,16,10</Thickness>
+			<StaticResource x:Key="FilledTextBoxMinHeight" ResourceKey="SimpleIconLarge" />
+			<StaticResource x:Key="FilledTextBoxForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledTextBoxPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="FilledTextBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="FilledTextBoxBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="FilledTextBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxBackgroundFocused" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxBorderBrushFocused" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundFocused" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="FilledTextBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledTextBoxBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledTextBoxBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledTextBoxHeaderForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxHeaderForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxHeaderForegroundFocused" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="OutlinedTextBoxCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<StaticResource x:Key="OutlinedTextBoxBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />
+			<StaticResource x:Key="OutlinedTextBoxBorderThicknessFocused" ResourceKey="SimpleStrokeFocusRingThickness" />
+			<Thickness x:Key="OutlinedTextBoxPadding">16,10,16,10</Thickness>
+			<StaticResource x:Key="OutlinedTextBoxMinHeight" ResourceKey="SimpleIconLarge" />
+			<StaticResource x:Key="OutlinedTextBoxForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBorderBrush" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="OutlinedTextBoxPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="OutlinedTextBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBackgroundPointerOver" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBorderBrushPointerOver" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="OutlinedTextBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBackgroundFocused" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBorderBrushFocused" ResourceKey="PrimaryMediumBrush" />
+			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundFocused" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="OutlinedTextBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="OutlinedTextBoxHeaderForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundFocused" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<!-- ToggleButton.xaml lightweight resources -->
+			<StaticResource x:Key="TextToggleButtonForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="TextToggleButtonBackground" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundPointerOver" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundPressed" ResourceKey="TertiaryContainerBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrush" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushPointerOver" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushPressed" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundChecked" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundCheckedPointerOver" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundCheckedPressed" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundCheckedDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundChecked" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundCheckedPointerOver" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundCheckedPressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundCheckedDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushChecked" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushCheckedPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushCheckedPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushCheckedDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundIndeterminate" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundIndeterminatePointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundIndeterminatePressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundIndeterminateDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundIndeterminate" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundIndeterminatePointerOver" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundIndeterminatePressed" ResourceKey="TertiaryContainerBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundIndeterminateDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushIndeterminate" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushIndeterminatePointerOver" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushIndeterminatePressed" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushIndeterminateDisabled" ResourceKey="OutlineDisabledBrush" />
+
+			<!-- ToggleSwitch.xaml lightweight resources -->
+			<StaticResource x:Key="ToggleSwitchOuterBorderFill" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="ToggleSwitchOuterBorderStroke" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="ToggleSwitchOuterBorderFillPressed" ResourceKey="TertiaryContainerBrush" />
+			<StaticResource x:Key="ToggleSwitchOuterBorderFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="ToggleSwitchOuterBorderStrokeDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobBoundsFill" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobBoundsFillPressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobBoundsFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOffFill" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOnFill" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="ToggleSwitchContentForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ToggleSwitchContentForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
 
 </ResourceDictionary>

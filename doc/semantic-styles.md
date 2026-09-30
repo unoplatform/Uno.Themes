@@ -20,7 +20,7 @@ Each theme's `SemanticStyles.xaml` defines `<StaticResource>` aliases that map s
 
 ### Runtime discovery (for tooling)
 
-Semantic resources are declared in dictionaries of type `Uno.Themes.SemanticResources`, a `ResourceDictionary` subclass with no members: the type is the signal. This covers the style aliases above, the shared colour palette and brushes, the shared typography tokens, and the generated spacing, shape and density scales. Theme-prefixed keys are never declared in one.
+Semantic resources are declared in dictionaries of type `Uno.Themes.SemanticResources`, a `ResourceDictionary` subclass with no members: the type is the signal. This covers the style aliases above, the control lightweight-styling brushes and layout tokens, the shared colour palette and brushes, the shared typography tokens, and the generated spacing, shape and density scales. Theme-prefixed keys are never declared in one.
 
 A tool walking a theme's dictionaries treats a key as semantic when any dictionary declaring it is a `SemanticResources`, or is one of the `ThemeDictionaries` of a `SemanticResources` (a file loaded through `Source` copies its theme dictionaries in as plain `ResourceDictionary` instances). `MergedDictionaries` do not inherit the marker. Read the theme dictionaries through the `ThemeDictionaries` indexer rather than by enumerating its values: a dictionary loaded through `Source` holds them as lazy initializers until first indexed.
 
@@ -248,7 +248,7 @@ Semantic style keys also enable portable [lightweight styling](lightweight-styli
 <SolidColorBrush x:Key="FilledButtonForeground" Color="Red" />
 ```
 
-Both **Material** and **Simple** templates reference the same unprefixed keys (e.g. `FilledButtonForeground`) directly.
+Both **Material** and **Simple** templates reference the same unprefixed keys (e.g. `FilledButtonForeground`) directly. Their lightweight-styling declarations live in the theme's `SemanticStyles.xaml`, alongside the style aliases, so tooling discovers them through `SemanticResources` too. Light, Default and any HighContrast entries keep their existing values; theme-prefixed compatibility aliases remain in the control dictionaries.
 
 The color palette underneath these keys can itself be swapped wholesale — generated from a single seed color, and even changed at runtime — see [Seed Color Palette](seed-colors.md).
 
