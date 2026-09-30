@@ -139,9 +139,8 @@ public class Given_SemanticResources
 
 		foreach (var property in new[] { "Background", "Foreground", "BorderBrush" })
 		{
-			foreach (var state in new[] { "", "PointerOver", "Pressed", "Disabled" })
+			foreach (var key in new[] { "", "PointerOver", "Pressed", "Disabled" }.Select(state => $"FilledButton{property}{state}"))
 			{
-				var key = $"FilledButton{property}{state}";
 				Assert.IsTrue(semantic.Contains(key), $"'{key}' should be marked semantic under {appearance}");
 			}
 		}
