@@ -94,7 +94,7 @@ Seed colors are configured exclusively via `ThemeColors` (the `BaseTheme.Colors`
 
 | Member | Type | Description |
 |---|---|---|
-| `GetTheme()` | `BaseTheme` | Returns the `BaseTheme` from `Application.Current.Resources`, or `null`. |
+| `GetTheme()` | `BaseTheme` | Returns the `BaseTheme` from `Application.Current.Resources` at any merge depth, or `null`. |
 | `PrimarySeed` | `Color?` | Gets/sets the primary seed color on the active theme. |
 | `SecondarySeed` | `Color?` | Gets/sets the secondary seed color on the active theme. |
 | `TertiarySeed` | `Color?` | Gets/sets the tertiary seed color on the active theme. |
@@ -103,7 +103,7 @@ Creates a `ThemeColors` instance automatically if the theme doesn't have one yet
 
 ### `ApplicationExtensions` (instance-based theme lookup)
 
-`Extensions/ApplicationExtensions.cs` exposes `GetTheme(this Application)`: the same first-level `MergedDictionaries` scan as `SemanticThemeHelper.GetTheme()`, but against the resources of the `Application` instance the caller holds. `SemanticThemeHelper.GetTheme()` is a pure delegation to it on `Application.Current`. The extension is null-tolerant (a `null` application yields `null`).
+`Extensions/ApplicationExtensions.cs` exposes `GetTheme(this Application)`: a `MergedDictionaries` search against the resources of the `Application` instance the caller holds. The search is **breadth-first over the whole graph** (issue #1704, see `specs/10-gettheme-nested-walk/progress.md`) — the shallowest theme wins, a repeated dictionary is visited once so diamonds are free and a cycle cannot hang, the top level is answered without allocating, `ThemeDictionaries` is deliberately not walked, and the descent is bounded at 32 levels as a guard against a pathological graph. `SemanticThemeHelper.GetTheme()` is a pure delegation to it on `Application.Current`. The extension is null-tolerant (a `null` application yields `null`).
 
 Motivation: hosts that run several applications (e.g. Hot Design's ALC-hosted guest apps, the ALC wrapper sample in `specs/05-alc-wrapper-app/`) cannot reach a guest's theme through `Application.Current`, which is the host application. A caller that resolves the guest's `Application` instance can now fetch its theme directly. Because `Uno.Themes.WinUI` resolves from the default load context in those hosting setups, `BaseTheme` type identity is shared and the plain `OfType<BaseTheme>` match works across the ALC boundary — no reflection needed. Runtime coverage: `Given_ApplicationExtensions` in `src/samples/SimpleSampleApp/RuntimeTests/`.
 
