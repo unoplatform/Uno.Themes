@@ -287,13 +287,14 @@ public abstract partial class BaseTheme : ResourceDictionary
 	/// Individual tokens can still be overridden via lightweight styling.
 	/// </summary>
 	/// <remarks>
-	/// This is a <b>construction-time</b> setting: assign it where the theme is declared
-	/// (normally <c>App.xaml</c>). Assigning it later regenerates the <c>Radius*</c> token
-	/// resources but does not restyle controls — not the ones already rendered, and not ones
-	/// created afterwards. The per-control keys that consume these tokens (<c>ButtonCornerRadius</c>
-	/// and friends) are resolved once when the theme's control-style dictionaries are parsed, and
-	/// a <see cref="CornerRadius"/> is a value with no live instance to update. To offer shape as
-	/// a user setting, change the property and then recreate the root content.
+	/// This is a <b>runtime</b> setting: assigning it regenerates the <c>Radius*</c> token
+	/// resources, and controls created afterwards pick the new scale up, because the control
+	/// styles read these tokens (directly or through per-control keys such as
+	/// <c>ButtonCornerRadius</c>) with <c>{ThemeResource}</c>. Controls <b>already rendered</b>
+	/// keep the values they resolved when they loaded — a <see cref="CornerRadius"/> is a value
+	/// with no live instance to update — until a theme-change pass re-resolves them (toggle the
+	/// root element's <c>RequestedTheme</c> away from its <c>ActualTheme</c> and back) or the
+	/// root content is recreated.
 	/// </remarks>
 	public double DefaultCornerRadius
 	{
@@ -301,6 +302,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 		set => SetValue(DefaultCornerRadiusProperty, value);
 	}
 
+	/// <summary>Identifies the <see cref="DefaultCornerRadius"/> dependency property.</summary>
 	public static DependencyProperty DefaultCornerRadiusProperty { get; } =
 		DependencyProperty.Register(
 			nameof(DefaultCornerRadius),
@@ -334,11 +336,10 @@ public abstract partial class BaseTheme : ResourceDictionary
 	/// Individual tokens can still be overridden via lightweight styling.
 	/// </summary>
 	/// <remarks>
-	/// This is a <b>construction-time</b> setting, for the same reason as
-	/// <see cref="DefaultCornerRadius"/>: assigning it later regenerates the <c>Space*</c> token
-	/// resources but does not restyle controls, because the per-control padding and margin keys
-	/// hold resolved <see cref="Thickness"/> values. To offer spacing as a user setting, change the
-	/// property and then recreate the root content.
+	/// This is a <b>runtime</b> setting, like <see cref="DefaultCornerRadius"/>: assigning it
+	/// regenerates the <c>Space*</c> token resources and controls created afterwards pick them up.
+	/// Controls already rendered keep the <see cref="Thickness"/> values they resolved until a
+	/// theme-change pass re-resolves them or the root content is recreated.
 	/// Non-finite or negative values are treated as unset and fall back to the default of 4.
 	/// </remarks>
 	public double DefaultSpacing
@@ -347,6 +348,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 		set => SetValue(DefaultSpacingProperty, value);
 	}
 
+	/// <summary>Identifies the <see cref="DefaultSpacing"/> dependency property.</summary>
 	public static DependencyProperty DefaultSpacingProperty { get; } =
 		DependencyProperty.Register(
 			nameof(DefaultSpacing),
@@ -372,11 +374,11 @@ public abstract partial class BaseTheme : ResourceDictionary
 	/// Control heights and icon sizes remain constant across densities.
 	/// </summary>
 	/// <remarks>
-	/// This is a <b>construction-time</b> setting, for the same reason as
-	/// <see cref="DefaultCornerRadius"/>: assigning it later regenerates the <c>Space*</c> token
-	/// resources but does not restyle controls, because the per-control padding and margin keys
-	/// hold resolved <see cref="Thickness"/> values. To offer density as a user setting, change the
-	/// property and then recreate the root content.
+	/// This is a <b>runtime</b> setting, like <see cref="DefaultCornerRadius"/>: assigning it
+	/// regenerates the <c>Space*</c> token resources and controls created afterwards pick them up.
+	/// Controls already rendered keep the <see cref="Thickness"/> values they resolved until a
+	/// theme-change pass re-resolves them or the root content is recreated.
+	/// Values outside the defined members fall back to the <see cref="Density.Regular"/> factor.
 	/// </remarks>
 	public Density DefaultDensity
 	{
@@ -384,6 +386,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 		set => SetValue(DefaultDensityProperty, value);
 	}
 
+	/// <summary>Identifies the <see cref="DefaultDensity"/> dependency property.</summary>
 	public static DependencyProperty DefaultDensityProperty { get; } =
 		DependencyProperty.Register(
 			nameof(DefaultDensity),
@@ -417,7 +420,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 	/// that.
 	/// </para>
 	/// <para>
-	/// Unlike <see cref="DefaultCornerRadius"/> and <see cref="DefaultSpacing"/>, this is a
+	/// Like <see cref="DefaultCornerRadius"/> and <see cref="DefaultSpacing"/>, this is a
 	/// <b>runtime</b> setting: text laid out after the change picks the new family up. Text
 	/// <b>already rendered</b> keeps the family it resolved when it loaded — a
 	/// <see cref="FontFamily"/> is an immutable value, so unlike a seed color, whose brushes are live
