@@ -18,11 +18,15 @@ Each theme's `SemanticStyles.xaml` defines `<StaticResource>` aliases that map s
 - **Material**: `FilledButtonStyle` &rarr; `MaterialFilledButtonStyle`
 - **Simple**: `FilledButtonStyle` &rarr; `SimpleFilledButtonStyle`
 
+Semantic style aliases exist only in **Material v2** and **Simple**. The Material v1 styles and Cupertino declare none, so a semantic style key does not resolve under them.
+
 ### Runtime discovery (for tooling)
 
 Semantic resources are declared in dictionaries of type `Uno.Themes.SemanticResources`, a `ResourceDictionary` subclass with no members: the type is the signal. This covers the style aliases above, the control lightweight-styling brushes and layout tokens, the shared colour palette and brushes, the shared typography tokens, and the generated spacing, shape and density scales. Theme-prefixed keys are never declared in one.
 
 A tool walking a theme's dictionaries treats a key as semantic when any dictionary declaring it is a `SemanticResources`, or is one of the `ThemeDictionaries` of a `SemanticResources` (a file loaded through `Source` copies its theme dictionaries in as plain `ResourceDictionary` instances). `MergedDictionaries` do not inherit the marker. Read the theme dictionaries through the `ThemeDictionaries` indexer rather than by enumerating its values: a dictionary loaded through `Source` holds them as lazy initializers until first indexed.
+
+The marker type only survives when the dictionary is constructed in C#: a `<SemanticResources Source="…"/>` element declared in XAML compiles and resolves, but the XAML generator emits it as a plain `ResourceDictionary`, so a runtime walk does not see the type. Create such a dictionary in code instead (`new SemanticResources { Source = new Uri("ms-appx:///…") }`), as the themes do.
 
 ## Control Style Mappings
 
@@ -178,6 +182,7 @@ FAB is a Material-specific concept. Under Simple theme, FAB keys resolve to exis
 | Semantic Key | Material | Simple | Notes |
 |---|---|---|---|
 | `DatePickerStyle` | `MaterialDatePickerStyle` | `SimpleDatePickerStyle` | Direct match |
+| `DatePickerFlyoutPresenterStyle` | `MaterialDatePickerFlyoutPresenterStyle` | **GAP** | Simple declares no alias for its `SimpleDatePickerFlyoutPresenterStyle` |
 
 ### MediaPlayerElement
 
@@ -196,6 +201,12 @@ FAB is a Material-specific concept. Under Simple theme, FAB keys resolve to exis
 | Semantic Key | Material | Simple | Notes |
 |---|---|---|---|
 | `RatingControlStyle` | `MaterialRatingControlStyle` | `SimpleRatingControlStyle` | Star rating with brand colors |
+
+### Ripple
+
+| Semantic Key  | Material              | Simple  | Notes                              |
+| ------------- | --------------------- | ------- | ---------------------------------- |
+| `RippleStyle` | `MaterialRippleStyle` | **GAP** | `Ripple` is a Uno Material control |
 
 ### Flyout / MenuFlyout
 

@@ -214,13 +214,14 @@ Used as the value for `BaseTheme.Colors` (i.e., `MaterialTheme.Colors` or `Simpl
 
 Static convenience class for runtime theme configuration.
 
-| Member          | Type     | Description                                                                                        |
-|-----------------|----------|----------------------------------------------------------------------------------------------------|
-| `GetTheme()`    | Method   | Returns the `BaseTheme` instance from `Application.Current.Resources`, or `null` if none is found. |
-| `PrimarySeed`   | Property | Gets or sets the primary seed color on the active theme. Setting regenerates the full palette.     |
-| `SecondarySeed` | Property | Gets or sets the secondary seed color. `null` to auto-derive from primary.                         |
-| `TertiarySeed`  | Property | Gets or sets the tertiary seed color. `null` to auto-derive from primary.                          |
-| `SeedColorMode` | Property | Gets or sets the generation mode on the active theme: `Fidelity` (default) or `TonalSpot`.         |
+| Member              | Type     | Description                                                                                                                                                                            |
+|---------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `GetTheme()`        | Method   | Returns the `BaseTheme` instance from `Application.Current.Resources`, or `null` if none is found.                                                                                     |
+| `PrimarySeed`       | Property | Gets or sets the primary seed color on the active theme. Setting regenerates the full palette.                                                                                         |
+| `SecondarySeed`     | Property | Gets or sets the secondary seed color. `null` to auto-derive from primary.                                                                                                             |
+| `TertiarySeed`      | Property | Gets or sets the tertiary seed color. `null` to auto-derive from primary.                                                                                                              |
+| `SeedColorMode`     | Property | Gets or sets the generation mode on the active theme: `Fidelity` (default) or `TonalSpot`.                                                                                             |
+| `DefaultFontFamily` | Property | Gets or sets the font the active theme's whole type scale is generated from. `null` keeps the theme's own typeface. See [Typography Font Swap](design-tokens.md#typography-font-swap). |
 
 ### `ApplicationExtensions`
 
