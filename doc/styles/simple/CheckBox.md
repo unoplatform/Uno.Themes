@@ -4,116 +4,81 @@ uid: Uno.Themes.Simple.Styles.CheckBox
 
 # CheckBox Control
 
+<!-- BEGIN GENERATED -->
+<!-- This region is generated from the Styles XAML by `dotnet run build/scripts/GenerateStyleDocs.cs`; do not edit it by hand. -->
+
 ## Styles
 
-| Style Key             | IsDefaultStyle\* |
-|-----------------------|------------------|
-| `SimpleCheckBoxStyle` | True             |
+| Style Key             | Semantic Alias  | IsDefaultStyle\* |
+| --------------------- | --------------- | ---------------- |
+| `SimpleCheckBoxStyle` | `CheckBoxStyle` | True             |
 
 IsDefaultStyle\*: Styles in this column will be set as the default implicit style for the matching control
 
 ## Lightweight Styling
 
-### Structural Resources
+### Theme-agnostic
 
-| Key                                    | Type              | Value                              |
-|----------------------------------------|-------------------|------------------------------------|
-| `SimpleCheckBoxSize`                   | `StaticResource`  | `SimpleSpace400`                   |
-| `SimpleCheckBoxCornerRadius`           | `StaticResource`  | `SimpleRadius100CornerRadius`      |
-| `SimpleCheckBoxStrokeThickness`        | `StaticResource`  | `SimpleStrokeBorder`               |
-| `SimpleCheckBoxContentMargin`          | `Thickness`       | 16,0,0,0                          |
-| `SimpleCheckBoxColumnWidth`            | `GridLength`      | 20                                 |
-| `SimpleCheckBoxGlyphSize`             | `Double`          | 10                                 |
-| `SimpleCheckBoxCheckGlyphPathData`     | `String`          | *(SVG path data)*                  |
-| `SimpleCheckBoxHyphenGlyphPathData`    | `String`          | *(SVG path data)*                  |
+| Key                                 | Type           | Value                                                                                              |
+| ----------------------------------- | -------------- | -------------------------------------------------------------------------------------------------- |
+| `SimpleCheckBoxCheckGlyphPathData`  | `String`       | M28.718018,0L32,3.2819897 10.666016,24.616999 0,13.951997 3.2810059,10.670007 10.666016,18.055033z |
+| `SimpleCheckBoxColumnWidth`         | `GridLength`   | Auto                                                                                               |
+| `SimpleCheckBoxContentMargin`       | `Thickness`    | `Space400LeftThickness`                                                                            |
+| `SimpleCheckBoxCornerRadius`        | `CornerRadius` | `SimpleRadius100CornerRadius`                                                                      |
+| `SimpleCheckBoxGlyphSize`           | `Double`       | 10                                                                                                 |
+| `SimpleCheckBoxHyphenGlyphPathData` | `String`       | M0,0L32,0 32,5.3 0,5.3z                                                                            |
+| `SimpleCheckBoxSize`                | `Double`       | `SimpleSpace400`                                                                                   |
+| `SimpleCheckBoxStrokeThickness`     | `Double`       | `SimpleStrokeBorder`                                                                               |
 
-### Brush Resources
+### Themed
 
-#### Unchecked Background
+| Key                                               | Type              | Light                     |
+| ------------------------------------------------- | ----------------- | ------------------------- |
+| `CheckBoxBackgroundChecked`                       | `SolidColorBrush` | `PrimaryBrush`            |
+| `CheckBoxBackgroundCheckedDisabled`               | `SolidColorBrush` | `OnSurfaceDisabledBrush`  |
+| `CheckBoxBackgroundCheckedPointerOver`            | `SolidColorBrush` | `PrimaryBrush`            |
+| `CheckBoxBackgroundCheckedPressed`                | `SolidColorBrush` | `PrimaryVariantDarkBrush` |
+| `CheckBoxBackgroundIndeterminate`                 | `SolidColorBrush` | `PrimaryBrush`            |
+| `CheckBoxBackgroundIndeterminateDisabled`         | `SolidColorBrush` | `OnSurfaceDisabledBrush`  |
+| `CheckBoxBackgroundIndeterminatePointerOver`      | `SolidColorBrush` | `PrimaryBrush`            |
+| `CheckBoxBackgroundIndeterminatePressed`          | `SolidColorBrush` | `PrimaryVariantDarkBrush` |
+| `CheckBoxBackgroundUnchecked`                     | `SolidColorBrush` | `SurfaceBrush`            |
+| `CheckBoxBackgroundUncheckedDisabled`             | `SolidColorBrush` | `OnSurfaceDisabledBrush`  |
+| `CheckBoxBackgroundUncheckedPointerOver`          | `SolidColorBrush` | `SurfaceBrush`            |
+| `CheckBoxBackgroundUncheckedPressed`              | `SolidColorBrush` | `PrimaryContainerBrush`   |
+| `CheckBoxBorderBrushChecked`                      | `SolidColorBrush` | `PrimaryBrush`            |
+| `CheckBoxBorderBrushCheckedDisabled`              | `SolidColorBrush` | `OutlineDisabledBrush`    |
+| `CheckBoxBorderBrushCheckedPointerOver`           | `SolidColorBrush` | `PrimaryBrush`            |
+| `CheckBoxBorderBrushCheckedPressed`               | `SolidColorBrush` | `PrimaryVariantDarkBrush` |
+| `CheckBoxBorderBrushIndeterminate`                | `SolidColorBrush` | `PrimaryBrush`            |
+| `CheckBoxBorderBrushIndeterminateDisabled`        | `SolidColorBrush` | `OutlineDisabledBrush`    |
+| `CheckBoxBorderBrushIndeterminatePointerOver`     | `SolidColorBrush` | `PrimaryBrush`            |
+| `CheckBoxBorderBrushIndeterminatePressed`         | `SolidColorBrush` | `PrimaryVariantDarkBrush` |
+| `CheckBoxBorderBrushUnchecked`                    | `SolidColorBrush` | `OutlineBrush`            |
+| `CheckBoxBorderBrushUncheckedDisabled`            | `SolidColorBrush` | `OutlineDisabledBrush`    |
+| `CheckBoxBorderBrushUncheckedPointerOver`         | `SolidColorBrush` | `OutlineBrush`            |
+| `CheckBoxBorderBrushUncheckedPressed`             | `SolidColorBrush` | `OutlineBrush`            |
+| `CheckBoxForegroundChecked`                       | `SolidColorBrush` | `OnSurfaceBrush`          |
+| `CheckBoxForegroundCheckedDisabled`               | `SolidColorBrush` | `OnSurfaceDisabledBrush`  |
+| `CheckBoxForegroundCheckedPointerOver`            | `SolidColorBrush` | `OnSurfaceBrush`          |
+| `CheckBoxForegroundCheckedPressed`                | `SolidColorBrush` | `OnSurfaceBrush`          |
+| `CheckBoxForegroundIndeterminate`                 | `SolidColorBrush` | `OnSurfaceBrush`          |
+| `CheckBoxForegroundIndeterminateDisabled`         | `SolidColorBrush` | `OnSurfaceDisabledBrush`  |
+| `CheckBoxForegroundIndeterminatePointerOver`      | `SolidColorBrush` | `OnSurfaceBrush`          |
+| `CheckBoxForegroundIndeterminatePressed`          | `SolidColorBrush` | `OnSurfaceBrush`          |
+| `CheckBoxForegroundUnchecked`                     | `SolidColorBrush` | `OnSurfaceBrush`          |
+| `CheckBoxForegroundUncheckedDisabled`             | `SolidColorBrush` | `OnSurfaceDisabledBrush`  |
+| `CheckBoxForegroundUncheckedPointerOver`          | `SolidColorBrush` | `OnSurfaceBrush`          |
+| `CheckBoxForegroundUncheckedPressed`              | `SolidColorBrush` | `OnSurfaceBrush`          |
+| `CheckBoxGlyphForegroundChecked`                  | `SolidColorBrush` | `OnPrimaryBrush`          |
+| `CheckBoxGlyphForegroundCheckedDisabled`          | `SolidColorBrush` | `OnSurfaceDisabledBrush`  |
+| `CheckBoxGlyphForegroundCheckedPointerOver`       | `SolidColorBrush` | `OnPrimaryBrush`          |
+| `CheckBoxGlyphForegroundCheckedPressed`           | `SolidColorBrush` | `OnPrimaryBrush`          |
+| `CheckBoxGlyphForegroundIndeterminate`            | `SolidColorBrush` | `OnPrimaryBrush`          |
+| `CheckBoxGlyphForegroundIndeterminateDisabled`    | `SolidColorBrush` | `OnSurfaceDisabledBrush`  |
+| `CheckBoxGlyphForegroundIndeterminatePointerOver` | `SolidColorBrush` | `OnPrimaryBrush`          |
+| `CheckBoxGlyphForegroundIndeterminatePressed`     | `SolidColorBrush` | `OnPrimaryBrush`          |
 
-| Key                                            | Type              | Value                    |
-|------------------------------------------------|-------------------|--------------------------|
-| `CheckBoxBackgroundUnchecked`                  | `SolidColorBrush` | `SurfaceBrush`           |
-| `CheckBoxBackgroundUncheckedPointerOver`       | `SolidColorBrush` | `SurfaceBrush`           |
-| `CheckBoxBackgroundUncheckedPressed`           | `SolidColorBrush` | `PrimaryContainerBrush`  |
-| `CheckBoxBackgroundUncheckedDisabled`          | `SolidColorBrush` | `OnSurfaceDisabledBrush` |
+The Dark theme uses the same values as Light.
 
-#### Unchecked BorderBrush
-
-| Key                                            | Type              | Value                    |
-|------------------------------------------------|-------------------|--------------------------|
-| `CheckBoxBorderBrushUnchecked`                 | `SolidColorBrush` | `OutlineBrush`           |
-| `CheckBoxBorderBrushUncheckedPointerOver`      | `SolidColorBrush` | `OutlineBrush`           |
-| `CheckBoxBorderBrushUncheckedPressed`          | `SolidColorBrush` | `OutlineBrush`           |
-| `CheckBoxBorderBrushUncheckedDisabled`         | `SolidColorBrush` | `OutlineDisabledBrush`   |
-
-#### Checked Background
-
-| Key                                            | Type              | Value                      |
-|------------------------------------------------|-------------------|----------------------------|
-| `CheckBoxBackgroundChecked`                    | `SolidColorBrush` | `PrimaryBrush`             |
-| `CheckBoxBackgroundCheckedPointerOver`         | `SolidColorBrush` | `PrimaryBrush`             |
-| `CheckBoxBackgroundCheckedPressed`             | `SolidColorBrush` | `PrimaryVariantDarkBrush`  |
-| `CheckBoxBackgroundCheckedDisabled`            | `SolidColorBrush` | `OnSurfaceDisabledBrush`   |
-
-#### Checked BorderBrush
-
-| Key                                            | Type              | Value                      |
-|------------------------------------------------|-------------------|----------------------------|
-| `CheckBoxBorderBrushChecked`                   | `SolidColorBrush` | `PrimaryBrush`             |
-| `CheckBoxBorderBrushCheckedPointerOver`        | `SolidColorBrush` | `PrimaryBrush`             |
-| `CheckBoxBorderBrushCheckedPressed`            | `SolidColorBrush` | `PrimaryVariantDarkBrush`  |
-| `CheckBoxBorderBrushCheckedDisabled`           | `SolidColorBrush` | `OutlineDisabledBrush`     |
-
-#### Checked Glyph Foreground
-
-| Key                                            | Type              | Value                      |
-|------------------------------------------------|-------------------|----------------------------|
-| `CheckBoxGlyphForegroundChecked`               | `SolidColorBrush` | `OnPrimaryBrush`           |
-| `CheckBoxGlyphForegroundCheckedPointerOver`    | `SolidColorBrush` | `OnPrimaryBrush`           |
-| `CheckBoxGlyphForegroundCheckedPressed`        | `SolidColorBrush` | `OnPrimaryBrush`           |
-| `CheckBoxGlyphForegroundCheckedDisabled`       | `SolidColorBrush` | `OnSurfaceDisabledBrush`   |
-
-#### Indeterminate Background
-
-| Key                                            | Type              | Value                      |
-|------------------------------------------------|-------------------|----------------------------|
-| `CheckBoxBackgroundIndeterminate`              | `SolidColorBrush` | `PrimaryBrush`             |
-| `CheckBoxBackgroundIndeterminatePointerOver`   | `SolidColorBrush` | `PrimaryBrush`             |
-| `CheckBoxBackgroundIndeterminatePressed`       | `SolidColorBrush` | `PrimaryVariantDarkBrush`  |
-| `CheckBoxBackgroundIndeterminateDisabled`      | `SolidColorBrush` | `OnSurfaceDisabledBrush`   |
-
-#### Indeterminate BorderBrush
-
-| Key                                            | Type              | Value                      |
-|------------------------------------------------|-------------------|----------------------------|
-| `CheckBoxBorderBrushIndeterminate`             | `SolidColorBrush` | `PrimaryBrush`             |
-| `CheckBoxBorderBrushIndeterminatePointerOver`  | `SolidColorBrush` | `PrimaryBrush`             |
-| `CheckBoxBorderBrushIndeterminatePressed`      | `SolidColorBrush` | `PrimaryVariantDarkBrush`  |
-| `CheckBoxBorderBrushIndeterminateDisabled`     | `SolidColorBrush` | `OutlineDisabledBrush`     |
-
-#### Indeterminate Glyph Foreground
-
-| Key                                                  | Type              | Value                      |
-|------------------------------------------------------|-------------------|----------------------------|
-| `CheckBoxGlyphForegroundIndeterminate`               | `SolidColorBrush` | `OnPrimaryBrush`           |
-| `CheckBoxGlyphForegroundIndeterminatePointerOver`    | `SolidColorBrush` | `OnPrimaryBrush`           |
-| `CheckBoxGlyphForegroundIndeterminatePressed`        | `SolidColorBrush` | `OnPrimaryBrush`           |
-| `CheckBoxGlyphForegroundIndeterminateDisabled`       | `SolidColorBrush` | `OnSurfaceDisabledBrush`   |
-
-#### Foreground (Label)
-
-| Key                                            | Type              | Value                      |
-|------------------------------------------------|-------------------|----------------------------|
-| `CheckBoxForegroundUnchecked`                  | `SolidColorBrush` | `OnSurfaceBrush`           |
-| `CheckBoxForegroundUncheckedPointerOver`       | `SolidColorBrush` | `OnSurfaceBrush`           |
-| `CheckBoxForegroundUncheckedPressed`           | `SolidColorBrush` | `OnSurfaceBrush`           |
-| `CheckBoxForegroundUncheckedDisabled`          | `SolidColorBrush` | `OnSurfaceDisabledBrush`   |
-| `CheckBoxForegroundChecked`                    | `SolidColorBrush` | `OnSurfaceBrush`           |
-| `CheckBoxForegroundCheckedPointerOver`         | `SolidColorBrush` | `OnSurfaceBrush`           |
-| `CheckBoxForegroundCheckedPressed`             | `SolidColorBrush` | `OnSurfaceBrush`           |
-| `CheckBoxForegroundCheckedDisabled`            | `SolidColorBrush` | `OnSurfaceDisabledBrush`   |
-| `CheckBoxForegroundIndeterminate`              | `SolidColorBrush` | `OnSurfaceBrush`           |
-| `CheckBoxForegroundIndeterminatePointerOver`   | `SolidColorBrush` | `OnSurfaceBrush`           |
-| `CheckBoxForegroundIndeterminatePressed`       | `SolidColorBrush` | `OnSurfaceBrush`           |
-| `CheckBoxForegroundIndeterminateDisabled`      | `SolidColorBrush` | `OnSurfaceDisabledBrush`   |
+<!-- END GENERATED -->
