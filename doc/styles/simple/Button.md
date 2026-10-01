@@ -4,135 +4,107 @@ uid: Uno.Themes.Simple.Styles.Button
 
 # Button Control
 
+<!-- BEGIN GENERATED -->
+<!-- This region is generated from the Styles XAML by `dotnet run build/scripts/GenerateStyleDocs.cs`; do not edit it by hand. -->
+
 ## Styles
 
-| Style Key                                 | IsDefaultStyle\* |
-|-------------------------------------------|------------------|
-| `SimpleFilledButtonStyle`                | True             |
-| `SimpleFilledTonalButtonStyle`                |                  |
-| `SimpleTextButtonStyle`                 |                  |
-| `SimpleDangerPrimaryButtonStyle`          |                  |
-| `SimpleDangerSubtleButtonStyle`           |                  |
-| `SimpleIconButtonStyle`            |                  |
-| `SimpleIconButtonNeutralStyle`            |                  |
-| `SimpleIconButtonSubtleStyle`             |                  |
-| `SimpleIconButtonDangerPrimaryStyle`      |                  |
-| `SimpleIconButtonDangerSubtleStyle`       |                  |
+| Style Key                            | Semantic Alias                                                                                                                             | IsDefaultStyle\* |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ---------------- |
+| `SimpleFilledButtonStyle`            | `FilledButtonStyle`                                                                                                                        | True             |
+| `SimpleFilledTonalButtonStyle`       | `FilledTonalButtonStyle`, `OutlinedButtonStyle`                                                                                            |                  |
+| `SimpleTextButtonStyle`              | `TextButtonStyle`                                                                                                                          |                  |
+| `SimpleDangerPrimaryButtonStyle`     |                                                                                                                                            |                  |
+| `SimpleDangerSubtleButtonStyle`      |                                                                                                                                            |                  |
+| `SimpleIconButtonStyle`              | `FabStyle`, `IconButtonStyle`, `LargeFabStyle`, `SmallFabStyle`                                                                            |                  |
+| `SimpleIconButtonNeutralStyle`       | `SecondaryFabStyle`, `SecondaryLargeFabStyle`, `SecondarySmallFabStyle`, `SurfaceFabStyle`, `SurfaceLargeFabStyle`, `SurfaceSmallFabStyle` |                  |
+| `SimpleIconButtonSubtleStyle`        | `TertiaryFabStyle`, `TertiaryLargeFabStyle`, `TertiarySmallFabStyle`                                                                       |                  |
+| `SimpleIconButtonDangerPrimaryStyle` |                                                                                                                                            |                  |
+| `SimpleIconButtonDangerSubtleStyle`  |                                                                                                                                            |                  |
 
 IsDefaultStyle\*: Styles in this column will be set as the default implicit style for the matching control
 
 ## Lightweight Styling
 
-### Button
+### Theme-agnostic
 
-| Key                                  | Type              | Value                            |
-|--------------------------------------|-------------------|----------------------------------|
-| `SimpleButtonCornerRadius`           | `CornerRadius`    | `SimpleRadius200CornerRadius`    |
-| `SimpleButtonBorderThickness`        | `Thickness`       | `SimpleStrokeBorderThickness`    |
-| `SimpleButtonMediumPadding`          | `Thickness`       | `SimpleSpace300Thickness`        |
-| `SimpleButtonSmallPadding`           | `Thickness`       | `SimpleSpace200Thickness`        |
-| `SimpleButtonMediumMinHeight`        | `Double`          | `SimpleIconLarge`                |
-| `SimpleButtonSmallMinHeight`         | `Double`          | `SimpleIconMedium`               |
-| `SimpleButtonMediumFontSize`         | `Double`          | `BodyMediumFontSize`             |
-| `SimpleButtonSmallFontSize`          | `Double`          | `BodySmallFontSize`              |
-| `SimpleButtonIconSpacing`            | `Double`          | `SimpleSpace200`                 |
-| `SimpleButtonFontFamily`             | `FontFamily`      | Inter                            |
-| `SimpleButtonFontWeight`             | `String`          | Medium                           |
+| Key                               | Type           | Value                          |
+| --------------------------------- | -------------- | ------------------------------ |
+| `SimpleButtonBorderThickness`     | `Thickness`    | `SimpleStrokeBorderThickness`  |
+| `SimpleButtonCornerRadius`        | `CornerRadius` | `SimpleRadius200CornerRadius`  |
+| `SimpleButtonFontWeight`          | `String`       | Medium                         |
+| `SimpleButtonIconSpacing`         | `Double`       | `SimpleSpace200`               |
+| `SimpleIconButtonBorderThickness` | `Thickness`    | `SimpleStrokeBorderThickness`  |
+| `SimpleIconButtonCornerRadius`    | `CornerRadius` | `SimpleRadiusFullCornerRadius` |
 
-### IconButton
+### Themed
 
-| Key                                  | Type              | Value                            |
-|--------------------------------------|-------------------|----------------------------------|
-| `SimpleIconButtonCornerRadius`       | `CornerRadius`    | `SimpleRadiusFullCornerRadius`   |
-| `SimpleIconButtonBorderThickness`    | `Thickness`       | `SimpleStrokeBorderThickness`    |
-| `SimpleIconButtonMediumPadding`      | `Thickness`       | `SimpleSpace200Thickness`        |
-| `SimpleIconButtonSmallPadding`       | `Thickness`       | `SimpleSpace100Thickness`        |
-| `SimpleIconButtonMediumMinSize`      | `Double`          | `SimpleIconLarge`                |
-| `SimpleIconButtonSmallMinSize`       | `Double`          | `SimpleIconMedium`               |
+| Key                                       | Type              | Light                                     |
+| ----------------------------------------- | ----------------- | ----------------------------------------- |
+| `FilledButtonBackground`                  | `SolidColorBrush` | `PrimaryBrush`                            |
+| `FilledButtonBackgroundDisabled`          | `SolidColorBrush` | `OnSurfaceDisabledBrush`                  |
+| `FilledButtonBackgroundPointerOver`       | `SolidColorBrush` | `PrimaryVariantDarkBrush`                 |
+| `FilledButtonBackgroundPressed`           | `SolidColorBrush` | `PrimaryVariantDarkBrush`                 |
+| `FilledButtonBorderBrush`                 | `SolidColorBrush` | `PrimaryBrush`                            |
+| `FilledButtonBorderBrushDisabled`         | `SolidColorBrush` | `OutlineDisabledBrush`                    |
+| `FilledButtonBorderBrushPointerOver`      | `SolidColorBrush` | `PrimaryBrush`                            |
+| `FilledButtonBorderBrushPressed`          | `SolidColorBrush` | `PrimaryBrush`                            |
+| `FilledButtonForeground`                  | `SolidColorBrush` | `OnPrimaryBrush`                          |
+| `FilledButtonForegroundDisabled`          | `SolidColorBrush` | `OnSurfaceDisabledBrush`                  |
+| `FilledButtonForegroundPointerOver`       | `SolidColorBrush` | `OnPrimaryBrush`                          |
+| `FilledButtonForegroundPressed`           | `SolidColorBrush` | `OnPrimaryBrush`                          |
+| `FilledTonalButtonBackground`             | `SolidColorBrush` | `SurfaceVariantBrush`                     |
+| `FilledTonalButtonBackgroundDisabled`     | `SolidColorBrush` | `OnSurfaceDisabledBrush`                  |
+| `FilledTonalButtonBackgroundPointerOver`  | `SolidColorBrush` | `PrimaryContainerBrush`                   |
+| `FilledTonalButtonBackgroundPressed`      | `SolidColorBrush` | `TertiaryContainerBrush`                  |
+| `FilledTonalButtonBorderBrush`            | `SolidColorBrush` | `OutlineBrush`                            |
+| `FilledTonalButtonBorderBrushDisabled`    | `SolidColorBrush` | `OutlineDisabledBrush`                    |
+| `FilledTonalButtonBorderBrushPointerOver` | `SolidColorBrush` | `OutlineBrush`                            |
+| `FilledTonalButtonBorderBrushPressed`     | `SolidColorBrush` | `OutlineBrush`                            |
+| `FilledTonalButtonForeground`             | `SolidColorBrush` | `OnSurfaceBrush`                          |
+| `FilledTonalButtonForegroundDisabled`     | `SolidColorBrush` | `OnSurfaceDisabledBrush`                  |
+| `FilledTonalButtonForegroundPointerOver`  | `SolidColorBrush` | `OnSurfaceBrush`                          |
+| `FilledTonalButtonForegroundPressed`      | `SolidColorBrush` | `OnSurfaceBrush`                          |
+| `IconButtonBackground`                    | `SolidColorBrush` | `FilledButtonBackground`                  |
+| `IconButtonBackgroundDisabled`            | `SolidColorBrush` | `FilledButtonBackgroundDisabled`          |
+| `IconButtonBackgroundPointerOver`         | `SolidColorBrush` | `FilledButtonBackgroundPointerOver`       |
+| `IconButtonBackgroundPressed`             | `SolidColorBrush` | `FilledButtonBackgroundPressed`           |
+| `IconButtonBorderBrush`                   | `SolidColorBrush` | `FilledButtonBorderBrush`                 |
+| `IconButtonBorderBrushDisabled`           | `SolidColorBrush` | `FilledButtonBorderBrushDisabled`         |
+| `IconButtonBorderBrushPointerOver`        | `SolidColorBrush` | `FilledButtonBorderBrushPointerOver`      |
+| `IconButtonBorderBrushPressed`            | `SolidColorBrush` | `FilledButtonBorderBrushPressed`          |
+| `IconButtonForeground`                    | `SolidColorBrush` | `FilledButtonForeground`                  |
+| `IconButtonForegroundDisabled`            | `SolidColorBrush` | `FilledButtonForegroundDisabled`          |
+| `IconButtonForegroundPointerOver`         | `SolidColorBrush` | `FilledButtonForegroundPointerOver`       |
+| `IconButtonForegroundPressed`             | `SolidColorBrush` | `FilledButtonForegroundPressed`           |
+| `OutlinedButtonBackground`                | `SolidColorBrush` | `FilledTonalButtonBackground`             |
+| `OutlinedButtonBackgroundDisabled`        | `SolidColorBrush` | `FilledTonalButtonBackgroundDisabled`     |
+| `OutlinedButtonBackgroundPointerOver`     | `SolidColorBrush` | `FilledTonalButtonBackgroundPointerOver`  |
+| `OutlinedButtonBackgroundPressed`         | `SolidColorBrush` | `FilledTonalButtonBackgroundPressed`      |
+| `OutlinedButtonBorderBrush`               | `SolidColorBrush` | `FilledTonalButtonBorderBrush`            |
+| `OutlinedButtonBorderBrushDisabled`       | `SolidColorBrush` | `FilledTonalButtonBorderBrushDisabled`    |
+| `OutlinedButtonBorderBrushPointerOver`    | `SolidColorBrush` | `FilledTonalButtonBorderBrushPointerOver` |
+| `OutlinedButtonBorderBrushPressed`        | `SolidColorBrush` | `FilledTonalButtonBorderBrushPressed`     |
+| `OutlinedButtonForeground`                | `SolidColorBrush` | `FilledTonalButtonForeground`             |
+| `OutlinedButtonForegroundDisabled`        | `SolidColorBrush` | `FilledTonalButtonForegroundDisabled`     |
+| `OutlinedButtonForegroundPointerOver`     | `SolidColorBrush` | `FilledTonalButtonForegroundPointerOver`  |
+| `OutlinedButtonForegroundPressed`         | `SolidColorBrush` | `FilledTonalButtonForegroundPressed`      |
+| `SimpleButtonFontFamily`                  | `FontFamily`      | `DefaultFontFamily`                       |
+| `TextButtonBackground`                    | `SolidColorBrush` | `SystemControlTransparentBrush`           |
+| `TextButtonBackgroundDisabled`            | `SolidColorBrush` | `OnSurfaceDisabledBrush`                  |
+| `TextButtonBackgroundPointerOver`         | `SolidColorBrush` | `SurfaceVariantBrush`                     |
+| `TextButtonBackgroundPressed`             | `SolidColorBrush` | `PrimaryContainerBrush`                   |
+| `TextButtonBorderBrush`                   | `SolidColorBrush` | `SystemControlTransparentBrush`           |
+| `TextButtonBorderBrushDisabled`           | `SolidColorBrush` | `OutlineDisabledBrush`                    |
+| `TextButtonBorderBrushPointerOver`        | `SolidColorBrush` | `SystemControlTransparentBrush`           |
+| `TextButtonBorderBrushPressed`            | `SolidColorBrush` | `SystemControlTransparentBrush`           |
+| `TextButtonForeground`                    | `SolidColorBrush` | `PrimaryBrush`                            |
+| `TextButtonForegroundDisabled`            | `SolidColorBrush` | `OnSurfaceDisabledBrush`                  |
+| `TextButtonForegroundPointerOver`         | `SolidColorBrush` | `PrimaryBrush`                            |
+| `TextButtonForegroundPressed`             | `SolidColorBrush` | `PrimaryBrush`                            |
 
-### Primary Variant
+The Dark theme uses the same values as Light.
 
-| Key                                                  | Type              | Value                          |
-|------------------------------------------------------|-------------------|--------------------------------|
-| `FilledButtonForeground`                             | `SolidColorBrush` | `OnPrimaryBrush`               |
-| `FilledButtonForegroundPointerOver`                  | `SolidColorBrush` | `OnPrimaryBrush`               |
-| `FilledButtonForegroundPressed`                      | `SolidColorBrush` | `OnPrimaryBrush`               |
-| `FilledButtonForegroundDisabled`                     | `SolidColorBrush` | `OnSurfaceDisabledBrush`       |
-| `FilledButtonBackground`                             | `SolidColorBrush` | `PrimaryBrush`                 |
-| `FilledButtonBackgroundPointerOver`                  | `SolidColorBrush` | `PrimaryVariantDarkBrush`      |
-| `FilledButtonBackgroundPressed`                      | `SolidColorBrush` | `PrimaryVariantDarkBrush`      |
-| `FilledButtonBackgroundDisabled`                     | `SolidColorBrush` | `OnSurfaceDisabledBrush`       |
-| `FilledButtonBorderBrush`                            | `SolidColorBrush` | `PrimaryBrush`                 |
-| `FilledButtonBorderBrushPointerOver`                 | `SolidColorBrush` | `PrimaryBrush`                 |
-| `FilledButtonBorderBrushPressed`                     | `SolidColorBrush` | `PrimaryBrush`                 |
-| `FilledButtonBorderBrushDisabled`                    | `SolidColorBrush` | `OutlineDisabledBrush`         |
+<!-- END GENERATED -->
 
-### Neutral Variant
-
-| Key                                                  | Type              | Value                          |
-|------------------------------------------------------|-------------------|--------------------------------|
-| `FilledTonalButtonForeground`                        | `SolidColorBrush` | `OnSurfaceBrush`               |
-| `FilledTonalButtonForegroundPointerOver`             | `SolidColorBrush` | `OnSurfaceBrush`               |
-| `FilledTonalButtonForegroundPressed`                 | `SolidColorBrush` | `OnSurfaceBrush`               |
-| `FilledTonalButtonForegroundDisabled`                | `SolidColorBrush` | `OnSurfaceDisabledBrush`       |
-| `FilledTonalButtonBackground`                        | `SolidColorBrush` | `SurfaceVariantBrush`          |
-| `FilledTonalButtonBackgroundPointerOver`             | `SolidColorBrush` | `PrimaryContainerBrush`        |
-| `FilledTonalButtonBackgroundPressed`                 | `SolidColorBrush` | `TertiaryContainerBrush`       |
-| `FilledTonalButtonBackgroundDisabled`                | `SolidColorBrush` | `OnSurfaceDisabledBrush`       |
-| `FilledTonalButtonBorderBrush`                       | `SolidColorBrush` | `OutlineBrush`                 |
-| `FilledTonalButtonBorderBrushPointerOver`            | `SolidColorBrush` | `OutlineBrush`                 |
-| `FilledTonalButtonBorderBrushPressed`                | `SolidColorBrush` | `OutlineBrush`                 |
-| `FilledTonalButtonBorderBrushDisabled`               | `SolidColorBrush` | `OutlineDisabledBrush`         |
-
-### Subtle Variant
-
-| Key                                                  | Type              | Value                              |
-|------------------------------------------------------|-------------------|------------------------------------|
-| `TextButtonForeground`                               | `SolidColorBrush` | `PrimaryBrush`                     |
-| `TextButtonForegroundPointerOver`                    | `SolidColorBrush` | `PrimaryBrush`                     |
-| `TextButtonForegroundPressed`                        | `SolidColorBrush` | `PrimaryBrush`                     |
-| `TextButtonForegroundDisabled`                       | `SolidColorBrush` | `OnSurfaceDisabledBrush`           |
-| `TextButtonBackground`                               | `SolidColorBrush` | `SystemControlTransparentBrush`    |
-| `TextButtonBackgroundPointerOver`                    | `SolidColorBrush` | `SurfaceVariantBrush`              |
-| `TextButtonBackgroundPressed`                        | `SolidColorBrush` | `PrimaryContainerBrush`            |
-| `TextButtonBackgroundDisabled`                       | `SolidColorBrush` | `OnSurfaceDisabledBrush`           |
-| `TextButtonBorderBrush`                              | `SolidColorBrush` | `SystemControlTransparentBrush`    |
-| `TextButtonBorderBrushPointerOver`                   | `SolidColorBrush` | `SystemControlTransparentBrush`    |
-| `TextButtonBorderBrushPressed`                       | `SolidColorBrush` | `SystemControlTransparentBrush`    |
-| `TextButtonBorderBrushDisabled`                      | `SolidColorBrush` | `OutlineDisabledBrush`             |
-
-### IconButton Variant
-
-| Key                                                  | Type              | Value                              |
-|------------------------------------------------------|-------------------|------------------------------------|
-| `IconButtonForeground`                               | `SolidColorBrush` | `FilledButtonForeground`           |
-| `IconButtonForegroundPointerOver`                    | `SolidColorBrush` | `FilledButtonForegroundPointerOver`|
-| `IconButtonForegroundPressed`                        | `SolidColorBrush` | `FilledButtonForegroundPressed`    |
-| `IconButtonForegroundDisabled`                       | `SolidColorBrush` | `FilledButtonForegroundDisabled`   |
-| `IconButtonBackground`                               | `SolidColorBrush` | `FilledButtonBackground`           |
-| `IconButtonBackgroundPointerOver`                    | `SolidColorBrush` | `FilledButtonBackgroundPointerOver`|
-| `IconButtonBackgroundPressed`                        | `SolidColorBrush` | `FilledButtonBackgroundPressed`    |
-| `IconButtonBackgroundDisabled`                       | `SolidColorBrush` | `FilledButtonBackgroundDisabled`   |
-| `IconButtonBorderBrush`                              | `SolidColorBrush` | `FilledButtonBorderBrush`          |
-| `IconButtonBorderBrushPointerOver`                   | `SolidColorBrush` | `FilledButtonBorderBrushPointerOver`|
-| `IconButtonBorderBrushPressed`                       | `SolidColorBrush` | `FilledButtonBorderBrushPressed`   |
-| `IconButtonBorderBrushDisabled`                      | `SolidColorBrush` | `FilledButtonBorderBrushDisabled`  |
-
-### Outlined Variant (Compatibility Aliases)
-
-These keys alias the Neutral (FilledTonal) variant for cross-design-system compatibility.
-
-| Key                                                  | Type              | Value                                    |
-|------------------------------------------------------|-------------------|------------------------------------------|
-| `OutlinedButtonForeground`                           | `SolidColorBrush` | `FilledTonalButtonForeground`            |
-| `OutlinedButtonForegroundPointerOver`                | `SolidColorBrush` | `FilledTonalButtonForegroundPointerOver` |
-| `OutlinedButtonForegroundPressed`                    | `SolidColorBrush` | `FilledTonalButtonForegroundPressed`     |
-| `OutlinedButtonForegroundDisabled`                   | `SolidColorBrush` | `FilledTonalButtonForegroundDisabled`    |
-| `OutlinedButtonBackground`                           | `SolidColorBrush` | `FilledTonalButtonBackground`            |
-| `OutlinedButtonBackgroundPointerOver`                | `SolidColorBrush` | `FilledTonalButtonBackgroundPointerOver` |
-| `OutlinedButtonBackgroundPressed`                    | `SolidColorBrush` | `FilledTonalButtonBackgroundPressed`     |
-| `OutlinedButtonBackgroundDisabled`                   | `SolidColorBrush` | `FilledTonalButtonBackgroundDisabled`    |
-| `OutlinedButtonBorderBrush`                          | `SolidColorBrush` | `FilledTonalButtonBorderBrush`           |
-| `OutlinedButtonBorderBrushPointerOver`               | `SolidColorBrush` | `FilledTonalButtonBorderBrushPointerOver`|
-| `OutlinedButtonBorderBrushPressed`                   | `SolidColorBrush` | `FilledTonalButtonBorderBrushPressed`    |
-| `OutlinedButtonBorderBrushDisabled`                  | `SolidColorBrush` | `FilledTonalButtonBorderBrushDisabled`   |
+The `OutlinedButton*` keys alias the Neutral (`FilledTonalButton*`) variant for cross-design-system compatibility.

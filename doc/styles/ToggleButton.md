@@ -4,108 +4,118 @@ uid: Uno.Themes.Styles.ToggleButton
 
 # ToggleButton Control
 
+<!-- BEGIN GENERATED -->
+<!-- This region is generated from the Styles XAML by `dotnet run build/scripts/GenerateStyleDocs.cs`; do not edit it by hand. -->
+
 ## Styles
 
-| Style Key               | IsDefaultStyle\* |
-|-------------------------|------------------|
-| `TextToggleButtonStyle` |                  |
-| `IconToggleButtonStyle` | True             |
+| Style Key                          | Semantic Alias          | IsDefaultStyle\* |
+| ---------------------------------- | ----------------------- | ---------------- |
+| `MaterialTextToggleButtonStyle`    | `TextToggleButtonStyle` |                  |
+| `MaterialIconToggleButtonStyle`    | `IconToggleButtonStyle` | True             |
+| `MaterialDefaultToggleButtonStyle` |                         | True             |
 
 IsDefaultStyle\*: Styles in this column will be set as the default implicit style for the matching control
 
 ## Lightweight Styling
 
-| Key                                                   | Type              | Value                           |
-|-------------------------------------------------------|-------------------|---------------------------------|
-| `TextToggleButtonBackground`                          | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `TextToggleButtonBackgroundPointerOver`               | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `TextToggleButtonBackgroundPressed`                   | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `TextToggleButtonBackgroundDisabled`                  | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `TextToggleButtonBackgroundChecked`                   | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `TextToggleButtonBackgroundCheckedPointerOver`        | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `TextToggleButtonBackgroundCheckedPressed`            | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `TextToggleButtonBackgroundCheckedDisabled`           | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `TextToggleButtonBackgroundIndeterminate`             | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `TextToggleButtonBackgroundIndeterminatePointerOver`  | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `TextToggleButtonBackgroundIndeterminatePressed`      | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `TextToggleButtonBackgroundIndeterminateDisabled`     | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `TextToggleButtonForeground`                          | `SolidColorBrush` | `PrimaryBrush`                  |
-| `TextToggleButtonForegroundPointerOver`               | `SolidColorBrush` | `PrimaryBrush`                  |
-| `TextToggleButtonForegroundPressed`                   | `SolidColorBrush` | `PrimaryBrush`                  |
-| `TextToggleButtonForegroundDisabled`                  | `SolidColorBrush` | `OnSurfaceLowBrush`             |
-| `TextToggleButtonForegroundChecked`                   | `SolidColorBrush` | `PrimaryBrush`                  |
-| `TextToggleButtonForegroundCheckedPointerOver`        | `SolidColorBrush` | `PrimaryBrush`                  |
-| `TextToggleButtonForegroundCheckedPressed`            | `SolidColorBrush` | `PrimaryBrush`                  |
-| `TextToggleButtonForegroundCheckedDisabled`           | `SolidColorBrush` | `OnSurfaceLowBrush`             |
-| `TextToggleButtonForegroundIndeterminate`             | `SolidColorBrush` | `PrimaryBrush`                  |
-| `TextToggleButtonForegroundIndeterminatePointerOver`  | `SolidColorBrush` | `PrimaryBrush`                  |
-| `TextToggleButtonForegroundIndeterminatePressed`      | `SolidColorBrush` | `PrimaryBrush`                  |
-| `TextToggleButtonForegroundIndeterminateDisabled`     | `SolidColorBrush` | `OnSurfaceLowBrush`             |
-| `TextToggleButtonFontFamily`                          | `FontFamily`      | `DefaultFontFamily`             |
-| `TextToggleButtonFontSize`                            | `Double`          | `LabelLargeFontSize`            |
-| `TextToggleButtonBorderBrush`                         | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `TextToggleButtonBorderBrushPointerOver`              | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `TextToggleButtonBorderBrushPressed`                  | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `TextToggleButtonBorderBrushDisabled`                 | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `TextToggleButtonBorderBrushChecked`                  | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `TextToggleButtonBorderBrushCheckedPointerOver`       | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `TextToggleButtonBorderBrushCheckedPressed`           | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `TextToggleButtonBorderBrushCheckedDisabled`          | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `TextToggleButtonBorderBrushIndeterminate`            | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `TextToggleButtonBorderBrushIndeterminatePointerOver` | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `TextToggleButtonBorderBrushIndeterminatePressed`     | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `TextToggleButtonBorderBrushIndeterminateDisabled`    | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `TextToggleButtonBorderBrushHoverOverlay`             | `SolidColorBrush` | `OnSurfaceHoverBrush`           |
-| `TextToggleButtonBorderBrushFocusedOverlay`           | `SolidColorBrush` | `OnSurfaceFocusedBrush`         |
-| `TextToggleButtonBorderBrushSelectedOverlay`          | `SolidColorBrush` | `OnSurfaceFocusedBrush`         |
-| `TextToggleButtonFeedbackFocused`                     | `SolidColorBrush` | `OnSurfaceFocusedBrush`         |
-| `TextToggleButtonBorderThickness`                     | `Thickness`       | 0                               |
-| `TextToggleButtonCornerRadius`                        | `CornerRadius`    | 4                               |
-| `TextToggleButtonPadding`                             | `Thickness`       | 16,8                            |
-| `TextToggleButtonMinHeight`                           | `Double`          | 40                              |
+### Themed
+
+| Key                                                   | Type              | Light                           |
+| ----------------------------------------------------- | ----------------- | ------------------------------- |
 | `IconToggleButtonBackground`                          | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `IconToggleButtonBackgroundPointerOver`               | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `IconToggleButtonBackgroundPressed`                   | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `IconToggleButtonBackgroundDisabled`                  | `SolidColorBrush` | `SystemControlTransparentBrush` |
 | `IconToggleButtonBackgroundChecked`                   | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `IconToggleButtonBackgroundCheckedDisabled`           | `SolidColorBrush` | `SystemControlTransparentBrush` |
 | `IconToggleButtonBackgroundCheckedPointerOver`        | `SolidColorBrush` | `SystemControlTransparentBrush` |
 | `IconToggleButtonBackgroundCheckedPressed`            | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `IconToggleButtonBackgroundCheckedDisabled`           | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `IconToggleButtonBackgroundDisabled`                  | `SolidColorBrush` | `SystemControlTransparentBrush` |
 | `IconToggleButtonBackgroundIndeterminate`             | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `IconToggleButtonBackgroundIndeterminateDisabled`     | `SolidColorBrush` | `SystemControlTransparentBrush` |
 | `IconToggleButtonBackgroundIndeterminatePointerOver`  | `SolidColorBrush` | `SystemControlTransparentBrush` |
 | `IconToggleButtonBackgroundIndeterminatePressed`      | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `IconToggleButtonBackgroundIndeterminateDisabled`     | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `IconToggleButtonForeground`                          | `SolidColorBrush` | `OnSurfaceVariantBrush`         |
-| `IconToggleButtonForegroundPointerOver`               | `SolidColorBrush` | `OnSurfaceVariantBrush`         |
-| `IconToggleButtonForegroundPressed`                   | `SolidColorBrush` | `OnSurfaceVariantBrush`         |
-| `IconToggleButtonForegroundDisabled`                  | `SolidColorBrush` | `OnSurfaceLowBrush`             |
-| `IconToggleButtonForegroundChecked`                   | `SolidColorBrush` | `PrimaryBrush`                  |
-| `IconToggleButtonForegroundCheckedPointerOver`        | `SolidColorBrush` | `PrimaryBrush`                  |
-| `IconToggleButtonForegroundCheckedPressed`            | `SolidColorBrush` | `PrimaryBrush`                  |
-| `IconToggleButtonForegroundCheckedDisabled`           | `SolidColorBrush` | `OnSurfaceLowBrush`             |
-| `IconToggleButtonForegroundIndeterminate`             | `SolidColorBrush` | `PrimaryBrush`                  |
-| `IconToggleButtonForegroundIndeterminatePointerOver`  | `SolidColorBrush` | `PrimaryBrush`                  |
-| `IconToggleButtonForegroundIndeterminatePressed`      | `SolidColorBrush` | `PrimaryBrush`                  |
-| `IconToggleButtonForegroundIndeterminateDisabled`     | `SolidColorBrush` | `OnSurfaceLowBrush`             |
+| `IconToggleButtonBackgroundPointerOver`               | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `IconToggleButtonBackgroundPressed`                   | `SolidColorBrush` | `SystemControlTransparentBrush` |
 | `IconToggleButtonBorderBrush`                         | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `IconToggleButtonBorderBrushPointerOver`              | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `IconToggleButtonBorderBrushPressed`                  | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `IconToggleButtonBorderBrushDisabled`                 | `SolidColorBrush` | `SystemControlTransparentBrush` |
 | `IconToggleButtonBorderBrushChecked`                  | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `IconToggleButtonBorderBrushCheckedDisabled`          | `SolidColorBrush` | `SystemControlTransparentBrush` |
 | `IconToggleButtonBorderBrushCheckedPointerOver`       | `SolidColorBrush` | `SystemControlTransparentBrush` |
 | `IconToggleButtonBorderBrushCheckedPressed`           | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `IconToggleButtonBorderBrushCheckedDisabled`          | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `IconToggleButtonBorderBrushDisabled`                 | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `IconToggleButtonBorderBrushFocusedOverlay`           | `SolidColorBrush` | `OnSurfaceFocusedBrush`         |
+| `IconToggleButtonBorderBrushHoverOverlay`             | `SolidColorBrush` | `OnSurfaceHoverBrush`           |
 | `IconToggleButtonBorderBrushIndeterminate`            | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `IconToggleButtonBorderBrushIndeterminateDisabled`    | `SolidColorBrush` | `SystemControlTransparentBrush` |
 | `IconToggleButtonBorderBrushIndeterminatePointerOver` | `SolidColorBrush` | `SystemControlTransparentBrush` |
 | `IconToggleButtonBorderBrushIndeterminatePressed`     | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `IconToggleButtonBorderBrushIndeterminateDisabled`    | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `IconToggleButtonBorderBrushHoverOverlay`             | `SolidColorBrush` | `OnSurfaceHoverBrush`           |
-| `IconToggleButtonBorderBrushFocusedOverlay`           | `SolidColorBrush` | `OnSurfaceFocusedBrush`         |
+| `IconToggleButtonBorderBrushPointerOver`              | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `IconToggleButtonBorderBrushPressed`                  | `SolidColorBrush` | `SystemControlTransparentBrush` |
 | `IconToggleButtonBorderBrushSelectedOverlay`          | `SolidColorBrush` | `OnSurfaceFocusedBrush`         |
+| `IconToggleButtonBorderThickness`                     | `Thickness`       | 0                               |
+| `IconToggleButtonForeground`                          | `SolidColorBrush` | `OnSurfaceVariantBrush`         |
+| `IconToggleButtonForegroundChecked`                   | `SolidColorBrush` | `PrimaryBrush`                  |
+| `IconToggleButtonForegroundCheckedDisabled`           | `SolidColorBrush` | `OnSurfaceLowBrush`             |
+| `IconToggleButtonForegroundCheckedPointerOver`        | `SolidColorBrush` | `PrimaryBrush`                  |
+| `IconToggleButtonForegroundCheckedPressed`            | `SolidColorBrush` | `PrimaryBrush`                  |
+| `IconToggleButtonForegroundDisabled`                  | `SolidColorBrush` | `OnSurfaceLowBrush`             |
+| `IconToggleButtonForegroundIndeterminate`             | `SolidColorBrush` | `PrimaryBrush`                  |
+| `IconToggleButtonForegroundIndeterminateDisabled`     | `SolidColorBrush` | `OnSurfaceLowBrush`             |
+| `IconToggleButtonForegroundIndeterminatePointerOver`  | `SolidColorBrush` | `PrimaryBrush`                  |
+| `IconToggleButtonForegroundIndeterminatePressed`      | `SolidColorBrush` | `PrimaryBrush`                  |
+| `IconToggleButtonForegroundPointerOver`               | `SolidColorBrush` | `OnSurfaceVariantBrush`         |
+| `IconToggleButtonForegroundPressed`                   | `SolidColorBrush` | `OnSurfaceVariantBrush`         |
+| `IconToggleButtonMinHeight`                           | `Double`          | `ControlHeightMedium`           |
+| `IconToggleButtonMinWidth`                            | `Double`          | `ControlHeightMedium`           |
 | `IconToggleButtonStateCircleFill`                     | `SolidColorBrush` | `PrimaryBrush`                  |
+| `IconToggleButtonStateCircleOpacityFocused`           | `Double`          | `FocusedOpacity`                |
 | `IconToggleButtonStateCircleOpacityPointerOver`       | `Double`          | `HoverOpacity`                  |
 | `IconToggleButtonStateCircleOpacityPressed`           | `Double`          | `PressedOpacity`                |
-| `IconToggleButtonStateCircleOpacityFocused`           | `Double`          | `FocusedOpacity`                |
-| `IconToggleButtonBorderThickness`                     | `Thickness`       | 0                               |
-| `IconToggleButtonMinHeight`                           | `Double`          | 40                              |
-| `IconToggleButtonMinWidth`                            | `Double`          | 40                              |
+| `TextToggleButtonBackground`                          | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `TextToggleButtonBackgroundChecked`                   | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `TextToggleButtonBackgroundCheckedDisabled`           | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `TextToggleButtonBackgroundCheckedPointerOver`        | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `TextToggleButtonBackgroundCheckedPressed`            | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `TextToggleButtonBackgroundDisabled`                  | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `TextToggleButtonBackgroundIndeterminate`             | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `TextToggleButtonBackgroundIndeterminateDisabled`     | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `TextToggleButtonBackgroundIndeterminatePointerOver`  | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `TextToggleButtonBackgroundIndeterminatePressed`      | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `TextToggleButtonBackgroundPointerOver`               | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `TextToggleButtonBackgroundPressed`                   | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `TextToggleButtonBorderBrush`                         | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `TextToggleButtonBorderBrushChecked`                  | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `TextToggleButtonBorderBrushCheckedDisabled`          | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `TextToggleButtonBorderBrushCheckedPointerOver`       | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `TextToggleButtonBorderBrushCheckedPressed`           | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `TextToggleButtonBorderBrushDisabled`                 | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `TextToggleButtonBorderBrushFocusedOverlay`           | `SolidColorBrush` | `OnSurfaceFocusedBrush`         |
+| `TextToggleButtonBorderBrushHoverOverlay`             | `SolidColorBrush` | `OnSurfaceHoverBrush`           |
+| `TextToggleButtonBorderBrushIndeterminate`            | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `TextToggleButtonBorderBrushIndeterminateDisabled`    | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `TextToggleButtonBorderBrushIndeterminatePointerOver` | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `TextToggleButtonBorderBrushIndeterminatePressed`     | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `TextToggleButtonBorderBrushPointerOver`              | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `TextToggleButtonBorderBrushPressed`                  | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `TextToggleButtonBorderBrushSelectedOverlay`          | `SolidColorBrush` | `OnSurfaceFocusedBrush`         |
+| `TextToggleButtonBorderThickness`                     | `Thickness`       | 0                               |
+| `TextToggleButtonCornerRadius`                        | `CornerRadius`    | `Radius100CornerRadius`         |
+| `TextToggleButtonFeedbackFocused`                     | `SolidColorBrush` | `OnSurfaceFocusedBrush`         |
+| `TextToggleButtonFontFamily`                          | `FontFamily`      | `DefaultFontFamily`             |
+| `TextToggleButtonFontSize`                            | `Double`          | `LabelLargeFontSize`            |
+| `TextToggleButtonForeground`                          | `SolidColorBrush` | `PrimaryBrush`                  |
+| `TextToggleButtonForegroundChecked`                   | `SolidColorBrush` | `PrimaryBrush`                  |
+| `TextToggleButtonForegroundCheckedDisabled`           | `SolidColorBrush` | `OnSurfaceLowBrush`             |
+| `TextToggleButtonForegroundCheckedPointerOver`        | `SolidColorBrush` | `PrimaryBrush`                  |
+| `TextToggleButtonForegroundCheckedPressed`            | `SolidColorBrush` | `PrimaryBrush`                  |
+| `TextToggleButtonForegroundDisabled`                  | `SolidColorBrush` | `OnSurfaceLowBrush`             |
+| `TextToggleButtonForegroundIndeterminate`             | `SolidColorBrush` | `PrimaryBrush`                  |
+| `TextToggleButtonForegroundIndeterminateDisabled`     | `SolidColorBrush` | `OnSurfaceLowBrush`             |
+| `TextToggleButtonForegroundIndeterminatePointerOver`  | `SolidColorBrush` | `PrimaryBrush`                  |
+| `TextToggleButtonForegroundIndeterminatePressed`      | `SolidColorBrush` | `PrimaryBrush`                  |
+| `TextToggleButtonForegroundPointerOver`               | `SolidColorBrush` | `PrimaryBrush`                  |
+| `TextToggleButtonForegroundPressed`                   | `SolidColorBrush` | `PrimaryBrush`                  |
+| `TextToggleButtonMinHeight`                           | `Double`          | `ControlHeightMedium`           |
+| `TextToggleButtonPadding`                             | `Thickness`       | 16,8                            |
+
+The Dark theme uses the same values as Light.
+
+<!-- END GENERATED -->

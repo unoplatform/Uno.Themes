@@ -421,6 +421,19 @@ The PR template (`.github/pull_request_template.md`) explicitly calls out `doc/m
 ✅ Cross-link relevant pages (e.g. between `lightweight-styling.md` and a per-design-system controls-styles page).
 ✅ Sample pages: add a page under `src/samples/SamplesApp.Shared/Content/` so all sample heads pick it up.
 
+### Generated per-control style pages (`doc/styles/**`)
+
+The Styles and Lightweight Styling tables of `doc/styles/*.md` (Material v2) and `doc/styles/simple/*.md` (Simple) are generated from the Styles XAML by `build/scripts/GenerateStyleDocs.cs`, a .NET 10 file-based app. Inclusion rules live in `specs/11-style-docs-generator/progress.md`.
+
+```bash
+dotnet run build/scripts/GenerateStyleDocs.cs              # rewrite the generated regions
+dotnet run build/scripts/GenerateStyleDocs.cs -- --check   # what CI runs; exit 1 when a page is stale
+```
+
+🚫 **Never hand-edit between `<!-- BEGIN GENERATED -->` and `<!-- END GENERATED -->`** — fix the XAML (or the generator) and regenerate. Front-matter, title, prose, and `> [!NOTE]` blocks outside the markers stay hand-owned.
+✅ **Regenerate whenever a Material v2 or Simple `Styles/Controls/*.xaml` file changes** (style keys, `_Resources.xaml` implicit styles, `SemanticStyles.xaml` aliases or lightweight groups), or a dictionary those keys alias (e.g. `Styles/Application/**`), and commit the page changes with the XAML. The `--check` gate runs in both the Docs Validations and Code Style stages.
+✅ `TextBlock.md` (both design systems) does not fit the generated layout and stays fully hand-owned.
+
 ### Docs validations (`build/stage-docs-validations.yml`)
 
 Both the cSpell and markdownlint jobs run over `**/*.md` with **`specs/**` and `.specify/**` excluded** — those are internal working notes (design specs, postmortems), not published documentation.

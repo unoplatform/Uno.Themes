@@ -4,60 +4,50 @@ uid: Uno.Themes.Simple.Styles.ToggleSwitch
 
 # ToggleSwitch Control
 
+<!-- BEGIN GENERATED -->
+<!-- This region is generated from the Styles XAML by `dotnet run build/scripts/GenerateStyleDocs.cs`; do not edit it by hand. -->
+
 ## Styles
 
-| Style Key                  | IsDefaultStyle\* |
-|----------------------------|------------------|
-| `SimpleToggleSwitchStyle`  | True             |
+| Style Key                 | Semantic Alias      | IsDefaultStyle\* |
+| ------------------------- | ------------------- | ---------------- |
+| `SimpleToggleSwitchStyle` | `ToggleSwitchStyle` | True             |
 
 IsDefaultStyle\*: Styles in this column will be set as the default implicit style for the matching control
 
 ## Lightweight Styling
 
-### Structural Resources
+### Theme-agnostic
 
-| Key                                    | Type              | Value                    |
-|----------------------------------------|-------------------|--------------------------|
-| `SimpleToggleSwitchTrackWidth`         | `StaticResource`  | `SimpleIconLarge`        |
-| `SimpleToggleSwitchTrackHeight`        | `StaticResource`  | `SimpleIconSmall`        |
-| `SimpleToggleSwitchStrokeThickness`    | `StaticResource`  | `SimpleStrokeBorder`     |
-| `SimpleToggleSwitchThumbSize`          | `StaticResource`  | `SimpleSpace400`         |
-| `SimpleToggleSwitchTrackRadius`        | `Double`          | 12                       |
-| `SimpleToggleSwitchThumbOffMargin`     | `Thickness`       | 4,0,0,0                  |
-| `SimpleToggleSwitchThumbOnMargin`      | `Thickness`       | 20,0,0,0                 |
-| `SimpleToggleSwitchHeaderMargin`       | `Thickness`       | 0,0,0,4                  |
+| Key                                 | Type        | Value                     |
+| ----------------------------------- | ----------- | ------------------------- |
+| `SimpleToggleSwitchHeaderMargin`    | `Thickness` | `Space100BottomThickness` |
+| `SimpleToggleSwitchStrokeThickness` | `Double`    | `SimpleStrokeBorder`      |
+| `SimpleToggleSwitchThumbOffMargin`  | `Thickness` | 4,0,0,0                   |
+| `SimpleToggleSwitchThumbOnMargin`   | `Thickness` | 20,0,0,0                  |
+| `SimpleToggleSwitchThumbSize`       | `Double`    | `SimpleSpace400`          |
+| `SimpleToggleSwitchTrackHeight`     | `Double`    | `SimpleIconSmall`         |
+| `SimpleToggleSwitchTrackRadius`     | `Double`    | `SimpleRadius300`         |
+| `SimpleToggleSwitchTrackWidth`      | `Double`    | `SimpleIconLarge`         |
 
-### Brush Resources
+### Themed
 
-#### Off-Track
+| Key                                     | Type              | Light                     |
+| --------------------------------------- | ----------------- | ------------------------- |
+| `ToggleSwitchContentForeground`         | `SolidColorBrush` | `OnSurfaceBrush`          |
+| `ToggleSwitchContentForegroundDisabled` | `SolidColorBrush` | `OnSurfaceDisabledBrush`  |
+| `ToggleSwitchKnobBoundsFill`            | `SolidColorBrush` | `PrimaryBrush`            |
+| `ToggleSwitchKnobBoundsFillDisabled`    | `SolidColorBrush` | `OnSurfaceDisabledBrush`  |
+| `ToggleSwitchKnobBoundsFillPressed`     | `SolidColorBrush` | `PrimaryVariantDarkBrush` |
+| `ToggleSwitchKnobFillDisabled`          | `SolidColorBrush` | `OnSurfaceDisabledBrush`  |
+| `ToggleSwitchKnobOffFill`               | `SolidColorBrush` | `OnSurfaceMediumBrush`    |
+| `ToggleSwitchKnobOnFill`                | `SolidColorBrush` | `OnPrimaryBrush`          |
+| `ToggleSwitchOuterBorderFill`           | `SolidColorBrush` | `SurfaceVariantBrush`     |
+| `ToggleSwitchOuterBorderFillDisabled`   | `SolidColorBrush` | `OnSurfaceDisabledBrush`  |
+| `ToggleSwitchOuterBorderFillPressed`    | `SolidColorBrush` | `TertiaryContainerBrush`  |
+| `ToggleSwitchOuterBorderStroke`         | `SolidColorBrush` | `OutlineBrush`            |
+| `ToggleSwitchOuterBorderStrokeDisabled` | `SolidColorBrush` | `OutlineDisabledBrush`    |
 
-| Key                                          | Type              | Value                      |
-|----------------------------------------------|-------------------|----------------------------|
-| `ToggleSwitchOuterBorderFill`                | `SolidColorBrush` | `SurfaceVariantBrush`      |
-| `ToggleSwitchOuterBorderStroke`              | `SolidColorBrush` | `OutlineBrush`             |
-| `ToggleSwitchOuterBorderFillPressed`         | `SolidColorBrush` | `TertiaryContainerBrush`   |
-| `ToggleSwitchOuterBorderFillDisabled`        | `SolidColorBrush` | `OnSurfaceDisabledBrush`   |
-| `ToggleSwitchOuterBorderStrokeDisabled`      | `SolidColorBrush` | `OutlineDisabledBrush`     |
+The Dark theme uses the same values as Light.
 
-#### On-Track
-
-| Key                                          | Type              | Value                      |
-|----------------------------------------------|-------------------|----------------------------|
-| `ToggleSwitchKnobBoundsFill`                 | `SolidColorBrush` | `PrimaryBrush`             |
-| `ToggleSwitchKnobBoundsFillPressed`          | `SolidColorBrush` | `PrimaryVariantDarkBrush`  |
-| `ToggleSwitchKnobBoundsFillDisabled`         | `SolidColorBrush` | `OnSurfaceDisabledBrush`   |
-
-#### Thumb
-
-| Key                                          | Type              | Value                      |
-|----------------------------------------------|-------------------|----------------------------|
-| `ToggleSwitchKnobOffFill`                    | `SolidColorBrush` | `OnSurfaceMediumBrush`     |
-| `ToggleSwitchKnobOnFill`                     | `SolidColorBrush` | `OnPrimaryBrush`           |
-| `ToggleSwitchKnobFillDisabled`               | `SolidColorBrush` | `OnSurfaceDisabledBrush`   |
-
-#### Label
-
-| Key                                          | Type              | Value                      |
-|----------------------------------------------|-------------------|----------------------------|
-| `ToggleSwitchContentForeground`              | `SolidColorBrush` | `OnSurfaceBrush`           |
-| `ToggleSwitchContentForegroundDisabled`      | `SolidColorBrush` | `OnSurfaceDisabledBrush`   |
+<!-- END GENERATED -->
