@@ -71,7 +71,7 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleExpanderHeaderDownStyle"
 		   TargetType="ToggleButton">
-		<Setter Property="Padding" Value="{StaticResource SimpleExpanderHeaderPadding}" />
+		<Setter Property="Padding" Value="{ThemeResource SimpleExpanderHeaderPadding}" />
 		<Setter Property="HorizontalContentAlignment" Value="Left" />
 		<Setter Property="BackgroundSizing" Value="InnerBorderEdge" />
 		<Setter Property="Template">
@@ -339,14 +339,14 @@
 								Width="{StaticResource SimpleExpanderChevronButtonSize}"
 								Height="{StaticResource SimpleExpanderChevronButtonSize}"
 								Margin="{StaticResource SimpleExpanderChevronMargin}"
-								CornerRadius="{StaticResource SimpleExpanderCornerRadius}"
+								CornerRadius="{ThemeResource SimpleExpanderCornerRadius}"
 								Background="Transparent"
 								BorderBrush="Transparent"
 								BorderThickness="0">
 							<FontIcon x:Name="ExpandCollapseChevron"
 									  Glyph="{StaticResource SimpleExpanderChevronDownGlyph}"
 									  FontFamily="{StaticResource SymbolThemeFontFamily}"
-									  FontSize="{StaticResource SimpleExpanderChevronGlyphSize}"
+									  FontSize="{ThemeResource SimpleExpanderChevronGlyphSize}"
 									  Foreground="{ThemeResource OnSurfaceBrush}"
 									  HorizontalAlignment="Center"
 									  VerticalAlignment="Center"
@@ -634,14 +634,14 @@
 								Width="{StaticResource SimpleExpanderChevronButtonSize}"
 								Height="{StaticResource SimpleExpanderChevronButtonSize}"
 								Margin="{StaticResource SimpleExpanderChevronMargin}"
-								CornerRadius="{StaticResource SimpleExpanderCornerRadius}"
+								CornerRadius="{ThemeResource SimpleExpanderCornerRadius}"
 								Background="Transparent"
 								BorderBrush="Transparent"
 								BorderThickness="0">
 							<FontIcon x:Name="ExpandCollapseChevron"
 									  Glyph="{StaticResource SimpleExpanderChevronDownGlyph}"
 									  FontFamily="{StaticResource SymbolThemeFontFamily}"
-									  FontSize="{StaticResource SimpleExpanderChevronGlyphSize}"
+									  FontSize="{ThemeResource SimpleExpanderChevronGlyphSize}"
 									  Foreground="{ThemeResource OnSurfaceBrush}"
 									  HorizontalAlignment="Center"
 									  VerticalAlignment="Center"
@@ -669,13 +669,13 @@
 		<Setter Property="Background" Value="{ThemeResource SurfaceBrush}" />
 		<Setter Property="BackgroundSizing" Value="InnerBorderEdge" />
 		<Setter Property="MinWidth" Value="{ThemeResource FlyoutThemeMinWidth}" />
-		<Setter Property="MinHeight" Value="{StaticResource SimpleExpanderMinHeight}" />
+		<Setter Property="MinHeight" Value="{ThemeResource SimpleExpanderMinHeight}" />
 		<Setter Property="BorderThickness" Value="{StaticResource SimpleExpanderContentBorderThickness}" />
 		<Setter Property="BorderBrush" Value="{ThemeResource OutlineBrush}" />
-		<Setter Property="Padding" Value="{StaticResource SimpleExpanderContentPadding}" />
+		<Setter Property="Padding" Value="{ThemeResource SimpleExpanderContentPadding}" />
 		<Setter Property="HorizontalAlignment" Value="Stretch" />
 		<Setter Property="VerticalAlignment" Value="Center" />
-		<Setter Property="CornerRadius" Value="{StaticResource SimpleExpanderCornerRadius}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource SimpleExpanderCornerRadius}" />
 		<Setter Property="Foreground" Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
 		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
@@ -811,10 +811,10 @@
 									  BorderBrush="{ThemeResource OutlineBrush}"
 									  BorderThickness="{StaticResource SimpleExpanderHeaderBorderThickness}"
 									  CornerRadius="{TemplateBinding CornerRadius}"
-									  MinHeight="{StaticResource SimpleExpanderMinHeight}"
+									  MinHeight="{ThemeResource SimpleExpanderMinHeight}"
 									  MinWidth="{TemplateBinding MinWidth}"
 									  MaxWidth="{TemplateBinding MaxWidth}"
-									  Padding="{StaticResource SimpleExpanderHeaderPadding}"
+									  Padding="{ThemeResource SimpleExpanderHeaderPadding}"
 									  FontFamily="{ThemeResource BodyLargeFontFamily}"
 									  FontSize="{ThemeResource BodyLargeFontSize}"
 									  FontWeight="{ThemeResource SimpleSemiBoldFontWeight}"

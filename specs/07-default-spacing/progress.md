@@ -63,3 +63,30 @@ Verification (Simple host, net10.0-desktop Debug, headless `--runtime-tests` run
   guard, unrelated).
 - Build clean: no new warnings in `BaseTheme.cs` / `Given_DesignTokens.cs` (only the two
   pre-existing CS0618 obsolete-member warnings in `BaseTheme.cs`).
+
+## Review addendum (2026-09-03) — the seam now reaches realized controls
+
+`doc/design-tokens.md` had recorded the three scale measures as construction-time: "assigning them
+later does regenerate the tokens but does not restyle controls". That was a defect, not a property
+of the design. The generated `Space*` / `Radius*` keys were fine; the control styles read them —
+directly or through per-control aliases such as `SimpleButtonCornerRadius` and
+`MaterialContentDialogPanelPadding` — with `{StaticResource}`, which snapshots at parse time.
+
+- **Sweep.** Alias closure over every `<StaticResource x:Key ResourceKey>` declaration rooted at a
+  generated key, then every `{StaticResource K}` consumer of that closure, across Simple and
+  Material v2: 98 sites in 22 files (78 Simple, 20 Material v2), all rewritten to
+  `{ThemeResource}`. Density constants (`ControlHeight*`, `IconSize*`, `TouchTargetMinSize`) are
+  regenerated with fixed values and were left as they are.
+- **Red / green.** `Given_DesignTokens.When_ScaleMeasuresChangeAtRuntime_Then_RealizedButtonFollows`
+  (Simple head): a realized `SimpleFilledButtonStyle` button kept `Padding` 12 / `CornerRadius` 8
+  after `DefaultSpacing` = 10, `DefaultDensity` = Compact, `DefaultCornerRadius` = 1 — expected
+  22.5 / 2 — and a button created after the change is asserted too.
+  `Given_DesignTokens.When_ScaleMeasuresChangeAtRuntime_Then_RealizedContentDialogFollows`
+  (Material head): a realized `MaterialContentDialogStyle` dialog kept `CornerRadius` 28 — expected
+  7. Both red before the rewrite, green after. Both mutate the application theme (the scope a
+  designer edits) and restore it in `finally`; realized content re-resolves on a `RequestedTheme`
+  flip, the same route `FontFamilyTunerControl` uses.
+- **Suites.** Simple head 256 / 0 failed; Material head 63 / 0 failed (net10.0-desktop Debug,
+  headless `--runtime-tests`). Build clean, no new warnings.
+- **Docs.** `doc/design-tokens.md`: the scale measures are documented as runtime-settable with the
+  already-realized caveat and the theme-change-pass route, matching the `DefaultFontFamily` wording.

@@ -12,28 +12,6 @@
 		SimpleProgressBar* = Simple-prefixed aliases → ProgressBar*
 	-->
 
-	<ResourceDictionary.ThemeDictionaries>
-
-		<!-- ─── Light Theme ─── -->
-		<ResourceDictionary x:Key="Light">
-			<StaticResource x:Key="ProgressBarForeground" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="ProgressBarBackground" ResourceKey="SurfaceVariantBrush" />
-			<StaticResource x:Key="ProgressBarForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="ProgressBarBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-
-			<!-- Backwards-compat aliases -->
-		</ResourceDictionary>
-
-		<!-- ─── Dark Theme (Default) ─── -->
-		<ResourceDictionary x:Key="Default">
-			<StaticResource x:Key="ProgressBarForeground" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="ProgressBarBackground" ResourceKey="OutlineBrush" />
-			<StaticResource x:Key="ProgressBarForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="ProgressBarBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-
-		</ResourceDictionary>
-
-	</ResourceDictionary.ThemeDictionaries>
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Sizing constants -->
@@ -50,7 +28,7 @@
 		<Setter Property="Background" Value="{ThemeResource ProgressBarBackground}" />
 		<Setter Property="Maximum" Value="100" />
 		<Setter Property="MinWidth" Value="{StaticResource SimpleProgressBarMinWidth}" />
-		<Setter Property="Height" Value="{StaticResource SimpleProgressBarHeight}" />
+		<Setter Property="Height" Value="{ThemeResource SimpleProgressBarHeight}" />
 		<Setter Property="CornerRadius" Value="2" />
 	</Style>
 

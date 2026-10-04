@@ -8,17 +8,21 @@
 		The key names follow the Material Design 3 type scale and are used
 		by control templates across all themes.
 		
-		ROOT TYPEFACE TOKENS
-		====================
-		TypefacePlain  - used for Display / Headline roles (regular weight).
-		TypefaceBrand  - used for Title / Label / Body / Caption roles (medium weight).
+		ROOT TYPEFACE TOKEN
+		===================
+		DefaultFontFamily - the single root typeface every type scale derives from.
+		Per-scale variation is expressed through the *FontWeight tokens, not through
+		separate font families: the font's weights are resolved from a single
+		FontFamily reference (via a variable font, or a font manifest on platforms
+		without variable-font support).
 		
-		Overriding TypefacePlain or TypefaceBrand at app level will cascade to
-		all type scales that reference them, enabling a single-key font swap.
+		Overriding DefaultFontFamily at app level cascades to all type scales,
+		enabling a single-key font swap.
 		
-		Each theme (Material, Simple, Cupertino) overrides these root tokens
-		(and optionally the per-scale keys) in its own Typography/Fonts file.
-		The values here serve as a baseline fallback using Segoe UI.
+		Each theme (Material, Simple, Cupertino) overrides this root token in its
+		own Fonts file. The value here serves as a baseline fallback using Segoe UI.
+		This is the only place the *FontFamily slot keys are declared; the per-theme
+		Typography files override size, weight and character spacing only.
 	-->
 
 	<ResourceDictionary.ThemeDictionaries>
@@ -26,99 +30,98 @@
 		<!-- DARK THEME (Default) -->
 		<ResourceDictionary x:Key="Default">
 
-			<!-- Root Typeface Tokens -->
-			<FontFamily x:Key="TypefacePlain">Segoe UI</FontFamily>
-			<FontFamily x:Key="TypefaceBrand">Segoe UI</FontFamily>
+			<!-- Root Typeface Token -->
+			<FontFamily x:Key="DefaultFontFamily">Segoe UI</FontFamily>
 
 			<!-- DISPLAY -->
-			<StaticResource x:Key="DisplayLargeFontFamily" ResourceKey="TypefacePlain" />
+			<StaticResource x:Key="DisplayLargeFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="DisplayLargeFontWeight">Normal</x:String>
 			<x:Double x:Key="DisplayLargeFontSize">57</x:Double>
 			<x:Int32 x:Key="DisplayLargeCharacterSpacing">-17</x:Int32>
 
-			<StaticResource x:Key="DisplayMediumFontFamily" ResourceKey="TypefacePlain" />
+			<StaticResource x:Key="DisplayMediumFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="DisplayMediumFontWeight">Normal</x:String>
 			<x:Double x:Key="DisplayMediumFontSize">45</x:Double>
 
-			<StaticResource x:Key="DisplaySmallFontFamily" ResourceKey="TypefacePlain" />
+			<StaticResource x:Key="DisplaySmallFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="DisplaySmallFontWeight">Normal</x:String>
 			<x:Double x:Key="DisplaySmallFontSize">36</x:Double>
 
 			<!-- HEADLINE -->
-			<StaticResource x:Key="HeadlineLargeFontFamily" ResourceKey="TypefacePlain" />
+			<StaticResource x:Key="HeadlineLargeFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="HeadlineLargeFontWeight">Normal</x:String>
 			<x:Double x:Key="HeadlineLargeFontSize">32</x:Double>
 
-			<StaticResource x:Key="HeadlineMediumFontFamily" ResourceKey="TypefacePlain" />
+			<StaticResource x:Key="HeadlineMediumFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="HeadlineMediumFontWeight">Normal</x:String>
 			<x:Double x:Key="HeadlineMediumFontSize">28</x:Double>
 
-			<StaticResource x:Key="HeadlineSmallFontFamily" ResourceKey="TypefacePlain" />
+			<StaticResource x:Key="HeadlineSmallFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="HeadlineSmallFontWeight">Normal</x:String>
 			<x:Double x:Key="HeadlineSmallFontSize">24</x:Double>
 
 			<!-- TITLE -->
-			<StaticResource x:Key="TitleLargeFontFamily" ResourceKey="TypefacePlain" />
+			<StaticResource x:Key="TitleLargeFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="TitleLargeFontWeight">Normal</x:String>
 			<x:Double x:Key="TitleLargeFontSize">22</x:Double>
 
-			<StaticResource x:Key="TitleMediumFontFamily" ResourceKey="TypefaceBrand" />
+			<StaticResource x:Key="TitleMediumFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="TitleMediumFontWeight">Medium</x:String>
 			<x:Double x:Key="TitleMediumFontSize">16</x:Double>
 
-			<StaticResource x:Key="TitleSmallFontFamily" ResourceKey="TypefaceBrand" />
+			<StaticResource x:Key="TitleSmallFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="TitleSmallFontWeight">Medium</x:String>
 			<x:Double x:Key="TitleSmallFontSize">14</x:Double>
 
 			<!-- LABEL -->
-			<StaticResource x:Key="LabelLargeFontFamily" ResourceKey="TypefaceBrand" />
+			<StaticResource x:Key="LabelLargeFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="LabelLargeFontWeight">Medium</x:String>
 			<x:Double x:Key="LabelLargeFontSize">14</x:Double>
 			<x:Int32 x:Key="LabelLargeCharacterSpacing">7</x:Int32>
 
-			<StaticResource x:Key="LabelMediumFontFamily" ResourceKey="TypefaceBrand" />
+			<StaticResource x:Key="LabelMediumFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="LabelMediumFontWeight">Medium</x:String>
 			<x:Double x:Key="LabelMediumFontSize">12</x:Double>
 			<x:Int32 x:Key="LabelMediumCharacterSpacing">41</x:Int32>
 
-			<StaticResource x:Key="LabelSmallFontFamily" ResourceKey="TypefaceBrand" />
+			<StaticResource x:Key="LabelSmallFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="LabelSmallFontWeight">Medium</x:String>
 			<x:Double x:Key="LabelSmallFontSize">11</x:Double>
 			<x:Int32 x:Key="LabelSmallCharacterSpacing">45</x:Int32>
 
-			<StaticResource x:Key="LabelExtraSmallFontFamily" ResourceKey="TypefaceBrand" />
+			<StaticResource x:Key="LabelExtraSmallFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="LabelExtraSmallFontWeight">Normal</x:String>
 			<x:Double x:Key="LabelExtraSmallFontSize">11</x:Double>
 			<x:Int32 x:Key="LabelExtraSmallCharacterSpacing">7</x:Int32>
 
 			<!-- BODY -->
-			<StaticResource x:Key="BodyLargeFontFamily" ResourceKey="TypefaceBrand" />
+			<StaticResource x:Key="BodyLargeFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="BodyLargeFontWeight">Medium</x:String>
 			<x:Double x:Key="BodyLargeFontSize">16</x:Double>
 			<x:Int32 x:Key="BodyLargeCharacterSpacing">9</x:Int32>
 
-			<StaticResource x:Key="BodyMediumFontFamily" ResourceKey="TypefaceBrand" />
+			<StaticResource x:Key="BodyMediumFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="BodyMediumFontWeight">Medium</x:String>
 			<x:Double x:Key="BodyMediumFontSize">14</x:Double>
 			<x:Int32 x:Key="BodyMediumCharacterSpacing">17</x:Int32>
 
-			<StaticResource x:Key="BodySmallFontFamily" ResourceKey="TypefaceBrand" />
+			<StaticResource x:Key="BodySmallFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="BodySmallFontWeight">Medium</x:String>
 			<x:Double x:Key="BodySmallFontSize">12</x:Double>
 			<x:Int32 x:Key="BodySmallCharacterSpacing">33</x:Int32>
 
 			<!-- CAPTION -->
-			<StaticResource x:Key="CaptionLargeFontFamily" ResourceKey="TypefaceBrand" />
+			<StaticResource x:Key="CaptionLargeFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="CaptionLargeFontWeight">Medium</x:String>
 			<x:Double x:Key="CaptionLargeFontSize">13</x:Double>
 			<x:Int32 x:Key="CaptionLargeCharacterSpacing">-3</x:Int32>
 
-			<StaticResource x:Key="CaptionMediumFontFamily" ResourceKey="TypefaceBrand" />
+			<StaticResource x:Key="CaptionMediumFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="CaptionMediumFontWeight">Medium</x:String>
 			<x:Double x:Key="CaptionMediumFontSize">12</x:Double>
 			<x:Int32 x:Key="CaptionMediumCharacterSpacing">33</x:Int32>
 
-			<StaticResource x:Key="CaptionSmallFontFamily" ResourceKey="TypefaceBrand" />
+			<StaticResource x:Key="CaptionSmallFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="CaptionSmallFontWeight">Medium</x:String>
 			<x:Double x:Key="CaptionSmallFontSize">11</x:Double>
 			<x:Int32 x:Key="CaptionSmallCharacterSpacing">7</x:Int32>
@@ -128,99 +131,98 @@
 		<!-- LIGHT THEME -->
 		<ResourceDictionary x:Key="Light">
 
-			<!-- Root Typeface Tokens -->
-			<FontFamily x:Key="TypefacePlain">Segoe UI</FontFamily>
-			<FontFamily x:Key="TypefaceBrand">Segoe UI</FontFamily>
+			<!-- Root Typeface Token -->
+			<FontFamily x:Key="DefaultFontFamily">Segoe UI</FontFamily>
 
 			<!-- DISPLAY -->
-			<StaticResource x:Key="DisplayLargeFontFamily" ResourceKey="TypefacePlain" />
+			<StaticResource x:Key="DisplayLargeFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="DisplayLargeFontWeight">Normal</x:String>
 			<x:Double x:Key="DisplayLargeFontSize">57</x:Double>
 			<x:Int32 x:Key="DisplayLargeCharacterSpacing">-17</x:Int32>
 
-			<StaticResource x:Key="DisplayMediumFontFamily" ResourceKey="TypefacePlain" />
+			<StaticResource x:Key="DisplayMediumFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="DisplayMediumFontWeight">Normal</x:String>
 			<x:Double x:Key="DisplayMediumFontSize">45</x:Double>
 
-			<StaticResource x:Key="DisplaySmallFontFamily" ResourceKey="TypefacePlain" />
+			<StaticResource x:Key="DisplaySmallFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="DisplaySmallFontWeight">Normal</x:String>
 			<x:Double x:Key="DisplaySmallFontSize">36</x:Double>
 
 			<!-- HEADLINE -->
-			<StaticResource x:Key="HeadlineLargeFontFamily" ResourceKey="TypefacePlain" />
+			<StaticResource x:Key="HeadlineLargeFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="HeadlineLargeFontWeight">Normal</x:String>
 			<x:Double x:Key="HeadlineLargeFontSize">32</x:Double>
 
-			<StaticResource x:Key="HeadlineMediumFontFamily" ResourceKey="TypefacePlain" />
+			<StaticResource x:Key="HeadlineMediumFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="HeadlineMediumFontWeight">Normal</x:String>
 			<x:Double x:Key="HeadlineMediumFontSize">28</x:Double>
 
-			<StaticResource x:Key="HeadlineSmallFontFamily" ResourceKey="TypefacePlain" />
+			<StaticResource x:Key="HeadlineSmallFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="HeadlineSmallFontWeight">Normal</x:String>
 			<x:Double x:Key="HeadlineSmallFontSize">24</x:Double>
 
 			<!-- TITLE -->
-			<StaticResource x:Key="TitleLargeFontFamily" ResourceKey="TypefacePlain" />
+			<StaticResource x:Key="TitleLargeFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="TitleLargeFontWeight">Normal</x:String>
 			<x:Double x:Key="TitleLargeFontSize">22</x:Double>
 
-			<StaticResource x:Key="TitleMediumFontFamily" ResourceKey="TypefaceBrand" />
+			<StaticResource x:Key="TitleMediumFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="TitleMediumFontWeight">Medium</x:String>
 			<x:Double x:Key="TitleMediumFontSize">16</x:Double>
 
-			<StaticResource x:Key="TitleSmallFontFamily" ResourceKey="TypefaceBrand" />
+			<StaticResource x:Key="TitleSmallFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="TitleSmallFontWeight">Medium</x:String>
 			<x:Double x:Key="TitleSmallFontSize">14</x:Double>
 
 			<!-- LABEL -->
-			<StaticResource x:Key="LabelLargeFontFamily" ResourceKey="TypefaceBrand" />
+			<StaticResource x:Key="LabelLargeFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="LabelLargeFontWeight">Medium</x:String>
 			<x:Double x:Key="LabelLargeFontSize">14</x:Double>
 			<x:Int32 x:Key="LabelLargeCharacterSpacing">7</x:Int32>
 
-			<StaticResource x:Key="LabelMediumFontFamily" ResourceKey="TypefaceBrand" />
+			<StaticResource x:Key="LabelMediumFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="LabelMediumFontWeight">Medium</x:String>
 			<x:Double x:Key="LabelMediumFontSize">12</x:Double>
 			<x:Int32 x:Key="LabelMediumCharacterSpacing">41</x:Int32>
 
-			<StaticResource x:Key="LabelSmallFontFamily" ResourceKey="TypefaceBrand" />
+			<StaticResource x:Key="LabelSmallFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="LabelSmallFontWeight">Medium</x:String>
 			<x:Double x:Key="LabelSmallFontSize">11</x:Double>
 			<x:Int32 x:Key="LabelSmallCharacterSpacing">45</x:Int32>
 
-			<StaticResource x:Key="LabelExtraSmallFontFamily" ResourceKey="TypefaceBrand" />
+			<StaticResource x:Key="LabelExtraSmallFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="LabelExtraSmallFontWeight">Normal</x:String>
 			<x:Double x:Key="LabelExtraSmallFontSize">11</x:Double>
 			<x:Int32 x:Key="LabelExtraSmallCharacterSpacing">7</x:Int32>
 
 			<!-- BODY -->
-			<StaticResource x:Key="BodyLargeFontFamily" ResourceKey="TypefaceBrand" />
+			<StaticResource x:Key="BodyLargeFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="BodyLargeFontWeight">Medium</x:String>
 			<x:Double x:Key="BodyLargeFontSize">16</x:Double>
 			<x:Int32 x:Key="BodyLargeCharacterSpacing">9</x:Int32>
 
-			<StaticResource x:Key="BodyMediumFontFamily" ResourceKey="TypefaceBrand" />
+			<StaticResource x:Key="BodyMediumFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="BodyMediumFontWeight">Medium</x:String>
 			<x:Double x:Key="BodyMediumFontSize">14</x:Double>
 			<x:Int32 x:Key="BodyMediumCharacterSpacing">17</x:Int32>
 
-			<StaticResource x:Key="BodySmallFontFamily" ResourceKey="TypefaceBrand" />
+			<StaticResource x:Key="BodySmallFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="BodySmallFontWeight">Medium</x:String>
 			<x:Double x:Key="BodySmallFontSize">12</x:Double>
 			<x:Int32 x:Key="BodySmallCharacterSpacing">33</x:Int32>
 
 			<!-- CAPTION -->
-			<StaticResource x:Key="CaptionLargeFontFamily" ResourceKey="TypefaceBrand" />
+			<StaticResource x:Key="CaptionLargeFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="CaptionLargeFontWeight">Medium</x:String>
 			<x:Double x:Key="CaptionLargeFontSize">13</x:Double>
 			<x:Int32 x:Key="CaptionLargeCharacterSpacing">-3</x:Int32>
 
-			<StaticResource x:Key="CaptionMediumFontFamily" ResourceKey="TypefaceBrand" />
+			<StaticResource x:Key="CaptionMediumFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="CaptionMediumFontWeight">Medium</x:String>
 			<x:Double x:Key="CaptionMediumFontSize">12</x:Double>
 			<x:Int32 x:Key="CaptionMediumCharacterSpacing">33</x:Int32>
 
-			<StaticResource x:Key="CaptionSmallFontFamily" ResourceKey="TypefaceBrand" />
+			<StaticResource x:Key="CaptionSmallFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="CaptionSmallFontWeight">Medium</x:String>
 			<x:Double x:Key="CaptionSmallFontSize">11</x:Double>
 			<x:Int32 x:Key="CaptionSmallCharacterSpacing">7</x:Int32>

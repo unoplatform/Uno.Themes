@@ -27,6 +27,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Data\TestCollections.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\EnumHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\HierarchyHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\SampleThemeHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\SystemThemeHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\VisualTreeHelperEx.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ViewModelBase.cs" />
@@ -393,6 +394,13 @@
     </Page>
     <Compile Include="$(MSBuildThisFileDirectory)Content\Styles\DesignTokensSamplePage.xaml.cs">
       <DependentUpon>DesignTokensSamplePage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="$(MSBuildThisFileDirectory)Content\Styles\FontFamilyTunerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Styles\FontFamilyTunerControl.xaml.cs">
+      <DependentUpon>FontFamilyTunerControl.xaml</DependentUpon>
     </Compile>
     <Page Include="$(MSBuildThisFileDirectory)Content\Styles\SeedColorSamplePage.xaml">
       <SubType>Designer</SubType>

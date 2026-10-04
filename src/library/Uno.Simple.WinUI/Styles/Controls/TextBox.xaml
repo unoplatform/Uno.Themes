@@ -13,7 +13,7 @@
 		FilledTextBox*      = semantic keys (source of truth, filled variant)
 		OutlinedTextBox*    = semantic keys (source of truth, outlined variant)
 		SimpleTextBox*      = Simple-prefixed aliases for backwards compat
-
+		
 		Each variant's keys directly reference semantic brushes — they are
 		independent and do not alias each other.
 		
@@ -36,79 +36,29 @@
 
 			<!-- ── FilledTextBox — semantic keys (source of truth) ── -->
 			<!-- Sizing -->
-			<StaticResource x:Key="FilledTextBoxCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
-			<Thickness x:Key="FilledTextBoxBorderThicknessNormal">0</Thickness>
-			<Thickness x:Key="FilledTextBoxBorderThicknessFocused">0</Thickness>
-			<Thickness x:Key="FilledTextBoxPadding">16,10,16,10</Thickness>
-			<StaticResource x:Key="FilledTextBoxMinHeight" ResourceKey="SimpleIconLarge" />
 
 			<!-- Normal state -->
-			<StaticResource x:Key="FilledTextBoxForeground" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxBackground" ResourceKey="SurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxBorderBrush" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="FilledTextBoxPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
 
 			<!-- PointerOver state -->
-			<StaticResource x:Key="FilledTextBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTextBoxBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceLowBrush" />
 
 			<!-- Focused state -->
-			<StaticResource x:Key="FilledTextBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxBackgroundFocused" ResourceKey="SurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxBorderBrushFocused" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundFocused" ResourceKey="OnSurfaceLowBrush" />
 
 			<!-- Disabled state -->
-			<StaticResource x:Key="FilledTextBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="FilledTextBoxBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="FilledTextBoxBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 
 			<!-- Header / label -->
-			<StaticResource x:Key="FilledTextBoxHeaderForeground" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxHeaderForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxHeaderForegroundFocused" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 
 			<!-- ── OutlinedTextBox — semantic keys (source of truth, outlined variant) ── -->
 			<!-- Sizing -->
-			<StaticResource x:Key="OutlinedTextBoxCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
-			<StaticResource x:Key="OutlinedTextBoxBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />
-			<StaticResource x:Key="OutlinedTextBoxBorderThicknessFocused" ResourceKey="SimpleStrokeFocusRingThickness" />
-			<Thickness x:Key="OutlinedTextBoxPadding">16,10,16,10</Thickness>
-			<StaticResource x:Key="OutlinedTextBoxMinHeight" ResourceKey="SimpleIconLarge" />
 
 			<!-- Normal state -->
-			<StaticResource x:Key="OutlinedTextBoxForeground" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBackground" ResourceKey="SurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBorderBrush" ResourceKey="OutlineBrush" />
-			<StaticResource x:Key="OutlinedTextBoxPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
 
 			<!-- PointerOver state -->
-			<StaticResource x:Key="OutlinedTextBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBackgroundPointerOver" ResourceKey="SurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBorderBrushPointerOver" ResourceKey="OutlineBrush" />
-			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceLowBrush" />
 
 			<!-- Focused state -->
-			<StaticResource x:Key="OutlinedTextBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBackgroundFocused" ResourceKey="SurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBorderBrushFocused" ResourceKey="PrimaryMediumBrush" />
-			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundFocused" ResourceKey="OnSurfaceLowBrush" />
 
 			<!-- Disabled state -->
-			<StaticResource x:Key="OutlinedTextBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
-			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 
 			<!-- Header / label -->
-			<StaticResource x:Key="OutlinedTextBoxHeaderForeground" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundFocused" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 
 			<!-- ── Simple-only: Error state overrides (no semantic rename) ── -->
 			<!-- ── Simple-only: Small size variant ── -->
@@ -125,79 +75,29 @@
 
 			<!-- ── FilledTextBox — semantic keys (source of truth) ── -->
 			<!-- Sizing -->
-			<StaticResource x:Key="FilledTextBoxCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
-			<Thickness x:Key="FilledTextBoxBorderThicknessNormal">0</Thickness>
-			<Thickness x:Key="FilledTextBoxBorderThicknessFocused">0</Thickness>
-			<Thickness x:Key="FilledTextBoxPadding">16,10,16,10</Thickness>
-			<StaticResource x:Key="FilledTextBoxMinHeight" ResourceKey="SimpleIconLarge" />
 
 			<!-- Normal state -->
-			<StaticResource x:Key="FilledTextBoxForeground" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxBackground" ResourceKey="SurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxBorderBrush" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="FilledTextBoxPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
 
 			<!-- PointerOver state -->
-			<StaticResource x:Key="FilledTextBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTextBoxBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceLowBrush" />
 
 			<!-- Focused state -->
-			<StaticResource x:Key="FilledTextBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxBackgroundFocused" ResourceKey="SurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxBorderBrushFocused" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundFocused" ResourceKey="OnSurfaceLowBrush" />
 
 			<!-- Disabled state -->
-			<StaticResource x:Key="FilledTextBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="FilledTextBoxBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="FilledTextBoxBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 
 			<!-- Header / label -->
-			<StaticResource x:Key="FilledTextBoxHeaderForeground" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxHeaderForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxHeaderForegroundFocused" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 
 			<!-- ── OutlinedTextBox — semantic keys (source of truth, outlined variant) ── -->
 			<!-- Sizing -->
-			<StaticResource x:Key="OutlinedTextBoxCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
-			<StaticResource x:Key="OutlinedTextBoxBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />
-			<StaticResource x:Key="OutlinedTextBoxBorderThicknessFocused" ResourceKey="SimpleStrokeFocusRingThickness" />
-			<Thickness x:Key="OutlinedTextBoxPadding">16,10,16,10</Thickness>
-			<StaticResource x:Key="OutlinedTextBoxMinHeight" ResourceKey="SimpleIconLarge" />
 
 			<!-- Normal state -->
-			<StaticResource x:Key="OutlinedTextBoxForeground" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBackground" ResourceKey="SurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBorderBrush" ResourceKey="OutlineBrush" />
-			<StaticResource x:Key="OutlinedTextBoxPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
 
 			<!-- PointerOver state -->
-			<StaticResource x:Key="OutlinedTextBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBackgroundPointerOver" ResourceKey="SurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBorderBrushPointerOver" ResourceKey="OutlineBrush" />
-			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceLowBrush" />
 
 			<!-- Focused state -->
-			<StaticResource x:Key="OutlinedTextBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBackgroundFocused" ResourceKey="SurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBorderBrushFocused" ResourceKey="PrimaryMediumBrush" />
-			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundFocused" ResourceKey="OnSurfaceLowBrush" />
 
 			<!-- Disabled state -->
-			<StaticResource x:Key="OutlinedTextBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
-			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 
 			<!-- Header / label -->
-			<StaticResource x:Key="OutlinedTextBoxHeaderForeground" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundFocused" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 
 			<!-- ── Simple-only: Error state overrides (no semantic rename) ── -->
 			<!-- ── Simple-only: Small size variant ── -->
@@ -285,7 +185,7 @@
 										  FontSize="{ThemeResource BodyMediumFontSize}"
 										  FontWeight="SemiBold"
 										  Foreground="{ThemeResource FilledTextBoxHeaderForeground}"
-										  Margin="{StaticResource SimpleTextBoxHeaderMargin}"
+										  Margin="{ThemeResource SimpleTextBoxHeaderMargin}"
 										  TextWrapping="Wrap"
 										  Visibility="Collapsed"
 										  x:DeferLoadStrategy="Lazy" />
@@ -432,7 +332,7 @@
 										  FontSize="{ThemeResource BodyMediumFontSize}"
 										  FontWeight="SemiBold"
 										  Foreground="{ThemeResource OutlinedTextBoxHeaderForeground}"
-										  Margin="{StaticResource SimpleTextBoxHeaderMargin}"
+										  Margin="{ThemeResource SimpleTextBoxHeaderMargin}"
 										  TextWrapping="Wrap"
 										  Visibility="Collapsed"
 										  x:DeferLoadStrategy="Lazy" />

@@ -44,7 +44,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `DatePickerFlyoutPresenterAcceptDismissHostGridHeight` | `Double`       | 52                              |
 | `DatePickerSpacerThemeWidth`                        | `StaticResource`  | `SimpleStrokeBorder`            |
 | `DatePickerFlyoutBorderThickness`                   | `StaticResource`  | `SimpleStrokeBorder`            |
-| `DatePickerFlyoutPresenterFontFamily`               | `StaticResource`  | `SimpleFontFamily`              |
+| `DatePickerFlyoutPresenterFontFamily`               | `StaticResource`  | `DefaultFontFamily`             |
 
 ##### DatePicker Button (field appearance)
 

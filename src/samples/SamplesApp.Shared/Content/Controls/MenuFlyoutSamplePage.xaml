@@ -1,4 +1,4 @@
-<Page x:Class="Uno.Themes.Samples.Content.Controls.MenuFlyoutSamplePage"
+﻿<Page x:Class="Uno.Themes.Samples.Content.Controls.MenuFlyoutSamplePage"
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	  xmlns:sample="using:Uno.Themes.Samples"
@@ -68,9 +68,9 @@
 							<Button.Flyout>
 								<MenuFlyout>
 									<ToggleMenuFlyoutItem Text="Show Toolbar"
-														   IsChecked="True" />
+														  IsChecked="True" />
 									<ToggleMenuFlyoutItem Text="Show Status Bar"
-														   IsChecked="True" />
+														  IsChecked="True" />
 									<ToggleMenuFlyoutItem Text="Show Ruler" />
 								</MenuFlyout>
 							</Button.Flyout>
@@ -105,9 +105,9 @@
 							<Button.Flyout>
 								<MenuFlyout>
 									<MenuFlyoutItem Text="Undo"
-													 IsEnabled="False" />
+													IsEnabled="False" />
 									<MenuFlyoutItem Text="Redo"
-													 IsEnabled="False" />
+													IsEnabled="False" />
 									<MenuFlyoutSeparator />
 									<MenuFlyoutItem Text="Cut" />
 									<MenuFlyoutItem Text="Copy" />
@@ -122,9 +122,13 @@
 						<Button Content="Sort Options">
 							<Button.Flyout>
 								<MenuFlyout>
-									<RadioMenuFlyoutItem Text="Sort by Name" GroupName="SortGroup" IsChecked="True" />
-									<RadioMenuFlyoutItem Text="Sort by Date" GroupName="SortGroup" />
-									<RadioMenuFlyoutItem Text="Sort by Size" GroupName="SortGroup" />
+									<RadioMenuFlyoutItem Text="Sort by Name"
+														 GroupName="SortGroup"
+														 IsChecked="True" />
+									<RadioMenuFlyoutItem Text="Sort by Date"
+														 GroupName="SortGroup" />
+									<RadioMenuFlyoutItem Text="Sort by Size"
+														 GroupName="SortGroup" />
 								</MenuFlyout>
 							</Button.Flyout>
 						</Button>

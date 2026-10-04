@@ -37,9 +37,9 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `SecondaryRatingControlSelectedForegroundPointerOver`    | `SolidColorBrush`   | `SecondaryBrush`            |
 | `SecondaryRatingControlSelectedForegroundDisabled`       | `SolidColorBrush`   | `OnSurfaceLowBrush`         |
 | `RatingControlCaptionForeground`                         | `SolidColorBrush`   | `OnSurfaceBrush`            |
-| `RatingControlCaptionFontFamily`                         | `FontFamily`        | `MaterialRegularFontFamily` |
+| `RatingControlCaptionFontFamily`                         | `FontFamily`        | `DefaultFontFamily`         |
 | `RatingControlCaptionStyle`                              | `StaticResourceRef` | `CaptionMedium`             |
 | `RatingControlFontFamily`                                | `FontFamily`        | `SymbolThemeFontFamily`     |
 | `SecondaryRatingControlCaptionForeground`                | `SolidColorBrush`   | `OnSurfaceBrush`            |
-| `SecondaryRatingControlCaptionFontFamily`                | `FontFamily`        | `MaterialRegularFontFamily` |
+| `SecondaryRatingControlCaptionFontFamily`                | `FontFamily`        | `DefaultFontFamily`         |
 | `SecondaryRatingControlCaptionStyle`                     | `StaticResourceRef` | `CaptionMedium`             |

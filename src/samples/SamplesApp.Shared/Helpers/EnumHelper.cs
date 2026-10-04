@@ -14,5 +14,5 @@ public static class EnumHelper
 	/// <summary>
 	/// Get the description value from DescriptionAttribute
 	/// </summary>
-	public static string GetDescription(this Enum @enum) => @enum.GetAttribute<DescriptionAttribute>()?.Description;
+	public static string GetDescription(this Enum @enum) => @enum.GetAttribute<System.ComponentModel.DescriptionAttribute>()?.Description;
 }

@@ -4,31 +4,23 @@
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					mc:Ignorable="d">
 
-	<!--  Documented variables  -->
+	<!-- Documented variables -->
 	<Thickness x:Key="CupertinoButtonPadding">20</Thickness>
 	<CornerRadius x:Key="CupertinoButtonCornerRadius">8</CornerRadius>
 	<x:Double x:Key="CupertinoButtonFontSize">14</x:Double>
 
-	<!--  Styles  -->
+	<!-- Styles -->
 	<Style x:Key="CupertinoButtonStyle"
 		   TargetType="Button">
 
-		<Setter Property="Foreground"
-				Value="{ThemeResource CupertinoBlueBrush}" />
-		<Setter Property="Background"
-				Value="Transparent" />
-		<Setter Property="BorderThickness"
-				Value="0" />
-		<Setter Property="Padding"
-				Value="0" />
-		<Setter Property="MinHeight"
-				Value="40" />
-		<Setter Property="FontFamily"
-				Value="{ThemeResource CupertinoFontFamily}" />
-		<Setter Property="FontSize"
-				Value="{ThemeResource CupertinoButtonFontSize}" />
-		<Setter Property="UseSystemFocusVisuals"
-				Value="True" />
+		<Setter Property="Foreground" Value="{ThemeResource CupertinoBlueBrush}" />
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="BorderThickness" Value="0" />
+		<Setter Property="Padding" Value="0" />
+		<Setter Property="MinHeight" Value="40" />
+		<Setter Property="FontFamily" Value="{ThemeResource CupertinoFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource CupertinoButtonFontSize}" />
+		<Setter Property="UseSystemFocusVisuals" Value="True" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -45,15 +37,13 @@
 
 								<VisualState x:Name="Normal">
 									<VisualState.Setters>
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="0" />
+										<Setter Target="FocusedOverlay.Opacity" Value="0" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Opacity"
-												Value="{StaticResource CupertinoHoverOpacity}" />
+										<Setter Target="ContentPresenter.Opacity" Value="{StaticResource CupertinoHoverOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -72,8 +62,7 @@
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Foreground"
-												Value="{ThemeResource CupertinoPrimaryGrayColor}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource CupertinoPrimaryGrayColor}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -82,8 +71,7 @@
 
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="{StaticResource CupertinoFocusedOpacity}" />
+										<Setter Target="FocusedOverlay.Opacity" Value="{StaticResource CupertinoFocusedOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -91,8 +79,7 @@
 
 								<VisualState x:Name="Unfocused">
 									<VisualState.Setters>
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="0" />
+										<Setter Target="FocusedOverlay.Opacity" Value="0" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -125,24 +112,15 @@
 	<Style x:Key="CupertinoContainedButtonStyle"
 		   TargetType="Button">
 
-		<Setter Property="Foreground"
-				Value="{ThemeResource CupertinoWhiteBrush}" />
-		<Setter Property="Background"
-				Value="{ThemeResource CupertinoBlueBrush}" />
-		<Setter Property="BorderThickness"
-				Value="0" />
-		<Setter Property="Padding"
-				Value="{ThemeResource CupertinoButtonPadding}" />
-		<Setter Property="CornerRadius"
-				Value="{StaticResource CupertinoButtonCornerRadius}" />
-		<Setter Property="MinHeight"
-				Value="40" />
-		<Setter Property="FontFamily"
-				Value="{ThemeResource CupertinoFontFamily}" />
-		<Setter Property="FontSize"
-				Value="{ThemeResource CupertinoButtonFontSize}" />
-		<Setter Property="UseSystemFocusVisuals"
-				Value="True" />
+		<Setter Property="Foreground" Value="{ThemeResource CupertinoWhiteBrush}" />
+		<Setter Property="Background" Value="{ThemeResource CupertinoBlueBrush}" />
+		<Setter Property="BorderThickness" Value="0" />
+		<Setter Property="Padding" Value="{ThemeResource CupertinoButtonPadding}" />
+		<Setter Property="CornerRadius" Value="{StaticResource CupertinoButtonCornerRadius}" />
+		<Setter Property="MinHeight" Value="40" />
+		<Setter Property="FontFamily" Value="{ThemeResource CupertinoFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource CupertinoButtonFontSize}" />
+		<Setter Property="UseSystemFocusVisuals" Value="True" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -159,17 +137,14 @@
 
 								<VisualState x:Name="Normal">
 									<VisualState.Setters>
-										<Setter Target="CommonStatesOverlay.Opacity"
-												Value="0" />
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="0" />
+										<Setter Target="CommonStatesOverlay.Opacity" Value="0" />
+										<Setter Target="FocusedOverlay.Opacity" Value="0" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="CommonStatesOverlay.Opacity"
-												Value="{StaticResource CupertinoHoverOverlayOpacity}" />
+										<Setter Target="CommonStatesOverlay.Opacity" Value="{StaticResource CupertinoHoverOverlayOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -188,10 +163,8 @@
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="Root.Background"
-												Value="{ThemeResource CupertinoPrimaryGrayColor}" />
-										<Setter Target="ContentPresenter.Foreground"
-												Value="{ThemeResource CupertinoWhiteBrush}" />
+										<Setter Target="Root.Background" Value="{ThemeResource CupertinoPrimaryGrayColor}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource CupertinoWhiteBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -200,8 +173,7 @@
 
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="{StaticResource CupertinoFocusedOpacity}" />
+										<Setter Target="FocusedOverlay.Opacity" Value="{StaticResource CupertinoFocusedOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -209,8 +181,7 @@
 
 								<VisualState x:Name="Unfocused">
 									<VisualState.Setters>
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="0" />
+										<Setter Target="FocusedOverlay.Opacity" Value="0" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>

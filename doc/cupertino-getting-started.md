@@ -94,8 +94,7 @@ Depending on the type of project template that the Uno Platform application was 
 2. Select the following projects for installation:
     - `PROJECT_NAME.Wasm.csproj`
     - `PROJECT_NAME.Mobile.csproj` (or `PROJECT_NAME.iOS.csproj`, `PROJECT_NAME.Droid.csproj`, and `PROJECT_NAME.macOS.csproj` if you have an existing project)
-    - `PROJECT_NAME.Skia.Gtk.csproj`
-    - `PROJECT_NAME.Skia.WPF.csproj`
+    - `PROJECT_NAME.csproj` (the `net*-desktop` Skia Desktop head)
     - `PROJECT_NAME.Windows.csproj` (or `PROJECT_NAME.UWP.csproj` for existing projects)
 3. Add the following resources inside `App.xaml`:
 
@@ -172,7 +171,7 @@ The following guides require the creation of new `ResourceDictionary` files in y
 
 ### Change Default Font
 
-By default, Uno Cupertino comes pre-packaged with the [SF Pro](https://developer.apple.com/fonts/) `FontFamily` and automatically includes them in your application. Upon installation of the Uno Cupertino package, you will have a `CupertinoFontFamily` resource available.
+By default, Uno Cupertino comes pre-packaged with the [SF Pro](https://developer.apple.com/fonts/) `FontFamily` and automatically includes them in your application. Upon installation of the Uno Cupertino package, you will have a `CupertinoFontFamily` resource available. It is an alias of the shared `DefaultFontFamily` root token (see [Design Tokens](design-tokens.md#typography)); Cupertino has no semantic type scale, so `CupertinoFontFamily` stays the key to override.
 
 If you would like Uno Cupertino to use a different font, you can override the default `FontFamily` by following these steps:
 

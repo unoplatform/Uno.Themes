@@ -1,263 +1,46 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:not_macos="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:macos="http://uno.ui/macos"
 					xmlns:um="using:Uno.Material"
 					xmlns:ut="using:Uno.Themes"
-					mc:Ignorable="d macos">
+					mc:Ignorable="d">
 
 	<!--
 		NOTE:
 		Expected TextBox behavior:
 		We are going a different route than the Official Material M2/M3 Google samples & the Material doc regarding the fact that the Placeholder will always be visible.
 		(cf. specs discussions here https://github.com/unoplatform/Uno.Themes/issues/974)
-
+		
 		- Without Header/Placeholder: Simple TextBox
-
+		
 		- With placeholder but no header: The placeholder will be displayed where the text is supposed to be until the text is inputted
-
+		
 		- With header but no placeholder: The header will be displayed where the text is supposed to be when unfocused and will move up when text is inputted or when focus is gained
-
+		
 		- With header and placeholder: The header will be displayed at the top, and the placeholder will be displayed where the text is supposed to be until the text is inputted
 	-->
 	<ResourceDictionary.ThemeDictionaries>
 		<ResourceDictionary x:Key="Default">
-			<!--#region DownscaledHeader visual state -->
+			<!--#region DownscaledHeader visual state-->
 			<x:Double x:Key="DownscaledHeaderHeaderCompositeTransformTranslateY">-11</x:Double>
 			<x:Double x:Key="DownscaledHeaderPlaceholderTextCompositeTransformTranslateY">8</x:Double>
 			<x:Double x:Key="DownscaledHeaderTextCompositeTransformTranslateY">8</x:Double>
 			<x:Double x:Key="DownscaledHeaderCompositeTransformScaleX">0.7</x:Double>
 			<x:Double x:Key="DownscaledHeaderCompositeTransformScaleY">0.7</x:Double>
-			<!--#endregion-->
-
-			<!--#region Fille Delete Button Brushes-->
-			<StaticResource x:Key="TextBoxDeleteButtonForeground" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="TextBoxDeleteButtonForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="TextBoxDeleteButtonForegroundPressed" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="TextBoxDeleteButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
-			<!--#endregion-->
-
-			<!--#region Leading Icon Brushes-->
-			<StaticResource x:Key="TextBoxLeadingIconForeground" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="TextBoxLeadingIconForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
-			<!--#endregion-->
-
-			<!--#region Filled TextBox Brushes-->
-			<StaticResource x:Key="FilledTextBoxBackground" ResourceKey="SurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTextBoxBackgroundPointerOver" ResourceKey="OnSurfaceVariantHoverBrush" />
-			<StaticResource x:Key="FilledTextBoxBackgroundFocused" ResourceKey="SurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTextBoxBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-
-			<StaticResource x:Key="FilledTextBoxBorderBrush" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTextBoxBorderBrushPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxBorderBrushFocused" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="FilledTextBoxBorderBrushDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-
-			<StaticResource x:Key="FilledTextBoxDeleteButtonForeground" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundFocused" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
-
-			<StaticResource x:Key="FilledTextBoxForeground" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
-			<!-- In this case the opacity is not applied to the brush directly - known issue for ContentElement -->
-			<StaticResource x:Key="FilledTextBoxForegroundDisabled" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxForegroundOpacityDisabled" ResourceKey="LowOpacity" />
-
-			<StaticResource x:Key="FilledTextBoxPlaceholderForeground" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundFocused" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
-
-			<StaticResource x:Key="FilledTextBoxHeaderForeground" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTextBoxHeaderForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTextBoxHeaderForegroundFocused" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="FilledTextBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
-			<!--#endregion-->
-
-			<!--#region Outlined TextBox Brushes-->
-			<StaticResource x:Key="OutlinedTextBoxBorderBrush" ResourceKey="OutlineBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBorderBrushPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBorderBrushFocused" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBorderBrushDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-
-			<StaticResource x:Key="OutlinedTextBoxForeground" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
-			<!-- In this case the opacity is not applied to the brush directly - known issue for ContentElement -->
-			<StaticResource x:Key="OutlinedTextBoxForegroundDisabled" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxForegroundOpacityDisabled" ResourceKey="LowOpacity" />
-
-			<StaticResource x:Key="OutlinedTextBoxPlaceholderForeground" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundFocused" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
-
-			<StaticResource x:Key="OutlinedTextBoxHeaderForeground" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundFocused" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
-			<!--#endregion-->
-
-			<!--#region Typo-->
-			<StaticResource x:Key="OutlinedTextBoxFontFamily" ResourceKey="BodyLargeFontFamily" />
-			<StaticResource x:Key="OutlinedTextBoxFontWeight" ResourceKey="BodyLargeFontWeight" />
-			<StaticResource x:Key="OutlinedTextBoxFontSize" ResourceKey="BodyLargeFontSize" />
-			<StaticResource x:Key="OutlinedTextBoxCharacterSpacing" ResourceKey="BodyLargeCharacterSpacing" />
-
-			<StaticResource x:Key="FilledTextBoxFontFamily" ResourceKey="BodyLargeFontFamily" />
-			<StaticResource x:Key="FilledTextBoxFontWeight" ResourceKey="BodyLargeFontWeight" />
-			<StaticResource x:Key="FilledTextBoxFontSize" ResourceKey="BodyLargeFontSize" />
-			<StaticResource x:Key="FilledTextBoxCharacterSpacing" ResourceKey="BodyLargeCharacterSpacing" />
-			<StaticResource x:Key="FilledTextBoxBorderThicknessNormal" ResourceKey="TextBoxOutlinedStrokeHeight" />
-			<StaticResource x:Key="FilledTextBoxBorderThicknessFocused" ResourceKey="TextBoxFocusStrokeWidth" />
-			<!--#endregion-->
-
-			<!--#region Delete Button Style-->
-			<x:Double x:Key="TextBoxClearGlyphWidth">20</x:Double>
-			<x:Double x:Key="TextBoxClearGlyphHeight">20</x:Double>
-			<!--#endregion-->
-
-			<!--#region Filled TextBox Style-->
-			<CornerRadius x:Key="FilledTextBoxCornerRadius">4,4,0,0</CornerRadius>
-			<macos:Thickness x:Key="FilledTextBoxPadding">16,7</macos:Thickness>
-			<not_macos:Thickness x:Key="FilledTextBoxPadding">16,8</not_macos:Thickness>
-			<x:Double x:Key="FilledTextBoxMinHeight">58</x:Double>
-			<x:Double x:Key="FilledTextBoxBorderHeightFocused">2</x:Double>
-			<!--#endregion-->
-
-			<!--#region Outlined TextBox Style-->
-			<x:Double x:Key="OutlinedTextBoxBorderThickness">1</x:Double>
-			<StaticResource x:Key="OutlinedTextBoxCornerRadius" ResourceKey="Radius100CornerRadius" />
-			<StaticResource x:Key="OutlinedTextBoxPadding" ResourceKey="Space200Thickness" />
-			<x:Double x:Key="OutlinedTextBoxMinHeight">56</x:Double>
-			<x:Double x:Key="OutlinedTextBoxBorderThicknessFocused">2</x:Double>
-			<x:Double x:Key="OutlinedTextBoxBorderThicknessPointerOver">2</x:Double>
-			<!--#endregion-->
 		</ResourceDictionary>
 
 		<ResourceDictionary x:Key="Light">
-			<!--#region DownscaledHeader visual state -->
+			<!--#region DownscaledHeader visual state-->
 			<x:Double x:Key="DownscaledHeaderHeaderCompositeTransformTranslateY">-11</x:Double>
 			<x:Double x:Key="DownscaledHeaderPlaceholderTextCompositeTransformTranslateY">8</x:Double>
 			<x:Double x:Key="DownscaledHeaderTextCompositeTransformTranslateY">8</x:Double>
 			<x:Double x:Key="DownscaledHeaderCompositeTransformScaleX">0.7</x:Double>
 			<x:Double x:Key="DownscaledHeaderCompositeTransformScaleY">0.7</x:Double>
-			<!--#endregion-->
-
-			<!--#region Fille Delete Button Brushes-->
-			<StaticResource x:Key="TextBoxDeleteButtonForeground" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="TextBoxDeleteButtonForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="TextBoxDeleteButtonForegroundPressed" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="TextBoxDeleteButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
-			<!--#endregion-->
-
-			<!--#region Leading Icon Brushes-->
-			<StaticResource x:Key="TextBoxLeadingIconForeground" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="TextBoxLeadingIconForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
-			<!--#endregion-->
-
-			<!--#region Filled TextBox Brushes-->
-			<StaticResource x:Key="FilledTextBoxBackground" ResourceKey="SurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTextBoxBackgroundPointerOver" ResourceKey="OnSurfaceVariantHoverBrush" />
-			<StaticResource x:Key="FilledTextBoxBackgroundFocused" ResourceKey="SurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTextBoxBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-
-			<StaticResource x:Key="FilledTextBoxBorderBrush" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTextBoxBorderBrushPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxBorderBrushFocused" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="FilledTextBoxBorderBrushDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-
-			<StaticResource x:Key="FilledTextBoxDeleteButtonForeground" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundFocused" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
-
-			<StaticResource x:Key="FilledTextBoxForeground" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
-			<!-- In this case the opacity is not applied to the brush directly - known issue for ContentElement -->
-			<StaticResource x:Key="FilledTextBoxForegroundDisabled" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxForegroundOpacityDisabled" ResourceKey="LowOpacity" />
-
-			<StaticResource x:Key="FilledTextBoxPlaceholderForeground" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundFocused" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
-
-			<StaticResource x:Key="FilledTextBoxHeaderForeground" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTextBoxHeaderForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTextBoxHeaderForegroundFocused" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="FilledTextBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
-			<!--#endregion-->
-
-			<!--#region Outlined TextBox Brushes-->
-			<StaticResource x:Key="OutlinedTextBoxBorderBrush" ResourceKey="OutlineBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBorderBrushPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBorderBrushFocused" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBorderBrushDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-
-			<StaticResource x:Key="OutlinedTextBoxForeground" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
-			<!-- In this case the opacity is not applied to the brush directly - known issue for ContentElement -->
-			<StaticResource x:Key="OutlinedTextBoxForegroundDisabled" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxForegroundOpacityDisabled" ResourceKey="LowOpacity" />
-
-			<StaticResource x:Key="OutlinedTextBoxPlaceholderForeground" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundFocused" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
-
-			<StaticResource x:Key="OutlinedTextBoxHeaderForeground" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundFocused" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
-			<!--#endregion-->
-
-			<!--#region Typo-->
-			<StaticResource x:Key="OutlinedTextBoxFontFamily" ResourceKey="BodyLargeFontFamily" />
-			<StaticResource x:Key="OutlinedTextBoxFontWeight" ResourceKey="BodyLargeFontWeight" />
-			<StaticResource x:Key="OutlinedTextBoxFontSize" ResourceKey="BodyLargeFontSize" />
-			<StaticResource x:Key="OutlinedTextBoxCharacterSpacing" ResourceKey="BodyLargeCharacterSpacing" />
-
-			<StaticResource x:Key="FilledTextBoxFontFamily" ResourceKey="BodyLargeFontFamily" />
-			<StaticResource x:Key="FilledTextBoxFontWeight" ResourceKey="BodyLargeFontWeight" />
-			<StaticResource x:Key="FilledTextBoxFontSize" ResourceKey="BodyLargeFontSize" />
-			<StaticResource x:Key="FilledTextBoxCharacterSpacing" ResourceKey="BodyLargeCharacterSpacing" />
-			<StaticResource x:Key="FilledTextBoxBorderThicknessNormal" ResourceKey="TextBoxOutlinedStrokeHeight" />
-			<StaticResource x:Key="FilledTextBoxBorderThicknessFocused" ResourceKey="TextBoxFocusStrokeWidth" />
-			<!--#endregion-->
-
-			<!--#region Delete Button Style-->
-			<x:Double x:Key="TextBoxClearGlyphWidth">20</x:Double>
-			<x:Double x:Key="TextBoxClearGlyphHeight">20</x:Double>
-			<!--#endregion-->
-
-			<!--#region Filled TextBox Style-->
-			<CornerRadius x:Key="FilledTextBoxCornerRadius">4,4,0,0</CornerRadius>
-			<macos:Thickness x:Key="FilledTextBoxPadding">16,7</macos:Thickness>
-			<not_macos:Thickness x:Key="FilledTextBoxPadding">16,8</not_macos:Thickness>
-			<x:Double x:Key="FilledTextBoxMinHeight">58</x:Double>
-			<x:Double x:Key="FilledTextBoxBorderHeightFocused">2</x:Double>
-			<!--#endregion-->
-
-			<!--#region Outlined TextBox Style-->
-			<x:Double x:Key="OutlinedTextBoxBorderThickness">1</x:Double>
-			<StaticResource x:Key="OutlinedTextBoxCornerRadius" ResourceKey="Radius100CornerRadius" />
-			<StaticResource x:Key="OutlinedTextBoxPadding" ResourceKey="Space200Thickness" />
-			<x:Double x:Key="OutlinedTextBoxMinHeight">56</x:Double>
-			<x:Double x:Key="OutlinedTextBoxBorderThicknessFocused">2</x:Double>
-			<x:Double x:Key="OutlinedTextBoxBorderThicknessPointerOver">2</x:Double>
-			<!--#endregion-->
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 
 	<!-- Path Data -->
-	<x:String x:Key="TextBoxClearGlyphData">M14.9482 6.46442L13.534 5.05021L9.99849 8.58574L6.46296 5.05021L5.04874 6.46442L8.58428 9.99995L5.04874 13.5355L6.46296 14.9497L9.99849 11.4142L13.534 14.9497L14.9482 13.5355L11.4127 9.99995L14.9482 6.46442ZM17.0696 2.92889C13.1663 -0.974342 6.83065 -0.974342 2.92742 2.92889C-0.975807 6.83212 -0.975807 13.1678 2.92742 17.071C6.83065 20.9743 13.1663 20.9743 17.0696 17.071C20.9728 13.1678 20.9728 6.83212 17.0696 2.92889ZM4.34164 15.6568C1.22329 12.5385 1.22329 7.46144 4.34164 4.3431C7.45998 1.22476 12.537 1.22476 15.6553 4.3431C18.7737 7.46144 18.7737 12.5385 15.6553 15.6568C12.537 18.7752 7.45998 18.7752 4.34164 15.6568Z</x:String>
 
 
 	<Style x:Key="MaterialDeleteButtonStyle"
@@ -322,10 +105,7 @@
 		<Setter Property="CharacterSpacing" Value="{ThemeResource FilledTextBoxCharacterSpacing}" />
 		<!-- End: Body Large Typo -->
 
-		<macos:Setter Property="Padding"
-					  Value="{ThemeResource FilledTextBoxPadding}" />
-		<not_macos:Setter Property="Padding"
-						  Value="{ThemeResource FilledTextBoxPadding}" />
+		<Setter Property="Padding" Value="{ThemeResource FilledTextBoxPadding}" />
 
 		<Setter Property="MinHeight" Value="{ThemeResource FilledTextBoxMinHeight}" />
 
@@ -429,7 +209,10 @@
 														 To="{StaticResource DownscaledHeaderCompositeTransformScaleY}" />
 									</Storyboard>
 									<VisualState.StateTriggers>
-										<ut:TextBoxHeaderStateTrigger Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}" FocusState="{Binding FocusState, RelativeSource={RelativeSource TemplatedParent}}" PlaceholderText="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}}" HeaderText="{Binding Header, RelativeSource={RelativeSource TemplatedParent}}" />
+										<ut:TextBoxHeaderStateTrigger Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}"
+																	  FocusState="{Binding FocusState, RelativeSource={RelativeSource TemplatedParent}}"
+																	  PlaceholderText="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}}"
+																	  HeaderText="{Binding Header, RelativeSource={RelativeSource TemplatedParent}}" />
 									</VisualState.StateTriggers>
 								</VisualState>
 							</VisualStateGroup>
@@ -520,7 +303,7 @@
 
 							<Button x:Name="DeleteButton"
 									Grid.Column="2"
-									Margin="{StaticResource Space200LeftThickness}"
+									Margin="{ThemeResource Space200LeftThickness}"
 									Foreground="{ThemeResource FilledTextBoxDeleteButtonForeground}"
 									IsTabStop="False"
 									Style="{StaticResource MaterialDeleteButtonStyle}"
@@ -538,8 +321,7 @@
 								   Fill="{ThemeResource FilledTextBoxBorderBrushFocused}"
 								   Height="{ThemeResource FilledTextBoxBorderThicknessFocused}"
 								   VerticalAlignment="Bottom"
-								   not_macos:RenderTransformOrigin="0.5,0.5"
-								   macos:RenderTransformOrigin="0.0,0.5">
+								   RenderTransformOrigin="0.5,0.5">
 							<Rectangle.RenderTransform>
 								<ScaleTransform x:Name="FocusedBorder_ScaleTransform" ScaleX="0" />
 							</Rectangle.RenderTransform>
@@ -652,7 +434,10 @@
 														 To="{StaticResource DownscaledHeaderCompositeTransformScaleY}" />
 									</Storyboard>
 									<VisualState.StateTriggers>
-										<ut:TextBoxHeaderStateTrigger Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}" FocusState="{Binding FocusState, RelativeSource={RelativeSource TemplatedParent}}" PlaceholderText="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}}" HeaderText="{Binding Header, RelativeSource={RelativeSource TemplatedParent}}" />
+										<ut:TextBoxHeaderStateTrigger Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}"
+																	  FocusState="{Binding FocusState, RelativeSource={RelativeSource TemplatedParent}}"
+																	  PlaceholderText="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}}"
+																	  HeaderText="{Binding Header, RelativeSource={RelativeSource TemplatedParent}}" />
 									</VisualState.StateTriggers>
 								</VisualState>
 							</VisualStateGroup>
@@ -685,7 +470,8 @@
 							</Viewbox>
 
 							<!-- 1: Text Elements Container -->
-							<Grid Grid.Column="1" Margin="{StaticResource Space200HorizontalThickness}">
+							<Grid Grid.Column="1"
+								  Margin="{ThemeResource Space200HorizontalThickness}">
 								<!--
 									We need to center this in both Singleline and Multiline mode:
 									- SingleLine via Border.MinHeight + SV.HAlign

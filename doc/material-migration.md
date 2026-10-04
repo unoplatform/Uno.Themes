@@ -40,6 +40,24 @@ Changing a seed color at runtime now recolors everything already on screen — i
 
 To make this possible, the semantic `*Brush` resources are now shared, long-lived instances whose `Color` and `Opacity` are rewritten in place when a seed or override changes. If your code caches a `brush.Color` snapshot or expects a fresh brush instance per theme rebuild, hold on to the resource key instead.
 
+### Single root typeface: `DefaultFontFamily`
+
+The semantic type scales now derive from one root token, `DefaultFontFamily`, and per-scale weight nuance is carried by the `*FontWeight` tokens, resolved from that single family (a variable font, or a font shipping a font manifest) — see [Typography](semantic-styles.md#typography). The font override surface changes accordingly:
+
+- The `TypefacePlain` / `TypefaceBrand` token pair introduced in 7.1.1 is removed. An override file that still defines them is silently ignored; redefine `DefaultFontFamily` instead.
+- Simple's `SimpleFontFamily` and per-weight `SimpleRegularFontFamily` / `SimpleMediumFontFamily` / `SimpleSemiBoldFontFamily` / `SimpleBoldFontFamily` keys are removed; a slot that needs a different weight overrides its `*FontWeight` token.
+- The Material v2 type scales and per-control `*FontFamily` keys (`HyperlinkButtonFontFamily`, `SliderFontFamily`, `TextToggleButtonFontFamily`, `DatePickerFlyoutPresenterFontFamily`, `RatingControlCaptionFontFamily`, `SecondaryRatingControlCaptionFontFamily`) no longer derive from `MaterialRegularFontFamily` / `MaterialMediumFontFamily` / `MaterialLightFontFamily`. Those keys still resolve, to the weight-specific Roboto files, and the v1 styles are unchanged, but overriding them no longer changes v2 typography.
+- `SimpleButtonFontWeight` is now `Medium` (it was `Normal`, with the weight baked into the old Inter-Medium button family) and `SimpleToggleButtonFontWeight` is new. An app that overrides `SimpleButtonFontFamily` with its own font gets Medium buttons unless it also overrides the weight key.
+
+| Legacy key                                                 | Portable token                      | Cascades to         |
+| ---------------------------------------------------------- | ----------------------------------- | ------------------- |
+| `TypefacePlain`, `TypefaceBrand`                           | `DefaultFontFamily`                 | Every type scale    |
+| `SimpleFontFamily`                                         | `DefaultFontFamily`                 | Every type scale    |
+| `SimpleRegular` / `Medium` / `SemiBold` / `BoldFontFamily` | `DefaultFontFamily` + `*FontWeight` | Every type scale    |
+| `MaterialRegularFontFamily`, `MaterialMediumFontFamily`    | `DefaultFontFamily`                 | Every v2 type scale |
+
+The override goes in the file referenced as the theme's `FontOverrideSource` — see [Typography Font Swap](design-tokens.md#typography-font-swap).
+
 ## Upgrading to Uno Themes v7
 
 Uno Themes 7.0 introduces the Simple design system, the theme-agnostic Semantic Design Language, design tokens, and opt-in seed color generation. Visual defaults are unchanged — no semantic color or brush resource key was renamed or removed, and seed generation is off unless you enable it — so most apps upgrade without code changes. The sections below cover the changes that may require action.
@@ -96,15 +114,6 @@ After:
 
 > [!IMPORTANT]
 > Seed generation is opt-in and no theme sets a default seed, so an upgraded app renders with exactly the same colors as 6.1, and explicit color overrides keep winning over everything else — including seed-generated palettes. For the full precedence order, see [Color Precedence](seed-colors.md#color-precedence).
-
-### Typography and font overrides
-
-Existing Material font overrides (`MaterialRegularFontFamily` / `MaterialMediumFontFamily`) continue to work. For overrides meant to apply across design systems, prefer the new root typeface tokens, which cascade through the whole type scale — see [Typography](semantic-styles.md#typography):
-
-| Legacy key (Material-specific) | Portable token  | Cascades to                 |
-| ------------------------------ | --------------- | --------------------------- |
-| `MaterialRegularFontFamily`    | `TypefacePlain` | Display, Headline           |
-| `MaterialMediumFontFamily`     | `TypefaceBrand` | Title, Label, Body, Caption |
 
 ### Material style changes
 

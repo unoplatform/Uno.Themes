@@ -9,14 +9,10 @@
 	<Style x:Key="MaterialHyperlinkButtonStyle"
 		   TargetType="HyperlinkButton">
 
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialPrimaryBrush}" />
-		<Setter Property="Padding"
-				Value="0" />
-		<Setter Property="FontSize"
-				Value="14" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialRegularFontFamily}" />
+		<Setter Property="Foreground" Value="{StaticResource MaterialPrimaryBrush}" />
+		<Setter Property="Padding" Value="0" />
+		<Setter Property="FontSize" Value="14" />
+		<Setter Property="FontFamily" Value="{StaticResource MaterialRegularFontFamily}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="HyperlinkButton">
@@ -29,22 +25,19 @@
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="Content.Opacity"
-												Value="{StaticResource MaterialMediumOpacity}" />
+										<Setter Target="Content.Opacity" Value="{StaticResource MaterialMediumOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="Content.Opacity"
-												Value="{StaticResource MaterialLowOpacity}" />
+										<Setter Target="Content.Opacity" Value="{StaticResource MaterialLowOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource MaterialTextButtonLowBrush}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{StaticResource MaterialTextButtonLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -81,8 +74,7 @@
 		   TargetType="HyperlinkButton"
 		   BasedOn="{StaticResource MaterialHyperlinkButtonStyle}">
 
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialSecondaryBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource MaterialSecondaryBrush}" />
 	</Style>
 
 </ResourceDictionary>

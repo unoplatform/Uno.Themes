@@ -13,11 +13,17 @@ Uno Themes provides a **semantic style abstraction layer** that lets you write t
 
 ## How It Works
 
-Each theme's `_Resources.xaml` defines `<StaticResource>` aliases that map semantic keys to theme-specific styles:
+Each theme's `SemanticStyles.xaml` defines `<StaticResource>` aliases that map semantic keys to theme-specific styles:
 
 - **Material**: `FilledButtonStyle` &rarr; `MaterialFilledButtonStyle`
 - **Simple**: `FilledButtonStyle` &rarr; `SimpleFilledButtonStyle`
 - **Omarchy**: `FilledButtonStyle` &rarr; `OmarchyFilledButtonStyle`
+
+### Runtime discovery (for tooling)
+
+Semantic resources are declared in dictionaries of type `Uno.Themes.SemanticResources`, a `ResourceDictionary` subclass with no members: the type is the signal. This covers the style aliases above, the control lightweight-styling brushes and layout tokens, the shared colour palette and brushes, the shared typography tokens, and the generated spacing, shape and density scales. Theme-prefixed keys are never declared in one.
+
+A tool walking a theme's dictionaries treats a key as semantic when any dictionary declaring it is a `SemanticResources`, or is one of the `ThemeDictionaries` of a `SemanticResources` (a file loaded through `Source` copies its theme dictionaries in as plain `ResourceDictionary` instances). `MergedDictionaries` do not inherit the marker. Read the theme dictionaries through the `ThemeDictionaries` indexer rather than by enumerating its values: a dictionary loaded through `Source` holds them as lazy initializers until first indexed.
 
 ## Control Style Mappings
 
@@ -208,6 +214,8 @@ FAB is a Material-specific concept. Under the Simple and Omarchy themes, FAB key
 
 All themes provide identical semantic typography keys based on the Material Design 3 type scale (Omarchy maps them onto its single monospace face: bold cuts for Display/Headline/Title, the italic cut for Caption).
 
+Every `*FontFamily` key derives from the single `DefaultFontFamily` root token, so overriding that one key swaps the typeface across the whole type scale; per-scale weight nuance is carried by the `*FontWeight` tokens. See [Design Tokens - Typography](design-tokens.md#typography).
+
 | Semantic Style Key | Font Resource Keys |
 |---|---|
 | `DisplayLarge` | `DisplayLargeFontFamily`, `DisplayLargeFontSize`, `DisplayLargeFontWeight`, `DisplayLargeCharacterSpacing` |
@@ -241,7 +249,7 @@ Semantic style keys also enable portable [lightweight styling](lightweight-styli
 <SolidColorBrush x:Key="FilledButtonForeground" Color="Red" />
 ```
 
-The **Material**, **Simple** and **Omarchy** templates reference the same unprefixed keys (e.g. `FilledButtonForeground`) directly. Omarchy derives hover, pressed and disabled visuals from opacity tokens rather than per-state brushes, so only the base keys (`*Foreground`, `*Background`, `*BorderBrush`) exist there — see [Omarchy Controls Styles](omarchy-controls-styles.md).
+The **Material**, **Simple** and **Omarchy** templates reference the same unprefixed keys (e.g. `FilledButtonForeground`) directly. Their lightweight-styling declarations live in the theme's `SemanticStyles.xaml`, alongside the style aliases, so tooling discovers them through `SemanticResources` too. Light, Default and any HighContrast entries keep their existing values; theme-prefixed compatibility aliases remain in the control dictionaries. Omarchy derives hover, pressed and disabled visuals from opacity tokens rather than per-state brushes, so only the base keys (`*Foreground`, `*Background`, `*BorderBrush`) exist there — see [Omarchy Controls Styles](omarchy-controls-styles.md).
 
 The color palette underneath these keys can itself be swapped wholesale — generated from a single seed color, and even changed at runtime — see [Seed Color Palette](seed-colors.md).
 

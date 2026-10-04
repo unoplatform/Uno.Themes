@@ -19,57 +19,13 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Lightweight styling ThemeResource aliases -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<ResourceDictionary.ThemeDictionaries>
 
-		<!-- ─── Light Theme ─── -->
-		<ResourceDictionary x:Key="Light">
-
-			<!-- ── Off-track — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="ToggleSwitchOuterBorderFill" ResourceKey="SurfaceVariantBrush" />
-			<StaticResource x:Key="ToggleSwitchOuterBorderStroke" ResourceKey="OutlineBrush" />
-			<StaticResource x:Key="ToggleSwitchOuterBorderFillPressed" ResourceKey="TertiaryContainerBrush" />
-			<StaticResource x:Key="ToggleSwitchOuterBorderFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="ToggleSwitchOuterBorderStrokeDisabled" ResourceKey="OutlineDisabledBrush" />
-			<!-- ── On-track — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="ToggleSwitchKnobBoundsFill" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="ToggleSwitchKnobBoundsFillPressed" ResourceKey="PrimaryVariantDarkBrush" />
-			<StaticResource x:Key="ToggleSwitchKnobBoundsFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<!-- ── Thumb — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="ToggleSwitchKnobOffFill" ResourceKey="OnSurfaceMediumBrush" />
-			<StaticResource x:Key="ToggleSwitchKnobOnFill" ResourceKey="OnPrimaryBrush" />
-			<StaticResource x:Key="ToggleSwitchKnobFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<!-- ── Label — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="ToggleSwitchContentForeground" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="ToggleSwitchContentForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-		</ResourceDictionary>
-
-		<!-- ─── Dark Theme (Default) ─── -->
-		<ResourceDictionary x:Key="Default">
-
-			<!-- ── Off-track — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="ToggleSwitchOuterBorderFill" ResourceKey="SurfaceVariantBrush" />
-			<StaticResource x:Key="ToggleSwitchOuterBorderStroke" ResourceKey="OutlineBrush" />
-			<StaticResource x:Key="ToggleSwitchOuterBorderFillPressed" ResourceKey="TertiaryContainerBrush" />
-			<StaticResource x:Key="ToggleSwitchOuterBorderFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="ToggleSwitchOuterBorderStrokeDisabled" ResourceKey="OutlineDisabledBrush" />
-			<!-- ── On-track — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="ToggleSwitchKnobBoundsFill" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="ToggleSwitchKnobBoundsFillPressed" ResourceKey="PrimaryVariantDarkBrush" />
-			<StaticResource x:Key="ToggleSwitchKnobBoundsFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<!-- ── Thumb — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="ToggleSwitchKnobOffFill" ResourceKey="OnSurfaceMediumBrush" />
-			<StaticResource x:Key="ToggleSwitchKnobOnFill" ResourceKey="OnPrimaryBrush" />
-			<StaticResource x:Key="ToggleSwitchKnobFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<!-- ── Label — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="ToggleSwitchContentForeground" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="ToggleSwitchContentForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-		</ResourceDictionary>
-
-	</ResourceDictionary.ThemeDictionaries>
-
-	<StaticResource x:Key="SimpleToggleSwitchTrackWidth" ResourceKey="SimpleIconLarge" /> <!-- sds-size-icon-large -->
-	<StaticResource x:Key="SimpleToggleSwitchTrackHeight" ResourceKey="SimpleIconSmall" /> <!-- sds-size-icon-small -->
-	<StaticResource x:Key="SimpleToggleSwitchStrokeThickness" ResourceKey="SimpleStrokeBorder" /> <!-- sds-size-stroke-border -->
+	<StaticResource x:Key="SimpleToggleSwitchTrackWidth" ResourceKey="SimpleIconLarge" />
+	<!-- sds-size-icon-large -->
+	<StaticResource x:Key="SimpleToggleSwitchTrackHeight" ResourceKey="SimpleIconSmall" />
+	<!-- sds-size-icon-small -->
+	<StaticResource x:Key="SimpleToggleSwitchStrokeThickness" ResourceKey="SimpleStrokeBorder" />
+	<!-- sds-size-stroke-border -->
 	<StaticResource x:Key="SimpleToggleSwitchThumbSize" ResourceKey="SimpleSpace400" />
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Layout / sizing resources (theme-agnostic) -->
@@ -172,7 +128,7 @@
 										  Content="{TemplateBinding Header}"
 										  ContentTemplate="{TemplateBinding HeaderTemplate}"
 										  Foreground="{ThemeResource ToggleSwitchContentForeground}"
-										  Margin="{StaticResource SimpleToggleSwitchHeaderMargin}"
+										  Margin="{ThemeResource SimpleToggleSwitchHeaderMargin}"
 										  VerticalAlignment="Top"
 										  Visibility="Collapsed" />
 
@@ -188,8 +144,8 @@
 							<Rectangle x:Name="OuterBorder"
 									   Width="{StaticResource SimpleToggleSwitchTrackWidth}"
 									   Height="{StaticResource SimpleToggleSwitchTrackHeight}"
-									   RadiusX="{StaticResource SimpleToggleSwitchTrackRadius}"
-									   RadiusY="{StaticResource SimpleToggleSwitchTrackRadius}"
+									   RadiusX="{ThemeResource SimpleToggleSwitchTrackRadius}"
+									   RadiusY="{ThemeResource SimpleToggleSwitchTrackRadius}"
 									   Fill="{ThemeResource ToggleSwitchOuterBorderFill}"
 									   Stroke="{ThemeResource ToggleSwitchOuterBorderStroke}"
 									   StrokeThickness="{StaticResource SimpleToggleSwitchStrokeThickness}"
@@ -199,8 +155,8 @@
 							<Rectangle x:Name="SwitchKnobBounds"
 									   Width="{StaticResource SimpleToggleSwitchTrackWidth}"
 									   Height="{StaticResource SimpleToggleSwitchTrackHeight}"
-									   RadiusX="{StaticResource SimpleToggleSwitchTrackRadius}"
-									   RadiusY="{StaticResource SimpleToggleSwitchTrackRadius}"
+									   RadiusX="{ThemeResource SimpleToggleSwitchTrackRadius}"
+									   RadiusY="{ThemeResource SimpleToggleSwitchTrackRadius}"
 									   Fill="{ThemeResource ToggleSwitchKnobBoundsFill}"
 									   HorizontalAlignment="Center"
 									   Opacity="0" />
@@ -214,8 +170,8 @@
 								<Grid x:Name="SwitchKnobOn"
 									  HorizontalAlignment="Left">
 									<Ellipse x:Name="KnobOn"
-											 Width="{StaticResource SimpleToggleSwitchThumbSize}"
-											 Height="{StaticResource SimpleToggleSwitchThumbSize}"
+											 Width="{ThemeResource SimpleToggleSwitchThumbSize}"
+											 Height="{ThemeResource SimpleToggleSwitchThumbSize}"
 											 Fill="{ThemeResource ToggleSwitchKnobOnFill}"
 											 Margin="{StaticResource SimpleToggleSwitchThumbOnMargin}"
 											 HorizontalAlignment="Left"
@@ -227,8 +183,8 @@
 								<Grid x:Name="SwitchKnobOff"
 									  HorizontalAlignment="Left">
 									<Ellipse x:Name="KnobOff"
-											 Width="{StaticResource SimpleToggleSwitchThumbSize}"
-											 Height="{StaticResource SimpleToggleSwitchThumbSize}"
+											 Width="{ThemeResource SimpleToggleSwitchThumbSize}"
+											 Height="{ThemeResource SimpleToggleSwitchThumbSize}"
 											 Fill="{ThemeResource ToggleSwitchKnobOffFill}"
 											 Margin="{StaticResource SimpleToggleSwitchThumbOffMargin}"
 											 HorizontalAlignment="Left"

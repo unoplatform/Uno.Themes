@@ -46,15 +46,18 @@ public class SimpleTheme(ResourceDictionary colorOverride = null, ResourceDictio
 
 	protected override string DefaultStylesSource => SimpleConstants.ResourcePaths.MergedPages;
 
-	protected override void AddThemeSpecificResources()
-	{
-		base.AddThemeSpecificResources();
+	protected override string SemanticStylesSource => SimpleConstants.ResourcePaths.SemanticStyles;
 
-		// Base fonts and thickness ship in the Source bundle (BaseDictionaries.xaml); only a
-		// consumer-supplied font override is layered dynamically on top to shadow them.
-		if (FontOverrideDictionary is { } fontOverride)
-		{
-			AddThemeDictionary(fontOverride);
-		}
-	}
+	/// <summary>
+	/// The font family alias keys Simple declares — StaticResource aliases that snapshot at parse
+	/// time and therefore need regenerating for a runtime <see cref="BaseTheme.DefaultFontFamily"/>
+	/// change to reach the control templates. Keep in sync with the <c>*FontFamily</c>
+	/// lightweight-styling keys under <c>Styles/Controls</c>.
+	/// </summary>
+	internal override string[] FontFamilyAliasKeys { get; } =
+	{
+		"SimpleButtonFontFamily",
+		"SimpleToggleButtonFontFamily",
+		"DatePickerFlyoutPresenterFontFamily",
+	};
 }

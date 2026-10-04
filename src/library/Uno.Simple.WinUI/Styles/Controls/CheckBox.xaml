@@ -25,159 +25,6 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Lightweight styling ThemeResource aliases -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<ResourceDictionary.ThemeDictionaries>
-
-		<!-- ─── Light Theme ─── -->
-		<ResourceDictionary x:Key="Light">
-
-			<!-- ── CheckBox — semantic keys (source of truth) ── -->
-
-			<!-- Unchecked Background -->
-			<StaticResource x:Key="CheckBoxBackgroundUnchecked" ResourceKey="SurfaceBrush" />
-			<StaticResource x:Key="CheckBoxBackgroundUncheckedPointerOver" ResourceKey="SurfaceBrush" />
-			<StaticResource x:Key="CheckBoxBackgroundUncheckedPressed" ResourceKey="PrimaryContainerBrush" />
-			<StaticResource x:Key="CheckBoxBackgroundUncheckedDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-
-			<!-- Unchecked BorderBrush -->
-			<StaticResource x:Key="CheckBoxBorderBrushUnchecked" ResourceKey="OutlineBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushUncheckedPointerOver" ResourceKey="OutlineBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushUncheckedPressed" ResourceKey="OutlineBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushUncheckedDisabled" ResourceKey="OutlineDisabledBrush" />
-
-			<!-- Checked Background -->
-			<StaticResource x:Key="CheckBoxBackgroundChecked" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="CheckBoxBackgroundCheckedPointerOver" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="CheckBoxBackgroundCheckedPressed" ResourceKey="PrimaryVariantDarkBrush" />
-			<StaticResource x:Key="CheckBoxBackgroundCheckedDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-
-			<!-- Checked BorderBrush -->
-			<StaticResource x:Key="CheckBoxBorderBrushChecked" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushCheckedPointerOver" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushCheckedPressed" ResourceKey="PrimaryVariantDarkBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushCheckedDisabled" ResourceKey="OutlineDisabledBrush" />
-
-			<!-- Checked Glyph -->
-			<StaticResource x:Key="CheckBoxGlyphForegroundChecked" ResourceKey="OnPrimaryBrush" />
-			<StaticResource x:Key="CheckBoxGlyphForegroundCheckedPointerOver" ResourceKey="OnPrimaryBrush" />
-			<StaticResource x:Key="CheckBoxGlyphForegroundCheckedPressed" ResourceKey="OnPrimaryBrush" />
-			<StaticResource x:Key="CheckBoxGlyphForegroundCheckedDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-
-			<!-- Indeterminate Background -->
-			<StaticResource x:Key="CheckBoxBackgroundIndeterminate" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="CheckBoxBackgroundIndeterminatePointerOver" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="CheckBoxBackgroundIndeterminatePressed" ResourceKey="PrimaryVariantDarkBrush" />
-			<StaticResource x:Key="CheckBoxBackgroundIndeterminateDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-
-			<!-- Indeterminate BorderBrush -->
-			<StaticResource x:Key="CheckBoxBorderBrushIndeterminate" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushIndeterminatePointerOver" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushIndeterminatePressed" ResourceKey="PrimaryVariantDarkBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushIndeterminateDisabled" ResourceKey="OutlineDisabledBrush" />
-
-			<!-- Indeterminate Glyph -->
-			<StaticResource x:Key="CheckBoxGlyphForegroundIndeterminate" ResourceKey="OnPrimaryBrush" />
-			<StaticResource x:Key="CheckBoxGlyphForegroundIndeterminatePointerOver" ResourceKey="OnPrimaryBrush" />
-			<StaticResource x:Key="CheckBoxGlyphForegroundIndeterminatePressed" ResourceKey="OnPrimaryBrush" />
-			<StaticResource x:Key="CheckBoxGlyphForegroundIndeterminateDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-
-			<!-- Foreground (label) -->
-			<StaticResource x:Key="CheckBoxForegroundUnchecked" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="CheckBoxForegroundUncheckedPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="CheckBoxForegroundUncheckedPressed" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="CheckBoxForegroundUncheckedDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="CheckBoxForegroundChecked" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="CheckBoxForegroundCheckedPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="CheckBoxForegroundCheckedPressed" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="CheckBoxForegroundCheckedDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="CheckBoxForegroundIndeterminate" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="CheckBoxForegroundIndeterminatePointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="CheckBoxForegroundIndeterminatePressed" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="CheckBoxForegroundIndeterminateDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-
-			<!-- ── Backwards-compat aliases (SimpleCheckBox* → CheckBox*) ── -->
-
-			<!-- Unchecked -->
-			<!-- Checked -->
-			<!-- Indeterminate -->
-			<!-- Foreground (label) -->
-		</ResourceDictionary>
-
-		<!-- ─── Dark Theme (Default) ─── -->
-		<ResourceDictionary x:Key="Default">
-
-			<!-- ── CheckBox — semantic keys (source of truth) ── -->
-
-			<!-- Unchecked Background -->
-			<StaticResource x:Key="CheckBoxBackgroundUnchecked" ResourceKey="SurfaceBrush" />
-			<StaticResource x:Key="CheckBoxBackgroundUncheckedPointerOver" ResourceKey="SurfaceBrush" />
-			<StaticResource x:Key="CheckBoxBackgroundUncheckedPressed" ResourceKey="PrimaryContainerBrush" />
-			<StaticResource x:Key="CheckBoxBackgroundUncheckedDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-
-			<!-- Unchecked BorderBrush -->
-			<StaticResource x:Key="CheckBoxBorderBrushUnchecked" ResourceKey="OutlineBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushUncheckedPointerOver" ResourceKey="OutlineBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushUncheckedPressed" ResourceKey="OutlineBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushUncheckedDisabled" ResourceKey="OutlineDisabledBrush" />
-
-			<!-- Checked Background -->
-			<StaticResource x:Key="CheckBoxBackgroundChecked" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="CheckBoxBackgroundCheckedPointerOver" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="CheckBoxBackgroundCheckedPressed" ResourceKey="PrimaryVariantDarkBrush" />
-			<StaticResource x:Key="CheckBoxBackgroundCheckedDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-
-			<!-- Checked BorderBrush -->
-			<StaticResource x:Key="CheckBoxBorderBrushChecked" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushCheckedPointerOver" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushCheckedPressed" ResourceKey="PrimaryVariantDarkBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushCheckedDisabled" ResourceKey="OutlineDisabledBrush" />
-
-			<!-- Checked Glyph -->
-			<StaticResource x:Key="CheckBoxGlyphForegroundChecked" ResourceKey="OnPrimaryBrush" />
-			<StaticResource x:Key="CheckBoxGlyphForegroundCheckedPointerOver" ResourceKey="OnPrimaryBrush" />
-			<StaticResource x:Key="CheckBoxGlyphForegroundCheckedPressed" ResourceKey="OnPrimaryBrush" />
-			<StaticResource x:Key="CheckBoxGlyphForegroundCheckedDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-
-			<!-- Indeterminate Background -->
-			<StaticResource x:Key="CheckBoxBackgroundIndeterminate" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="CheckBoxBackgroundIndeterminatePointerOver" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="CheckBoxBackgroundIndeterminatePressed" ResourceKey="PrimaryVariantDarkBrush" />
-			<StaticResource x:Key="CheckBoxBackgroundIndeterminateDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-
-			<!-- Indeterminate BorderBrush -->
-			<StaticResource x:Key="CheckBoxBorderBrushIndeterminate" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushIndeterminatePointerOver" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushIndeterminatePressed" ResourceKey="PrimaryVariantDarkBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushIndeterminateDisabled" ResourceKey="OutlineDisabledBrush" />
-
-			<!-- Indeterminate Glyph -->
-			<StaticResource x:Key="CheckBoxGlyphForegroundIndeterminate" ResourceKey="OnPrimaryBrush" />
-			<StaticResource x:Key="CheckBoxGlyphForegroundIndeterminatePointerOver" ResourceKey="OnPrimaryBrush" />
-			<StaticResource x:Key="CheckBoxGlyphForegroundIndeterminatePressed" ResourceKey="OnPrimaryBrush" />
-			<StaticResource x:Key="CheckBoxGlyphForegroundIndeterminateDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-
-			<!-- Foreground (label) -->
-			<StaticResource x:Key="CheckBoxForegroundUnchecked" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="CheckBoxForegroundUncheckedPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="CheckBoxForegroundUncheckedPressed" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="CheckBoxForegroundUncheckedDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="CheckBoxForegroundChecked" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="CheckBoxForegroundCheckedPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="CheckBoxForegroundCheckedPressed" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="CheckBoxForegroundCheckedDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="CheckBoxForegroundIndeterminate" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="CheckBoxForegroundIndeterminatePointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="CheckBoxForegroundIndeterminatePressed" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="CheckBoxForegroundIndeterminateDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-
-			<!-- ── Backwards-compat aliases (SimpleCheckBox* → CheckBox*) ── -->
-
-			<!-- Unchecked -->
-			<!-- Checked -->
-			<!-- Indeterminate -->
-			<!-- Foreground (label) -->
-		</ResourceDictionary>
-
-	</ResourceDictionary.ThemeDictionaries>
 
 	<StaticResource x:Key="SimpleCheckBoxSize" ResourceKey="SimpleSpace400" />
 	<StaticResource x:Key="SimpleCheckBoxCornerRadius" ResourceKey="SimpleRadius100CornerRadius" />
@@ -337,8 +184,8 @@
 						<!-- CheckBox Visual -->
 						<Grid x:Name="CheckBoxContainer"
 							  Grid.Column="0"
-							  Width="{StaticResource SimpleCheckBoxSize}"
-							  Height="{StaticResource SimpleCheckBoxSize}"
+							  Width="{ThemeResource SimpleCheckBoxSize}"
+							  Height="{ThemeResource SimpleCheckBoxSize}"
 							  HorizontalAlignment="Center"
 							  VerticalAlignment="Center">
 
@@ -375,7 +222,7 @@
 						<!-- Content -->
 						<ContentPresenter x:Name="ContentPresenter"
 										  Grid.Column="1"
-										  Margin="{StaticResource SimpleCheckBoxContentMargin}"
+										  Margin="{ThemeResource SimpleCheckBoxContentMargin}"
 										  Content="{TemplateBinding Content}"
 										  ContentTemplate="{TemplateBinding ContentTemplate}"
 										  ContentTransitions="{TemplateBinding ContentTransitions}"

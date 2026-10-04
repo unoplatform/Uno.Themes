@@ -83,7 +83,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `TextBoxClearGlyphWidth`                                      | `Double`          | 20                            |
 | `TextBoxClearGlyphHeight`                                     | `Double`          | 20                            |
 | `FilledTextBoxCornerRadius`                                   | `CornerRadius`    | 4,4,0,0                       |
-| `FilledTextBoxPadding`                                        | `Thickness`       | 16,7                          |
+| `FilledTextBoxPadding`                                        | `Thickness`       | 16,8                          |
 | `FilledTextBoxMinHeight`                                      | `Double`          | 58                            |
 | `FilledTextBoxBorderHeightFocused`                            | `Double`          | 2                             |
 | `OutlinedTextBoxBorderThickness`                              | `Double`          | 1                             |

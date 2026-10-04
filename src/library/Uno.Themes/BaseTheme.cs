@@ -1,5 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
+using Uno.Extensions;
 using Uno.Themes.ColorGeneration;
 using Uno.Themes.Helpers;
 
@@ -88,8 +90,12 @@ public abstract partial class BaseTheme : ResourceDictionary
 			{
 				theme.FontOverrideDictionary = new ResourceDictionary() { Source = source };
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
+				if (theme.Log().IsEnabled(LogLevel.Warning))
+				{
+					theme.Log().LogWarning(ex, "FontOverrideSource '{Source}' could not be loaded; the font override is cleared.", sourceUri);
+				}
 				theme.FontOverrideDictionary = null;
 			}
 		}
@@ -394,6 +400,65 @@ public abstract partial class BaseTheme : ResourceDictionary
 	}
 	#endregion
 
+	#region DefaultFontFamily (DP)
+	/// <summary>
+	/// (Optional) Gets or sets the <see cref="FontFamily"/> the theme's whole type scale is generated
+	/// from. Left unset (the default), the concrete theme's own typeface stands (Material: Roboto,
+	/// Simple: Inter, Cupertino: SF Pro, otherwise Segoe UI).
+	/// </summary>
+	/// <remarks>
+	/// <para>
+	/// Assigning this regenerates the <c>DefaultFontFamily</c> root token and every
+	/// <c>*FontFamily</c> key of the type scale derived from it, so one value swaps the font
+	/// everywhere the design system styles text. Per-scale variation is expressed through the
+	/// <c>*FontWeight</c> tokens, so the assigned family should resolve multiple weights (a variable
+	/// font, or a font with a font manifest). Changing only some scales is not expressed here:
+	/// declare the individual <c>*FontFamily</c> keys in a <see cref="FontOverrideDictionary"/> for
+	/// that.
+	/// </para>
+	/// <para>
+	/// Unlike <see cref="DefaultCornerRadius"/> and <see cref="DefaultSpacing"/>, this is a
+	/// <b>runtime</b> setting: text laid out after the change picks the new family up. Text
+	/// <b>already rendered</b> keeps the family it resolved when it loaded — a
+	/// <see cref="FontFamily"/> is an immutable value, so unlike a seed color, whose brushes are live
+	/// instances this theme rewrites in place, there is nothing to mutate. Moving realized text needs
+	/// the application to re-resolve its resource bindings (what a hot reload does at the end of a
+	/// reload) or the content recreated.
+	/// </para>
+	/// <para>
+	/// This covers text the design system styles. Text with no style resolves the framework's own
+	/// default instead (<c>FeatureConfiguration.Font.DefaultTextFontFamily</c>), which this property
+	/// does not touch.
+	/// </para>
+	/// <para>
+	/// A consumer <see cref="FontOverrideDictionary"/> declaring any of these keys still wins: it is
+	/// merged above the generated tokens, matching how
+	/// <see cref="ThemeColors.OverrideDictionary"/> beats the generated seed palette.
+	/// </para>
+	/// </remarks>
+	public FontFamily DefaultFontFamily
+	{
+		get => (FontFamily)GetValue(DefaultFontFamilyProperty);
+		set => SetValue(DefaultFontFamilyProperty, value);
+	}
+
+	/// <summary>Identifies the <see cref="DefaultFontFamily"/> dependency property.</summary>
+	public static DependencyProperty DefaultFontFamilyProperty { get; } =
+		DependencyProperty.Register(
+			nameof(DefaultFontFamily),
+			typeof(FontFamily),
+			typeof(BaseTheme),
+			new PropertyMetadata(null, OnDefaultFontFamilyChanged));
+
+	private static void OnDefaultFontFamilyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+	{
+		if (d is BaseTheme theme)
+		{
+			theme.UpdateSource();
+		}
+	}
+	#endregion
+
 	/// <summary>
 	/// Gets the default primary seed color for this theme.
 	/// When not <c>null</c>, seed color generation is always active — even
@@ -438,6 +503,19 @@ public abstract partial class BaseTheme : ResourceDictionary
 		// (control styles) from the URI it provides. UpdateSource() appends the dynamic
 		// layers (colors/typography/spacing/…) on top and rebuilds them on every pass.
 		Source = new Uri(DefaultStylesSource);
+
+		// Merged from code so it carries the SemanticResources type (the XAML generator emits a plain
+		// ResourceDictionary for a Source-merged entry whatever type the markup declares). Inserted
+		// first so it is searched last, below the theme's own Typography and Fonts overrides.
+		MergedDictionaries.Insert(0, new SemanticResources { Source = new Uri(ThemesConstants.SharedTypographyResourcePath) });
+
+		// Set once alongside Source: the aliases are static and resolve lazily against the whole
+		// theme, so a rebuild never has to touch them.
+		if (SemanticStylesSource is { } semanticStylesSource)
+		{
+			MergedDictionaries.Add(new SemanticResources { Source = new Uri(semanticStylesSource) });
+		}
+
 		UpdateSource();
 	}
 
@@ -493,6 +571,17 @@ public abstract partial class BaseTheme : ResourceDictionary
 		var shape = GenerateShapeScale(DefaultCornerRadius);
 		var density = GenerateDensityDefaults();
 
+		// Null when no font family is set, which is the common case: the concrete theme's own
+		// Fonts.xaml then stands with no layer over it.
+		var typefaces = GenerateFontFamilyScale(DefaultFontFamily);
+		var typefaceAliases = GenerateFontFamilyAliases(DefaultFontFamily);
+
+		// Re-resolved from its Source when a hot reload invalidates it: the in-memory entries of the
+		// instance built when the Source was first assigned are a load-time snapshot, so a hot-reload
+		// edit to the override file would otherwise never reach the theme (unoplatform/Uno.Themes#1705).
+		// Unrelated rebuilds (a seed-color change, a spacing tweak) reuse the resolved copy.
+		var fontOverride = ResolveFontOverride();
+
 		// ── Commit. Nothing below parses XAML or runs consumer-supplied code. ──
 
 		// Remove only the dictionaries this theme appended on a previous pass. The URI-backed
@@ -521,11 +610,101 @@ public abstract partial class BaseTheme : ResourceDictionary
 		AddThemeDictionary(density);
 		AddThemeDictionary(colors);
 
-		// Let the concrete theme append its own dynamic dictionaries (e.g. a consumer font
-		// override) on top of the generated layers. The static converter/typography/font/
-		// thickness defaults live in the Source bundle (BaseDictionaries.xaml), below the
-		// theme's own overrides; only resources that must shadow that base belong here.
+		if (typefaces is { })
+		{
+			AddThemeDictionary(typefaces);
+		}
+
+		if (typefaceAliases is { })
+		{
+			AddThemeDictionary(typefaceAliases);
+		}
+
+		// Let the concrete theme append its own dynamic dictionaries on top of the generated
+		// layers. The static converter/typography/font/thickness defaults live in the Source
+		// bundle (BaseDictionaries.xaml), below the theme's own overrides; only resources that
+		// must shadow that base belong here.
 		AddThemeSpecificResources();
+
+		// Merged last so a consumer font override wins over both the generated typeface tokens and
+		// anything the concrete theme added, matching how the colour override is merged over the
+		// generated seed palette.
+		if (fontOverride is { })
+		{
+			AddThemeDictionary(fontOverride);
+		}
+	}
+
+	// The last successfully resolved copy of a URI-backed font override, the consumer instance it
+	// was resolved from, and whether the next rebuild must re-read it from its Source. Re-reading
+	// on every rebuild would re-parse the override XAML on unrelated theme changes (a seed-color
+	// drag, a spacing tweak) — the re-read only exists for hot reload, so the hot-reload handler
+	// and the override property setters are the only invalidators.
+	private ResourceDictionary _resolvedFontOverride;
+	private ResourceDictionary _resolvedFontOverrideOrigin;
+	private bool _fontOverrideNeedsReresolve = true;
+
+	/// <summary>
+	/// The consumer font override to merge last, or <c>null</c> when there is none. A URI-backed
+	/// override is re-read from its <see cref="ResourceDictionary.Source"/> when a hot-reload pass
+	/// invalidates it (or when the override itself is reassigned), so an edit to that file
+	/// propagates — see unoplatform/Uno.Themes#1705 — while unrelated rebuilds reuse the resolved
+	/// copy. An explicitly assigned dictionary with no <c>Source</c> is merged as assigned.
+	/// </summary>
+	/// <returns>The dictionary to merge, or <c>null</c>.</returns>
+	private ResourceDictionary ResolveFontOverride()
+	{
+		if (FontOverrideDictionary is not { } fontOverride)
+		{
+			_resolvedFontOverride = null;
+			_resolvedFontOverrideOrigin = null;
+			return null;
+		}
+
+		if (fontOverride.Source is not { } overrideSource)
+		{
+			// No file to re-read. On non-Uno targets a dictionary instance may not be nested under
+			// two parents at once, so merge a clone there (mirrors SafeMerge); on Uno the instance
+			// itself is merged so consumer-side mutations stay visible across rebuilds.
+#if !HAS_UNO
+			return fontOverride.Duplicate();
+#else
+			return fontOverride;
+#endif
+		}
+
+		if (!_fontOverrideNeedsReresolve
+			&& ReferenceEquals(_resolvedFontOverrideOrigin, fontOverride)
+			&& _resolvedFontOverride is { })
+		{
+			return _resolvedFontOverride;
+		}
+
+		_fontOverrideNeedsReresolve = false;
+		_resolvedFontOverrideOrigin = fontOverride;
+
+		try
+		{
+			_resolvedFontOverride = new ResourceDictionary { Source = overrideSource };
+		}
+		catch (Exception ex)
+		{
+			// The source loaded once (this instance exists) but no longer does, e.g. a hot-reload edit
+			// broke the XAML. A stale override beats losing the typefaces altogether, and this runs
+			// from a property-changed callback where throwing takes the consuming app down.
+			if (this.Log().IsEnabled(LogLevel.Warning))
+			{
+				this.Log().LogWarning(ex, "The font override '{Source}' could not be re-read; keeping the previously resolved copy.", overrideSource);
+			}
+			_resolvedFontOverride ??=
+#if !HAS_UNO
+				fontOverride.Duplicate();
+#else
+				fontOverride;
+#endif
+		}
+
+		return _resolvedFontOverride;
 	}
 
 	/// <summary>
@@ -547,7 +726,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 		var colors = new ResourceDictionary();
 		var colorLayers = new List<ResourceDictionary>(4);
 
-		var sharedPalette = new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorPaletteResourcePath) };
+		var sharedPalette = new SemanticResources { Source = new Uri(ThemesConstants.SharedColorPaletteResourcePath) };
 		colors.MergedDictionaries.Add(sharedPalette);
 		colorLayers.Add(sharedPalette);
 
@@ -592,11 +771,15 @@ public abstract partial class BaseTheme : ResourceDictionary
 				{
 					resolvedOverride = new ResourceDictionary { Source = overrideSource };
 				}
-				catch (Exception)
+				catch (Exception ex)
 				{
 					// The source loaded once (the override instance exists) but no longer does —
 					// e.g. a hot-reload edit broke the XAML. A stale override beats losing it, and
 					// throwing here would propagate out of a property-changed callback.
+					if (this.Log().IsEnabled(LogLevel.Warning))
+					{
+						this.Log().LogWarning(ex, "The color override '{Source}' could not be re-read; keeping the assigned copy.", overrideSource);
+					}
 					resolvedOverride = userOverride;
 				}
 			}
@@ -614,7 +797,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 		// resolve eagerly at parse time, against the ambient scope) nor reach anything already
 		// rendered (consumers bind {ThemeResource *Brush}, which re-evaluates only on a theme
 		// change). See SemanticBrushUpdater.
-		_semanticBrushes ??= new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorsResourcePath) };
+		_semanticBrushes ??= new SemanticResources { Source = new Uri(ThemesConstants.SharedColorsResourcePath) };
 		SemanticBrushUpdater.Apply(_semanticBrushes, colorLayers);
 
 		return colors;
@@ -639,10 +822,28 @@ public abstract partial class BaseTheme : ResourceDictionary
 	protected abstract string DefaultStylesSource { get; }
 
 	/// <summary>
-	/// Appends design-system-specific resource dictionaries (fonts, thickness, …) on top of the
-	/// layers generated by <see cref="UpdateSource"/>. Called at the end of every rebuild pass.
-	/// Override in a concrete theme and call <see cref="AddThemeDictionary(ResourceDictionary)"/>
-	/// for each dictionary so it participates in the dynamic rebuild lifecycle.
+	/// URI of the concrete theme's semantic style aliases (<c>FilledButtonStyle</c> aliasing
+	/// <c>MaterialFilledButtonStyle</c>, and so on), or <c>null</c> when the design system declares
+	/// none. Merged once during construction as a <see cref="SemanticResources"/> dictionary, right
+	/// after <see cref="DefaultStylesSource"/>. The file must be kept out of the XamlMerge bundle:
+	/// flattened into <see cref="DefaultStylesSource"/> its entries would lose the marker type.
+	/// Read from the base constructor, so an override must not depend on derived-instance state. A
+	/// theme with more than one semantic file adds further <see cref="SemanticResources"/> instances
+	/// to <see cref="ResourceDictionary.MergedDictionaries"/> in its own constructor.
+	/// </summary>
+	protected virtual string SemanticStylesSource => null;
+
+	/// <summary>
+	/// Appends design-system-specific resource dictionaries on top of the layers generated by
+	/// <see cref="UpdateSource"/>. Called on every rebuild pass, after the generated layers and before
+	/// the consumer font override. Override in a concrete theme and call
+	/// <see cref="AddThemeDictionary(ResourceDictionary)"/> for each dictionary so it participates in
+	/// the dynamic rebuild lifecycle. A <see cref="FontOverrideDictionary"/> does not belong here:
+	/// <see cref="UpdateSource"/> resolves and merges it, so it is re-read from its
+	/// <see cref="ResourceDictionary.Source"/> when a hot reload invalidates it.
+	/// Overrides <b>must not throw</b>: this is called from dependency-property change callbacks
+	/// (and the hot-reload handler), where an exception propagates into the consuming app and
+	/// leaves the merged dictionaries partially rebuilt. Degrade gracefully instead.
 	/// </summary>
 	protected virtual void AddThemeSpecificResources()
 	{

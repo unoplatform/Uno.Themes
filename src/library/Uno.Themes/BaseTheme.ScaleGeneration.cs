@@ -1,10 +1,13 @@
+using System;
 using System.Collections.Generic;
 
 
 #if WinUI
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Media;
 #else
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 #endif
 
 
@@ -16,6 +19,74 @@ public abstract partial class BaseTheme
 	/// Theme dictionary keys used when generating token ResourceDictionaries.
 	/// </summary>
 	private static readonly string[] ThemeKeys = { "Default", "Light" };
+
+	/// <summary>
+	/// Theme dictionary keys the typeface layer is generated for. Unlike the other scales, this
+	/// includes <c>HighContrast</c>: Material and Cupertino declare their root typeface in a
+	/// HighContrast font dictionary, which would otherwise win over a generated layer that carries
+	/// no HighContrast entry. A font family is appearance-independent, so all three carry the same value.
+	/// </summary>
+	private static readonly string[] TypefaceThemeKeys = { "Default", "Light", "HighContrast" };
+
+	/// <summary>
+	/// Per-control font family alias keys this design system declares over the root token or a
+	/// type-scale slot (e.g. Simple's <c>SimpleButtonFontFamily</c>, Material's <c>SliderFontFamily</c>).
+	/// Those aliases are <c>StaticResource</c> references that snapshot at XAML parse time, so a
+	/// runtime <see cref="DefaultFontFamily"/> change only reaches the control templates when the
+	/// generated layer regenerates these keys too. Concrete themes override this with the keys their
+	/// Styles tree declares — keep the override in sync when adding a per-control
+	/// <c>*FontFamily</c> lightweight-styling key.
+	/// </summary>
+	internal virtual string[] FontFamilyAliasKeys => Array.Empty<string>();
+
+	/// <summary>
+	/// Generates a <see cref="SemanticResources"/> dictionary carrying the root typeface token and
+	/// every type-scale family key (<see cref="ThemesConstants.TypefaceScaleKeys"/>), all set to
+	/// <paramref name="family"/> — or <c>null</c> when no family is set.
+	/// </summary>
+	/// <param name="family">The theme's font family, or <c>null</c> to leave the type scale alone.</param>
+	/// <returns>The generated layer, or <c>null</c> when there is nothing to generate.</returns>
+	private static ResourceDictionary GenerateFontFamilyScale(FontFamily family)
+		=> GenerateTypefaceLayer(family, ThemesConstants.TypefaceScaleKeys, static () => new SemanticResources());
+
+	/// <summary>
+	/// Generates a plain dictionary carrying the design system's own <see cref="FontFamilyAliasKeys"/>
+	/// set to <paramref name="family"/> — or <c>null</c> when no family is set or the theme declares
+	/// no aliases. Kept apart from <see cref="GenerateFontFamilyScale"/> because those keys are
+	/// theme-specific (<c>SimpleButtonFontFamily</c>) and must not land in a <see cref="SemanticResources"/>.
+	/// </summary>
+	/// <param name="family">The theme's font family, or <c>null</c>.</param>
+	/// <returns>The generated layer, or <c>null</c> when there is nothing to generate.</returns>
+	private ResourceDictionary GenerateFontFamilyAliases(FontFamily family)
+		=> FontFamilyAliasKeys.Length == 0
+			? null
+			: GenerateTypefaceLayer(family, FontFamilyAliasKeys, static () => new ResourceDictionary());
+
+	private static ResourceDictionary GenerateTypefaceLayer(FontFamily family, string[] keys, Func<ResourceDictionary> create)
+	{
+		if (family is null)
+		{
+			return null;
+		}
+
+		var dict = create();
+
+		foreach (var themeKey in TypefaceThemeKeys)
+		{
+			// The theme dictionaries exist so a lookup under any appearance resolves here rather
+			// than falling through to the theme's own Fonts.xaml.
+			var themed = create();
+
+			foreach (var key in keys)
+			{
+				themed[key] = family;
+			}
+
+			dict.ThemeDictionaries[themeKey] = themed;
+		}
+
+		return dict;
+	}
 
 	/// <summary>
 	/// Multiplier table for spacing tokens.
@@ -75,11 +146,11 @@ public abstract partial class BaseTheme
 	/// </summary>
 	private static ResourceDictionary GenerateSpacingScale(double baseValue)
 	{
-		var dict = new ResourceDictionary();
+		var dict = new SemanticResources();
 
 		foreach (var themeKey in ThemeKeys)
 		{
-			var themed = new ResourceDictionary();
+			var themed = new SemanticResources();
 
 			foreach (var (variant, multiplier) in SpacingScaleMultipliers)
 			{
@@ -115,11 +186,11 @@ public abstract partial class BaseTheme
 	/// </summary>
 	private static ResourceDictionary GenerateShapeScale(double baseValue)
 	{
-		var dict = new ResourceDictionary();
+		var dict = new SemanticResources();
 
 		foreach (var themeKey in ThemeKeys)
 		{
-			var themed = new ResourceDictionary();
+			var themed = new SemanticResources();
 
 			foreach (var (variant, multiplier) in ShapeScaleMultipliers)
 			{
@@ -162,11 +233,11 @@ public abstract partial class BaseTheme
 	/// </summary>
 	private static ResourceDictionary GenerateDensityDefaults()
 	{
-		var dict = new ResourceDictionary();
+		var dict = new SemanticResources();
 
 		foreach (var themeKey in ThemeKeys)
 		{
-			var themed = new ResourceDictionary();
+			var themed = new SemanticResources();
 
 			foreach (var (key, value) in FixedDensityDefaults)
 			{

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 #if WinUI
 using Microsoft.UI.Xaml;

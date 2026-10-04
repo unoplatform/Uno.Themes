@@ -4,6 +4,235 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## Uno's `AppBarButton` hijacks the template part named `Content` — never use that name for a presenter that is not meant to show `Icon ?? Content`
+
+**Context:** unoplatform/Uno.Themes#1735 (2026-09-29). In the Material v2 and Simple `AppBarButton` styles, a
+`UIElement` assigned to `AppBarButton.Content` (e.g. a `Grid` wrapping a `TextBlock`) rendered nothing, while a
+plain string in `Content` rendered fine. Both templates have two presenters: `ContentPresenter x:Name="Content"`
+bound to `Icon`, nested in a `Viewbox` that collapses when `Icon` is null, and `ContentPresenter
+x:Name="ContentPresenter"` bound to `Content`.
+
+**Root cause:** `AppBarButton.uno.cs` (`SetupContentUpdate`, run from `OnApplyTemplate` / `OnLoaded`) does
+`GetTemplateChild<ContentPresenter>("Content")` and force-sets that presenter's `Content` to `Icon ?? Content`,
+re-applying it whenever either property changes. It exists so that WinUI's icon-only template still shows
+something when only `Content` is set (Uno issue #19649). In our templates the part named `Content` is the icon
+presenter inside the collapsed `Viewbox`. With no `Icon`, Uno pushes the user's `Content` into it; a
+`UIElement` can only have one visual parent, so it is torn out of the visible `ContentPresenter` and ends up
+under a collapsed element. A string is not subject to the single-parent rule, which is why every string-based
+sample and test passed and the bug went unnoticed.
+
+**How to apply:**
+- In an `AppBarButton` template, never name a template part `Content` unless it is meant to display
+  `Icon ?? Content`. Our templates name the icon presenter `IconPresenter` and the content presenter
+  `ContentPresenter`; keep it that way in both Material v2 and Simple (the v1 `MaterialAppBarButton` in
+  `CommandBar.xaml` is icon-only and intentionally relies on the fallback).
+- When a template splits a control's properties across several presenters, add at least one runtime test
+  that sets a `UIElement` (not a string) into each of them — strings hide re-parenting bugs.
+- Before naming a part in a retemplated framework control, check the Uno implementation for
+  `GetTemplateChild("...")` lookups; Uno adds a few beyond WinUI's (`AppBarButton`: `Content`,
+  `KeyboardAcceleratorTextLabel`).
+
+---
+
+## `Application.Current` is the HOST app inside an ALC-hosted guest — anything resolving the theme through it silently looks at the wrong application
+
+**Context:** `ThemesSampleApp` hosting (2026-09-21, `specs/05-alc-wrapper-app/`). Opening the **Seed Color**
+page in a hosted head threw `InvalidOperationException: No BaseTheme ... found in
+Application.Current.Resources.MergedDictionaries` from the page's constructor, while the same page works
+standalone and the rest of the hosted guest renders correctly themed.
+
+**Root cause:** verified in the pinned `Uno.UI.dll` IL, unchanged between `Uno.Sdk.Private` 6.7.0-dev.815
+and 7.0.0-dev.701 (Uno 7 only renames the null-path sweep to `CleanupAllSecondaryAlcCaches`).
+`Application..ctor` calls
+`set_Current(this)` -> `SetCurrentApplication`, which writes the `_current` static **only** when
+`AssemblyLoadContext.GetLoadContext(app.GetType().Assembly) == Default`. A secondary-ALC app is registered in
+`_applicationsByAlc` (`ConditionalWeakTable<ALC, Application>`) with an `AlcRegistrationId` and latches
+`_hasSecondaryApps`; `_current` is left alone. `Application.Current` therefore stays the *hosting* app for the
+whole process, which is exactly what makes host-wins resource resolution work — and exactly what breaks any
+guest-side code that treats it as "my app". Type isolation compounds it: with `Uno.Themes.WinUI` loaded
+per-ALC, `Application.Current.Resources.MergedDictionaries.OfType<BaseTheme>()` evaluated in guest code can
+never match a host theme, because it is a different `BaseTheme` type.
+
+**How to apply:**
+- In code that may run inside an ALC-hosted app, treat `Application.Current`, `Window.Current` and every
+  process-wide static in the shared `Uno.UI` as *the host's*. The hosted head must capture its own instance
+  (`this` in its `App` constructor) and pass it along — the instance-scoped
+  `ApplicationExtensions.GetTheme(Application)` exists for exactly this; the static
+  `SemanticThemeHelper` wrapper does not work hosted, by construction.
+- Put that handle in code that compiles **into the head** (a shared-project type, like
+  `NavigationHelper.MainWindow` / `SamplePageLayout.ActiveDesign` / `SampleThemeHelper.CurrentApplication`).
+  Statics there are per-head, hence per-ALC when hosted, with no ALC API involved.
+- Do **not** try to discover the guest's `Application` from Uno: `GetForAssemblyLoadContext`, `GetForInstance`,
+  `GetForType`, `EnumerateSecondaryApplications`, `GetLatestSecondaryApplicationForType` and
+  `AlcContentHost.SourceApplicationOverride` are all `internal`, and the `GetFor*` pair falls back to
+  `Application.Current` for default-ALC types — i.e. it answers "the host" for the shared framework types most
+  of a guest's visual tree is built from. Do not reach for a live-instance registry either: within one ALC it
+  cannot tell an app-level theme from one a page or test constructed.
+- A bug that only manifests hosted cannot be red-proven by a runtime test (those run standalone, in the
+  default ALC). Prove it with a throwaway in-ALC probe through the wrapper (`--app=<head>`, reflection into the
+  guest ALC, reverted afterwards) and say plainly in the report that the hosted path is verified manually and
+  not CI-gated.
+
+---
+
+## `CommandBarExtensions.NavigationCommand` only renders under the Material **v1** CommandBar template
+
+**Context:** the five `Content/NestedSamples/MediaPlayerElementSample_NestedPage*.xaml` pages declared
+their back button through `uno:CommandBarExtensions.NavigationCommand`. Under Material v2 — the default
+since `MaterialTheme.DefaultStylesSource` points at `Version2.MergedPages` — none of them rendered a
+button at all, so the full-screen nested samples were a dead end on every platform without a system
+back affordance (Skia desktop, Windows).
+
+**Root cause:** the navigation-command slot is not a framework feature, it is a `ContentControl` inside
+the *hand-written* `XamlMaterialCommandBarTemplate` in `Styles/Controls/v1/CommandBar.xaml` (its own
+comment says so: *"Simplified CommandBar template that adds support for
+Uno.UI.CommandBarExtensions.NavigationCommand on Windows"*). v2's `MaterialCommandBarStyle` sets no
+`Template` at all, so the default WinUI template applies and the attached property is simply ignored.
+`doc/material-migration.md` also records that the native iOS/Android CommandBar path is gone, so there
+is no platform where v2 picks the property up. The same pages referenced `MaterialAppBarButton` (a v1-only
+key; v2 has `MaterialAppBarButtonStyle`) and `ms-appx:///Assets/Close.png`, which does not exist in the
+repo — both fail silently as `Uno.UI.ResourceResolver` warnings.
+
+**How to apply:**
+- **In shared sample XAML, put command-bar buttons in `CommandBar.PrimaryCommands`**, not in
+  `CommandBarExtensions.NavigationCommand`, unless the page is pinned to Material v1. PrimaryCommands is
+  rendered by the default template, so it survives a v1→v2 switch and works in every head.
+- Pair it with `OverflowButtonVisibility="Collapsed"` and `IsDynamicOverflowEnabled="False"` when the
+  button is the only way out of a page — dynamic overflow will otherwise fold it into a `…` menu at
+  narrow widths.
+- **A green build proves nothing about resource keys.** Unresolved `{StaticResource}` and a missing
+  template slot both compile clean; they surface as `warn: Uno.UI.ResourceResolver` lines at runtime and
+  as missing UI. Verify sample-UI changes by running the app or a runtime test, never by building.
+- **`MediaPlayerElement.MediaPlayer` is null when no media extension is registered** (Skia desktop).
+  `MediaPlayerElementSample_NestedPage5` threw an NRE from its constructor because of it, and all five
+  pages would have thrown from their `Unloaded` handler *during* back navigation. Null-conditional these.
+- **Do not run the `AGENTS.md` §5 XamlStyler command over existing XAML without checking the diff.**
+  `Settings.XamlStyler` declares no `IndentWithTabs`/`IndentSize`, so `XamlStyler.Console` defaults to
+  4 spaces and rewrites every line of a tab-indented file — the repo's XAML is tabs (`.editorconfig`).
+  It turned a 17-line diff into a 105-line one. Either hand-format to match the file, or revert the
+  whitespace churn afterwards.
+
+---
+
+## A generated layer is always a *merged* dictionary, so it can only shadow keys declared inside `ThemeDictionaries`
+
+**Context:** Spec 09 (`DefaultFontFamily`, PR #1707). `When_DefaultFontFamilySet_Then_ThemeAliasKeysFollow`
+failed for `SimpleButtonFontFamily` and `SimpleToggleButtonFontFamily` while passing for
+`DatePickerFlyoutPresenterFontFamily` — all three listed in the same `SimpleTheme.FontFamilyAliasKeys`
+and all three regenerated by the same loop.
+
+**Root cause:** the two failing keys were declared at the **top level** of `Button.xaml` /
+`ToggleButton.xaml`, under a "Layout / sizing resources (theme-agnostic)" heading; the passing one is
+declared inside `ResourceDictionary.ThemeDictionaries`. `BaseTheme` sets its **own** `Source` to
+`mergedpages.xaml` (`BaseTheme.cs:505`), so every top-level key in that merge is one of the theme
+dictionary's *own* resources — and own resources beat `MergedDictionaries`. `GenerateFontFamilyScale`
+returns a dictionary added through `AddThemeDictionary`, i.e. a merged one, so it can never shadow a
+non-themed key no matter what it contains.
+
+The two halves of the precedence rule are opposites, and both are load-bearing here:
+
+- **themed lookup:** a merged dictionary's `ThemeDictionaries` beat the parent's own — this is what
+  makes the generated layer work at all, and what the `mergedpages` typography lesson above records.
+- **non-themed lookup:** the parent's own keys beat every merged dictionary — which is why the
+  generated layer is powerless against a top-level declaration.
+
+**How to apply:**
+- **Any key a generated/runtime layer has to override must be declared inside `ThemeDictionaries`**,
+  even when its value is genuinely appearance-independent. "Theme-agnostic" describes the *value*; the
+  `ThemeDictionaries` block is what determines *who can override it*. Declaring it once per appearance
+  is the cost of being overridable.
+- **Adding the key to the generated dictionary's top level does not work** — that dictionary is merged,
+  so its non-themed entries lose to the theme's own. This was tried and measured before being reverted;
+  do not reach for it again.
+- **Two consumers of one key can disagree about whether it is broken.** After the setters moved to
+  `{ThemeResource}` the rendered button followed a runtime change correctly while a direct
+  `Resources.TryGetValue` on the same key still returned the parse-time snapshot — the rendered test
+  passed and the token test failed, in the same run. Fixing the read path does not fix the key; assert
+  both, and when they disagree, believe the one that says something is still wrong.
+- Resource keys are public API here, so the direct lookup is a real consumer, not just a test artefact.
+
+---
+
+## Regenerating a resource key is half a runtime seam — the setter that reads it must be `{ThemeResource}`
+
+**Context:** Spec 09 (`DefaultFontFamily`, issue #1705). The generated typeface layer rewrites each
+design system's per-control alias keys (`SimpleButtonFontFamily`, …) so a runtime family change
+reaches control templates, and a token test proved the keys followed. Simple's `Button` and
+`ToggleButton` read them with `{StaticResource}`, so the rendered controls stayed on Inter.
+
+**Root cause:** `{StaticResource}` in a `Setter` resolves once, when the dictionary is parsed, and
+holds the value. Writing a new value under that key afterwards changes nothing for controls already
+styled from it, and nothing for controls styled later either — the setter no longer consults the
+dictionary. `{ThemeResource}` keeps the reference and re-resolves on a theme-change pass.
+
+**How to apply:**
+- Any key a `BaseTheme` layer generates or regenerates at runtime (`*FontFamily`, `Space*`,
+  `*CornerRadius`, `ControlHeight*`, the semantic brushes) must be read with `{ThemeResource}`
+  wherever a style consumes it. `{StaticResource}` is correct only for values no theme property can
+  move. The `<StaticResource x:Key=… ResourceKey=…>` *alias declaration* is unaffected — it is the
+  consuming `Setter`/attribute that has to be `{ThemeResource}`.
+- **A token test cannot see this.** `TryGetValue` walks the dictionaries; a setter does not.
+  Whenever a fix's claim is "the control follows", assert the rendered `FontFamily` / `Padding` /
+  `CornerRadius` on a realized control after the property changes, not the resource lookup. This is
+  the same trap the `SharedTypography` lesson below records, hit from the other side.
+- **The same defect held for the spacing/shape seam, and was measured before it was fixed.** A
+  sweep over Simple and Material v2 (alias closure over `<StaticResource x:Key ResourceKey>`
+  declarations rooted at the generated `Space*` / `Radius*` keys, then every `{StaticResource K}`
+  consumer of that closure) found 98 sites in 22 files — 78 Simple, 20 Material v2. Red: a
+  realized Simple button kept `Padding` 12 after `DefaultSpacing` moved it to 22.5; a realized
+  Material `ContentDialog` kept `CornerRadius` 28 after `DefaultCornerRadius` moved it to 7. The
+  sweep is the way to find these: grep for the *generated* key alone misses every per-control
+  alias (`SimpleButtonCornerRadius`, `MaterialContentDialogPanelPadding`, …) that stands between
+  the token and the setter. Density constants (`ControlHeight*`, `IconSize*`,
+  `TouchTargetMinSize`) are regenerated with fixed values, so a `{StaticResource}` read of those
+  is harmless and was left alone.
+- **`doc/design-tokens.md` had documented the defect as a design property** ("construction-time
+  settings … the new value never reaches the control templates"). A limitation written into the
+  docs is still a claim; check it against the mechanism before carrying it forward.
+
+---
+
+## A resource merged into `mergedpages` cannot override one merged *by* it — and a comment claiming it can is not evidence
+
+**Context:** Spec 09 (single typeface, PR #1710). CI failed eight rows asserting Simple's
+`*FontWeight` tokens; each returned the value `SharedTypography.xaml` declares. The tokens were
+declared, correctly, in `Uno.Simple.WinUI/Styles/Application/Typography.xaml`, and
+`BaseDictionaries.xaml` carried a comment stating that file's resources "shadow these shared
+defaults". They never had.
+
+**Root cause:** `Uno.XamlMerge.Task` hoists every input's `MergedDictionaries` to the top of
+`mergedpages.xaml` and folds every input's themed resources into mergedpages' *own*
+`ThemeDictionaries`. A merged dictionary out-ranks the parent's own theme dictionaries, so
+anything `BaseDictionaries.xaml` merges — `SharedTypography.xaml` here — beats every file left in
+the `Styles\Application\` glob. `Fonts.xaml` and `Thickness.xaml` won only because they had been
+removed from the glob and merged explicitly; that was never written down as the *reason*, so the
+next file to need an override didn't get it.
+
+**How to apply:**
+- In a XamlMerge library, "later in the glob wins" is false. The only way a theme file overrides a
+  shared default is `XamlMergeInput Remove` plus an explicit `<ResourceDictionary Source=...>` in
+  the base dictionary, listed after the one it overrides. Treat the `Remove` and the `Source` as a
+  single indivisible edit; either alone is silent breakage.
+- A file that is merged by `Source` must load standalone. `Typography.xaml` could only be moved
+  once the single-typeface collapse left it literal-only — while it still carried
+  `<StaticResource ResourceKey="SimpleBoldFontFamily" />` it would have resolved against the
+  ambient application scope instead (see the `StaticResource` lesson below).
+- **A comment describing merge order is a claim, not a fact.** Two comments in this tree described
+  the ordering, and they contradicted each other: `BaseDictionaries.xaml` said the glob wins,
+  Simple's old `Fonts.xaml` said it doesn't and duplicated the slot mappings to work around it.
+  The one that had a workaround attached to it was the true one. When two comments disagree,
+  believe the one someone paid for.
+- **Assert the rendered value, not only the token.** Resource lookup (`TryGetValue`) and a
+  control's `{ThemeResource}` setters are different resolution paths. Here both were wrong, but
+  that is luck: a token test alone cannot tell you which layer moved.
+- **The blast radius of a shadowing bug is every key in the file, not the ones with tests.** Only
+  the weights failed CI because only the weights were asserted; twelve `*FontSize` tokens and
+  every `*CharacterSpacing` were equally shadowed, and Simple's display text had been rendering at
+  the Material 57px baseline instead of 72px. When a lookup-order defect is confirmed, enumerate
+  the whole dictionary against what it is supposed to override before sizing the fix.
+
+---
+
 ## A design-token "mode" (density) must be a factor over the scale's base unit, never a competing source of the base value
 
 **Context:** Spec 07 (`DefaultSpacing`, issue #1688). The first implementation gave `Density` enum members base-unit pixel values (`Compact = 3`, `Regular = 4`, `Comfy = 5`) and made `DefaultSpacing` an *override* that beat the preset ("override-beats-preset, like the color stack"). The user rejected this: density is a **mode** the consumer picks (Compact / Regular / Comfy), not an alternate spelling of a pixel value.
@@ -131,15 +360,28 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
-## Typography slot→weight font mappings must be duplicated in Fonts.xaml (not only Typography.xaml)
+## Typography slot aliases resolve their root against the *application* scope — declare the root in the dictionary merged after `SharedTypography.xaml`, and never test an alias cascade from a scoped container
 
-**Context:** PR #1680 (`dev/sb/themes-revert`) — reworking `BaseTheme` resource management. CI runtime tests failed with 5 `Given_Fonts` cases: Bold display slots (`DisplayLargeFontFamily`, `DisplayMediumFontFamily`) resolved to `Inter-Regular` instead of `Inter-Bold`, and SemiBold slots (`HeadlineMediumFontFamily`, `TitleMediumFontFamily`, `LabelLargeFontFamily`) resolved to `Inter-Regular`/`Inter-Medium` instead of `Inter-SemiBold`.
+**Context:** PR #1680 (`dev/sb/themes-revert`) reworked `BaseTheme` resource management and CI failed 5 `Given_Fonts` cases: Bold display slots (`DisplayLargeFontFamily`, `DisplayMediumFontFamily`) resolved to `Inter-Regular`, SemiBold slots to Regular/Medium. PR #1710 then collapsed the per-weight families into the single `DefaultFontFamily` root and deleted the Simple `Fonts.xaml` slot re-declarations that #1680's fix had introduced.
 
-**Root cause:** Simple's `Typography.xaml` maps the semantic font-family slots via `<StaticResource ResourceKey="SimpleBoldFontFamily" />` etc. `SharedTypography.xaml` (Uno.Themes core) *also* defines the same `*FontFamily` keys, aliased to `TypefacePlain`/`TypefaceBrand` (the Segoe-derived defaults). `<StaticResource>` aliases inside `ResourceDictionary.ThemeDictionaries` are resolved **eagerly at parse time** against whatever is visible in scope then — across separate merged dictionaries this resolution is unreliable, so the shared (wrong-weight) defaults can win. Master's fix was to **also** declare the slot→weight `<StaticResource>` mappings in `Fonts.xaml` (which is merged *after* `SharedTypography.xaml` inside `BaseDictionaries.xaml`), making the correct weights win deterministically. A reshape of `Fonts.xaml` deleted those duplicated mappings, reintroducing the bug.
+**Root cause (#1680, per-weight model):** Simple's `Typography.xaml` mapped the semantic slots to weight-specific keys (`SimpleBoldFontFamily`, …) through `<StaticResource>` aliases inside `ThemeDictionaries`, while `SharedTypography.xaml` declared the same slot keys aliased to the Segoe-derived defaults. An alias is stored as a redirect and its *target* is resolved at lookup time (`ResourceDictionary.TryResolveAlias` → `ResourceResolver.ResolveResourceStatic`), against the by-name scope stack and then the application's top-level resources — not against the dictionary the alias sits in. Which family a slot landed on therefore depended on what the application scope held for the target key. The fix duplicated the slot→weight aliases into Simple's `Fonts.xaml`, merged after `SharedTypography.xaml`, so the theme's mapping won deterministically.
+
+**Why #1710 could delete those duplicates:** with one root, every slot alias in every layer (`SharedTypography.xaml`, Material v2 `Typography.xaml`, Simple `Typography.xaml`) targets the same key, `DefaultFontFamily`. Whichever alias is hit, its target resolves to what the application scope holds for that one key, and the theme's `Fonts.xaml` (merged after `SharedTypography.xaml`) wins for it. The per-slot duplication carried no information any more. What still matters is that the root token is declared in the dictionary merged *after* `SharedTypography.xaml`; `Given_Fonts.When_SimpleThemeLoaded_Then_TypographyScaleDerivesFromRoot` (19 slots) guards that ordering. The per-theme alias blocks in Material v2 and Simple `Typography.xaml` were then deleted too: a lookup that misses a key in one dictionary's HighContrast block continues to the next merged dictionary and then to its `Default` block (`ResourceDictionary.GetThemeDictionary` fallback), so `SharedTypography.xaml`'s aliases serve every appearance. `SharedTypography.xaml` is the only declaration of the `*FontFamily` slot keys; the per-theme Typography files override size, weight and spacing only.
+
+**The sharper lesson (measured in #1710):** because the alias target resolves against the application scope, a `SimpleTheme` merged into a `Grid` with a `FontOverrideDictionary` that redefines `DefaultFontFamily` does **not** cascade — `BodyMediumFontFamily` looked up through that grid still returns the *application* theme's Inter root. The same override on the application-level theme (`Application.Current.GetTheme().FontOverrideDictionary = …`) cascades to every slot; that is the documented scenario and what `Given_Fonts.When_RootOverriddenOnApplicationTheme_Then_ScaleFollowsAndClears` pins. A scoped theme can only swap the scales by declaring the concrete `*FontFamily` keys (no alias), which is what the `DefaultFontFamily` property generator in #1707 does.
 
 **How to apply:**
-- When a per-design-system typography file maps font-family slots to weight-specific keys, keep the matching mappings in the **font dictionary that is merged after `SharedTypography.xaml`** (e.g. Simple's `Fonts.xaml`). Do not assume the aliases in `Typography.xaml` alone are sufficient — they are not, because of eager cross-dictionary `<StaticResource>` resolution in theme dictionaries.
-- Treat the slot→weight mappings in `Fonts.xaml` as load-bearing, not redundant. The comment in that file explains why; preserve it on any refactor.
+- Declare the root token in the theme's font dictionary that is merged after `SharedTypography.xaml`; that ordering is what makes the theme's family win over the Segoe UI baseline. Do not re-declare the slot aliases per theme; a design-system-specific key for the root (`SimpleFontFamily`, `CupertinoFontFamily`) is a dead alias: it resolves, but overriding it reaches nothing.
+- Never claim "override X cascades" for an aliased key without a test at the scope the doc describes. Container-scoped runtime tests are the wrong scope for alias cascades: they pass or fail on the ambient application theme, not on the container's. Mutate `Application.Current.GetTheme()` and restore it in `finally`.
+- A "merge gate" test that measures rendered glyphs must first prove the font loaded: a missing `ms-appx` font falls back silently to the platform default, which has its own Bold, so Bold-vs-Normal alone is green on the very configuration it is meant to catch. Measure against a family known not to exist; equal widths mean both fell back.
 
 **Verification trap (the more important lesson):** these font tests **passed in the minimal dedicated `Uno.Themes.RuntimeTests` host but failed in `SimpleSampleApp`** (and therefore in CI). The dedicated host merges `<SimpleTheme/>` app-wide, which "warms" the ambient resolution scope so the fragile `<StaticResource>` aliases happen to resolve to the right weight — a **false positive**. The real consumer-like host (`SimpleSampleApp`, also what CI runs) exposed the bug.
 - **Always verify font/typography/resource-precedence changes in `SimpleSampleApp` (the CI host), not only in a minimal host.** A minimal single-theme host can mask cross-dictionary resolution and merge-order bugs. If two hosts disagree, trust the one that matches CI.
+
+## A `ResourceDictionary` subclass declared in XAML with `Source` loses its type; `BaseDictionaries.xaml` feeds the deprecated bundles too (#1728)
+
+**Context:** #1728 marks semantic resources by dictionary type (`SemanticResources : ResourceDictionary`). Declaring `<themes:SemanticResources Source="…/SharedTypography.xaml"/>` in `BaseDictionaries.xaml` compiled and resolved, but a runtime walk showed the entry as a plain `ResourceDictionary`: the Uno XAML generator emits the registered dictionary for a Source-merged entry and ignores the declared type. The first fix removed `SharedTypography.xaml` from `BaseDictionaries.xaml` and re-merged it from C#, which silently stripped the shared type tokens from `MaterialResourcesV1`/`V2` because the `Common` glob feeds `mergedpages.v1` and `.v2` as well.
+
+**How to apply:**
+- Anything that must carry a dictionary *type* is created in C# (`new SemanticResources { Source = … }`), never declared in XAML. Verify the type at runtime, not by reading the markup.
+- Treat `Styles/Application/Common/BaseDictionaries.xaml` as shared with the deprecated Material bundles: prefer adding a layer over removing an entry, and check `MaterialResourcesV1`/`V2` before editing it.

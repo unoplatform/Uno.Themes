@@ -2,23 +2,34 @@ using System;
 
 #if WinUI
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Media;
 using Windows.UI;
 #else
 using Windows.UI;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 #endif
 
 namespace Uno.Themes;
 
 /// <summary>
-/// Provides static helpers for runtime theme configuration via <see cref="ThemeColors"/>.
+/// Provides static helpers for runtime theme configuration: the seed colours and override channels
+/// on <see cref="ThemeColors"/>, and the font family on <see cref="BaseTheme"/>.
 /// </summary>
 public static class SemanticThemeHelper
 {
 	/// <summary>
-	/// Gets the <see cref="BaseTheme"/> instance from <see cref="Application.Current.Resources"/>.
+	/// Gets the <see cref="BaseTheme"/> instance from <c>Application.Current.Resources</c>.
 	/// Returns <c>null</c> if no <see cref="BaseTheme"/> is found.
 	/// </summary>
+	/// <remarks>
+	/// Every member of this class resolves the theme through <see cref="Application.Current"/>, which
+	/// is only assigned for the application whose assembly lives in the default
+	/// <c>AssemblyLoadContext</c>. An application hosted in a secondary ALC is registered per-ALC
+	/// instead, so from its code <see cref="Application.Current"/> is the <em>hosting</em>
+	/// application and this lookup finds the host's theme or none at all. Such an application must
+	/// hold on to its own instance and use <see cref="ApplicationExtensions.GetTheme(Application)"/>.
+	/// </remarks>
 	public static BaseTheme GetTheme() => Application.Current.GetTheme();
 
 	/// <summary>
@@ -65,10 +76,26 @@ public static class SemanticThemeHelper
 		set => GetColorsOrThrow().SeedColorMode = value;
 	}
 
+	/// <summary>
+	/// Gets or sets the font family the active theme's whole type scale is generated from.
+	/// <c>null</c> leaves the theme's own typeface in place. Setting this regenerates the
+	/// <c>DefaultFontFamily</c> root token and every derived type-scale family key at runtime; see
+	/// <see cref="BaseTheme.DefaultFontFamily"/> for what it does and does not move.
+	/// </summary>
+	/// <exception cref="InvalidOperationException">No <see cref="BaseTheme"/> found in application resources.</exception>
+	public static FontFamily DefaultFontFamily
+	{
+		get => GetThemeOrThrow().DefaultFontFamily;
+		set => GetThemeOrThrow().DefaultFontFamily = value;
+	}
+
+	private static BaseTheme GetThemeOrThrow()
+		=> GetTheme() ?? throw new InvalidOperationException(
+			"No BaseTheme (MaterialTheme, SimpleTheme, etc.) found in Application.Current.Resources.MergedDictionaries.");
+
 	private static ThemeColors GetColorsOrThrow()
 	{
-		var theme = GetTheme() ?? throw new InvalidOperationException(
-			"No BaseTheme (MaterialTheme, SimpleTheme, etc.) found in Application.Current.Resources.MergedDictionaries.");
+		var theme = GetThemeOrThrow();
 
 		if (theme.Colors is null)
 		{

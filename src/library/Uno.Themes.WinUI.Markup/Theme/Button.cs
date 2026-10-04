@@ -171,7 +171,7 @@ public static partial class Theme
 
 				[ResourceKeyDefinition(typeof(Brush), "FilledTonalButtonForeground")]
 				public static ThemeResourceKey<Brush> Foreground => new("FilledTonalButtonForeground");
-				
+
 				public static ThemeResourceKey<Thickness> Margin => Shared.Margin;
 			}
 

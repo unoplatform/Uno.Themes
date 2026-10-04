@@ -1,12 +1,6 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:um="using:Uno.Material"
-					xmlns:toolkit="using:Uno.UI.Toolkit"
-					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:android="http://uno.ui/android"
-					xmlns:ios="http://uno.ui/ios"
-					mc:Ignorable="android ios">
+					xmlns:um="using:Uno.Material">
 	<ResourceDictionary.ThemeDictionaries>
 		<ResourceDictionary x:Key="Light">
 			<StaticResource x:Key="AppBarButtonHeight" ResourceKey="Space1600" />
@@ -52,7 +46,7 @@
 										<VisualState.Setters>
 											<Setter Target="AppBarButtonInnerBorder.Background" Value="{ThemeResource AppBarButtonBackgroundPointerOver}" />
 											<Setter Target="AppBarButtonInnerBorder.BorderBrush" Value="{ThemeResource AppBarButtonBorderBrushPointerOver}" />
-											<Setter Target="Content.Foreground" Value="{ThemeResource AppBarButtonForegroundPointerOver}" />
+											<Setter Target="IconPresenter.Foreground" Value="{ThemeResource AppBarButtonForegroundPointerOver}" />
 											<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource AppBarButtonForegroundPointerOver}" />
 										</VisualState.Setters>
 									</VisualState>
@@ -61,7 +55,7 @@
 										<VisualState.Setters>
 											<Setter Target="AppBarButtonInnerBorder.Background" Value="{ThemeResource AppBarButtonBackgroundPressed}" />
 											<Setter Target="AppBarButtonInnerBorder.BorderBrush" Value="{ThemeResource AppBarButtonBorderBrushPressed}" />
-											<Setter Target="Content.Foreground" Value="{ThemeResource AppBarButtonForegroundPressed}" />
+											<Setter Target="IconPresenter.Foreground" Value="{ThemeResource AppBarButtonForegroundPressed}" />
 											<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource AppBarButtonForegroundPressed}" />
 										</VisualState.Setters>
 									</VisualState>
@@ -70,7 +64,7 @@
 										<VisualState.Setters>
 											<Setter Target="AppBarButtonInnerBorder.Background" Value="{ThemeResource AppBarButtonBackgroundDisabled}" />
 											<Setter Target="AppBarButtonInnerBorder.BorderBrush" Value="{ThemeResource AppBarButtonBorderBrushDisabled}" />
-											<Setter Target="Content.Foreground" Value="{ThemeResource AppBarButtonForegroundDisabled}" />
+											<Setter Target="IconPresenter.Foreground" Value="{ThemeResource AppBarButtonForegroundDisabled}" />
 											<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource AppBarButtonForegroundDisabled}" />
 										</VisualState.Setters>
 									</VisualState>
@@ -88,7 +82,7 @@
 										Orientation="Vertical"
 										VerticalAlignment="Center"
 										HorizontalAlignment="Stretch"
-										Spacing="{StaticResource Space200}">
+										Spacing="{ThemeResource Space200}">
 								<!-- Icon content wrapped in Viewbox (shown when Icon is set) -->
 								<Viewbox x:Name="ContentViewbox"
 										 MaxHeight="{ThemeResource AppBarButtonContentHeight}"
@@ -97,7 +91,8 @@
 										 HorizontalAlignment="Center"
 										 AutomationProperties.AccessibilityView="Raw"
 										 Visibility="{Binding Icon, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
-									<ContentPresenter x:Name="Content"
+									<!-- Must not be named "Content": Uno's AppBarButton force-sets a template part with that name to Icon ?? Content, which would steal a UIElement Content from ContentPresenter below (unoplatform/Uno.Themes#1735). -->
+									<ContentPresenter x:Name="IconPresenter"
 													  Content="{TemplateBinding Icon}"
 													  Foreground="{TemplateBinding Foreground}" />
 								</Viewbox>

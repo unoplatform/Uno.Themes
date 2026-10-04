@@ -4,40 +4,34 @@
 	<Style x:Key="MaterialBaseTextBlockStyle"
 		   TargetType="TextBlock">
 
-		<Setter Property="TextTrimming"
-				Value="CharacterEllipsis" />
-		<Setter Property="TextWrapping"
-				Value="Wrap" />
-		<Setter Property="FontWeight"
-				Value="Normal" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialRegularFontFamily}" />
+		<Setter Property="TextTrimming" Value="CharacterEllipsis" />
+		<Setter Property="TextWrapping" Value="Wrap" />
+		<Setter Property="FontWeight" Value="Normal" />
+		<Setter Property="FontFamily" Value="{StaticResource MaterialRegularFontFamily}" />
 	</Style>
 
 	<!--
-	******************************************************************
+		******************************************************************
 		STYLE GUIDE TEXTBLOCKS STYLES
-	******************************************************************
+		******************************************************************
 	-->
 
-	<!-- IMPORTANT NOTE :
-	CharacterSpacing is measured in 1/1000 of an "em". One "em" is equivalent to the current font size of the control.
-	For example, here with MaterialHeadline1 an additional 96 pixels will be inserted between each character with FontSize="96" and CharacterSpacing="1000".
-	So in order to specify the letter spacing of -1.5px from the Material guidelines, we will need to add CharacterSpacing="-15.625". -->
+	<!--
+		IMPORTANT NOTE :
+		CharacterSpacing is measured in 1/1000 of an "em". One "em" is equivalent to the current font size of the control.
+		For example, here with MaterialHeadline1 an additional 96 pixels will be inserted between each character with FontSize="96" and CharacterSpacing="1000".
+		So in order to specify the letter spacing of -1.5px from the Material guidelines, we will need to add CharacterSpacing="-15.625".
+	-->
 
 	<!-- Headline 1 -->
 	<Style x:Key="MaterialHeadline1"
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}">
 
-		<Setter Property="FontSize"
-				Value="96" />
-		<Setter Property="FontWeight"
-				Value="Light" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialLightFontFamily}" />
-		<Setter Property="CharacterSpacing"
-				Value="-15.625" />
+		<Setter Property="FontSize" Value="96" />
+		<Setter Property="FontWeight" Value="Light" />
+		<Setter Property="FontFamily" Value="{StaticResource MaterialLightFontFamily}" />
+		<Setter Property="CharacterSpacing" Value="-15.625" />
 	</Style>
 
 	<!-- Headline 2 -->
@@ -45,14 +39,10 @@
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}">
 
-		<Setter Property="FontSize"
-				Value="60" />
-		<Setter Property="FontWeight"
-				Value="Light" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialLightFontFamily}" />
-		<Setter Property="CharacterSpacing"
-				Value="-8.333" />
+		<Setter Property="FontSize" Value="60" />
+		<Setter Property="FontWeight" Value="Light" />
+		<Setter Property="FontFamily" Value="{StaticResource MaterialLightFontFamily}" />
+		<Setter Property="CharacterSpacing" Value="-8.333" />
 
 	</Style>
 
@@ -61,8 +51,7 @@
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}">
 
-		<Setter Property="FontSize"
-				Value="48" />
+		<Setter Property="FontSize" Value="48" />
 	</Style>
 
 	<!-- Headline 4 -->
@@ -70,10 +59,8 @@
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}">
 
-		<Setter Property="FontSize"
-				Value="34" />
-		<Setter Property="CharacterSpacing"
-				Value="7.353" />
+		<Setter Property="FontSize" Value="34" />
+		<Setter Property="CharacterSpacing" Value="7.353" />
 	</Style>
 
 	<!-- Headline 5 -->
@@ -81,8 +68,7 @@
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}">
 
-		<Setter Property="FontSize"
-				Value="24" />
+		<Setter Property="FontSize" Value="24" />
 	</Style>
 
 	<!-- Headline 6 -->
@@ -90,14 +76,10 @@
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}">
 
-		<Setter Property="FontSize"
-				Value="20" />
-		<Setter Property="FontWeight"
-				Value="Medium" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialMediumFontFamily}" />
-		<Setter Property="CharacterSpacing"
-				Value="7.5" />
+		<Setter Property="FontSize" Value="20" />
+		<Setter Property="FontWeight" Value="Medium" />
+		<Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
+		<Setter Property="CharacterSpacing" Value="7.5" />
 	</Style>
 
 	<!-- Subtitle 1 -->
@@ -105,10 +87,8 @@
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}">
 
-		<Setter Property="FontSize"
-				Value="16" />
-		<Setter Property="CharacterSpacing"
-				Value="9.375" />
+		<Setter Property="FontSize" Value="16" />
+		<Setter Property="CharacterSpacing" Value="9.375" />
 	</Style>
 
 	<!-- Subtitle 2 -->
@@ -116,14 +96,10 @@
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}">
 
-		<Setter Property="FontSize"
-				Value="14" />
-		<Setter Property="FontWeight"
-				Value="Medium" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialMediumFontFamily}" />
-		<Setter Property="CharacterSpacing"
-				Value="7.143" />
+		<Setter Property="FontSize" Value="14" />
+		<Setter Property="FontWeight" Value="Medium" />
+		<Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
+		<Setter Property="CharacterSpacing" Value="7.143" />
 	</Style>
 
 	<!-- Body 1 -->
@@ -131,10 +107,8 @@
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}">
 
-		<Setter Property="FontSize"
-				Value="16" />
-		<Setter Property="CharacterSpacing"
-				Value="31.25" />
+		<Setter Property="FontSize" Value="16" />
+		<Setter Property="CharacterSpacing" Value="31.25" />
 	</Style>
 
 	<!-- Body 2 -->
@@ -142,10 +116,8 @@
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}">
 
-		<Setter Property="FontSize"
-				Value="14" />
-		<Setter Property="CharacterSpacing"
-				Value="17.857" />
+		<Setter Property="FontSize" Value="14" />
+		<Setter Property="CharacterSpacing" Value="17.857" />
 	</Style>
 
 	<!-- Button -->
@@ -154,14 +126,10 @@
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}">
 
-		<Setter Property="FontSize"
-				Value="14" />
-		<Setter Property="FontWeight"
-				Value="Medium" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialMediumFontFamily}" />
-		<Setter Property="CharacterSpacing"
-				Value="89.286" />
+		<Setter Property="FontSize" Value="14" />
+		<Setter Property="FontWeight" Value="Medium" />
+		<Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
+		<Setter Property="CharacterSpacing" Value="89.286" />
 	</Style>
 
 	<!-- Caption -->
@@ -169,10 +137,8 @@
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}">
 
-		<Setter Property="FontSize"
-				Value="12" />
-		<Setter Property="CharacterSpacing"
-				Value="33.333" />
+		<Setter Property="FontSize" Value="12" />
+		<Setter Property="CharacterSpacing" Value="33.333" />
 	</Style>
 
 	<!-- Overline -->
@@ -181,9 +147,7 @@
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}">
 
-		<Setter Property="FontSize"
-				Value="10" />
-		<Setter Property="CharacterSpacing"
-				Value="150" />
+		<Setter Property="FontSize" Value="10" />
+		<Setter Property="CharacterSpacing" Value="150" />
 	</Style>
 </ResourceDictionary>

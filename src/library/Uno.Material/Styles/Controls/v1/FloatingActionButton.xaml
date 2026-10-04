@@ -4,7 +4,7 @@
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:um="using:Uno.Material"
 					xmlns:ut="using:Uno.Themes"
-					xmlns:toolkit="using:Uno.UI.Toolkit"
+					xmlns:uno="using:Uno.UI.Xaml.Controls"
 					mc:Ignorable="d">
 
 	<!-- Need full color for disabled state or else the elevated view looks weird -->
@@ -25,8 +25,7 @@
 					 Color="Transparent" />
 	<SolidColorBrush x:Key="ButtonFabLowFabBackgroundColorBrush"
 					 Color="{ThemeResource ButtonFabLowFabBackgroundColor}" />
-	<StaticResource x:Key="ButtonFabFocusOverlayBorderColor"
-					ResourceKey="MaterialOnPrimaryBrush" />
+	<StaticResource x:Key="ButtonFabFocusOverlayBorderColor" ResourceKey="MaterialOnPrimaryBrush" />
 
 	<!-- Documented variables -->
 	<x:Double x:Key="MaterialFabFontSize">14</x:Double>
@@ -52,39 +51,29 @@
 	<Style x:Key="MaterialFabStyle"
 		   TargetType="Button">
 
-		<Setter Property="Background"
-				Value="{StaticResource MaterialPrimaryBrush}" />
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnPrimaryBrush}" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialMediumFontFamily}" />
-		<Setter Property="FontSize"
-				Value="{StaticResource MaterialFabFontSize}" />
-		<Setter Property="FontWeight"
-				Value="SemiBold" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Center" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
-		<Setter Property="CornerRadius"
-				Value="{StaticResource MaterialFabLargeCorderRadius}" />
-		<Setter Property="Padding"
-				Value="{StaticResource MaterialFabLargePadding}" />
+		<Setter Property="Background" Value="{StaticResource MaterialPrimaryBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource MaterialOnPrimaryBrush}" />
+		<Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
+		<Setter Property="FontSize" Value="{StaticResource MaterialFabFontSize}" />
+		<Setter Property="FontWeight" Value="SemiBold" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="CornerRadius" Value="{StaticResource MaterialFabLargeCorderRadius}" />
+		<Setter Property="Padding" Value="{StaticResource MaterialFabLargePadding}" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="ut:ControlExtensions.Icon"
-				Value="{x:Null}" />
+		<Setter Property="ut:ControlExtensions.Icon" Value="{x:Null}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
 					<Grid>
 
-						<toolkit:ElevatedView x:Name="ElevatedView"
-											  Margin="0,0,6,6"
-											  Elevation="6"
-											  CornerRadius="{TemplateBinding CornerRadius}"
-											  Background="Transparent">
+						<uno:ElevatedView x:Name="ElevatedView"
+										  Margin="0,0,6,6"
+										  Elevation="6"
+										  CornerRadius="{TemplateBinding CornerRadius}"
+										  Background="Transparent">
 
 							<um:Ripple x:Name="Ripple"
 									   CornerRadius="{TemplateBinding CornerRadius}"
@@ -128,7 +117,7 @@
 									<Border x:Name="FabFocusBorder" />
 								</Grid>
 							</um:Ripple>
-						</toolkit:ElevatedView>
+						</uno:ElevatedView>
 
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
@@ -137,16 +126,14 @@
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="FabFocusBorder.Background"
-												Value="{StaticResource MaterialOnSurfaceHoverBrush}" />
+										<Setter Target="FabFocusBorder.Background" Value="{StaticResource MaterialOnSurfaceHoverBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 
-										<Setter Target="Root.Background"
-												Value="{StaticResource ButtonFabLowFabBackgroundColorBrush}" />
+										<Setter Target="Root.Background" Value="{StaticResource ButtonFabLowFabBackgroundColorBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -155,8 +142,7 @@
 
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="FabFocusBorder.Background"
-												Value="{StaticResource MaterialOnSurfaceFocusedBrush}" />
+										<Setter Target="FabFocusBorder.Background" Value="{StaticResource MaterialOnSurfaceFocusedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -180,12 +166,9 @@
 									</VisualState.StateTriggers>
 
 									<VisualState.Setters>
-										<Setter Target="ElevatedView.CornerRadius"
-												Value="{StaticResource MaterialFabSmallCorderRadius}" />
-										<Setter Target="Ripple.CornerRadius"
-												Value="{StaticResource MaterialFabSmallCorderRadius}" />
-										<Setter Target="ContentPanel.Margin"
-												Value="{StaticResource MaterialFabSmallPadding}" />
+										<Setter Target="ElevatedView.CornerRadius" Value="{StaticResource MaterialFabSmallCorderRadius}" />
+										<Setter Target="Ripple.CornerRadius" Value="{StaticResource MaterialFabSmallCorderRadius}" />
+										<Setter Target="ContentPanel.Margin" Value="{StaticResource MaterialFabSmallPadding}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -199,39 +182,29 @@
 	<Style x:Key="MaterialSmallFabStyle"
 		   TargetType="Button">
 
-		<Setter Property="Background"
-				Value="{StaticResource MaterialPrimaryBrush}" />
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnPrimaryBrush}" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialMediumFontFamily}" />
-		<Setter Property="FontSize"
-				Value="{StaticResource MaterialFabFontSize}" />
-		<Setter Property="FontWeight"
-				Value="SemiBold" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Center" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
-		<Setter Property="CornerRadius"
-				Value="{StaticResource MaterialFabSmallCorderRadius}" />
-		<Setter Property="Padding"
-				Value="{StaticResource MaterialFabSmallPadding}" />
+		<Setter Property="Background" Value="{StaticResource MaterialPrimaryBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource MaterialOnPrimaryBrush}" />
+		<Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
+		<Setter Property="FontSize" Value="{StaticResource MaterialFabFontSize}" />
+		<Setter Property="FontWeight" Value="SemiBold" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="CornerRadius" Value="{StaticResource MaterialFabSmallCorderRadius}" />
+		<Setter Property="Padding" Value="{StaticResource MaterialFabSmallPadding}" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="ut:ControlExtensions.Icon"
-				Value="{x:Null}" />
+		<Setter Property="ut:ControlExtensions.Icon" Value="{x:Null}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
 					<Grid>
 
-						<toolkit:ElevatedView x:Name="ElevatedView"
-											  Margin="0,0,4,4"
-											  Elevation="4"
-											  CornerRadius="{TemplateBinding CornerRadius}"
-											  Background="Transparent">
+						<uno:ElevatedView x:Name="ElevatedView"
+										  Margin="0,0,4,4"
+										  Elevation="4"
+										  CornerRadius="{TemplateBinding CornerRadius}"
+										  Background="Transparent">
 
 							<um:Ripple x:Name="Ripple"
 									   CornerRadius="{TemplateBinding CornerRadius}"
@@ -275,7 +248,7 @@
 									<Border x:Name="FabFocusBorder" />
 								</Grid>
 							</um:Ripple>
-						</toolkit:ElevatedView>
+						</uno:ElevatedView>
 
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
@@ -284,16 +257,14 @@
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="FabFocusBorder.Background"
-												Value="{StaticResource MaterialOnSurfaceHoverBrush}" />
+										<Setter Target="FabFocusBorder.Background" Value="{StaticResource MaterialOnSurfaceHoverBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 
-										<Setter Target="Root.Background"
-												Value="{StaticResource ButtonFabLowFabBackgroundColorBrush}" />
+										<Setter Target="Root.Background" Value="{StaticResource ButtonFabLowFabBackgroundColorBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -302,8 +273,7 @@
 
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="FabFocusBorder.Background"
-												Value="{StaticResource MaterialOnSurfaceFocusedBrush}" />
+										<Setter Target="FabFocusBorder.Background" Value="{StaticResource MaterialOnSurfaceFocusedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -322,29 +292,23 @@
 		   BasedOn="{StaticResource MaterialFabStyle}"
 		   TargetType="Button">
 
-		<Setter Property="Background"
-				Value="{StaticResource MaterialSecondaryBrush}" />
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSecondaryBrush}" />
+		<Setter Property="Background" Value="{StaticResource MaterialSecondaryBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource MaterialOnSecondaryBrush}" />
 	</Style>
 
 	<Style x:Key="MaterialPrimaryInvertedFabStyle"
 		   BasedOn="{StaticResource MaterialFabStyle}"
 		   TargetType="Button">
 
-		<Setter Property="Background"
-				Value="{StaticResource MaterialOnPrimaryBrush}" />
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialPrimaryBrush}" />
+		<Setter Property="Background" Value="{StaticResource MaterialOnPrimaryBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource MaterialPrimaryBrush}" />
 	</Style>
 
 	<Style x:Key="MaterialSecondaryInvertedFabStyle"
 		   BasedOn="{StaticResource MaterialFabStyle}"
 		   TargetType="Button">
 
-		<Setter Property="Background"
-				Value="{StaticResource MaterialBackgroundBrush}" />
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialSecondaryBrush}" />
+		<Setter Property="Background" Value="{StaticResource MaterialBackgroundBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource MaterialSecondaryBrush}" />
 	</Style>
 </ResourceDictionary>

@@ -31,145 +31,15 @@
 		<!-- ─── Light Theme ─── -->
 		<ResourceDictionary x:Key="Light">
 
-			<!-- ── FilledButton (Primary) — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="FilledButtonForeground" ResourceKey="OnPrimaryBrush" />
-			<StaticResource x:Key="FilledButtonForegroundPointerOver" ResourceKey="OnPrimaryBrush" />
-			<StaticResource x:Key="FilledButtonForegroundPressed" ResourceKey="OnPrimaryBrush" />
-			<StaticResource x:Key="FilledButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="FilledButtonBackground" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="FilledButtonBackgroundPointerOver" ResourceKey="PrimaryVariantDarkBrush" />
-			<StaticResource x:Key="FilledButtonBackgroundPressed" ResourceKey="PrimaryVariantDarkBrush" />
-			<StaticResource x:Key="FilledButtonBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="FilledButtonBorderBrush" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="FilledButtonBorderBrushPointerOver" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="FilledButtonBorderBrushPressed" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="FilledButtonBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
-			<!-- ── FilledTonalButton (Neutral) — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="FilledTonalButtonForeground" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTonalButtonForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTonalButtonForegroundPressed" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTonalButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="FilledTonalButtonBackground" ResourceKey="SurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTonalButtonBackgroundPointerOver" ResourceKey="PrimaryContainerBrush" />
-			<StaticResource x:Key="FilledTonalButtonBackgroundPressed" ResourceKey="TertiaryContainerBrush" />
-			<StaticResource x:Key="FilledTonalButtonBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="FilledTonalButtonBorderBrush" ResourceKey="OutlineBrush" />
-			<StaticResource x:Key="FilledTonalButtonBorderBrushPointerOver" ResourceKey="OutlineBrush" />
-			<StaticResource x:Key="FilledTonalButtonBorderBrushPressed" ResourceKey="OutlineBrush" />
-			<StaticResource x:Key="FilledTonalButtonBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
-			<!-- OutlinedButton aliases (read parity — point to FilledTonalButton*) -->
-			<StaticResource x:Key="OutlinedButtonForeground" ResourceKey="FilledTonalButtonForeground" />
-			<StaticResource x:Key="OutlinedButtonForegroundPointerOver" ResourceKey="FilledTonalButtonForegroundPointerOver" />
-			<StaticResource x:Key="OutlinedButtonForegroundPressed" ResourceKey="FilledTonalButtonForegroundPressed" />
-			<StaticResource x:Key="OutlinedButtonForegroundDisabled" ResourceKey="FilledTonalButtonForegroundDisabled" />
-			<StaticResource x:Key="OutlinedButtonBackground" ResourceKey="FilledTonalButtonBackground" />
-			<StaticResource x:Key="OutlinedButtonBackgroundPointerOver" ResourceKey="FilledTonalButtonBackgroundPointerOver" />
-			<StaticResource x:Key="OutlinedButtonBackgroundPressed" ResourceKey="FilledTonalButtonBackgroundPressed" />
-			<StaticResource x:Key="OutlinedButtonBackgroundDisabled" ResourceKey="FilledTonalButtonBackgroundDisabled" />
-			<StaticResource x:Key="OutlinedButtonBorderBrush" ResourceKey="FilledTonalButtonBorderBrush" />
-			<StaticResource x:Key="OutlinedButtonBorderBrushPointerOver" ResourceKey="FilledTonalButtonBorderBrushPointerOver" />
-			<StaticResource x:Key="OutlinedButtonBorderBrushPressed" ResourceKey="FilledTonalButtonBorderBrushPressed" />
-			<StaticResource x:Key="OutlinedButtonBorderBrushDisabled" ResourceKey="FilledTonalButtonBorderBrushDisabled" />
-			<!-- ── TextButton (Subtle) — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="TextButtonForeground" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="TextButtonForegroundPointerOver" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="TextButtonForegroundPressed" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="TextButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="TextButtonBackground" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="TextButtonBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
-			<StaticResource x:Key="TextButtonBackgroundPressed" ResourceKey="PrimaryContainerBrush" />
-			<StaticResource x:Key="TextButtonBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="TextButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="TextButtonBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="TextButtonBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="TextButtonBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
-			<!-- ── IconButton — semantic keys ── -->
-			<StaticResource x:Key="IconButtonForeground" ResourceKey="FilledButtonForeground" />
-			<StaticResource x:Key="IconButtonForegroundPointerOver" ResourceKey="FilledButtonForegroundPointerOver" />
-			<StaticResource x:Key="IconButtonForegroundPressed" ResourceKey="FilledButtonForegroundPressed" />
-			<StaticResource x:Key="IconButtonForegroundDisabled" ResourceKey="FilledButtonForegroundDisabled" />
-			<StaticResource x:Key="IconButtonBackground" ResourceKey="FilledButtonBackground" />
-			<StaticResource x:Key="IconButtonBackgroundPointerOver" ResourceKey="FilledButtonBackgroundPointerOver" />
-			<StaticResource x:Key="IconButtonBackgroundPressed" ResourceKey="FilledButtonBackgroundPressed" />
-			<StaticResource x:Key="IconButtonBackgroundDisabled" ResourceKey="FilledButtonBackgroundDisabled" />
-			<StaticResource x:Key="IconButtonBorderBrush" ResourceKey="FilledButtonBorderBrush" />
-			<StaticResource x:Key="IconButtonBorderBrushPointerOver" ResourceKey="FilledButtonBorderBrushPointerOver" />
-			<StaticResource x:Key="IconButtonBorderBrushPressed" ResourceKey="FilledButtonBorderBrushPressed" />
-			<StaticResource x:Key="IconButtonBorderBrushDisabled" ResourceKey="FilledButtonBorderBrushDisabled" />
-			<!-- ── DangerPrimary (Simple-only — no semantic rename) ── -->
-			<!-- ── DangerSubtle (Simple-only — no semantic rename) ── -->
+			<!-- Typeface alias: themed so the generated font layer can shadow it (see BaseTheme.FontFamilyAliasKeys). -->
+			<StaticResource x:Key="SimpleButtonFontFamily" ResourceKey="DefaultFontFamily" />
 		</ResourceDictionary>
 
 		<!-- ─── Dark Theme (Default) ─── -->
 		<ResourceDictionary x:Key="Default">
 
-			<!-- ── FilledButton (Primary) — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="FilledButtonForeground" ResourceKey="OnPrimaryBrush" />
-			<StaticResource x:Key="FilledButtonForegroundPointerOver" ResourceKey="OnPrimaryBrush" />
-			<StaticResource x:Key="FilledButtonForegroundPressed" ResourceKey="OnPrimaryBrush" />
-			<StaticResource x:Key="FilledButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="FilledButtonBackground" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="FilledButtonBackgroundPointerOver" ResourceKey="PrimaryVariantDarkBrush" />
-			<StaticResource x:Key="FilledButtonBackgroundPressed" ResourceKey="PrimaryVariantDarkBrush" />
-			<StaticResource x:Key="FilledButtonBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="FilledButtonBorderBrush" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="FilledButtonBorderBrushPointerOver" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="FilledButtonBorderBrushPressed" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="FilledButtonBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
-			<!-- ── FilledTonalButton (Neutral) — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="FilledTonalButtonForeground" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTonalButtonForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTonalButtonForegroundPressed" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTonalButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="FilledTonalButtonBackground" ResourceKey="SurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTonalButtonBackgroundPointerOver" ResourceKey="PrimaryContainerBrush" />
-			<StaticResource x:Key="FilledTonalButtonBackgroundPressed" ResourceKey="TertiaryContainerBrush" />
-			<StaticResource x:Key="FilledTonalButtonBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="FilledTonalButtonBorderBrush" ResourceKey="OutlineBrush" />
-			<StaticResource x:Key="FilledTonalButtonBorderBrushPointerOver" ResourceKey="OutlineBrush" />
-			<StaticResource x:Key="FilledTonalButtonBorderBrushPressed" ResourceKey="OutlineBrush" />
-			<StaticResource x:Key="FilledTonalButtonBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
-			<!-- OutlinedButton aliases (read parity — point to FilledTonalButton*) -->
-			<StaticResource x:Key="OutlinedButtonForeground" ResourceKey="FilledTonalButtonForeground" />
-			<StaticResource x:Key="OutlinedButtonForegroundPointerOver" ResourceKey="FilledTonalButtonForegroundPointerOver" />
-			<StaticResource x:Key="OutlinedButtonForegroundPressed" ResourceKey="FilledTonalButtonForegroundPressed" />
-			<StaticResource x:Key="OutlinedButtonForegroundDisabled" ResourceKey="FilledTonalButtonForegroundDisabled" />
-			<StaticResource x:Key="OutlinedButtonBackground" ResourceKey="FilledTonalButtonBackground" />
-			<StaticResource x:Key="OutlinedButtonBackgroundPointerOver" ResourceKey="FilledTonalButtonBackgroundPointerOver" />
-			<StaticResource x:Key="OutlinedButtonBackgroundPressed" ResourceKey="FilledTonalButtonBackgroundPressed" />
-			<StaticResource x:Key="OutlinedButtonBackgroundDisabled" ResourceKey="FilledTonalButtonBackgroundDisabled" />
-			<StaticResource x:Key="OutlinedButtonBorderBrush" ResourceKey="FilledTonalButtonBorderBrush" />
-			<StaticResource x:Key="OutlinedButtonBorderBrushPointerOver" ResourceKey="FilledTonalButtonBorderBrushPointerOver" />
-			<StaticResource x:Key="OutlinedButtonBorderBrushPressed" ResourceKey="FilledTonalButtonBorderBrushPressed" />
-			<StaticResource x:Key="OutlinedButtonBorderBrushDisabled" ResourceKey="FilledTonalButtonBorderBrushDisabled" />
-			<!-- ── TextButton (Subtle) — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="TextButtonForeground" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="TextButtonForegroundPointerOver" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="TextButtonForegroundPressed" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="TextButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="TextButtonBackground" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="TextButtonBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
-			<StaticResource x:Key="TextButtonBackgroundPressed" ResourceKey="PrimaryContainerBrush" />
-			<StaticResource x:Key="TextButtonBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="TextButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="TextButtonBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="TextButtonBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="TextButtonBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
-			<!-- ── IconButton — semantic keys ── -->
-			<StaticResource x:Key="IconButtonForeground" ResourceKey="FilledButtonForeground" />
-			<StaticResource x:Key="IconButtonForegroundPointerOver" ResourceKey="FilledButtonForegroundPointerOver" />
-			<StaticResource x:Key="IconButtonForegroundPressed" ResourceKey="FilledButtonForegroundPressed" />
-			<StaticResource x:Key="IconButtonForegroundDisabled" ResourceKey="FilledButtonForegroundDisabled" />
-			<StaticResource x:Key="IconButtonBackground" ResourceKey="FilledButtonBackground" />
-			<StaticResource x:Key="IconButtonBackgroundPointerOver" ResourceKey="FilledButtonBackgroundPointerOver" />
-			<StaticResource x:Key="IconButtonBackgroundPressed" ResourceKey="FilledButtonBackgroundPressed" />
-			<StaticResource x:Key="IconButtonBackgroundDisabled" ResourceKey="FilledButtonBackgroundDisabled" />
-			<StaticResource x:Key="IconButtonBorderBrush" ResourceKey="FilledButtonBorderBrush" />
-			<StaticResource x:Key="IconButtonBorderBrushPointerOver" ResourceKey="FilledButtonBorderBrushPointerOver" />
-			<StaticResource x:Key="IconButtonBorderBrushPressed" ResourceKey="FilledButtonBorderBrushPressed" />
-			<StaticResource x:Key="IconButtonBorderBrushDisabled" ResourceKey="FilledButtonBorderBrushDisabled" />
-			<!-- ── DangerPrimary (Simple-only — no semantic rename) ── -->
-			<!-- ── DangerSubtle (Simple-only — no semantic rename) ── -->
+			<!-- Typeface alias: themed so the generated font layer can shadow it (see BaseTheme.FontFamilyAliasKeys). -->
+			<StaticResource x:Key="SimpleButtonFontFamily" ResourceKey="DefaultFontFamily" />
 		</ResourceDictionary>
 
 	</ResourceDictionary.ThemeDictionaries>
@@ -184,20 +54,19 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Layout / sizing resources (theme-agnostic) -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<StaticResource x:Key="SimpleButtonFontFamily" ResourceKey="TypefaceBrand" />
-	<x:String x:Key="SimpleButtonFontWeight">Normal</x:String>
+	<x:String x:Key="SimpleButtonFontWeight">Medium</x:String>
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Base style — shared setters (no template) -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleBaseButtonStyle"
 		   TargetType="Button">
-		<Setter Property="FontFamily" Value="{StaticResource SimpleButtonFontFamily}" />
+		<Setter Property="FontFamily" Value="{ThemeResource SimpleButtonFontFamily}" />
 		<Setter Property="FontSize" Value="{StaticResource LabelLargeFontSize}" />
-		<Setter Property="FontWeight" Value="Normal" />
+		<Setter Property="FontWeight" Value="{StaticResource SimpleButtonFontWeight}" />
 		<Setter Property="MinHeight" Value="{StaticResource ControlHeightMedium}" />
-		<Setter Property="Padding" Value="{StaticResource SimpleSpace300Thickness}" />
-		<Setter Property="CornerRadius" Value="{StaticResource SimpleButtonCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource SimpleSpace300Thickness}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource SimpleButtonCornerRadius}" />
 		<Setter Property="BorderThickness" Value="{StaticResource SimpleButtonBorderThickness}" />
 		<Setter Property="HorizontalAlignment" Value="Left" />
 		<Setter Property="VerticalAlignment" Value="Center" />
@@ -263,7 +132,7 @@
 						<StackPanel Orientation="Horizontal"
 									HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 									VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-									Spacing="{StaticResource SimpleButtonIconSpacing}">
+									Spacing="{ThemeResource SimpleButtonIconSpacing}">
 
 							<ContentPresenter x:Name="LeadingIconPresenter"
 											  Content="{Binding Path=(ut:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}}"
@@ -347,7 +216,7 @@
 						<StackPanel Orientation="Horizontal"
 									HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 									VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-									Spacing="{StaticResource SimpleButtonIconSpacing}">
+									Spacing="{ThemeResource SimpleButtonIconSpacing}">
 
 							<ContentPresenter x:Name="LeadingIconPresenter"
 											  Content="{Binding Path=(ut:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}}"
@@ -431,7 +300,7 @@
 						<StackPanel Orientation="Horizontal"
 									HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 									VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-									Spacing="{StaticResource SimpleButtonIconSpacing}">
+									Spacing="{ThemeResource SimpleButtonIconSpacing}">
 
 							<ContentPresenter x:Name="LeadingIconPresenter"
 											  Content="{Binding Path=(ut:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}}"
@@ -515,7 +384,7 @@
 						<StackPanel Orientation="Horizontal"
 									HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 									VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-									Spacing="{StaticResource SimpleButtonIconSpacing}">
+									Spacing="{ThemeResource SimpleButtonIconSpacing}">
 
 							<ContentPresenter x:Name="LeadingIconPresenter"
 											  Content="{Binding Path=(ut:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}}"
@@ -599,7 +468,7 @@
 						<StackPanel Orientation="Horizontal"
 									HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 									VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-									Spacing="{StaticResource SimpleButtonIconSpacing}">
+									Spacing="{ThemeResource SimpleButtonIconSpacing}">
 
 							<ContentPresenter x:Name="LeadingIconPresenter"
 											  Content="{Binding Path=(ut:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}}"
@@ -650,14 +519,14 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleBaseIconButtonStyle"
 		   TargetType="Button">
-		<Setter Property="FontFamily" Value="{StaticResource SimpleButtonFontFamily}" />
+		<Setter Property="FontFamily" Value="{ThemeResource SimpleButtonFontFamily}" />
 		<Setter Property="FontSize" Value="16" />
 		<Setter Property="MinHeight" Value="{StaticResource SimpleIconLarge}" />
 		<Setter Property="MinWidth" Value="{StaticResource SimpleIconLarge}" />
 		<Setter Property="MaxHeight" Value="{StaticResource SimpleIconLarge}" />
 		<Setter Property="MaxWidth" Value="{StaticResource SimpleIconLarge}" />
-		<Setter Property="Padding" Value="{StaticResource SimpleSpace200Thickness}" />
-		<Setter Property="CornerRadius" Value="{StaticResource SimpleIconButtonCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource SimpleSpace200Thickness}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource SimpleIconButtonCornerRadius}" />
 		<Setter Property="BorderThickness" Value="{StaticResource SimpleIconButtonBorderThickness}" />
 		<Setter Property="HorizontalAlignment" Value="Center" />
 		<Setter Property="VerticalAlignment" Value="Center" />

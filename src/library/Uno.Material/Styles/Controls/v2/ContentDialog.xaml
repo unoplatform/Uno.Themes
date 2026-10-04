@@ -1,8 +1,6 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:toolkit="using:Uno.UI.Toolkit"
-					mc:Ignorable="">
+					xmlns:uno="using:Uno.UI.Xaml.Controls">
 
 	<!-- 28-CornerRadius doesnt match the general 24-Spacing; this is indeed correct. -->
 	<x:Double x:Key="MaterialContentDialogMinWidth">288</x:Double>
@@ -39,11 +37,12 @@
 		<Setter Property="VerticalAlignment" Value="Stretch" />
 	</Style>
 
-	<Style x:Key="MaterialContentDialogStyle" TargetType="ContentDialog">
+	<Style x:Key="MaterialContentDialogStyle"
+		   TargetType="ContentDialog">
 
 		<Setter Property="Background" Value="{StaticResource MaterialContentDialogBackground}" />
 		<Setter Property="Foreground" Value="{StaticResource MaterialContentDialogContentForeground}" />
-		<Setter Property="CornerRadius" Value="{StaticResource MaterialContentDialogCornerRadius}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource MaterialContentDialogCornerRadius}" />
 
 		<Setter Property="HorizontalAlignment" Value="Stretch" />
 		<Setter Property="VerticalAlignment" Value="Stretch" />
@@ -162,31 +161,32 @@
 						</VisualStateManager.VisualStateGroups>
 
 						<Grid x:Name="LayoutRoot">
-							<Rectangle x:Name="SmokeLayerBackground" Fill="{StaticResource MaterialContentDialogSmokeLayerBackground}" />
+							<Rectangle x:Name="SmokeLayerBackground"
+									   Fill="{StaticResource MaterialContentDialogSmokeLayerBackground}" />
 
 							<!-- workaround: BackgroundElement is hidden, because it has an undesired shadow that the control impl applies. -->
 							<Border x:Name="BackgroundElement"
 									Opacity="0"
 									Visibility="Collapsed" />
-							<toolkit:ElevatedView x:Name="RealBackgroundElement"
-												  Background="{TemplateBinding Background}"
-												  BackgroundSizing="InnerBorderEdge"
-												  BorderBrush="{TemplateBinding BorderBrush}"
-												  BorderThickness="{TemplateBinding BorderThickness}"
-												  CornerRadius="{TemplateBinding CornerRadius}"
-												  Elevation="3"
-												  FlowDirection="{TemplateBinding FlowDirection}"
-												  MaxWidth="{StaticResource MaterialContentDialogMaxWidth}"
-												  MaxHeight="{StaticResource MaterialContentDialogMaxHeight}"
-												  Margin="{StaticResource MaterialContentDialogEdgeMargin}"
-												  HorizontalAlignment="Center"
-												  VerticalAlignment="Center">
-								<toolkit:ElevatedView.RenderTransform>
+							<uno:ElevatedView x:Name="RealBackgroundElement"
+											  Background="{TemplateBinding Background}"
+											  BackgroundSizing="InnerBorderEdge"
+											  BorderBrush="{TemplateBinding BorderBrush}"
+											  BorderThickness="{TemplateBinding BorderThickness}"
+											  CornerRadius="{TemplateBinding CornerRadius}"
+											  Elevation="3"
+											  FlowDirection="{TemplateBinding FlowDirection}"
+											  MaxWidth="{StaticResource MaterialContentDialogMaxWidth}"
+											  MaxHeight="{StaticResource MaterialContentDialogMaxHeight}"
+											  Margin="{StaticResource MaterialContentDialogEdgeMargin}"
+											  HorizontalAlignment="Center"
+											  VerticalAlignment="Center">
+								<uno:ElevatedView.RenderTransform>
 									<ScaleTransform x:Name="ScaleTransform" />
-								</toolkit:ElevatedView.RenderTransform>
-								
+								</uno:ElevatedView.RenderTransform>
+
 								<Grid>
-									
+
 									<!--
 										workaround: this holder enforce a min-size when the content isnt enough, but allows for
 										the dialog to shrink below min-size if the screen dictates (better than being clipped).
@@ -196,8 +196,9 @@
 									<Border x:Name="MinSizeHolder"
 											MinWidth="{StaticResource MaterialContentDialogMinWidth}"
 											MinHeight="{StaticResource MaterialContentDialogMinHeight}" />
-									
-									<Grid x:Name="DialogSpace" Margin="{StaticResource MaterialContentDialogPanelPadding}">
+
+									<Grid x:Name="DialogSpace"
+										  Margin="{ThemeResource MaterialContentDialogPanelPadding}">
 										<Grid.RowDefinitions>
 											<!-- 0: Title, 1: Content, 2: CommandSpace -->
 											<RowDefinition Height="Auto" />
@@ -213,7 +214,7 @@
 														FontFamily="{ThemeResource HeadlineSmallFontFamily}"
 														FontSize="{StaticResource HeadlineSmallFontSize}"
 														FontWeight="{ThemeResource HeadlineSmallFontWeight}"
-														Margin="{StaticResource MaterialContentDialogTitleToContentMargin}"
+														Margin="{ThemeResource MaterialContentDialogTitleToContentMargin}"
 														HorizontalAlignment="Center"
 														VerticalAlignment="Top"
 														IsTabStop="False">
@@ -247,17 +248,22 @@
 										</ScrollViewer>
 										<Grid x:Name="CommandSpace"
 											  Grid.Row="2"
-											  Margin="{StaticResource MaterialContentDialogCommandSpaceToContentMargin}"
+											  Margin="{ThemeResource MaterialContentDialogCommandSpaceToContentMargin}"
 											  HorizontalAlignment="Right"
 											  VerticalAlignment="Bottom"
 											  XYFocusKeyboardNavigation="Enabled">
 
 											<Grid.ColumnDefinitions>
-												<ColumnDefinition x:Name="CloseColumn" Width="Auto" />
-												<ColumnDefinition x:Name="SecondSpacer" Width="{StaticResource MaterialContentDialogButtonSpacing}" />
-												<ColumnDefinition x:Name="SecondaryColumn" Width="Auto" />
-												<ColumnDefinition x:Name="FirstSpacer" Width="{StaticResource MaterialContentDialogButtonSpacing}" />
-												<ColumnDefinition x:Name="PrimaryColumn" Width="Auto" />
+												<ColumnDefinition x:Name="CloseColumn"
+																  Width="Auto" />
+												<ColumnDefinition x:Name="SecondSpacer"
+																  Width="{StaticResource MaterialContentDialogButtonSpacing}" />
+												<ColumnDefinition x:Name="SecondaryColumn"
+																  Width="Auto" />
+												<ColumnDefinition x:Name="FirstSpacer"
+																  Width="{StaticResource MaterialContentDialogButtonSpacing}" />
+												<ColumnDefinition x:Name="PrimaryColumn"
+																  Width="Auto" />
 											</Grid.ColumnDefinitions>
 
 											<Button Grid.Column="0"
@@ -284,7 +290,7 @@
 										</Grid>
 									</Grid>
 								</Grid>
-							</toolkit:ElevatedView>
+							</uno:ElevatedView>
 						</Grid>
 					</Border>
 				</ControlTemplate>
