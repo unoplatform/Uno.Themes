@@ -226,12 +226,7 @@ The Simple input styles present the errors of Uno's input validation (`Uno.Extra
 | `AutoSuggestBox` | `Text`             | `SimpleAutoSuggestBoxStyle`, `SimpleDefaultAutoSuggestBoxStyle`                     |
 | `ComboBox`       | `SelectedItem`     | `SimpleComboBoxStyle`, `SimpleComboBoxErrorStyle`                                   |
 
-Validation is opt-in, both app-wide and per control:
-
-```csharp
-// App constructor, before InitializeComponent(): input validation is off by default.
-Uno.UI.FeatureConfiguration.InputValidation.IsEnabled = true;
-```
+Validation is opt-in per control:
 
 ```xml
 <Page xmlns:input="using:Uno.Extras.Input">
@@ -249,4 +244,4 @@ The error presentation comes from two templates the theme provides. Both can be 
 | `DefaultCompactErrorIconTemplate`    | The Compact error icon. The framework looks this key up at application level, so the Simple theme overrides the framework's default. |
 
 > [!NOTE]
-> Input validation requires an Uno Platform version that ships `Uno.Extras.Input.Validation`. It is not available on WinAppSDK, where these styles render as they do without validation.
+> Until Uno Platform ships `Uno.Extras.Input.Validation`, `Uno.Themes.WinUI` provides a temporary implementation with the same API. It tracks `{Binding}` with a single-segment path (not `{x:Bind}`), and is removed once the framework implementation is available, which will then also need `Uno.UI.FeatureConfiguration.InputValidation.IsEnabled = true` at startup. Input validation is not available on WinAppSDK, where these styles render as they do without validation.
