@@ -107,7 +107,6 @@ Local only, never committed: the `Uno.Sdk.Private` 7.0.0-dev.703 pin in both `gl
 - The shim tracks `{Binding}` with a single-segment path only (no `{x:Bind}`, no dotted paths), and only while
   the control is loaded. It stands in for the framework's OnApplyTemplate hook with `SizeChanged`, re-applying
   the states when the template root changes (e.g. a control first laid out after a collapsed ancestor shows).
-- Hosted in ThemesSampleApp, the feature flag is set after the host has registered its own bindings. Standalone SimpleSampleApp is the reference.
 
 ## Review
 
@@ -143,7 +142,10 @@ Verified against Uno 7.0.0-dev.703 (no framework validation) with the temporary 
 
 - Library builds for `net10.0` and `net10.0-windows10.0.19041`; Simple, Material and Cupertino heads build
   for desktop with no new warnings.
-- `Given_InputValidation`: 22/22 pass. Full SimpleSampleApp suite: 300 pass, 1 skipped (pre-existing `[Ignore]`).
+- `Given_InputValidation`: 24/24 pass, including the attached-property set/clear scenario
+  (`When_ModeDisabledThenAuto_...`) and the teardown-leak guard (`When_ControlRemoved_Then_LongLivedSourceDoesNotKeepItAlive`,
+  confirmed red with the Unloaded unsubscribe removed). Full SimpleSampleApp suite, Debug and Release: 302 pass,
+  1 skipped (pre-existing `[Ignore]`). ThemesSampleApp `--smoke` was not run.
 - The sample page renders the same visuals as in Phase A (Light/Dark × Inline/Compact; pixel comparison across
   the two framework builds is not meaningful, as text rendering differs). The existing input sample pages render
   pixel-identical between master and branch styles on 703.
