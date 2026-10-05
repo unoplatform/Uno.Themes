@@ -11,12 +11,12 @@
 		(TextBox, PasswordBox, AutoSuggestBox, ComboBox). Their templates declare the
 		InputValidationEnabledStates / InputValidationErrorStates groups and an ErrorPresenter part;
 		the framework fills that part from the templates below.
-
+		
 		Both templates must be reachable from Application.Resources: the styles' ErrorTemplate
 		setters name SimpleInputValidationErrorTemplate through {StaticResource}, and the framework
 		looks DefaultCompactErrorIconTemplate up at application level. Merging the theme there
 		satisfies both.
-
+		
 		Uno-only: Uno.Extras.Input does not exist on WinAppSDK.
 	-->
 
