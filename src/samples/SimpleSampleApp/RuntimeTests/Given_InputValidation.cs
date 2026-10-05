@@ -175,6 +175,38 @@ public class Given_InputValidation
 
 	[TestMethod]
 	[RunsOnUIThread]
+	[DataRow(InputValidationKind.Compact)]
+	[DataRow(InputValidationKind.Inline)]
+	public async Task When_ShownAfterBeingCollapsed_Then_ErrorStateShows(InputValidationKind kind)
+	{
+		// Arrange: a control already in error, loaded inside a collapsed panel
+		var container = CreateThemedContainer();
+		var control = CreateControl("SimpleOutlinedTextBoxStyle", container.Resources);
+		Validation.SetMode(control, InputValidationMode.Auto);
+		Validation.SetKind(control, kind);
+		BindValidatedProperty(control, new ErrorSource(ErrorMessage));
+		var panel = new StackPanel { Visibility = Visibility.Collapsed };
+		panel.Children.Add(control);
+		container.Children.Add(panel);
+
+		UnitTestsUIContentHelper.Content = container;
+		await UnitTestsUIContentHelper.WaitForIdle();
+		Assert.IsTrue(panel.IsLoaded, "The collapsed panel should be loaded");
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		// Act
+		panel.Visibility = Visibility.Visible;
+		await UnitTestsUIContentHelper.WaitForLoaded(control);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		// Assert
+		Assert.IsTrue(Validation.GetHasErrors(control));
+		Assert.AreEqual(Visibility.Visible, FindPart(control, "ErrorPresenter")?.Visibility, "ErrorPresenter should show once the control is shown");
+		Assert.AreEqual(Visibility.Visible, FindPart(control, "ErrorBorderElement")?.Visibility, "The error ring should show once the control is shown");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
 	[DataRow("SimpleOutlinedTextBoxStyle")]
 	[DataRow("SimpleFilledTextBoxStyle")]
 	[DataRow("SimpleOutlinedPasswordBoxStyle")]
