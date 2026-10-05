@@ -218,6 +218,8 @@
 										<Setter Target="BorderElement.Background" Value="{ThemeResource SurfaceBrush}" />
 										<Setter Target="BorderStrokeElement.BorderBrush" Value="{ThemeResource PrimaryMediumBrush}" />
 										<Setter Target="BorderStrokeElement.BorderThickness" Value="{ThemeResource SimpleStrokeFocusRingThickness}" />
+										<!-- Keeps the fill inset under the thicker, translucent focus stroke. -->
+										<Setter Target="BorderElement.BorderThickness" Value="{ThemeResource SimpleStrokeFocusRingThickness}" />
 										<Setter Target="ContentElement.Foreground" Value="{ThemeResource OnSurfaceBrush}" />
 										<Setter Target="QueryButton.Foreground" Value="{ThemeResource OnSurfaceBrush}" />
 									</VisualState.Setters>
