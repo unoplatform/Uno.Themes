@@ -385,3 +385,11 @@ next file to need an override didn't get it.
 **How to apply:**
 - Anything that must carry a dictionary *type* is created in C# (`new SemanticResources { Source = … }`), never declared in XAML. Verify the type at runtime, not by reading the markup.
 - Treat `Styles/Application/Common/BaseDictionaries.xaml` as shared with the deprecated Material bundles: prefer adding a layer over removing an entry, and check `MaterialResourcesV1`/`V2` before editing it.
+
+## The Uno XAML generator tolerates malformed XAML; only XAML Styler catches it
+
+**Context:** Omarchy's `TypeScale.xaml` shipped with a stray `</ResourceDictionary>` and orphaned comment after the root had already closed. The library built and every runtime test passed — the generator silently ignored the trailing markup — but `dotnet xstyler --passive` (the Code Style CI gate) crashed on it with `XmlException: Unexpected end tag`.
+
+**How to apply:**
+- A green build is not proof a XAML file is well-formed. Run the XAML Styler format + `--passive` commands from AGENTS.md before pushing any XAML change.
+- If `--passive` throws instead of reporting PASS/FAIL, read the last `Checking:` line: that file is malformed.
