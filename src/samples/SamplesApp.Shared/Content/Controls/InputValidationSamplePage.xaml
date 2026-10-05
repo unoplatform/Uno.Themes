@@ -22,8 +22,21 @@
 								   TextWrapping="Wrap"
 								   Text="Each control opts into validation with input:Validation.Mode=&quot;Auto&quot;, and the view model reports its errors through INotifyDataErrorInfo. Everything around the fields comes from the Simple templates; the text under each field is read straight from the view model. Both sections are bound to the same view model." />
 
+						<!-- Section switch: each section's Visibility is bound to its radio button's IsChecked. -->
+						<StackPanel Orientation="Horizontal"
+									Spacing="16">
+							<RadioButton x:Name="InlineRadioButton"
+										 Content="Inline"
+										 GroupName="InputValidationKind"
+										 IsChecked="True" />
+							<RadioButton x:Name="CompactRadioButton"
+										 Content="Compact"
+										 GroupName="InputValidationKind" />
+						</StackPanel>
+
 						<!-- Compact: errors in the tooltip of an icon beside the field -->
-						<StackPanel Spacing="16">
+						<StackPanel Spacing="16"
+									Visibility="{Binding IsChecked, ElementName=CompactRadioButton}">
 							<TextBlock Style="{StaticResource SimpleTitleMedium}"
 									   Text="Compact" />
 
@@ -100,7 +113,8 @@
 						</StackPanel>
 
 						<!-- Inline: errors listed in a row under the field -->
-						<StackPanel Spacing="16">
+						<StackPanel Spacing="16"
+									Visibility="{Binding IsChecked, ElementName=InlineRadioButton}">
 							<TextBlock Style="{StaticResource SimpleTitleMedium}"
 									   Text="Inline" />
 
