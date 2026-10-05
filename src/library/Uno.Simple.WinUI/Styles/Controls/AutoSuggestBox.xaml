@@ -247,12 +247,16 @@
 
 						<!--
 							Background (pill-shaped). Fill only: the stroke is BorderStrokeElement below, so it can be
-							hidden on its own. Keeps the BorderElement name, which TextBox looks up for the fill.
+							hidden on its own. Keeps the BorderElement name, which TextBox looks up for the fill. The
+							transparent stroke keeps the fill inset under the stroke as before the split, which shows
+							through the translucent disabled stroke.
 						-->
 						<Border x:Name="BorderElement"
 								Grid.Row="1"
 								Grid.ColumnSpan="4"
 								Background="{TemplateBinding Background}"
+								BorderBrush="Transparent"
+								BorderThickness="{TemplateBinding BorderThickness}"
 								CornerRadius="{TemplateBinding CornerRadius}" />
 
 						<!--
