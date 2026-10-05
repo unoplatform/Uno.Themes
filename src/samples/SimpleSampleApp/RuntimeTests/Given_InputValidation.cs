@@ -2,6 +2,7 @@
 
 using System.Collections;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Uno.Extras.Input;
 using Uno.Simple;
@@ -20,6 +21,10 @@ namespace Uno.Themes.Samples.RuntimeTests;
 public class Given_InputValidation
 {
 	private const string ErrorMessage = "Value is invalid.";
+
+	// Leak guard state lives in fields: locals would keep the tracked control reachable while the GC runs.
+	private ErrorSource? _longLivedSource;
+	private WeakReference<Control>? _removedControl;
 
 	private static Grid CreateThemedContainer(ElementTheme theme = ElementTheme.Default)
 	{
@@ -236,6 +241,88 @@ public class Given_InputValidation
 		Assert.IsFalse(Validation.GetHasErrors(validated));
 		Assert.AreEqual(plain.ActualWidth, validated.ActualWidth, 0.5, "A clean validated control should be as wide as an unvalidated one");
 		Assert.AreEqual(plain.ActualHeight, validated.ActualHeight, 0.5, "A clean validated control should be as tall as an unvalidated one");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_ModeDisabledThenAuto_Then_ErrorStateClearsAndReturns()
+	{
+		// Arrange: a control in error
+		var container = CreateThemedContainer();
+		var control = CreateControl("SimpleOutlinedTextBoxStyle", container.Resources);
+		Validation.SetMode(control, InputValidationMode.Auto);
+		BindValidatedProperty(control, new ErrorSource(ErrorMessage));
+		container.Children.Add(control);
+
+		UnitTestsUIContentHelper.Content = container;
+		await UnitTestsUIContentHelper.WaitForLoaded(control);
+		await UnitTestsUIContentHelper.WaitForIdle();
+		Assert.IsTrue(Validation.GetHasErrors(control));
+
+		// Act: validation turned off
+		Validation.SetMode(control, InputValidationMode.Disabled);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		// Assert: nothing is presented
+		Assert.IsFalse(Validation.GetHasErrors(control), "A control that does not validate has no errors");
+		Assert.AreEqual(Visibility.Collapsed, FindPart(control, "ErrorPresenter")?.Visibility ?? Visibility.Collapsed, "ErrorPresenter should hide");
+		Assert.AreEqual(Visibility.Collapsed, FindPart(control, "ErrorBorderElement")?.Visibility, "The error ring should hide");
+
+		// Act: validation turned back on
+		Validation.SetMode(control, InputValidationMode.Auto);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		// Assert: the source's error is presented again
+		Assert.IsTrue(Validation.GetHasErrors(control), "The source's error should be picked up again");
+		Assert.AreEqual(Visibility.Visible, FindPart(control, "ErrorPresenter")?.Visibility, "ErrorPresenter should show again");
+		Assert.AreEqual(Visibility.Visible, FindPart(control, "ErrorBorderElement")?.Visibility, "The error ring should show again");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_ControlRemoved_Then_LongLivedSourceDoesNotKeepItAlive()
+	{
+		// Arrange: a source that outlives the control, as a view model typically does
+		_longLivedSource = new ErrorSource(ErrorMessage);
+		var container = CreateThemedContainer();
+		UnitTestsUIContentHelper.Content = container;
+		await AddValidatedControl(container, _longLivedSource);
+
+		// Act: the control leaves the tree
+		container.Children.Clear();
+		await UnitTestsUIContentHelper.WaitForIdle();
+		await CollectGarbage();
+
+		// Assert
+		Assert.IsNotNull(_removedControl);
+		Assert.IsFalse(_removedControl.TryGetTarget(out _), "The source's ErrorsChanged subscription should not keep a removed control alive");
+		GC.KeepAlive(_longLivedSource);
+	}
+
+	/// <summary>Creates, binds and loads the control in its own frame, so no local outlives it.</summary>
+	[MethodImpl(MethodImplOptions.NoInlining)]
+	private async Task AddValidatedControl(Grid container, ErrorSource source)
+	{
+		var control = CreateControl("SimpleOutlinedTextBoxStyle", container.Resources);
+		Validation.SetMode(control, InputValidationMode.Auto);
+		BindValidatedProperty(control, source);
+		container.Children.Add(control);
+		await UnitTestsUIContentHelper.WaitForLoaded(control);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		Assert.IsTrue(Validation.GetHasErrors(control), "The control should be subscribed to the source");
+		_removedControl = new WeakReference<Control>(control);
+	}
+
+	[MethodImpl(MethodImplOptions.NoInlining)]
+	private static async Task CollectGarbage()
+	{
+		for (var i = 0; i < 3; i++)
+		{
+			GC.Collect();
+			GC.WaitForPendingFinalizers();
+			await UnitTestsUIContentHelper.WaitForIdle();
+		}
 	}
 
 	/// <summary>A one-property INotifyDataErrorInfo source whose errors are set by the test.</summary>
