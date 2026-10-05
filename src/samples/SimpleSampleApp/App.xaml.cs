@@ -20,6 +20,9 @@ sealed partial class App : Application
 		// secondary ALC by ThemesSampleApp must hand sample pages its own instance for theme lookups.
 		SampleThemeHelper.CurrentApplication = this;
 
+		// Input validation is off by default, and must be enabled before the first binding is registered.
+		Uno.UI.FeatureConfiguration.InputValidation.IsEnabled = true;
+
 		ConfigureXamlDisplay();
 		SamplePageLayout.ActiveDesign = Design.Simple;
 

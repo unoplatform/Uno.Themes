@@ -1,0 +1,177 @@
+﻿<Page x:Class="Uno.Themes.Samples.Content.Controls.InputValidationSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:sample="using:Uno.Themes.Samples"
+	  xmlns:vm="using:Uno.Themes.Samples.ViewModels"
+	  xmlns:input="using:Uno.Extras.Input"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  mc:Ignorable="d">
+
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<sample:SamplePageLayout>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<!-- The view model is set here: the page's DataContext has to stay the Sample, for SamplePageLayout. -->
+					<StackPanel Spacing="32">
+						<StackPanel.DataContext>
+							<vm:InputValidationSampleViewModel />
+						</StackPanel.DataContext>
+
+						<TextBlock Style="{StaticResource SimpleBodyMedium}"
+								   TextWrapping="Wrap"
+								   Text="Each control opts into validation with input:Validation.Mode=&quot;Auto&quot;, and the view model reports its errors through INotifyDataErrorInfo. Everything around the fields comes from the Simple templates; the text under each field is read straight from the view model. Both sections are bound to the same view model." />
+
+						<!-- Compact: errors in the tooltip of an icon beside the field -->
+						<StackPanel Spacing="16">
+							<TextBlock Style="{StaticResource SimpleTitleMedium}"
+									   Text="Compact" />
+
+							<StackPanel Spacing="4">
+								<TextBox Header="User name (Outlined TextBox)"
+										 PlaceholderText="5 to 10 characters"
+										 Style="{StaticResource SimpleOutlinedTextBoxStyle}"
+										 input:Validation.Mode="Auto"
+										 input:Validation.Kind="Compact"
+										 Text="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+								<sample:IndeiStateViewer Source="{Binding}"
+														 Property="UserName" />
+							</StackPanel>
+
+							<StackPanel Spacing="4">
+								<TextBox Header="Codename (Filled TextBox)"
+										 PlaceholderText="an even number of characters"
+										 Style="{StaticResource SimpleFilledTextBoxStyle}"
+										 input:Validation.Mode="Auto"
+										 input:Validation.Kind="Compact"
+										 Text="{Binding Codename, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+								<sample:IndeiStateViewer Source="{Binding}"
+														 Property="Codename" />
+							</StackPanel>
+
+							<StackPanel Spacing="4">
+								<PasswordBox Header="Password (Outlined PasswordBox)"
+											 PlaceholderText="9+ characters, one digit"
+											 Style="{StaticResource SimpleOutlinedPasswordBoxStyle}"
+											 input:Validation.Mode="Auto"
+											 input:Validation.Kind="Compact"
+											 Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+								<sample:IndeiStateViewer Source="{Binding}"
+														 Property="Password" />
+							</StackPanel>
+
+							<StackPanel Spacing="4">
+								<PasswordBox Header="PIN (Filled PasswordBox)"
+											 PlaceholderText="4 digits"
+											 Style="{StaticResource SimpleFilledPasswordBoxStyle}"
+											 input:Validation.Mode="Auto"
+											 input:Validation.Kind="Compact"
+											 Password="{Binding Pin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+								<sample:IndeiStateViewer Source="{Binding}"
+														 Property="Pin" />
+							</StackPanel>
+
+							<StackPanel Spacing="4">
+								<AutoSuggestBox Header="City (AutoSuggestBox)"
+												PlaceholderText="Montreal, Toronto, ..."
+												Style="{StaticResource SimpleAutoSuggestBoxStyle}"
+												input:Validation.Mode="Auto"
+												input:Validation.Kind="Compact"
+												ItemsSource="{Binding CitySuggestions}"
+												Text="{Binding City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+								<sample:IndeiStateViewer Source="{Binding}"
+														 Property="City" />
+							</StackPanel>
+
+							<StackPanel Spacing="4">
+								<ComboBox PlaceholderText="Country"
+										  HorizontalAlignment="Stretch"
+										  Style="{StaticResource SimpleComboBoxStyle}"
+										  input:Validation.Mode="Auto"
+										  input:Validation.Kind="Compact"
+										  ItemsSource="{Binding Countries}"
+										  SelectedItem="{Binding Country, Mode=TwoWay}" />
+								<sample:IndeiStateViewer Source="{Binding}"
+														 Property="Country" />
+							</StackPanel>
+						</StackPanel>
+
+						<!-- Inline: errors listed in a row under the field -->
+						<StackPanel Spacing="16">
+							<TextBlock Style="{StaticResource SimpleTitleMedium}"
+									   Text="Inline" />
+
+							<StackPanel Spacing="4">
+								<TextBox Header="User name (Outlined TextBox)"
+										 PlaceholderText="5 to 10 characters"
+										 Style="{StaticResource SimpleOutlinedTextBoxStyle}"
+										 input:Validation.Mode="Auto"
+										 input:Validation.Kind="Inline"
+										 Text="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+								<sample:IndeiStateViewer Source="{Binding}"
+														 Property="UserName" />
+							</StackPanel>
+
+							<StackPanel Spacing="4">
+								<TextBox Header="Codename (Filled TextBox)"
+										 PlaceholderText="an even number of characters"
+										 Style="{StaticResource SimpleFilledTextBoxStyle}"
+										 input:Validation.Mode="Auto"
+										 input:Validation.Kind="Inline"
+										 Text="{Binding Codename, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+								<sample:IndeiStateViewer Source="{Binding}"
+														 Property="Codename" />
+							</StackPanel>
+
+							<StackPanel Spacing="4">
+								<PasswordBox Header="Password (Outlined PasswordBox)"
+											 PlaceholderText="9+ characters, one digit"
+											 Style="{StaticResource SimpleOutlinedPasswordBoxStyle}"
+											 input:Validation.Mode="Auto"
+											 input:Validation.Kind="Inline"
+											 Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+								<sample:IndeiStateViewer Source="{Binding}"
+														 Property="Password" />
+							</StackPanel>
+
+							<StackPanel Spacing="4">
+								<PasswordBox Header="PIN (Filled PasswordBox)"
+											 PlaceholderText="4 digits"
+											 Style="{StaticResource SimpleFilledPasswordBoxStyle}"
+											 input:Validation.Mode="Auto"
+											 input:Validation.Kind="Inline"
+											 Password="{Binding Pin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+								<sample:IndeiStateViewer Source="{Binding}"
+														 Property="Pin" />
+							</StackPanel>
+
+							<StackPanel Spacing="4">
+								<AutoSuggestBox Header="City (AutoSuggestBox)"
+												PlaceholderText="Montreal, Toronto, ..."
+												Style="{StaticResource SimpleAutoSuggestBoxStyle}"
+												input:Validation.Mode="Auto"
+												input:Validation.Kind="Inline"
+												ItemsSource="{Binding CitySuggestions}"
+												Text="{Binding City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+								<sample:IndeiStateViewer Source="{Binding}"
+														 Property="City" />
+							</StackPanel>
+
+							<StackPanel Spacing="4">
+								<ComboBox PlaceholderText="Country"
+										  HorizontalAlignment="Stretch"
+										  Style="{StaticResource SimpleComboBoxStyle}"
+										  input:Validation.Mode="Auto"
+										  input:Validation.Kind="Inline"
+										  ItemsSource="{Binding Countries}"
+										  SelectedItem="{Binding Country, Mode=TwoWay}" />
+								<sample:IndeiStateViewer Source="{Binding}"
+														 Property="Country" />
+							</StackPanel>
+						</StackPanel>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
+		</sample:SamplePageLayout>
+	</Grid>
+</Page>
