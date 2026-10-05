@@ -111,11 +111,14 @@ Verified against the local validation build (Uno 7.0.0-dev.701 override):
 
 - Library builds for `net10.0` and `net10.0-windows10.0.19041` (MSBuild), Debug and Release; the Release
   XamlMerge output keeps the `input` / `not_win` namespaces.
-- `Given_InputValidation`: 20/20 pass. Full SimpleSampleApp suite: all pass (one pre-existing `[Ignore]`).
+- `Given_InputValidation`: 20/20 pass, Debug and Release (merged dictionaries). Full SimpleSampleApp
+  suite: 298 pass, 1 skipped (pre-existing `[Ignore]`), Debug and Release. MaterialSampleApp and
+  CupertinoSampleApp (which also compile the shared page) build with no new warnings.
 - Existing TextBox / PasswordBox / AutoSuggestBox / ComboBox sample pages render pixel-identical to the
-  master styles (RenderTargetBitmap comparison). This caught one regression, fixed in
-  `fix(simple): keep the AutoSuggestBox fill inset under its stroke`: splitting the stroke off the fill
-  let the fill extend under the translucent disabled stroke.
+  master styles (RenderTargetBitmap comparison), in Light and Dark, resting and with the first input in
+  its Focused state. This caught two AutoSuggestBox regressions from splitting the stroke off the fill: the
+  fill extended under the translucent disabled and focus strokes. Both fixed (`fix(simple): keep the
+  AutoSuggestBox fill inset ...`).
 - XAML Styler and `dotnet format whitespace` verify clean; markdownlint and cSpell clean on the doc.
 
 Local-only environment workarounds (never committed): the local framework build left empty
