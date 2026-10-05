@@ -130,6 +130,8 @@ public class Given_SemanticResources
 			"ProgressRingForeground", "RadioButtonForeground", "RatingControlCaptionForeground",
 			"SliderThumbBackground", "FilledTextBoxBackground", "TextToggleButtonBackground",
 			"ToggleSwitchKnobBoundsFill", "SliderThumbWidth",
+			"ComboBoxUpperPlaceHolderScaleX", "ComboBoxUpperPlaceHolderScaleY", "ComboBoxUpperPlaceHolderTranslateY",
+			"ComboBoxUpperPlaceHolderMargin", "ComboBoxPlaceholderTextStyle",
 		};
 
 		foreach (var key in keys)
