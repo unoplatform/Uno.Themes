@@ -249,7 +249,7 @@ Semantic style keys also enable portable [lightweight styling](lightweight-styli
 <SolidColorBrush x:Key="FilledButtonForeground" Color="Red" />
 ```
 
-The **Material**, **Simple** and **Omarchy** templates reference the same unprefixed keys (e.g. `FilledButtonForeground`) directly. Their lightweight-styling declarations live in the theme's `SemanticStyles.xaml`, alongside the style aliases, so tooling discovers them through `SemanticResources` too. Light, Default and any HighContrast entries keep their existing values; theme-prefixed compatibility aliases remain in the control dictionaries. Omarchy derives hover, pressed and disabled visuals from opacity tokens rather than per-state brushes, so only the base keys (`*Foreground`, `*Background`, `*BorderBrush`) exist there — see [Omarchy Controls Styles](omarchy-controls-styles.md).
+The **Material**, **Simple** and **Omarchy** templates reference the same unprefixed keys (e.g. `FilledButtonForeground`) directly. Their lightweight-styling declarations live in the theme's `SemanticStyles.xaml`, alongside the style aliases, so tooling discovers them through `SemanticResources` too. Light, Default and any HighContrast entries keep their existing values; theme-prefixed compatibility aliases remain in the control dictionaries. Omarchy derives button hover, pressed and disabled visuals from opacity tokens rather than per-state brushes, so its button styles expose only the base keys (`*Foreground`, `*Background`, `*BorderBrush`) — see [Omarchy Controls Styles](omarchy-controls-styles.md).
 
 The color palette underneath these keys can itself be swapped wholesale — generated from a single seed color, and even changed at runtime — see [Seed Color Palette](seed-colors.md).
 

@@ -122,19 +122,14 @@ Individual semantic colors can still be overridden through the `Colors` property
 
 ### Fonts
 
-Omarchy uses the CaskaydiaMono Nerd Font Mono face bundled with the package (regular, bold and italic cuts). To use another monospace face, override the font resources:
+Omarchy uses the CaskaydiaMono Nerd Font Mono face bundled with the package: the regular cut for body text, the bold cut for titles and the italic cut for captions. To use another monospace face, set `DefaultFontFamily` on the theme — every type scale follows it:
 
 ```xml
-<uo:OmarchyTheme xmlns:uo="using:Uno.Omarchy">
-    <uo:OmarchyTheme.FontOverrideDictionary>
-        <ResourceDictionary>
-            <FontFamily x:Key="OmarchyRegularFontFamily">ms-appx:///Fonts/JetBrainsMono-Regular.ttf#JetBrains Mono</FontFamily>
-            <FontFamily x:Key="OmarchyBoldFontFamily">ms-appx:///Fonts/JetBrainsMono-Bold.ttf#JetBrains Mono</FontFamily>
-            <FontFamily x:Key="OmarchyItalicFontFamily">ms-appx:///Fonts/JetBrainsMono-Italic.ttf#JetBrains Mono</FontFamily>
-        </ResourceDictionary>
-    </uo:OmarchyTheme.FontOverrideDictionary>
-</uo:OmarchyTheme>
+<uo:OmarchyTheme xmlns:uo="using:Uno.Omarchy"
+                 DefaultFontFamily="ms-appx:///Fonts/JetBrainsMono.ttf#JetBrains Mono" />
 ```
+
+`DefaultFontFamily` can also be changed at runtime, and individual type scales can be overridden with a font override dictionary (`BodyMediumFontFamily`, `TitleLargeFontFamily`, …) — see [Typography Font Swap](design-tokens.md#typography-font-swap).
 
 ### Spacing and density
 
