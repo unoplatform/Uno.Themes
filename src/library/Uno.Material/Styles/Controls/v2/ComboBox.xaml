@@ -401,24 +401,25 @@
 									   IsHitTestVisible="False"
 									   MaxLines="1"
 									   RenderTransformOrigin="0,0.5"
-									   Style="{StaticResource MaterialBodyLarge}"
+									   Style="{ThemeResource ComboBoxPlaceholderTextStyle}"
 									   Text="{TemplateBinding PlaceholderText}" />
 
 							<TextBlock x:Name="UpperPlaceholderElement"
 									   Grid.Column="1"
+									   Margin="{ThemeResource ComboBoxUpperPlaceHolderMargin}"
 									   VerticalAlignment="Center"
 									   Visibility="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsed}, TargetNullValue=Collapsed, FallbackValue=Collapsed}"
 									   Foreground="{ThemeResource ComboBoxUpperPlaceHolderForeground}"
 									   IsHitTestVisible="False"
 									   MaxLines="1"
 									   RenderTransformOrigin="0,0.5"
-									   Style="{StaticResource MaterialBodyLarge}"
+									   Style="{ThemeResource ComboBoxPlaceholderTextStyle}"
 									   Text="{TemplateBinding PlaceholderText}">
 								<TextBlock.RenderTransform>
 									<CompositeTransform x:Name="UpperPlaceholderElement_CompositeTransform"
-														ScaleX="0.7"
-														ScaleY="0.7"
-														TranslateY="-11" />
+														ScaleX="{ThemeResource ComboBoxUpperPlaceHolderScaleX}"
+														ScaleY="{ThemeResource ComboBoxUpperPlaceHolderScaleY}"
+														TranslateY="{ThemeResource ComboBoxUpperPlaceHolderTranslateY}" />
 								</TextBlock.RenderTransform>
 							</TextBlock>
 
