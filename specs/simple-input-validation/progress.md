@@ -65,22 +65,22 @@ Branch: `dev/xygu/20261005/simple-input-validation`
 
 Local only, never committed: Composition `HintPath` references in `src/samples/Directory.Build.props`.
 
-- [ ] Error templates — `Styles/Controls/InputValidation.xaml`
-- [ ] TextBox — `SimpleOutlinedTextBoxStyle`, `SimpleFilledTextBoxStyle`
-- [ ] PasswordBox — `SimpleOutlinedPasswordBoxStyle`, `SimpleFilledPasswordBoxStyle`
-- [ ] AutoSuggestBox — `SimpleAutoSuggestBoxTextBoxStyle`, `SimpleAutoSuggestBoxStyle`
-- [ ] ComboBox — `SimpleComboBoxStyle`
-- [ ] Sample — `IndeiStateViewer` control
-- [ ] Sample — `InputValidationSamplePage` + `InputValidationSampleViewModel` (INDEI), Compact and Inline sections
-- [ ] SimpleSampleApp — `FeatureConfiguration.InputValidation.IsEnabled = true`
-- [ ] Runtime tests — `Given_InputValidation`
-- [ ] Docs — `doc/simple-controls-styles.md` "Input validation" section
-- [ ] Verify
-  - [ ] Library builds for `windows` (not_win gating)
-  - [ ] SimpleSampleApp builds and runs on `net10.0-desktop`
-  - [ ] Sample page checked in Light/Dark × Compact/Inline; existing input pages unchanged
-  - [ ] `Given_InputValidation` + full runtime suite pass
-  - [ ] XAML Styler + `dotnet format whitespace` verify clean
+- [x] Error templates — `Styles/Controls/InputValidation.xaml`
+- [x] TextBox — `SimpleOutlinedTextBoxStyle`, `SimpleFilledTextBoxStyle`
+- [x] PasswordBox — `SimpleOutlinedPasswordBoxStyle`, `SimpleFilledPasswordBoxStyle`
+- [x] AutoSuggestBox — `SimpleAutoSuggestBoxTextBoxStyle`, `SimpleAutoSuggestBoxStyle`
+- [x] ComboBox — `SimpleComboBoxStyle`
+- [x] Sample — `IndeiStateViewer` control
+- [x] Sample — `InputValidationSamplePage` + `InputValidationSampleViewModel` (INDEI), Compact and Inline sections
+- [x] SimpleSampleApp — `FeatureConfiguration.InputValidation.IsEnabled = true`
+- [x] Runtime tests — `Given_InputValidation`
+- [x] Docs — `doc/simple-controls-styles.md` "Input validation" section
+- [x] Verify
+  - [x] Library builds for `windows` (not_win gating)
+  - [x] SimpleSampleApp builds and runs on `net10.0-desktop`
+  - [x] Sample page checked in Light/Dark × Compact/Inline; existing input pages unchanged
+  - [x] `Given_InputValidation` + full runtime suite pass
+  - [x] XAML Styler + `dotnet format whitespace` verify clean
 - [ ] ⛔ **Checkpoint — human review before Phase B**
 
 ### Phase B — against Uno 7.0.0-dev.703 (no validation), temporary shim
@@ -105,4 +105,25 @@ Local only, never committed: the `Uno.Sdk.Private` 7.0.0-dev.703 pin in both `gl
 
 ## Review
 
-_(filled in at the end)_
+### Phase A (2026-10-05)
+
+Verified against the local validation build (Uno 7.0.0-dev.701 override):
+
+- Library builds for `net10.0` and `net10.0-windows10.0.19041` (MSBuild), Debug and Release; the Release
+  XamlMerge output keeps the `input` / `not_win` namespaces.
+- `Given_InputValidation`: 20/20 pass. Full SimpleSampleApp suite: all pass (one pre-existing `[Ignore]`).
+- Existing TextBox / PasswordBox / AutoSuggestBox / ComboBox sample pages render pixel-identical to the
+  master styles (RenderTargetBitmap comparison). This caught one regression, fixed in
+  `fix(simple): keep the AutoSuggestBox fill inset under its stroke`: splitting the stroke off the fill
+  let the fill extend under the translucent disabled stroke.
+- XAML Styler and `dotnet format whitespace` verify clean; markdownlint and cSpell clean on the doc.
+
+Local-only environment workarounds (never committed): the local framework build left empty
+`ref/net10.0` folders in the cached `uno.foundation` / `uno.winrt` 7.0.0-dev.701 packages, which hide
+their compile assets on any fresh restore, and split `Uno.UI.Composition.*` out of `Uno.UI`. Both are
+patched with `Reference`/`HintPath` items in `Directory.Build.props` and `src/samples/Directory.Build.props`.
+
+Open points for review:
+
+- The inline error text inherits the field's font size (BodyLarge), larger than typical helper text.
+- An inline-validated field reserves its 20px error row even when clean, by design (no jump on first error).
