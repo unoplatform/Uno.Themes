@@ -1,86 +1,27 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<!--
 		Omarchy TextBox, ported from flutter_omarchy
 		(artifacts/flutter_omarchy/packages/flutter_omarchy/lib/src/widgets/input_container.dart and text_input.dart).
-
+		
 		OmarchyOutlinedTextBoxStyle = OmarchyInputContainer + OmarchyTextInput: a 2 px border that is
 		normal.black at rest and the accent (theme.colors.border) when focused, 8 px padding all around.
 		The source stacks a 1 px normal.white border under the 2 px focus overlay; the overlay covers it
 		entirely, so a single 2 px border is the visible result.
 		OmarchyFilledTextBoxStyle = bare OmarchyTextInput: no border, no background, the widget's default
 		EdgeInsets.symmetric(vertical: 8) padding.
-
+		
 		Text is theme.text.normal in foreground, the placeholder is bright.black (muted) and the selection
 		is theme.colors.selectedText.
-
+		
 		Deviations from the source:
 		- No hover visuals (none in the source either); the *PointerOver keys only exist for lightweight styling.
 		- Disabled: the source has no disabled visuals; the whole control is dimmed to OmarchyBorderOpacityDisabled.
 		- Caret: cursorColor = selectedText (accent) cannot be expressed, WinUI has no caret brush.
 		- Header and DeleteButton have no source equivalent (WinUI-only parts): header = body text in
-		  foreground, delete button = a muted glyph that turns accent on hover, no background, no border.
+		foreground, delete button = a muted glyph that turns accent on hover, no background, no border.
 	-->
-
-	<ResourceDictionary.ThemeDictionaries>
-
-		<!-- Omarchy has a single palette: Light and Default are identical -->
-		<ResourceDictionary x:Key="Light">
-
-			<!-- OutlinedTextBox (OmarchyInputContainer) -->
-			<StaticResource x:Key="OutlinedTextBoxForeground" ResourceKey="OmarchyForegroundBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBackground" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBorderBrush" ResourceKey="OmarchyNormalBlackBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBorderBrushPointerOver" ResourceKey="OmarchyNormalBlackBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBorderBrushFocused" ResourceKey="OmarchyAccentBrush" />
-			<StaticResource x:Key="OutlinedTextBoxPlaceholderForeground" ResourceKey="OmarchyMutedBrush" />
-			<StaticResource x:Key="OutlinedTextBoxHeaderForeground" ResourceKey="OmarchyForegroundBrush" />
-			<StaticResource x:Key="OutlinedTextBoxSelectionHighlightColor" ResourceKey="OmarchySelectionBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBorderThickness" ResourceKey="OmarchyBorderThickness" />
-			<StaticResource x:Key="OutlinedTextBoxPadding" ResourceKey="Space200Thickness" />
-
-			<!-- FilledTextBox (bare OmarchyTextInput) -->
-			<StaticResource x:Key="FilledTextBoxForeground" ResourceKey="OmarchyForegroundBrush" />
-			<StaticResource x:Key="FilledTextBoxBackground" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="FilledTextBoxBorderBrush" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="FilledTextBoxBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="FilledTextBoxBorderBrushFocused" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="FilledTextBoxPlaceholderForeground" ResourceKey="OmarchyMutedBrush" />
-			<StaticResource x:Key="FilledTextBoxHeaderForeground" ResourceKey="OmarchyForegroundBrush" />
-			<StaticResource x:Key="FilledTextBoxSelectionHighlightColor" ResourceKey="OmarchySelectionBrush" />
-			<Thickness x:Key="FilledTextBoxBorderThickness">0</Thickness>
-			<StaticResource x:Key="FilledTextBoxPadding" ResourceKey="Space200VerticalThickness" />
-		</ResourceDictionary>
-
-		<ResourceDictionary x:Key="Default">
-
-			<!-- OutlinedTextBox (OmarchyInputContainer) -->
-			<StaticResource x:Key="OutlinedTextBoxForeground" ResourceKey="OmarchyForegroundBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBackground" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBorderBrush" ResourceKey="OmarchyNormalBlackBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBorderBrushPointerOver" ResourceKey="OmarchyNormalBlackBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBorderBrushFocused" ResourceKey="OmarchyAccentBrush" />
-			<StaticResource x:Key="OutlinedTextBoxPlaceholderForeground" ResourceKey="OmarchyMutedBrush" />
-			<StaticResource x:Key="OutlinedTextBoxHeaderForeground" ResourceKey="OmarchyForegroundBrush" />
-			<StaticResource x:Key="OutlinedTextBoxSelectionHighlightColor" ResourceKey="OmarchySelectionBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBorderThickness" ResourceKey="OmarchyBorderThickness" />
-			<StaticResource x:Key="OutlinedTextBoxPadding" ResourceKey="Space200Thickness" />
-
-			<!-- FilledTextBox (bare OmarchyTextInput) -->
-			<StaticResource x:Key="FilledTextBoxForeground" ResourceKey="OmarchyForegroundBrush" />
-			<StaticResource x:Key="FilledTextBoxBackground" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="FilledTextBoxBorderBrush" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="FilledTextBoxBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="FilledTextBoxBorderBrushFocused" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="FilledTextBoxPlaceholderForeground" ResourceKey="OmarchyMutedBrush" />
-			<StaticResource x:Key="FilledTextBoxHeaderForeground" ResourceKey="OmarchyForegroundBrush" />
-			<StaticResource x:Key="FilledTextBoxSelectionHighlightColor" ResourceKey="OmarchySelectionBrush" />
-			<Thickness x:Key="FilledTextBoxBorderThickness">0</Thickness>
-			<StaticResource x:Key="FilledTextBoxPadding" ResourceKey="Space200VerticalThickness" />
-		</ResourceDictionary>
-
-	</ResourceDictionary.ThemeDictionaries>
 
 	<!-- Segoe MDL2 / Uno Fluent "Cancel" glyph -->
 	<x:String x:Key="OmarchyTextBoxDeleteGlyph">&#xE711;</x:String>

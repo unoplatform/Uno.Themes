@@ -1,10 +1,5 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:not_win="http://uno.ui/not_win"
-					mc:Ignorable="d not_win">
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<!--
 		Omarchy CheckBox - reproduces flutter_omarchy lib/src/widgets/checkbox.dart
@@ -35,31 +30,6 @@
 		- Every source transition animates over 120 ms (AnimatedContainer / AnimatedSwitcher);
 		  the states below switch instantly (no VisualTransition).
 	-->
-
-	<ResourceDictionary.ThemeDictionaries>
-
-		<ResourceDictionary x:Key="Light">
-			<StaticResource x:Key="CheckBoxForeground" ResourceKey="OmarchyForegroundBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushUnchecked" ResourceKey="OmarchyNormalWhiteBrush" />
-			<StaticResource x:Key="CheckBoxBackgroundUnchecked" ResourceKey="OmarchyNormalBlackBrush" />
-			<!-- Defaults of the BorderBrush / Background channels (the accent variants replace them) -->
-			<StaticResource x:Key="CheckBoxBorderBrushChecked" ResourceKey="OmarchyForegroundBrush" />
-			<StaticResource x:Key="CheckBoxBackgroundChecked" ResourceKey="OmarchyMutedBrush" />
-			<!-- The glyph is painted with the BorderBrush channel; this key documents the mapping and is not read by the template -->
-			<StaticResource x:Key="CheckBoxGlyphForegroundChecked" ResourceKey="OmarchyForegroundBrush" />
-		</ResourceDictionary>
-
-		<!-- Omarchy has one palette with a light/dark flag: Light and Default are identical -->
-		<ResourceDictionary x:Key="Default">
-			<StaticResource x:Key="CheckBoxForeground" ResourceKey="OmarchyForegroundBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushUnchecked" ResourceKey="OmarchyNormalWhiteBrush" />
-			<StaticResource x:Key="CheckBoxBackgroundUnchecked" ResourceKey="OmarchyNormalBlackBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushChecked" ResourceKey="OmarchyForegroundBrush" />
-			<StaticResource x:Key="CheckBoxBackgroundChecked" ResourceKey="OmarchyMutedBrush" />
-			<StaticResource x:Key="CheckBoxGlyphForegroundChecked" ResourceKey="OmarchyForegroundBrush" />
-		</ResourceDictionary>
-
-	</ResourceDictionary.ThemeDictionaries>
 
 	<!-- checkbox.dart: size = fontSize (14) x 1.2 = 16.8, rounded to an even pixel so the 2 px border sits on whole pixels -->
 	<x:Double x:Key="OmarchyCheckBoxSize">18</x:Double>

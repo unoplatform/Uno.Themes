@@ -1,45 +1,26 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-					xmlns:not_win="http://uno.ui/not_win"
-					mc:Ignorable="d not_win">
+					xmlns:muxc="using:Microsoft.UI.Xaml.Controls">
 
 	<!--
 		OmarchyProgressBar (flutter_omarchy: lib/src/widgets/progress_bar.dart).
-
+		
 		A 4 px normal.black bar with a 1 px inset, so the fill is 2 px tall. The fill is the
 		accent (theme border color by default, bright.{ansi} for the variants) and travels
 		through Foreground.
-
+		
 		The track is painted by LayoutRoot: the control computes its clip from LayoutRoot
 		minus Padding and the template applies it to the padded root, so the clip trims the
 		fill to the inset area and leaves the track alone.
-
+		
 		Deviations:
 		- The source is determinate only. IsIndeterminate keeps the WinUI sliding-bars
-		  animation, painted with the Foreground over the track.
+		animation, painted with the Foreground over the track.
 		- ShowError / ShowPaused have no source equivalent: the determinate bar is unchanged;
-		  an indeterminate bar stops moving and shows the wide bar at rest.
+		an indeterminate bar stops moving and shows the wide bar at rest.
 		- The 1 px inset is a literal Thickness: the spacing scale has no 1 px step
-		  (Space050 is 2 px).
+		(Space050 is 2 px).
 	-->
-
-	<ResourceDictionary.ThemeDictionaries>
-
-		<ResourceDictionary x:Key="Light">
-			<StaticResource x:Key="ProgressBarForeground" ResourceKey="OmarchyAccentBrush" />
-			<StaticResource x:Key="ProgressBarBackground" ResourceKey="OmarchyNormalBlackBrush" />
-		</ResourceDictionary>
-
-		<ResourceDictionary x:Key="Default">
-			<StaticResource x:Key="ProgressBarForeground" ResourceKey="OmarchyAccentBrush" />
-			<StaticResource x:Key="ProgressBarBackground" ResourceKey="OmarchyNormalBlackBrush" />
-		</ResourceDictionary>
-
-	</ResourceDictionary.ThemeDictionaries>
 
 	<!-- progress_bar.dart: height: 4, padding: EdgeInsets.all(1) -->
 	<x:Double x:Key="OmarchyProgressBarHeight">4</x:Double>

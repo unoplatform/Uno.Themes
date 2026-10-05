@@ -1,93 +1,29 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:not_win="http://uno.ui/not_win"
-					xmlns:ut="using:Uno.Themes"
-					mc:Ignorable="d not_win">
+					xmlns:ut="using:Uno.Themes">
 
 	<!--
 		flutter_omarchy: widgets/button.dart (OmarchyButtonStyle.filled / .outline / .bar) and
 		widgets/utils/pointer_area.dart (PointerState: enabled > pressed > hovering > focused > normal).
-
+		
 		Tint model. Every Omarchy state is ONE color per role at an alpha, so a template stacks
-		  TintLayer      Background = {TemplateBinding Background} (the normal ANSI color), Opacity driven by the states
-		  BorderElement  BorderBrush = {TemplateBinding BorderBrush}
-		  FocusBorder    BorderBrush = {TemplateBinding Foreground} (the bright ANSI color): focus and outline-pressed stroke
-		  ContentPresenter (+ leading / trailing icons via ut:ControlExtensions, as in the Simple theme)
+		TintLayer      Background = {TemplateBinding Background} (the normal ANSI color), Opacity driven by the states
+		BorderElement  BorderBrush = {TemplateBinding BorderBrush}
+		FocusBorder    BorderBrush = {TemplateBinding Foreground} (the bright ANSI color): focus and outline-pressed stroke
+		ContentPresenter (+ leading / trailing icons via ut:ControlExtensions, as in the Simple theme)
 		and an accent variant is three setters: Background = normal, Foreground = bright, BorderBrush = normal | transparent.
 		Lightweight styling exposes only the *Background / *Foreground / *BorderBrush base keys; the
 		*PointerOver / *Pressed / *Disabled brush keys of the other themes do not exist here.
-
+		
 		Deviations from the source:
 		- No 120 ms transition (OmarchyButtonStyleData.transitionDuration): states switch instantly.
 		- Disabled foreground is the bright color dimmed (OmarchyForegroundOpacityDisabled / OmarchyMutedForegroundOpacity)
-		  instead of switching to the normal color; the tint model has no per-state foreground brush.
+		instead of switching to the normal color; the tint model has no per-state foreground brush.
 		- The source resolves hovering before focus, so a hovered + focused button never shows the focus stroke;
-		  here Focused / PointerFocused always show it.
+		here Focused / PointerFocused always show it.
 		- bar (text) buttons draw no focus visual in the source; the bar template shows the bright focus stroke on
-		  keyboard focus so focus stays visible.
+		keyboard focus so focus stays visible.
 	-->
-
-	<ResourceDictionary.ThemeDictionaries>
-
-		<!-- One palette feeds both theme dictionaries (see specs/08-omarchy-theme/progress.md): identical content. -->
-		<ResourceDictionary x:Key="Light">
-
-			<!-- filled(blue) -->
-			<StaticResource x:Key="FilledButtonBackground" ResourceKey="OmarchyNormalBlueBrush" />
-			<StaticResource x:Key="FilledButtonForeground" ResourceKey="OmarchyBrightBlueBrush" />
-			<StaticResource x:Key="FilledButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
-
-			<!-- filled(white) -->
-			<StaticResource x:Key="FilledTonalButtonBackground" ResourceKey="OmarchyNormalWhiteBrush" />
-			<StaticResource x:Key="FilledTonalButtonForeground" ResourceKey="OmarchyBrightWhiteBrush" />
-			<StaticResource x:Key="FilledTonalButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
-
-			<!-- outline(white) -->
-			<StaticResource x:Key="OutlinedButtonBackground" ResourceKey="OmarchyNormalWhiteBrush" />
-			<StaticResource x:Key="OutlinedButtonForeground" ResourceKey="OmarchyBrightWhiteBrush" />
-			<StaticResource x:Key="OutlinedButtonBorderBrush" ResourceKey="OmarchyNormalWhiteBrush" />
-
-			<!-- bar(white) -->
-			<StaticResource x:Key="TextButtonBackground" ResourceKey="OmarchyNormalWhiteBrush" />
-			<StaticResource x:Key="TextButtonForeground" ResourceKey="OmarchyBrightWhiteBrush" />
-
-			<!-- outline(white) with an icon child -->
-			<StaticResource x:Key="IconButtonBackground" ResourceKey="OutlinedButtonBackground" />
-			<StaticResource x:Key="IconButtonForeground" ResourceKey="OutlinedButtonForeground" />
-			<StaticResource x:Key="IconButtonBorderBrush" ResourceKey="OutlinedButtonBorderBrush" />
-		</ResourceDictionary>
-
-		<ResourceDictionary x:Key="Default">
-
-			<!-- filled(blue) -->
-			<StaticResource x:Key="FilledButtonBackground" ResourceKey="OmarchyNormalBlueBrush" />
-			<StaticResource x:Key="FilledButtonForeground" ResourceKey="OmarchyBrightBlueBrush" />
-			<StaticResource x:Key="FilledButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
-
-			<!-- filled(white) -->
-			<StaticResource x:Key="FilledTonalButtonBackground" ResourceKey="OmarchyNormalWhiteBrush" />
-			<StaticResource x:Key="FilledTonalButtonForeground" ResourceKey="OmarchyBrightWhiteBrush" />
-			<StaticResource x:Key="FilledTonalButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
-
-			<!-- outline(white) -->
-			<StaticResource x:Key="OutlinedButtonBackground" ResourceKey="OmarchyNormalWhiteBrush" />
-			<StaticResource x:Key="OutlinedButtonForeground" ResourceKey="OmarchyBrightWhiteBrush" />
-			<StaticResource x:Key="OutlinedButtonBorderBrush" ResourceKey="OmarchyNormalWhiteBrush" />
-
-			<!-- bar(white) -->
-			<StaticResource x:Key="TextButtonBackground" ResourceKey="OmarchyNormalWhiteBrush" />
-			<StaticResource x:Key="TextButtonForeground" ResourceKey="OmarchyBrightWhiteBrush" />
-
-			<!-- outline(white) with an icon child -->
-			<StaticResource x:Key="IconButtonBackground" ResourceKey="OutlinedButtonBackground" />
-			<StaticResource x:Key="IconButtonForeground" ResourceKey="OutlinedButtonForeground" />
-			<StaticResource x:Key="IconButtonBorderBrush" ResourceKey="OutlinedButtonBorderBrush" />
-		</ResourceDictionary>
-
-	</ResourceDictionary.ThemeDictionaries>
 
 	<!-- Shared setters (no template). theme.text.normal = 14 px regular; EdgeInsets.all(8); borderWidth 2; no radius. -->
 	<Style x:Key="OmarchyBaseButtonStyle"

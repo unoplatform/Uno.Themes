@@ -1,14 +1,14 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<!--
 		Omarchy type scale: per-slot FontSize / FontWeight / CharacterSpacing.
-
+		
 		The source (theme/text.dart) has ONE size (14 px) and three faces (normal, bold, italic);
 		the larger Display / Headline / Title sizes are an extension so the semantic type scale
 		stays usable. Bold slots use the bold cut, Caption slots the italic cut (see Fonts.xaml);
 		CharacterSpacing is 0 everywhere because the face is monospace.
-
+		
 		Declared as plain (theme-agnostic) values in a dictionary merged AFTER SharedTypography.xaml:
 		a merged dictionary is searched before a page's own ThemeDictionaries, so values declared
 		inline in Typography.xaml would lose to the shared Material-derived defaults (the same
@@ -122,11 +122,5 @@
 	<x:String x:Key="CaptionSmallFontWeight">Normal</x:String>
 	<x:Double x:Key="CaptionSmallFontSize">11</x:Double>
 	<x:Int32 x:Key="CaptionSmallCharacterSpacing">0</x:Int32>
-
-	</ResourceDictionary>
-
-	<!-- ═══════════════════════════════════════════════════════════════ -->
-	<!-- LIGHT THEME                                                   -->
-	<!-- ═══════════════════════════════════════════════════════════════ -->
 
 </ResourceDictionary>

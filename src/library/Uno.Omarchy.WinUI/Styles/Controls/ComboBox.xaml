@@ -1,11 +1,11 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<!--
 		Omarchy ComboBox, ported from flutter_omarchy OmarchySelect
 		(artifacts/flutter_omarchy/packages/flutter_omarchy/lib/src/widgets/select.dart, which composes
 		button.dart, pop_over.dart and tile.dart).
-
+		
 		OmarchyComboBoxStyle (closed control) = OmarchyButton(borderWidth: 0) in the default outline(white)
 		style: bright.white text over a normal.white tint layer whose opacity goes 0 -> 0.15 (hover) -> 0.25
 		(pressed). Padding 8, no chevron. The popup is an OmarchyPopOverContainer: the background color with
@@ -13,60 +13,14 @@
 		OmarchyComboBoxItemStyle = OmarchyTile: 56 px high (4 x the 14 px body size), 16 px horizontal padding,
 		foreground text; hover paints normal.black at 0.5 (1 when pressed) and turns the text accent
 		(selectedText); the selected option is accent + italic with no background.
-
+		
 		Deviations from the source:
 		- Focused: the source outline(white) focus visual is a bright border, invisible at borderWidth 0;
-		  keyboard focus shows the hover look instead (control and items).
+		keyboard focus shows the hover look instead (control and items).
 		- Disabled: no source visuals; content is dimmed to OmarchyMutedForegroundOpacity.
 		- DropDownGlyph is kept as a collapsed template part; OmarchySelect has no chevron.
 		- Header has no source equivalent: body text in foreground (WinUI-only part).
 	-->
-
-	<ResourceDictionary.ThemeDictionaries>
-
-		<!-- Omarchy has a single palette: Light and Default are identical -->
-		<ResourceDictionary x:Key="Light">
-
-			<!-- ComboBox (OmarchyButton outline(white), borderWidth 0) -->
-			<StaticResource x:Key="ComboBoxForeground" ResourceKey="OmarchyBrightWhiteBrush" />
-			<!-- Tint source: the template drives the layer's Opacity, never the brush -->
-			<StaticResource x:Key="ComboBoxBackground" ResourceKey="OmarchyNormalWhiteBrush" />
-			<StaticResource x:Key="ComboBoxBorderBrush" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="ComboBoxPlaceholderForeground" ResourceKey="OmarchyBrightWhiteBrush" />
-			<StaticResource x:Key="ComboBoxHeaderForeground" ResourceKey="OmarchyForegroundBrush" />
-
-			<!-- Popup (OmarchyPopOverContainer) -->
-			<StaticResource x:Key="ComboBoxDropDownBackground" ResourceKey="OmarchyBackgroundBrush" />
-			<StaticResource x:Key="ComboBoxDropDownBorderBrush" ResourceKey="OmarchyAccentBrush" />
-
-			<!-- ComboBoxItem (OmarchyTile) -->
-			<StaticResource x:Key="ComboBoxItemForeground" ResourceKey="OmarchyForegroundBrush" />
-			<StaticResource x:Key="ComboBoxItemForegroundPointerOver" ResourceKey="OmarchyAccentBrush" />
-			<StaticResource x:Key="ComboBoxItemForegroundSelected" ResourceKey="OmarchyAccentBrush" />
-			<StaticResource x:Key="ComboBoxItemBackgroundPointerOver" ResourceKey="OmarchyNormalBlackBrush" />
-		</ResourceDictionary>
-
-		<ResourceDictionary x:Key="Default">
-
-			<!-- ComboBox (OmarchyButton outline(white), borderWidth 0) -->
-			<StaticResource x:Key="ComboBoxForeground" ResourceKey="OmarchyBrightWhiteBrush" />
-			<StaticResource x:Key="ComboBoxBackground" ResourceKey="OmarchyNormalWhiteBrush" />
-			<StaticResource x:Key="ComboBoxBorderBrush" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="ComboBoxPlaceholderForeground" ResourceKey="OmarchyBrightWhiteBrush" />
-			<StaticResource x:Key="ComboBoxHeaderForeground" ResourceKey="OmarchyForegroundBrush" />
-
-			<!-- Popup (OmarchyPopOverContainer) -->
-			<StaticResource x:Key="ComboBoxDropDownBackground" ResourceKey="OmarchyBackgroundBrush" />
-			<StaticResource x:Key="ComboBoxDropDownBorderBrush" ResourceKey="OmarchyAccentBrush" />
-
-			<!-- ComboBoxItem (OmarchyTile) -->
-			<StaticResource x:Key="ComboBoxItemForeground" ResourceKey="OmarchyForegroundBrush" />
-			<StaticResource x:Key="ComboBoxItemForegroundPointerOver" ResourceKey="OmarchyAccentBrush" />
-			<StaticResource x:Key="ComboBoxItemForegroundSelected" ResourceKey="OmarchyAccentBrush" />
-			<StaticResource x:Key="ComboBoxItemBackgroundPointerOver" ResourceKey="OmarchyNormalBlackBrush" />
-		</ResourceDictionary>
-
-	</ResourceDictionary.ThemeDictionaries>
 
 	<!-- select.dart: maxPopOverHeight defaults to 500 -->
 	<x:Double x:Key="OmarchyComboBoxPopupMaxHeight">500</x:Double>

@@ -1,54 +1,26 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-					xmlns:not_win="http://uno.ui/not_win"
-					mc:Ignorable="d not_win">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<!--
 		OmarchySlider (flutter_omarchy: lib/src/widgets/slider.dart).
-
+		
 		A 4 px normal.black track with a 12 x 12 square thumb, 24 px tall (2 x thumb).
 		Filled track = accent at 0.6; thumb = accent at 0.9, opaque while hovered;
 		bright.white while pressed (anywhere on the slider); disabled: filled track and
 		thumb = bright.black (muted). The accent travels through Foreground (theme border
 		color by default, bright.{ansi} for the variants), so every state is an Opacity
 		change on a layer, never a brush swap.
-
+		
 		Deviations:
 		- `divisions` is not drawn by the source; the TickBar parts stay collapsed
-		  (the control still honors TickPlacement if a consumer opts in).
+		(the control still honors TickPlacement if a consumer opts in).
 		- Keyboard focus = hover look in the source. The WinUI Slider raises only
-		  CommonStates / FocusEngagementStates (no FocusStates), and system focus visuals
-		  are off, so keyboard focus has no in-template representation.
+		CommonStates / FocusEngagementStates (no FocusStates), and system focus visuals
+		are off, so keyboard focus has no in-template representation.
 		- Vertical orientation is not in the source; it mirrors the horizontal geometry.
 		- The filled track stops at the thumb's left edge (WinUI layout) instead of running
-		  under the thumb's centre; only visible through the thumb's 0.1 transparency.
+		under the thumb's centre; only visible through the thumb's 0.1 transparency.
 	-->
-
-	<ResourceDictionary.ThemeDictionaries>
-
-		<ResourceDictionary x:Key="Light">
-			<StaticResource x:Key="SliderForeground" ResourceKey="OmarchyAccentBrush" />
-			<StaticResource x:Key="SliderTrackFill" ResourceKey="OmarchyNormalBlackBrush" />
-			<StaticResource x:Key="SliderThumbBackgroundPressed" ResourceKey="OmarchyBrightWhiteBrush" />
-			<StaticResource x:Key="SliderTrackValueFillDisabled" ResourceKey="OmarchyMutedBrush" />
-			<StaticResource x:Key="SliderThumbBackgroundDisabled" ResourceKey="OmarchyMutedBrush" />
-			<StaticResource x:Key="SliderHeaderForeground" ResourceKey="OmarchyForegroundBrush" />
-		</ResourceDictionary>
-
-		<ResourceDictionary x:Key="Default">
-			<StaticResource x:Key="SliderForeground" ResourceKey="OmarchyAccentBrush" />
-			<StaticResource x:Key="SliderTrackFill" ResourceKey="OmarchyNormalBlackBrush" />
-			<StaticResource x:Key="SliderThumbBackgroundPressed" ResourceKey="OmarchyBrightWhiteBrush" />
-			<StaticResource x:Key="SliderTrackValueFillDisabled" ResourceKey="OmarchyMutedBrush" />
-			<StaticResource x:Key="SliderThumbBackgroundDisabled" ResourceKey="OmarchyMutedBrush" />
-			<StaticResource x:Key="SliderHeaderForeground" ResourceKey="OmarchyForegroundBrush" />
-		</ResourceDictionary>
-
-	</ResourceDictionary.ThemeDictionaries>
 
 	<!-- slider.dart: _trackHeight = 4, _thumbSize = 12, height = _thumbSize * 2 -->
 	<x:Double x:Key="OmarchySliderTrackHeight">4</x:Double>

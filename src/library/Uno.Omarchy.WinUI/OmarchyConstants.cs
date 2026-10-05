@@ -9,6 +9,7 @@ internal static class OmarchyConstants
 		public static readonly string MergedPages = $"ms-appx:///{PackageName}/Generated/mergedpages.xaml";
 		public static readonly string Fonts = $"ms-appx:///{PackageName}/Styles/Application/Common/Fonts.xaml";
 		public static readonly string Tokens = $"ms-appx:///{PackageName}/Styles/Application/Common/Tokens.xaml";
+		public static readonly string SemanticStyles = $"ms-appx:///{PackageName}/Styles/Controls/SemanticStyles.xaml";
 	}
 
 	/// <summary>

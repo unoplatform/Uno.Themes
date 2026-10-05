@@ -23,7 +23,7 @@ public class Given_OmarchySemanticStyles
 	}
 
 	// ─────────────────────────────────────────────────────────────────────
-	// Semantic key -> Omarchy style (see _Resources.xaml)
+	// Semantic key -> Omarchy style (see SemanticStyles.xaml)
 	// ─────────────────────────────────────────────────────────────────────
 
 	[TestMethod]

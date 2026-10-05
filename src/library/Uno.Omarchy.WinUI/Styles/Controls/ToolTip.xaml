@@ -1,13 +1,13 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<!--
 		Omarchy — ToolTip
 		Reproduces flutter_omarchy widgets/tooltip.dart (OmarchyTooltip).
-
+		
 		Background normal.black, body text in bright.white, no border, sharp corners. The
 		source delegates to Flutter's Tooltip, whose desktop default padding is 16,8.
-
+		
 		Deviations:
 		- MaxWidth 320: Flutter wraps at the screen width; a cap keeps long messages readable.
 	-->
@@ -15,21 +15,6 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Lightweight styling ThemeResource aliases -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<ResourceDictionary.ThemeDictionaries>
-
-		<!-- ─── Light (one palette, both dictionaries) ─── -->
-		<ResourceDictionary x:Key="Light">
-			<StaticResource x:Key="ToolTipBackground" ResourceKey="OmarchyNormalBlackBrush" />
-			<StaticResource x:Key="ToolTipForeground" ResourceKey="OmarchyBrightWhiteBrush" />
-		</ResourceDictionary>
-
-		<!-- ─── Default ─── -->
-		<ResourceDictionary x:Key="Default">
-			<StaticResource x:Key="ToolTipBackground" ResourceKey="OmarchyNormalBlackBrush" />
-			<StaticResource x:Key="ToolTipForeground" ResourceKey="OmarchyBrightWhiteBrush" />
-		</ResourceDictionary>
-
-	</ResourceDictionary.ThemeDictionaries>
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Sizing / Geometry constants -->

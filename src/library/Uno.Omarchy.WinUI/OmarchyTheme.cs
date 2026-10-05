@@ -139,6 +139,8 @@ public partial class OmarchyTheme : BaseTheme
 
 	protected override string DefaultStylesSource => OmarchyConstants.ResourcePaths.MergedPages;
 
+	protected override string SemanticStylesSource => OmarchyConstants.ResourcePaths.SemanticStyles;
+
 	private void ApplyPalette(OmarchyPalette palette)
 	{
 		PopulatePaletteLayer(_paletteLayer, palette);

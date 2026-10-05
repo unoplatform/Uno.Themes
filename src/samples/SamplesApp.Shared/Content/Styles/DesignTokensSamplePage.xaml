@@ -578,11 +578,9 @@
 						<TextBlock Text="Typography Tokens"
 								   Style="{StaticResource TitleLarge}"
 								   Margin="0,24,0,4" />
-						<TextBlock Text="TypefacePlain (Display / Headline)"
-								   FontFamily="{ThemeResource TypefacePlain}"
-								   FontSize="20" />
-						<TextBlock Text="TypefaceBrand (Title / Label / Body)"
-								   FontFamily="{ThemeResource TypefaceBrand}"
+						<local:FontFamilyTunerControl />
+						<TextBlock Text="DefaultFontFamily (every type scale)"
+								   FontFamily="{ThemeResource DefaultFontFamily}"
 								   FontSize="20" />
 						<TextBlock Text="Display Large"
 								   Style="{StaticResource DisplayLarge}" />

@@ -18,7 +18,7 @@
 	</ItemGroup>
 
 	<Choose>
-		<When Condition="$(IsIOSOrCatalyst) or $(_IsAndroid)">
+		<When Condition="$(_IsIOS) or $(_IsAndroid)">
 			<ItemGroup>
 				<IncludeXamlNamespaces Include="mobile" />
 				<ExcludeXamlNamespaces Include="not_mobile" />
@@ -28,23 +28,6 @@
 			<ItemGroup>
 				<IncludeXamlNamespaces Include="not_mobile" />
 				<ExcludeXamlNamespaces Include="mobile" />
-			</ItemGroup>
-		</Otherwise>
-	</Choose>
-
-	<!-- NOTE: These two conditionals ONLY work under Uno targets and not Windows Desktop so they need to be used within the context of not_win or finer constraints -->
-	<!-- Make sure to add these aliases to the mc:Ignorable when using -->
-	<Choose>
-		<When Condition="'$(FrameworkLineage)'=='WinUI'">
-			<ItemGroup>
-				<IncludeXamlNamespaces Include="winui" />
-				<ExcludeXamlNamespaces Include="uwp" />
-			</ItemGroup>
-		</When>
-		<Otherwise>
-			<ItemGroup>
-				<ExcludeXamlNamespaces Include="winui" />
-				<ExcludeXamlNamespaces Include="uwp" />
 			</ItemGroup>
 		</Otherwise>
 	</Choose>
@@ -69,16 +52,12 @@
 		<XamlMergeInput Remove="Styles\Application\Common\Fonts.xaml" />
 		<XamlMergeInput Remove="Styles\Application\Common\TypeScale.xaml" />
 		<XamlMergeInput Remove="Styles\Application\Common\Tokens.xaml" />
+		<!-- Merged by OmarchyTheme as a SemanticResources dictionary; flattened into mergedpages it would lose the type. -->
+		<XamlMergeInput Remove="Styles\Controls\SemanticStyles.xaml" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<UpToDateCheckInput Remove="Styles\Controls\_Resources.xaml" />
-	</ItemGroup>
-
-	<ItemGroup Condition="$(IsXamarinIOS) or $(IsMonoAndroid) or $(IsXamarinMac)">
-		<EmbeddedResource Include="LinkerConfig.xamarin.xml">
-			<LogicalName>$(AssemblyName).xml</LogicalName>
-		</EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(ImplicitUsings)'=='true' OR '$(ImplicitUsings)'=='enable'">

@@ -1,58 +1,26 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					mc:Ignorable="">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<!--
 		Omarchy — ListView / ListViewItem
 		Reproduces flutter_omarchy widgets/tile.dart (OmarchyTile).
-
+		
 		Tile: height = 4 x the 14 px body size (56), horizontal padding 16, body text in the
 		foreground color. Hover paints normal.black at 0.5, pressed at 1: the HoverLayer keeps
 		one brush and the visual states drive its Opacity. Hover / pressed / selected text is
 		selectedText (= accent) and a selected tile switches to the italic face; selection has
 		no background of its own. Keyboard focus is rendered like hover (no system focus visual).
-
+		
 		Deviations:
 		- No ItemContainerTransitions / VisualTransitions: the source animates every state over
-		  120 ms; the theme omits generated durations.
+		120 ms; the theme omits generated durations.
 		- The description / leading / trailing slots of the tile are content (DataTemplate)
-		  concerns, not template parts. The source has no multi-select visuals either.
+		concerns, not template parts. The source has no multi-select visuals either.
 	-->
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Lightweight styling ThemeResource aliases -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<ResourceDictionary.ThemeDictionaries>
-
-		<!-- ─── Light (one palette, both dictionaries) ─── -->
-		<ResourceDictionary x:Key="Light">
-			<StaticResource x:Key="ListViewBackground" ResourceKey="SystemControlTransparentBrush" />
-
-			<StaticResource x:Key="ListViewItemBackground" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="ListViewItemForeground" ResourceKey="OmarchyForegroundBrush" />
-			<!-- lighter_background hover layer; opacity comes from OmarchyTileHoverOpacity (hover) / 1 (pressed) -->
-			<StaticResource x:Key="ListViewItemBackgroundPointerOver" ResourceKey="OmarchyNormalBlackBrush" />
-			<!-- selectedText -->
-			<StaticResource x:Key="ListViewItemForegroundPointerOver" ResourceKey="OmarchyAccentBrush" />
-			<StaticResource x:Key="ListViewItemForegroundSelected" ResourceKey="OmarchyAccentBrush" />
-			<StaticResource x:Key="ListViewItemForegroundDisabled" ResourceKey="OmarchyMutedBrush" />
-		</ResourceDictionary>
-
-		<!-- ─── Default ─── -->
-		<ResourceDictionary x:Key="Default">
-			<StaticResource x:Key="ListViewBackground" ResourceKey="SystemControlTransparentBrush" />
-
-			<StaticResource x:Key="ListViewItemBackground" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="ListViewItemForeground" ResourceKey="OmarchyForegroundBrush" />
-			<StaticResource x:Key="ListViewItemBackgroundPointerOver" ResourceKey="OmarchyNormalBlackBrush" />
-			<StaticResource x:Key="ListViewItemForegroundPointerOver" ResourceKey="OmarchyAccentBrush" />
-			<StaticResource x:Key="ListViewItemForegroundSelected" ResourceKey="OmarchyAccentBrush" />
-			<StaticResource x:Key="ListViewItemForegroundDisabled" ResourceKey="OmarchyMutedBrush" />
-		</ResourceDictionary>
-
-	</ResourceDictionary.ThemeDictionaries>
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- ListViewItem Style (OmarchyTile) -->

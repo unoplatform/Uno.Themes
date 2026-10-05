@@ -1,51 +1,17 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:not_win="http://uno.ui/not_win"
-					mc:Ignorable="d not_win">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<!--
 		flutter_omarchy has no link widget. Modeled on widgets/button.dart OmarchyButtonStyle.bar(AnsiColor.blue)
 		(the secondary style is bar(white) with the plain foreground): no border, EdgeInsets.all(12),
 		no tint / hover 0.15 / pressed 0.25, disabled foreground dimmed.
-
+		
 		Deviations from the source:
 		- No 120 ms transition: states switch instantly.
 		- Text content stays underlined (HyperlinkUnderlineVisible, applied by Uno to the ContentPresenter's text)
-		  so a link is not distinguished by color alone; a bar button in the source has no underline.
+		so a link is not distinguished by color alone; a bar button in the source has no underline.
 		- The source draws no focus visual for bar buttons; keyboard focus shows the theme's bright stroke.
 	-->
-
-	<x:Boolean x:Key="HyperlinkUnderlineVisible">True</x:Boolean>
-
-	<ResourceDictionary.ThemeDictionaries>
-
-		<!-- One palette feeds both theme dictionaries: identical content. -->
-		<ResourceDictionary x:Key="Light">
-
-			<!-- bar(blue) -->
-			<StaticResource x:Key="HyperlinkButtonBackground" ResourceKey="OmarchyNormalBlueBrush" />
-			<StaticResource x:Key="HyperlinkButtonForeground" ResourceKey="OmarchyBrightBlueBrush" />
-
-			<!-- bar(white), plain foreground -->
-			<StaticResource x:Key="SecondaryHyperlinkButtonBackground" ResourceKey="OmarchyNormalWhiteBrush" />
-			<StaticResource x:Key="SecondaryHyperlinkButtonForeground" ResourceKey="OmarchyForegroundBrush" />
-		</ResourceDictionary>
-
-		<ResourceDictionary x:Key="Default">
-
-			<!-- bar(blue) -->
-			<StaticResource x:Key="HyperlinkButtonBackground" ResourceKey="OmarchyNormalBlueBrush" />
-			<StaticResource x:Key="HyperlinkButtonForeground" ResourceKey="OmarchyBrightBlueBrush" />
-
-			<!-- bar(white), plain foreground -->
-			<StaticResource x:Key="SecondaryHyperlinkButtonBackground" ResourceKey="OmarchyNormalWhiteBrush" />
-			<StaticResource x:Key="SecondaryHyperlinkButtonForeground" ResourceKey="OmarchyForegroundBrush" />
-		</ResourceDictionary>
-
-	</ResourceDictionary.ThemeDictionaries>
 
 	<Style x:Key="OmarchyHyperlinkButtonStyle"
 		   TargetType="HyperlinkButton">

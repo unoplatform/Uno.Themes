@@ -143,7 +143,7 @@ bundles them). Omarchy has one size (14) and three faces; the type scale is:
 | Label | Regular | 14 / 12 / 12 (ExtraSmall 11) |
 | Caption | Italic | 12 / 12 / 11 |
 
-`TypefacePlain` / `TypefaceBrand` = Regular. Sizes above 14 are an extension (Omarchy only
+`DefaultFontFamily` (the root typeface token, #1710) = Regular. Sizes above 14 are an extension (Omarchy only
 uses 14 and 12); faces per slot follow the source (`bold` for titles, `italic` for
 descriptions/hints, `normal` for everything else).
 
@@ -171,3 +171,25 @@ descriptions/hints, `normal` for everything else).
 ## Review
 
 (pending)
+
+## Master sync (2026-10-04): SemanticResources (#1730) and Uno 7
+
+Merged `master` (Uno 7 / net10.0 retarget, #1710 `DefaultFontFamily`, #1715 ThemeResource tokens,
+#1730 `SemanticResources`) and adapted Omarchy to match Simple:
+
+- [x] Resolve merge conflicts (`ListViewSamplePage` `DataType`, `SamplePageLayout`, `ThemesSampleApp.csproj` assets, `semantic-styles.md`)
+- [x] `Styles/Controls/SemanticStyles.xaml`: semantic style aliases (from `_Resources.xaml`) and every
+      unprefixed lightweight key (from the control dictionaries, Light + Default and theme-agnostic scalars);
+      excluded from XamlMerge; merged by `OmarchyTheme.SemanticStylesSource` as a `SemanticResources`
+- [x] `BaseDictionaries.xaml` no longer merges `SharedTypography.xaml` (`BaseTheme` inserts it typed)
+- [x] `Fonts.xaml`: `TypefacePlain` / `TypefaceBrand` replaced by `DefaultFontFamily`; Omarchy templates read the
+      `*FontFamily` slot keys through ThemeResource, so no `FontFamilyAliasKeys` override is needed
+- [x] #1715 sweep: Omarchy already reads generated `Space*` / `Radius*` tokens (and aliases) through ThemeResource
+- [x] Uno 7: `omarchy-common.props` (`_IsIOS`, no `winui`/`uwp` Choose, no xamarin LinkerConfig item); unused
+      `win` / `not_win` / `d` / `muxc` prefixes removed
+- [x] Sample head mirrors Simple: `SampleThemeHelper.CurrentApplication`, `XamlDisplay.Init(assembly)`,
+      Android `UnoPlatformHostBuilder`; DesignTokens Omarchy template uses `DefaultFontFamily` + font tuner
+- [x] `TypeScale.xaml`: removed a stray `</ResourceDictionary>` (malformed XML, failed the XAML Styler gate)
+- [x] Runtime tests: `OmarchySampleApp/RuntimeTests/Given_SemanticResources.cs`
+- [x] XAML Styler + `dotnet format whitespace` gates clean
+

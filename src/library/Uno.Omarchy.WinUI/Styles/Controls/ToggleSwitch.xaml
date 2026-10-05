@@ -1,10 +1,5 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:not_win="http://uno.ui/not_win"
-					mc:Ignorable="d not_win">
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<!--
 		Omarchy ToggleSwitch - reproduces flutter_omarchy lib/src/widgets/toggle.dart
@@ -34,33 +29,6 @@
 		- Omarchy has no labels: OnContent / OffContent default to null, the presenters stay for consumers.
 		- Every source transition animates over 120 ms (easeInOut); the states below switch instantly.
 	-->
-
-	<ResourceDictionary.ThemeDictionaries>
-
-		<ResourceDictionary x:Key="Light">
-			<StaticResource x:Key="ToggleSwitchForeground" ResourceKey="OmarchyForegroundBrush" />
-			<StaticResource x:Key="ToggleSwitchFillOff" ResourceKey="OmarchyNormalBlackBrush" />
-			<!-- Default of the Background channel (the accent variants replace it) -->
-			<StaticResource x:Key="ToggleSwitchFillOn" ResourceKey="OmarchyBrightWhiteBrush" />
-			<StaticResource x:Key="ToggleSwitchFillOnPointerOver" ResourceKey="OmarchyBrightWhiteBrush" />
-			<StaticResource x:Key="ToggleSwitchKnobFillOff" ResourceKey="OmarchyNormalWhiteBrush" />
-			<!-- Default of the BorderBrush channel (the accent variants replace it) -->
-			<StaticResource x:Key="ToggleSwitchKnobFillOffPointerOver" ResourceKey="OmarchyForegroundBrush" />
-			<StaticResource x:Key="ToggleSwitchKnobFillOn" ResourceKey="OmarchyNormalBlackBrush" />
-		</ResourceDictionary>
-
-		<!-- Omarchy has one palette with a light/dark flag: Light and Default are identical -->
-		<ResourceDictionary x:Key="Default">
-			<StaticResource x:Key="ToggleSwitchForeground" ResourceKey="OmarchyForegroundBrush" />
-			<StaticResource x:Key="ToggleSwitchFillOff" ResourceKey="OmarchyNormalBlackBrush" />
-			<StaticResource x:Key="ToggleSwitchFillOn" ResourceKey="OmarchyBrightWhiteBrush" />
-			<StaticResource x:Key="ToggleSwitchFillOnPointerOver" ResourceKey="OmarchyBrightWhiteBrush" />
-			<StaticResource x:Key="ToggleSwitchKnobFillOff" ResourceKey="OmarchyNormalWhiteBrush" />
-			<StaticResource x:Key="ToggleSwitchKnobFillOffPointerOver" ResourceKey="OmarchyForegroundBrush" />
-			<StaticResource x:Key="ToggleSwitchKnobFillOn" ResourceKey="OmarchyNormalBlackBrush" />
-		</ResourceDictionary>
-
-	</ResourceDictionary.ThemeDictionaries>
 
 	<!-- toggle.dart: const size = Size(28, 14) -->
 	<x:Double x:Key="OmarchyToggleSwitchWidth">28</x:Double>
