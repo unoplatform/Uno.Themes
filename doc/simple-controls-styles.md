@@ -211,3 +211,42 @@ The Simple theme also provides well-known style key aliases for compatibility wi
 | `CaptionLarge`                         | `SimpleCaptionLarge`                       |
 | `CaptionMedium`                        | `SimpleCaptionMedium`                      |
 | `CaptionSmall`                         | `SimpleCaptionSmall`                       |
+
+## Input Validation
+
+The Simple input styles present the errors of Uno's input validation (`Uno.Extras.Input.Validation`), so an `INotifyDataErrorInfo` view model can report errors without any app-side error UI. A field in error gets an error outline and a light error tint, plus either:
+
+- **Compact** (default): an error icon beside the field, listing the errors in its tooltip.
+- **Inline**: the errors listed in a row under the field.
+
+| Control          | Validated property | Style Keys                                                                          |
+|------------------|--------------------|-------------------------------------------------------------------------------------|
+| `TextBox`        | `Text`             | `SimpleOutlinedTextBoxStyle`, `SimpleFilledTextBoxStyle` (and styles based on them)  |
+| `PasswordBox`    | `Password`         | `SimpleOutlinedPasswordBoxStyle`, `SimpleFilledPasswordBoxStyle`, `SimplePasswordBoxStyle` |
+| `AutoSuggestBox` | `Text`             | `SimpleAutoSuggestBoxStyle`, `SimpleDefaultAutoSuggestBoxStyle`                     |
+| `ComboBox`       | `SelectedItem`     | `SimpleComboBoxStyle`, `SimpleComboBoxErrorStyle`                                   |
+
+Validation is opt-in, both app-wide and per control:
+
+```csharp
+// App constructor, before InitializeComponent(): input validation is off by default.
+Uno.UI.FeatureConfiguration.InputValidation.IsEnabled = true;
+```
+
+```xml
+<Page xmlns:input="using:Uno.Extras.Input">
+
+    <TextBox input:Validation.Mode="Auto"
+             input:Validation.Kind="Inline"
+             Text="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+```
+
+The error presentation comes from two templates the theme provides. Both can be overridden in the app's resources:
+
+| Resource Key                         | Description                                                                              |
+|--------------------------------------|------------------------------------------------------------------------------------------|
+| `SimpleInputValidationErrorTemplate` | The error list, set as each style's `Validation.ErrorTemplate`.                         |
+| `DefaultCompactErrorIconTemplate`    | The Compact error icon. The framework looks this key up at application level, so the Simple theme overrides the framework's default. |
+
+> [!NOTE]
+> Input validation requires an Uno Platform version that ships `Uno.Extras.Input.Validation`. It is not available on WinAppSDK, where these styles render as they do without validation.
