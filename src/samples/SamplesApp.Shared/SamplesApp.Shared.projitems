@@ -31,6 +31,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\SampleThemeHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\SystemThemeHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\VisualTreeHelperEx.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\InputValidationSampleViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -165,6 +166,13 @@
     </Page>
     <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\InfoBarSamplePage.xaml.cs">
       <DependentUpon>InfoBarSamplePage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="$(MSBuildThisFileDirectory)Content\Controls\InputValidationSamplePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\InputValidationSamplePage.xaml.cs">
+      <DependentUpon>InputValidationSamplePage.xaml</DependentUpon>
     </Compile>
     <Page Include="$(MSBuildThisFileDirectory)Content\Controls\IconButtonSamplePage.xaml">
       <SubType>Designer</SubType>
