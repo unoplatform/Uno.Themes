@@ -81,26 +81,32 @@ Local only, never committed: Composition `HintPath` references in `src/samples/D
   - [x] Sample page checked in Light/Dark × Compact/Inline; existing input pages unchanged
   - [x] `Given_InputValidation` + full runtime suite pass
   - [x] XAML Styler + `dotnet format whitespace` verify clean
-- [ ] ⛔ **Checkpoint — human review before Phase B**
+- [x] ⛔ **Checkpoint — human review before Phase B**
 
 ### Phase B — against Uno 7.0.0-dev.703 (no validation), temporary shim
 
 Local only, never committed: the `Uno.Sdk.Private` 7.0.0-dev.703 pin in both `global.json`.
 
-- [ ] Temporary `Uno.Extras.Input.Validation` shim drives the same states and fills `ErrorPresenter`
-- [ ] SimpleSampleApp — drop the `FeatureConfiguration.InputValidation` line (absent on 703)
-- [ ] Verify — desktop + windows builds, sample page matches Phase A, runtime suite passes
+- [x] Temporary `Uno.Extras.Input.Validation` shim drives the same states and fills `ErrorPresenter`
+      (`src/library/Uno.Themes/InputValidation/`, Uno-only via `HAS_UNO`; in Uno.Themes.WinUI because the
+      shared sample page also compiles into the Material and Cupertino heads)
+- [x] SimpleSampleApp — drop the `FeatureConfiguration.InputValidation` line (absent on 703), left as a TODO comment
+- [x] Verify — desktop + windows builds, sample page matches Phase A, runtime suite passes
 
 ## TODO — when unoplatform/uno#24838 is merged and published
 
 - [ ] Bump Uno to the first version that includes it
-- [ ] Delete the temporary `Validation` shim
+- [ ] Delete the temporary `Validation` shim (`src/library/Uno.Themes/InputValidation/`) — it declares the
+      same types in the same namespace as the framework, so it must go in the same change as the bump
 - [ ] Restore `FeatureConfiguration.InputValidation.IsEnabled = true` in SimpleSampleApp
 - [ ] Re-run `Given_InputValidation` + the full suite against the real implementation
 
 ## Known limitations
 
 - Commits between Phase A and the Phase B shim don't build on CI (the published 701 has no `Uno.Extras.Input`).
+- The shim tracks `{Binding}` with a single-segment path only (no `{x:Bind}`, no dotted paths), and only while
+  the control is loaded. It stands in for the framework's OnApplyTemplate hook with `SizeChanged`, re-applying
+  the states when the template root changes (e.g. a control first laid out after a collapsed ancestor shows).
 - Hosted in ThemesSampleApp, the feature flag is set after the host has registered its own bindings. Standalone SimpleSampleApp is the reference.
 
 ## Review
@@ -130,3 +136,17 @@ Open points for review:
 
 - The inline error text inherits the field's font size (BodyLarge), larger than typical helper text.
 - An inline-validated field reserves its 20px error row even when clean, by design (no jump on first error).
+
+### Phase B (2026-10-05)
+
+Verified against Uno 7.0.0-dev.703 (no framework validation) with the temporary shim:
+
+- Library builds for `net10.0` and `net10.0-windows10.0.19041`; Simple, Material and Cupertino heads build
+  for desktop with no new warnings.
+- `Given_InputValidation`: 22/22 pass. Full SimpleSampleApp suite: 300 pass, 1 skipped (pre-existing `[Ignore]`).
+- The sample page renders the same visuals as in Phase A (Light/Dark × Inline/Compact; pixel comparison across
+  the two framework builds is not meaningful, as text rendering differs). The existing input sample pages render
+  pixel-identical between master and branch styles on 703.
+- Found and fixed while verifying: controls loaded inside a collapsed section never got their error states
+  (no template yet when the shim first ran). Guarded by `When_ShownAfterBeingCollapsed_Then_ErrorStateShows`,
+  confirmed red without the fix and green with it.
