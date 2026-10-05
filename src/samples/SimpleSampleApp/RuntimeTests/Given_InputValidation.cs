@@ -145,6 +145,11 @@ public class Given_InputValidation
 		{
 			Assert.AreEqual(1, Grid.GetColumn(presenter), "Compact: the icon sits in the icon column");
 			Assert.IsTrue(presenter.ActualWidth > 0, "Compact: the icon column should have opened");
+
+			var icon = (presenter as ContentPresenter)?.Content as FrameworkElement;
+			Assert.IsNotNull(icon, "Compact: ErrorPresenter should hold the error icon");
+			var toolTip = ToolTipService.GetToolTip(icon) as ToolTip;
+			Assert.IsNotNull(toolTip?.Content, "Compact: the icon's tooltip should carry the errors");
 		}
 		else
 		{
