@@ -12,6 +12,7 @@ labels: kind/contributor-experience, kind/documentation, triage/untriaged
 
 ## For which Platform:
 
+- [ ] All platforms
 - [ ] WebAssembly
 - [ ] Android
 - [ ] iOS

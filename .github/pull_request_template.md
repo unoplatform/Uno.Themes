@@ -24,6 +24,7 @@ Please check if your PR fulfills the following requirements:
 
 - Commits must be following the [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/#summary)
 - [ ] Tested the changes where applicable:
+	- [ ] All platforms
 	- [ ] WebAssembly
 	- [ ] Android
 	- [ ] iOS

@@ -12,6 +12,7 @@ labels: kind/enhancement, triage/untriaged
 
 ## For which Platform:
 
+- [ ] All platforms
 - [ ] WebAssembly
 - [ ] Android
 - [ ] iOS
