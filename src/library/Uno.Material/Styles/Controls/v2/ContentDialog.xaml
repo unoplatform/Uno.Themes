@@ -7,8 +7,11 @@
 	<x:Double x:Key="MaterialContentDialogMinHeight">132</x:Double>
 	<x:Double x:Key="MaterialContentDialogMaxWidth">560</x:Double>
 	<x:Double x:Key="MaterialContentDialogMaxHeight">560</x:Double>
+	<!-- Caps the content inside the panel padding, so the dialog grows with DefaultSpacing instead of clipping. 512 = 560 - 2 x 24 padding at the default. -->
+	<x:Double x:Key="MaterialContentDialogContentMaxWidth">512</x:Double>
+	<x:Double x:Key="MaterialContentDialogContentMaxHeight">512</x:Double>
 	<Thickness x:Key="MaterialContentDialogEdgeMargin">56</Thickness>
-	<StaticResource x:Key="MaterialContentDialogPanelPadding" ResourceKey="Space300Thickness" />
+	<Thickness x:Key="MaterialContentDialogPanelPadding">24</Thickness>
 	<StaticResource x:Key="MaterialContentDialogCornerRadius" ResourceKey="Radius700CornerRadius" />
 	<GridLength x:Key="MaterialContentDialogButtonSpacing">8</GridLength>
 	<StaticResource x:Key="MaterialContentDialogTitleToContentMargin" ResourceKey="Space200BottomThickness" />
@@ -176,8 +179,6 @@
 											  CornerRadius="{TemplateBinding CornerRadius}"
 											  Elevation="3"
 											  FlowDirection="{TemplateBinding FlowDirection}"
-											  MaxWidth="{StaticResource MaterialContentDialogMaxWidth}"
-											  MaxHeight="{StaticResource MaterialContentDialogMaxHeight}"
 											  Margin="{StaticResource MaterialContentDialogEdgeMargin}"
 											  HorizontalAlignment="Center"
 											  VerticalAlignment="Center">
@@ -198,6 +199,8 @@
 											MinHeight="{StaticResource MaterialContentDialogMinHeight}" />
 
 									<Grid x:Name="DialogSpace"
+										  MaxWidth="{StaticResource MaterialContentDialogContentMaxWidth}"
+										  MaxHeight="{StaticResource MaterialContentDialogContentMaxHeight}"
 										  Margin="{ThemeResource MaterialContentDialogPanelPadding}">
 										<Grid.RowDefinitions>
 											<!-- 0: Title, 1: Content, 2: CommandSpace -->

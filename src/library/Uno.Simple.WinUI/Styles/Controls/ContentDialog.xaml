@@ -28,7 +28,7 @@
 
 	</ResourceDictionary.ThemeDictionaries>
 
-	<StaticResource x:Key="SimpleContentDialogPanelPadding" ResourceKey="SimpleSpace400Thickness" />
+	<Thickness x:Key="SimpleContentDialogPanelPadding">32</Thickness>
 	<StaticResource x:Key="SimpleContentDialogCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
 
 
@@ -39,6 +39,9 @@
 	<x:Double x:Key="SimpleContentDialogMinHeight">132</x:Double>
 	<x:Double x:Key="SimpleContentDialogMaxWidth">560</x:Double>
 	<x:Double x:Key="SimpleContentDialogMaxHeight">560</x:Double>
+	<!-- Caps the content inside the panel padding, so the dialog grows with DefaultSpacing instead of clipping. 494 = 560 - 2 x 32 padding - 2 x 1 border at the default. -->
+	<x:Double x:Key="SimpleContentDialogContentMaxWidth">494</x:Double>
+	<x:Double x:Key="SimpleContentDialogContentMaxHeight">494</x:Double>
 	<GridLength x:Key="SimpleContentDialogButtonSpacing">8</GridLength>
 	<StaticResource x:Key="SimpleContentDialogTitleToContentMargin" ResourceKey="Space100BottomThickness" />
 	<StaticResource x:Key="SimpleContentDialogCommandSpaceToContentMargin" ResourceKey="Space300TopThickness" />
@@ -206,8 +209,6 @@
 									BorderThickness="{TemplateBinding BorderThickness}"
 									CornerRadius="{TemplateBinding CornerRadius}"
 									FlowDirection="{TemplateBinding FlowDirection}"
-									MaxWidth="{StaticResource SimpleContentDialogMaxWidth}"
-									MaxHeight="{StaticResource SimpleContentDialogMaxHeight}"
 									Margin="{StaticResource SimpleContentDialogEdgeMargin}"
 									HorizontalAlignment="Center"
 									VerticalAlignment="Center">
@@ -219,6 +220,8 @@
 											MinHeight="{StaticResource SimpleContentDialogMinHeight}" />
 
 									<Grid x:Name="DialogSpace"
+										  MaxWidth="{StaticResource SimpleContentDialogContentMaxWidth}"
+										  MaxHeight="{StaticResource SimpleContentDialogContentMaxHeight}"
 										  Margin="{ThemeResource SimpleContentDialogPanelPadding}">
 
 										<Grid.RowDefinitions>
