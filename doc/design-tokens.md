@@ -34,22 +34,54 @@ Per-scale keys follow the pattern `{Role}{Size}FontFamily`, `{Role}{Size}FontSiz
 
 ### Spacing
 
+The spacing scale follows [Material 3](https://m3.material.io/styles/spacing/overview): a linear scale on an 8 px base, where `Space100` = 8. `Space{n}` is always `DefaultSpacing × n / 100`. The scale has Material 3's steps (0 to 9×, plus 0.25×, 0.5×, 0.75× and 1.25×) and four extensions (1.5×, 2.5×, 12× and 20×).
+
+Use spacing tokens for padding, gaps and margins only. Control sizes (boxes, thumbs, tracks, fixed-size buttons) use fixed tokens such as `IconSize*` and `ControlHeight*`, so they don't change with `DefaultSpacing`.
+
 | Key         | Value (px) | Thickness Key        |
 |-------------|------------|----------------------|
 | `Space0`    | 0          | `Space0Thickness`    |
-| `Space050`  | 2          | `Space050Thickness`  |
-| `Space100`  | 4          | `Space100Thickness`  |
-| `Space150`  | 6          | `Space150Thickness`  |
-| `Space200`  | 8          | `Space200Thickness`  |
-| `Space300`  | 12         | `Space300Thickness`  |
-| `Space400`  | 16         | `Space400Thickness`  |
-| `Space500`  | 20         | `Space500Thickness`  |
-| `Space600`  | 24         | `Space600Thickness`  |
-| `Space800`  | 32         | `Space800Thickness`  |
-| `Space1200` | 48         | `Space1200Thickness` |
-| `Space1600` | 64         | `Space1600Thickness` |
-| `Space2400` | 96         | `Space2400Thickness` |
-| `Space4000` | 160        | `Space4000Thickness` |
+| `Space025`  | 2          | `Space025Thickness`  |
+| `Space050`  | 4          | `Space050Thickness`  |
+| `Space075`  | 6          | `Space075Thickness`  |
+| `Space100`  | 8          | `Space100Thickness`  |
+| `Space125`  | 10         | `Space125Thickness`  |
+| `Space150`  | 12         | `Space150Thickness`  |
+| `Space200`  | 16         | `Space200Thickness`  |
+| `Space250`  | 20         | `Space250Thickness`  |
+| `Space300`  | 24         | `Space300Thickness`  |
+| `Space400`  | 32         | `Space400Thickness`  |
+| `Space500`  | 40         | `Space500Thickness`  |
+| `Space600`  | 48         | `Space600Thickness`  |
+| `Space700`  | 56         | `Space700Thickness`  |
+| `Space800`  | 64         | `Space800Thickness`  |
+| `Space900`  | 72         | `Space900Thickness`  |
+| `Space1200` | 96         | `Space1200Thickness` |
+| `Space2000` | 160        | `Space2000Thickness` |
+
+`Space0` to `Space900` also have `Horizontal`, `Vertical`, `Top`, `Bottom`, `Left` and `Right` thickness companions, for example `Space200HorizontalThickness`.
+
+#### Migrating from the 4-based scale
+
+Before the scale followed Material 3, the base was 4, so every `Space*` key had half its current value. To keep a value you used directly, use the key at half the number:
+
+| Previous key | Value (px) | Current key |
+|--------------|------------|-------------|
+| `Space050`   | 2          | `Space025`  |
+| `Space100`   | 4          | `Space050`  |
+| `Space150`   | 6          | `Space075`  |
+| `Space200`   | 8          | `Space100`  |
+| `Space300`   | 12         | `Space150`  |
+| `Space400`   | 16         | `Space200`  |
+| `Space500`   | 20         | `Space250`  |
+| `Space600`   | 24         | `Space300`  |
+| `Space800`   | 32         | `Space400`  |
+| `Space1200`  | 48         | `Space600`  |
+| `Space1600`  | 64         | `Space800`  |
+| `Space2400`  | 96         | `Space1200` |
+| `Space4000`  | 160        | `Space2000` |
+
+If you set `DefaultSpacing="4"` to get the default spacing, remove it or set `DefaultSpacing="8"`.
 
 ### Shape (Corner Radius)
 
@@ -90,7 +122,7 @@ Set `DefaultCornerRadius` (shape) or `DefaultSpacing` (spacing) on the theme to 
 
 This generates all `Radius*` / `Space*` tokens as multiples of the base value. The same properties are available on `SimpleTheme`.
 
-For spacing, the [density mode](#density-modes) (`DefaultDensity`) composes with the base unit rather than replacing it: the effective spacing base is `DefaultSpacing × density factor` (`Compact` ×0.75, `Regular` ×1, `Comfy` ×1.25). With the default base of 4, the modes yield 3 / 4 / 5.
+For spacing, the [density mode](#density-modes) (`DefaultDensity`) composes with the base unit rather than replacing it: the effective spacing base is `DefaultSpacing × density factor` (`Compact` ×0.75, `Regular` ×1, `Comfy` ×1.25). With the default base of 8, the modes yield 6 / 8 / 10.
 
 > [!NOTE]
 > `DefaultCornerRadius`, `DefaultSpacing`, and `DefaultDensity` are **runtime-settable**. Assigning one regenerates the `Radius*` / `Space*` token resources, and controls created afterwards pick the new scale up through their styles.
@@ -114,7 +146,7 @@ To override individual tokens without changing the whole scale, use standard XAM
 | Property              | Type         | Description                                                                                                                                 |
 |-----------------------|--------------|---------------------------------------------------------------------------------------------------------------------------------------------|
 | `DefaultCornerRadius` | `double`     | Base corner radius unit; generates the full `Radius*` scale. Runtime-settable.                                                              |
-| `DefaultSpacing`      | `double`     | Base spacing unit (default 4); generates the full `Space*` scale, scaled by the `DefaultDensity` mode. Runtime-settable.                    |
+| `DefaultSpacing`      | `double`     | Base spacing unit (default 8); generates the full `Space*` scale, scaled by the `DefaultDensity` mode. Runtime-settable.                    |
 | `DefaultDensity`      | `Density`    | Density mode that scales the spacing base unit (`Compact` ×0.75, `Regular` ×1, `Comfy` ×1.25). Runtime-settable.                            |
 | `DefaultFontFamily`   | `FontFamily` | The font the type scale is generated from: the `DefaultFontFamily` token and every `*FontFamily` key derived from it. Runtime-settable.     |
 
@@ -125,11 +157,11 @@ These properties are defined on `BaseTheme` and inherited by `MaterialTheme`, `S
 The `DefaultDensity` property controls the spacing density of all controls.
 It is a *mode*, not a value: it scales the `DefaultSpacing` base unit (effective base = `DefaultSpacing × factor`), adjusting padding and margins (Space* tokens) while keeping control heights and icon sizes constant. The two axes are orthogonal — a branded base unit and a density mode compose freely. The fixed tokens (`ControlHeight*`, `IconSize*`, `TouchTargetMinSize`) never change across density modes.
 
-| DefaultDensity      | Factor | Base at default spacing (4) | Feel                               |
+| DefaultDensity      | Factor | Base at default spacing (8) | Feel                               |
 |---------------------|:------:|:---------------------------:|------------------------------------|
-| `Compact`           | ×0.75  |              3              | Tighter padding for data-dense UIs |
-| `Regular` (default) |   ×1   |              4              | Balanced spacing                   |
-| `Comfy`             | ×1.25  |              5              | More generous padding              |
+| `Compact`           | ×0.75  |              6              | Tighter padding for data-dense UIs |
+| `Regular` (default) |   ×1   |              8              | Balanced spacing                   |
+| `Comfy`             | ×1.25  |             10              | More generous padding              |
 
 ```xml
 <!-- App.xaml — Material with compact density -->
