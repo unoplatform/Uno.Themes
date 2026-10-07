@@ -73,6 +73,11 @@
 		<Build_Windows Condition="'$(OS)'!='Windows_NT'">false</Build_Windows>
 	</PropertyGroup>
 
+	<!-- Uno.WinUI's Windows assemblies are built against the WinRT.Runtime 2.3.1 projection (unoplatform/uno#24905) -->
+	<PropertyGroup Condition="$(TargetFramework.Contains('-windows10.0.19041')) and '$(WindowsSdkPackageVersion)'==''">
+		<WindowsSdkPackageVersion>10.0.19041.87</WindowsSdkPackageVersion>
+	</PropertyGroup>
+
 	<!-- Workaround for https://developercommunity.visualstudio.com/t/XamarinMac-binaries-are-missing-in-173/10164443 -->
 	<ItemGroup Condition="$(TargetFramework.ToLower().StartsWith('xamarinmac')) and '$(Configuration)' == 'Release' and '$(OS)'=='Windows_NT'">
 		<Reference Include="Xamarin.Mac">
