@@ -498,4 +498,33 @@ public class Given_DesignTokens
 		}
 	}
 
+	// ═══════════════════════════════════════════════════════════════════════
+	// CONTROL SIZES — spacing tokens are for padding, gaps and margins only
+	// ═══════════════════════════════════════════════════════════════════════
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow("SimpleCheckBoxSize", 16.0)]
+	[DataRow("SimpleRadioButtonSize", 16.0)]
+	[DataRow("SimpleRadioButtonDotSize", 8.0)]
+	[DataRow("SliderThumbWidth", 16.0)]
+	[DataRow("SliderThumbHeight", 16.0)]
+	[DataRow("SliderTrackThickness", 4.0)]
+	[DataRow("SliderFillThickness", 8.0)]
+	[DataRow("SimpleToggleSwitchThumbSize", 16.0)]
+	[DataRow("SimpleExpanderMinHeight", 48.0)]
+	[DataRow("SimpleExpanderChevronGlyphSize", 12.0)]
+	[DataRow("SimpleProgressBarHeight", 4.0)]
+	public void When_DefaultSpacingChanges_Then_ControlSizeKeysStayFixed(string key, double expected)
+	{
+		foreach (var spacing in new[] { 0.0, double.NaN, 64.0 })
+		{
+			var theme = new SimpleTheme { DefaultSpacing = spacing };
+			var container = new Grid();
+			container.Resources.MergedDictionaries.Add(theme);
+
+			Assert.AreEqual(expected, GetResource<double>(container, key), 0.001,
+				$"{key} must not follow DefaultSpacing (DefaultSpacing={spacing})");
+		}
+	}
 }
