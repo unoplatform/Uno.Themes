@@ -63,14 +63,17 @@ public class Given_DesignTokens
 	[TestMethod]
 	[RunsOnUIThread]
 	[DataRow(Density.Compact, "Space0", 0.0)]    // zero is always zero
-	[DataRow(Density.Compact, "Space100", 3.0)]  // base=3 × 1
-	[DataRow(Density.Compact, "Space400", 12.0)] // base=3 × 4
-	[DataRow(Density.Regular, "Space100", 4.0)]  // base=4 × 1
-	[DataRow(Density.Regular, "Space200", 8.0)]  // base=4 × 2
-	[DataRow(Density.Regular, "Space4000", 160.0)] // base=4 × 40
-	[DataRow(Density.Comfy, "Space100", 5.0)]    // base=5 × 1
-	[DataRow(Density.Comfy, "Space050", 2.5)]    // base=5 × 0.5
-	[DataRow(Density.Comfy, "Space800", 40.0)]   // base=5 × 8
+	[DataRow(Density.Compact, "Space100", 6.0)]  // base=6 × 1
+	[DataRow(Density.Compact, "Space400", 24.0)] // base=6 × 4
+	[DataRow(Density.Regular, "Space100", 8.0)]  // base=8 × 1 (M3 space100 = 8dp)
+	[DataRow(Density.Regular, "Space200", 16.0)] // base=8 × 2
+	[DataRow(Density.Regular, "Space025", 2.0)]  // base=8 × 0.25
+	[DataRow(Density.Regular, "Space125", 10.0)] // base=8 × 1.25
+	[DataRow(Density.Regular, "Space900", 72.0)] // base=8 × 9
+	[DataRow(Density.Regular, "Space2000", 160.0)] // base=8 × 20
+	[DataRow(Density.Comfy, "Space100", 10.0)]   // base=10 × 1
+	[DataRow(Density.Comfy, "Space050", 5.0)]    // base=10 × 0.5
+	[DataRow(Density.Comfy, "Space800", 80.0)]   // base=10 × 8
 	public void When_DensitySet_Then_SpaceTokenHasCorrectValue(
 		Density density, string tokenKey, double expected)
 	{
@@ -91,19 +94,19 @@ public class Given_DesignTokens
 		var (container, _) = CreateThemedContainer(Density.Regular);
 
 		// Uniform: all sides equal
-		Assert.AreEqual(new Thickness(8), GetResource<Thickness>(container, "Space200Thickness"));
+		Assert.AreEqual(new Thickness(16), GetResource<Thickness>(container, "Space200Thickness"));
 
 		// Horizontal: left/right only
-		Assert.AreEqual(new Thickness(16, 0, 16, 0), GetResource<Thickness>(container, "Space400HorizontalThickness"));
+		Assert.AreEqual(new Thickness(32, 0, 32, 0), GetResource<Thickness>(container, "Space400HorizontalThickness"));
 
 		// Vertical
-		Assert.AreEqual(new Thickness(0, 4, 0, 4), GetResource<Thickness>(container, "Space100VerticalThickness"));
+		Assert.AreEqual(new Thickness(0, 8, 0, 8), GetResource<Thickness>(container, "Space100VerticalThickness"));
 
 		// Directional singles
-		Assert.AreEqual(new Thickness(0, 8, 0, 0), GetResource<Thickness>(container, "Space200TopThickness"));
-		Assert.AreEqual(new Thickness(0, 0, 0, 8), GetResource<Thickness>(container, "Space200BottomThickness"));
-		Assert.AreEqual(new Thickness(4, 0, 0, 0), GetResource<Thickness>(container, "Space100LeftThickness"));
-		Assert.AreEqual(new Thickness(0, 0, 4, 0), GetResource<Thickness>(container, "Space100RightThickness"));
+		Assert.AreEqual(new Thickness(0, 16, 0, 0), GetResource<Thickness>(container, "Space200TopThickness"));
+		Assert.AreEqual(new Thickness(0, 0, 0, 16), GetResource<Thickness>(container, "Space200BottomThickness"));
+		Assert.AreEqual(new Thickness(8, 0, 0, 0), GetResource<Thickness>(container, "Space100LeftThickness"));
+		Assert.AreEqual(new Thickness(0, 0, 8, 0), GetResource<Thickness>(container, "Space100RightThickness"));
 	}
 
 	[TestMethod]
@@ -112,7 +115,7 @@ public class Given_DesignTokens
 	{
 		var (container, _) = CreateThemedContainer(Density.Regular);
 
-		// Variants above 800 have uniform Thickness but no directional ones
+		// Variants above 900 have uniform Thickness but no directional ones
 		Assert.IsTrue(TryGetResource<Thickness>(container, "Space1200Thickness", out _));
 		Assert.IsFalse(TryGetResource<Thickness>(container, "Space1200HorizontalThickness", out _));
 		Assert.IsFalse(TryGetResource<Thickness>(container, "Space1200VerticalThickness", out _));
@@ -195,13 +198,13 @@ public class Given_DesignTokens
 	public void When_DensitySwitchedAtRuntime_Then_SpacingTokensUpdate()
 	{
 		var (container, theme) = CreateThemedContainer(Density.Regular);
-		Assert.AreEqual(4.0, GetResource<double>(container, "Space100"), 0.001);
+		Assert.AreEqual(8.0, GetResource<double>(container, "Space100"), 0.001);
 
 		theme.DefaultDensity = Density.Compact;
-		Assert.AreEqual(3.0, GetResource<double>(container, "Space100"), 0.001);
+		Assert.AreEqual(6.0, GetResource<double>(container, "Space100"), 0.001);
 
 		theme.DefaultDensity = Density.Comfy;
-		Assert.AreEqual(5.0, GetResource<double>(container, "Space100"), 0.001);
+		Assert.AreEqual(10.0, GetResource<double>(container, "Space100"), 0.001);
 	}
 
 	[TestMethod]
@@ -238,10 +241,10 @@ public class Given_DesignTokens
 	public void When_CornerRadiusChanges_Then_SpacingTokensAreUnaffected()
 	{
 		var (container, theme) = CreateThemedContainer(Density.Regular, cornerRadius: 4.0);
-		Assert.AreEqual(8.0, GetResource<double>(container, "Space200"), 0.001);
+		Assert.AreEqual(16.0, GetResource<double>(container, "Space200"), 0.001);
 
 		theme.DefaultCornerRadius = 10.0;
-		Assert.AreEqual(8.0, GetResource<double>(container, "Space200"), 0.001);
+		Assert.AreEqual(16.0, GetResource<double>(container, "Space200"), 0.001);
 	}
 
 	// ═══════════════════════════════════════════════════════════════════════
@@ -256,8 +259,8 @@ public class Given_DesignTokens
 		var container = new Grid();
 		container.Resources.MergedDictionaries.Add(theme);
 
-		Assert.AreEqual(4.0, GetResource<double>(container, "Space100"), 0.001,
-			"Invalid Density should fall back to base=4.0");
+		Assert.AreEqual(8.0, GetResource<double>(container, "Space100"), 0.001,
+			"Invalid Density should fall back to base=8.0");
 	}
 
 	[TestMethod]
@@ -324,16 +327,16 @@ public class Given_DesignTokens
 	public void When_DefaultSpacingChangedAtRuntime_Then_DensityModeStillApplies()
 	{
 		var (container, theme) = CreateThemedContainer(Density.Comfy);
-		Assert.AreEqual(5.0, GetResource<double>(container, "Space100"), 0.001,
-			"Default base (4) × Comfy (1.25) should be 5");
+		Assert.AreEqual(10.0, GetResource<double>(container, "Space100"), 0.001,
+			"Default base (8) × Comfy (1.25) should be 10");
 
 		theme.DefaultSpacing = 6.0;
 		Assert.AreEqual(7.5, GetResource<double>(container, "Space100"), 0.001,
 			"New base (6) × Comfy (1.25) should be 7.5");
 
 		theme.DefaultSpacing = double.NaN;
-		Assert.AreEqual(5.0, GetResource<double>(container, "Space100"), 0.001,
-			"An invalid base (NaN) should restore the default base (4) × Comfy (1.25)");
+		Assert.AreEqual(10.0, GetResource<double>(container, "Space100"), 0.001,
+			"An invalid base (NaN) should restore the default base (8) × Comfy (1.25)");
 	}
 
 	[TestMethod]
@@ -345,8 +348,8 @@ public class Given_DesignTokens
 	public void When_DefaultSpacingInvalid_Then_FallsBackToDefaultBase(double invalid)
 	{
 		var (container, _) = CreateThemedContainer(Density.Comfy, spacing: invalid);
-		Assert.AreEqual(5.0, GetResource<double>(container, "Space100"), 0.001,
-			$"DefaultSpacing={invalid} should fall back to the default base (4) × Comfy (1.25)");
+		Assert.AreEqual(10.0, GetResource<double>(container, "Space100"), 0.001,
+			$"DefaultSpacing={invalid} should fall back to the default base (8) × Comfy (1.25)");
 	}
 
 	[TestMethod]

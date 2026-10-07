@@ -322,11 +322,11 @@ public abstract partial class BaseTheme : ResourceDictionary
 	/// The default base spacing unit (px) when <see cref="DefaultSpacing"/> is not set
 	/// or holds an invalid (non-finite or negative) value.
 	/// </summary>
-	private const double DefaultBaseSpacing = 4.0;
+	private const double DefaultBaseSpacing = 8.0;
 
 	/// <summary>
-	/// Gets or sets the base spacing unit (in pixels). Default is 4.
-	/// All spacing scale tokens (Space0, Space050, Space100, …) and their
+	/// Gets or sets the base spacing unit (in pixels). Default is 8, matching Material 3, where space100 = 8dp.
+	/// All spacing scale tokens (Space0, Space025, Space050, Space100, …) and their
 	/// <see cref="Thickness"/> companions are computed as multiples of this value,
 	/// scaled by the <see cref="DefaultDensity"/> mode —
 	/// e.g. <c>DefaultSpacing="6"</c> at <see cref="Density.Regular"/> makes
@@ -339,7 +339,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 	/// resources but does not restyle controls, because the per-control padding and margin keys
 	/// hold resolved <see cref="Thickness"/> values. To offer spacing as a user setting, change the
 	/// property and then recreate the root content.
-	/// Non-finite or negative values are treated as unset and fall back to the default of 4.
+	/// Non-finite or negative values are treated as unset and fall back to the default of 8.
 	/// </remarks>
 	public double DefaultSpacing
 	{
@@ -553,14 +553,14 @@ public abstract partial class BaseTheme : ResourceDictionary
 		var colors = BuildColorLayer(out var resolvedOverride);
 
 		// Spacing and density are orthogonal: DefaultSpacing supplies the base unit, the density
-		// mode scales it. Non-finite or negative consumer values degrade to the default base (4)
+		// mode scales it. Non-finite or negative consumer values degrade to the default base (8)
 		// instead of poisoning every Space* token — this runs from property-changed callbacks and
 		// must not misbehave on untrusted input.
 		var requestedSpacing = DefaultSpacing;
 		var baseSpacing = double.IsFinite(requestedSpacing) && requestedSpacing >= 0
 			? requestedSpacing
 			: DefaultBaseSpacing;
-		// Factors chosen so the default base of 4 yields the historical presets: 3 / 4 / 5.
+		// Factors chosen so the default base of 8 yields 6 / 8 / 10, the same rendered spacing as the historical 3 / 4 / 5 presets on the 4-based scale.
 		var densityFactor = DefaultDensity switch
 		{
 			Density.Compact => 0.75,
