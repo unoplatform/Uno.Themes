@@ -394,9 +394,9 @@ public class Given_DesignTokens
 		await UnitTestsUIContentHelper.WaitForLoaded(button);
 		await UnitTestsUIContentHelper.WaitForIdle();
 
-		// Padding = SimpleSpace300Thickness = Space300Thickness = Thickness(12) at Regular (4×3=12)
+		// Padding = SimpleSpace150Thickness = Space150Thickness = Thickness(12) at Regular (8×1.5=12)
 		Assert.AreEqual(new Thickness(12), button.Padding,
-			"Simple button Padding should be Space300Thickness (uniform 12) at Regular density");
+			"Simple button Padding should be Space150Thickness (uniform 12) at Regular density");
 
 		// CornerRadius = SimpleRadius200CornerRadius = Radius200CornerRadius = CornerRadius(8) at base=4
 		Assert.AreEqual(new CornerRadius(8), button.CornerRadius,
@@ -456,13 +456,13 @@ public class Given_DesignTokens
 
 		try
 		{
-			// Padding = Space300Thickness, CornerRadius = Radius200CornerRadius at the app's defaults.
+			// Padding = Space150Thickness, CornerRadius = Radius200CornerRadius at the app's defaults.
 			var paddingBefore = button.Padding;
 			var radiusBefore = button.CornerRadius;
 
-			theme.DefaultSpacing = 10;          // Space300 = 30 at Regular
+			theme.DefaultSpacing = 10;          // Space150 = 15 at Regular
 			theme.DefaultCornerRadius = 1;      // Radius200 = 2
-			theme.DefaultDensity = Density.Compact; // Space300 = 10 × 0.75 × 3 = 22.5
+			theme.DefaultDensity = Density.Compact; // Space150 = 10 × 0.75 × 1.5 = 11.25
 
 			// Setters re-resolve on a theme-change pass — the public route to content already realized.
 			root.RequestedTheme = ElementTheme.Light;
@@ -470,8 +470,8 @@ public class Given_DesignTokens
 			root.RequestedTheme = ElementTheme.Dark;
 			await UnitTestsUIContentHelper.WaitForIdle();
 
-			Assert.AreEqual(new Thickness(22.5), button.Padding,
-				$"A realized button must re-resolve Space300Thickness after the spacing changes (was {paddingBefore}).");
+			Assert.AreEqual(new Thickness(11.25), button.Padding,
+				$"A realized button must re-resolve Space150Thickness after the spacing changes (was {paddingBefore}).");
 			Assert.AreEqual(new CornerRadius(2), button.CornerRadius,
 				$"A realized button must re-resolve Radius200CornerRadius after the radius changes (was {radiusBefore}).");
 
@@ -485,7 +485,7 @@ public class Given_DesignTokens
 			await UnitTestsUIContentHelper.WaitForLoaded(later);
 			await UnitTestsUIContentHelper.WaitForIdle();
 
-			Assert.AreEqual(new Thickness(22.5), later.Padding, "A button created after the change must use the new spacing.");
+			Assert.AreEqual(new Thickness(11.25), later.Padding, "A button created after the change must use the new spacing.");
 			Assert.AreEqual(new CornerRadius(2), later.CornerRadius, "A button created after the change must use the new radius.");
 		}
 		finally
