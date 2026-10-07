@@ -325,7 +325,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 	private const double DefaultBaseSpacing = 8.0;
 
 	/// <summary>
-	/// Gets or sets the base spacing unit (in pixels). Default is 8, matching Material 3, where space100 = 8dp.
+	/// Gets or sets the base spacing unit (in pixels). Default is 8.
 	/// All spacing scale tokens (Space0, Space025, Space050, Space100, …) and their
 	/// <see cref="Thickness"/> companions are computed as multiples of this value,
 	/// scaled by the <see cref="DefaultDensity"/> mode —

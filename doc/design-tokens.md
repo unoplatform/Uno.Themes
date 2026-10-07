@@ -34,7 +34,7 @@ Per-scale keys follow the pattern `{Role}{Size}FontFamily`, `{Role}{Size}FontSiz
 
 ### Spacing
 
-The spacing scale follows [Material 3](https://m3.material.io/styles/spacing/overview): a linear scale on an 8 px base, where `Space100` = 8. `Space{n}` is always `DefaultSpacing × n / 100`. The scale has Material 3's steps (0 to 9×, plus 0.25×, 0.5×, 0.75× and 1.25×) and four extensions (1.5×, 2.5×, 12× and 20×).
+The spacing scale is linear, on an 8 px base: `Space100` = 8, and `Space{n}` is always `DefaultSpacing × n / 100`. Besides the whole steps from 0 to 9×, it has 0.25×, 0.5×, 0.75×, 1.25×, 1.5×, 2.5×, 12× and 20×.
 
 Use spacing tokens for padding, gaps and margins only. Control sizes (boxes, thumbs, tracks, fixed-size buttons) use fixed tokens such as `IconSize*` and `ControlHeight*`, so they don't change with `DefaultSpacing`.
 
@@ -63,7 +63,7 @@ Use spacing tokens for padding, gaps and margins only. Control sizes (boxes, thu
 
 #### Migrating from the 4-based scale
 
-Before the scale followed Material 3, the base was 4, so every `Space*` key had half its current value. To keep a value you used directly, use the key at half the number:
+The base used to be 4, so every `Space*` key had half its current value. To keep a value you used directly, use the key at half the number:
 
 | Previous key | Value (px) | Current key |
 |--------------|------------|-------------|
