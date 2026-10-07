@@ -385,3 +385,15 @@ next file to need an override didn't get it.
 **How to apply:**
 - Anything that must carry a dictionary *type* is created in C# (`new SemanticResources { Source = … }`), never declared in XAML. Verify the type at runtime, not by reading the markup.
 - Treat `Styles/Application/Common/BaseDictionaries.xaml` as shared with the deprecated Material bundles: prefer adding a layer over removing an entry, and check `MaterialResourcesV1`/`V2` before editing it.
+
+## Fixing breakage at large design-token values: change the tokens, not the templates (#1746)
+
+**Context:** while aligning the spacing scale with Material 3, controls still broke at large `DefaultSpacing` values. One fix moved ContentDialog's max size from its frame onto its content and dropped the height cap; another added a layout property to a NavigationView item template. Both rendered identically at the default in the sample, but the dialog change altered every long-content dialog at the default (it grew to the window instead of stopping at 560 px).
+
+**Correction from the maintainer:** spacing is uncapped, so UI will always break at high enough values. Fixes for large-value breakage stay design-token changes (which token or fixed value a key resolves to) unless the breakage is extreme.
+
+**How to apply:**
+- To stop a control breaking at large scale values, change what its keys resolve to: a fixed token or literal equal to the current default, or a smaller step. Do not restructure a template, move size caps, or add layout properties.
+- A pixel-identical sample at the default does not prove a template change is safe: the sample rarely exercises the case the change affects (long content, an override, another host size). Token remaps are provable by value; template changes are not.
+- List what token-only fixes leave broken in the issue as follow-ups instead of widening the change.
+
