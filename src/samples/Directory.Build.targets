@@ -1,2 +1,6 @@
 ﻿<Project>
+  <!-- Workaround for unoplatform/uno#24699: Uno.WinUI.Graphics2DSK needs Uno.WinUI.Graphics3DGL for Android AOT, but doesn't bring it -->
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+    <PackageReference Include="Uno.WinUI.Graphics3DGL" />
+  </ItemGroup>
 </Project>
