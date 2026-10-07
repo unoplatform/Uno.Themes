@@ -282,7 +282,7 @@ public class Given_DesignTokens
 		await UnitTestsUIContentHelper.WaitForLoaded(button);
 		await UnitTestsUIContentHelper.WaitForIdle();
 
-		// ButtonPadding = Space400HorizontalThickness = Thickness(16,0,16,0) at Regular
+		// ButtonPadding = Space200HorizontalThickness = Thickness(16,0,16,0) at Regular
 		Assert.AreEqual(new Thickness(16, 0, 16, 0), button.Padding,
 			"FilledButton Padding should be Space400HorizontalThickness at Regular density");
 
