@@ -18,7 +18,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 | Key                                    | Type              | Value                              |
 |----------------------------------------|-------------------|------------------------------------|
-| `SimpleCheckBoxSize`                   | `StaticResource`  | `SimpleSpace400`                   |
+| `SimpleCheckBoxSize`                   | `StaticResource`  | `IconSizeSmall` (16)               |
 | `SimpleCheckBoxCornerRadius`           | `StaticResource`  | `SimpleRadius100CornerRadius`      |
 | `SimpleCheckBoxStrokeThickness`        | `StaticResource`  | `SimpleStrokeBorder`               |
 | `SimpleCheckBoxContentMargin`          | `Thickness`       | 16,0,0,0                          |

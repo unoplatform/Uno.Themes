@@ -20,13 +20,13 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 |----------------------------------------------|-------------------|----------------------------------|
 | `SimpleToggleButtonCornerRadius`             | `CornerRadius`    | `SimpleRadius200CornerRadius`    |
 | `SimpleToggleButtonBorderThickness`          | `Thickness`       | `SimpleStrokeBorderThickness`    |
-| `SimpleToggleButtonMediumPadding`            | `Thickness`       | `SimpleSpace300Thickness`        |
-| `SimpleToggleButtonSmallPadding`             | `Thickness`       | `SimpleSpace200Thickness`        |
+| `SimpleToggleButtonMediumPadding`            | `Thickness`       | `SimpleSpace150Thickness`        |
+| `SimpleToggleButtonSmallPadding`             | `Thickness`       | `SimpleSpace100Thickness`        |
 | `SimpleToggleButtonMediumMinHeight`          | `Double`          | `SimpleIconLarge`                |
 | `SimpleToggleButtonSmallMinHeight`           | `Double`          | `SimpleIconMedium`               |
 | `SimpleToggleButtonMediumFontSize`           | `Double`          | `BodyLargeFontSize`              |
 | `SimpleToggleButtonSmallFontSize`            | `Double`          | `BodyMediumFontSize`             |
-| `SimpleToggleButtonIconSpacing`              | `Double`          | `SimpleSpace200`                 |
+| `SimpleToggleButtonIconSpacing`              | `Double`          | `SimpleSpace100`                 |
 | `SimpleToggleButtonFontFamily`               | `FontFamily`      | Inter                            |
 | `SimpleToggleButtonFontWeight`               | `String`          | Medium                           |
 

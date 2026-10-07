@@ -18,8 +18,8 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 | Key                                  | Type              | Value                         |
 |--------------------------------------|-------------------|-------------------------------|
-| `SimpleRadioButtonSize`              | `StaticResource`  | `SimpleSpace400`              |
-| `SimpleRadioButtonDotSize`           | `StaticResource`  | `SimpleSpace200`              |
+| `SimpleRadioButtonSize`              | `StaticResource`  | `IconSizeSmall` (16)          |
+| `SimpleRadioButtonDotSize`           | `Double`          | `8`                           |
 | `SimpleRadioButtonStrokeThickness`   | `StaticResource`  | `SimpleStrokeBorder`          |
 | `SimpleRadioButtonContentMargin`     | `Thickness`       | 16,0,0,0                     |
 | `SimpleRadioButtonColumnWidth`       | `GridLength`      | 16                            |
