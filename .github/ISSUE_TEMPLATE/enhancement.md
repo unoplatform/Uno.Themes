@@ -12,11 +12,15 @@ labels: kind/enhancement, triage/untriaged
 
 ## For which Platform:
 
-- [ ] UWP
-- [ ] iOS
-- [ ] Android
 - [ ] WebAssembly
-- [ ] macOS
+- [ ] Android
+- [ ] iOS
+- [ ] tvOS
+- [ ] Desktop (Windows)
+- [ ] Desktop (macOS)
+- [ ] Desktop (X11)
+- [ ] Desktop (Linux Framebuffer)
+- [ ] Windows App SDK
 
 ## Anything else we need to know?
 

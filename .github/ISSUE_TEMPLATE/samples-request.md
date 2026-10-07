@@ -12,11 +12,15 @@ labels: kind/contributor-experience, kind/documentation, triage/untriaged
 
 ## For which Platform:
 
-- [ ] iOS
-- [ ] Android
 - [ ] WebAssembly
-- [ ] Windows
-- [ ] MacOS
+- [ ] Android
+- [ ] iOS
+- [ ] tvOS
+- [ ] Desktop (Windows)
+- [ ] Desktop (macOS)
+- [ ] Desktop (X11)
+- [ ] Desktop (Linux Framebuffer)
+- [ ] Windows App SDK
 
 
 ## Anything else we need to know?
