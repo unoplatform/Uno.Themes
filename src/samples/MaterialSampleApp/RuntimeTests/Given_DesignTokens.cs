@@ -389,4 +389,33 @@ public class Given_DesignTokens
 		}
 	}
 
+	// ═══════════════════════════════════════════════════════════════════════
+	// CONTROL SIZES — spacing tokens are for padding, gaps and margins only
+	// ═══════════════════════════════════════════════════════════════════════
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow("AppBarButtonHeight", 64.0)]
+	[DataRow("AppBarButtonWidth", 64.0)]
+	[DataRow("PipsPagerHorizontalOrientationButtonWidth", 12.0)]
+	[DataRow("PipsPagerNavigationVisualStatesEllipseWidth", 12.0)]
+	[DataRow("PipsPagerSelectedEllipseSize", 8.0)]
+	[DataRow("PipsPagerNormalEllipseSize", 8.0)]
+	[DataRow("ProgressBarHeight", 4.0)]
+	[DataRow("SliderFillThickness", 6.0)]
+	[DataRow("SliderTopTickBarHeight", 4.0)]
+	[DataRow("SliderHorizontalInlineTickBarHeight", 2.0)]
+	[DataRow("SwitchKnobRadius", 16.0)]
+	public void When_DefaultSpacingChanges_Then_ControlSizeKeysStayFixed(string key, double expected)
+	{
+		foreach (var spacing in new[] { 0.0, double.NaN, 64.0 })
+		{
+			var theme = new MaterialTheme { DefaultSpacing = spacing };
+			var container = new Grid();
+			container.Resources.MergedDictionaries.Add(theme);
+
+			Assert.AreEqual(expected, GetResource<double>(container, key), 0.001,
+				$"{key} must not follow DefaultSpacing (DefaultSpacing={spacing})");
+		}
+	}
 }
