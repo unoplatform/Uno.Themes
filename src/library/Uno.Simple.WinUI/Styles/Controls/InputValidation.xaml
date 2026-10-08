@@ -1,0 +1,58 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					xmlns:input="using:Uno.Extras.Input"
+					xmlns:not_win="http://uno.ui/not_win"
+					mc:Ignorable="not_win">
+
+	<!--
+		Simple Design System — Input Validation
+		Error presentation for the controls that take part in Uno's input validation
+		(TextBox, PasswordBox, AutoSuggestBox, ComboBox). Their templates declare the
+		InputValidationEnabledStates / InputValidationErrorStates groups and an ErrorPresenter part;
+		the framework fills that part from the templates below.
+		
+		Both templates must be reachable from Application.Resources: the styles' ErrorTemplate
+		setters name SimpleInputValidationErrorTemplate through {StaticResource}, and the framework
+		looks DefaultCompactErrorIconTemplate up at application level. Merging the theme there
+		satisfies both.
+		
+		Uno-only: Uno.Extras.Input does not exist on WinAppSDK.
+	-->
+
+	<!--
+		The error list: inline under the field, or in the compact icon's tooltip.
+		Its DataContext is the validated control.
+	-->
+	<not_win:DataTemplate x:Key="SimpleInputValidationErrorTemplate">
+		<ItemsControl ItemsSource="{Binding (input:Validation.Errors)}">
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<!-- Foreground is set here: the ErrorPresenter's does not reach the loaded content. -->
+					<TextBlock Text="{Binding ErrorMessage}"
+							   Foreground="{ThemeResource ErrorBrush}"
+							   TextWrapping="Wrap" />
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
+	</not_win:DataTemplate>
+
+	<!--
+		Replaces the framework's copy, which hardcodes a Fluent brush. InfoSolid at 20/24 rather than
+		the outline glyph, so the icon carries the weight of the 2px error ring beside it; the
+		templates' 28px ErrorIconColumn is sized to fit it. The framework fills the empty ToolTip.
+	-->
+	<not_win:DataTemplate x:Key="DefaultCompactErrorIconTemplate">
+		<FontIcon Foreground="{ThemeResource ErrorBrush}"
+				  Glyph="&#xF167;"
+				  FontSize="20"
+				  Width="24"
+				  Height="24"
+				  Margin="3,0,0,0">
+			<ToolTipService.ToolTip>
+				<ToolTip Placement="Right" />
+			</ToolTipService.ToolTip>
+		</FontIcon>
+	</not_win:DataTemplate>
+
+</ResourceDictionary>
