@@ -78,6 +78,7 @@
 								<RowDefinition Height="Auto" />
 								<RowDefinition Height="Auto" />
 								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
 							</Grid.RowDefinitions>
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="*" />
@@ -183,6 +184,31 @@
 												</TextBlock>
 											</DataTemplate>
 										</ComboBox.ItemTemplate>
+									</ComboBox>
+								</smtx:XamlDisplay>
+							</StackPanel>
+
+							<StackPanel Grid.Row="3"
+										Grid.ColumnSpan="2">
+
+								<!-- Label -->
+								<TextBlock Text="Lightweight styling: floating placeholder"
+										   Style="{StaticResource TitleMedium}" />
+
+								<!-- ComboBox -->
+								<smtx:XamlDisplay UniqueKey="M3_Material_ComboBoxSamplePage_Lightweight_Placeholder"
+												  Style="{StaticResource XamlDisplayBelowStyle}">
+									<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
+											  PlaceholderText="Placeholder"
+											  ItemsSource="{Binding Data.Letters}"
+											  SelectedIndex="0">
+										<ComboBox.Resources>
+											<x:Double x:Key="ComboBoxUpperPlaceHolderScaleX">0.6</x:Double>
+											<x:Double x:Key="ComboBoxUpperPlaceHolderScaleY">0.6</x:Double>
+											<x:Double x:Key="ComboBoxUpperPlaceHolderTranslateY">-13</x:Double>
+											<Thickness x:Key="ComboBoxUpperPlaceHolderMargin">0,0,0,2</Thickness>
+											<StaticResource x:Key="ComboBoxPlaceholderTextStyle" ResourceKey="BodyMedium" />
+										</ComboBox.Resources>
 									</ComboBox>
 								</smtx:XamlDisplay>
 							</StackPanel>
