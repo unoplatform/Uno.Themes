@@ -1,0 +1,71 @@
+jobs:
+- job: WinAppSDK
+  cancelTimeoutInMinutes: 0
+  timeoutInMinutes: 60
+
+  pool:
+    vmImage: windows-2022
+
+  # Only the WinAppSDK heads build the libraries' !HAS_UNO (real WinUI) paths. This job proves they compile.
+  strategy:
+    matrix:
+      Material:
+        SampleAppName: MaterialSampleApp
+        ProjectPath: src/samples/MaterialSampleApp
+      Simple:
+        SampleAppName: SimpleSampleApp
+        ProjectPath: src/samples/SimpleSampleApp
+
+  variables:
+    ArtifactName: winappsdk-$(SampleAppName)
+
+  steps:
+  - template: templates/dotnet-install-windows.yml
+  - template: templates/canary-updater.yml
+  - template: templates/gitversion.yml
+
+  # MSBuild, not dotnet build: the WinUI class libraries carry XAML, which dotnet build rejects (UNOB0008).
+  - task: MSBuild@1
+    displayName: Build $(SampleAppName) for Release - (net10.0-windows10.0.19041)
+    inputs:
+      solution: $(ProjectPath)/$(SampleAppName).csproj
+      configuration: Release
+      platform: x64
+      msbuildLocationMethod: version
+      msbuildVersion: latest
+      maximumCpuCount: true
+      msbuildArguments: /r /v:m /p:TargetFramework=net10.0-windows10.0.19041 /p:TargetFrameworkOverride=windows "/p:InformationalVersion=$(NBGV_InformationalVersion)" /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
+
+  - task: PublishBuildArtifacts@1
+    condition: always()
+    displayName: 'Publish binlog'
+    inputs:
+      PathtoPublish: $(build.artifactstagingdirectory)
+      ArtifactName: $(ArtifactName)
+
+# Uno silently ignores a {StaticResource}/{ThemeResource} to an undefined key; WinUI fails, usually as a native
+# fail-fast when the control or page is realized. The check is a static scan of the source XAML covering every
+# theme and head it checks, so it runs once in its own job rather than riding on one head's build.
+- job: XAML_Resource_Keys
+  displayName: XAML Resource Keys
+  cancelTimeoutInMinutes: 0
+  timeoutInMinutes: 30
+
+  pool:
+    vmImage: windows-2022
+
+  steps:
+  - template: templates/dotnet-install-windows.yml
+
+  # Only for WinUI's generic.xaml: the restore puts Microsoft.WindowsAppSDK.WinUI in the NuGet cache.
+  - task: MSBuild@1
+    displayName: Restore SimpleSampleApp (net10.0-windows10.0.19041)
+    inputs:
+      solution: src/samples/SimpleSampleApp/SimpleSampleApp.csproj
+      platform: x64
+      msbuildLocationMethod: version
+      msbuildVersion: latest
+      msbuildArguments: /t:Restore /v:m /p:TargetFrameworkOverride=windows
+
+  - pwsh: ./build/scripts/check-xaml-resource-keys.ps1
+    displayName: Verify XAML resource keys resolve

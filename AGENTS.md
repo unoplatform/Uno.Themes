@@ -30,7 +30,7 @@ Despite the legacy folder name `src/library/Uno.Themes`, the assembly is `Uno.Th
   - `src/samples/ThemesSampleApp/` — wrapper head (desktop + browserwasm only) that hosts the three theme sample heads **in-process** via collectible secondary AssemblyLoadContexts (Uno's `AlcContentHost`/`WindowHelper.ContentHostOverride`): launch one app, pick the theme sample to test. Deliberately references **no** theme library and does not import `SamplesApp.Shared`; hosting/loader code lives under `GuestHosting/`. The heads stay fully standalone (`UnoEnableAlcAppSupport` + `new Window()` are the only head-side accommodations). Guests are hosted from their own build output (desktop: sibling `bin` probing; wasm: `GuestApps/` payload packaged at build) — build the heads for the matching TFM first. A scripted hosting smoke (`--smoke` on desktop, `?smoke` in the browser) cycles every guest and verifies ALC reclamation; CI gates it via the `HostingSmoke_Desktop` job (`build/scripts/linux-skia-desktop-hosting-smoke.sh`). See `specs/05-alc-wrapper-app/progress.md` for design, verified behavior, and known upstream limitations.
 - `doc/` — published documentation (see §13).
 
-There is **no separate runtime-tests project** — runtime tests live inside the sample apps and are driven by `Uno.UI.RuntimeTests.Engine` (`PackageReference Include="Uno.UI.RuntimeTests.Engine"` in each sample csproj).
+There is **no separate runtime-tests project** — runtime tests live inside the sample apps and are driven by `Uno.UI.RuntimeTests.Engine` (`PackageReference Include="Uno.UI.RuntimeTests.Engine"` in each sample csproj). The one shared test, `src/samples/SamplesApp.Shared/RuntimeTests/Given_AllSamplePages.cs`, opens every sample page a head lists and so runs in every head; it lives in the shared project (compiled into each head, excluded from `dotnet format`) rather than being linked, because a linked `.cs` file is formatted without the repo `.editorconfig`.
 
 ## Target frameworks and platform builds
 
@@ -38,6 +38,7 @@ Target frameworks are managed centrally:
 
 - `src/library/tfm-common-winui.props` expands library projects to `net9.0` plus per-platform suffixes (`net9.0-ios`, `net9.0-android`, `net9.0-windows10.0.19041`, `net9.0-maccatalyst`) based on `TargetFrameworkOverride` and the `Build_iOS` / `Build_Android` / `Build_Windows` switches.
 - Each sample csproj declares its own `net10.0-*` set directly (see `MaterialSampleApp.csproj`, `CupertinoSampleApp.csproj`, `SimpleSampleApp.csproj`). Without an override, samples target `net10.0-android;net10.0-ios;net10.0-browserwasm;net10.0-desktop`.
+  - `SimpleSampleApp` and `MaterialSampleApp` additionally host a **WinAppSDK head** (`net10.0-windows10.0.19041`), added when `Build_Windows` is true (Windows hosts) or the override contains `windows`. Build it with Visual Studio's `MSBuild.exe` (`/p:TargetFramework=net10.0-windows10.0.19041 /p:Platform=x64`): `dotnet build` rejects the WinUI class libraries with `UNOB0008`. Both are MSIX-packaged by default; run it from VS, or register the output with `Add-AppxPackage -Register <bin>\AppxManifest.xml`. They are the only heads that exercise the libraries' `!HAS_UNO` (real WinUI) code paths.
 - The Uno SDK version is pinned in `global.json` at the repo root and in `src/samples/global.json` (`Uno.Sdk` and `Uno.Sdk.Private` — keep these in sync).
 
 The top-level `Directory.Build.props` exposes `Build_Android`, `Build_iOS`, `Build_MacOS`, `Build_Windows` switches; non-Windows hosts default `Build_Windows=false`. The single-platform local-build flow (via `crosstargeting_override.props`) is documented in §4 below. The repo's default branch is **`master`**.
@@ -277,7 +278,15 @@ TargetFrameworkOverride=desktop dotnet format whitespace Uno.Themes.sln --exclud
 TargetFrameworkOverride=desktop dotnet format whitespace Uno.Themes.sln --verify-no-changes --exclude src/samples/SamplesApp.Shared
 ```
 
-Three things about these commands are load-bearing:
+```bash
+# XAML resource keys: every {StaticResource}/{ThemeResource} a Simple / Material v2 style or sample page uses
+# must resolve. Uno silently ignores an undefined key; WinUI fails, usually as a native fail-fast. Reads
+# WinUI's own keys from its generic.xaml, so restore/build a WinAppSDK head first. CI runs it in the
+# XAML_Resource_Keys job (build/stage-build-winappsdk.yml). Cupertino and Material v1 are out of scope for now.
+pwsh build/scripts/check-xaml-resource-keys.ps1
+```
+
+Three things about the formatting commands are load-bearing:
 
 ✅ **Drive the styler from `git ls-files`, not `-d`.** The XamlMerge task writes gitignored
 `mergedpages*.xaml` into `src/library/*/Generated/`, and `-r -d src` checks those too, so the

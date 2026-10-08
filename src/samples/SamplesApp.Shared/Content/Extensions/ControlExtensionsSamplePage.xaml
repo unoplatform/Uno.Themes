@@ -15,7 +15,7 @@
 	</Page.Resources>
 
 	<ScrollViewer VerticalScrollBarVisibility="Auto">
-		<StackPanel BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
+		<StackPanel BorderBrush="{ThemeResource OnSurfaceBrush}"
 					BorderThickness="1"
 					android:Margin="12"
 					ios:Margin="12"
@@ -24,10 +24,10 @@
 			<StackPanel Spacing="16">
 
 				<TextBlock Text="ControlExtensions.Icon"
-						   Style="{StaticResource MaterialHeadline5}" />
+						   Style="{StaticResource MaterialTitleLarge}" />
 
 				<TextBlock Text="This property support a variety of icon sources:"
-						   Style="{StaticResource MaterialBody1}" />
+						   Style="{StaticResource MaterialBodyLarge}" />
 
 				<!-- BitmapIcon -->
 				<StackPanel Orientation="Horizontal">
@@ -78,25 +78,25 @@
 
 				<TextBlock Text="Supported controls"
 						   Margin="0,16,0,0"
-						   Style="{StaticResource MaterialHeadline6}" />
+						   Style="{StaticResource MaterialTitleMedium}" />
 
 				<!-- TextBox -->
 				<TextBlock Text="TextBox"
-						   Style="{StaticResource MaterialSubtitle1}" />
+						   Style="{StaticResource MaterialTitleMedium}" />
 				<smtx:XamlDisplay UniqueKey="ControlExtensionsSamplePage_TextBox"
 								  Style="{StaticResource XamlDisplayBelowStyle}">
 					<TextBox PlaceholderText="Filled"
 							 Style="{StaticResource MaterialFilledTextBoxStyle}">
 						<ut:ControlExtensions.Icon>
 							<SymbolIcon Symbol="SolidStar"
-										Foreground="{StaticResource MaterialPrimaryBrush}" />
+										Foreground="{ThemeResource PrimaryBrush}" />
 						</ut:ControlExtensions.Icon>
 					</TextBox>
 				</smtx:XamlDisplay>
 
 				<!-- ComboBox -->
 				<TextBlock Text="ComboBox"
-						   Style="{StaticResource MaterialSubtitle1}" />
+						   Style="{StaticResource MaterialTitleMedium}" />
 				<smtx:XamlDisplay UniqueKey="ControlExtensionsSamplePage_ComboBox"
 								  Style="{StaticResource XamlDisplayBelowStyle}">
 					<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
@@ -104,7 +104,7 @@
 							  ItemsSource="{x:Bind Items}">
 						<ut:ControlExtensions.Icon>
 							<SymbolIcon Symbol="SolidStar"
-										Foreground="{StaticResource MaterialPrimaryBrush}" />
+										Foreground="{ThemeResource PrimaryBrush}" />
 						</ut:ControlExtensions.Icon>
 					</ComboBox>
 				</smtx:XamlDisplay>
@@ -114,10 +114,10 @@
 			<StackPanel Spacing="16">
 
 				<TextBlock Text="ControlExtensions.AlternateContent"
-						   Style="{StaticResource MaterialHeadline5}" />
+						   Style="{StaticResource MaterialTitleLarge}" />
 
 				<TextBlock Text="This property can be used in order to have an alternate content for some controls:"
-						   Style="{StaticResource MaterialBody1}" />
+						   Style="{StaticResource MaterialBodyLarge}" />
 
 				<smtx:XamlDisplay UniqueKey="ControlExtensionsSamplePage_ToggleButtonText"
 								  Style="{StaticResource XamlDisplayBelowStyle}">
