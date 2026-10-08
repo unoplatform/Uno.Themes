@@ -9,7 +9,7 @@ uid: Uno.Themes.Material.Migration
 
 ## Upgrading to Uno Themes v8
 
-Uno Themes 8.0 reworks seed color generation so the palette faithfully reproduces the seed color you provide. **If your app never sets `PrimarySeed`, nothing changes** — the built-in palettes, style keys, and brush resources are untouched, and you can upgrade without code changes. If your app does use a seed, the generated colors will look different after the upgrade — the sections below explain how and why.
+Uno Themes 8.0 reworks seed color generation so the palette faithfully reproduces the seed color you provide. **If your app never sets `PrimarySeed`, its colors do not change** — the built-in palettes, style keys, and brush resources are untouched, and most apps upgrade without code changes. If your app does use a seed, the generated colors will look different after the upgrade — the sections below explain how and why, and also cover the few API changes that affect code that persists `Density` values or derives from `BaseTheme`.
 
 ### Seed-generated palettes look different
 
@@ -40,6 +40,16 @@ Changing a seed color at runtime now recolors everything already on screen — i
 
 To make this possible, the semantic `*Brush` resources are now shared, long-lived instances whose `Color` and `Opacity` are rewritten in place when a seed or override changes. If your code caches a `brush.Color` snapshot or expects a fresh brush instance per theme rebuild, hold on to the resource key instead.
 
+### `BaseTheme.SemanticStylesSource`
+
+This only affects code that subclasses `BaseTheme`. A design system that declares semantic style aliases (`FilledButtonStyle` aliasing its own prefixed style, and so on) returns their URI from the new protected virtual `SemanticStylesSource` property; the base constructor merges that file as a `SemanticResources` dictionary right after `DefaultStylesSource`. Keep the file out of the XamlMerge bundle, since entries flattened into `DefaultStylesSource` lose the marker type. The default is `null` (no semantic aliases), so existing subclasses are unaffected. See [Runtime discovery](semantic-styles.md#runtime-discovery-for-tooling).
+
+### Spacing base unit and runtime scale measures
+
+- **New `DefaultSpacing` property.** The spacing scale now has its own base unit (default 4), so `Space*` tokens can be rebranded without changing the density mode. See [Design Tokens](design-tokens.md#via-scalar-properties).
+- **`Density` is now a pure mode, and its underlying values changed.** `DefaultDensity` scales the `DefaultSpacing` base unit (`Compact` ×0.75, `Regular` ×1, `Comfy` ×1.25) instead of defining it, and the `Density` enum members are now `Compact = 0`, `Regular = 1`, `Comfy = 2` (they were `3` / `4` / `5`, the base unit in pixels). Apps that set `DefaultDensity` by name are unaffected and render the same spacing as before. This only affects code that casts `Density` to or from an integer, or persists it as a number: a stale `3` / `4` / `5` is not a defined member any more and is treated as `Regular`, without an exception.
+- **Scale measures are runtime-settable.** `DefaultSpacing`, `DefaultDensity`, and `DefaultCornerRadius` can now be changed after startup: the control styles read the generated `Space*` / `Radius*` tokens through `{ThemeResource}`, so controls created afterwards pick the new scale up, and controls already on screen follow on a theme-change pass. See the note in [Via Scalar Properties](design-tokens.md#via-scalar-properties).
+
 ### Single root typeface: `DefaultFontFamily`
 
 The semantic type scales now derive from one root token, `DefaultFontFamily`, and per-scale weight nuance is carried by the `*FontWeight` tokens, resolved from that single family (a variable font, or a font shipping a font manifest) — see [Typography](semantic-styles.md#typography). The font override surface changes accordingly:
@@ -58,6 +68,8 @@ The semantic type scales now derive from one root token, `DefaultFontFamily`, an
 
 The override goes in the file referenced as the theme's `FontOverrideSource` — see [Typography Font Swap](design-tokens.md#typography-font-swap).
 
+The root is also settable as the new `DefaultFontFamily` theme property (`<MaterialTheme DefaultFontFamily="…" />`), which generates every type-scale `*FontFamily` key from one value and can be changed at runtime.
+
 ## Upgrading to Uno Themes v7
 
 Uno Themes 7.0 introduces the Simple design system, the theme-agnostic Semantic Design Language, design tokens, and opt-in seed color generation. Visual defaults are unchanged — no semantic color or brush resource key was renamed or removed, and seed generation is off unless you enable it — so most apps upgrade without code changes. The sections below cover the changes that may require action.
@@ -66,7 +78,7 @@ Uno Themes 7.0 introduces the Simple design system, the theme-agnostic Semantic 
 
 - **Simple theme**: new `Uno.Simple.WinUI` and `Uno.Simple.WinUI.Markup` packages providing a minimal, density-driven design system. See [Simple - Getting Started](simple-getting-started.md).
 - **Semantic Design Language**: design-system-agnostic style aliases (`FilledButtonStyle`, `OutlinedTextBoxStyle`, …) shared by Material and Simple, so apps can switch design systems without changing style keys. See [Semantic Design Language](semantic-styles.md).
-- **Design tokens**: spacing (`Space*`), shape (`Radius*`), and density (`ControlHeight*`, `IconSize*`) tokens, driven globally by the new `DefaultSpacing`, `DefaultDensity`, and `DefaultCornerRadius` theme properties. See [Design Tokens](design-tokens.md).
+- **Design tokens**: spacing (`Space*`), shape (`Radius*`), and density (`ControlHeight*`, `IconSize*`) tokens, driven globally by the new `DefaultDensity` and `DefaultCornerRadius` theme properties. See [Design Tokens](design-tokens.md).
 - **Seed color generation** (opt-in): generate a full palette from one or more seed colors via the new `Colors` property (`ThemeColors`) and `SemanticThemeHelper`. See [Seed Color Palette](seed-colors.md).
 - **Control extensions**: new `ControlExtensions.LeadingIcon` and `ControlExtensions.TrailingIcon` attached properties; `ControlExtensions.Icon` keeps working and now forwards its value to `LeadingIcon`. See [Control Extensions](themes-control-extensions.md).
 - **XAML Hot Reload**: theme resources now participate in Hot Reload.
@@ -139,7 +151,7 @@ Material v2 sizing, spacing, and corner-radius resources are no longer hard-code
 | `ButtonPadding`      | `16,0`    | `Space400HorizontalThickness` | `16,0`        |
 | `ButtonCornerRadius` | `20`      | `Radius500CornerRadius`       | `20`          |
 
-Roughly forty keys across all Material v2 controls follow this pattern. Because the values are now derived, the new `DefaultSpacing`, `DefaultDensity` (`Compact` / `Regular` / `Comfy`), and `DefaultCornerRadius` theme properties reshape every Material control globally. See [Design Tokens](design-tokens.md).
+Roughly forty keys across all Material v2 controls follow this pattern. Because the values are now derived, the new `DefaultDensity` (`Compact` / `Regular` / `Comfy`) and `DefaultCornerRadius` theme properties reshape every Material control globally. See [Design Tokens](design-tokens.md).
 
 ### `StringFormatConverter` is now culture-aware
 

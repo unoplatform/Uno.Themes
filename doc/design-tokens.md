@@ -51,6 +51,19 @@ Per-scale keys follow the pattern `{Role}{Size}FontFamily`, `{Role}{Size}FontSiz
 | `Space2400` | 96         | `Space2400Thickness` |
 | `Space4000` | 160        | `Space4000Thickness` |
 
+The steps `Space0` through `Space800` also have directional `Thickness` companions, named after the step:
+
+| Suffix                | Value for step N |
+|-----------------------|------------------|
+| `HorizontalThickness` | `N,0,N,0`        |
+| `VerticalThickness`   | `0,N,0,N`        |
+| `TopThickness`        | `0,N,0,0`        |
+| `BottomThickness`     | `0,0,0,N`        |
+| `LeftThickness`       | `N,0,0,0`        |
+| `RightThickness`      | `0,0,N,0`        |
+
+For example, `Space400HorizontalThickness` is `16,0,16,0` at the default base. The larger steps (`Space1200` and up) have only the uniform `Thickness` companion.
+
 ### Shape (Corner Radius)
 
 | Key          | Value (px) | CornerRadius Key         |
@@ -61,6 +74,7 @@ Per-scale keys follow the pattern `{Role}{Size}FontFamily`, `{Role}{Size}FontSiz
 | `Radius200`  | 8          | `Radius200CornerRadius`  |
 | `Radius300`  | 12         | `Radius300CornerRadius`  |
 | `Radius400`  | 16         | `Radius400CornerRadius`  |
+| `Radius500`  | 20         | `Radius500CornerRadius`  |
 | `Radius700`  | 28         | `Radius700CornerRadius`  |
 | `RadiusFull` | 9999       | `RadiusFullCornerRadius` |
 
@@ -77,6 +91,10 @@ Per-scale keys follow the pattern `{Role}{Size}FontFamily`, `{Role}{Size}FontSiz
 | `IconSizeMedium`           | 24                 |
 | `IconSizeLarge`            | 32                 |
 
+### Opacity
+
+The state-overlay opacities (`HoverOpacity`, `FocusedOpacity`, `PressedOpacity`, `DraggedOpacity`, `SelectedOpacity`, `MediumOpacity`, `LowOpacity`, `DisabledOpacity`) are shared tokens too: they are declared once in the shared color palette (`SharedColorPalette.xaml`) that every theme merges, and the state brushes (`PrimaryHoverBrush`, `OnSurfacePressedBrush`, …) take their opacity from them. See [Opacities](material-colors.md#opacities) for the values.
+
 ## Overriding Tokens
 
 ### Via Scalar Properties
@@ -90,12 +108,26 @@ Set `DefaultCornerRadius` (shape) or `DefaultSpacing` (spacing) on the theme to 
 
 This generates all `Radius*` / `Space*` tokens as multiples of the base value. The same properties are available on `SimpleTheme`.
 
-For spacing, the [density mode](#density-modes) (`DefaultDensity`) composes with the base unit rather than replacing it: the effective spacing base is `DefaultSpacing × density factor` (`Compact` ×0.75, `Regular` ×1, `Comfy` ×1.25). With the default base of 4, the modes yield 3 / 4 / 5.
+For spacing, the [density mode](#density-modes) (`DefaultDensity`) composes with the base unit rather than replacing it: the effective spacing base is `DefaultSpacing × density factor` (`Compact` ×0.75, `Regular` ×1, `Comfy` ×1.25). With the default base of 4, the modes yield 3 / 4 / 5. A non-finite (`NaN`, infinity) or negative `DefaultSpacing` is treated as unset and falls back to the default base of 4.
 
 > [!NOTE]
 > `DefaultCornerRadius`, `DefaultSpacing`, and `DefaultDensity` are **runtime-settable**. Assigning one regenerates the `Radius*` / `Space*` token resources, and controls created afterwards pick the new scale up through their styles.
 >
 > Controls **already on screen** keep the values they resolved when they loaded: these tokens are `CornerRadius` / `Thickness` / `double` **values**, so unlike a seed color — whose brushes are live instances the theme rewrites in place, see [Runtime Seed Color Changes](seed-colors.md#runtime-seed-color-changes) — there is nothing to mutate. Their styles read the tokens through `{ThemeResource}`, so a theme-change pass re-resolves them: toggle the root element's `RequestedTheme` away from its `ActualTheme` and back, or recreate the root content.
+
+To change a scale measure from code, get the application's theme and assign the property:
+
+```csharp
+using Uno.Themes;
+
+if (Application.Current.GetTheme() is { } theme)
+{
+    theme.DefaultSpacing = 6;
+    theme.DefaultDensity = Density.Compact;
+}
+```
+
+`GetTheme()` returns the first `BaseTheme` (`MaterialTheme`, `SimpleTheme`, …) merged into the application's resources, or `null` when there is none.
 
 ### Via Lightweight Styling
 
@@ -181,7 +213,12 @@ only some appearances or some scales should change:
 </ResourceDictionary>
 ```
 
-Reference the file as the theme's `FontOverrideSource` (`<MaterialTheme FontOverrideSource="ms-appx:///MyTypography.xaml" />`, likewise on `SimpleTheme`); redefining the root there cascades to every type-scale `FontFamily` key the same way the property does.
+Reference the file as the theme's `FontOverrideSource` (`<MaterialTheme FontOverrideSource="ms-appx:///MyTypography.xaml" />`, likewise on `SimpleTheme`). Redefining only the root there cascades to every type-scale `FontFamily` key under two conditions:
+
+- **The `DefaultFontFamily` property is unset.** When it is set, the theme generates every type-scale `*FontFamily` key as a concrete value rather than a reference to the root, so a root-only override has nothing to cascade through.
+- **The theme is merged at the application level** (`App.xaml`). The type-scale keys reference the root through aliases that resolve against the application's resources, so a root override on a theme merged into a page or a control's `Resources` does not reach them.
+
+Otherwise, redefine the individual `*FontFamily` keys (`DisplayLargeFontFamily`, `BodyMediumFontFamily`, …) in the override file.
 
 A font override wins over the generated tokens, the same way a color override wins over the
 generated seed palette: a key declared in both places takes its value from the override, and a key

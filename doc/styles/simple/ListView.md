@@ -4,70 +4,42 @@ uid: Uno.Themes.Simple.Styles.ListView
 
 # ListView Control
 
+<!-- BEGIN GENERATED -->
+<!-- This region is generated from the Styles XAML by `dotnet run build/scripts/GenerateStyleDocs.cs`; do not edit it by hand. -->
+
 ## Styles
 
-| Style Key                          | IsDefaultStyle\* |
-|------------------------------------|------------------|
-| `SimpleListViewStyle`              |                  |
-| `SimpleDefaultListViewStyle`       | True             |
-| `SimpleListViewItemStyle`          |                  |
-| `SimpleDefaultListViewItemStyle`   | True             |
+| Style Key                        | Semantic Alias      | IsDefaultStyle\* |
+| -------------------------------- | ------------------- | ---------------- |
+| `SimpleListViewItemStyle`        | `ListViewItemStyle` | True             |
+| `SimpleListViewStyle`            | `ListViewStyle`     | True             |
+| `SimpleDefaultListViewItemStyle` |                     | True             |
+| `SimpleDefaultListViewStyle`     |                     | True             |
 
 IsDefaultStyle\*: Styles in this column will be set as the default implicit style for the matching control
 
 ## Lightweight Styling
 
-### ListView Container
+### Themed
 
-| Key                                                  | Type              | Value                              |
-|------------------------------------------------------|-------------------|------------------------------------|
-| `ListViewBackground`                                 | `SolidColorBrush` | `SurfaceBrush`                     |
-| `ListViewBorderBrush`                                | `SolidColorBrush` | `OutlineBrush`                     |
+| Key                                         | Type              | Light                           |
+| ------------------------------------------- | ----------------- | ------------------------------- |
+| `ListViewBackground`                        | `SolidColorBrush` | `SurfaceBrush`                  |
+| `ListViewBorderBrush`                       | `SolidColorBrush` | `OutlineBrush`                  |
+| `ListViewItemBackground`                    | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `ListViewItemBackgroundPointerOver`         | `SolidColorBrush` | `SurfaceVariantBrush`           |
+| `ListViewItemBackgroundPointerOverSelected` | `SolidColorBrush` | `PrimaryVariantDarkBrush`       |
+| `ListViewItemBackgroundPressed`             | `SolidColorBrush` | `OutlineBrush`                  |
+| `ListViewItemBackgroundPressedSelected`     | `SolidColorBrush` | `PrimaryVariantDarkBrush`       |
+| `ListViewItemBackgroundSelected`            | `SolidColorBrush` | `PrimaryBrush`                  |
+| `ListViewItemForeground`                    | `SolidColorBrush` | `OnSurfaceBrush`                |
+| `ListViewItemForegroundDisabled`            | `SolidColorBrush` | `OnSurfaceDisabledBrush`        |
+| `ListViewItemForegroundPointerOver`         | `SolidColorBrush` | `OnSurfaceBrush`                |
+| `ListViewItemForegroundPointerOverSelected` | `SolidColorBrush` | `OnPrimaryBrush`                |
+| `ListViewItemForegroundPressed`             | `SolidColorBrush` | `OnSurfaceBrush`                |
+| `ListViewItemForegroundPressedSelected`     | `SolidColorBrush` | `OnPrimaryBrush`                |
+| `ListViewItemForegroundSelected`            | `SolidColorBrush` | `OnPrimaryBrush`                |
 
-### ListViewItem — Normal
+The Dark theme uses the same values as Light.
 
-| Key                                                  | Type              | Value                              |
-|------------------------------------------------------|-------------------|------------------------------------|
-| `ListViewItemBackground`                             | `SolidColorBrush` | `SystemControlTransparentBrush`    |
-| `ListViewItemForeground`                             | `SolidColorBrush` | `OnSurfaceBrush`                   |
-
-### ListViewItem — PointerOver
-
-| Key                                                  | Type              | Value                              |
-|------------------------------------------------------|-------------------|------------------------------------|
-| `ListViewItemBackgroundPointerOver`                  | `SolidColorBrush` | `SurfaceVariantBrush`              |
-| `ListViewItemForegroundPointerOver`                  | `SolidColorBrush` | `OnSurfaceBrush`                   |
-
-### ListViewItem — Pressed
-
-| Key                                                  | Type              | Value                              |
-|------------------------------------------------------|-------------------|------------------------------------|
-| `ListViewItemBackgroundPressed`                      | `SolidColorBrush` | `OutlineBrush`                     |
-| `ListViewItemForegroundPressed`                      | `SolidColorBrush` | `OnSurfaceBrush`                   |
-
-### ListViewItem — Selected
-
-| Key                                                  | Type              | Value                              |
-|------------------------------------------------------|-------------------|------------------------------------|
-| `ListViewItemBackgroundSelected`                     | `SolidColorBrush` | `PrimaryBrush`                     |
-| `ListViewItemForegroundSelected`                     | `SolidColorBrush` | `OnPrimaryBrush`                   |
-
-### ListViewItem — PointerOverSelected
-
-| Key                                                  | Type              | Value                              |
-|------------------------------------------------------|-------------------|------------------------------------|
-| `ListViewItemBackgroundPointerOverSelected`          | `SolidColorBrush` | `PrimaryVariantDarkBrush`          |
-| `ListViewItemForegroundPointerOverSelected`          | `SolidColorBrush` | `OnPrimaryBrush`                   |
-
-### ListViewItem — PressedSelected
-
-| Key                                                  | Type              | Value                              |
-|------------------------------------------------------|-------------------|------------------------------------|
-| `ListViewItemBackgroundPressedSelected`              | `SolidColorBrush` | `PrimaryVariantDarkBrush`          |
-| `ListViewItemForegroundPressedSelected`              | `SolidColorBrush` | `OnPrimaryBrush`                   |
-
-### ListViewItem — Disabled
-
-| Key                                                  | Type              | Value                              |
-|------------------------------------------------------|-------------------|------------------------------------|
-| `ListViewItemForegroundDisabled`                     | `SolidColorBrush` | `OnSurfaceDisabledBrush`           |
+<!-- END GENERATED -->
