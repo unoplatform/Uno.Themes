@@ -29,13 +29,13 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 |--------------------------------------|-------------------|----------------------------------|
 | `SimpleButtonCornerRadius`           | `CornerRadius`    | `SimpleRadius200CornerRadius`    |
 | `SimpleButtonBorderThickness`        | `Thickness`       | `SimpleStrokeBorderThickness`    |
-| `SimpleButtonMediumPadding`          | `Thickness`       | `SimpleSpace300Thickness`        |
-| `SimpleButtonSmallPadding`           | `Thickness`       | `SimpleSpace200Thickness`        |
+| `SimpleButtonMediumPadding`          | `Thickness`       | `SimpleSpace150Thickness`        |
+| `SimpleButtonSmallPadding`           | `Thickness`       | `SimpleSpace100Thickness`        |
 | `SimpleButtonMediumMinHeight`        | `Double`          | `SimpleIconLarge`                |
 | `SimpleButtonSmallMinHeight`         | `Double`          | `SimpleIconMedium`               |
 | `SimpleButtonMediumFontSize`         | `Double`          | `BodyMediumFontSize`             |
 | `SimpleButtonSmallFontSize`          | `Double`          | `BodySmallFontSize`              |
-| `SimpleButtonIconSpacing`            | `Double`          | `SimpleSpace200`                 |
+| `SimpleButtonIconSpacing`            | `Double`          | `SimpleSpace100`                 |
 | `SimpleButtonFontFamily`             | `FontFamily`      | Inter                            |
 | `SimpleButtonFontWeight`             | `String`          | Medium                           |
 
@@ -45,8 +45,8 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 |--------------------------------------|-------------------|----------------------------------|
 | `SimpleIconButtonCornerRadius`       | `CornerRadius`    | `SimpleRadiusFullCornerRadius`   |
 | `SimpleIconButtonBorderThickness`    | `Thickness`       | `SimpleStrokeBorderThickness`    |
-| `SimpleIconButtonMediumPadding`      | `Thickness`       | `SimpleSpace200Thickness`        |
-| `SimpleIconButtonSmallPadding`       | `Thickness`       | `SimpleSpace100Thickness`        |
+| `SimpleIconButtonMediumPadding`      | `Thickness`       | `SimpleSpace100Thickness`        |
+| `SimpleIconButtonSmallPadding`       | `Thickness`       | `SimpleSpace050Thickness`        |
 | `SimpleIconButtonMediumMinSize`      | `Double`          | `SimpleIconLarge`                |
 | `SimpleIconButtonSmallMinSize`       | `Double`          | `SimpleIconMedium`               |
 

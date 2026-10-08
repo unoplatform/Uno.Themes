@@ -17,10 +17,10 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 | Key                                          | Type              | Value                            |
 |----------------------------------------------|-------------------|----------------------------------|
-| `SimpleExpanderMinHeight`                    | `Double`          | `SimpleSpace1200` (48)                |
+| `SimpleExpanderMinHeight`                    | `StaticResource`  | `ControlHeightLarge` (48)             |
 | `SimpleExpanderCornerRadius`                 | `CornerRadius`    | `SimpleRadius200CornerRadius` (8)    |
 | `SimpleExpanderHeaderPadding`                | `Thickness`       | 16,0,0,0                         |
-| `SimpleExpanderContentPadding`               | `Thickness`       | `SimpleSpace400Thickness` (16)        |
+| `SimpleExpanderContentPadding`               | `Thickness`       | `SimpleSpace200Thickness` (16)        |
 | `SimpleExpanderHeaderBorderThickness`        | `Thickness`       | `SimpleStrokeBorderThickness` (1)    |
 | `SimpleExpanderContentBorderThickness`       | `Thickness`       | 1,0,1,1                          |
 | `SimpleExpanderContentUpBorderThickness`     | `Thickness`       | 1,1,1,0                          |
