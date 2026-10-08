@@ -120,6 +120,27 @@ partial class Theme
 
 			[ResourceKeyDefinition(typeof(Color), "SurfaceTintColor")]
 			public static ThemeResourceKey<Color> Tint => new("SurfaceTintColor");
+
+			[ResourceKeyDefinition(typeof(Color), "SurfaceDimColor")]
+			public static ThemeResourceKey<Color> Dim => new("SurfaceDimColor");
+
+			[ResourceKeyDefinition(typeof(Color), "SurfaceBrightColor")]
+			public static ThemeResourceKey<Color> Bright => new("SurfaceBrightColor");
+
+			[ResourceKeyDefinition(typeof(Color), "SurfaceContainerLowestColor")]
+			public static ThemeResourceKey<Color> ContainerLowest => new("SurfaceContainerLowestColor");
+
+			[ResourceKeyDefinition(typeof(Color), "SurfaceContainerLowColor")]
+			public static ThemeResourceKey<Color> ContainerLow => new("SurfaceContainerLowColor");
+
+			[ResourceKeyDefinition(typeof(Color), "SurfaceContainerColor")]
+			public static ThemeResourceKey<Color> Container => new("SurfaceContainerColor");
+
+			[ResourceKeyDefinition(typeof(Color), "SurfaceContainerHighColor")]
+			public static ThemeResourceKey<Color> ContainerHigh => new("SurfaceContainerHighColor");
+
+			[ResourceKeyDefinition(typeof(Color), "SurfaceContainerHighestColor")]
+			public static ThemeResourceKey<Color> ContainerHighest => new("SurfaceContainerHighestColor");
 		}
 
 		public static class OnSurface
