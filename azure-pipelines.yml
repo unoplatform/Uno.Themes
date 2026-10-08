@@ -38,6 +38,12 @@ stages:
   jobs:
   - template: build/stage-determine-changes.yml
 
+- stage: Conflict_Markers
+  displayName: Conflict Markers
+  dependsOn: []
+  jobs:
+  - template: build/stage-conflict-markers.yml
+
 - stage: Docs_Validations
   displayName: Docs Validations
   dependsOn: Determine_Changes
