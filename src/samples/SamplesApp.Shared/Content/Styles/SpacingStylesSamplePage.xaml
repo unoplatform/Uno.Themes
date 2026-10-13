@@ -1,0 +1,717 @@
+﻿<Page x:Class="Uno.Themes.Samples.Content.Styles.SpacingStylesSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:sample="using:Uno.Themes.Samples"
+	  xmlns:ut="using:Uno.Themes"
+	  xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<Page.Resources>
+		<Style x:Key="SpacingSampleLabelStyle"
+			   TargetType="TextBlock"
+			   BasedOn="{StaticResource BodySmall}">
+			<Setter Property="Width" Value="300" />
+			<Setter Property="VerticalAlignment" Value="Center" />
+			<Setter Property="TextWrapping" Value="Wrap" />
+		</Style>
+		<Style x:Key="SpacingSampleRowStyle"
+			   TargetType="StackPanel">
+			<Setter Property="Orientation" Value="Horizontal" />
+			<Setter Property="Spacing" Value="16" />
+		</Style>
+		<Style x:Key="SpacingSampleBoundsStyle"
+			   TargetType="Border">
+			<Setter Property="BorderBrush" Value="#80FF00FF" />
+			<Setter Property="BorderThickness" Value="1" />
+			<Setter Property="HorizontalAlignment" Value="Left" />
+			<Setter Property="VerticalAlignment" Value="Center" />
+		</Style>
+	</Page.Resources>
+
+	<sample:SamplePageLayout>
+		<sample:SamplePageLayout.M3MaterialTemplate>
+			<DataTemplate>
+				<ScrollViewer>
+					<StackPanel x:Name="SpacingStylesRoot"
+								Spacing="12"
+								Padding="16,16,16,32"
+								Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+						<TextBlock Text="Styles that read the spacing scale"
+								   Style="{StaticResource TitleLarge}" />
+						<TextBlock Text="Every Material v2 style that references a Space* token, directly or through a control alias. The magenta outline marks each control's bounds."
+								   Style="{StaticResource BodySmall}"
+								   TextWrapping="Wrap"
+								   Opacity="0.7" />
+
+						<!-- ── Buttons ── -->
+						<TextBlock Text="Buttons"
+								   Style="{StaticResource TitleMedium}"
+								   Margin="0,8,0,0" />
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="MaterialBaseButtonStyle&#x0a;Horizontal padding"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<Button Content="Base"
+										Style="{StaticResource MaterialBaseButtonStyle}" />
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="MaterialElevatedButtonStyle&#x0a;Icon and label margins"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<Button Content="Elevated"
+										Style="{StaticResource MaterialElevatedButtonStyle}">
+									<ut:ControlExtensions.Icon>
+										<SymbolIcon Symbol="Add" />
+									</ut:ControlExtensions.Icon>
+								</Button>
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="MaterialFilledButtonStyle&#x0a;Icon and label margins"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<Button Content="Filled"
+										Style="{StaticResource MaterialFilledButtonStyle}">
+									<ut:ControlExtensions.Icon>
+										<SymbolIcon Symbol="Add" />
+									</ut:ControlExtensions.Icon>
+								</Button>
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="MaterialFilledTonalButtonStyle&#x0a;Icon and label margins"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<Button Content="Filled tonal"
+										Style="{StaticResource MaterialFilledTonalButtonStyle}">
+									<ut:ControlExtensions.Icon>
+										<SymbolIcon Symbol="Add" />
+									</ut:ControlExtensions.Icon>
+								</Button>
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="MaterialOutlinedButtonStyle&#x0a;Icon and label margins"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<Button Content="Outlined"
+										Style="{StaticResource MaterialOutlinedButtonStyle}">
+									<ut:ControlExtensions.Icon>
+										<SymbolIcon Symbol="Add" />
+									</ut:ControlExtensions.Icon>
+								</Button>
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="MaterialTextButtonStyle&#x0a;Horizontal padding, icon gap"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<Button Content="Text"
+										Style="{StaticResource MaterialTextButtonStyle}">
+									<ut:ControlExtensions.Icon>
+										<SymbolIcon Symbol="Add" />
+									</ut:ControlExtensions.Icon>
+								</Button>
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="MaterialAppBarButtonStyle&#x0a;Icon-label gap (size fixed at 64)"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<AppBarButton Label="Add"
+											  Icon="Add"
+											  Style="{StaticResource MaterialAppBarButtonStyle}" />
+							</Border>
+						</StackPanel>
+
+						<!-- ── Floating action buttons ── -->
+						<TextBlock Text="Floating action buttons"
+								   Style="{StaticResource TitleMedium}"
+								   Margin="0,8,0,0" />
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="MaterialFabStyle / SecondaryFab / TertiaryFab / SurfaceFab&#x0a;Icon-label gap (56 square, padding fixed, as in M3)"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<StackPanel Orientation="Horizontal"
+										Spacing="12">
+								<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+									<Button Content="Fab"
+											Style="{StaticResource MaterialFabStyle}">
+										<ut:ControlExtensions.Icon>
+											<SymbolIcon Symbol="Add" />
+										</ut:ControlExtensions.Icon>
+									</Button>
+								</Border>
+								<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+									<Button Style="{StaticResource MaterialSecondaryFabStyle}">
+										<ut:ControlExtensions.Icon>
+											<SymbolIcon Symbol="Add" />
+										</ut:ControlExtensions.Icon>
+									</Button>
+								</Border>
+								<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+									<Button Style="{StaticResource MaterialTertiaryFabStyle}">
+										<ut:ControlExtensions.Icon>
+											<SymbolIcon Symbol="Add" />
+										</ut:ControlExtensions.Icon>
+									</Button>
+								</Border>
+								<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+									<Button Style="{StaticResource MaterialSurfaceFabStyle}">
+										<ut:ControlExtensions.Icon>
+											<SymbolIcon Symbol="Add" />
+										</ut:ControlExtensions.Icon>
+									</Button>
+								</Border>
+							</StackPanel>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="MaterialSmallFabStyle / SecondarySmall / TertiarySmall / SurfaceSmall&#x0a;40 square, padding fixed, as in M3"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<StackPanel Orientation="Horizontal"
+										Spacing="12">
+								<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+									<Button Style="{StaticResource MaterialSmallFabStyle}">
+										<ut:ControlExtensions.Icon>
+											<SymbolIcon Symbol="Add" />
+										</ut:ControlExtensions.Icon>
+									</Button>
+								</Border>
+								<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+									<Button Style="{StaticResource MaterialSecondarySmallFabStyle}">
+										<ut:ControlExtensions.Icon>
+											<SymbolIcon Symbol="Add" />
+										</ut:ControlExtensions.Icon>
+									</Button>
+								</Border>
+								<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+									<Button Style="{StaticResource MaterialTertiarySmallFabStyle}">
+										<ut:ControlExtensions.Icon>
+											<SymbolIcon Symbol="Add" />
+										</ut:ControlExtensions.Icon>
+									</Button>
+								</Border>
+								<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+									<Button Style="{StaticResource MaterialSurfaceSmallFabStyle}">
+										<ut:ControlExtensions.Icon>
+											<SymbolIcon Symbol="Add" />
+										</ut:ControlExtensions.Icon>
+									</Button>
+								</Border>
+							</StackPanel>
+						</StackPanel>
+
+						<!-- ── Selection controls ── -->
+						<TextBlock Text="Selection controls"
+								   Style="{StaticResource TitleMedium}"
+								   Margin="0,8,0,0" />
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="MaterialCheckBoxStyle&#x0a;Box-label gap (box fixed)"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<CheckBox Content="CheckBox"
+										  IsChecked="True"
+										  Style="{StaticResource MaterialCheckBoxStyle}" />
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="MaterialRadioButtonStyle&#x0a;Circle-label gap (circle fixed)"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<RadioButton Content="RadioButton"
+											 IsChecked="True"
+											 Style="{StaticResource MaterialRadioButtonStyle}" />
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="MaterialToggleSwitchStyle&#x0a;Knob icon padding (track and knob fixed)"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<ToggleSwitch IsOn="True"
+											  Style="{StaticResource MaterialToggleSwitchStyle}" />
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="MaterialSliderStyle&#x0a;Track, fill and tick bars fixed"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<Slider MinWidth="240"
+										Value="40"
+										Style="{StaticResource MaterialSliderStyle}" />
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="MaterialProgressBarStyle&#x0a;Track height fixed"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<muxc:ProgressBar MinWidth="240"
+												  Value="60"
+												  Style="{StaticResource MaterialProgressBarStyle}" />
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="MaterialPipsPagerStyle with Normal/Selected pip and navigation button styles (template parts)&#x0a;Navigation button padding (pips fixed)"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<muxc:PipsPager NumberOfPages="5"
+												SelectedPageIndex="1"
+												PreviousButtonVisibility="Visible"
+												NextButtonVisibility="Visible"
+												Style="{StaticResource MaterialPipsPagerStyle}" />
+							</Border>
+						</StackPanel>
+
+						<!-- ── Text input and pickers ── -->
+						<TextBlock Text="Text input and pickers"
+								   Style="{StaticResource TitleMedium}"
+								   Margin="0,8,0,0" />
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="MaterialFilledTextBoxStyle&#x0a;Delete button gap"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<TextBox MinWidth="240"
+										 PlaceholderText="Filled"
+										 Style="{StaticResource MaterialFilledTextBoxStyle}" />
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="MaterialOutlinedTextBoxStyle&#x0a;Padding, text inset"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<TextBox MinWidth="240"
+										 PlaceholderText="Outlined"
+										 Style="{StaticResource MaterialOutlinedTextBoxStyle}" />
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="MaterialOutlinedPasswordBoxStyle&#x0a;Horizontal padding, text inset"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<PasswordBox MinWidth="240"
+											 Password="password"
+											 Style="{StaticResource MaterialOutlinedPasswordBoxStyle}" />
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="MaterialComboBoxStyle&#x0a;Horizontal padding"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<ComboBox MinWidth="240"
+										  SelectedIndex="0"
+										  Style="{StaticResource MaterialComboBoxStyle}">
+									<x:String>First option</x:String>
+									<x:String>Second option</x:String>
+								</ComboBox>
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="MaterialComboBoxItemStyle (shown outside its drop-down)&#x0a;Horizontal padding"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<ComboBoxItem MinWidth="240"
+											  Content="ComboBoxItem"
+											  Style="{StaticResource MaterialComboBoxItemStyle}" />
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="MaterialCalendarViewStyle&#x0a;Header button padding"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<CalendarView Style="{StaticResource MaterialCalendarViewStyle}" />
+							</Border>
+						</StackPanel>
+
+						<!-- ── Containers ── -->
+						<TextBlock Text="Containers"
+								   Style="{StaticResource TitleMedium}"
+								   Margin="0,8,0,0" />
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="MaterialContentDialogStyle&#x0a;Title and button gaps (panel padding fixed, as in M3)"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Button Content="Show ContentDialog"
+									Click="OnShowContentDialogClick"
+									Style="{StaticResource MaterialFilledTonalButtonStyle}" />
+						</StackPanel>
+
+						<!-- ── Menus and lists ── -->
+						<TextBlock Text="Menus and lists"
+								   Style="{StaticResource TitleMedium}"
+								   Margin="0,8,0,0" />
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="Material menu items: leading and trailing padding (row height and check slot fixed)"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<MenuFlyoutPresenter MinWidth="240"
+													 Style="{StaticResource MaterialMenuFlyoutPresenterStyle}">
+									<MenuFlyoutItem Text="Item"
+													Style="{StaticResource MaterialMenuFlyoutItemStyle}" />
+									<ToggleMenuFlyoutItem Text="Toggle item"
+														  IsChecked="True"
+														  Style="{StaticResource MaterialToggleMenuFlyoutItemStyle}" />
+									<muxc:RadioMenuFlyoutItem Text="Radio item"
+															  IsChecked="True"
+															  Style="{StaticResource MaterialRadioMenuFlyoutItemStyle}" />
+									<MenuFlyoutSubItem Text="Sub item"
+													   Style="{StaticResource MaterialMenuFlyoutSubItemStyle}" />
+								</MenuFlyoutPresenter>
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="MaterialListViewItemStyle&#x0a;Leading padding"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<ListView MinWidth="240"
+										  SelectedIndex="0"
+										  Style="{StaticResource MaterialListViewStyle}"
+										  ItemContainerStyle="{StaticResource MaterialListViewItemStyle}">
+									<x:String>First item</x:String>
+									<x:String>Second item</x:String>
+								</ListView>
+							</Border>
+						</StackPanel>
+
+						<!-- ── Navigation ── -->
+						<TextBlock Text="Navigation"
+								   Style="{StaticResource TitleMedium}"
+								   Margin="0,8,0,0" />
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="Material NavigationView, left pane: item horizontal padding, header padding (item height fixed at 56)"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<muxc:NavigationView MinWidth="320"
+													 MinHeight="320"
+													 IsBackButtonVisible="Collapsed"
+													 IsSettingsVisible="False"
+													 PaneDisplayMode="Left"
+													 OpenPaneLength="320"
+													 IsPaneToggleButtonVisible="False"
+													 Style="{StaticResource MaterialNavigationViewStyle}">
+									<muxc:NavigationView.MenuItems>
+										<muxc:NavigationViewItemHeader Content="Header" />
+										<muxc:NavigationViewItem Icon="Home"
+																 Content="Home"
+																 IsSelected="True"
+																 Style="{StaticResource MaterialNavigationViewItemStyle}" />
+										<muxc:NavigationViewItem Icon="Library"
+																 Content="Library"
+																 Style="{StaticResource MaterialNavigationViewItemStyle}" />
+									</muxc:NavigationView.MenuItems>
+								</muxc:NavigationView>
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="Material NavigationView, top pane: item horizontal padding"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<muxc:NavigationView MinWidth="420"
+													 Height="64"
+													 IsBackButtonVisible="Collapsed"
+													 IsSettingsVisible="False"
+													 PaneDisplayMode="Top"
+													 Style="{StaticResource MaterialNavigationViewStyle}">
+									<muxc:NavigationView.MenuItems>
+										<muxc:NavigationViewItem Content="Home"
+																 IsSelected="True"
+																 Style="{StaticResource MaterialNavigationViewItemStyle}" />
+										<muxc:NavigationViewItem Content="Library"
+																 Style="{StaticResource MaterialNavigationViewItemStyle}" />
+									</muxc:NavigationView.MenuItems>
+								</muxc:NavigationView>
+							</Border>
+						</StackPanel>
+					</StackPanel>
+				</ScrollViewer>
+			</DataTemplate>
+		</sample:SamplePageLayout.M3MaterialTemplate>
+		<sample:SamplePageLayout.SimpleTemplate>
+			<DataTemplate>
+				<ScrollViewer>
+					<StackPanel x:Name="SpacingStylesRoot"
+								Spacing="12"
+								Padding="16,16,16,32"
+								Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+						<TextBlock Text="Styles that read the spacing scale"
+								   Style="{StaticResource TitleLarge}" />
+						<TextBlock Text="Every Simple style that references a SimpleSpace* token, directly or through a control alias. The magenta outline marks each control's bounds."
+								   Style="{StaticResource BodySmall}"
+								   TextWrapping="Wrap"
+								   Opacity="0.7" />
+
+						<!-- ── Buttons ── -->
+						<TextBlock Text="Buttons"
+								   Style="{StaticResource TitleMedium}"
+								   Margin="0,8,0,0" />
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="SimpleBaseButtonStyle&#x0a;Padding"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<Button Content="Base"
+										Style="{StaticResource SimpleBaseButtonStyle}" />
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="SimpleBaseIconButtonStyle&#x0a;Fixed 40 square, icon centred"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<Button Style="{StaticResource SimpleBaseIconButtonStyle}">
+									<SymbolIcon Symbol="Add" />
+								</Button>
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="SimpleFilledButtonStyle&#x0a;Padding, icon gap"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<Button Style="{StaticResource SimpleFilledButtonStyle}">
+									<StackPanel Orientation="Horizontal"
+												Spacing="{ThemeResource SimpleButtonIconSpacing}">
+										<SymbolIcon Symbol="Add" />
+										<TextBlock Text="Filled" />
+									</StackPanel>
+								</Button>
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="SimpleFilledTonalButtonStyle&#x0a;Padding, icon gap"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<Button Content="Filled tonal"
+										Style="{StaticResource SimpleFilledTonalButtonStyle}" />
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="SimpleTextButtonStyle&#x0a;Padding, icon gap"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<Button Content="Text"
+										Style="{StaticResource SimpleTextButtonStyle}" />
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="SimpleDangerPrimaryButtonStyle&#x0a;Padding, icon gap"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<Button Content="Danger primary"
+										Style="{StaticResource SimpleDangerPrimaryButtonStyle}" />
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="SimpleDangerSubtleButtonStyle&#x0a;Padding, icon gap"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<Button Content="Danger subtle"
+										Style="{StaticResource SimpleDangerSubtleButtonStyle}" />
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="SimpleAppBarButtonStyle&#x0a;Icon-label gap (padding fixed)"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<AppBarButton Label="Add"
+											  Icon="Add"
+											  Style="{StaticResource SimpleAppBarButtonStyle}" />
+							</Border>
+						</StackPanel>
+
+						<!-- ── Toggle buttons ── -->
+						<TextBlock Text="Toggle buttons"
+								   Style="{StaticResource TitleMedium}"
+								   Margin="0,8,0,0" />
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="SimpleTextToggleButtonStyle&#x0a;Padding, icon gap"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<ToggleButton Content="Toggle"
+											  IsChecked="True"
+											  Style="{StaticResource SimpleTextToggleButtonStyle}" />
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="SimpleIconToggleButtonStyle&#x0a;Fixed 40 square, icon centred"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<ToggleButton Style="{StaticResource SimpleIconToggleButtonStyle}">
+									<SymbolIcon Symbol="Favorite" />
+								</ToggleButton>
+							</Border>
+						</StackPanel>
+
+						<!-- ── Selection controls ── -->
+						<TextBlock Text="Selection controls"
+								   Style="{StaticResource TitleMedium}"
+								   Margin="0,8,0,0" />
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="SimpleCheckBoxStyle&#x0a;Box-label gap (box and row height fixed)"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<CheckBox Content="CheckBox"
+										  IsChecked="True"
+										  Style="{StaticResource SimpleCheckBoxStyle}" />
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="SimpleRadioButtonStyle&#x0a;Circle-label gap (circle and dot fixed)"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<RadioButton Content="RadioButton"
+											 IsChecked="True"
+											 Style="{StaticResource SimpleRadioButtonStyle}" />
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="SimpleToggleSwitchStyle&#x0a;Thumb fixed"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<ToggleSwitch IsOn="True"
+											  Style="{StaticResource SimpleToggleSwitchStyle}" />
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="SimpleSliderStyle&#x0a;Thumb, track and fill fixed"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<Slider MinWidth="240"
+										Value="40"
+										Style="{StaticResource SimpleSliderStyle}" />
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="SimpleProgressBarStyle&#x0a;Track height fixed"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<ProgressBar MinWidth="240"
+											 Value="60"
+											 Style="{StaticResource SimpleProgressBarStyle}" />
+							</Border>
+						</StackPanel>
+
+						<!-- ── Text input and pickers ── -->
+						<TextBlock Text="Text input and pickers"
+								   Style="{StaticResource TitleMedium}"
+								   Margin="0,8,0,0" />
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="SimpleAutoSuggestBoxStyle + SimpleAutoSuggestBoxTextBoxStyle (template part)&#x0a;Button and suggestion-list padding"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<AutoSuggestBox MinWidth="240"
+												PlaceholderText="Search"
+												Style="{StaticResource SimpleAutoSuggestBoxStyle}" />
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="SimpleCalendarDatePickerStyle + implicit FlyoutPresenter&#x0a;Flyout padding"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<CalendarDatePicker PlaceholderText="Pick a date"
+													Style="{StaticResource SimpleCalendarDatePickerStyle}" />
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="SimpleDatePickerFlyoutButtonStyle (template part of SimpleDatePickerStyle)&#x0a;Flyout button padding"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<DatePicker Style="{StaticResource SimpleDatePickerStyle}" />
+							</Border>
+						</StackPanel>
+
+						<!-- ── Containers ── -->
+						<TextBlock Text="Containers"
+								   Style="{StaticResource TitleMedium}"
+								   Margin="0,8,0,0" />
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="SimpleExpanderStyle + SimpleExpanderHeaderUp/DownStyle (template parts)&#x0a;Header and content padding (min height and chevron fixed)"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<Expander MinWidth="320"
+										  Header="Expander"
+										  IsExpanded="True"
+										  Style="{StaticResource SimpleExpanderStyle}">
+									<TextBlock Text="Expanded content" />
+								</Expander>
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="SimpleFlyoutPresenterStyle&#x0a;Padding"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<FlyoutPresenter Style="{StaticResource SimpleFlyoutPresenterStyle}">
+									<TextBlock Text="Flyout content" />
+								</FlyoutPresenter>
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="SimpleContentDialogStyle&#x0a;Title and button gaps (panel padding fixed, as in M3)"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Button Content="Show ContentDialog"
+									Click="OnShowContentDialogClick"
+									Style="{StaticResource SimpleFilledTonalButtonStyle}" />
+						</StackPanel>
+
+						<!-- ── Menus ── -->
+						<TextBlock Text="Menus"
+								   Style="{StaticResource TitleMedium}"
+								   Margin="0,8,0,0" />
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="Simple menu: presenter padding (item margins and row height fixed)"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<MenuFlyoutPresenter MinWidth="240"
+													 Style="{StaticResource SimpleMenuFlyoutPresenterStyle}">
+									<MenuFlyoutItem Text="Item"
+													Style="{StaticResource SimpleMenuFlyoutItemStyle}" />
+									<ToggleMenuFlyoutItem Text="Toggle item"
+														  IsChecked="True"
+														  Style="{StaticResource SimpleToggleMenuFlyoutItemStyle}" />
+									<RadioMenuFlyoutItem Text="Radio item"
+														 IsChecked="True"
+														 Style="{StaticResource SimpleRadioMenuFlyoutItemStyle}" />
+									<MenuFlyoutSubItem Text="Sub item"
+													   Style="{StaticResource SimpleMenuFlyoutSubItemStyle}" />
+								</MenuFlyoutPresenter>
+							</Border>
+						</StackPanel>
+
+						<!-- ── Lists and people ── -->
+						<TextBlock Text="Lists and people"
+								   Style="{StaticResource TitleMedium}"
+								   Margin="0,8,0,0" />
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="SimpleListViewItemStyle&#x0a;Padding"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+								<ListView MinWidth="240"
+										  SelectedIndex="0"
+										  Style="{StaticResource SimpleListViewStyle}"
+										  ItemContainerStyle="{StaticResource SimpleListViewItemStyle}">
+									<x:String>First item</x:String>
+									<x:String>Second item</x:String>
+								</ListView>
+							</Border>
+						</StackPanel>
+						<StackPanel Style="{StaticResource SpacingSampleRowStyle}">
+							<TextBlock Text="SimplePersonPictureStyle / SquareStyle / SquareSmallStyle&#x0a;Badge size fixed"
+									   Style="{StaticResource SpacingSampleLabelStyle}" />
+							<StackPanel Orientation="Horizontal"
+										Spacing="12">
+								<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+									<PersonPicture Initials="AB"
+												   Style="{StaticResource SimplePersonPictureStyle}" />
+								</Border>
+								<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+									<PersonPicture Initials="CD"
+												   Style="{StaticResource SimplePersonPictureSquareStyle}" />
+								</Border>
+								<Border Style="{StaticResource SpacingSampleBoundsStyle}">
+									<PersonPicture Initials="EF"
+												   Style="{StaticResource SimplePersonPictureSquareSmallStyle}" />
+								</Border>
+							</StackPanel>
+						</StackPanel>
+					</StackPanel>
+				</ScrollViewer>
+			</DataTemplate>
+		</sample:SamplePageLayout.SimpleTemplate>
+	</sample:SamplePageLayout>
+</Page>

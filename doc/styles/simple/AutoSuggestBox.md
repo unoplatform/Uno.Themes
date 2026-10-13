@@ -26,7 +26,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `SimpleAutoSuggestBoxIconFontSize`                            | `StaticResource`  | `BodyLargeFontSize` (16)                  |
 | `SimpleAutoSuggestBoxSuggestionsCornerRadius`                 | `StaticResource`  | `SimpleRadius200CornerRadius` (8)         |
 | `SimpleAutoSuggestBoxSuggestionsBorderThickness`              | `StaticResource`  | `SimpleStrokeBorderThickness` (1)         |
-| `SimpleAutoSuggestBoxSuggestionsPadding`                      | `StaticResource`  | `SimpleSpace100Thickness` (4)             |
+| `SimpleAutoSuggestBoxSuggestionsPadding`                      | `StaticResource`  | `SimpleSpace050Thickness` (4)             |
 
 > [!NOTE]
 > The AutoSuggestBox control does not expose overridable themed brush resource keys. Brushes are applied directly via shared semantic resources (e.g. `OnSurfaceBrush`, `SurfaceBrush`, `OutlineBrush`, `PrimaryMediumBrush`) in the style templates and visual states.

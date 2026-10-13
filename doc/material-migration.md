@@ -136,7 +136,7 @@ Material v2 sizing, spacing, and corner-radius resources are no longer hard-code
 | Resource Key         | 6.1 value | Now aliases                   | Default value |
 | -------------------- | --------- | ----------------------------- | ------------- |
 | `ButtonMinHeight`    | `40`      | `ControlHeightMedium`         | `40`          |
-| `ButtonPadding`      | `16,0`    | `Space400HorizontalThickness` | `16,0`        |
+| `ButtonPadding`      | `16,0`    | `Space200HorizontalThickness` | `16,0`        |
 | `ButtonCornerRadius` | `20`      | `Radius500CornerRadius`       | `20`          |
 
 Roughly forty keys across all Material v2 controls follow this pattern. Because the values are now derived, the new `DefaultSpacing`, `DefaultDensity` (`Compact` / `Regular` / `Comfy`), and `DefaultCornerRadius` theme properties reshape every Material control globally. See [Design Tokens](design-tokens.md).
