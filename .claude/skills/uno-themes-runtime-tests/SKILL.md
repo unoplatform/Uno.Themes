@@ -14,13 +14,13 @@ There is **no `dotnet test` entry point** in this repo. Runtime tests execute in
 ## Where tests live
 
 - **Canonical host:** `src/samples/SimpleSampleApp/RuntimeTests/Given_*.cs`. Per `AGENTS.md` §5, new tests belong here unless the behavior is genuinely Material/Cupertino-specific.
-- **Other hosts:** `src/samples/MaterialSampleApp/RuntimeTests/` (currently `Given_DesignTokens.cs`); `CupertinoSampleApp` references `Uno.UI.RuntimeTests.Engine` but hosts no tests today.
+- **Other hosts:** `src/samples/MaterialSampleApp/RuntimeTests/` (Material-only behavior, e.g. `Given_AppBarButton.cs`, `Given_ProgressRing.cs`). It is CI-gated too. `CupertinoSampleApp` references `Uno.UI.RuntimeTests.Engine` but hosts no tests today, and CI does not run it.
 - **Naming:** `Given_<Subject>.cs`, e.g. `Given_SeedColorPalette`, `Given_SemanticStyles`, `Given_ColorOverridePrecedence`, `Given_DesignTokens`, `Given_Fonts`, `Given_HotReload`.
 - **Attributes:** MSTest-style — `[TestClass]`, `[TestMethod]`, `[DataRow(...)]`, plus `[RunsOnUIThread]` for any test that touches `FrameworkElement` / `ResourceDictionary` / `Application.Resources`.
 
 ## CI pipeline
 
-- Desktop is the only CI-validated runtime-test target. Pipeline: `build/stage-runtimetests-desktop.yml`. Driver script: `build/scripts/linux-skia-desktop-runtime-tests.sh`. It `dotnet publish`es `SimpleSampleApp` for `net10.0-desktop -c Release`, then runs the resulting `SimpleSampleApp.dll` under `xvfb-run` + `fluxbox`, writes NUnit XML, and post-validates that at least one `<test-case>` was emitted.
+- Desktop is the only CI-validated runtime-test target. Pipeline: `build/stage-runtimetests-desktop.yml`. Driver script: `build/scripts/linux-skia-desktop-runtime-tests.sh`. Its matrix covers `SimpleSampleApp` and `MaterialSampleApp`: each is published for `net10.0-desktop -c Release`, and the resulting `<head>.dll` runs under `xvfb-run` + `fluxbox`, writes NUnit XML, and post-validates that at least one `<test-case>` was emitted.
 - **WinAppSDK (`net10.0-windows10.0.19041`) cannot run headless.** The engine's embedded runner (`UNO_RUNTIME_TESTS_RUN_TESTS`) waits on `Window.Current`, which is always null in a WinUI desktop app, and `UnitTestsControl` needs `ApplicationData.Current`, i.e. package identity. Run the packaged app (VS F5, or `Add-AppxPackage -Register` its `AppxManifest.xml`) and use the in-app runner page. Expect known WinUI-only failures in the typography/seed-repaint/density-rebuild tests until they are fixed. `Given_AllSamplePages` (shared by every head) opens each listed sample page and is the fastest check that a head is not crashing on WinUI.
 - WASM / Android / iOS runtime tests are not wired up in CI for this repo. They are technically reachable via `Uno.UI.RuntimeTests.Engine.Wasm.Runner` and per-platform heads, but treat that as out-of-scope here unless explicitly asked.
 
@@ -132,7 +132,7 @@ export UNO_RUNTIME_TESTS_RUN_TESTS='{"Filter": {"Value": "Given_HotReload"}, "At
 Follow `AGENTS.md` §5 and the "Adding a new style or theme resource" checklist in §11. Quick form:
 
 1. **Extend, don't duplicate.** If a `Given_*` file already covers the subject (e.g. `Given_ColorOverridePrecedence` for override-precedence work, `Given_SeedColorPalette` for seed-color logic, `Given_SemanticStyles` for semantic-key resolution), add a `[TestMethod]` there. Only create a new `Given_<Subject>.cs` when no existing file fits.
-2. **Place under `src/samples/SimpleSampleApp/RuntimeTests/`.** A test added anywhere else (a fresh top-level test project, a different sample's `RuntimeTests/`) will silently not run under `linux-skia-desktop-runtime-tests.sh`.
+2. **Place under `src/samples/SimpleSampleApp/RuntimeTests/`**, or under `src/samples/MaterialSampleApp/RuntimeTests/` for Material-only behavior. A test added anywhere else will silently not run in CI. That includes a fresh top-level test project and `CupertinoSampleApp/RuntimeTests/`.
 3. **Mark UI-touching tests with `[RunsOnUIThread]`.** Anything that constructs a `FrameworkElement`, merges a `ResourceDictionary`, or reads `Application.Resources` needs it. Tests without the attribute run on a pool thread and will throw at the first DP touch.
 4. **Use `[DataRow]` for matrix tests.** See `Given_SemanticStyles.When_SemanticAndSimpleStyles_AreApplied_LookIdentical` — one `[TestMethod]` with five `[DataRow]`s beats five copy-pasted methods.
 5. **Cover the cleanup path too.** For attached properties and theme-change subscriptions, assert both the apply and the clear/revert path. Leak-guard tests using `WeakReference<T>` must store the tracker as a field, not a local — see `AGENTS.md` §2 "Separate stack frames for leak-guard runtime tests".
@@ -208,7 +208,8 @@ Or open the XML and grep for `result="Failed"`.
 ## Common pitfalls
 
 - **`DOTNET_MODIFIABLE_ASSEMBLIES=debug` missing** → `Given_HotReload` tests fail with a metadata-update error. Always export it for headless runs.
-- **Test added outside `src/samples/SimpleSampleApp/RuntimeTests/`** → silently not picked up by CI. The CI script targets `SimpleSampleApp.dll`; anything else is invisible.
+- **Test added outside the Simple or Material `RuntimeTests/` folders** → CI silently skips it. The CI matrix runs only `SimpleSampleApp.dll` and `MaterialSampleApp.dll`.
+- **`--runtime-tests=<path>` alone does nothing.** The engine reads only the `UNO_RUNTIME_TESTS_RUN_TESTS` / `UNO_RUNTIME_TESTS_OUTPUT_PATH` environment variables. Without the output path it never starts, and the app keeps running until it is killed. CI sets both.
 - **Missing `[RunsOnUIThread]` on a UI-touching test** → first DP access throws `RPC_E_WRONG_THREAD` / `InvalidOperationException` and the test is marked failed for the wrong reason.
 - **Assertions that mutate `Application.Current.Resources`** → leak state into subsequent tests. Scope changes to a local container (`new Grid { Resources = { MergedDictionaries = { new SimpleTheme() } } }`) per `Given_SemanticStyles.CreateThemedContainer`.
 - **`Assert.Inconclusive`** → banned by `AGENTS.md` §5. Gate platform-specific tests with `#if __WASM__` / `#if !__WASM__` or an explicit attribute, not by skipping.
