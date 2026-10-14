@@ -17,6 +17,7 @@ cache-retention one.
 | 3 | [unoplatform/uno#24075](https://github.com/unoplatform/uno/issues/24075) | re-invokes `Application.CleanupNonDefaultAlcCaches` |
 | 4 | [unoplatform/uno#24076](https://github.com/unoplatform/uno/issues/24076) | none, not reachable host-side |
 | 5 | [unoplatform/uno#24581](https://github.com/unoplatform/uno/issues/24581) | none found |
+| 6 | not filed yet | none, see § 6 |
 
 ---
 
@@ -193,6 +194,40 @@ template-declared binding, since the consumer has no call site to wrap.
 work is plausible now that the mechanism is known, but binding evaluation happens on the
 dispatcher during layout rather than at a call site the host controls, so it was not attempted.
 Load the design system you want to test first in a session, or run its head standalone.
+
+## 6. `embedded://` Lottie sources resolve the assembly from the default ALC, so hosted theme animations never load
+
+**Area**: `LottieVisualSourceBase` / secondary-ALC app support
+**Version**: 7.0.0-dev.1574 and 7.0.0-dev.2285 (Skia desktop, Win32); not filed yet
+
+The Material and Cupertino `ProgressRing` styles point `LottieVisualSource.UriSource` at
+`embedded://Uno.Material.WinUI/...` (`embedded://Uno.Cupertino.WinUI/...`).
+`LottieVisualSourceBase.TryLoadEmbeddedJson` resolves the host part with
+`Assembly.Load(uri.Host)`. That code lives in `Uno.UI`, which is shared from the default ALC,
+so the load binds against the default ALC. The theme assembly is isolated per guest (`!` rule),
+so the default ALC cannot find it: `FileNotFoundException: Could not load file or assembly
+'uno.material.winui'`. The source records it as `Diagnostics`, logs `Failed to load animation`,
+and the ring never animates. Standalone heads are unaffected because there is only one ALC.
+
+The `embedded://./...` form does not help either: it resolves through
+`Application.Current`, which is the host's application.
+
+Verified with a throwaway in-guest probe through `ThemesSampleApp --app=material` (Release,
+desktop): `IsAnimatedVisualLoaded=False` hosted, `True` standalone. The same
+`Failed to load animation` lines appear in master's (`7.0.0-dev.1574`) hosted log, so this
+predates the Lottie package removal in `7.0.0-dev.1664`.
+
+**Suggested fix**: before the `Assembly.Load` fallback, resolve the name against
+`AssemblyLoadContext.CurrentContextualReflectionContext` when one is set. Better still, resolve
+it against the ALC of the code that created the source. For example, when a XAML-generated
+`LottieVisualSource` is created, capture the creating assembly's load context, or scan
+`ContextualAssemblyResolver.GetRelevantAssemblies()` for an already-loaded assembly with that
+simple name.
+
+**Workaround**: none. A host-side `Default.Resolving` forward into the collectible guest ALC,
+or a long-lived contextual-reflection scope on the UI thread, would both work against the
+unload and reclamation guarantees that `HostingSmoke_Desktop` gates. The animations run in the
+standalone heads, and `MaterialSampleApp`'s `Given_ProgressRing` covers them there.
 
 ---
 

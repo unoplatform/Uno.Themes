@@ -431,3 +431,31 @@ smoke reports a distinct "could not read" failure rather than blaming `Init()` a
 `IsMonoWebAssembly` guard is reached, so the browser leg should be at least as correct as
 desktop and no longer depends on `GetEntryAssembly()` being non-null there — but that was not
 verified, same caveat as the assets fix above.
+
+## Uno 7.0.0-dev.2285 retarget — Lottie folded into Uno.UI (2026-10-14)
+
+`7.0.0-dev.1664` dropped the `Uno.WinUI.Lottie` package (unoplatform/uno#25117), so no guest
+ships `Uno.UI.Lottie` in Release any more, and the `~Uno.UI.Lottie` rule was removed from
+`GuestSharedAssemblies.txt`. The `~` tier stays as a generic mechanism. In Debug, Hot Design
+still pulls the slim `Uno.WinUI.Lottie` (Skottie backend only) into the guest bins. With
+neither a `~` nor an isolation rule it loads per guest, which is what `~` did anyway, because
+the host does not carry it.
+
+### Not fixed (upstream): hosted ProgressRing animations never load
+
+The Material and Cupertino rings load their Lottie JSON from `embedded://<theme assembly>/...`.
+`Uno.UI` (shared, default ALC) resolves that assembly with `Assembly.Load`, which cannot see the
+guest's isolated copy, so the ring stays blank when hosted. This is **not** a regression from
+the retarget: master's (`7.0.0-dev.1574`) hosted log shows the same `Failed to load animation`
+errors. Details and the suggested fix are in `upstream-issues.md` § 6.
+
+Verification is manual and not CI-gated (see `specs/lessons.md`): a throwaway in-guest probe
+run through `ThemesSampleApp --app=material` showed `IsAnimatedVisualLoaded=False` hosted and
+`True` standalone. The standalone path is CI-gated by `MaterialSampleApp`'s `Given_ProgressRing`.
+
+### Observed, not caused here: the Win32 smoke fails ALC reclamation for Material
+
+On Windows (Win32), `ThemesSampleApp --smoke` (Release) reports `Previous guest ALC was NOT
+reclaimed` for the Material guest and exits `1`, on master and on this branch alike. CI runs
+the smoke on Linux/X11, which this session could not reproduce locally. Not investigated
+further.
