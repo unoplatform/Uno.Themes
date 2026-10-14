@@ -154,7 +154,7 @@
   <!--
     Applies the GuestSharedAssemblies.txt rules to a guest's dll list: '='/'^' names resolve
     from the wrapper's default ALC at runtime and are excluded from the payload; '!' (isolated
-    theme libraries) and '~' (shared-if-present, e.g. Uno.UI.Lottie) always ship.
+    theme libraries) and '~' (shared-if-present) always ship.
   -->
   <UsingTask TaskName="FilterGuestWasmPayload"
              TaskFactory="RoslynCodeTaskFactory"
