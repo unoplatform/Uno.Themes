@@ -89,40 +89,44 @@ public abstract partial class BaseTheme
 	}
 
 	/// <summary>
-	/// Multiplier table for spacing tokens.
-	/// Each entry maps a token variant to its multiplier relative to the base unit.
+	/// Multiplier table for spacing tokens: Material 3's steps (0–9× plus 0.25×, 0.5×, 0.75×, 1.25×)
+	/// and the 1.5×, 2.5×, 12× and 20× extensions, which keep a token for every value of the previous 4-based scale.
 	/// E.g. "200" → 2.0 means Space200 = DefaultSpacing × 2.
 	/// </summary>
 	private static readonly (string Variant, double Multiplier)[] SpacingScaleMultipliers =
 	{
 		("0",    0.0),
+		("025",  0.25),
 		("050",  0.5),
+		("075",  0.75),
 		("100",  1.0),
+		("125",  1.25),
 		("150",  1.5),
 		("200",  2.0),
+		("250",  2.5),
 		("300",  3.0),
 		("400",  4.0),
 		("500",  5.0),
 		("600",  6.0),
+		("700",  7.0),
 		("800",  8.0),
+		("900",  9.0),
 		("1200", 12.0),
-		("1600", 16.0),
-		("2400", 24.0),
-		("4000", 40.0),
+		("2000", 20.0),
 	};
 
 	/// <summary>
 	/// Variants that have a HorizontalThickness companion (N,0,N,0).
 	/// </summary>
 	private static readonly HashSet<string> HorizontalThicknessVariants =
-		new() { "0", "050", "100", "150", "200", "300", "400", "500", "600", "800" };
+		new() { "0", "025", "050", "075", "100", "125", "150", "200", "250", "300", "400", "500", "600", "700", "800", "900" };
 
 	/// <summary>
 	/// Variants that have directional Thickness companions
 	/// (VerticalThickness, TopThickness, BottomThickness, LeftThickness, RightThickness).
 	/// </summary>
 	private static readonly HashSet<string> DirectionalThicknessVariants =
-		new() { "0", "050", "100", "150", "200", "300", "400", "500", "600", "800" };
+		new() { "0", "025", "050", "075", "100", "125", "150", "200", "250", "300", "400", "500", "600", "700", "800", "900" };
 
 	/// <summary>
 	/// Multiplier table for shape (corner radius) tokens.

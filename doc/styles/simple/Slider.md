@@ -22,11 +22,11 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `SimpleSliderThumbCornerRadius`            | `StaticResource`  | `SliderThumbCornerRadius`        |
 | `SimpleSliderTrackThickness`               | `StaticResource`  | `SliderTrackThickness`           |
 | `SimpleSliderFillThickness`                | `StaticResource`  | `SliderFillThickness`            |
-| `SliderThumbWidth`                         | `StaticResource`  | `SimpleSpace400`                 |
-| `SliderThumbHeight`                        | `StaticResource`  | `SimpleSpace400`                 |
+| `SliderThumbWidth`                         | `StaticResource`  | `SimpleIconExtraSmall` (16)      |
+| `SliderThumbHeight`                        | `StaticResource`  | `SimpleIconExtraSmall` (16)      |
 | `SliderThumbCornerRadius`                  | `StaticResource`  | `SimpleRadius200CornerRadius`    |
-| `SliderTrackThickness`                     | `StaticResource`  | `SimpleSpace100`                 |
-| `SliderFillThickness`                      | `StaticResource`  | `SimpleSpace200`                 |
+| `SliderTrackThickness`                     | `Double`          | `4`                              |
+| `SliderFillThickness`                      | `Double`          | `8`                              |
 | `SliderPreContentMargin`                   | `Double`          | 14                               |
 | `SliderPostContentMargin`                  | `Double`          | 14                               |
 | `SliderHorizontalHeight`                   | `StaticResource`  | `SimpleIconMedium`               |

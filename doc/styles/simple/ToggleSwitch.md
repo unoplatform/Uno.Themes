@@ -21,7 +21,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `SimpleToggleSwitchTrackWidth`         | `StaticResource`  | `SimpleIconLarge`        |
 | `SimpleToggleSwitchTrackHeight`        | `StaticResource`  | `SimpleIconSmall`        |
 | `SimpleToggleSwitchStrokeThickness`    | `StaticResource`  | `SimpleStrokeBorder`     |
-| `SimpleToggleSwitchThumbSize`          | `StaticResource`  | `SimpleSpace400`         |
+| `SimpleToggleSwitchThumbSize`          | `StaticResource`  | `SimpleIconExtraSmall`   |
 | `SimpleToggleSwitchTrackRadius`        | `Double`          | 12                       |
 | `SimpleToggleSwitchThumbOffMargin`     | `Thickness`       | 4,0,0,0                  |
 | `SimpleToggleSwitchThumbOnMargin`      | `Thickness`       | 20,0,0,0                 |
