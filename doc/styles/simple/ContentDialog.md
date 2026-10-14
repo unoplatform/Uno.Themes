@@ -23,7 +23,7 @@ The Light and Dark ThemeDictionaries for ContentDialog are empty -- no control-s
 
 | Key                                              | Type              | Value                         |
 |--------------------------------------------------|-------------------|-------------------------------|
-| `SimpleContentDialogPanelPadding`                | `StaticResource`  | `SimpleSpace800Thickness`     |
+| `SimpleContentDialogPanelPadding`                | `Thickness`       | `32`                          |
 | `SimpleContentDialogCornerRadius`                | `StaticResource`  | `SimpleRadius200CornerRadius` |
 | `SimpleContentDialogMinWidth`                    | `Double`          | 288                           |
 | `SimpleContentDialogMinHeight`                   | `Double`          | 132                           |
