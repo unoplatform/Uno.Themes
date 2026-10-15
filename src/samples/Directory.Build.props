@@ -18,6 +18,10 @@
     <!-- Runtime Tests Engine: suppress warnings from injected source package -->
     <NoWarn>$(NoWarn);CS8619;CS8602;Uno0001;IL2026;IL2070;IL2072;IL2075</NoWarn>
     <DefineConstants>$(DefineConstants);IS_UNO_RUNTIMETEST_PROJECT</DefineConstants>
+
+    <!-- The Uno SDK implicitly references Uno.Core.Extensions.Logging.Singleton on WinAppSDK heads at its own
+         default version; keep it at the theme libraries' pin (src/library/Directory.Packages.props) or restore fails with NU1605. -->
+    <UnoCoreLoggingSingletonVersion>5.0.0-dev.34</UnoCoreLoggingSingletonVersion>
   </PropertyGroup>
 
   <Import Project="..\..\Directory.Build.props" />

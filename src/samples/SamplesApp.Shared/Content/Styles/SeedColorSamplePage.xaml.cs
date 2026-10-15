@@ -14,21 +14,34 @@ public sealed partial class SeedColorSamplePage : Page
 	private static Color _lastSeed = Color.FromArgb(0xFF, 0x67, 0x50, 0xA4);
 	private static SeedColorMode _lastSeedColorMode = SeedColorMode.Fidelity;
 
+	// WinUI raises ColorChanged while InitializeComponent applies the XAML Color, before the named
+	// elements ApplySeedColor writes to are connected. The constructor applies the seed itself.
+	private readonly bool _isInitialized;
+
 	public SeedColorSamplePage()
 	{
 		this.InitializeComponent();
 		SeedColorPicker.Color = _lastSeed;
 		SeedColorModeCombo.SelectedIndex = _lastSeedColorMode == SeedColorMode.Fidelity ? 0 : 1;
 		ApplySeedColor(_lastSeed);
+		_isInitialized = true;
 	}
 
 	private void SeedColorPicker_ColorChanged(ColorPicker sender, ColorChangedEventArgs args)
 	{
-		ApplySeedColor(args.NewColor);
+		if (_isInitialized)
+		{
+			ApplySeedColor(args.NewColor);
+		}
 	}
 
 	private void SeedColorModeCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
 	{
+		if (!_isInitialized)
+		{
+			return;
+		}
+
 		_lastSeedColorMode = SeedColorModeCombo.SelectedIndex == 1 ? SeedColorMode.TonalSpot : SeedColorMode.Fidelity;
 		ApplySeedColor(_lastSeed);
 	}

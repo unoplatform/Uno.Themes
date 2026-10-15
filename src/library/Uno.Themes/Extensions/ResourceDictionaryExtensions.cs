@@ -1,3 +1,7 @@
+using System;
+using Microsoft.Extensions.Logging;
+using Uno.Extensions;
+
 #if WinUI
 using Microsoft.UI.Xaml;
 #else
@@ -63,6 +67,20 @@ internal static class ResourceDictionaryExtensions
 
 	public static ResourceDictionary Duplicate(this ResourceDictionary source)
 	{
+		// Enumerating a dictionary makes WinUI resolve every deferred entry, including {StaticResource}
+		// aliases whose target is only in scope once the dictionary sits in the app's resources (Simple's
+		// ColorPalette.xaml aliases OnSurfaceInverseBrush). Resolving them early fails with E_FAIL, so a
+		// URI-backed dictionary is cloned by re-reading its Source; only runtime merges are copied over.
+		if (source.Source is { } uri && TryLoad(uri) is { } reloaded)
+		{
+			for (var i = reloaded.MergedDictionaries.Count; i < source.MergedDictionaries.Count; i++)
+			{
+				reloaded.MergedDictionaries.Add(source.MergedDictionaries[i].Duplicate());
+			}
+
+			return reloaded;
+		}
+
 		var clone = new ResourceDictionary();
 
 		foreach (var kvp in source)
@@ -79,5 +97,24 @@ internal static class ResourceDictionaryExtensions
 		}
 
 		return clone;
+	}
+
+	// The Source may no longer load (e.g. a hot-reload edit broke it) — callers then fall back to
+	// Duplicate precisely to keep the already-loaded copy, so degrade to copying its entries.
+	private static ResourceDictionary TryLoad(Uri source)
+	{
+		try
+		{
+			return new ResourceDictionary { Source = source };
+		}
+		catch (Exception ex)
+		{
+			if (typeof(ResourceDictionaryExtensions).Log().IsEnabled(LogLevel.Debug))
+			{
+				typeof(ResourceDictionaryExtensions).Log().LogDebug(ex, "'{Source}' could not be re-read; copying the loaded entries instead.", source);
+			}
+
+			return null;
+		}
 	}
 }

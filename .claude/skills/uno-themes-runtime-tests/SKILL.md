@@ -21,6 +21,7 @@ There is **no `dotnet test` entry point** in this repo. Runtime tests execute in
 ## CI pipeline
 
 - Desktop is the only CI-validated runtime-test target. Pipeline: `build/stage-runtimetests-desktop.yml`. Driver script: `build/scripts/linux-skia-desktop-runtime-tests.sh`. It `dotnet publish`es `SimpleSampleApp` for `net10.0-desktop -c Release`, then runs the resulting `SimpleSampleApp.dll` under `xvfb-run` + `fluxbox`, writes NUnit XML, and post-validates that at least one `<test-case>` was emitted.
+- **WinAppSDK (`net10.0-windows10.0.19041`) cannot run headless.** The engine's embedded runner (`UNO_RUNTIME_TESTS_RUN_TESTS`) waits on `Window.Current`, which is always null in a WinUI desktop app, and `UnitTestsControl` needs `ApplicationData.Current`, i.e. package identity. Run the packaged app (VS F5, or `Add-AppxPackage -Register` its `AppxManifest.xml`) and use the in-app runner page. Expect known WinUI-only failures in the typography/seed-repaint/density-rebuild tests until they are fixed. `Given_AllSamplePages` (shared by every head) opens each listed sample page and is the fastest check that a head is not crashing on WinUI.
 - WASM / Android / iOS runtime tests are not wired up in CI for this repo. They are technically reachable via `Uno.UI.RuntimeTests.Engine.Wasm.Runner` and per-platform heads, but treat that as out-of-scope here unless explicitly asked.
 
 ---
