@@ -1,0 +1,17 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:simple="using:Uno.Simple">
+
+	<!--
+		Fixture for Given_ApplicationExtensions (issue #1704). Reproduces the layout the
+		hot-reload guidance recommends and the issue reports as broken: a dictionary of the
+		application's own, merged by Source, which in turn merges the design system. The
+		MergedDictionaries below are populated by the XAML parser rather than from code, which
+		is the arrangement a recursive walk has to cope with in a real application.
+	-->
+
+	<ResourceDictionary.MergedDictionaries>
+		<simple:SimpleTheme />
+	</ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>
