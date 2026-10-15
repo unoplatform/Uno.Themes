@@ -45,3 +45,28 @@
 
   - bash: markdownlint -c $(Build.SourcesDirectory)/build/.markdownlint.json --ignore ".specify/**" --ignore "specs/**" "**/*.md"
     displayName: Run Markdown Linter
+
+- job: style_docs
+  cancelTimeoutInMinutes: 0
+  displayName: 'Style Docs Validation'
+
+  pool:
+    vmImage: 'ubuntu-latest'
+
+  steps:
+  - checkout: self
+    fetchDepth: 1
+    clean: true
+
+  # Same SDK step as templates/dotnet-install-linux.yml (keep DotNetVersion in sync), without its
+  # uno-check workload install: the generator is a plain .NET 10 file-based app.
+  - task: UseDotNet@2
+    displayName: 'Use .NET Core SDK 10.0.101'
+    retryCountOnTaskFailure: 3
+    inputs:
+      packageType: sdk
+      version: '10.0.101'
+
+  # doc/styles/** tables are generated from the Styles XAML; fails when a page is out of date.
+  - bash: dotnet run build/scripts/GenerateStyleDocs.cs -- --check
+    displayName: Verify generated style docs
