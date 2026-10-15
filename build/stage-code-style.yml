@@ -40,3 +40,9 @@ jobs:
   # gate would fail for anyone who built before running it.
   - bash: dotnet xstyler -c Settings.XamlStyler --passive -f "$(git ls-files '*.xaml' | paste -sd,)"
     displayName: Verify XAML formatting
+
+  # Also run in build/stage-docs-validations.yml (style_docs job). Repeated here because the
+  # Docs_Validations stage is skipped for PRs that touch no docs, which is exactly when a
+  # Styles XAML change can leave doc/styles/** stale.
+  - bash: dotnet run build/scripts/GenerateStyleDocs.cs -- --check
+    displayName: Verify generated style docs
