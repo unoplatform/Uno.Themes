@@ -504,6 +504,7 @@ internal sealed partial class GuestAppLoader
 
 		await Task.Run(alc.Dispose).ConfigureAwait(false);
 		_lastUnloadedAlc = new WeakReference<GuestAssemblyLoadContext>(alc);
+		DiagUnloadedAlcs.Add((alc.Name ?? "?", new WeakReference<GuestAssemblyLoadContext>(alc))); // TEMP DIAG
 
 		// Guest finalizers (DependencyObject teardown) run during unload and can re-populate
 		// the shared property-system caches AFTER ExitAlcApplication's sweep — observed via
@@ -553,6 +554,11 @@ internal sealed partial class GuestAppLoader
 	/// been reclaimed. Regular loads report this automatically; the hosting smoke calls it
 	/// after the final unload (and to retry while finalizers drain).
 	/// </summary>
+	// TEMP DIAG: every unloaded guest ALC, for the hosting smoke's end-of-run census.
+	internal List<(string Name, WeakReference<GuestAssemblyLoadContext> Ref)> DiagUnloadedAlcs { get; } = new();
+
+	internal static Task DiagDeepCollectAsync() => DeepCollectAsync();
+
 	internal async Task<bool?> VerifyPreviousAlcCollectedAsync()
 	{
 		if (_lastUnloadedAlc is null)

@@ -104,3 +104,14 @@ jobs:
       chmod +x build/scripts/linux-skia-desktop-hosting-smoke.sh
       build/scripts/linux-skia-desktop-hosting-smoke.sh
     displayName: 'Run Hosting Smoke - ThemesSampleApp'
+    env:
+      SMOKE_DIAG_DIR: '$(Build.ArtifactStagingDirectory)/smoke-diag'
+
+  # TEMP DIAG: heap dump + gcroot output from the hosting smoke
+  - task: PublishBuildArtifacts@1
+    displayName: Publish Hosting Smoke Diagnostics
+    condition: always()
+    inputs:
+      PathtoPublish: $(Build.ArtifactStagingDirectory)/smoke-diag
+      ArtifactName: hosting-smoke-diag
+      ArtifactType: Container

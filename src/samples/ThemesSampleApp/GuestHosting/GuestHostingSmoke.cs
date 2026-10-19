@@ -39,7 +39,12 @@ internal static class GuestHostingSmoke
 		var passed = true;
 		try
 		{
-			foreach (var app in GuestAppCatalog.Apps)
+			// TEMP DIAG: SMOKE_REVERSE flips the guest order.
+			var apps = Environment.GetEnvironmentVariable("SMOKE_REVERSE") is { Length: > 0 }
+				? GuestAppCatalog.Apps.Reverse().ToArray()
+				: GuestAppCatalog.Apps.ToArray();
+			_logger.LogInformation("[HOSTING-SMOKE] Order: {Order}", string.Join(", ", apps.Select(a => a.DisplayName)));
+			foreach (var app in apps)
 			{
 				_logger.LogInformation("[HOSTING-SMOKE] Loading {App}…", app.DisplayName);
 				await loader.LoadAsync(app);
@@ -60,6 +65,11 @@ internal static class GuestHostingSmoke
 				_logger.LogInformation("[HOSTING-SMOKE] Unloading the last guest…");
 				await loader.UnloadAsync();
 				passed &= await CheckReclamationAsync(loader);
+			}
+
+			if (_diag)
+			{
+				await DiagCensusAsync(loader);
 			}
 		}
 		catch (Exception ex)
@@ -118,10 +128,41 @@ internal static class GuestHostingSmoke
 		return true;
 	}
 
+	// TEMP DIAG: SMOKE_DIAG polls reclamation for up to 60 s and runs an end-of-run census.
+	private static readonly bool _diag = Environment.GetEnvironmentVariable("SMOKE_DIAG") is { Length: > 0 };
+
+	private static async Task DiagCensusAsync(GuestAppLoader loader)
+	{
+		var watch = System.Diagnostics.Stopwatch.StartNew();
+		string[] alive = [];
+		while (watch.Elapsed < TimeSpan.FromSeconds(60))
+		{
+			await GuestAppLoader.DiagDeepCollectAsync();
+			alive = loader.DiagUnloadedAlcs.Where(x => x.Ref.TryGetTarget(out _)).Select(x => x.Name).ToArray();
+			if (alive.Length == 0)
+			{
+				break;
+			}
+
+			await Task.Delay(500);
+		}
+
+		_logger.LogWarning("[HOSTING-SMOKE][DIAG] Census after {Elapsed:N1}s: {Total} unloaded, still alive: [{Alive}]",
+			watch.Elapsed.TotalSeconds, loader.DiagUnloadedAlcs.Count, string.Join(", ", alive));
+
+		if (alive.Length > 0 && Environment.GetEnvironmentVariable("SMOKE_HOLD") is { Length: > 0 } hold)
+		{
+			_logger.LogWarning("[HOSTING-SMOKE][DIAG] Holding for a dump (pid {Pid}).", Environment.ProcessId);
+			System.IO.File.WriteAllText(hold, Environment.ProcessId.ToString());
+			await Task.Delay(TimeSpan.FromMinutes(10));
+		}
+	}
+
 	private static async Task<bool> CheckReclamationAsync(GuestAppLoader loader)
 	{
 		bool? collected = null;
-		for (var attempt = 0; attempt < 5; attempt++)
+		var watch = System.Diagnostics.Stopwatch.StartNew();
+		for (var attempt = 0; _diag ? watch.Elapsed < TimeSpan.FromSeconds(60) : attempt < 5; attempt++)
 		{
 			collected = await loader.VerifyPreviousAlcCollectedAsync();
 			if (collected != false)
@@ -130,7 +171,12 @@ internal static class GuestHostingSmoke
 			}
 
 			// Finalizer-driven unpinning can lag a collection pass, especially in the browser.
-			await Task.Delay(200);
+			await Task.Delay(_diag ? 500 : 200);
+		}
+
+		if (_diag)
+		{
+			_logger.LogWarning("[HOSTING-SMOKE][DIAG] Reclamation check: collected={Collected} after {Elapsed:N1}s", collected, watch.Elapsed.TotalSeconds);
 		}
 
 		if (collected is null)
