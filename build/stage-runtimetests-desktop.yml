@@ -66,6 +66,7 @@ jobs:
 # hosting regression (this repo's history: a wasm payload that fetched HTTP 200 but failed to
 # boot, and a Win32 run-loop bug X11 verification missed). This job actually loads every guest,
 # unloads, and asserts per-cycle ALC reclamation via the wrapper's --smoke mode.
+# Reclamation is warning-only on Linux until unoplatform/uno-private#2469 is fixed.
 - job: HostingSmoke_Desktop
   cancelTimeoutInMinutes: 0
   displayName: 'Hosting Smoke - ThemesSampleApp Desktop'
