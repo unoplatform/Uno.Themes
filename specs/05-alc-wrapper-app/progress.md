@@ -453,9 +453,31 @@ Verification is manual and not CI-gated (see `specs/lessons.md`): a throwaway in
 run through `ThemesSampleApp --app=material` showed `IsAnimatedVisualLoaded=False` hosted and
 `True` standalone. The standalone path is CI-gated by `MaterialSampleApp`'s `Given_ProgressRing`.
 
-### Observed, not caused here: the Win32 smoke fails ALC reclamation for Material
+### Not fixed (upstream): guest ALCs are not reclaimed on Linux from dev.2285 (smoke now warning-only there)
 
-On Windows (Win32), `ThemesSampleApp --smoke` (Release) reports `Previous guest ALC was NOT
-reclaimed` for the Material guest and exits `1`, on master and on this branch alike. CI runs
-the smoke on Linux/X11, which this session could not reproduce locally. Not investigated
-further.
+The retarget broke the CI `HostingSmoke_Desktop` job (Linux/X11). Master (`dev.1574`) passed it
+on every recent run; this branch failed it on every run. Tracked as
+unoplatform/uno-private#2469. The diagnostic instrumentation is preserved on the
+`dev/xygu/20261020/up2469` branch.
+
+What a temporary diagnostic smoke showed on CI (60 s reclamation poll, census after the last
+unload, deterministic across two runs):
+
+- Material → Cupertino → Simple: Cupertino stays alive the whole 60 s while Simple is hosted.
+  It is collected once Simple is unloaded.
+- Simple → Cupertino → Material: Simple stays alive while Cupertino is hosted, and Cupertino
+  stays alive while Material is hosted. **Both are still alive 60 s after every guest is
+  unloaded.**
+- Heap dump at that point: the stuck ALCs' `LoaderAllocator`s are reachable only through their
+  own weak-interior-pointer handles (statics). There is no strong, static, thread or finalizer
+  root, so none of the wrapper's sweeps can release them. The retention is runtime/loader-side.
+  One lead, not confirmed: a `Gen2GcCallback` holds the trim delegate of
+  `SharedArrayPool<Sample (CupertinoSampleApp)>`.
+
+The smoke's reclamation check is therefore warning-only on Linux, like Debug and WASM
+(`GuestHostingSmoke._reclamationIsAuthoritative`). Loading, switching, unloading and the
+ShowMeTheXAML check stay gated. Make it authoritative again once #2469 is fixed.
+
+On Windows (Win32) a guest is collected only after the *next* guest is unloaded, on `dev.1574`
+and `dev.2285` alike. The smoke checks the previous guest only, so it fails there on both
+versions. Reclamation stays authoritative on Win32, but CI does not run the smoke on it.

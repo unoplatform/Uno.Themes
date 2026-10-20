@@ -18,6 +18,7 @@ cache-retention one.
 | 4 | [unoplatform/uno#24076](https://github.com/unoplatform/uno/issues/24076) | none, not reachable host-side |
 | 5 | [unoplatform/uno#24581](https://github.com/unoplatform/uno/issues/24581) | none found |
 | 6 | not filed yet | none, see § 6 |
+| 7 | [unoplatform/uno-private#2469](https://github.com/unoplatform/uno-private/issues/2469) | none possible; the smoke's reclamation check is warning-only on Linux |
 
 ---
 
@@ -229,6 +230,19 @@ or a long-lived contextual-reflection scope on the UI thread, would both work ag
 unload and reclamation guarantees that `HostingSmoke_Desktop` gates. The animations run in the
 standalone heads, and `MaterialSampleApp`'s `Given_ProgressRing` covers them there.
 
+## 7. From dev.2285, guest ALCs are not reclaimed after unload on Skia Linux/X11
+
+**Area**: secondary-ALC app support / runtime loader
+**Version**: 7.0.0-dev.2285 (not on 7.0.0-dev.1574)
+**Filed**: [unoplatform/uno-private#2469](https://github.com/unoplatform/uno-private/issues/2469), which has the full write-up
+
+In the hosting smoke, a guest ALC can stay alive after unload, permanently in the reversed
+guest order. A heap dump shows no managed root a host could clear: the stuck `LoaderAllocator`s
+are reachable only through their own weak-interior-pointer static handles. The repro and the
+diagnostic instrumentation are on the `dev/xygu/20261020/up2469` branch.
+
+**Workaround**: none. `GuestHostingSmoke` treats reclamation as warning-only on Linux until
+the issue is fixed.
 ---
 
 ## Uno 7 signature drift in the issue-3 workaround
