@@ -431,3 +431,53 @@ smoke reports a distinct "could not read" failure rather than blaming `Init()` a
 `IsMonoWebAssembly` guard is reached, so the browser leg should be at least as correct as
 desktop and no longer depends on `GetEntryAssembly()` being non-null there — but that was not
 verified, same caveat as the assets fix above.
+
+## Uno 7.0.0-dev.2285 retarget — Lottie folded into Uno.UI (2026-10-14)
+
+`7.0.0-dev.1664` dropped the `Uno.WinUI.Lottie` package (unoplatform/uno#25117), so no guest
+ships `Uno.UI.Lottie` in Release any more, and the `~Uno.UI.Lottie` rule was removed from
+`GuestSharedAssemblies.txt`. The `~` tier stays as a generic mechanism. In Debug, Hot Design
+still pulls the slim `Uno.WinUI.Lottie` (Skottie backend only) into the guest bins. With
+neither a `~` nor an isolation rule it loads per guest, which is what `~` did anyway, because
+the host does not carry it.
+
+### Not fixed (upstream): hosted ProgressRing animations never load
+
+The Material and Cupertino rings load their Lottie JSON from `embedded://<theme assembly>/...`.
+`Uno.UI` (shared, default ALC) resolves that assembly with `Assembly.Load`, which cannot see the
+guest's isolated copy, so the ring stays blank when hosted. This is **not** a regression from
+the retarget: master's (`7.0.0-dev.1574`) hosted log shows the same `Failed to load animation`
+errors. Details and the suggested fix are in `upstream-issues.md` § 6.
+
+Verification is manual and not CI-gated (see `specs/lessons.md`): a throwaway in-guest probe
+run through `ThemesSampleApp --app=material` showed `IsAnimatedVisualLoaded=False` hosted and
+`True` standalone. The standalone path is CI-gated by `MaterialSampleApp`'s `Given_ProgressRing`.
+
+### Not fixed (upstream): guest ALCs are not reclaimed on Linux from dev.2285 (smoke now warning-only there)
+
+The retarget broke the CI `HostingSmoke_Desktop` job (Linux/X11). Master (`dev.1574`) passed it
+on every recent run; this branch failed it on every run. Tracked as
+unoplatform/uno-private#2469. The diagnostic instrumentation is preserved on the
+`dev/xygu/20261020/up2469` branch.
+
+What a temporary diagnostic smoke showed on CI (60 s reclamation poll, census after the last
+unload, deterministic across two runs):
+
+- Material → Cupertino → Simple: Cupertino stays alive the whole 60 s while Simple is hosted.
+  It is collected once Simple is unloaded.
+- Simple → Cupertino → Material: Simple stays alive while Cupertino is hosted, and Cupertino
+  stays alive while Material is hosted. **Both are still alive 60 s after every guest is
+  unloaded.**
+- Heap dump at that point: the stuck ALCs' `LoaderAllocator`s are reachable only through their
+  own weak-interior-pointer handles (statics). There is no strong, static, thread or finalizer
+  root, so none of the wrapper's sweeps can release them. The retention is runtime/loader-side.
+  One lead, not confirmed: a `Gen2GcCallback` holds the trim delegate of
+  `SharedArrayPool<Sample (CupertinoSampleApp)>`.
+
+The smoke's reclamation check is therefore warning-only on Linux, like Debug and WASM
+(`GuestHostingSmoke._reclamationIsAuthoritative`). Loading, switching, unloading and the
+ShowMeTheXAML check stay gated. Make it authoritative again once #2469 is fixed.
+
+On Windows (Win32) a guest is collected only after the *next* guest is unloaded, on `dev.1574`
+and `dev.2285` alike. The smoke checks the previous guest only, so it fails there on both
+versions. Reclamation stays authoritative on Win32, but CI does not run the smoke on it.

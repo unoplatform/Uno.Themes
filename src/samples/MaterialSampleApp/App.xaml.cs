@@ -24,10 +24,6 @@ sealed partial class App : Application
 		SamplePageLayout.ActiveDesign = Design.Material;
 
 		this.InitializeComponent();
-
-#if HAS_UNO || NETFX_CORE
-		this.Suspending += OnSuspending;
-#endif
 	}
 
 	/// <summary>
@@ -54,12 +50,6 @@ sealed partial class App : Application
 			NavigationHelper.NavigateTo(_shell, sample, trySynchronizeCurrentItem: true);
 
 		MainWindow.Activate();
-	}
-
-	private void OnSuspending(object sender, SuspendingEventArgs e)
-	{
-		var deferral = e.SuspendingOperation.GetDeferral();
-		deferral.Complete();
 	}
 
 	public static void InitializeLogging()

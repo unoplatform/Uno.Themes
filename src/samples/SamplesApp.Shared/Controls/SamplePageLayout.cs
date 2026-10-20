@@ -222,7 +222,7 @@ public partial class SamplePageLayout : ContentControl
 	{
 		var presenter = (ContentPresenter)GetTemplateChild($"{mode}ContentPresenter");
 
-		return VisualTreeHelperEx.FindFirstDescendant<T>(presenter, x => x.Name == name);
+		return Helpers.VisualTreeHelperEx.FindFirstDescendant<T>(presenter, x => x.Name == name);
 	}
 
 	private class LayoutModeMapping
