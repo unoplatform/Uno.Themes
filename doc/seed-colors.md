@@ -21,7 +21,7 @@ Setting a `PrimarySeed` color on the `ThemeColors` object will generate:
 
 - **Primary**, **Secondary** and **Tertiary** tonal palettes
 - **Neutral** and **NeutralVariant** palettes (for Surface and Outline roles)
-- All semantic color roles (`OnPrimary`, `PrimaryContainer`, `OnPrimaryContainer`, `Surface`, `OnSurface`, `Outline`, etc.) at the correct M3-spec tone levels
+- All semantic color roles (`OnPrimary`, `PrimaryContainer`, `OnPrimaryContainer`, `Surface`, `OnSurface`, `Outline`, etc.) at the correct M3-spec tone levels, including the tone-based surface roles (`SurfaceContainerLowest` through `SurfaceContainerHighest`, `SurfaceDim`, `SurfaceBright`)
 - Separate palettes for both **Light** and **Dark** themes
 
 The **Error** palette is *not* generated. Material Design 3 pins Error to a fixed hue and chroma regardless of the seed, so the four Error keys keep the values defined by the theme's base palette. Override them explicitly if you need a different error color.
