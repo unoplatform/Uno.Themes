@@ -1,21 +1,5 @@
 steps:
 
-  - task: UseDotNet@2
-    condition: eq(variables['IsCanaryBranch'], true)
-    displayName: 'Use .NET 5.0.406'
-    retryCountOnTaskFailure: 3
-    inputs:
-      packageType: runtime
-      version: 5.0.15
-
-  - task: UseDotNet@2
-    condition: eq(variables['IsCanaryBranch'], true)
-    displayName: 'Use .NET runtime 2.2.x'
-    retryCountOnTaskFailure: 3
-    inputs:
-      packageType: runtime
-      version: 2.2.x
-
   - task: unoplatformCanaryUpdater@1
     displayName: 'Canary Update'
     retryCountOnTaskFailure: 3
@@ -26,7 +10,5 @@ steps:
       summaryFile: '$(Build.ArtifactStagingDirectory)/Canary.md'
       resultFile: '$(Build.ArtifactStagingDirectory)/result.json'
       nugetUpdaterVersion: '1.3.1'
-      useVersionOverrides: true
-      versionOverridesFile: '$(build.sourcesdirectory)/build/templates/versionOverrides.json'
-      packageAuthor: 'Uno Platform,unoplatform'
+      packageAuthor: 'Uno Platform,unoplatform,nventive'
       additionalPublicSources: 'https://pkgs.dev.azure.com/uno-platform/1dd81cbd-cb35-41de-a570-b0df3571a196/_packaging/unoplatformdev/nuget/v3/index.json'
