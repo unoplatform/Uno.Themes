@@ -4,6 +4,189 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## `!HAS_UNO` code paths ran nowhere until the WinAppSDK head — `SimpleTheme` crashed every WinUI app at startup
+
+**Context:** adding the WinAppSDK head to `SimpleSampleApp` (2026-09-29). The app failed fast
+(`0xC000027B`, stowed exception in `Microsoft.UI.Xaml.dll`) inside `App.InitializeComponent`, with no
+managed exception surfaced. `AppDomain.FirstChanceException` logging is what found the cause; WinRT
+callbacks swallow the managed trace otherwise.
+
+**Root cause:** on real WinUI, `ResourceDictionaryExtensions.SafeMerge` clones via `Duplicate()`, which
+*enumerates* the dictionary. WinUI resolves every deferred entry while enumerating, including Simple's
+`ColorPalette.xaml` `<StaticResource x:Key="SimpleTextUtilitiesOnOverlayBrush" ResourceKey="OnSurfaceInverseBrush"/>`
+alias. Its target only exists once the theme sits in the app's resources, so resolving it from inside the
+`SimpleTheme` constructor throws `E_FAIL`. Uno resolves aliases lazily and `SafeMerge` never clones there, so no
+existing head could see it.
+
+**How to apply:**
+- Never enumerate a `ResourceDictionary` that may hold `<StaticResource>` aliases on WinUI. Clone a URI-backed
+  one by re-reading its `Source` (what `Duplicate` does now).
+- Any `#if !HAS_UNO` branch is only exercised by the WinAppSDK head: run the runtime tests there when touching one.
+- Uno forgives XAML that WinUI rejects, and every such case is a WinAppSDK crash. Seen so far: a
+  `{StaticResource}` to an undefined key (Design Tokens sample's `SimpleOutlinedButtonStyle`), and an
+  `x:Double` fed through `{StaticResource}` into a `GridLength` row/column (Simple Slider's
+  `SliderPreContentMargin`). Only `{ThemeResource}` converts it, which is why WinUI's own templates use it.
+- WinUI can raise control events while `InitializeComponent` applies attributes, before `x:Name` fields
+  are connected (`ColorPicker.ColorChanged` on the Seed Color sample). Uno doesn't. Guard code-behind
+  handlers until the constructor has finished.
+- A WinUI `XamlParseException` message can be stale: the "Cannot find a Resource with the Name/Key
+  TertiaryContainerColor" text was attached to both of these unrelated failures. Trust the `[Line/Position]`
+  and the first-chance exception, not the text. It also hints that an earlier lookup fails silently, a
+  lead for the WinUI-only seed/typography test failures.
+- On WinUI desktop a `ContentDialog` needs `XamlRoot` set before `ShowAsync()`; Uno doesn't care.
+- Undefined keys in library templates (`SimpleContentDialogEdgeMargin`, `SimpleMenuFlyoutSeparatorHeight`)
+  fail natively on WinUI with no managed exception at all. To sweep for them, diff every
+  `{StaticResource|ThemeResource X}` / `ResourceKey="X"` in `Styles/` against the `x:Key`s of the library,
+  `Uno.Themes/Styles` and WinAppSDK's `generic.xaml`. Ignore the `BaseTheme`-generated tokens (`Space*`,
+  `Radius*`, `ControlHeight*`, `IconSize*`) and `x:Name`-keyed template resources.
+- Never open the `RuntimeTestRunner` sample page from inside a test run. Its `UnitTestsControl`
+  constructor replaces the engine's static test content root, so every later `UnitTestsUIContentHelper.Content`
+  lands in a detached tree and each `WaitForLoaded` times out. Symptom: a page with no parent and no
+  `XamlRoot`. `Given_AllSamplePages` excludes it.
+- The Material sample app loads Material **v2** only. A page with only a v1 `MaterialTemplate` (no
+  `M3MaterialTemplate`) falls back to its v1 content and v1-only keys, which Uno renders unstyled and WinUI
+  crashes on. Give it a v2 template, or don't list it for `Design.Material` (InfoBar, TimePicker and
+  NavigationView (WUX) are unlisted for this reason).
+- The runtime tests that fail only on WinAppSDK are not engine problems (the engine only lacks a headless
+  mode there). They come from how WinUI resolves the themes' `<StaticResource x:Key="A" ResourceKey="B"/>`
+  aliases: against the alias's own dictionary first, then `Application.Resources`, and only once. Uno
+  resolves them later, from the scope actually doing the lookup. Consequences (2026-09-30, 33 Simple / 22
+  Material failures):
+  - `SharedTypography.xaml` declares a Segoe UI `DefaultFontFamily` fallback beside the scale aliases, so every
+    type scale binds to Segoe UI on WinUI, even though the theme's own root is Inter/Roboto (real bug, every
+    WinAppSDK app).
+  - A theme merged into an element's `Resources` (a scoped theme, as most runtime tests do) does not drive
+    its styles on WinUI; the aliases reach the app-level theme instead (density, corner radius, seed and
+    colour overrides).
+  - Values changed at runtime do not reach controls that are already rendered.
+  - Two failures are test techniques, not bugs: a `ContentDialog` placed in the tree never raises `Loaded`,
+    and a `Source`-loaded dictionary can't be written to (`0x800F1000`).
+- Sweep a head's own XAML too (`App.xaml`, override dictionaries), not just the shared pages. The Material
+  head overrode `FlyoutLightDismissOverlayBackground` with the v1-only `MaterialOverlayColor`: Uno drew a
+  transparent overlay, and WinUI failed `ShowAt` (`E_FAIL`, no detail) for every `LightDismissOverlayMode="On"`
+  flyout. Content that only materializes on open (flyouts, dialogs) is invisible to a page-load smoke
+  test and needs its own open-it test.
+- Prove a WinUI hypothesis before keeping the change: `Value="PositiveInfinity"` looked suspect but works on
+  WinUI; it was reverted after a targeted test.
+- A `.cs` file shared between heads belongs in `SamplesApp.Shared`, not a `<Compile Link>`: `dotnet format`
+  formats a linked file without the repo `.editorconfig` and rewrites its tabs to spaces.
+- To find which part of a page kills WinUI, load its sections one by one through `XamlReader.Load`
+  and log before and after each. `DebugSettings.XamlResourceReferenceFailed` stayed silent for both cases.
+- When a WinUI app dies with `0xC000027B` and no managed exception, hook `AppDomain.CurrentDomain.FirstChanceException`
+  in `App`'s static constructor to get the real stack before guessing.
+
+---
+
+## Uno's `AppBarButton` hijacks the template part named `Content` — never use that name for a presenter that is not meant to show `Icon ?? Content`
+
+**Context:** unoplatform/Uno.Themes#1735 (2026-09-29). In the Material v2 and Simple `AppBarButton` styles, a
+`UIElement` assigned to `AppBarButton.Content` (e.g. a `Grid` wrapping a `TextBlock`) rendered nothing, while a
+plain string in `Content` rendered fine. Both templates have two presenters: `ContentPresenter x:Name="Content"`
+bound to `Icon`, nested in a `Viewbox` that collapses when `Icon` is null, and `ContentPresenter
+x:Name="ContentPresenter"` bound to `Content`.
+
+**Root cause:** `AppBarButton.uno.cs` (`SetupContentUpdate`, run from `OnApplyTemplate` / `OnLoaded`) does
+`GetTemplateChild<ContentPresenter>("Content")` and force-sets that presenter's `Content` to `Icon ?? Content`,
+re-applying it whenever either property changes. It exists so that WinUI's icon-only template still shows
+something when only `Content` is set (Uno issue #19649). In our templates the part named `Content` is the icon
+presenter inside the collapsed `Viewbox`. With no `Icon`, Uno pushes the user's `Content` into it; a
+`UIElement` can only have one visual parent, so it is torn out of the visible `ContentPresenter` and ends up
+under a collapsed element. A string is not subject to the single-parent rule, which is why every string-based
+sample and test passed and the bug went unnoticed.
+
+**How to apply:**
+- In an `AppBarButton` template, never name a template part `Content` unless it is meant to display
+  `Icon ?? Content`. Our templates name the icon presenter `IconPresenter` and the content presenter
+  `ContentPresenter`; keep it that way in both Material v2 and Simple (the v1 `MaterialAppBarButton` in
+  `CommandBar.xaml` is icon-only and intentionally relies on the fallback).
+- When a template splits a control's properties across several presenters, add at least one runtime test
+  that sets a `UIElement` (not a string) into each of them — strings hide re-parenting bugs.
+- Before naming a part in a retemplated framework control, check the Uno implementation for
+  `GetTemplateChild("...")` lookups; Uno adds a few beyond WinUI's (`AppBarButton`: `Content`,
+  `KeyboardAcceleratorTextLabel`).
+
+---
+
+## `Application.Current` is the HOST app inside an ALC-hosted guest — anything resolving the theme through it silently looks at the wrong application
+
+**Context:** `ThemesSampleApp` hosting (2026-09-21, `specs/05-alc-wrapper-app/`). Opening the **Seed Color**
+page in a hosted head threw `InvalidOperationException: No BaseTheme ... found in
+Application.Current.Resources.MergedDictionaries` from the page's constructor, while the same page works
+standalone and the rest of the hosted guest renders correctly themed.
+
+**Root cause:** verified in the pinned `Uno.UI.dll` IL, unchanged between `Uno.Sdk.Private` 6.7.0-dev.815
+and 7.0.0-dev.701 (Uno 7 only renames the null-path sweep to `CleanupAllSecondaryAlcCaches`).
+`Application..ctor` calls
+`set_Current(this)` -> `SetCurrentApplication`, which writes the `_current` static **only** when
+`AssemblyLoadContext.GetLoadContext(app.GetType().Assembly) == Default`. A secondary-ALC app is registered in
+`_applicationsByAlc` (`ConditionalWeakTable<ALC, Application>`) with an `AlcRegistrationId` and latches
+`_hasSecondaryApps`; `_current` is left alone. `Application.Current` therefore stays the *hosting* app for the
+whole process, which is exactly what makes host-wins resource resolution work — and exactly what breaks any
+guest-side code that treats it as "my app". Type isolation compounds it: with `Uno.Themes.WinUI` loaded
+per-ALC, `Application.Current.Resources.MergedDictionaries.OfType<BaseTheme>()` evaluated in guest code can
+never match a host theme, because it is a different `BaseTheme` type.
+
+**How to apply:**
+- In code that may run inside an ALC-hosted app, treat `Application.Current`, `Window.Current` and every
+  process-wide static in the shared `Uno.UI` as *the host's*. The hosted head must capture its own instance
+  (`this` in its `App` constructor) and pass it along — the instance-scoped
+  `ApplicationExtensions.GetTheme(Application)` exists for exactly this; the static
+  `SemanticThemeHelper` wrapper does not work hosted, by construction.
+- Put that handle in code that compiles **into the head** (a shared-project type, like
+  `NavigationHelper.MainWindow` / `SamplePageLayout.ActiveDesign` / `SampleThemeHelper.CurrentApplication`).
+  Statics there are per-head, hence per-ALC when hosted, with no ALC API involved.
+- Do **not** try to discover the guest's `Application` from Uno: `GetForAssemblyLoadContext`, `GetForInstance`,
+  `GetForType`, `EnumerateSecondaryApplications`, `GetLatestSecondaryApplicationForType` and
+  `AlcContentHost.SourceApplicationOverride` are all `internal`, and the `GetFor*` pair falls back to
+  `Application.Current` for default-ALC types — i.e. it answers "the host" for the shared framework types most
+  of a guest's visual tree is built from. Do not reach for a live-instance registry either: within one ALC it
+  cannot tell an app-level theme from one a page or test constructed.
+- A bug that only manifests hosted cannot be red-proven by a runtime test (those run standalone, in the
+  default ALC). Prove it with a throwaway in-ALC probe through the wrapper (`--app=<head>`, reflection into the
+  guest ALC, reverted afterwards) and say plainly in the report that the hosted path is verified manually and
+  not CI-gated.
+
+---
+
+## `CommandBarExtensions.NavigationCommand` only renders under the Material **v1** CommandBar template
+
+**Context:** the five `Content/NestedSamples/MediaPlayerElementSample_NestedPage*.xaml` pages declared
+their back button through `uno:CommandBarExtensions.NavigationCommand`. Under Material v2 — the default
+since `MaterialTheme.DefaultStylesSource` points at `Version2.MergedPages` — none of them rendered a
+button at all, so the full-screen nested samples were a dead end on every platform without a system
+back affordance (Skia desktop, Windows).
+
+**Root cause:** the navigation-command slot is not a framework feature, it is a `ContentControl` inside
+the *hand-written* `XamlMaterialCommandBarTemplate` in `Styles/Controls/v1/CommandBar.xaml` (its own
+comment says so: *"Simplified CommandBar template that adds support for
+Uno.UI.CommandBarExtensions.NavigationCommand on Windows"*). v2's `MaterialCommandBarStyle` sets no
+`Template` at all, so the default WinUI template applies and the attached property is simply ignored.
+`doc/material-migration.md` also records that the native iOS/Android CommandBar path is gone, so there
+is no platform where v2 picks the property up. The same pages referenced `MaterialAppBarButton` (a v1-only
+key; v2 has `MaterialAppBarButtonStyle`) and `ms-appx:///Assets/Close.png`, which does not exist in the
+repo — both fail silently as `Uno.UI.ResourceResolver` warnings.
+
+**How to apply:**
+- **In shared sample XAML, put command-bar buttons in `CommandBar.PrimaryCommands`**, not in
+  `CommandBarExtensions.NavigationCommand`, unless the page is pinned to Material v1. PrimaryCommands is
+  rendered by the default template, so it survives a v1→v2 switch and works in every head.
+- Pair it with `OverflowButtonVisibility="Collapsed"` and `IsDynamicOverflowEnabled="False"` when the
+  button is the only way out of a page — dynamic overflow will otherwise fold it into a `…` menu at
+  narrow widths.
+- **A green build proves nothing about resource keys.** Unresolved `{StaticResource}` and a missing
+  template slot both compile clean; they surface as `warn: Uno.UI.ResourceResolver` lines at runtime and
+  as missing UI. Verify sample-UI changes by running the app or a runtime test, never by building.
+- **`MediaPlayerElement.MediaPlayer` is null when no media extension is registered** (Skia desktop).
+  `MediaPlayerElementSample_NestedPage5` threw an NRE from its constructor because of it, and all five
+  pages would have thrown from their `Unloaded` handler *during* back navigation. Null-conditional these.
+- **Do not run the `AGENTS.md` §5 XamlStyler command over existing XAML without checking the diff.**
+  `Settings.XamlStyler` declares no `IndentWithTabs`/`IndentSize`, so `XamlStyler.Console` defaults to
+  4 spaces and rewrites every line of a tab-indented file — the repo's XAML is tabs (`.editorconfig`).
+  It turned a 17-line diff into a 105-line one. Either hand-format to match the file, or revert the
+  whitespace churn afterwards.
+
+---
+
 ## A generated layer is always a *merged* dictionary, so it can only shadow keys declared inside `ThemeDictionaries`
 
 **Context:** Spec 09 (`DefaultFontFamily`, PR #1707). `When_DefaultFontFamilySet_Then_ThemeAliasKeysFollow`
@@ -267,3 +450,23 @@ next file to need an override didn't get it.
 
 **Verification trap (the more important lesson):** these font tests **passed in the minimal dedicated `Uno.Themes.RuntimeTests` host but failed in `SimpleSampleApp`** (and therefore in CI). The dedicated host merges `<SimpleTheme/>` app-wide, which "warms" the ambient resolution scope so the fragile `<StaticResource>` aliases happen to resolve to the right weight — a **false positive**. The real consumer-like host (`SimpleSampleApp`, also what CI runs) exposed the bug.
 - **Always verify font/typography/resource-precedence changes in `SimpleSampleApp` (the CI host), not only in a minimal host.** A minimal single-theme host can mask cross-dictionary resolution and merge-order bugs. If two hosts disagree, trust the one that matches CI.
+
+## A `ResourceDictionary` subclass declared in XAML with `Source` loses its type; `BaseDictionaries.xaml` feeds the deprecated bundles too (#1728)
+
+**Context:** #1728 marks semantic resources by dictionary type (`SemanticResources : ResourceDictionary`). Declaring `<themes:SemanticResources Source="…/SharedTypography.xaml"/>` in `BaseDictionaries.xaml` compiled and resolved, but a runtime walk showed the entry as a plain `ResourceDictionary`: the Uno XAML generator emits the registered dictionary for a Source-merged entry and ignores the declared type. The first fix removed `SharedTypography.xaml` from `BaseDictionaries.xaml` and re-merged it from C#, which silently stripped the shared type tokens from `MaterialResourcesV1`/`V2` because the `Common` glob feeds `mergedpages.v1` and `.v2` as well.
+
+**How to apply:**
+- Anything that must carry a dictionary *type* is created in C# (`new SemanticResources { Source = … }`), never declared in XAML. Verify the type at runtime, not by reading the markup.
+- Treat `Styles/Application/Common/BaseDictionaries.xaml` as shared with the deprecated Material bundles: prefer adding a layer over removing an entry, and check `MaterialResourcesV1`/`V2` before editing it.
+
+## Fixing breakage at large design-token values: change the tokens, not the templates (#1746)
+
+**Context:** while aligning the spacing scale with Material 3, controls still broke at large `DefaultSpacing` values. One fix moved ContentDialog's max size from its frame onto its content and dropped the height cap; another added a layout property to a NavigationView item template. Both rendered identically at the default in the sample, but the dialog change altered every long-content dialog at the default (it grew to the window instead of stopping at 560 px).
+
+**Correction from the maintainer:** spacing is uncapped, so UI will always break at high enough values. Fixes for large-value breakage stay design-token changes (which token or fixed value a key resolves to) unless the breakage is extreme.
+
+**How to apply:**
+- To stop a control breaking at large scale values, change what its keys resolve to: a fixed token or literal equal to the current default, or a smaller step. Do not restructure a template, move size caps, or add layout properties.
+- A pixel-identical sample at the default does not prove a template change is safe: the sample rarely exercises the case the change affects (long content, an override, another host size). Token remaps are provable by value; template changes are not.
+- List what token-only fixes leave broken in the issue as follow-ups instead of widening the change.
+

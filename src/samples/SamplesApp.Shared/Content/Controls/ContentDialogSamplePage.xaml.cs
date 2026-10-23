@@ -28,15 +28,26 @@ public sealed partial class ContentDialogSamplePage : Page
 			[nameof(BuildSimpleCustomContentDialog)] = BuildSimpleCustomContentDialog,
 		};
 
-		if ((sender as Button)?.Tag is string context && mappings.TryGetValue(context, out var builder))
+		// async void: an escaping exception takes the app down, so report it instead.
+		try
 		{
-			var dialog = builder();
+			if ((sender as Button)?.Tag is string context && mappings.TryGetValue(context, out var builder))
+			{
+				var dialog = builder();
 
-			await dialog.ShowAsync();
+				// WinUI only shows a dialog that knows which XamlRoot (window) to open over.
+				dialog.XamlRoot = XamlRoot;
+
+				await dialog.ShowAsync();
+			}
+			else
+			{
+				throw new KeyNotFoundException($"The given key '{(sender as Button)?.Tag as string}' was not present in the dictionary.");
+			}
 		}
-		else
+		catch (Exception ex)
 		{
-			throw new KeyNotFoundException($"The given key '{(sender as Button)?.Tag as string}' was not present in the dictionary.");
+			System.Diagnostics.Debug.WriteLine($"Failed to show the ContentDialog sample: {ex}");
 		}
 	}
 

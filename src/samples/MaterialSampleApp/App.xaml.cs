@@ -16,14 +16,14 @@ sealed partial class App : Application
 	/// </summary>
 	public App()
 	{
+		// Application.Current only ever points at the default-ALC application, so a head hosted in a
+		// secondary ALC by ThemesSampleApp must hand sample pages its own instance for theme lookups.
+		SampleThemeHelper.CurrentApplication = this;
+
 		ConfigureXamlDisplay();
 		SamplePageLayout.ActiveDesign = Design.Material;
 
 		this.InitializeComponent();
-
-#if HAS_UNO || NETFX_CORE
-		this.Suspending += OnSuspending;
-#endif
 	}
 
 	/// <summary>
@@ -50,12 +50,6 @@ sealed partial class App : Application
 			NavigationHelper.NavigateTo(_shell, sample, trySynchronizeCurrentItem: true);
 
 		MainWindow.Activate();
-	}
-
-	private void OnSuspending(object sender, SuspendingEventArgs e)
-	{
-		var deferral = e.SuspendingOperation.GetDeferral();
-		deferral.Complete();
 	}
 
 	public static void InitializeLogging()
@@ -86,8 +80,13 @@ sealed partial class App : Application
 #endif
 	}
 
+	// Name our own assembly explicitly: with no argument, XamlDisplay.Init() looks for the
+	// generated ShowMeTheXAML.XamlDictionary in Assembly.GetEntryAssembly(), which is the
+	// ThemesSampleApp wrapper when this app is hosted in a secondary ALC. That probe misses
+	// silently — unregistered keys resolve to an empty string — so every "show me the XAML"
+	// pane renders blank. Standalone this is a no-op: the entry assembly is already this one.
 	static void ConfigureXamlDisplay()
 	{
-		XamlDisplay.Init();
+		XamlDisplay.Init(typeof(App).Assembly);
 	}
 }

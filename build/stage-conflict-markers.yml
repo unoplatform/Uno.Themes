@@ -1,0 +1,24 @@
+# Fails on unresolved merge-conflict markers anywhere in the tree. Mergify opens
+# a backport PR even when its cherry-pick conflicts, committing the markers as-is;
+# this makes such a PR fail in seconds instead of deep in the build.
+# Scans the whole tree, not the diff, so markers already on the base branch are
+# reported too. `=======` is not matched: it is also a Markdown heading underline.
+jobs:
+- job: Scan
+  displayName: No unresolved merge conflicts
+  cancelTimeoutInMinutes: 0
+  pool:
+    vmImage: ubuntu-latest
+  steps:
+  - checkout: self
+    fetchDepth: 1
+  - bash: |
+      git grep -nIE '^(<<<<<<<|>>>>>>>)( |$)'
+      case $? in
+        0) echo "##vso[task.logissue type=error]Unresolved merge conflict markers found (listed above)."
+           exit 1 ;;
+        1) echo "No merge conflict markers found." ;;
+        *) echo "##vso[task.logissue type=error]git grep failed."
+           exit 1 ;;
+      esac
+    displayName: Scan for merge conflict markers

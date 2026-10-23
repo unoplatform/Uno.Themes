@@ -38,6 +38,12 @@ stages:
   jobs:
   - template: build/stage-determine-changes.yml
 
+- stage: Conflict_Markers
+  displayName: Conflict Markers
+  dependsOn: []
+  jobs:
+  - template: build/stage-conflict-markers.yml
+
 - stage: Docs_Validations
   displayName: Docs Validations
   dependsOn: Determine_Changes
@@ -72,6 +78,7 @@ stages:
     - template: build/stage-build-android.yml
     - template: build/stage-build-wasm.yml
     - template: build/stage-build-desktop.yml
+    - template: build/stage-build-winappsdk.yml
 
 - stage: Runtime_Tests
   displayName: Runtime Tests

@@ -287,13 +287,14 @@ public abstract partial class BaseTheme : ResourceDictionary
 	/// Individual tokens can still be overridden via lightweight styling.
 	/// </summary>
 	/// <remarks>
-	/// This is a <b>construction-time</b> setting: assign it where the theme is declared
-	/// (normally <c>App.xaml</c>). Assigning it later regenerates the <c>Radius*</c> token
-	/// resources but does not restyle controls — not the ones already rendered, and not ones
-	/// created afterwards. The per-control keys that consume these tokens (<c>ButtonCornerRadius</c>
-	/// and friends) are resolved once when the theme's control-style dictionaries are parsed, and
-	/// a <see cref="CornerRadius"/> is a value with no live instance to update. To offer shape as
-	/// a user setting, change the property and then recreate the root content.
+	/// This is a <b>runtime</b> setting: assigning it regenerates the <c>Radius*</c> token
+	/// resources, and controls created afterwards pick the new scale up, because the control
+	/// styles read these tokens (directly or through per-control keys such as
+	/// <c>ButtonCornerRadius</c>) with <c>{ThemeResource}</c>. Controls <b>already rendered</b>
+	/// keep the values they resolved when they loaded — a <see cref="CornerRadius"/> is a value
+	/// with no live instance to update — until a theme-change pass re-resolves them (toggle the
+	/// root element's <c>RequestedTheme</c> away from its <c>ActualTheme</c> and back) or the
+	/// root content is recreated.
 	/// </remarks>
 	public double DefaultCornerRadius
 	{
@@ -301,6 +302,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 		set => SetValue(DefaultCornerRadiusProperty, value);
 	}
 
+	/// <summary>Identifies the <see cref="DefaultCornerRadius"/> dependency property.</summary>
 	public static DependencyProperty DefaultCornerRadiusProperty { get; } =
 		DependencyProperty.Register(
 			nameof(DefaultCornerRadius),
@@ -322,11 +324,11 @@ public abstract partial class BaseTheme : ResourceDictionary
 	/// The default base spacing unit (px) when <see cref="DefaultSpacing"/> is not set
 	/// or holds an invalid (non-finite or negative) value.
 	/// </summary>
-	private const double DefaultBaseSpacing = 4.0;
+	private const double DefaultBaseSpacing = 8.0;
 
 	/// <summary>
-	/// Gets or sets the base spacing unit (in pixels). Default is 4.
-	/// All spacing scale tokens (Space0, Space050, Space100, …) and their
+	/// Gets or sets the base spacing unit (in pixels). Default is 8.
+	/// All spacing scale tokens (Space0, Space025, Space050, Space100, …) and their
 	/// <see cref="Thickness"/> companions are computed as multiples of this value,
 	/// scaled by the <see cref="DefaultDensity"/> mode —
 	/// e.g. <c>DefaultSpacing="6"</c> at <see cref="Density.Regular"/> makes
@@ -334,12 +336,11 @@ public abstract partial class BaseTheme : ResourceDictionary
 	/// Individual tokens can still be overridden via lightweight styling.
 	/// </summary>
 	/// <remarks>
-	/// This is a <b>construction-time</b> setting, for the same reason as
-	/// <see cref="DefaultCornerRadius"/>: assigning it later regenerates the <c>Space*</c> token
-	/// resources but does not restyle controls, because the per-control padding and margin keys
-	/// hold resolved <see cref="Thickness"/> values. To offer spacing as a user setting, change the
-	/// property and then recreate the root content.
-	/// Non-finite or negative values are treated as unset and fall back to the default of 4.
+	/// This is a <b>runtime</b> setting, like <see cref="DefaultCornerRadius"/>: assigning it
+	/// regenerates the <c>Space*</c> token resources and controls created afterwards pick them up.
+	/// Controls already rendered keep the <see cref="Thickness"/> values they resolved until a
+	/// theme-change pass re-resolves them or the root content is recreated.
+	/// Non-finite or negative values are treated as unset and fall back to the default of 8.
 	/// </remarks>
 	public double DefaultSpacing
 	{
@@ -347,6 +348,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 		set => SetValue(DefaultSpacingProperty, value);
 	}
 
+	/// <summary>Identifies the <see cref="DefaultSpacing"/> dependency property.</summary>
 	public static DependencyProperty DefaultSpacingProperty { get; } =
 		DependencyProperty.Register(
 			nameof(DefaultSpacing),
@@ -372,11 +374,11 @@ public abstract partial class BaseTheme : ResourceDictionary
 	/// Control heights and icon sizes remain constant across densities.
 	/// </summary>
 	/// <remarks>
-	/// This is a <b>construction-time</b> setting, for the same reason as
-	/// <see cref="DefaultCornerRadius"/>: assigning it later regenerates the <c>Space*</c> token
-	/// resources but does not restyle controls, because the per-control padding and margin keys
-	/// hold resolved <see cref="Thickness"/> values. To offer density as a user setting, change the
-	/// property and then recreate the root content.
+	/// This is a <b>runtime</b> setting, like <see cref="DefaultCornerRadius"/>: assigning it
+	/// regenerates the <c>Space*</c> token resources and controls created afterwards pick them up.
+	/// Controls already rendered keep the <see cref="Thickness"/> values they resolved until a
+	/// theme-change pass re-resolves them or the root content is recreated.
+	/// Values outside the defined members fall back to the <see cref="Density.Regular"/> factor.
 	/// </remarks>
 	public Density DefaultDensity
 	{
@@ -384,6 +386,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 		set => SetValue(DefaultDensityProperty, value);
 	}
 
+	/// <summary>Identifies the <see cref="DefaultDensity"/> dependency property.</summary>
 	public static DependencyProperty DefaultDensityProperty { get; } =
 		DependencyProperty.Register(
 			nameof(DefaultDensity),
@@ -417,7 +420,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 	/// that.
 	/// </para>
 	/// <para>
-	/// Unlike <see cref="DefaultCornerRadius"/> and <see cref="DefaultSpacing"/>, this is a
+	/// Like <see cref="DefaultCornerRadius"/> and <see cref="DefaultSpacing"/>, this is a
 	/// <b>runtime</b> setting: text laid out after the change picks the new family up. Text
 	/// <b>already rendered</b> keeps the family it resolved when it loaded — a
 	/// <see cref="FontFamily"/> is an immutable value, so unlike a seed color, whose brushes are live
@@ -503,6 +506,19 @@ public abstract partial class BaseTheme : ResourceDictionary
 		// (control styles) from the URI it provides. UpdateSource() appends the dynamic
 		// layers (colors/typography/spacing/…) on top and rebuilds them on every pass.
 		Source = new Uri(DefaultStylesSource);
+
+		// Merged from code so it carries the SemanticResources type (the XAML generator emits a plain
+		// ResourceDictionary for a Source-merged entry whatever type the markup declares). Inserted
+		// first so it is searched last, below the theme's own Typography and Fonts overrides.
+		MergedDictionaries.Insert(0, new SemanticResources { Source = new Uri(ThemesConstants.SharedTypographyResourcePath) });
+
+		// Set once alongside Source: the aliases are static and resolve lazily against the whole
+		// theme, so a rebuild never has to touch them.
+		if (SemanticStylesSource is { } semanticStylesSource)
+		{
+			MergedDictionaries.Add(new SemanticResources { Source = new Uri(semanticStylesSource) });
+		}
+
 		UpdateSource();
 	}
 
@@ -540,14 +556,14 @@ public abstract partial class BaseTheme : ResourceDictionary
 		var colors = BuildColorLayer(out var resolvedOverride);
 
 		// Spacing and density are orthogonal: DefaultSpacing supplies the base unit, the density
-		// mode scales it. Non-finite or negative consumer values degrade to the default base (4)
+		// mode scales it. Non-finite or negative consumer values degrade to the default base (8)
 		// instead of poisoning every Space* token — this runs from property-changed callbacks and
 		// must not misbehave on untrusted input.
 		var requestedSpacing = DefaultSpacing;
 		var baseSpacing = double.IsFinite(requestedSpacing) && requestedSpacing >= 0
 			? requestedSpacing
 			: DefaultBaseSpacing;
-		// Factors chosen so the default base of 4 yields the historical presets: 3 / 4 / 5.
+		// Factors chosen so the default base of 8 yields 6 / 8 / 10, the same rendered spacing as the historical 3 / 4 / 5 presets on the 4-based scale.
 		var densityFactor = DefaultDensity switch
 		{
 			Density.Compact => 0.75,
@@ -561,6 +577,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 		// Null when no font family is set, which is the common case: the concrete theme's own
 		// Fonts.xaml then stands with no layer over it.
 		var typefaces = GenerateFontFamilyScale(DefaultFontFamily);
+		var typefaceAliases = GenerateFontFamilyAliases(DefaultFontFamily);
 
 		// Re-resolved from its Source when a hot reload invalidates it: the in-memory entries of the
 		// instance built when the Source was first assigned are a load-time snapshot, so a hot-reload
@@ -599,6 +616,11 @@ public abstract partial class BaseTheme : ResourceDictionary
 		if (typefaces is { })
 		{
 			AddThemeDictionary(typefaces);
+		}
+
+		if (typefaceAliases is { })
+		{
+			AddThemeDictionary(typefaceAliases);
 		}
 
 		// Let the concrete theme append its own dynamic dictionaries on top of the generated
@@ -707,7 +729,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 		var colors = new ResourceDictionary();
 		var colorLayers = new List<ResourceDictionary>(4);
 
-		var sharedPalette = new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorPaletteResourcePath) };
+		var sharedPalette = new SemanticResources { Source = new Uri(ThemesConstants.SharedColorPaletteResourcePath) };
 		colors.MergedDictionaries.Add(sharedPalette);
 		colorLayers.Add(sharedPalette);
 
@@ -778,7 +800,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 		// resolve eagerly at parse time, against the ambient scope) nor reach anything already
 		// rendered (consumers bind {ThemeResource *Brush}, which re-evaluates only on a theme
 		// change). See SemanticBrushUpdater.
-		_semanticBrushes ??= new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorsResourcePath) };
+		_semanticBrushes ??= new SemanticResources { Source = new Uri(ThemesConstants.SharedColorsResourcePath) };
 		SemanticBrushUpdater.Apply(_semanticBrushes, colorLayers);
 
 		return colors;
@@ -801,6 +823,18 @@ public abstract partial class BaseTheme : ResourceDictionary
 	/// the dynamic layers generated by <see cref="UpdateSource"/> are appended on top.
 	/// </summary>
 	protected abstract string DefaultStylesSource { get; }
+
+	/// <summary>
+	/// URI of the concrete theme's semantic style aliases (<c>FilledButtonStyle</c> aliasing
+	/// <c>MaterialFilledButtonStyle</c>, and so on), or <c>null</c> when the design system declares
+	/// none. Merged once during construction as a <see cref="SemanticResources"/> dictionary, right
+	/// after <see cref="DefaultStylesSource"/>. The file must be kept out of the XamlMerge bundle:
+	/// flattened into <see cref="DefaultStylesSource"/> its entries would lose the marker type.
+	/// Read from the base constructor, so an override must not depend on derived-instance state. A
+	/// theme with more than one semantic file adds further <see cref="SemanticResources"/> instances
+	/// to <see cref="ResourceDictionary.MergedDictionaries"/> in its own constructor.
+	/// </summary>
+	protected virtual string SemanticStylesSource => null;
 
 	/// <summary>
 	/// Appends design-system-specific resource dictionaries on top of the layers generated by

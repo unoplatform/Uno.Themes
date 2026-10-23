@@ -27,6 +27,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Data\TestCollections.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\EnumHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\HierarchyHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\SampleThemeHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RuntimeTests\Given_AllSamplePages.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\SystemThemeHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\VisualTreeHelperEx.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ViewModelBase.cs" />
@@ -386,6 +388,20 @@
     </Page>
     <Compile Include="$(MSBuildThisFileDirectory)Content\Styles\SemanticStylingSamplePage.xaml.cs">
       <DependentUpon>SemanticStylingSamplePage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="$(MSBuildThisFileDirectory)Content\Styles\CornerRadiusStylesSamplePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Styles\CornerRadiusStylesSamplePage.xaml.cs">
+      <DependentUpon>CornerRadiusStylesSamplePage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="$(MSBuildThisFileDirectory)Content\Styles\SpacingStylesSamplePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Styles\SpacingStylesSamplePage.xaml.cs">
+      <DependentUpon>SpacingStylesSamplePage.xaml</DependentUpon>
     </Compile>
     <Page Include="$(MSBuildThisFileDirectory)Content\Styles\DesignTokensSamplePage.xaml">
       <SubType>Designer</SubType>

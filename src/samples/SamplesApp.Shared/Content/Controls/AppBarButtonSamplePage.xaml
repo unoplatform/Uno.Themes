@@ -88,6 +88,22 @@
 										  Style="{StaticResource MaterialAppBarButtonStyle}" />
 						</smtx:XamlDisplay>
 
+						<!-- AppBarButton with Content Only - UIElement (unoplatform/Uno.Themes#1735) -->
+						<TextBlock Text="UIElement Content"
+								   FontSize="12"
+								   Opacity="0.7"
+								   Margin="0,8,0,4" />
+						<smtx:XamlDisplay UniqueKey="Material_AppBarButtonSamplePage_ContentOnlyUIElement"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<AppBarButton Style="{StaticResource MaterialAppBarButtonStyle}">
+								<AppBarButton.Content>
+									<Grid>
+										<TextBlock Text="Hello" />
+									</Grid>
+								</AppBarButton.Content>
+							</AppBarButton>
+						</smtx:XamlDisplay>
+
 						<TextBlock Text="AppBarButton with Icon and Content"
 								   FontSize="16"
 								   FontWeight="SemiBold"
@@ -301,6 +317,18 @@
 								<AppBarButton Content="Settings"
 											  Style="{StaticResource SimpleAppBarButtonStyle}" />
 							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- Content Only - UIElement (unoplatform/Uno.Themes#1735) -->
+						<smtx:XamlDisplay UniqueKey="Simple_AppBarButton_ContentOnlyUIElement"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<AppBarButton Style="{StaticResource SimpleAppBarButtonStyle}">
+								<AppBarButton.Content>
+									<Grid>
+										<TextBlock Text="Hello" />
+									</Grid>
+								</AppBarButton.Content>
+							</AppBarButton>
 						</smtx:XamlDisplay>
 
 						<TextBlock Text="AppBarButton with Icon and Content"

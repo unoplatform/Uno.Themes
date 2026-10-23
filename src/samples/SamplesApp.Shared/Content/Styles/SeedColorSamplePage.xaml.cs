@@ -14,21 +14,34 @@ public sealed partial class SeedColorSamplePage : Page
 	private static Color _lastSeed = Color.FromArgb(0xFF, 0x67, 0x50, 0xA4);
 	private static SeedColorMode _lastSeedColorMode = SeedColorMode.Fidelity;
 
+	// WinUI raises ColorChanged while InitializeComponent applies the XAML Color, before the named
+	// elements ApplySeedColor writes to are connected. The constructor applies the seed itself.
+	private readonly bool _isInitialized;
+
 	public SeedColorSamplePage()
 	{
 		this.InitializeComponent();
 		SeedColorPicker.Color = _lastSeed;
 		SeedColorModeCombo.SelectedIndex = _lastSeedColorMode == SeedColorMode.Fidelity ? 0 : 1;
 		ApplySeedColor(_lastSeed);
+		_isInitialized = true;
 	}
 
 	private void SeedColorPicker_ColorChanged(ColorPicker sender, ColorChangedEventArgs args)
 	{
-		ApplySeedColor(args.NewColor);
+		if (_isInitialized)
+		{
+			ApplySeedColor(args.NewColor);
+		}
 	}
 
 	private void SeedColorModeCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
 	{
+		if (!_isInitialized)
+		{
+			return;
+		}
+
 		_lastSeedColorMode = SeedColorModeCombo.SelectedIndex == 1 ? SeedColorMode.TonalSpot : SeedColorMode.Fidelity;
 		ApplySeedColor(_lastSeed);
 	}
@@ -36,8 +49,12 @@ public sealed partial class SeedColorSamplePage : Page
 	private void ApplySeedColor(Color seed)
 	{
 		_lastSeed = seed;
-		SemanticThemeHelper.SeedColorMode = _lastSeedColorMode;
-		SemanticThemeHelper.PrimarySeed = seed;
+
+		// Not SemanticThemeHelper: it resolves Application.Current, which is the wrapper app — not
+		// this head — when the head is hosted in a secondary ALC by ThemesSampleApp.
+		var colors = SampleThemeHelper.GetColorsOrThrow();
+		colors.SeedColorMode = _lastSeedColorMode;
+		colors.PrimarySeed = seed;
 
 		var hct = HctColor.FromArgb(ColorToArgb(seed));
 

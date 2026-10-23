@@ -1,12 +1,14 @@
 # Upstream issues — unoplatform/uno (6.7-dev secondary-ALC app support)
 
-The four gaps found while building `ThemesSampleApp` (see `progress.md` → Phase 4 findings and
-Review). All were reproduced against `Uno.Sdk.Private 6.7.0-dev.815` (`artifacts/uno` @
-`21bf1ad6`) hosting the three theme sample heads through `AlcContentHost` /
-`WindowHelper.ContentHostOverride`.
+The five gaps found while building `ThemesSampleApp` (see `progress.md` → Phase 4 findings and
+Review). Issues 1-4 were reproduced against `Uno.Sdk.Private 6.7.0-dev.815` (`artifacts/uno` @
+`21bf1ad6`) and issue 5 against `7.0.0-dev.701`, all hosting the three theme sample heads
+through `AlcContentHost` / `WindowHelper.ContentHostOverride`.
 
-All four are now filed. Delete each wrapper-side sweep in
+All five are filed. Delete each wrapper-side sweep in
 `src/samples/ThemesSampleApp/GuestHosting/GuestAppLoader.Sweeps.cs` when its fix ships.
+Issue 5 was found later, on Uno 7, and has no sweep to delete — it is a resolution bug, not a
+cache-retention one.
 
 | # | Issue | Wrapper-side sweep |
 | --- | --- | --- |
@@ -14,6 +16,9 @@ All four are now filed. Delete each wrapper-side sweep in
 | 2 | [unoplatform/uno#24074](https://github.com/unoplatform/uno/issues/24074) | prunes `SystemNavigationManager` handlers |
 | 3 | [unoplatform/uno#24075](https://github.com/unoplatform/uno/issues/24075) | re-invokes `Application.CleanupNonDefaultAlcCaches` |
 | 4 | [unoplatform/uno#24076](https://github.com/unoplatform/uno/issues/24076) | none, not reachable host-side |
+| 5 | [unoplatform/uno#24581](https://github.com/unoplatform/uno/issues/24581) | none found |
+| 6 | not filed yet | none, see § 6 |
+| 7 | [unoplatform/uno-private#2469](https://github.com/unoplatform/uno-private/issues/2469) | none possible; the smoke's reclamation check is warning-only on Linux |
 
 ---
 
@@ -89,3 +94,163 @@ ALC-guest-window teardown path.
 
 **Workaround**: none available host-side; bounded in practice by the number of guest switches
 in a session.
+
+## 5. XAML attached-property binding paths read `null` once a second ALC has loaded the owner assembly
+
+**Area**: BindingPath / attached properties / secondary-ALC app support
+**Version**: 7.0.0-dev.701 (Skia desktop, Windows)
+
+A template binding whose path is a parenthesized attached property —
+
+```xml
+Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+```
+
+— produces `null` once more than one ALC has loaded `Uno.Themes.WinUI` (each guest loads its
+own copy: the theme libraries are `!`-isolated in `GuestSharedAssemblies.txt`), even though the
+page has set `ControlExtensions.Icon` on that very element and the type-keyed DP lookup returns
+the correct per-ALC `DependencyProperty`.
+
+**Mechanism (confirmed).** `DependencyProperty.InternalGetProperty` discards the caller's
+`type` in favour of the one parsed out of the path string, and
+`DependencyPropertyDescriptor.Parse` resolves that owner type by name through
+`SearchTypeInLoadedAssemblies` → `ContextualAssemblyResolver.GetRelevantAssemblies()`. That
+resolver is ALC-aware only while an `EnterContextualReflection` scope is active, and the only
+such scope in all of `Uno.UI` is around `PageStackEntry.ResolveDescriptor` — page *type
+descriptor* resolution, not template application or binding evaluation. With no scope active it
+falls back to `AppDomain.CurrentDomain.GetAssemblies()`, which yields the **first-loaded**
+`Uno.Themes.WinUI` — including copies in guest ALCs already unloaded but not yet collected,
+exactly the stale-ALC case the resolver's own summary says it exists to avoid.
+
+Measured from the host after each guest load, replaying `SearchTypeInLoadedAssemblies` verbatim
+(`Type.GetType` returned `null` and the contextual scope was `<none>` at every step, so every
+resolution went through the `AppDomain` scan):
+
+| Load order | Hosted guest | `Uno.Themes.WinUI` copies | Owner type resolved to |
+| --- | --- | --- | --- |
+| catalog | Material | 1 | `GuestALC-MaterialSampleApp` ✅ |
+| catalog | Cupertino | 2 | `GuestALC-MaterialSampleApp` ❌ |
+| catalog | Simple | 3 | `GuestALC-MaterialSampleApp` ❌ |
+| reverse | Simple | 1 | `GuestALC-SimpleSampleApp` ✅ |
+| reverse | Cupertino | 2 | `GuestALC-SimpleSampleApp` ❌ |
+| reverse | **Material** | 3 | **`GuestALC-SimpleSampleApp`** ❌ |
+
+The winner is pinned to the first-loaded guest and never tracks the hosted one. Two other
+candidates were ruled out on the way: the by-name `BindableMetadataProvider` fast path (each
+guest installs its own provider at startup, so last-loaded-wins predicts the opposite
+direction), and a shared `BindingPropertyHelper._getValueGetter` memo (no earlier guest ever
+binds that path string — Cupertino references `ControlExtensions` nowhere, Simple uses only
+`LeadingIcon` / `TrailingIcon`).
+
+The probe was a throwaway addition to `GuestHostingSmoke` and was reverted after the run; it is
+a one-off diagnostic, not a regression guard.
+
+**Symptom**: every Material control that surfaces `ControlExtensions.Icon` through its template
+renders without its icon — `TextBox` and `ComboBox` on the ControlExtensions sample page are
+the visible cases. Nothing logs: a binding that resolves to `null` is not an error, and the
+`NullToCollapsedConverter` sibling binding then legitimately collapses the icon slot.
+
+**Repro** (desktop, Debug):
+
+1. Launch `ThemesSampleApp`, load **Cupertino** or **Simple** first, then switch to **Material**.
+2. Navigate to *Helpers → ControlExtensions*.
+3. The `TextBox` and `ComboBox` leading star icons are missing.
+
+Load **Material first** in a fresh process and they render correctly — the defect needs a
+second `Uno.Themes.WinUI` to already be loaded.
+
+Measured on the hosted page (`IconPresenter` is the template part fed by the binding):
+
+| | Material loaded first | Material after Cupertino + Simple |
+| --- | --- | --- |
+| `ControlExtensions.Icon` on the `TextBox` | `SymbolIcon` | `SymbolIcon` (set correctly) |
+| `MaterialFilledTextBoxStyle` applied | yes | yes |
+| `DependencyProperty.GetProperty(ControlExtensions, "Icon")` | matches the static DP | matches the static DP |
+| `Uno.Themes.WinUI` copies loaded | 1 | 3 |
+| **`IconPresenter.Content`** | **`SymbolIcon`, 30x20** | **`null`, 0x0** |
+
+So the attached property, the style and the type-keyed DP lookup are all correct; only the
+value the XAML binding path reads is wrong.
+
+**Note**: this is *not* the same as issue 1, and no sweep can fix it.
+`DependencyProperty._getPropertyCache` is cleared by the wrapper's existing sweep (that sweep
+logs no failure), and issue 3's `CleanupNonDefaultAlcCaches` sweep was repaired for Uno 7 (see
+below) — the icon defect survives both, because nothing cached is stale: the resolution is
+wrong every time it runs.
+
+**Symmetry**: Material is the visible victim only because its templates bind `.Icon`. Simple's
+templates bind `ControlExtensions.LeadingIcon` / `.TrailingIcon`, so a Simple guest loaded after
+another guest should lose its leading/trailing icons the same way. Cupertino references
+`ControlExtensions` nowhere and is unaffected.
+
+**Suggested fix**: enter the bound element's ALC contextual-reflection scope around template
+application / binding-path resolution, so `GetRelevantAssemblies()` takes its ALC-aware branch
+for framework-created bindings as it does for consumer-created ones; or resolve the owner type
+against `AssemblyLoadContext.GetLoadContext(element.GetType().Assembly)` instead of a
+process-wide scan. Note the mitigation `ContextualAssemblyResolver` documents — wrapping
+`SetBinding` in `EnterContextualReflection` — is structurally unavailable for a
+template-declared binding, since the consumer has no call site to wrap.
+
+**Workaround**: none in use. A host-side `EnterContextualReflection` scope around guest UI
+work is plausible now that the mechanism is known, but binding evaluation happens on the
+dispatcher during layout rather than at a call site the host controls, so it was not attempted.
+Load the design system you want to test first in a session, or run its head standalone.
+
+## 6. `embedded://` Lottie sources resolve the assembly from the default ALC, so hosted theme animations never load
+
+**Area**: `LottieVisualSourceBase` / secondary-ALC app support
+**Version**: 7.0.0-dev.1574 and 7.0.0-dev.2285 (Skia desktop, Win32); not filed yet
+
+The Material and Cupertino `ProgressRing` styles point `LottieVisualSource.UriSource` at
+`embedded://Uno.Material.WinUI/...` (`embedded://Uno.Cupertino.WinUI/...`).
+`LottieVisualSourceBase.TryLoadEmbeddedJson` resolves the host part with
+`Assembly.Load(uri.Host)`. That code lives in `Uno.UI`, which is shared from the default ALC,
+so the load binds against the default ALC. The theme assembly is isolated per guest (`!` rule),
+so the default ALC cannot find it: `FileNotFoundException: Could not load file or assembly
+'uno.material.winui'`. The source records it as `Diagnostics`, logs `Failed to load animation`,
+and the ring never animates. Standalone heads are unaffected because there is only one ALC.
+
+The `embedded://./...` form does not help either: it resolves through
+`Application.Current`, which is the host's application.
+
+Verified with a throwaway in-guest probe through `ThemesSampleApp --app=material` (Release,
+desktop): `IsAnimatedVisualLoaded=False` hosted, `True` standalone. The same
+`Failed to load animation` lines appear in master's (`7.0.0-dev.1574`) hosted log, so this
+predates the Lottie package removal in `7.0.0-dev.1664`.
+
+**Suggested fix**: before the `Assembly.Load` fallback, resolve the name against
+`AssemblyLoadContext.CurrentContextualReflectionContext` when one is set. Better still, resolve
+it against the ALC of the code that created the source. For example, when a XAML-generated
+`LottieVisualSource` is created, capture the creating assembly's load context, or scan
+`ContextualAssemblyResolver.GetRelevantAssemblies()` for an already-loaded assembly with that
+simple name.
+
+**Workaround**: none. A host-side `Default.Resolving` forward into the collectible guest ALC,
+or a long-lived contextual-reflection scope on the UI thread, would both work against the
+unload and reclamation guarantees that `HostingSmoke_Desktop` gates. The animations run in the
+standalone heads, and `MaterialSampleApp`'s `Given_ProgressRing` covers them there.
+
+## 7. From dev.2285, guest ALCs are not reclaimed after unload on Skia Linux/X11
+
+**Area**: secondary-ALC app support / runtime loader
+**Version**: 7.0.0-dev.2285 (not on 7.0.0-dev.1574)
+**Filed**: [unoplatform/uno-private#2469](https://github.com/unoplatform/uno-private/issues/2469), which has the full write-up
+
+In the hosting smoke, a guest ALC can stay alive after unload, permanently in the reversed
+guest order. A heap dump shows no managed root a host could clear: the stuck `LoaderAllocator`s
+are reachable only through their own weak-interior-pointer static handles. The repro and the
+diagnostic instrumentation are on the `dev/xygu/20261020/up2469` branch.
+
+**Workaround**: none. `GuestHostingSmoke` treats reclamation as warning-only on Linux until
+the issue is fixed.
+---
+
+## Uno 7 signature drift in the issue-3 workaround
+
+Not an upstream defect, but the reason the issue-3 sweep stopped running: Uno 7 changed
+`Application.CleanupNonDefaultAlcCaches()` to `CleanupNonDefaultAlcCaches(AssemblyLoadContext
+dyingAlc)`. The wrapper invoked it reflectively with no arguments, so every post-unload sweep
+threw `TargetParameterCountException` and was swallowed into a warning — the mitigation was
+silently dead. `GuestAppLoader.Sweeps.cs` now adapts to whichever arity the loaded Uno exposes
+and passes the dying ALC. Uno 7 also added a parameterless `CleanupAllSecondaryAlcCaches()`,
+which is the broader hammer if the per-ALC call ever proves insufficient.

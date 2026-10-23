@@ -14,6 +14,7 @@ internal static class SimpleConstants
 		public static readonly string ColorPalette = $"ms-appx:///{PackageName}/Styles/Application/ColorPalette.xaml";
 		public static string Thickness = $"ms-appx:///{PackageName}/Styles/Application/Common/Thickness.xaml";
 		public static readonly string MergedPages = $"ms-appx:///{PackageName}/Generated/mergedpages.xaml";
+		public static readonly string SemanticStyles = $"ms-appx:///{PackageName}/Styles/Controls/SemanticStyles.xaml";
 
 		public static class Common
 		{
