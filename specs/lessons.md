@@ -470,3 +470,10 @@ next file to need an override didn't get it.
 - A pixel-identical sample at the default does not prove a template change is safe: the sample rarely exercises the case the change affects (long content, an override, another host size). Token remaps are provable by value; template changes are not.
 - List what token-only fixes leave broken in the issue as follow-ups instead of widening the change.
 
+## `{ThemeResource}` on a non-FrameworkElement in a compiled template loses local overrides on theme change (#1739)
+
+**Context:** #1739 made the Material ComboBox floating-label `CompositeTransform` (`ScaleX`/`ScaleY`/`TranslateY`) read lightweight keys through `{ThemeResource}`. Tests that set overrides before load passed. A test that switched `RequestedTheme` after load showed that Uno re-resolves those values from `Application.Resources` only, skipping the control and page resources, so local overrides reverted to the defaults. `Margin`, `Style` and `Foreground` on the same `TextBlock` kept their local overrides. A `XamlReader.Load` template did not reproduce it; only the compiled library template did. Upstream: unoplatform/uno#24958.
+
+**How to apply:**
+- A lightweight key consumed by a non-FrameworkElement (transforms, brushes, gradient stops) inside a template needs a test that flips `RequestedTheme` after load with the override at the scope the doc promises. A pre-load assertion only proves the initial resolution.
+- Do not trust a `XamlReader` repro to clear a template-resolution bug: compiled library XAML takes a different path.
