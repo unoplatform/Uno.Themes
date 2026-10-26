@@ -21,15 +21,10 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 ### Theme-agnostic
 
-| Key                                  | Type        | Value               |
-| ------------------------------------ | ----------- | ------------------- |
-| `ComboBoxDownArrowPathData`          | `String`    | M0 0L5 5L10 0H0Z    |
-| `ComboBoxPlaceholderTextStyle`       | `Style`     | `MaterialBodyLarge` |
-| `ComboBoxUpArrowPathData`            | `String`    | M0 0L-5 -5L-10 0H0Z |
-| `ComboBoxUpperPlaceHolderMargin`     | `Thickness` | 0                   |
-| `ComboBoxUpperPlaceHolderScaleX`     | `Double`    | 0.7                 |
-| `ComboBoxUpperPlaceHolderScaleY`     | `Double`    | 0.7                 |
-| `ComboBoxUpperPlaceHolderTranslateY` | `Double`    | -11                 |
+| Key                         | Type     | Value               |
+| --------------------------- | -------- | ------------------- |
+| `ComboBoxDownArrowPathData` | `String` | M0 0L5 5L10 0H0Z    |
+| `ComboBoxUpArrowPathData`   | `String` | M0 0L-5 -5L-10 0H0Z |
 
 ### Themed
 
@@ -115,6 +110,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `ComboBoxPlaceHolderForegroundFocusedPressed`      | `SolidColorBrush` | `OnSurfaceVariantBrush`         |
 | `ComboBoxPlaceHolderForegroundPointerOver`         | `SolidColorBrush` | `OnSurfaceVariantBrush`         |
 | `ComboBoxPlaceHolderForegroundPressed`             | `SolidColorBrush` | `OnSurfaceVariantBrush`         |
+| `ComboBoxPlaceholderTextStyle`                     | `Style`           | `MaterialBodyLarge`             |
 | `ComboBoxUpGlyphHeight`                            | `Double`          | 5                               |
 | `ComboBoxUpGlyphMargin`                            | `Thickness`       | 7,0                             |
 | `ComboBoxUpGlyphWidth`                             | `Double`          | 10                              |
@@ -125,6 +121,10 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `ComboBoxUpperPlaceHolderForegroundOpened`         | `SolidColorBrush` | `PrimaryBrush`                  |
 | `ComboBoxUpperPlaceHolderForegroundPointerOver`    | `SolidColorBrush` | `OnSurfaceVariantBrush`         |
 | `ComboBoxUpperPlaceHolderForegroundPressed`        | `SolidColorBrush` | `OnSurfaceVariantBrush`         |
+| `ComboBoxUpperPlaceHolderMargin`                   | `Thickness`       | 0                               |
+| `ComboBoxUpperPlaceHolderScaleX`                   | `Double`          | 0.7                             |
+| `ComboBoxUpperPlaceHolderScaleY`                   | `Double`          | 0.7                             |
+| `ComboBoxUpperPlaceHolderTranslateY`               | `Double`          | -11                             |
 
 The Dark theme uses the same values as Light.
 
