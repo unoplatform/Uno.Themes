@@ -176,6 +176,16 @@ internal sealed class SeedColorPaletteGenerator
 		lightDict["SurfaceTintColor"] = ArgbToColor(lightPrimary);
 		darkDict["SurfaceTintColor"] = ArgbToColor(primary.GetArgb(80));
 
+		// Tone-based surface roles, at material-color-utilities' tones. Background and Surface keep
+		// this library's older tones, so the two sets do not line up (see specs/03-seed-color-palette).
+		SetColor(lightDict, darkDict, "SurfaceDimColor", neutral, 87, 6);
+		SetColor(lightDict, darkDict, "SurfaceBrightColor", neutral, 98, 24);
+		SetColor(lightDict, darkDict, "SurfaceContainerLowestColor", neutral, 100, 4);
+		SetColor(lightDict, darkDict, "SurfaceContainerLowColor", neutral, 96, 10);
+		SetColor(lightDict, darkDict, "SurfaceContainerColor", neutral, 94, 12);
+		SetColor(lightDict, darkDict, "SurfaceContainerHighColor", neutral, 92, 17);
+		SetColor(lightDict, darkDict, "SurfaceContainerHighestColor", neutral, 90, 22);
+
 		// Outline
 		SetColor(lightDict, darkDict, "OutlineColor", neutralVariant, 50, 60);
 		SetColor(lightDict, darkDict, "OutlineVariantColor", neutralVariant, 80, 30);
