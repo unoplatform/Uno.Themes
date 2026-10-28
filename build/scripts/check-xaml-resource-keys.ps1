@@ -29,6 +29,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $xamlNs = 'http://schemas.microsoft.com/winfx/2006/xaml'
+$mcNs = 'http://schemas.openxmlformats.org/markup-compatibility/2006'
 
 # Declared in code (BaseTheme scale generation) or by the WinUI platform outside generic.xaml.
 $allowedPrefixes = 'Space', 'Radius', 'ControlHeight', 'IconSize', 'System'
@@ -73,9 +74,21 @@ function Get-DefinedKeys([System.IO.FileInfo[]]$Files) {
 	, $keys # the comma keeps PowerShell from unrolling the set into an array
 }
 
+# WinUI skips the elements and attributes of namespaces the root marks mc:Ignorable (e.g. xamarin:).
+function Test-Ignored([System.Xml.XmlAttribute]$Attr, [string[]]$Ignorable) {
+	if ($Ignorable -contains $Attr.NamespaceURI) { return $true }
+	for ($element = $Attr.OwnerElement; $element -is [System.Xml.XmlElement]; $element = $element.ParentNode) {
+		if ($Ignorable -contains $element.NamespaceURI) { return $true }
+	}
+	$false
+}
+
 function Get-ReferencedKeys([System.Xml.XmlNode]$Root) {
 	$pattern = '\{(?:Static|Theme)Resource\s+(?:ResourceKey=)?([A-Za-z0-9_.]+)\s*\}'
+	$documentElement = $Root.OwnerDocument.DocumentElement
+	$ignorable = @(-split $documentElement.GetAttribute('Ignorable', $mcNs) | ForEach-Object { $documentElement.GetNamespaceOfPrefix($_) } | Where-Object { $_ })
 	foreach ($attr in $Root.SelectNodes('.//@*')) {
+		if (Test-Ignored $attr $ignorable) { continue }
 		if ($attr.LocalName -eq 'ResourceKey' -and $attr.Value -notmatch '^\{') { $attr.Value }
 		foreach ($match in [regex]::Matches($attr.Value, $pattern)) { $match.Groups[1].Value }
 	}
