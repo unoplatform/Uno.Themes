@@ -4,6 +4,79 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## `!HAS_UNO` code paths ran nowhere until the WinAppSDK head — `SimpleTheme` crashed every WinUI app at startup
+
+**Context:** adding the WinAppSDK head to `SimpleSampleApp` (2026-09-29). The app failed fast
+(`0xC000027B`, stowed exception in `Microsoft.UI.Xaml.dll`) inside `App.InitializeComponent`, with no
+managed exception surfaced. `AppDomain.FirstChanceException` logging is what found the cause; WinRT
+callbacks swallow the managed trace otherwise.
+
+**Root cause:** on real WinUI, `ResourceDictionaryExtensions.SafeMerge` clones via `Duplicate()`, which
+*enumerates* the dictionary. WinUI resolves every deferred entry while enumerating, including Simple's
+`ColorPalette.xaml` `<StaticResource x:Key="SimpleTextUtilitiesOnOverlayBrush" ResourceKey="OnSurfaceInverseBrush"/>`
+alias. Its target only exists once the theme sits in the app's resources, so resolving it from inside the
+`SimpleTheme` constructor throws `E_FAIL`. Uno resolves aliases lazily and `SafeMerge` never clones there, so no
+existing head could see it.
+
+**How to apply:**
+- Never enumerate a `ResourceDictionary` that may hold `<StaticResource>` aliases on WinUI. Clone a URI-backed
+  one by re-reading its `Source` (what `Duplicate` does now).
+- Any `#if !HAS_UNO` branch is only exercised by the WinAppSDK head: run the runtime tests there when touching one.
+- Uno forgives XAML that WinUI rejects, and every such case is a WinAppSDK crash. Seen so far: a
+  `{StaticResource}` to an undefined key (Design Tokens sample's `SimpleOutlinedButtonStyle`), and an
+  `x:Double` fed through `{StaticResource}` into a `GridLength` row/column (Simple Slider's
+  `SliderPreContentMargin`). Only `{ThemeResource}` converts it, which is why WinUI's own templates use it.
+- WinUI can raise control events while `InitializeComponent` applies attributes, before `x:Name` fields
+  are connected (`ColorPicker.ColorChanged` on the Seed Color sample). Uno doesn't. Guard code-behind
+  handlers until the constructor has finished.
+- A WinUI `XamlParseException` message can be stale: the "Cannot find a Resource with the Name/Key
+  TertiaryContainerColor" text was attached to both of these unrelated failures. Trust the `[Line/Position]`
+  and the first-chance exception, not the text. It also hints that an earlier lookup fails silently, a
+  lead for the WinUI-only seed/typography test failures.
+- On WinUI desktop a `ContentDialog` needs `XamlRoot` set before `ShowAsync()`; Uno doesn't care.
+- Undefined keys in library templates (`SimpleContentDialogEdgeMargin`, `SimpleMenuFlyoutSeparatorHeight`)
+  fail natively on WinUI with no managed exception at all. To sweep for them, diff every
+  `{StaticResource|ThemeResource X}` / `ResourceKey="X"` in `Styles/` against the `x:Key`s of the library,
+  `Uno.Themes/Styles` and WinAppSDK's `generic.xaml`. Ignore the `BaseTheme`-generated tokens (`Space*`,
+  `Radius*`, `ControlHeight*`, `IconSize*`) and `x:Name`-keyed template resources.
+- Never open the `RuntimeTestRunner` sample page from inside a test run. Its `UnitTestsControl`
+  constructor replaces the engine's static test content root, so every later `UnitTestsUIContentHelper.Content`
+  lands in a detached tree and each `WaitForLoaded` times out. Symptom: a page with no parent and no
+  `XamlRoot`. `Given_AllSamplePages` excludes it.
+- The Material sample app loads Material **v2** only. A page with only a v1 `MaterialTemplate` (no
+  `M3MaterialTemplate`) falls back to its v1 content and v1-only keys, which Uno renders unstyled and WinUI
+  crashes on. Give it a v2 template, or don't list it for `Design.Material` (InfoBar, TimePicker and
+  NavigationView (WUX) are unlisted for this reason).
+- The runtime tests that fail only on WinAppSDK are not engine problems (the engine only lacks a headless
+  mode there). They come from how WinUI resolves the themes' `<StaticResource x:Key="A" ResourceKey="B"/>`
+  aliases: against the alias's own dictionary first, then `Application.Resources`, and only once. Uno
+  resolves them later, from the scope actually doing the lookup. Consequences (2026-09-30, 33 Simple / 22
+  Material failures):
+  - `SharedTypography.xaml` declares a Segoe UI `DefaultFontFamily` fallback beside the scale aliases, so every
+    type scale binds to Segoe UI on WinUI, even though the theme's own root is Inter/Roboto (real bug, every
+    WinAppSDK app).
+  - A theme merged into an element's `Resources` (a scoped theme, as most runtime tests do) does not drive
+    its styles on WinUI; the aliases reach the app-level theme instead (density, corner radius, seed and
+    colour overrides).
+  - Values changed at runtime do not reach controls that are already rendered.
+  - Two failures are test techniques, not bugs: a `ContentDialog` placed in the tree never raises `Loaded`,
+    and a `Source`-loaded dictionary can't be written to (`0x800F1000`).
+- Sweep a head's own XAML too (`App.xaml`, override dictionaries), not just the shared pages. The Material
+  head overrode `FlyoutLightDismissOverlayBackground` with the v1-only `MaterialOverlayColor`: Uno drew a
+  transparent overlay, and WinUI failed `ShowAt` (`E_FAIL`, no detail) for every `LightDismissOverlayMode="On"`
+  flyout. Content that only materializes on open (flyouts, dialogs) is invisible to a page-load smoke
+  test and needs its own open-it test.
+- Prove a WinUI hypothesis before keeping the change: `Value="PositiveInfinity"` looked suspect but works on
+  WinUI; it was reverted after a targeted test.
+- A `.cs` file shared between heads belongs in `SamplesApp.Shared`, not a `<Compile Link>`: `dotnet format`
+  formats a linked file without the repo `.editorconfig` and rewrites its tabs to spaces.
+- To find which part of a page kills WinUI, load its sections one by one through `XamlReader.Load`
+  and log before and after each. `DebugSettings.XamlResourceReferenceFailed` stayed silent for both cases.
+- When a WinUI app dies with `0xC000027B` and no managed exception, hook `AppDomain.CurrentDomain.FirstChanceException`
+  in `App`'s static constructor to get the real stack before guessing.
+
+---
+
 ## Uno's `AppBarButton` hijacks the template part named `Content` — never use that name for a presenter that is not meant to show `Icon ?? Content`
 
 **Context:** unoplatform/Uno.Themes#1735 (2026-09-29). In the Material v2 and Simple `AppBarButton` styles, a
@@ -72,6 +145,45 @@ never match a host theme, because it is a different `BaseTheme` type.
   default ALC). Prove it with a throwaway in-ALC probe through the wrapper (`--app=<head>`, reflection into the
   guest ALC, reverted afterwards) and say plainly in the report that the hosted path is verified manually and
   not CI-gated.
+
+---
+
+## `CommandBarExtensions.NavigationCommand` only renders under the Material **v1** CommandBar template
+
+**Context:** the five `Content/NestedSamples/MediaPlayerElementSample_NestedPage*.xaml` pages declared
+their back button through `uno:CommandBarExtensions.NavigationCommand`. Under Material v2 — the default
+since `MaterialTheme.DefaultStylesSource` points at `Version2.MergedPages` — none of them rendered a
+button at all, so the full-screen nested samples were a dead end on every platform without a system
+back affordance (Skia desktop, Windows).
+
+**Root cause:** the navigation-command slot is not a framework feature, it is a `ContentControl` inside
+the *hand-written* `XamlMaterialCommandBarTemplate` in `Styles/Controls/v1/CommandBar.xaml` (its own
+comment says so: *"Simplified CommandBar template that adds support for
+Uno.UI.CommandBarExtensions.NavigationCommand on Windows"*). v2's `MaterialCommandBarStyle` sets no
+`Template` at all, so the default WinUI template applies and the attached property is simply ignored.
+`doc/material-migration.md` also records that the native iOS/Android CommandBar path is gone, so there
+is no platform where v2 picks the property up. The same pages referenced `MaterialAppBarButton` (a v1-only
+key; v2 has `MaterialAppBarButtonStyle`) and `ms-appx:///Assets/Close.png`, which does not exist in the
+repo — both fail silently as `Uno.UI.ResourceResolver` warnings.
+
+**How to apply:**
+- **In shared sample XAML, put command-bar buttons in `CommandBar.PrimaryCommands`**, not in
+  `CommandBarExtensions.NavigationCommand`, unless the page is pinned to Material v1. PrimaryCommands is
+  rendered by the default template, so it survives a v1→v2 switch and works in every head.
+- Pair it with `OverflowButtonVisibility="Collapsed"` and `IsDynamicOverflowEnabled="False"` when the
+  button is the only way out of a page — dynamic overflow will otherwise fold it into a `…` menu at
+  narrow widths.
+- **A green build proves nothing about resource keys.** Unresolved `{StaticResource}` and a missing
+  template slot both compile clean; they surface as `warn: Uno.UI.ResourceResolver` lines at runtime and
+  as missing UI. Verify sample-UI changes by running the app or a runtime test, never by building.
+- **`MediaPlayerElement.MediaPlayer` is null when no media extension is registered** (Skia desktop).
+  `MediaPlayerElementSample_NestedPage5` threw an NRE from its constructor because of it, and all five
+  pages would have thrown from their `Unloaded` handler *during* back navigation. Null-conditional these.
+- **Do not run the `AGENTS.md` §5 XamlStyler command over existing XAML without checking the diff.**
+  `Settings.XamlStyler` declares no `IndentWithTabs`/`IndentSize`, so `XamlStyler.Console` defaults to
+  4 spaces and rewrites every line of a tab-indented file — the repo's XAML is tabs (`.editorconfig`).
+  It turned a 17-line diff into a 105-line one. Either hand-format to match the file, or revert the
+  whitespace churn afterwards.
 
 ---
 
@@ -358,3 +470,10 @@ next file to need an override didn't get it.
 - A pixel-identical sample at the default does not prove a template change is safe: the sample rarely exercises the case the change affects (long content, an override, another host size). Token remaps are provable by value; template changes are not.
 - List what token-only fixes leave broken in the issue as follow-ups instead of widening the change.
 
+## `{ThemeResource}` on a non-FrameworkElement in a compiled template loses local overrides on theme change (#1739)
+
+**Context:** #1739 made the Material ComboBox floating-label `CompositeTransform` (`ScaleX`/`ScaleY`/`TranslateY`) read lightweight keys through `{ThemeResource}`. Tests that set overrides before load passed. A test that switched `RequestedTheme` after load showed that Uno re-resolves those values from `Application.Resources` only, skipping the control and page resources, so local overrides reverted to the defaults. `Margin`, `Style` and `Foreground` on the same `TextBlock` kept their local overrides. A `XamlReader.Load` template did not reproduce it; only the compiled library template did. Upstream: unoplatform/uno#24958.
+
+**How to apply:**
+- A lightweight key consumed by a non-FrameworkElement (transforms, brushes, gradient stops) inside a template needs a test that flips `RequestedTheme` after load with the override at the scope the doc promises. A pre-load assertion only proves the initial resolution.
+- Do not trust a `XamlReader` repro to clear a template-resolution bug: compiled library XAML takes a different path.

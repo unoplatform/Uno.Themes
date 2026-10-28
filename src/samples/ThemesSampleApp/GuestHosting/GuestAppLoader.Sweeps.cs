@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Runtime.Loader;
 using Microsoft.Extensions.Logging;
 using Microsoft.UI.Xaml;
 
@@ -24,8 +25,15 @@ internal sealed partial class GuestAppLoader
 {
 	// Same sweep ExitAlcApplication runs, needed a second time after guest finalizers finish.
 	// Upstream: unoplatform/uno#24075.
+	//
+	// Uno 7 changed the signature from CleanupNonDefaultAlcCaches() to
+	// CleanupNonDefaultAlcCaches(AssemblyLoadContext dyingAlc); invoking it with no arguments
+	// throws TargetParameterCountException, which the catch below turns into a warning — the
+	// sweep then silently never runs. Adapt to whichever arity the loaded Uno exposes.
 	private static readonly MethodInfo? _cleanupNonDefaultAlcCaches =
 		SafeGetMethod(typeof(Application), "CleanupNonDefaultAlcCaches", BindingFlags.Static | BindingFlags.NonPublic);
+	private static readonly bool _cleanupTakesDyingAlc =
+		_cleanupNonDefaultAlcCaches?.GetParameters().Length == 1;
 
 	// DependencyProperty._getPropertyCache memoizes (targetType, "ns:Owner.Property") -> DP
 	// lookups from style/VSM target paths. A guest style targeting an attached property on a
@@ -66,14 +74,14 @@ internal sealed partial class GuestAppLoader
 		}
 	}
 
-	private void SweepNonDefaultAlcCaches()
+	private void SweepNonDefaultAlcCaches(AssemblyLoadContext dyingAlc)
 	{
 		// Each mitigation is independent: one failing must not skip the others.
 		try
 		{
 			if (_cleanupNonDefaultAlcCaches is { } cleanup)
 			{
-				cleanup.Invoke(null, null);
+				cleanup.Invoke(null, _cleanupTakesDyingAlc ? new object?[] { dyingAlc } : null);
 			}
 			else if (_logger.IsEnabled(LogLevel.Warning))
 			{

@@ -51,6 +51,7 @@ internal static class GuestHostingSmoke
 				}
 
 				_logger.LogInformation("[HOSTING-SMOKE] {App} is hosted.", app.DisplayName);
+				passed &= CheckXamlSnippets(loader, app);
 				passed &= await CheckReclamationAsync(loader);
 			}
 
@@ -80,6 +81,41 @@ internal static class GuestHostingSmoke
 #if !__WASM__
 		Environment.Exit(passed ? 0 : 1);
 #endif
+	}
+
+	/// <summary>
+	/// Verifies the guest registered its generated ShowMeTheXAML dictionary.
+	/// </summary>
+	/// <remarks>
+	/// <c>XamlDisplay.Init()</c> resolves the generated dictionary from
+	/// <c>Assembly.GetEntryAssembly()</c> unless the guest names its own assembly, and under
+	/// hosting the entry assembly is this wrapper. Nothing throws when that probe misses — the
+	/// resolver just answers every key with an empty string — so only a count proves it worked.
+	/// </remarks>
+	private static bool CheckXamlSnippets(GuestAppLoader loader, GuestAppInfo app)
+	{
+		var count = loader.GetHostedXamlSnippetCount();
+		if (count is null)
+		{
+			// Distinct from "registered nothing": the probe itself could not read the resolver —
+			// most likely Uno.ShowMeTheXAML stopped resolving per-ALC (a GuestSharedAssemblies.txt
+			// edit) rather than anything to do with XamlDisplay.Init().
+			_logger.LogError(
+				"[HOSTING-SMOKE] Could not read {App}'s ShowMeTheXAML registrations; is Uno.ShowMeTheXAML still loaded per-ALC?",
+				app.DisplayName);
+			return false;
+		}
+
+		if (count == 0)
+		{
+			_logger.LogError(
+				"[HOSTING-SMOKE] {App} registered no ShowMeTheXAML snippets; its XAML panes render blank.",
+				app.DisplayName);
+			return false;
+		}
+
+		_logger.LogInformation("[HOSTING-SMOKE] {App} registered {Count} ShowMeTheXAML snippets.", app.DisplayName, count);
+		return true;
 	}
 
 	private static async Task<bool> CheckReclamationAsync(GuestAppLoader loader)

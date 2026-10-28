@@ -133,6 +133,45 @@ public class Given_SemanticStyles
 	}
 
 	// ─────────────────────────────────────────────────────────────────────
+	// Palette aliases: Simple's ColorPalette.xaml aliases a semantic brush
+	// through <StaticResource>. On WinUI, cloning that palette by enumerating
+	// it resolved the alias before its target existed and crashed the
+	// SimpleTheme constructor (unoplatform/Uno.Themes WinAppSDK head).
+	// ─────────────────────────────────────────────────────────────────────
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow(ElementTheme.Light, "OnSurfaceInverseBrush")]
+	[DataRow(ElementTheme.Dark, "OnSurfaceBrush")]
+	public async Task When_PaletteAliasIsApplied_Then_ItMatchesItsSemanticBrush(
+		ElementTheme requestedTheme, string semanticBrushKey)
+	{
+		var container = CreateThemedContainer();
+		container.RequestedTheme = requestedTheme;
+
+		var aliased = CreateBorder("SimpleTextUtilitiesOnOverlayBrush");
+		var semantic = CreateBorder(semanticBrushKey);
+		var panel = new StackPanel();
+		panel.Children.Add(aliased);
+		panel.Children.Add(semantic);
+		container.Children.Add(panel);
+
+		UnitTestsUIContentHelper.Content = container;
+		await UnitTestsUIContentHelper.WaitForLoaded(aliased);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		var aliasedBrush = aliased.Background as SolidColorBrush;
+		var semanticBrush = semantic.Background as SolidColorBrush;
+		Assert.IsNotNull(aliasedBrush, "SimpleTextUtilitiesOnOverlayBrush should resolve");
+		Assert.IsNotNull(semanticBrush, $"{semanticBrushKey} should resolve");
+		Assert.AreEqual(semanticBrush.Color, aliasedBrush.Color,
+			$"SimpleTextUtilitiesOnOverlayBrush should alias {semanticBrushKey} under {requestedTheme}");
+
+		static Border CreateBorder(string brushKey) => (Border)XamlReader.Load(
+			$$"""<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="10" Height="10" Background="{ThemeResource {{brushKey}}}" />""");
+	}
+
+	// ─────────────────────────────────────────────────────────────────────
 	// Scope isolation: overrides in one container don't leak to siblings.
 	// ─────────────────────────────────────────────────────────────────────
 
