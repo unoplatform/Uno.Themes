@@ -9,6 +9,12 @@ uid: Uno.Themes.Material.Migration
 
 ## Upgrading to Uno Themes v9
 
+### Uno Platform 7.0 and .NET 10 are required
+
+Uno Themes v9 is built against Uno Platform 7.0 and targets .NET 10 (`net10.0` and its platform-specific variants). Uno Themes v8 targets .NET 9 and Uno Platform 6.x. Before upgrading the Uno Themes packages, update your app to Uno Platform 7.0 and .NET 10; see [Migrating to Uno Platform 7.0](xref:Uno.Development.MigratingToUno7).
+
+Uno Platform 7.0 builds applications with the `Uno.Sdk` single project only. An app that still uses the older multi-head project structure fails to build with `UNOB0029` and must first be migrated, as described in [Migrating Projects to Single Project](xref:Uno.Development.MigratingToSingleProject).
+
 ### The spacing scale is rebased on 8
 
 To match Material 3, `Space100` is now 8 (it was 4) and every `Space*` key doubled in value. The steps changed too: `Space025`, `Space075`, `Space125`, `Space250`, `Space700`, `Space900` and `Space2000` are new, and `Space1600`, `Space2400` and `Space4000` are removed. The control styles were remapped, so built-in controls render the same spacing as before, and the density modes still yield the same rendered spacing.
