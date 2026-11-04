@@ -43,4 +43,4 @@ It contains four libraries:
 
 ## Fluent Controls Styles
 
-Uno Platform 3.0 and above supports control styles conforming to the [Fluent design system](https://www.microsoft.com/design/fluent).
+Uno Platform supports control styles conforming to the [Fluent design system](https://www.microsoft.com/design/fluent), the default design system of WinUI.

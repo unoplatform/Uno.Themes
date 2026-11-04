@@ -34,9 +34,7 @@ Uno Cupertino is enabled through the `Cupertino` UnoFeatures and lets you apply 
 
 ### Installing Uno Cupertino in an existing project
 
-Depending on the type of project template that the Uno Platform application was created with, follow the instructions below to install Uno Cupertino.
-
-#### [**Single Project Template**](#tab/singleproj)
+Uno Platform 7.0 builds applications with the `Uno.Sdk` single project only. If your app still uses the older multi-head project structure, it fails to build with `UNOB0029`: migrate it first by following [Migrating Projects to Single Project](xref:Uno.Development.MigratingToSingleProject).
 
 1. Edit your project file (`PROJECT_NAME.csproj`) and add `Cupertino` to the list of `UnoFeatures`:
 
@@ -60,68 +58,6 @@ Depending on the type of project template that the Uno Platform application was 
         </ResourceDictionary>
     </Application.Resources>
     ```
-
-#### [**Multi-Head Project Template (Legacy)**](#tab/multihead)
-
-> [!NOTE]
-> Use this only when working on older multi-head templates that do not support `UnoFeatures`. Modern templates should use the Single Project instructions above.
-
-1. In the Solution Explorer panel, right-click on your app's **App Code Library** project (`PROJECT_NAME.csproj`) and select `Manage NuGet Packages...`
-1. Install the [`Uno.Cupertino.WinUI`](https://www.nuget.org/packages/Uno.Cupertino.WinUI)
-1. Add the following Cupertino resources to `AppResources.xaml`:
-
-    ```xml
-    <ResourceDictionary>
-        <ResourceDictionary.MergedDictionaries>
-
-        <CupertinoColors xmlns="using:Uno.Cupertino" />
-        <CupertinoFonts xmlns="using:Uno.Cupertino" />
-        <CupertinoResources xmlns="using:Uno.Cupertino" />
-
-        </ResourceDictionary.MergedDictionaries>
-    </ResourceDictionary>
-    ```
-
-#### [**Shared Project (.shproj) Template (Legacy)**](#tab/shproj)
-
-> [!NOTE]
-> Use this only when working on older `.shproj`-based solutions that do not support `UnoFeatures`. Modern templates should use the Single Project instructions above.
-
-1. In the Solution Explorer panel, right-click on your solution name and select `Manage NuGet Packages for Solution ...`. Choose either:
-    - The [`Uno.Cupertino`](https://www.nuget.org/packages/Uno.Cupertino/) package when targetting Xamarin/UWP
-    - The [`Uno.Cupertino.WinUI`](https://www.nuget.org/packages/Uno.Cupertino.WinUI) package when targetting net6.0+/WinUI
-
-2. Select the following projects for installation:
-    - `PROJECT_NAME.Wasm.csproj`
-    - `PROJECT_NAME.Mobile.csproj` (or `PROJECT_NAME.iOS.csproj`, `PROJECT_NAME.Droid.csproj`, and `PROJECT_NAME.macOS.csproj` if you have an existing project)
-    - `PROJECT_NAME.csproj` (the `net*-desktop` Skia Desktop head)
-    - `PROJECT_NAME.Windows.csproj` (or `PROJECT_NAME.UWP.csproj` for existing projects)
-3. Add the following resources inside `App.xaml`:
-
-    ```xml
-    <Application>
-        <Application.Resources>
-            <ResourceDictionary>
-                <ResourceDictionary.MergedDictionaries>
-
-                    <!-- Load WinUI resources -->
-                    <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
-
-                    <!-- Load Uno.Cupertino resources -->
-                    <CupertinoColors xmlns="using:Uno.Cupertino" />
-                    <CupertinoFonts xmlns="using:Uno.Cupertino" />
-                    <CupertinoResources xmlns="using:Uno.Cupertino" />
-
-                    <!-- Load custom application resources -->
-                    <!-- ... -->
-
-                </ResourceDictionary.MergedDictionaries>
-            </ResourceDictionary>
-        </Application.Resources>
-    </Application>
-    ```
-
----
 
 ## Customization
 

@@ -154,3 +154,6 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 The Dark theme uses the same values as Light.
 
 <!-- END GENERATED -->
+
+> [!NOTE]
+> The disabled border of `MaterialOutlinedButtonStyle` (`OutlinedButtonStyle`) is drawn with `OutlinedButtonBackgroundDisabled`, not `OutlinedButtonBorderBrushDisabled`: the template does not read `OutlinedButtonBorderBrushDisabled`, so overriding it has no effect. To change the border color of a disabled outlined button, override `OutlinedButtonBackgroundDisabled`. The disabled state does not change the button's background, so this key affects only the border.
