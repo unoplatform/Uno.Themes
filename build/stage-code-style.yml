@@ -46,3 +46,7 @@ jobs:
   # Styles XAML change can leave doc/styles/** stale.
   - bash: dotnet run build/scripts/GenerateStyleDocs.cs -- --check
     displayName: Verify generated style docs
+    env:
+      # GenerateStyleDocs.cs is a file-based app. On Linux, SDKs before 10.0.113 restore those
+      # without NuGet signature verification (CVE-2026-96957).
+      DOTNET_NUGET_SIGNATURE_VERIFICATION: 'true'
