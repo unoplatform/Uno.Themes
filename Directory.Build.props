@@ -73,9 +73,12 @@
 		<Build_Windows Condition="'$(OS)'!='Windows_NT'">false</Build_Windows>
 	</PropertyGroup>
 
-	<!-- Uno.WinUI's Windows assemblies are built against the WinRT.Runtime 2.3.1 projection (unoplatform/uno#24905) -->
-	<PropertyGroup Condition="$(TargetFramework.Contains('-windows10.0.19041')) and '$(WindowsSdkPackageVersion)'==''">
-		<WindowsSdkPackageVersion>10.0.19041.87</WindowsSdkPackageVersion>
+	<!--
+		Build net10.0 Windows assets against the .NET 10 SDK default projection (WinRT.Runtime 2.2.0), like Uno core does
+		(unoplatform/uno#25106). A higher projection makes every .NET 10 SDK consumer fail with CS1705.
+	-->
+	<PropertyGroup Condition="$(TargetFramework.StartsWith('net10.0-windows')) and '$(WindowsSdkPackageVersion)'==''">
+		<WindowsSdkPackageVersion>10.0.19041.57</WindowsSdkPackageVersion>
 	</PropertyGroup>
 
 	<!-- Workaround for https://developercommunity.visualstudio.com/t/XamarinMac-binaries-are-missing-in-173/10164443 -->
