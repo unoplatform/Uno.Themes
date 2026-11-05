@@ -726,6 +726,27 @@ partial class Theme
 			[ResourceKeyDefinition(typeof(Brush), "SurfaceDisabledBrush")]
 			public static ThemeResourceKey<Brush> Disabled => new("SurfaceDisabledBrush");
 
+			[ResourceKeyDefinition(typeof(Brush), "SurfaceDimBrush")]
+			public static ThemeResourceKey<Brush> Dim => new("SurfaceDimBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "SurfaceBrightBrush")]
+			public static ThemeResourceKey<Brush> Bright => new("SurfaceBrightBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "SurfaceContainerLowestBrush")]
+			public static ThemeResourceKey<Brush> ContainerLowest => new("SurfaceContainerLowestBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "SurfaceContainerLowBrush")]
+			public static ThemeResourceKey<Brush> ContainerLow => new("SurfaceContainerLowBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "SurfaceContainerBrush")]
+			public static ThemeResourceKey<Brush> Container => new("SurfaceContainerBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "SurfaceContainerHighBrush")]
+			public static ThemeResourceKey<Brush> ContainerHigh => new("SurfaceContainerHighBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "SurfaceContainerHighestBrush")]
+			public static ThemeResourceKey<Brush> ContainerHighest => new("SurfaceContainerHighestBrush");
+
 			public static class Variant
 			{
 				[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantBrush")]
