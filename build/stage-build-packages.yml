@@ -16,6 +16,7 @@ jobs:
 
     - template: templates/gitversion.yml
     - template: templates/dotnet-install-windows.yml
+    - template: templates/canary-updater.yml
 
     - task: MSBuild@1
       displayName: 'Build Packages'
