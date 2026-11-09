@@ -15,12 +15,12 @@
 
 	Cupertino and Material v1 are out of scope for now.
 
-	WinUI's own keys come from its generic.xaml, so a WinAppSDK head must have been restored first (CI runs this
-	in the WinAppSDK job, after its build). Keys generated in code by BaseTheme (Space*, Radius*, ControlHeight*,
-	IconSize*) and WinUI's System* keys are allowed by prefix.
+	WinUI's own keys come from its generic.xaml, so the SimpleSampleApp WinAppSDK head must have been restored
+	first (TargetFrameworkOverride=windows; CI's XAML_Resource_Keys job does). Keys generated in code by BaseTheme
+	(Space*, Radius*, ControlHeight*, IconSize*) and WinUI's System* keys are allowed by prefix.
 
 .PARAMETER GenericXaml
-	WinUI's generic.xaml. Defaults to the newest Microsoft.WindowsAppSDK.WinUI in the NuGet cache.
+	WinUI's generic.xaml. Defaults to the one in the WinAppSDK package the SimpleSampleApp restore resolved.
 #>
 param(
 	[string]$RepoRoot = (Resolve-Path "$PSScriptRoot/../.."),
@@ -29,18 +29,22 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $xamlNs = 'http://schemas.microsoft.com/winfx/2006/xaml'
+$mcNs = 'http://schemas.openxmlformats.org/markup-compatibility/2006'
 
 # Declared in code (BaseTheme scale generation) or by the WinUI platform outside generic.xaml.
 $allowedPrefixes = 'Space', 'Radius', 'ControlHeight', 'IconSize', 'System'
 $allowedKeys = @('ScrollViewerScrollBarlessTemplate')
 
 if (-not $GenericXaml) {
-	$cache = if ($env:NUGET_PACKAGES) { $env:NUGET_PACKAGES } else { Join-Path $HOME '.nuget/packages' }
-	$GenericXaml = Get-ChildItem (Join-Path $cache 'microsoft.windowsappsdk.winui') -Directory -ErrorAction SilentlyContinue |
-		Sort-Object { [version]($_.Name -replace '-.*$', '') } -Descending |
-		ForEach-Object { Join-Path $_.FullName 'lib/native/Microsoft.UI/Themes/generic.xaml' } |
-		Where-Object { Test-Path $_ } | Select-Object -First 1
-	if (-not $GenericXaml) { throw 'WinUI generic.xaml not found in the NuGet cache; restore a WinAppSDK head first or pass -GenericXaml.' }
+	# The WinUI the Simple head restored: Microsoft.WindowsAppSDK.WinUI since WinAppSDK 1.8, Microsoft.WindowsAppSDK before.
+	$assetsFile = Join-Path $RepoRoot 'src/samples/SimpleSampleApp/obj/project.assets.json'
+	if (Test-Path $assetsFile) {
+		$assets = Get-Content $assetsFile -Raw | ConvertFrom-Json -AsHashtable
+		$GenericXaml = $assets.libraries.GetEnumerator() | Where-Object Name -Match '^Microsoft\.WindowsAppSDK(\.WinUI)?/' |
+			ForEach-Object { foreach ($folder in $assets.packageFolders.Keys) { Join-Path $folder $_.Value.path 'lib/*/Microsoft.UI/Themes/generic.xaml' } } |
+			Resolve-Path -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty Path
+	}
+	if (-not $GenericXaml) { throw 'WinUI generic.xaml not found; restore the SimpleSampleApp WinAppSDK head first or pass -GenericXaml.' }
 }
 $platformKeys = [System.Collections.Generic.HashSet[string]]::new([string[]]([regex]::Matches((Get-Content $GenericXaml -Raw), 'x:Key="([^"]+)"') | ForEach-Object { $_.Groups[1].Value }))
 
@@ -73,9 +77,21 @@ function Get-DefinedKeys([System.IO.FileInfo[]]$Files) {
 	, $keys # the comma keeps PowerShell from unrolling the set into an array
 }
 
+# WinUI skips the elements and attributes of namespaces the root marks mc:Ignorable (e.g. xamarin:).
+function Test-Ignored([System.Xml.XmlAttribute]$Attr, [string[]]$Ignorable) {
+	if ($Ignorable -contains $Attr.NamespaceURI) { return $true }
+	for ($element = $Attr.OwnerElement; $element -is [System.Xml.XmlElement]; $element = $element.ParentNode) {
+		if ($Ignorable -contains $element.NamespaceURI) { return $true }
+	}
+	$false
+}
+
 function Get-ReferencedKeys([System.Xml.XmlNode]$Root) {
 	$pattern = '\{(?:Static|Theme)Resource\s+(?:ResourceKey=)?([A-Za-z0-9_.]+)\s*\}'
+	$documentElement = $Root.OwnerDocument.DocumentElement
+	$ignorable = @(-split $documentElement.GetAttribute('Ignorable', $mcNs) | ForEach-Object { $documentElement.GetNamespaceOfPrefix($_) } | Where-Object { $_ })
 	foreach ($attr in $Root.SelectNodes('.//@*')) {
+		if (Test-Ignored $attr $ignorable) { continue }
 		if ($attr.LocalName -eq 'ResourceKey' -and $attr.Value -notmatch '^\{') { $attr.Value }
 		foreach ($match in [regex]::Matches($attr.Value, $pattern)) { $match.Groups[1].Value }
 	}
