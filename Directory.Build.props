@@ -73,9 +73,11 @@
 		<Build_Windows Condition="'$(OS)'!='Windows_NT'">false</Build_Windows>
 	</PropertyGroup>
 
-	<!-- Uno.WinUI's Windows assemblies are built against the WinRT.Runtime 2.3.1 projection (unoplatform/uno#24905) -->
-	<PropertyGroup Condition="$(TargetFramework.Contains('-windows10.0.19041')) and '$(WindowsSdkPackageVersion)'==''">
-		<WindowsSdkPackageVersion>10.0.19041.87</WindowsSdkPackageVersion>
+	<!-- Uno.WinUI's Windows assemblies are built against the WinRT.Runtime 2.3.1 projection (unoplatform/uno#24905).
+	     A minimum revision, like Uno.Sdk 7.0 sets for its own projects (unoplatform/uno#25836): also setting
+	     WindowsSdkPackageVersion fails with NETSDK1230. Covers the projects that don't use Uno.Sdk. -->
+	<PropertyGroup Condition="$(TargetFramework.Contains('-windows10.0.19041')) and '$(WindowsSdkPackageVersion)'=='' and '$(WindowsSdkPackageMinimumRevision)'==''">
+		<WindowsSdkPackageMinimumRevision>87</WindowsSdkPackageMinimumRevision>
 	</PropertyGroup>
 
 	<!-- Workaround for https://developercommunity.visualstudio.com/t/XamarinMac-binaries-are-missing-in-173/10164443 -->
