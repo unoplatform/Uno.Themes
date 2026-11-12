@@ -567,6 +567,20 @@ of `#4B6367` / `#525D7D`.
 - [ ] Item 7 in full: confirm the `version.json` bump with the release owner and write the release note
       (the breaking commit markers are done).
 
+### Follow-up (#1778): explicit Secondary / Tertiary seeds are pinned too
+
+Item 2 kept explicit `SecondarySeed` / `TertiarySeed` at "own hue and chroma", but still wrote the roles at
+tone 40 / 80, so `Colors.Orange` rendered as brown `#855400` and only tone-40 seeds round-tripped (the doc
+examples `#625B71` / `#7D5260` happened to be tone 40, which hid it).
+
+- [x] Fidelity mode: light `SecondaryColor` / `TertiaryColor` is the explicit seed verbatim; `On*` picked by
+      `PickOnColor`. Dark stays tone 80 / 20. Auto-derived roles and `TonalSpot` are unchanged.
+- [x] `GenerateCore` routes all three key roles through one `SetKeyColor` helper (Primary included).
+- [x] Red/green: `Given_SeedColorPalette.When_SupportingSeedIsExplicit_*`, `When_SupportingRoleIsPinned_*`,
+      plus `TonalSpot` and not-set guards.
+- [x] `doc/seed-colors.md` and the `ThemeColors` / `SeedColorMode` XML docs updated.
+- Output change for consumers with explicit supporting seeds in Fidelity mode — needs a 9.1 release note.
+
 ---
 
 ## Reproduction harness

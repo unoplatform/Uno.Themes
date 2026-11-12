@@ -36,8 +36,9 @@ Since version 8.0, the default mode keeps the generated theme true to the color 
 
 - In Light mode, `PrimaryColor` is your seed color **verbatim** — the hex you supply is the hex your buttons render. (The alpha channel is ignored: seeds are treated as fully opaque.)
 - The color used on top of it (`OnPrimaryColor`, for button text and icons) is chosen automatically so it always stays readable: a pale seed gets dark text, a dark seed gets light text. The pairing always meets the WCAG AA contrast standard (4.5:1).
+- The same holds for an explicit [`SecondarySeed` or `TertiarySeed`](#optional-secondary-and-tertiary-seeds): in Light mode, `SecondaryColor` / `TertiaryColor` is that seed verbatim, with `OnSecondaryColor` / `OnTertiaryColor` chosen for contrast.
 - Every supporting palette follows the character of your seed: a muted seed gives a muted theme, and a gray seed gives a fully neutral theme.
-- In Dark mode, `PrimaryColor` is a lighter derivative of your seed — a dark brand color painted onto a dark background would be unreadable, so Dark mode always brightens it.
+- In Dark mode, `PrimaryColor` (and likewise `SecondaryColor` / `TertiaryColor`) is a lighter derivative of your seed — a dark brand color painted onto a dark background would be unreadable, so Dark mode always brightens it.
 
 ### Tonal spot — always vibrant
 
@@ -102,6 +103,11 @@ By default, the Secondary and Tertiary palettes are automatically derived from t
     </MaterialTheme.Colors>
 </MaterialTheme>
 ```
+
+An explicit seed supplies the hue and saturation of its whole palette (containers, variants, the Dark-mode role). In the default `Fidelity` mode, the Light-mode `SecondaryColor` / `TertiaryColor` is additionally the seed itself, verbatim — exactly like `PrimaryColor`. In `TonalSpot` mode the role is re-derived at Material's standard lightness instead, so a bright seed such as `Orange` renders noticeably darker.
+
+> [!NOTE]
+> Before version 9.1, an explicit `SecondarySeed` / `TertiarySeed` was re-derived at the standard lightness in both modes, so only seeds that already sat at that lightness were reproduced exactly. If you relied on the previous output, set `SecondaryColor` / `OnSecondaryColor` (or the Tertiary equivalents) in an override dictionary, or use `SeedColorMode="TonalSpot"`.
 
 ### Seed Colors with Manual Overrides
 
@@ -204,8 +210,8 @@ Used as the value for `BaseTheme.Colors` (i.e., `MaterialTheme.Colors` or `Simpl
 | Property             | Type                 | Description                                                                                                                                                         |
 |----------------------|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `PrimarySeed`        | `Color?`             | The primary seed color. When set, derives the full semantic palette algorithmically.                                                                                |
-| `SecondarySeed`      | `Color?`             | Optional secondary seed. If `null`, auto-derived from `PrimarySeed`.                                                                                                |
-| `TertiarySeed`       | `Color?`             | Optional tertiary seed. If `null`, auto-derived from `PrimarySeed`.                                                                                                 |
+| `SecondarySeed`      | `Color?`             | Optional secondary seed. If `null`, auto-derived from `PrimarySeed`. In `Fidelity` mode, light `SecondaryColor` is this seed verbatim.                              |
+| `TertiarySeed`       | `Color?`             | Optional tertiary seed. If `null`, auto-derived from `PrimarySeed`. In `Fidelity` mode, light `TertiaryColor` is this seed verbatim.                                |
 | `SeedColorMode`      | `SeedColorMode`      | Default `Fidelity`: light `PrimaryColor` is the seed verbatim; palettes follow its saturation. `TonalSpot` selects Material's always-vibrant recipe.                |
 | `OverrideSource`     | `string`             | URI to a `ResourceDictionary` with color overrides. These override both defaults and seed-generated colors.                                                         |
 | `OverrideDictionary` | `ResourceDictionary` | Direct `ResourceDictionary` with color overrides. Highest precedence.                                                                                               |
