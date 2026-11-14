@@ -60,4 +60,35 @@ public class SimpleTheme(ResourceDictionary colorOverride = null, ResourceDictio
 		"SimpleToggleButtonFontFamily",
 		"DatePickerFlyoutPresenterFontFamily",
 	};
+
+	/// <summary>
+	/// The radii Simple caps by the size of the control they sit on (unoplatform/Uno.Themes#1747).
+	/// Each cap is at least the value at the default base of 4, so the default look is unchanged.
+	/// Keep in sync with the <c>SimpleShape*</c> references under <c>Styles/Controls</c>.
+	/// </summary>
+	internal override CappedRadius[] CappedRadii { get; } =
+	{
+		// 40px controls (buttons, inputs, pickers, list items) and tooltips: a quarter of the height.
+		new("SimpleShapeControl", 2, 10),
+		// 40px ComboBoxItem, which follows Radius100.
+		new("SimpleShapeItem", 1, 10),
+		// 36px menu items: a quarter of the height.
+		new("SimpleShapeMenuItem", 2, 9),
+		// Flyouts, menus, dialogs, expanders: a fixed maximum, twice the default, so content stays inside the corner.
+		new("SimpleShapeContainer", 2, 16),
+		// 16px check box: a quarter of its side, so it never reads as a RadioButton.
+		new("SimpleShapeCheckBox", 1, 4),
+		// 32px and 24px square avatars: a quarter of the side.
+		new("SimpleShapeAvatar", 2, 8),
+		new("SimpleShapeAvatarSmall", 1, 6),
+		// 40px AutoSuggestBox pill: half the height.
+		new("SimpleShapePill", 5, 20),
+		// 24px ToggleSwitch track: half the height.
+		new("SimpleShapeSwitchTrack", 3, 12),
+		// CalendarView and date flyouts: the header text stays inside the corner.
+		new("SimpleShapeCalendar", 4, 24),
+		// 4px slider track and progress bar, 8px slider fill: half the thickness.
+		new("SimpleShapeTrack", 0.5, 2),
+		new("SimpleShapeSliderFill", 1, 4),
+	};
 }

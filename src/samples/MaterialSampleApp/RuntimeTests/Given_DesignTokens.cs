@@ -1,5 +1,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Markup;
+using Microsoft.UI.Xaml.Shapes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Uno.Material;
 using Uno.Themes;
@@ -263,6 +265,177 @@ public class Given_DesignTokens
 	}
 
 	// ═══════════════════════════════════════════════════════════════════════
+	// SHAPE — directional companions, validation and size-capped radii
+	// (unoplatform/Uno.Themes#1747)
+	// ═══════════════════════════════════════════════════════════════════════
+
+	private static readonly double[] ShapeBases = { 0.0, 2.0, 4.0, 8.0, 16.0 };
+
+	// A per-control key is a StaticResource alias, which resolves from the scope doing the lookup:
+	// read from a detached dictionary it reaches the application's theme, not this one. So these
+	// are read the way a template reads them, by an element loaded under the themed container.
+	private static async Task<T> LoadProbe<T>(double baseRadius, string xaml)
+		where T : FrameworkElement
+	{
+		var (container, _) = CreateThemedContainer(cornerRadius: baseRadius);
+		var probe = (T)XamlReader.Load(xaml);
+		container.Children.Add(probe);
+
+		UnitTestsUIContentHelper.Content = container;
+		await UnitTestsUIContentHelper.WaitForLoaded(probe);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		return probe;
+	}
+
+	private static async Task<CornerRadius> ResolveCornerRadius(double baseRadius, string key)
+		=> (await LoadProbe<Border>(baseRadius,
+			$"<Border xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' Width='40' Height='40' CornerRadius='{{ThemeResource {key}}}' />")).CornerRadius;
+
+	private static async Task<double> ResolveRadius(double baseRadius, string key)
+		=> (await LoadProbe<Rectangle>(baseRadius,
+			$"<Rectangle xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' Width='40' Height='40' RadiusX='{{ThemeResource {key}}}' />")).RadiusX;
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_CornerRadiusSet_Then_DirectionalCompanionsExist()
+	{
+		var (container, _) = CreateThemedContainer(cornerRadius: 6.0);
+
+		Assert.AreEqual(new CornerRadius(12, 12, 0, 0), GetResource<CornerRadius>(container, "Radius200TopCornerRadius"));
+		Assert.AreEqual(new CornerRadius(12, 0, 0, 12), GetResource<CornerRadius>(container, "Radius200LeftCornerRadius"));
+		Assert.AreEqual(new CornerRadius(0, 0, 12, 12), GetResource<CornerRadius>(container, "Radius200BottomCornerRadius"));
+		Assert.AreEqual(new CornerRadius(12, 0, 0, 0), GetResource<CornerRadius>(container, "Radius200TopLeftCornerRadius"));
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow(double.NaN)]
+	[DataRow(double.PositiveInfinity)]
+	[DataRow(double.NegativeInfinity)]
+	[DataRow(-4.0)]
+	public void When_CornerRadiusIsInvalid_Then_FallsBackToDefault(double invalid)
+	{
+		var (container, _) = CreateThemedContainer(cornerRadius: invalid);
+
+		Assert.AreEqual(4.0, GetResource<double>(container, "Radius100"), 0.001);
+		Assert.AreEqual(new CornerRadius(8), GetResource<CornerRadius>(container, "Radius200CornerRadius"));
+		Assert.AreEqual(20.0, GetResource<double>(container, "MaterialShapeButton"), 0.001,
+			"A capped radius must fall back to its base-4 value too.");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow("MaterialShapeButton", 5.0, 20.0)]
+	[DataRow("MaterialShapeCheckBox", 0.5, 4.5)]
+	[DataRow("MaterialShapeFab", 4.0, 16.8)]
+	[DataRow("MaterialShapeFabSmall", 3.0, 12.0)]
+	[DataRow("MaterialShapeFabLarge", 7.0, 28.8)]
+	[DataRow("MaterialShapeDialog", 7.0, 32.0)]
+	[DataRow("MaterialShapeNavigationItem", 7.0, 28.0)]
+	[DataRow("MaterialShapeNavigationItemCompact", 4.0, 16.0)]
+	[DataRow("MaterialShapeSwitchTrack", 4.0, 16.0)]
+	[DataRow("MaterialShapeSliderFill", 1.0, 4.0)]
+	[DataRow("MaterialShapeIndicator", 0.5, 2.0)]
+	public void When_CornerRadiusChanges_Then_CappedRadiusKeepsControlShape(string key, double multiplier, double cap)
+	{
+		Assert.IsTrue(4.0 * multiplier <= cap, $"{key}: the cap must not change what the default base of 4 renders.");
+
+		foreach (var baseRadius in ShapeBases)
+		{
+			var (container, _) = CreateThemedContainer(cornerRadius: baseRadius);
+			var expected = Math.Min(baseRadius * multiplier, cap);
+
+			Assert.AreEqual(expected, GetResource<double>(container, key), 0.001, $"{key} at base={baseRadius}");
+			Assert.AreEqual(new CornerRadius(expected), GetResource<CornerRadius>(container, key + "CornerRadius"),
+				$"{key}CornerRadius at base={baseRadius}");
+		}
+	}
+
+	// The per-control keys keep their name and type and follow the capped radius: today's value at
+	// 4, square at 0, and never past the control's size at 16.
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow("ButtonCornerRadius", 20.0, 20.0)]
+	[DataRow("CheckBoxCheckAreaCornerRadius", 2.0, 4.5)]
+	[DataRow("MaterialFabCornerRadius", 16.0, 16.8)]
+	[DataRow("MaterialSmallFabCornerRadius", 12.0, 12.0)]
+	[DataRow("MaterialLargeFabCornerRadius", 28.0, 28.8)]
+	[DataRow("MaterialContentDialogCornerRadius", 28.0, 32.0)]
+	[DataRow("MaterialNavigationViewItemCornerRadius", 28.0, 28.0)]
+	[DataRow("MaterialNavigationViewItemCornerRadiusCompact", 16.0, 16.0)]
+	[DataRow("MaterialNavigationViewButtonCornerRadius", 16.0, 16.0)]
+	[DataRow("OutlinedPasswordBoxCornerRadius", 4.0, 16.0)]
+	public async Task When_CornerRadiusChanges_Then_ControlKeyKeepsItsShape(string key, double atDefault, double atLarge)
+	{
+		Assert.AreEqual(new CornerRadius(0), await ResolveCornerRadius(0.0, key), $"{key} at base=0");
+		Assert.AreEqual(new CornerRadius(atDefault), await ResolveCornerRadius(4.0, key), $"{key} at base=4");
+		Assert.AreEqual(new CornerRadius(atLarge), await ResolveCornerRadius(16.0, key), $"{key} at base=16");
+	}
+
+	// Literals that now follow the scale: the same value at 4, square at 0.
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_CornerRadiusChanges_Then_FormerLiteralsFollowTheScale()
+	{
+		Assert.AreEqual(new CornerRadius(4, 4, 0, 0), await ResolveCornerRadius(4.0, "FilledTextBoxCornerRadius"));
+		Assert.AreEqual(new CornerRadius(4, 4, 0, 0), await ResolveCornerRadius(4.0, "FilledPasswordBoxCornerRadius"));
+		Assert.AreEqual(new CornerRadius(4, 4, 0, 0), await ResolveCornerRadius(4.0, "DatePickerCornerRadius"));
+		Assert.AreEqual(new CornerRadius(4, 4, 0, 0), await ResolveCornerRadius(4.0, "CalendarDatePickerBackgroundCornerRadius"));
+		Assert.AreEqual(new CornerRadius(4, 0, 0, 4), await ResolveCornerRadius(4.0, "SliderHorizontalFillCornerRadius"));
+		Assert.AreEqual(new CornerRadius(0, 0, 4, 4), await ResolveCornerRadius(4.0, "SliderVerticalFillCornerRadius"));
+		Assert.AreEqual(new CornerRadius(8, 0, 0, 0), await ResolveCornerRadius(4.0, "NavigationViewContentGridCornerRadius"));
+		Assert.AreEqual(new CornerRadius(28, 0, 0, 28), await ResolveCornerRadius(4.0, "MaterialNavigationViewItemCornerRadiusLeftOnly"));
+		Assert.AreEqual(16.0, await ResolveRadius(4.0, "SwitchKnobRadius"), 0.001);
+
+		Assert.AreEqual(new CornerRadius(0), await ResolveCornerRadius(0.0, "FilledTextBoxCornerRadius"));
+		Assert.AreEqual(new CornerRadius(0), await ResolveCornerRadius(0.0, "MaterialNavigationViewItemCornerRadiusLeftOnly"));
+		Assert.AreEqual(0.0, await ResolveRadius(0.0, "SwitchKnobRadius"), 0.001);
+
+		Assert.AreEqual(new CornerRadius(28, 0, 0, 28), await ResolveCornerRadius(16.0, "MaterialNavigationViewItemCornerRadiusLeftOnly"),
+			"The left-only radius is capped at half the 56px item, like the full one.");
+		Assert.AreEqual(16.0, await ResolveRadius(16.0, "SwitchKnobRadius"), 0.001);
+		Assert.AreEqual(new CornerRadius(4, 0, 0, 4), await ResolveCornerRadius(16.0, "SliderHorizontalFillCornerRadius"),
+			"The slider fill keeps its rounded end: its radius does not grow past the literal it replaced.");
+		Assert.AreEqual(2.0, await ResolveRadius(16.0, "NavigationViewSelectionIndicatorRadius"), 0.001);
+		Assert.AreEqual(2.0, await ResolveRadius(4.0, "NavigationViewSelectionIndicatorRadius"), 0.001);
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_CornerRadiusIsLarge_Then_FabStaysARoundedSquare()
+	{
+		var (container, _) = CreateThemedContainer(cornerRadius: 16.0);
+		var fab = new Button { Content = "+", Style = (Style)container.Resources["MaterialFabStyle"] };
+		container.Children.Add(fab);
+
+		UnitTestsUIContentHelper.Content = container;
+		await UnitTestsUIContentHelper.WaitForLoaded(fab);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		// Radius400 would be 64 here, past half of any FAB: a circle. Capped at 0.3 × the 56px side.
+		Assert.AreEqual(new CornerRadius(16.8), fab.CornerRadius);
+		Assert.IsTrue(fab.CornerRadius.TopLeft < fab.ActualHeight / 2,
+			$"The FAB radius ({fab.CornerRadius.TopLeft}) must stay under half its height ({fab.ActualHeight}).");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_FilledButton_WithLargeCornerRadius_Then_ButtonStaysAPill()
+	{
+		var (container, _) = CreateThemedContainer(Density.Regular, cornerRadius: 16.0);
+		var button = new Button { Content = "Pill", Style = (Style)container.Resources["FilledButtonStyle"] };
+		container.Children.Add(button);
+
+		UnitTestsUIContentHelper.Content = container;
+		await UnitTestsUIContentHelper.WaitForLoaded(button);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		// Radius500 would be 80; half the 40px height keeps a true pill instead of an ellipse.
+		Assert.AreEqual(new CornerRadius(20), button.CornerRadius);
+	}
+
+	// ═══════════════════════════════════════════════════════════════════════
 	// 8. VISUAL INTEGRATION — render actual controls, verify layout values
 	// ═══════════════════════════════════════════════════════════════════════
 
@@ -316,7 +489,7 @@ public class Given_DesignTokens
 	[RunsOnUIThread]
 	public async Task When_FilledButton_WithCustomCornerRadius_Then_ButtonReflectsIt()
 	{
-		var (container, _) = CreateThemedContainer(Density.Regular, cornerRadius: 6.0);
+		var (container, _) = CreateThemedContainer(Density.Regular, cornerRadius: 3.0);
 
 		var style = container.Resources["FilledButtonStyle"] as Style;
 		Assert.IsNotNull(style, "FilledButtonStyle should exist");
@@ -328,9 +501,10 @@ public class Given_DesignTokens
 		await UnitTestsUIContentHelper.WaitForLoaded(button);
 		await UnitTestsUIContentHelper.WaitForIdle();
 
-		// ButtonCornerRadius = Radius500CornerRadius = CornerRadius(6×5=30)
-		Assert.AreEqual(new CornerRadius(30), button.CornerRadius,
-			"FilledButton CornerRadius should be 30 at base=6 (Radius500 = 6×5)");
+		// ButtonCornerRadius = min(Radius500, 20) = CornerRadius(3×5=15); the cap is asserted in
+		// When_FilledButton_WithLargeCornerRadius_Then_ButtonStaysAPill.
+		Assert.AreEqual(new CornerRadius(15), button.CornerRadius,
+			"FilledButton CornerRadius should be 15 at base=3 (Radius500 = 3×5)");
 	}
 
 	// ═══════════════════════════════════════════════════════════════════════

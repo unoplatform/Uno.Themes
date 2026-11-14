@@ -20,17 +20,17 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 ### Themed
 
-| Key                                              | Type           | Light                            |
-| ------------------------------------------------ | -------------- | -------------------------------- |
-| `SimpleAutoSuggestBoxBorderThickness`            | `Thickness`    | `SimpleStrokeBorderThickness`    |
-| `SimpleAutoSuggestBoxCornerRadius`               | `CornerRadius` | 20                               |
-| `SimpleAutoSuggestBoxFocusedBorderThickness`     | `Thickness`    | `SimpleStrokeFocusRingThickness` |
-| `SimpleAutoSuggestBoxIconFontSize`               | `Double`       | `BodyLargeFontSize`              |
-| `SimpleAutoSuggestBoxMinHeight`                  | `Double`       | `SimpleIconLarge`                |
-| `SimpleAutoSuggestBoxPadding`                    | `Thickness`    | 16,10,40,10                      |
-| `SimpleAutoSuggestBoxSuggestionsBorderThickness` | `Thickness`    | `SimpleStrokeBorderThickness`    |
-| `SimpleAutoSuggestBoxSuggestionsCornerRadius`    | `CornerRadius` | `SimpleRadius200CornerRadius`    |
-| `SimpleAutoSuggestBoxSuggestionsPadding`         | `Thickness`    | `SimpleSpace050Thickness`        |
+| Key                                              | Type           | Light                              |
+| ------------------------------------------------ | -------------- | ---------------------------------- |
+| `SimpleAutoSuggestBoxBorderThickness`            | `Thickness`    | `SimpleStrokeBorderThickness`      |
+| `SimpleAutoSuggestBoxCornerRadius`               | `CornerRadius` | `SimpleShapePillCornerRadius`      |
+| `SimpleAutoSuggestBoxFocusedBorderThickness`     | `Thickness`    | `SimpleStrokeFocusRingThickness`   |
+| `SimpleAutoSuggestBoxIconFontSize`               | `Double`       | `BodyLargeFontSize`                |
+| `SimpleAutoSuggestBoxMinHeight`                  | `Double`       | `SimpleIconLarge`                  |
+| `SimpleAutoSuggestBoxPadding`                    | `Thickness`    | 16,10,40,10                        |
+| `SimpleAutoSuggestBoxSuggestionsBorderThickness` | `Thickness`    | `SimpleStrokeBorderThickness`      |
+| `SimpleAutoSuggestBoxSuggestionsCornerRadius`    | `CornerRadius` | `SimpleShapeContainerCornerRadius` |
+| `SimpleAutoSuggestBoxSuggestionsPadding`         | `Thickness`    | `SimpleSpace050Thickness`          |
 
 The Dark theme uses the same values as Light.
 

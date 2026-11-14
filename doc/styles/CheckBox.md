@@ -48,7 +48,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `CheckBoxBorderBrushUncheckedPressed`                   | `SolidColorBrush` | `SystemControlTransparentBrush`                                                                    |
 | `CheckBoxCharacterSpacing`                              | `Int32`           | `BodySmallCharacterSpacing`                                                                        |
 | `CheckBoxCheckAreaBorderThickness`                      | `Thickness`       | 2                                                                                                  |
-| `CheckBoxCheckAreaCornerRadius`                         | `CornerRadius`    | `Radius050CornerRadius`                                                                            |
+| `CheckBoxCheckAreaCornerRadius`                         | `CornerRadius`    | `MaterialShapeCheckBoxCornerRadius`                                                                |
 | `CheckBoxCheckAreaLength`                               | `GridLength`      | 40                                                                                                 |
 | `CheckBoxCheckAreaPadding`                              | `Thickness`       | `Space100LeftThickness`                                                                            |
 | `CheckBoxCheckAreaSize`                                 | `Double`          | 18                                                                                                 |
