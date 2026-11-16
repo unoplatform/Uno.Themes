@@ -17,6 +17,7 @@ namespace Uno.Themes.Samples.RuntimeTests;
 [TestClass]
 public class Given_FluentSemanticStyles
 {
+#if HAS_UNO // WinUI's DatePickerFlyoutPresenter has no public constructor, so it cannot be instantiated there.
 	[TestMethod]
 	[RunsOnUIThread]
 	[DataRow(ElementTheme.Light)]
@@ -36,6 +37,7 @@ public class Given_FluentSemanticStyles
 		await UnitTestsUIContentHelper.WaitForIdle();
 		Assert.IsNotNull(presenter.Template, "An explicit semantic style must preserve the built-in picker template.");
 	}
+#endif
 
 	private static Grid CreateThemedContainer()
 	{
