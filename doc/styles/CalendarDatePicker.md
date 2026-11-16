@@ -4,46 +4,56 @@ uid: Uno.Themes.Styles.CalendarDatePicker
 
 # CalendarDatePicker Control
 
+<!-- BEGIN GENERATED -->
+<!-- This region is generated from the Styles XAML by `dotnet run build/scripts/GenerateStyleDocs.cs`; do not edit it by hand. -->
+
 ## Styles
 
-| Style Key                 | IsDefaultStyle\* |
-|---------------------------|------------------|
-| `CalendarDatePickerStyle` | True             |
+| Style Key                                | Semantic Alias            | IsDefaultStyle\* |
+| ---------------------------------------- | ------------------------- | ---------------- |
+| `MaterialCalendarDatePickerStyle`        | `CalendarDatePickerStyle` | True             |
+| `MaterialDefaultCalendarDatePickerStyle` |                           | True             |
 
 IsDefaultStyle\*: Styles in this column will be set as the default implicit style for the matching control
 
 ## Lightweight Styling
 
-| Key                                                 | Type              | Value                           |
-|-----------------------------------------------------|-------------------|---------------------------------|
+### Themed
+
+| Key                                                 | Type              | Light                           |
+| --------------------------------------------------- | ----------------- | ------------------------------- |
+| `CalendarDatePickerBackground`                      | `SolidColorBrush` | `SurfaceVariantBrush`           |
 | `CalendarDatePickerBackgroundCornerRadius`          | `CornerRadius`    | 4,4,0,0                         |
-| `CalendarDatePickerBorderThemeThickness`            | `Thickness`       | 1                               |
-| `CalendarDatePickerFlyoutPresenterPadding`          | `Thickness`       | 0                               |
-| `CalendarDatePickerFlyoutPresenterMargin`           | `Thickness`       | 0                               |
-| `CalendarDatePickerContentMargin`                   | `Thickness`       | 10,0                            |
-| `CalendarDatePickerHeight`                          | `Double`          | 53                              |
+| `CalendarDatePickerBackgroundDisabled`              | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `CalendarDatePickerBackgroundFocused`               | `SolidColorBrush` | `SurfaceVariantBrush`           |
 | `CalendarDatePickerBackgroundMinHeight`             | `Double`          | 53                              |
-| `CalendarDatePickerCornerRadius`                    | `CornerRadius`    | `ControlCornerRadius`           |
-| `CalendarDatePickerFlyoutPresenterCornerRadius`     | `CornerRadius`    | `OverlayCornerRadius`           |
-| `CalendarDatePickerCalendarViewCornerRadius`        | `CornerRadius`    | `OverlayCornerRadius`           |
-| `CalendarDatePickerForeground`                      | `SolidColorBrush` | `OnSurfaceBrush`                |
-| `CalendarDatePickerForegroundDisabled`              | `SolidColorBrush` | `OnSurfaceMediumBrush`          |
+| `CalendarDatePickerBackgroundPointerOver`           | `SolidColorBrush` | `SurfaceVariantBrush`           |
+| `CalendarDatePickerBackgroundPressed`               | `SolidColorBrush` | `SurfaceVariantBrush`           |
+| `CalendarDatePickerBorderBrush`                     | `SolidColorBrush` | `OnSurfaceLowBrush`             |
+| `CalendarDatePickerBorderBrushDisabled`             | `SolidColorBrush` | `OnSurfaceLowBrush`             |
+| `CalendarDatePickerBorderBrushPointerOver`          | `SolidColorBrush` | `OnSurfaceLowBrush`             |
+| `CalendarDatePickerBorderBrushPressed`              | `SolidColorBrush` | `OnSurfaceLowBrush`             |
+| `CalendarDatePickerBorderThemeThickness`            | `Thickness`       | 1                               |
+| `CalendarDatePickerBottomBorderBrush`               | `SolidColorBrush` | `PrimaryBrush`                  |
 | `CalendarDatePickerCalendarGlyphForeground`         | `SolidColorBrush` | `OnSurfaceBrush`                |
 | `CalendarDatePickerCalendarGlyphForegroundDisabled` | `SolidColorBrush` | `OnSurfaceMediumBrush`          |
+| `CalendarDatePickerCalendarViewCornerRadius`        | `CornerRadius`    | `OverlayCornerRadius`           |
+| `CalendarDatePickerContentMargin`                   | `Thickness`       | 10,0,10,0                       |
+| `CalendarDatePickerCornerRadius`                    | `CornerRadius`    | `ControlCornerRadius`           |
+| `CalendarDatePickerFlyoutPresenterCornerRadius`     | `CornerRadius`    | `OverlayCornerRadius`           |
+| `CalendarDatePickerFlyoutPresenterMargin`           | `Thickness`       | 0                               |
+| `CalendarDatePickerFlyoutPresenterPadding`          | `Thickness`       | 0                               |
+| `CalendarDatePickerForeground`                      | `SolidColorBrush` | `OnSurfaceBrush`                |
+| `CalendarDatePickerForegroundDisabled`              | `SolidColorBrush` | `OnSurfaceMediumBrush`          |
+| `CalendarDatePickerHeaderForeground`                | `SolidColorBrush` | `PrimaryBrush`                  |
+| `CalendarDatePickerHeaderForegroundDisabled`        | `SolidColorBrush` | `OnSurfaceMediumBrush`          |
+| `CalendarDatePickerHeaderStyle`                     | `Style`           | `MaterialBodySmall`             |
+| `CalendarDatePickerHeight`                          | `Double`          | 53                              |
 | `CalendarDatePickerTextForeground`                  | `SolidColorBrush` | `OnSurfaceLowBrush`             |
 | `CalendarDatePickerTextForegroundDisabled`          | `SolidColorBrush` | `OnSurfaceMediumBrush`          |
 | `CalendarDatePickerTextForegroundSelected`          | `SolidColorBrush` | `OnSurfaceBrush`                |
-| `CalendarDatePickerHeaderForeground`                | `SolidColorBrush` | `PrimaryBrush`                  |
-| `CalendarDatePickerHeaderForegroundDisabled`        | `SolidColorBrush` | `OnSurfaceMediumBrush`          |
-| `CalendarDatePickerBackground`                      | `SolidColorBrush` | `SurfaceVariantBrush`           |
-| `CalendarDatePickerBackgroundPointerOver`           | `SolidColorBrush` | `SurfaceVariantBrush`           |
-| `CalendarDatePickerBackgroundPressed`               | `SolidColorBrush` | `SurfaceVariantBrush`           |
-| `CalendarDatePickerBackgroundDisabled`              | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `CalendarDatePickerBackgroundFocused`               | `SolidColorBrush` | `SurfaceVariantBrush`           |
-| `CalendarDatePickerBorderBrush`                     | `SolidColorBrush` | `OnSurfaceLowBrush`             |
-| `CalendarDatePickerBorderBrushPointerOver`          | `SolidColorBrush` | `OnSurfaceLowBrush`             |
-| `CalendarDatePickerBorderBrushPressed`              | `SolidColorBrush` | `OnSurfaceLowBrush`             |
-| `CalendarDatePickerBorderBrushDisabled`             | `SolidColorBrush` | `OnSurfaceLowBrush`             |
-| `CalendarDatePickerBottomBorderBrush`               | `SolidColorBrush` | `PrimaryBrush`                  |
-| `CalendarDatePickerHeaderStyle`                     | `Style`           | `MaterialBodySmall`             |
 | `CalendarDatePickerTextStyle`                       | `Style`           | `MaterialBodyMedium`            |
+
+The Dark theme uses the same values as Light.
+
+<!-- END GENERATED -->

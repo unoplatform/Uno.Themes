@@ -36,6 +36,8 @@ public class MaterialTheme : BaseTheme
 
 	protected override string DefaultStylesSource => MaterialConstants.ResourcePaths.Version2.MergedPages;
 
+	protected override string SemanticStylesSource => MaterialConstants.ResourcePaths.Version2.SemanticStyles;
+
 	/// <summary>
 	/// The per-control font family alias keys Material v2 declares — StaticResource aliases that
 	/// snapshot at parse time and therefore need regenerating for a runtime

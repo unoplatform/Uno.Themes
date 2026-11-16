@@ -230,6 +230,9 @@ For more information about the lightweight styling resource keys used in each co
 - [ToggleButton](styles/ToggleButton.md)
 - [ToggleSwitch](styles/ToggleSwitch.md)
 
+> [!NOTE]
+> The per-control pages, the Material pages above and their Simple counterparts, list every resource key the control's styles define. An override takes effect only for a key that the control template actually reads, and some listed keys are defined without being read. For example, the [Simple Slider page](styles/simple/Slider.md) lists both `SimpleSliderCornerRadius` and `SliderCornerRadius`, but the style reads `SliderCornerRadius`, so only an override of that key changes the corner radius. If an override has no visible effect, check which key the template uses in the style's XAML source in the [Uno.Themes repository](https://github.com/unoplatform/Uno.Themes/tree/master/src/library).
+
 ## Fluent theme
 
 Under [`FluentTheme`](fluent-getting-started.md), controls are rendered by the **built-in WinUI templates**, which reference Fluent's own per-control resources (`AccentButtonBackground`, `TextControlForeground`, …) rather than the semantic keys above. The theme bridges the two worlds per control — **Button, TextBox, CheckBox, RadioButton, ToggleSwitch, and Slider** are covered:

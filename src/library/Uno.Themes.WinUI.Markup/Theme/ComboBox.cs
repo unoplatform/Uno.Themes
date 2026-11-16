@@ -190,6 +190,21 @@ public static partial class Theme
 					public static ThemeResourceKey<double> Width => new("ComboBoxUpGlyphWidth");
 				}
 
+				public static partial class UpperPlaceHolder
+				{
+					[ResourceKeyDefinition(typeof(Thickness), "ComboBoxUpperPlaceHolderMargin")]
+					public static ThemeResourceKey<Thickness> Margin => new("ComboBoxUpperPlaceHolderMargin");
+
+					[ResourceKeyDefinition(typeof(double), "ComboBoxUpperPlaceHolderScaleX")]
+					public static ThemeResourceKey<double> ScaleX => new("ComboBoxUpperPlaceHolderScaleX");
+
+					[ResourceKeyDefinition(typeof(double), "ComboBoxUpperPlaceHolderScaleY")]
+					public static ThemeResourceKey<double> ScaleY => new("ComboBoxUpperPlaceHolderScaleY");
+
+					[ResourceKeyDefinition(typeof(double), "ComboBoxUpperPlaceHolderTranslateY")]
+					public static ThemeResourceKey<double> TranslateY => new("ComboBoxUpperPlaceHolderTranslateY");
+				}
+
 				public static partial class UpperPlaceHolderForeground
 				{
 					[ResourceKeyDefinition(typeof(Brush), "ComboBoxUpperPlaceHolderForeground")]
@@ -225,6 +240,9 @@ public static partial class Theme
 
 				[ResourceKeyDefinition(typeof(Thickness), "ComboBoxPadding")]
 				public static ThemeResourceKey<Thickness> Padding => new("ComboBoxPadding");
+
+				[ResourceKeyDefinition(typeof(Style), "ComboBoxPlaceholderTextStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.TextBlock))]
+				public static ThemeResourceKey<Style> PlaceholderTextStyle => new("ComboBoxPlaceholderTextStyle");
 
 				[ResourceKeyDefinition(typeof(string), "ComboBoxUpArrowPathData")]
 				public static StaticResourceKey<string> UpArrowPathData => new("ComboBoxUpArrowPathData");

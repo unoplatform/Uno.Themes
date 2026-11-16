@@ -21,7 +21,7 @@ uid: Uno.Themes.Overview
 Cross-cutting guides shared by the theme libraries:
 
 - [Seed Color Palette](seed-colors.md) — generate the full Light and Dark color theme from a single seed color (Material, Simple, and Fluent)
-- [Semantic Styles](semantic-styles.md) — design-system-agnostic style names, so you can switch themes without changing your XAML
+- [Semantic Styles](semantic-styles.md) — design-system-agnostic style names, so you can switch themes without changing your XAML (Material v2, Simple, and Fluent); semantic resources are marked by the `SemanticResources` dictionary type, so tooling can tell them from theme-prefixed keys
 - [Design Tokens](design-tokens.md) — spacing, shape, and density values you can adjust globally
 - [Lightweight Styling](lightweight-styling.md) — override individual colors, brushes, and sizes per control without redefining the control template
 
@@ -44,6 +44,6 @@ It contains five libraries:
 
 ## Fluent Controls Styles
 
-Uno Platform 3.0 and above supports control styles conforming to the [Fluent design system](https://www.microsoft.com/design/fluent) out of the box, via `XamlControlsResources`.
+Uno Platform supports control styles conforming to the [Fluent design system](https://www.microsoft.com/design/fluent), the default design system of WinUI.
 
 On top of that, the `Uno.Fluent.WinUI` library (`FluentTheme`) lets apps written against the Uno Themes [semantic styles](semantic-styles.md) — semantic style keys, color palette, and typography — render with the platform-default Fluent look, without rewriting their XAML against the WinUI style names. See [Fluent getting started](fluent-getting-started.md).
