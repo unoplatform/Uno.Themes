@@ -5,7 +5,7 @@ uid: Uno.Themes.Styles.CheckBox
 # CheckBox Control
 
 > [!NOTE]
-> Under the [Fluent theme](../fluent-getting-started.md), most keys below are WinUI's own per-control resource names — overrides reach Fluent-styled checkboxes natively at any scope. Only the `CheckBoxGlyphForeground*` family is bridged (onto `CheckBoxCheckGlyphForeground*`) via `Colors.OverrideDictionary`; `CheckBoxStateCircleFill*` has no Fluent equivalent. See [Lightweight Styling — Fluent theme](../lightweight-styling.md#fluent-theme).
+> Under the [Fluent theme](../fluent-getting-started.md), most keys below are WinUI's own per-control resource names, so overrides reach Fluent-styled checkboxes natively at any scope. The glyph is `CheckBoxCheckGlyphForeground*` in Fluent; `CheckBoxStateCircleFill*` has no Fluent equivalent. See [Lightweight Styling — Fluent theme](../lightweight-styling.md#fluent-theme).
 
 <!-- BEGIN GENERATED -->
 <!-- This region is generated from the Styles XAML by `dotnet run build/scripts/GenerateStyleDocs.cs`; do not edit it by hand. -->

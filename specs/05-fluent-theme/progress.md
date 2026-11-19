@@ -360,6 +360,44 @@ Findings (before):
 - Not changed: the solid accent row of a multi-select ListView is Uno's stock `ListViewItemBackgroundSelected`
   (probed identical in a bare `XamlControlsResources`), not a FluentTheme mapping.
 
+## Phase 10 — Simplification for merge (#1694 hand-off, 2026-11-19)
+
+Goal: make `FluentTheme` as straightforward as `SimpleTheme` — aliases + palette + typography + tokens,
+plus one slim accent layer. Decisions (owner-confirmed): keep the 3-PR stack (#1695 → #1719 → #1721) and
+update the branches in place; v1 scope = core + slim accent cascade; **G6 (lightweight-styling bridge) is
+dropped** — under Fluent, lightweight styling uses WinUI's native per-control keys.
+
+- [x] Merge `master` into `dev/sb/fluent-theme` (conflict: `SeedColorPaletteGenerator` — master's
+  explicit-seed logic kept, `SemanticColorKeys` constants applied). Baseline: 347/347 Fluent cases (Light).
+- [x] Semantic keys through `BaseTheme.SemanticStylesSource` (as Simple). Aliases into the theme's *own*
+  bundle do not resolve below app scope (they did not with the code-built table's predecessor either), so
+  `TextButtonStyle`, `IconButtonStyle` and the 19 typography styles are now **defined** under their
+  semantic keys in `SemanticStyles.xaml`; the `Fluent*`-prefixed keys, `Button.xaml`, `TextBlock.xaml`,
+  `_Resources.xaml` and the code-built `_bundleStyleAliases` are gone.
+- [x] Lightweight bridge dropped: `FluentLightweightBridge`, `FluentTextButtonResources`,
+  `LightweightDefaults.xaml`, `Given_FluentLightweightStyling` and the lifecycle tests of that feature.
+  The subtle text/icon buttons get their state fills from one tiny attached property
+  (`FluentResources.Merged`) that merges a per-theme dictionary into the button's resources.
+- [x] Slim accent cascade: `FluentAccentPalette` (pure: shades + closure from PrimaryColor/PrimaryBrush
+  override > seed, explicit consumer keys skipped) + `FluentAccentLayer` (stable brushes updated in
+  place, restored to the platform values on clear). The platform accent is read from
+  `XamlControlsResources` (UISettings fallback for WinUI), which FluentTheme cannot shadow — so the
+  `BaseTheme.PrepareThemeResources` detach hook and `FluentResourceUpdater` (bindings + weak refs) are
+  gone. Probe: on Uno, `UISettings` Accent (#3399FF) ≠ `SystemAccentColor` (#0078D7), hence XCR first.
+- [x] Also dropped: the font-override `DefaultFontFamily` cascade (`AddFontRootOverrides`, Fluent-only,
+  no Material/Simple parity) and `BaseTheme.ResolvedFontOverride`; per-pass palette refresh (the
+  palette now refreshes on the system-accent event only). Kept: platform token re-pointing
+  (`DefaultCornerRadius` / `DefaultFontFamily`), the system-accent observer.
+- [x] Tests: full Simple host Debug Light 529/1 skip/0, Debug Dark 529/1/0, Release Light 529/1/0,
+  Release Dark (Fluent/semantic/override filter) 240/0; FluentSampleApp 5/5. XamlStyler, dotnet format,
+  style-docs `--check` pass.
+- [x] Docs: fluent-getting-started, lightweight-styling, semantic-styles, seed-colors, `doc/styles/*` notes.
+- [ ] Merge up into #1719 / #1721 and fix their Fluent docs; refresh PR descriptions.
+- [ ] Cross-repo: uno#24797 (UnoFeature) and uno.templates#2284 (`-theme fluent`) — resolve conflicts,
+  re-verify against a locally packed `Uno.Fluent.WinUI`.
+- Follow-up (not this PR): Simple/Material `SemanticStyles.xaml` alias into their own bundle and so bind
+  to a foreign app-level theme when container-scoped (see `specs/lessons.md`).
+
 ## Gap audit — 2026-09-04
 
 Requested with the master integration: a full inspection of the adapter, its

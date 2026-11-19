@@ -45,8 +45,8 @@ A few Fluent targets are marked *built-in&nbsp;¹*: the corresponding Fluent sty
 | `ElevatedButtonStyle` | `MaterialElevatedButtonStyle` | **GAP** | `DefaultButtonStyle` | Simple has no elevated/shadow variant; Fluent has no elevation, standard button is the nearest match |
 | `FilledTonalButtonStyle` | `MaterialFilledTonalButtonStyle` | `SimpleFilledTonalButtonStyle` | `DefaultButtonStyle` | Simple "Neutral" is closest tonal match; Fluent standard button has a neutral fill |
 | `OutlinedButtonStyle` | `MaterialOutlinedButtonStyle` | `SimpleFilledTonalButtonStyle` | `DefaultButtonStyle` | Fluent standard button carries a stroke |
-| `TextButtonStyle` | `MaterialTextButtonStyle` | `SimpleTextButtonStyle` | `FluentTextButtonStyle` | Text-only appearance; Fluent "subtle button" (transparent at rest) |
-| `IconButtonStyle` | `MaterialIconButtonStyle` | `SimpleIconButtonStyle` | `FluentIconButtonStyle` | Simple has multiple icon button colors; Primary is default |
+| `TextButtonStyle` | `MaterialTextButtonStyle` | `SimpleTextButtonStyle` | Fluent subtle button (defined by the theme) | Text-only appearance; Fluent "subtle button" (transparent at rest) |
+| `IconButtonStyle` | `MaterialIconButtonStyle` | `SimpleIconButtonStyle` | Fluent subtle icon button (defined by the theme) | Simple has multiple icon button colors; Primary is default |
 
 ### Floating Action Button (FAB)
 
@@ -273,7 +273,7 @@ Both **Material** and **Simple** templates reference the same unprefixed keys (e
 The color palette underneath these keys can itself be swapped wholesale — generated from a single seed color, and even changed at runtime — see [Seed Color Palette](seed-colors.md).
 
 > [!NOTE]
-> The **Fluent** theme bridges the semantic lightweight-styling keys to the built-in Fluent control resources for Button, TextBox, CheckBox, RadioButton, ToggleSwitch, and Slider. For CheckBox/RadioButton/Slider most key names are WinUI's own, so overrides work natively at any scope; for divergent names, app-wide overrides go through the theme's `Colors.OverrideDictionary` and page-scoped overrides target the Fluent per-control keys directly. See [Lightweight Styling — Fluent theme](lightweight-styling.md#fluent-theme).
+> The **Fluent** theme keeps the built-in WinUI templates, which read Fluent's own per-control resources. Lightweight-style Fluent controls with those keys (`AccentButtonBackground`, `TextControlForeground`, …); for CheckBox, RadioButton, and Slider most semantic key names already are WinUI's own. See [Lightweight Styling — Fluent theme](lightweight-styling.md#fluent-theme).
 
 For more details on per-control lightweight styling resources, see the individual control style pages:
 

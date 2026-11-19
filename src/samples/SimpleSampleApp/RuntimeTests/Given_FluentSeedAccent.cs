@@ -796,7 +796,9 @@ public class Given_FluentSeedAccent
 
 	[TestMethod]
 	[RunsOnUIThread]
-	public void When_MergedNativeAccentBrushOverridesSeed_ExplicitBrushAndOpacityWin()
+	[DataRow(ElementTheme.Light)]
+	[DataRow(ElementTheme.Dark)]
+	public async Task When_MergedNativeAccentBrushOverridesSeed_ExplicitBrushAndOpacityWin(ElementTheme appearance)
 	{
 		var expected = new SolidColorBrush(OverrideBlue) { Opacity = 0.43 };
 		var overrides = new ResourceDictionary();
@@ -805,13 +807,18 @@ public class Given_FluentSeedAccent
 		{
 			Colors = new ThemeColors { PrimarySeed = SeedRed, OverrideDictionary = overrides },
 		};
+		var host = new Grid { RequestedTheme = appearance };
+		host.Resources.MergedDictionaries.Add(theme);
+		var button = new Button { Content = "explicit", Style = (Style)Application.Current.Resources["AccentButtonStyle"] };
+		host.Children.Add(button);
 
-		foreach (var appearance in new[] { "Light", "Default" })
-		{
-			var actual = Assert.IsInstanceOfType<SolidColorBrush>(FindBranchValue(theme, appearance, "AccentFillColorDefaultBrush"), $"{appearance} must expose the explicit native fill brush");
-			Assert.AreEqual(expected.Color, actual.Color, $"{appearance} must preserve the explicit brush color");
-			Assert.AreEqual(expected.Opacity, actual.Opacity, 0.0001, $"{appearance} must preserve the explicit brush opacity");
-		}
+		UnitTestsUIContentHelper.Content = host;
+		await UnitTestsUIContentHelper.WaitForLoaded(button);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		var actual = Assert.IsInstanceOfType<SolidColorBrush>(button.Background);
+		Assert.AreEqual(expected.Color, actual.Color, "the explicit native fill brush must win over the seed");
+		Assert.AreEqual(expected.Opacity, actual.Opacity, 0.0001, "the explicit brush opacity must be preserved");
 	}
 
 	[TestMethod]
