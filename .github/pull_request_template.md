@@ -24,11 +24,16 @@ Please check if your PR fulfills the following requirements:
 
 - Commits must be following the [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/#summary)
 - [ ] Tested the changes where applicable:
-	- [ ] UWP
-	- [ ] iOS
+	- [ ] All platforms
+	- [ ] WebAssembly
 	- [ ] Android
-	- [ ] WASM
-	- [ ] MacOS
+	- [ ] iOS
+	- [ ] tvOS
+	- [ ] Desktop (Windows)
+	- [ ] Desktop (macOS)
+	- [ ] Desktop (X11)
+	- [ ] Desktop (Linux Framebuffer)
+	- [ ] Windows App SDK
 - [ ] Updated the documentation as needed:
 	- [ ] [General Doc Update](https://github.com/unoplatform/Uno.Themes/tree/master/doc)
 	- [ ] [material-controls-styles.md](https://github.com/unoplatform/Uno.Themes/blob/master/doc/material-controls-styles.md)
