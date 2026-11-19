@@ -112,6 +112,28 @@ For variants `0`, `050`, `100`, `150`, `200`, `300`, `400`, `500`, `600`, and `8
 | `Radius700`  | 28         | `Radius700CornerRadius`  |
 | `RadiusFull` | 9999       | `RadiusFullCornerRadius` |
 
+Every step except `RadiusFull` also has directional `CornerRadius` companions, for shapes rounded on one side only:
+
+| Suffix                | Value     | Example                        |
+|-----------------------|-----------|--------------------------------|
+| `TopCornerRadius`     | `r,r,0,0` | `Radius100TopCornerRadius`     |
+| `LeftCornerRadius`    | `r,0,0,r` | `Radius100LeftCornerRadius`    |
+| `BottomCornerRadius`  | `0,0,r,r` | `Radius100BottomCornerRadius`  |
+| `TopLeftCornerRadius` | `r,0,0,0` | `Radius200TopLeftCornerRadius` |
+
+#### Size-capped radii
+
+The shape scale grows with `DefaultCornerRadius`, but a control's size does not. A step that suits a 40px control at the default of 4 would pass half its height at 8 or 16 and turn it into an ellipse. So the default styles read the radius of a fixed-size control as `min(step, cap)`, where the cap comes from that size:
+
+- **Pills** (Material `Button`, `NavigationViewItem`, switch tracks, Simple `AutoSuggestBox`): half the height.
+- **Small controls with an identity** (`CheckBox`, square `PersonPicture`, FABs): about a quarter of the smallest side, so a `CheckBox` never looks like a `RadioButton`.
+- **Other fixed-height controls** (Simple buttons, text inputs, pickers, list and menu items): a quarter of the height.
+- **Containers** (`ContentDialog`, flyouts, menus, `CalendarView`): a fixed maximum that keeps the content inside the rounded corner.
+
+Every cap is at least the value at the default of 4, so the default look is unchanged, and `DefaultCornerRadius="0"` still makes every one of these controls square.
+
+The capped values are generated from `DefaultCornerRadius` as `SimpleShape*` and `MaterialShape*` resources, and the per-control keys (`SimpleButtonCornerRadius`, `MaterialFabCornerRadius`, `ButtonCornerRadius`, …) alias them. To give one of these controls a radius outside its cap, override its own key.
+
 ### Density
 
 | Key                        | Default Value (px) |
@@ -177,11 +199,14 @@ To override individual tokens without changing the whole scale, use standard XAM
 </Page.Resources>
 ```
 
+> [!NOTE]
+> Overriding a `Radius*` token does not reach the controls whose radius is [capped by their size](#size-capped-radii): those values are generated from `DefaultCornerRadius`. Override the control's own key instead, for example `SimpleButtonCornerRadius` or `MaterialFabCornerRadius`.
+
 ### Properties Reference
 
 | Property              | Type         | Description                                                                                                                                 |
 |-----------------------|--------------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| `DefaultCornerRadius` | `double`     | Base corner radius unit; generates the full `Radius*` scale. Runtime-settable. Under `FluentTheme` it also re-points the platform `ControlCornerRadius` / `OverlayCornerRadius` tokens the built-in templates read. |
+| `DefaultCornerRadius` | `double`     | Base corner radius unit (default 4); generates the full `Radius*` scale. Invalid values fall back to 4. Runtime-settable. Under `FluentTheme` it also re-points the platform `ControlCornerRadius` / `OverlayCornerRadius` tokens the built-in templates read.                   |
 | `DefaultSpacing`      | `double`     | Base spacing unit (default 8); generates the full `Space*` scale, scaled by the `DefaultDensity` mode. Runtime-settable.                    |
 | `DefaultDensity`      | `Density`    | Density mode that scales the spacing base unit (`Compact` ×0.75, `Regular` ×1, `Comfy` ×1.25). Runtime-settable.                            |
 | `DefaultFontFamily`   | `FontFamily` | The font the type scale is generated from: the `DefaultFontFamily` token and every `*FontFamily` key derived from it. Runtime-settable.     |

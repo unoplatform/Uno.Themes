@@ -33,7 +33,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `SliderFocusVisualMargin`             | `Thickness`       | -7,0                                           | -7,0                                           |
 | `SliderFontFamily`                    | `FontFamily`      | `DefaultFontFamily`                            | `DefaultFontFamily`                            |
 | `SliderFontSize`                      | `Double`          | `LabelMediumFontSize`                          | `LabelMediumFontSize`                          |
-| `SliderHorizontalFillCornerRadius`    | `CornerRadius`    | 4,0,0,4                                        | 4,0,0,4                                        |
+| `SliderHorizontalFillCornerRadius`    | `CornerRadius`    | `MaterialShapeSliderFillLeftCornerRadius`      | `MaterialShapeSliderFillLeftCornerRadius`      |
 | `SliderHorizontalFocusVisualMargin`   | `Thickness`       | -14,-6,-14,-6                                  | -14,-6,-14,-6                                  |
 | `SliderHorizontalHeight`              | `Double`          | `ControlHeightSmall`                           | `ControlHeightSmall`                           |
 | `SliderHorizontalInlineTickBarHeight` | `Double`          | 2                                              | 2                                              |
@@ -59,7 +59,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `SliderTrackThickness`                | `Double`          | 4                                              | 4                                              |
 | `SliderTrackValueFill`                | `SolidColorBrush` | `PrimaryBrush`                                 | `PrimaryBrush`                                 |
 | `SliderTrackValueFillDisabled`        | `SolidColorBrush` | `SystemControlDisabledChromeDisabledHighBrush` | `SystemControlDisabledChromeDisabledHighBrush` |
-| `SliderVerticalFillCornerRadius`      | `CornerRadius`    | 0,0,4,4                                        | 0,0,4,4                                        |
+| `SliderVerticalFillCornerRadius`      | `CornerRadius`    | `MaterialShapeSliderFillBottomCornerRadius`    | `MaterialShapeSliderFillBottomCornerRadius`    |
 | `SliderVerticalFocusVisualMargin`     | `Thickness`       | -6,-14,-6,-14                                  | -6,-14,-6,-14                                  |
 | `SliderVerticalInlineTickBarWidth`    | `Double`          | 2                                              | 2                                              |
 | `SliderVerticalWidth`                 | `Double`          | `ControlHeightSmall`                           | `ControlHeightSmall`                           |

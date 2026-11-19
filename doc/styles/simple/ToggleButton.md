@@ -23,12 +23,12 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 ### Theme-agnostic
 
-| Key                                 | Type           | Value                         |
-| ----------------------------------- | -------------- | ----------------------------- |
-| `SimpleToggleButtonBorderThickness` | `Thickness`    | `SimpleStrokeBorderThickness` |
-| `SimpleToggleButtonCornerRadius`    | `CornerRadius` | `SimpleRadius200CornerRadius` |
-| `SimpleToggleButtonFontWeight`      | `String`       | Medium                        |
-| `SimpleToggleButtonIconSpacing`     | `Double`       | `SimpleSpace100`              |
+| Key                                 | Type           | Value                            |
+| ----------------------------------- | -------------- | -------------------------------- |
+| `SimpleToggleButtonBorderThickness` | `Thickness`    | `SimpleStrokeBorderThickness`    |
+| `SimpleToggleButtonCornerRadius`    | `CornerRadius` | `SimpleShapeControlCornerRadius` |
+| `SimpleToggleButtonFontWeight`      | `String`       | Medium                           |
+| `SimpleToggleButtonIconSpacing`     | `Double`       | `SimpleSpace100`                 |
 
 ### Themed
 

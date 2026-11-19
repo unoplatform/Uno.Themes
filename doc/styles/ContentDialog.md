@@ -20,21 +20,21 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 ### Theme-agnostic
 
-| Key                                                | Type              | Value                     |
-| -------------------------------------------------- | ----------------- | ------------------------- |
-| `MaterialContentDialogBackground`                  | `SolidColorBrush` | `SurfaceBrush`            |
-| `MaterialContentDialogButtonSpacing`               | `GridLength`      | 8                         |
-| `MaterialContentDialogCommandSpaceToContentMargin` | `Thickness`       | `Space300TopThickness`    |
-| `MaterialContentDialogContentForeground`           | `SolidColorBrush` | `OnSurfaceVariantBrush`   |
-| `MaterialContentDialogCornerRadius`                | `CornerRadius`    | `Radius700CornerRadius`   |
-| `MaterialContentDialogEdgeMargin`                  | `Thickness`       | 56                        |
-| `MaterialContentDialogMaxHeight`                   | `Double`          | 560                       |
-| `MaterialContentDialogMaxWidth`                    | `Double`          | 560                       |
-| `MaterialContentDialogMinHeight`                   | `Double`          | 132                       |
-| `MaterialContentDialogMinWidth`                    | `Double`          | 288                       |
-| `MaterialContentDialogPanelPadding`                | `Thickness`       | 24                        |
-| `MaterialContentDialogSmokeLayerBackground`        | `SolidColorBrush` | `OnSurfaceLowBrush`       |
-| `MaterialContentDialogTitleForeground`             | `SolidColorBrush` | `OnSurfaceBrush`          |
-| `MaterialContentDialogTitleToContentMargin`        | `Thickness`       | `Space200BottomThickness` |
+| Key                                                | Type              | Value                             |
+| -------------------------------------------------- | ----------------- | --------------------------------- |
+| `MaterialContentDialogBackground`                  | `SolidColorBrush` | `SurfaceBrush`                    |
+| `MaterialContentDialogButtonSpacing`               | `GridLength`      | 8                                 |
+| `MaterialContentDialogCommandSpaceToContentMargin` | `Thickness`       | `Space300TopThickness`            |
+| `MaterialContentDialogContentForeground`           | `SolidColorBrush` | `OnSurfaceVariantBrush`           |
+| `MaterialContentDialogCornerRadius`                | `CornerRadius`    | `MaterialShapeDialogCornerRadius` |
+| `MaterialContentDialogEdgeMargin`                  | `Thickness`       | 56                                |
+| `MaterialContentDialogMaxHeight`                   | `Double`          | 560                               |
+| `MaterialContentDialogMaxWidth`                    | `Double`          | 560                               |
+| `MaterialContentDialogMinHeight`                   | `Double`          | 132                               |
+| `MaterialContentDialogMinWidth`                    | `Double`          | 288                               |
+| `MaterialContentDialogPanelPadding`                | `Thickness`       | 24                                |
+| `MaterialContentDialogSmokeLayerBackground`        | `SolidColorBrush` | `OnSurfaceLowBrush`               |
+| `MaterialContentDialogTitleForeground`             | `SolidColorBrush` | `OnSurfaceBrush`                  |
+| `MaterialContentDialogTitleToContentMargin`        | `Thickness`       | `Space200BottomThickness`         |
 
 <!-- END GENERATED -->
