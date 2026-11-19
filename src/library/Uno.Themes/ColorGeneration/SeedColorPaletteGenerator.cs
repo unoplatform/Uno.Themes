@@ -100,6 +100,7 @@ internal sealed class SeedColorPaletteGenerator
 		if (secondarySeedColor is { } secSeed)
 		{
 			// An explicit seed always uses its own hue and chroma verbatim, in either variant.
+			// In Fidelity mode its light role is additionally pinned to the seed itself (below).
 			var secHct = HctColor.FromArgb(ColorToArgb(secSeed));
 			secondary = new TonalPalette(secHct.Hue, secHct.Chroma);
 		}
@@ -130,17 +131,16 @@ internal sealed class SeedColorPaletteGenerator
 		var lightDict = new ResourceDictionary();
 		var darkDict = new ResourceDictionary();
 
-		// Primary. In Fidelity mode the light role *is* the seed, verbatim — the promise
-		// being that PrimaryColor renders the exact hex the consumer supplied. Dark stays
-		// derived at tone 80: a dark brand color pinned onto a dark surface is unreadable.
-		int lightPrimary = preserveSeedColor ? seedArgb : primary.GetArgb(40);
-		lightDict["PrimaryColor"] = ArgbToColor(lightPrimary);
-		darkDict["PrimaryColor"] = ArgbToColor(primary.GetArgb(80));
+		// Key roles. In Fidelity mode the light role *is* the seed, verbatim — the promise
+		// being that PrimaryColor (and SecondaryColor / TertiaryColor, when the consumer
+		// supplied those seeds explicitly) renders the exact hex that was supplied. An
+		// auto-derived Secondary / Tertiary has no seed of its own, so it stays at tone 40.
+		int? pinnedPrimary = preserveSeedColor ? seedArgb : null;
+		int? pinnedSecondary = preserveSeedColor && secondarySeedColor is { } pinSec ? ColorToArgb(pinSec) : null;
+		int? pinnedTertiary = preserveSeedColor && tertiarySeedColor is { } pinTer ? ColorToArgb(pinTer) : null;
 
-		lightDict["OnPrimaryColor"] = ArgbToColor(
-			preserveSeedColor ? PickOnColor(lightPrimary, primary) : primary.GetArgb(100));
-		darkDict["OnPrimaryColor"] = ArgbToColor(primary.GetArgb(20));
-
+		// Primary
+		int lightPrimary = SetKeyColor(lightDict, darkDict, "PrimaryColor", "OnPrimaryColor", primary, pinnedPrimary);
 		SetColor(lightDict, darkDict, "PrimaryContainerColor", primary, 90, 30);
 		SetColor(lightDict, darkDict, "OnPrimaryContainerColor", primary, 10, 90);
 		SetColor(lightDict, darkDict, "PrimaryInverseColor", primary, 80, 40);
@@ -148,16 +148,14 @@ internal sealed class SeedColorPaletteGenerator
 		SetColor(lightDict, darkDict, "PrimaryVariantLightColor", primary, 70, 80);
 
 		// Secondary
-		SetColor(lightDict, darkDict, "SecondaryColor", secondary, 40, 80);
-		SetColor(lightDict, darkDict, "OnSecondaryColor", secondary, 100, 20);
+		SetKeyColor(lightDict, darkDict, "SecondaryColor", "OnSecondaryColor", secondary, pinnedSecondary);
 		SetColor(lightDict, darkDict, "SecondaryContainerColor", secondary, 90, 30);
 		SetColor(lightDict, darkDict, "OnSecondaryContainerColor", secondary, 10, 90);
 		SetColor(lightDict, darkDict, "SecondaryVariantDarkColor", secondary, 30, 30);
 		SetColor(lightDict, darkDict, "SecondaryVariantLightColor", secondary, 70, 80);
 
 		// Tertiary
-		SetColor(lightDict, darkDict, "TertiaryColor", tertiary, 40, 80);
-		SetColor(lightDict, darkDict, "OnTertiaryColor", tertiary, 100, 20);
+		SetKeyColor(lightDict, darkDict, "TertiaryColor", "OnTertiaryColor", tertiary, pinnedTertiary);
 		SetColor(lightDict, darkDict, "TertiaryContainerColor", tertiary, 90, 30);
 		SetColor(lightDict, darkDict, "OnTertiaryContainerColor", tertiary, 10, 90);
 
@@ -192,7 +190,29 @@ internal sealed class SeedColorPaletteGenerator
 	}
 
 	/// <summary>
-	/// Choose the foreground for a pinned Primary. Because the seed's tone is whatever the
+	/// Writes a key role (Primary / Secondary / Tertiary) and its On* foreground. Unpinned, these
+	/// are the M3 tones: 40 / 100 in Light. Pinned, the light role is the seed verbatim and its
+	/// foreground is picked for contrast. Dark is always derived (80 / 20): a dark brand color
+	/// pinned onto a dark surface is unreadable.
+	/// </summary>
+	/// <returns>The light role's ARGB value.</returns>
+	private static int SetKeyColor(
+		ResourceDictionary lightDict, ResourceDictionary darkDict,
+		string key, string onKey, TonalPalette palette, int? pinnedLightArgb)
+	{
+		int light = pinnedLightArgb ?? palette.GetArgb(40);
+		lightDict[key] = ArgbToColor(light);
+		darkDict[key] = ArgbToColor(palette.GetArgb(80));
+
+		lightDict[onKey] = ArgbToColor(
+			pinnedLightArgb is { } pinned ? PickOnColor(pinned, palette) : palette.GetArgb(100));
+		darkDict[onKey] = ArgbToColor(palette.GetArgb(20));
+
+		return light;
+	}
+
+	/// <summary>
+	/// Choose the foreground for a pinned key role. Because the seed's tone is whatever the
 	/// consumer supplied, M3's fixed tone-100 foreground is not always legible on it; pick
 	/// whichever palette extreme contrasts best. Tone 0 is included because tone 10 tops out
 	/// near 3.8:1 against a mid-tone (~L*50) background, which would leave the default pairing

@@ -42,7 +42,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `SwitchKnobOffShadowMargin`                      | `Thickness`       | 0,0,20,0                        |
 | `SwitchKnobOnMargin`                             | `Thickness`       | 26,0,0,0                        |
 | `SwitchKnobOnShadowMargin`                       | `Thickness`       | 20,0,0,0                        |
-| `SwitchKnobRadius`                               | `Double`          | 16                              |
+| `SwitchKnobRadius`                               | `Double`          | `MaterialShapeSwitchTrack`      |
 | `SwitchKnobShadowSize`                           | `Double`          | `ControlHeightMedium`           |
 | `SwitchKnobStrokeThickness`                      | `Double`          | 2                               |
 | `SwitchKnobWidth`                                | `Double`          | 52                              |

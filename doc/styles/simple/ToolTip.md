@@ -19,11 +19,11 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 ### Theme-agnostic
 
-| Key                            | Type           | Value                         |
-| ------------------------------ | -------------- | ----------------------------- |
-| `SimpleToolTipBorderThickness` | `Thickness`    | `SimpleStrokeBorderThickness` |
-| `SimpleToolTipCornerRadius`    | `CornerRadius` | `SimpleRadius200CornerRadius` |
-| `SimpleToolTipPadding`         | `Thickness`    | 12,8,12,8                     |
+| Key                            | Type           | Value                            |
+| ------------------------------ | -------------- | -------------------------------- |
+| `SimpleToolTipBorderThickness` | `Thickness`    | `SimpleStrokeBorderThickness`    |
+| `SimpleToolTipCornerRadius`    | `CornerRadius` | `SimpleShapeControlCornerRadius` |
+| `SimpleToolTipPadding`         | `Thickness`    | 12,8,12,8                        |
 
 <!-- END GENERATED -->
 

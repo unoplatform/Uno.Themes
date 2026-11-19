@@ -21,7 +21,7 @@
 		<!-- ─── Light Theme ─── -->
 		<ResourceDictionary x:Key="Light">
 			<!-- Sizing -->
-			<CornerRadius x:Key="SimpleAutoSuggestBoxCornerRadius">20</CornerRadius>
+			<StaticResource x:Key="SimpleAutoSuggestBoxCornerRadius" ResourceKey="SimpleShapePillCornerRadius" />
 			<Thickness x:Key="SimpleAutoSuggestBoxPadding">16,10,40,10</Thickness>
 
 			<StaticResource x:Key="SimpleAutoSuggestBoxBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />
@@ -31,7 +31,7 @@
 			<StaticResource x:Key="SimpleAutoSuggestBoxMinHeight" ResourceKey="SimpleIconLarge" />
 			<!-- sds-size-icon-large -->
 			<StaticResource x:Key="SimpleAutoSuggestBoxIconFontSize" ResourceKey="BodyLargeFontSize" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxSuggestionsCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<StaticResource x:Key="SimpleAutoSuggestBoxSuggestionsCornerRadius" ResourceKey="SimpleShapeContainerCornerRadius" />
 			<!-- sds-size-radius-200 -->
 			<StaticResource x:Key="SimpleAutoSuggestBoxSuggestionsBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />
 			<!-- sds-size-stroke-border -->
@@ -41,7 +41,7 @@
 
 		<!-- ─── Dark Theme (Default) ─── -->
 		<ResourceDictionary x:Key="Default">
-			<CornerRadius x:Key="SimpleAutoSuggestBoxCornerRadius">20</CornerRadius>
+			<StaticResource x:Key="SimpleAutoSuggestBoxCornerRadius" ResourceKey="SimpleShapePillCornerRadius" />
 			<Thickness x:Key="SimpleAutoSuggestBoxPadding">16,10,40,10</Thickness>
 
 
@@ -52,7 +52,7 @@
 			<StaticResource x:Key="SimpleAutoSuggestBoxMinHeight" ResourceKey="SimpleIconLarge" />
 			<!-- sds-size-icon-large -->
 			<StaticResource x:Key="SimpleAutoSuggestBoxIconFontSize" ResourceKey="BodyLargeFontSize" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxSuggestionsCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<StaticResource x:Key="SimpleAutoSuggestBoxSuggestionsCornerRadius" ResourceKey="SimpleShapeContainerCornerRadius" />
 			<!-- sds-size-radius-200 -->
 			<StaticResource x:Key="SimpleAutoSuggestBoxSuggestionsBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />
 			<!-- sds-size-stroke-border -->
@@ -396,7 +396,7 @@
 									BorderThickness="{ThemeResource SimpleStrokeBorderThickness}"
 									BorderBrush="{ThemeResource OutlineBrush}"
 									Background="{ThemeResource SurfaceBrush}"
-									CornerRadius="{ThemeResource SimpleRadius200CornerRadius}">
+									CornerRadius="{ThemeResource SimpleShapeContainerCornerRadius}">
 								<ListView x:Name="SuggestionsList"
 										  DisplayMemberPath="{TemplateBinding DisplayMemberPath}"
 										  IsItemClickEnabled="True"

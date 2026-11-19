@@ -30,9 +30,7 @@ Uno Simple is enabled through the `SimpleTheme` UnoFeatures and lets you apply S
 
 ### Installing Uno Simple in an existing project
 
-Depending on the type of project template that the Uno Platform application was created with, follow the instructions below to install Uno Simple.
-
-#### [**Single Project Template**](#tab/singleproj)
+Uno Platform 7.0 builds applications with the `Uno.Sdk` single project only. If your app still uses the older multi-head project structure, it fails to build with `UNOB0029`: migrate it first by following [Migrating Projects to Single Project](xref:Uno.Development.MigratingToSingleProject).
 
 1. Edit your project file (`PROJECT_NAME.csproj`) and add `SimpleTheme` to the list of `UnoFeatures`:
 
@@ -54,27 +52,6 @@ Depending on the type of project template that the Uno Platform application was 
         </ResourceDictionary>
     </Application.Resources>
     ```
-
-#### [**Multi-Head Project Template (Legacy)**](#tab/multihead)
-
-> [!NOTE]
-> Use this only when working on older multi-head templates that do not support `UnoFeatures`. Modern templates should use the Single Project instructions above.
-
-1. In the Solution Explorer panel, right-click on your app's **App Code Library** project (`PROJECT_NAME.csproj`) and select `Manage NuGet Packages...`
-1. Install the [`Uno.Simple.WinUI`](https://www.nuget.org/packages/Uno.Simple.WinUI)
-1. Add the following Simple resources to `AppResources.xaml`:
-
-    ```xml
-    <ResourceDictionary>
-        <ResourceDictionary.MergedDictionaries>
-
-            <us:SimpleTheme xmlns:us="using:Uno.Simple" />
-
-        </ResourceDictionary.MergedDictionaries>
-    </ResourceDictionary>
-    ```
-
----
 
 ## Customization
 

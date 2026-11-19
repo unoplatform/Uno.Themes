@@ -131,6 +131,7 @@ public abstract partial class BaseTheme
 	/// <summary>
 	/// Multiplier table for shape (corner radius) tokens.
 	/// RadiusFull is always 9999 and is handled separately.
+	/// The values at the default base of 4 are today's look: do not change the multipliers.
 	/// </summary>
 	private static readonly (string Variant, double Multiplier)[] ShapeScaleMultipliers =
 	{
@@ -185,6 +186,30 @@ public abstract partial class BaseTheme
 	}
 
 	/// <summary>
+	/// The default base corner radius (px) when <see cref="DefaultCornerRadius"/> is not set
+	/// or holds an invalid (non-finite or negative) value.
+	/// </summary>
+	private const double DefaultBaseCornerRadius = 4.0;
+
+	/// <summary>
+	/// Returns <paramref name="requested"/> when it is a usable base radius, otherwise the default
+	/// of 4. A negative radius throws from the <see cref="CornerRadius"/> constructor and a NaN one
+	/// poisons every Radius* token, and this runs from a property-changed callback.
+	/// </summary>
+	private static double SanitizeCornerRadius(double requested)
+		=> double.IsFinite(requested) && requested >= 0 ? requested : DefaultBaseCornerRadius;
+
+	/// <summary>
+	/// The radii this design system caps by the size of the control they sit on, generated on every
+	/// rebuild as <c>min(DefaultCornerRadius × Multiplier, Cap)</c>. The shape scale grows with
+	/// <see cref="DefaultCornerRadius"/> but a control's size does not, so an uncapped step ends up
+	/// larger than half the control and turns it into an ellipse (unoplatform/Uno.Themes#1747).
+	/// Concrete themes override this with the roles their Styles tree aliases; the cap of each must
+	/// be at least its value at the default base of 4, so the default look is unchanged.
+	/// </summary>
+	internal virtual CappedRadius[] CappedRadii => Array.Empty<CappedRadius>();
+
+	/// <summary>
 	/// Generates a ResourceDictionary containing all shape scale tokens
 	/// derived from the given base value. RadiusFull is always 9999.
 	/// </summary>
@@ -198,10 +223,7 @@ public abstract partial class BaseTheme
 
 			foreach (var (variant, multiplier) in ShapeScaleMultipliers)
 			{
-				var value = baseValue * multiplier;
-
-				themed[$"Radius{variant}"] = value;
-				themed[$"Radius{variant}CornerRadius"] = new CornerRadius(value);
+				AddRadius(themed, $"Radius{variant}", baseValue * multiplier);
 			}
 
 			// RadiusFull is always 9999 (pill shape)
@@ -212,6 +234,51 @@ public abstract partial class BaseTheme
 		}
 
 		return dict;
+	}
+
+	/// <summary>
+	/// Generates a plain dictionary carrying this design system's <see cref="CappedRadii"/>, or
+	/// <c>null</c> when it declares none. Kept apart from <see cref="GenerateShapeScale"/> because
+	/// the keys are theme-specific and must not land in a <see cref="SemanticResources"/>.
+	/// </summary>
+	private ResourceDictionary GenerateCappedRadii(double baseValue)
+	{
+		var radii = CappedRadii;
+		if (radii.Length == 0)
+		{
+			return null;
+		}
+
+		var dict = new ResourceDictionary();
+
+		foreach (var themeKey in ThemeKeys)
+		{
+			var themed = new ResourceDictionary();
+
+			foreach (var radius in radii)
+			{
+				AddRadius(themed, radius.Key, Math.Min(baseValue * radius.Multiplier, radius.Cap));
+			}
+
+			dict.ThemeDictionaries[themeKey] = themed;
+		}
+
+		return dict;
+	}
+
+	/// <summary>
+	/// Adds a radius under <paramref name="key"/> with its <see cref="CornerRadius"/> companions:
+	/// uniform, and the Top (r,r,0,0), Left (r,0,0,r), Bottom (0,0,r,r) and TopLeft (r,0,0,0)
+	/// directional ones, mirroring the spacing scale's directional thicknesses.
+	/// </summary>
+	private static void AddRadius(ResourceDictionary target, string key, double value)
+	{
+		target[key] = value;
+		target[$"{key}CornerRadius"] = new CornerRadius(value);
+		target[$"{key}TopCornerRadius"] = new CornerRadius(value, value, 0, 0);
+		target[$"{key}LeftCornerRadius"] = new CornerRadius(value, 0, 0, value);
+		target[$"{key}BottomCornerRadius"] = new CornerRadius(0, 0, value, value);
+		target[$"{key}TopLeftCornerRadius"] = new CornerRadius(value, 0, 0, 0);
 	}
 
 	/// <summary>
