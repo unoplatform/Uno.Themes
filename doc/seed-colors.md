@@ -36,8 +36,9 @@ Since version 8.0, the default mode keeps the generated theme true to the color 
 
 - In Light mode, `PrimaryColor` is your seed color **verbatim**. Material/Simple filled buttons use this color; Fluent's native accent fill uses a derived shade, as described below. The alpha channel is ignored: seeds are treated as fully opaque.
 - The color used on top of it (`OnPrimaryColor`, for button text and icons) is chosen automatically so it always stays readable: a pale seed gets dark text, a dark seed gets light text. The pairing always meets the WCAG AA contrast standard (4.5:1).
+- The same holds for an explicit [`SecondarySeed` or `TertiarySeed`](#optional-secondary-and-tertiary-seeds): in Light mode, `SecondaryColor` / `TertiaryColor` is that seed verbatim, with `OnSecondaryColor` / `OnTertiaryColor` chosen for contrast.
 - Every supporting palette follows the character of your seed: a muted seed gives a muted theme, and a gray seed gives a fully neutral theme.
-- In Dark mode, `PrimaryColor` is a lighter derivative of your seed — a dark brand color painted onto a dark background would be unreadable, so Dark mode always brightens it.
+- In Dark mode, `PrimaryColor` (and likewise `SecondaryColor` / `TertiaryColor`) is a lighter derivative of your seed — a dark brand color painted onto a dark background would be unreadable, so Dark mode always brightens it.
 
 ### Tonal spot — always vibrant
 
@@ -113,6 +114,11 @@ By default, the Secondary and Tertiary palettes are automatically derived from t
     </MaterialTheme.Colors>
 </MaterialTheme>
 ```
+
+An explicit seed supplies the hue and saturation of its whole palette (containers, variants, the Dark-mode role). In the default `Fidelity` mode, the Light-mode `SecondaryColor` / `TertiaryColor` is additionally the seed itself, verbatim — exactly like `PrimaryColor`. In `TonalSpot` mode the role is re-derived at Material's standard lightness instead, so a bright seed such as `Orange` renders noticeably darker.
+
+> [!NOTE]
+> Before version 9.1, an explicit `SecondarySeed` / `TertiarySeed` was re-derived at the standard lightness in both modes, so only seeds that already sat at that lightness were reproduced exactly. If you relied on the previous output, set `SecondaryColor` / `OnSecondaryColor` (or the Tertiary equivalents) in an override dictionary, or use `SeedColorMode="TonalSpot"`.
 
 ### Seed Colors with Manual Overrides
 
@@ -217,8 +223,8 @@ Used as the value for `BaseTheme.Colors` (`MaterialTheme.Colors`, `SimpleTheme.C
 | Property             | Type                 | Description                                                                                                                                                         |
 |----------------------|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `PrimarySeed`        | `Color?`             | The primary seed color. When set, derives the full semantic palette algorithmically.                                                                                |
-| `SecondarySeed`      | `Color?`             | Optional secondary seed. If `null`, auto-derived from `PrimarySeed`.                                                                                                |
-| `TertiarySeed`       | `Color?`             | Optional tertiary seed. If `null`, auto-derived from `PrimarySeed`.                                                                                                 |
+| `SecondarySeed`      | `Color?`             | Optional secondary seed. If `null`, auto-derived from `PrimarySeed`. In `Fidelity` mode, light `SecondaryColor` is this seed verbatim.                              |
+| `TertiarySeed`       | `Color?`             | Optional tertiary seed. If `null`, auto-derived from `PrimarySeed`. In `Fidelity` mode, light `TertiaryColor` is this seed verbatim.                                |
 | `SeedColorMode`      | `SeedColorMode`      | Default `Fidelity`: light `PrimaryColor` is the seed verbatim; palettes follow its saturation. `TonalSpot` selects Material's always-vibrant recipe.                |
 | `OverrideSource`     | `string`             | URI to a `ResourceDictionary` with color overrides. These override both defaults and seed-generated colors.                                                         |
 | `OverrideDictionary` | `ResourceDictionary` | Direct `ResourceDictionary` with color overrides. Highest precedence.                                                                                               |
@@ -227,14 +233,14 @@ Used as the value for `BaseTheme.Colors` (`MaterialTheme.Colors`, `SimpleTheme.C
 
 Static convenience class for runtime theme configuration.
 
-| Member              | Type     | Description                                                                                                               |
-|---------------------|----------|---------------------------------------------------------------------------------------------------------------------------|
+| Member              | Type     | Description                                                                                                                                                                            |
+|---------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `GetTheme()`        | Method   | Returns the first `BaseTheme` directly in `Application.Current.Resources.MergedDictionaries`, or `null` if none is found. |
-| `PrimarySeed`       | Property | Gets or sets the primary seed color on the active theme. Setting regenerates the full palette.                            |
-| `SecondarySeed`     | Property | Gets or sets the secondary seed color. `null` to auto-derive from primary.                                                |
-| `TertiarySeed`      | Property | Gets or sets the tertiary seed color. `null` to auto-derive from primary.                                                 |
-| `SeedColorMode`     | Property | Gets or sets the generation mode on the active theme: `Fidelity` (default) or `TonalSpot`.                                |
-| `DefaultFontFamily` | Property | Gets or sets the active theme's typeface; see [Typography Font Swap](design-tokens.md#typography-font-swap).              |
+| `PrimarySeed`       | Property | Gets or sets the primary seed color on the active theme. Setting regenerates the full palette.                                                                                         |
+| `SecondarySeed`     | Property | Gets or sets the secondary seed color. `null` to auto-derive from primary.                                                                                                             |
+| `TertiarySeed`      | Property | Gets or sets the tertiary seed color. `null` to auto-derive from primary.                                                                                                              |
+| `SeedColorMode`     | Property | Gets or sets the generation mode on the active theme: `Fidelity` (default) or `TonalSpot`.                                                                                             |
+| `DefaultFontFamily` | Property | Gets or sets the font the active theme's whole type scale is generated from. `null` keeps the theme's own typeface. See [Typography Font Swap](design-tokens.md#typography-font-swap). |
 
 The properties require an active application theme and throw `InvalidOperationException` if none is found. Setting a secondary or tertiary seed alone does not start generation: an effective primary seed is required. Clearing `PrimarySeed` restores the built-in palette for Material, Simple, and Fluent; explicit override resources remain in effect. Perform theme resource changes on the UI thread.
 
@@ -255,7 +261,7 @@ Under [`FluentTheme`](fluent-getting-started.md), a seed color does more than ge
 - The `SystemAccentColor` shade set (`SystemAccentColor`, `Light1`–`Light3`, `Dark1`–`Dark3`) is overridden from the seed's tonal palette: the base accent is the generated light `PrimaryColor` — the seed itself under the default `Fidelity` mode, tone 40 of the chroma-boosted palette under `TonalSpot`. The shades are derived **relative to the accent's own tone**, so a very dark brand color gets darker shades still (its light-theme fill stays navy, not a lighter blue): the dark shades sit at 3/4, 1/2 and 1/4 of the accent's tone, and `Light2` — Fluent's dark-theme accent fill — is anchored at the dark-theme `PrimaryColor` tone (80), with `Light1` midway to it and `Light3` midway from it to white.
 - The accent-derived design tokens (`AccentFillColor*`, `AccentTextFillColor*` colors and brushes) are overridden per Light/Dark theme following Fluent's own structure — for example, the light-theme accent fill is the `Dark1` shade and the dark-theme fill is `Light2`, exactly as with the platform accent.
 - The cascade honors [`SeedColorMode`](#two-generation-modes) like the semantic palette does, so the built-in accent and the semantic `PrimaryColor` agree at `SystemAccentColor` in Light and `SystemAccentColorLight2` in Dark. The Light native fill still uses the `Dark1` shade. Under the default `Fidelity` mode a muted corporate accent keeps its character in both; `TonalSpot` re-saturates both.
-- Text on the accent (`TextOnAccentFillColorPrimary` / `Secondary` and their brushes) is picked for **contrast against the derived fill** — Fluent's white (light theme) and black (dark theme) families assume a mid-tone platform accent, so a pale brand color gets black text on its accent buttons, checked check boxes and toggle switches instead of unreadable white. The semantic defaults that sit on the fill (`FilledButtonForeground*`, `CheckBoxGlyphForegroundChecked`, `ToggleSwitchKnobOnFill`) follow the same pick.
+- Text on the accent (`TextOnAccentFillColorPrimary` / `Secondary` and their brushes) is picked for **contrast against the derived fill** — Fluent's white (light theme) and black (dark theme) families assume a mid-tone platform accent, so a pale brand color gets black text on its accent buttons, checked check boxes and toggle switches instead of unreadable white.
 
 ### PrimaryColor overrides drive the accent too
 
@@ -264,7 +270,8 @@ The cascade is not limited to seeds. An explicit **`PrimaryColor` override** —
 - Unlike a seed (a *generator input*, mapped through tonal-palette tones), an override is the highest-precedence statement of what Primary **is** — it becomes the accent fill **verbatim** for its theme branch, with the surrounding `SystemAccentColor*` shades and accent-text tones derived relative to it, and the on-accent text family picked by contrast against it.
 - A flat value drives both appearances. `Light` and `Dark` values select their respective appearances; `Default` supplies a fallback for either appearance without its own value. Currently an isolated Dark-only override without a seed can also populate the generated native `Default` branch, making it a fallback in Light. Provide both appearance values for predictable accent behavior.
 - When both a seed and a `PrimaryColor` override are set, the **override wins** — the same precedence as in the semantic palette.
-- Any accent-family key you override **explicitly** (`SystemAccentColor*`, `AccentFillColor*`, `AccentTextFillColor*`) always wins over the derived values.
+- An `OnPrimaryColor` (or solid `OnPrimaryBrush`) override becomes the text on the accent (`TextOnAccentFillColor*`), instead of the contrast pick.
+- Any accent-family key you override **explicitly** (`SystemAccentColor*`, `AccentFillColor*`, `AccentTextFillColor*`, `TextOnAccentFillColor*`) always wins over the derived values.
 
 ```xml
 <uf:FluentTheme xmlns:uf="using:Uno.Fluent"
@@ -273,7 +280,7 @@ The cascade is not limited to seeds. An explicit **`PrimaryColor` override** —
 
 With `ColorPaletteOverride.xaml` defining `PrimaryColor` per theme branch, both semantic-keyed XAML **and** the stock Fluent controls follow it.
 
-The supported bridge input is the theme's configured override dictionary (including the source and obsolete property channels listed above). The constructor's `colorOverride` argument and entries nested in `MergedDictionaries` do not feed Fluent's accent bridge. Other semantic color/brush overrides, such as `OnPrimaryColor`, are not general native accent drivers; see [override compatibility](semantic-styles.md#override-compatibility).
+Every color-override channel feeds the cascade (the constructor's `colorOverride`, `Colors.OverrideDictionary` / `OverrideSource`, the obsolete properties), including entries in nested `MergedDictionaries`; an `OnPrimaryColor` or solid `OnPrimaryBrush` override sets the text on the accent. See [override compatibility](semantic-styles.md#override-compatibility).
 
 Without a seed or a `PrimaryColor` override, none of these overrides exist and the controls follow the platform accent (on Windows, the user's chosen accent color).
 

@@ -46,6 +46,8 @@ public class SimpleTheme(ResourceDictionary colorOverride = null, ResourceDictio
 
 	protected override string DefaultStylesSource => SimpleConstants.ResourcePaths.MergedPages;
 
+	protected override string SemanticStylesSource => SimpleConstants.ResourcePaths.SemanticStyles;
+
 	/// <summary>
 	/// The font family alias keys Simple declares — StaticResource aliases that snapshot at parse
 	/// time and therefore need regenerating for a runtime <see cref="BaseTheme.DefaultFontFamily"/>

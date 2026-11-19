@@ -202,39 +202,38 @@ public class Given_FluentTypography
 	}
 
 	// ─────────────────────────────────────────────────────────────────────
-	// TextBlock styles (spec §7.3): the semantic alias resolves to the Fluent-
-	// prefixed style, and applying it carries the slot values to the control.
+	// TextBlock styles (spec §7.3): each semantic slot resolves to a TextBlock
+	// style, and applying it carries the slot values to the control.
 	// ─────────────────────────────────────────────────────────────────────
 
 	[TestMethod]
 	[RunsOnUIThread]
-	[DataRow("DisplayLarge", "FluentDisplayLarge")]
-	[DataRow("DisplayMedium", "FluentDisplayMedium")]
-	[DataRow("DisplaySmall", "FluentDisplaySmall")]
-	[DataRow("HeadlineLarge", "FluentHeadlineLarge")]
-	[DataRow("HeadlineMedium", "FluentHeadlineMedium")]
-	[DataRow("HeadlineSmall", "FluentHeadlineSmall")]
-	[DataRow("TitleLarge", "FluentTitleLarge")]
-	[DataRow("TitleMedium", "FluentTitleMedium")]
-	[DataRow("TitleSmall", "FluentTitleSmall")]
-	[DataRow("BodyLarge", "FluentBodyLarge")]
-	[DataRow("BodyMedium", "FluentBodyMedium")]
-	[DataRow("BodySmall", "FluentBodySmall")]
-	[DataRow("LabelLarge", "FluentLabelLarge")]
-	[DataRow("LabelMedium", "FluentLabelMedium")]
-	[DataRow("LabelSmall", "FluentLabelSmall")]
-	[DataRow("LabelExtraSmall", "FluentLabelExtraSmall")]
-	[DataRow("CaptionLarge", "FluentCaptionLarge")]
-	[DataRow("CaptionMedium", "FluentCaptionMedium")]
-	[DataRow("CaptionSmall", "FluentCaptionSmall")]
-	public void When_TypographyAlias_ResolvesToFluentStyle(string semanticKey, string fluentKey)
+	[DataRow("DisplayLarge")]
+	[DataRow("DisplayMedium")]
+	[DataRow("DisplaySmall")]
+	[DataRow("HeadlineLarge")]
+	[DataRow("HeadlineMedium")]
+	[DataRow("HeadlineSmall")]
+	[DataRow("TitleLarge")]
+	[DataRow("TitleMedium")]
+	[DataRow("TitleSmall")]
+	[DataRow("BodyLarge")]
+	[DataRow("BodyMedium")]
+	[DataRow("BodySmall")]
+	[DataRow("LabelLarge")]
+	[DataRow("LabelMedium")]
+	[DataRow("LabelSmall")]
+	[DataRow("LabelExtraSmall")]
+	[DataRow("CaptionLarge")]
+	[DataRow("CaptionMedium")]
+	[DataRow("CaptionSmall")]
+	public void When_TypographySlot_ResolvesToTextBlockStyle(string key)
 	{
+		// Container-scoped: the styles this library defines must resolve without an app-level theme.
 		var container = CreateThemedContainer();
 
-		var semantic = Assert.IsInstanceOfType<Style>(container.Resources[semanticKey], $"{semanticKey} should resolve");
-		var fluent = Assert.IsInstanceOfType<Style>(container.Resources[fluentKey], $"{fluentKey} should resolve");
-		Assert.AreSame(fluent, semantic, $"{semanticKey} should alias {fluentKey}");
-		Assert.AreEqual(typeof(TextBlock), fluent.TargetType);
+		var style = Assert.IsInstanceOfType<Style>(container.Resources[key], $"{key} should resolve");
+		Assert.AreEqual(typeof(TextBlock), style.TargetType);
 	}
 
 	[TestMethod]

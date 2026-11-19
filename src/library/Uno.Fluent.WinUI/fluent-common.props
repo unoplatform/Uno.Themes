@@ -47,12 +47,11 @@
 		     specs/lessons.md. -->
 		<XamlMergeInput Remove="Styles\Application\Fonts.xaml" />
 		<XamlMergeInput Remove="Styles\Application\Typography.xaml" />
-		<!-- ColorPalette.xaml and LightweightDefaults.xaml are theme-branch
-		     dictionaries loaded standalone via their ms-appx Source (the palette
-		     values by FluentColorPalette, the lightweight defaults by FluentTheme)
-		     for the same Release-resolution reason. -->
+		<!-- ColorPalette.xaml is a theme-branch dictionary loaded standalone by FluentColorPalette, for
+		     the same Release-resolution reason. SemanticStyles.xaml is merged by FluentTheme as a
+		     SemanticResources dictionary, like Simple's. -->
 		<XamlMergeInput Remove="Styles\Application\ColorPalette.xaml" />
-		<XamlMergeInput Remove="Styles\Application\LightweightDefaults.xaml" />
+		<XamlMergeInput Remove="Styles\Controls\SemanticStyles.xaml" />
 	</ItemGroup>
 
 	<ItemGroup>

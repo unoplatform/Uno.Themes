@@ -5,7 +5,7 @@ jobs:
   container: unoplatform/wasm-build:3.0
 
   pool:
-    vmImage: 'ubuntu-latest'
+    vmImage: 'ubuntu-24.04'
 
   variables:
     # dotnet format has no -p: switch, so the single-platform override is passed as an
@@ -40,3 +40,13 @@ jobs:
   # gate would fail for anyone who built before running it.
   - bash: dotnet xstyler -c Settings.XamlStyler --passive -f "$(git ls-files '*.xaml' | paste -sd,)"
     displayName: Verify XAML formatting
+
+  # Also run in build/stage-docs-validations.yml (style_docs job). Repeated here because the
+  # Docs_Validations stage is skipped for PRs that touch no docs, which is exactly when a
+  # Styles XAML change can leave doc/styles/** stale.
+  - bash: dotnet run build/scripts/GenerateStyleDocs.cs -- --check
+    displayName: Verify generated style docs
+    env:
+      # GenerateStyleDocs.cs is a file-based app. On Linux, SDKs before 10.0.113 restore those
+      # without NuGet signature verification (CVE-2026-96957).
+      DOTNET_NUGET_SIGNATURE_VERIFICATION: 'true'

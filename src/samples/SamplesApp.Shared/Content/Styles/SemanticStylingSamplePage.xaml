@@ -223,7 +223,7 @@
 						</StackPanel>
 					</smtx:XamlDisplay>
 
-					<!-- TextButtonStyle → FluentTextButtonStyle (subtle button) -->
+					<!-- TextButtonStyle: the Fluent subtle button -->
 					<smtx:XamlDisplay UniqueKey="Fluent_Semantic_TextButton"
 									  Style="{StaticResource XamlDisplayBelowStyle}">
 						<StackPanel Orientation="Horizontal"
@@ -236,7 +236,7 @@
 						</StackPanel>
 					</smtx:XamlDisplay>
 
-					<!-- IconButtonStyle → FluentIconButtonStyle -->
+					<!-- IconButtonStyle: the Fluent subtle icon button -->
 					<smtx:XamlDisplay UniqueKey="Fluent_Semantic_IconButton"
 									  Style="{StaticResource XamlDisplayBelowStyle}">
 						<StackPanel Orientation="Horizontal"
@@ -259,7 +259,7 @@
 					<TextBlock Text="Lightweight Styling under Fluent"
 							   Style="{StaticResource TitleLarge}"
 							   Margin="0,32,0,4" />
-					<TextBlock Text="Page-scoped overrides target Fluent's per-control keys (AccentButtonBackground, ButtonBorderBrush, …), exactly as in a plain WinUI app. The theme's bridge styles read the semantic TextButtonForeground directly, so that semantic key works at any scope. An app-wide semantic override (FilledButtonBackground, …) goes through the theme's Colors.OverrideDictionary, which re-points the Fluent keys for you."
+					<TextBlock Text="Fluent controls keep the built-in templates, so lightweight styling uses Fluent's own per-control keys (AccentButtonBackground, ButtonBorderBrush, …), exactly as in a plain WinUI app. To recolor the accent app-wide, set a seed or a PrimaryColor override: the built-in controls follow it."
 							   Style="{StaticResource BodyMedium}"
 							   Opacity="0.7"
 							   Margin="0,0,0,8"
@@ -300,20 +300,6 @@
 							</StackPanel.Resources>
 							<Button Content="Fluent key: ButtonBorderBrush"
 									Style="{StaticResource OutlinedButtonStyle}" />
-						</StackPanel>
-					</smtx:XamlDisplay>
-
-					<!-- Semantic key consumed by the bridge style: works at any scope -->
-					<smtx:XamlDisplay UniqueKey="Fluent_Semantic_Override_TextButtonForeground"
-									  Style="{StaticResource XamlDisplayBelowStyle}">
-						<StackPanel Orientation="Horizontal"
-									Spacing="12">
-							<StackPanel.Resources>
-								<SolidColorBrush x:Key="TextButtonForeground"
-												 Color="Crimson" />
-							</StackPanel.Resources>
-							<Button Content="Semantic: TextButtonForeground"
-									Style="{StaticResource TextButtonStyle}" />
 						</StackPanel>
 					</smtx:XamlDisplay>
 

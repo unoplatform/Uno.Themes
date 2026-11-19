@@ -1,99 +1,39 @@
 #nullable enable
 
 using System;
-using System.Collections.Generic;
 using Uno.Themes;
 
 #if WinUI
 using Microsoft.UI.Xaml;
-using Windows.UI;
 #else
-using Windows.UI;
 using Windows.UI.Xaml;
 #endif
 
 namespace Uno.Fluent;
 
 /// <summary>
-/// Builds the Fluent semantic color palette: the accent-derived roles are written
-/// in code per theme branch ("mechanism C", spec 05 D6) from the live
-/// <c>XamlControlsResources</c> accent shades, and the static per-branch neutrals
-/// are copied verbatim from the declarative <c>ColorPalette.xaml</c>.
+/// The Fluent semantic color palette: the accent-derived roles from the platform accent shades, the
+/// neutrals from <c>ColorPalette.xaml</c> (captured Fluent token values, drift-guarded by
+/// <c>Given_FluentColorPalette</c>). Built in code because per-branch XAML color aliases resolve
+/// against the ambient theme on Uno, not the branch they sit in.
 /// </summary>
 /// <remarks>
-/// <para>
-/// Only the accent-derived roles are code-built: per-theme-branch XAML
-/// <c>&lt;StaticResource&gt;</c> color aliases resolve against the ambient theme
-/// on Uno (see specs/lessons.md and <c>Given_FluentAliasResolution</c>), and
-/// resolving the shades live is also what lets Windows track the user's real
-/// system accent. Every static per-branch value lives declaratively in
-/// <c>Styles/Application/ColorPalette.xaml</c> (single source of truth; platform
-/// captures from spike S2). <c>Given_FluentColorPalette</c> asserts the ambient
-/// branch against the live platform values on every run, failing fast if an
-/// Uno.UI update changes a token.
-/// </para>
-/// <para>
-/// Population never throws and is all-or-nothing: when the accent tokens are
-/// unreachable (e.g. XamlControlsResources not merged) the palette is left
-/// untouched — neutrals included — and the shared (M3) defaults apply; applying
-/// Fluent neutrals around a non-Fluent primary (the shared M3 purple) would
-/// produce an incoherent mixed palette. Graceful degradation from
-/// theme-initialization paths.
-/// </para>
+/// All-or-nothing and never throws: when the accent is unavailable the palette is left untouched and
+/// the shared defaults apply, rather than mixing Fluent neutrals with a non-Fluent primary.
 /// </remarks>
 internal static class FluentColorPalette
 {
-	private const string LightBranchKey = "Light";
-	private const string DefaultBranchKey = "Default";
-
-	// Theme-invariant accent shades, resolved from the ambient resources.
-	private static readonly string[] _accentTokens =
-	{
-		"SystemAccentColor",
-		"SystemAccentColorLight1",
-		"SystemAccentColorLight2",
-		"SystemAccentColorLight3",
-		"SystemAccentColorDark1",
-		"SystemAccentColorDark2",
-		"SystemAccentColorDark3",
-	};
-
-	// The declarative neutral values (ColorPalette.xaml), loaded once per process.
-	// Never attached to a visual tree — only copied from — so sharing the instance
-	// across theme instances is safe.
+	// Loaded once and only copied from, never attached, so sharing it across themes is safe.
 	private static ResourceDictionary? _neutralSource;
 
-	/// <summary>
-	/// Populates <paramref name="palette"/>'s Light/Default theme dictionaries with
-	/// the semantic role colors mapped from the Fluent tokens (spec 05 §6.3).
-	/// </summary>
-	/// <returns>
-	/// <c>false</c> when the accent tokens (or the neutral dictionary) are
-	/// unreachable; <paramref name="palette"/> is then left untouched so the shared
-	/// (M3) palette defaults apply.
-	/// </returns>
+	/// <summary>Populates the Light/Default branches of <paramref name="palette"/>.</summary>
+	/// <returns><c>false</c> when the platform accent or the neutrals are unavailable.</returns>
 	internal static bool TryPopulate(ResourceDictionary palette)
 	{
-		if (Application.Current?.Resources is not { } resources)
+		if (FluentAccentPalette.GetPlatformShades() is not { } accent)
 		{
-			LogPaletteUnavailable();
-			return false;
-		}
-
-		var accent = new Dictionary<string, Color>(_accentTokens.Length);
-		foreach (var token in _accentTokens)
-		{
-			if (resources.TryGetValue(token, out var value) && value is Color color)
-			{
-				accent[token] = color;
-			}
-		}
-
-		// All-or-nothing: applying Fluent neutrals around a non-Fluent primary
-		// (the shared M3 purple) would produce an incoherent mixed palette.
-		if (!accent.ContainsKey("SystemAccentColor"))
-		{
-			LogPaletteUnavailable();
+			FluentDiagnostics.LogWarning(
+				"FluentTheme could not resolve the Fluent accent; semantic colors keep the shared defaults. Ensure XamlControlsResources is merged before FluentTheme.");
 			return false;
 		}
 
@@ -102,8 +42,8 @@ internal static class FluentColorPalette
 			return false;
 		}
 
-		palette.ThemeDictionaries[LightBranchKey] = BuildBranch(LightBranchKey, isLight: true, accent, neutrals);
-		palette.ThemeDictionaries[DefaultBranchKey] = BuildBranch(DefaultBranchKey, isLight: false, accent, neutrals);
+		palette.ThemeDictionaries["Light"] = BuildBranch("Light", isLight: true, accent, neutrals);
+		palette.ThemeDictionaries["Default"] = BuildBranch("Default", isLight: false, accent, neutrals);
 		return true;
 	}
 
@@ -114,34 +54,22 @@ internal static class FluentColorPalette
 			return cached;
 		}
 
-		Exception loadError;
 		try
 		{
 			return _neutralSource = new ResourceDictionary { Source = new Uri(FluentConstants.ResourcePaths.ColorPalette) };
 		}
-		catch (InvalidOperationException e)
-		{
-			loadError = e;
-		}
 		catch (Exception e)
 		{
-			// Theme initialization must also tolerate unexpected platform loader failures.
-			loadError = e;
+			// Theme initialization never throws: degrade to the shared defaults.
+			FluentDiagnostics.LogWarning($"FluentTheme could not load its neutral color palette; semantic colors keep the shared defaults. {e.Message}");
+			return null;
 		}
-		// The packaged dictionary failed to load — degrade to the shared (M3)
-		// defaults rather than throwing from theme initialization.
-		FluentDiagnostics.LogWarning(
-			$"FluentTheme could not load its neutral color palette (ColorPalette.xaml); semantic colors keep the shared defaults. {loadError.Message}");
-		return null;
 	}
 
-	private static ResourceDictionary BuildBranch(string branchKey, bool isLight, IReadOnlyDictionary<string, Color> accent, ResourceDictionary neutrals)
+	private static ResourceDictionary BuildBranch(string branchKey, bool isLight, FluentAccentPalette.AccentShades accent, ResourceDictionary neutrals)
 	{
+		// Flat copy of the neutrals: the shape SafeMerge and the override precedence expect.
 		var branch = new ResourceDictionary();
-
-		// The declarative neutrals first, copied verbatim so the branch carries
-		// the full role set in a single flat dictionary (the shape SafeMerge and
-		// the override-precedence contract are proven against).
 		if (neutrals.ThemeDictionaries.TryGetValue(branchKey, out var declared) && declared is ResourceDictionary declaredBranch)
 		{
 			foreach (var pair in declaredBranch)
@@ -150,45 +78,27 @@ internal static class FluentColorPalette
 			}
 		}
 
-		// Then the accent-derived roles. Skipped when an accent shade is missing
-		// on a platform: the role keeps the shared (M3) default for this branch.
-		void FromAccent(string role, string token)
-		{
-			if (accent.TryGetValue(token, out var color))
-			{
-				branch[role] = color;
-			}
-		}
+		// Primary is Fluent's accent fill per theme (light: the accent, dark: Light2). Secondary and
+		// Tertiary take darker / lighter shades of the same accent, not neutrals, so they stay branded.
+		branch[SemanticColorKeys.Primary] = isLight ? accent.Accent : accent.Light2;
+		branch[SemanticColorKeys.PrimaryContainer] = isLight ? accent.Light2 : accent.Dark1;
+		branch[SemanticColorKeys.OnPrimaryContainer] = isLight ? accent.Dark2 : accent.Light3;
+		branch[SemanticColorKeys.PrimaryInverse] = isLight ? accent.Light2 : accent.Accent;
+		branch[SemanticColorKeys.PrimaryVariantDark] = accent.Dark1;
+		branch[SemanticColorKeys.PrimaryVariantLight] = accent.Light1;
 
-		// Primary — the accent itself; Fluent's dark-theme accent fill is
-		// SystemAccentColorLight2, not the base accent (verified against
-		// AccentFillColorDefaultBrush — spike S2). Secondary/Tertiary map to
-		// darker/lighter shades of the single Fluent accent (not to neutrals) so
-		// Secondary/Tertiary-styled UI stays visibly branded and hierarchical
-		// (spec 05 §6.3 judgment calls).
-		FromAccent(SemanticColorKeys.Primary, isLight ? "SystemAccentColor" : "SystemAccentColorLight2");
-		FromAccent(SemanticColorKeys.PrimaryContainer, isLight ? "SystemAccentColorLight2" : "SystemAccentColorDark1");
-		FromAccent(SemanticColorKeys.OnPrimaryContainer, isLight ? "SystemAccentColorDark2" : "SystemAccentColorLight3");
-		FromAccent(SemanticColorKeys.PrimaryInverse, isLight ? "SystemAccentColorLight2" : "SystemAccentColor");
-		FromAccent(SemanticColorKeys.PrimaryVariantDark, "SystemAccentColorDark1");
-		FromAccent(SemanticColorKeys.PrimaryVariantLight, "SystemAccentColorLight1");
+		branch[SemanticColorKeys.Secondary] = isLight ? accent.Dark1 : accent.Light1;
+		branch[SemanticColorKeys.SecondaryContainer] = isLight ? accent.Light3 : accent.Dark2;
+		branch[SemanticColorKeys.OnSecondaryContainer] = isLight ? accent.Dark3 : accent.Light3;
+		branch[SemanticColorKeys.SecondaryVariantDark] = accent.Dark2;
+		branch[SemanticColorKeys.SecondaryVariantLight] = isLight ? accent.Accent : accent.Light2;
 
-		FromAccent(SemanticColorKeys.Secondary, isLight ? "SystemAccentColorDark1" : "SystemAccentColorLight1");
-		FromAccent(SemanticColorKeys.SecondaryContainer, isLight ? "SystemAccentColorLight3" : "SystemAccentColorDark2");
-		FromAccent(SemanticColorKeys.OnSecondaryContainer, isLight ? "SystemAccentColorDark3" : "SystemAccentColorLight3");
-		FromAccent(SemanticColorKeys.SecondaryVariantDark, "SystemAccentColorDark2");
-		FromAccent(SemanticColorKeys.SecondaryVariantLight, isLight ? "SystemAccentColor" : "SystemAccentColorLight2");
+		branch[SemanticColorKeys.Tertiary] = isLight ? accent.Dark2 : accent.Light3;
+		branch[SemanticColorKeys.TertiaryContainer] = isLight ? accent.Light3 : accent.Dark3;
+		branch[SemanticColorKeys.OnTertiaryContainer] = isLight ? accent.Dark3 : accent.Light2;
 
-		FromAccent(SemanticColorKeys.Tertiary, isLight ? "SystemAccentColorDark2" : "SystemAccentColorLight3");
-		FromAccent(SemanticColorKeys.TertiaryContainer, isLight ? "SystemAccentColorLight3" : "SystemAccentColorDark3");
-		FromAccent(SemanticColorKeys.OnTertiaryContainer, isLight ? "SystemAccentColorDark3" : "SystemAccentColorLight2");
-
-		FromAccent(SemanticColorKeys.SurfaceTint, isLight ? "SystemAccentColor" : "SystemAccentColorLight2");
+		branch[SemanticColorKeys.SurfaceTint] = isLight ? accent.Accent : accent.Light2;
 
 		return branch;
 	}
-
-	private static void LogPaletteUnavailable()
-		=> FluentDiagnostics.LogWarning(
-			"FluentTheme could not resolve the Fluent design tokens; semantic colors keep the shared defaults. Ensure XamlControlsResources is merged before FluentTheme.");
 }

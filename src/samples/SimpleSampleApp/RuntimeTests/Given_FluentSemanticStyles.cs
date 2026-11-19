@@ -17,6 +17,7 @@ namespace Uno.Themes.Samples.RuntimeTests;
 [TestClass]
 public class Given_FluentSemanticStyles
 {
+#if HAS_UNO // WinUI's DatePickerFlyoutPresenter has no public constructor, so it cannot be instantiated there.
 	[TestMethod]
 	[RunsOnUIThread]
 	[DataRow(ElementTheme.Light)]
@@ -36,6 +37,7 @@ public class Given_FluentSemanticStyles
 		await UnitTestsUIContentHelper.WaitForIdle();
 		Assert.IsNotNull(presenter.Template, "An explicit semantic style must preserve the built-in picker template.");
 	}
+#endif
 
 	private static Grid CreateThemedContainer()
 	{
@@ -113,22 +115,61 @@ public class Given_FluentSemanticStyles
 
 	[TestMethod]
 	[RunsOnUIThread]
-	[DataRow("TextButtonStyle", "FluentTextButtonStyle")]
-	[DataRow("IconButtonStyle", "FluentIconButtonStyle")]
-	public void When_BridgeStyleAlias_ResolvesToShippedBridgeStyle(string semanticKey, string bridgeKey)
+	[DataRow("TextButtonStyle")]
+	[DataRow("IconButtonStyle")]
+	public void When_SubtleButtonStyle_DerivesFromTheBuiltInButtonStyle(string key)
 	{
+		// Container-scoped: the styles this library defines must resolve without an app-level theme.
 		var container = CreateThemedContainer();
 
-		var semantic = Assert.IsInstanceOfType<Style>(container.Resources[semanticKey], $"{semanticKey} should resolve");
-		var bridge = Assert.IsInstanceOfType<Style>(container.Resources[bridgeKey], $"{bridgeKey} should resolve");
-		Assert.AreSame(bridge, semantic, $"{semanticKey} should alias {bridgeKey}");
-
-		Assert.AreEqual(typeof(Button), bridge.TargetType);
+		var style = Assert.IsInstanceOfType<Style>(container.Resources[key], $"{key} should resolve");
+		Assert.AreEqual(typeof(Button), style.TargetType);
 		Assert.IsTrue(
 			Application.Current.Resources.TryGetValue("DefaultButtonStyle", out var defaultStyle),
 			"DefaultButtonStyle should be provided by XamlControlsResources");
-		Assert.AreSame(defaultStyle, bridge.BasedOn,
-			$"{bridgeKey} must be BasedOn the XCR DefaultButtonStyle instance (never a re-templated fork)");
+
+		var root = style;
+		while (root.BasedOn is { } basedOn && !ReferenceEquals(basedOn, defaultStyle))
+		{
+			Assert.IsFalse(root.Setters.OfType<Setter>().Any(s => s.Property == Control.TemplateProperty), $"{key} must not re-template the button");
+			root = basedOn;
+		}
+		Assert.AreSame(defaultStyle, root.BasedOn, $"{key} must derive from the XCR DefaultButtonStyle instance");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow(ElementTheme.Light, "#09000000")]
+	[DataRow(ElementTheme.Dark, "#0FFFFFFF")]
+	public async Task When_TextButtonPointerOver_UsesTheSubtleFill(ElementTheme appearance, string expected)
+	{
+		var container = CreateThemedContainer();
+		container.RequestedTheme = appearance;
+		var button = new Button { Content = "subtle", Style = (Style)container.Resources["TextButtonStyle"] };
+		container.Children.Add(button);
+
+		UnitTestsUIContentHelper.Content = container;
+		await UnitTestsUIContentHelper.WaitForLoaded(button);
+		await UnitTestsUIContentHelper.WaitForIdle();
+		VisualStateManager.GoToState(button, "PointerOver", false);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		var presenter = Assert.IsInstanceOfType<ContentPresenter>(VisualTreeHelper.GetChild(button, 0));
+		var background = Assert.IsInstanceOfType<SolidColorBrush>(presenter.Background);
+		Assert.AreEqual(expected, background.Color.ToString(), "the subtle button hovers with SubtleFillColorSecondary, not the standard fill");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_TextButtonStyleReplaced_ItsResourcesAreRemoved()
+	{
+		var container = CreateThemedContainer();
+		var button = new Button { Style = (Style)container.Resources["TextButtonStyle"] };
+		Assert.AreEqual(1, button.Resources.MergedDictionaries.Count, "the subtle button merges its state resources");
+
+		button.Style = (Style)container.Resources["OutlinedButtonStyle"];
+
+		Assert.AreEqual(0, button.Resources.MergedDictionaries.Count, "replacing the style must remove them");
 	}
 
 	[TestMethod]
@@ -155,7 +196,7 @@ public class Given_FluentSemanticStyles
 
 	// ─────────────────────────────────────────────────────────────────────
 	// Gap keys (spec §5.2 Ⓜ set): no public XCR key on Uno — shipped as
-	// declarative empty styles (_Resources.xaml) that keep the control's
+	// declarative empty styles (SemanticStyles.xaml) that keep the control's
 	// built-in default appearance (D8: nearest-match over GAP; the key must
 	// resolve on every platform where the control exists).
 	// ─────────────────────────────────────────────────────────────────────

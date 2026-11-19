@@ -8,46 +8,38 @@ uid: Uno.Themes.Fluent.GetStarted
   <img src="assets/fluent-design-system.png" alt="Fluent design system" />
 </p>
 
-Uno Platform 3.0 and above supports control styles conforming to the [Fluent design system](https://www.microsoft.com/design/fluent).
+Uno Platform supports control styles conforming to the [Fluent design system](https://www.microsoft.com/design/fluent), the default design system of WinUI.
 The details below explain how to use them in your app.
 
-## Upgrading existing Uno apps to use Fluent styles
+## Enabling Fluent styles
 
-Overall, the Uno Platform uses the same mechanism as WinUI to enable Fluent styles. After installing the `Uno.UI` NuGet version 3.0 or above, Fluent styles are enabled by specifying the `XamlControlsResources` within the application's resources (inside `App.xaml`).
+The Uno Platform uses the same mechanism as WinUI to enable Fluent styles: add the `XamlControlsResources` resource dictionary to your application resources inside `App.xaml`. The resources are part of Uno Platform itself, so no additional package is required.
 
-For the UWP head, an additional WinUI 2 NuGet package reference must be added. This is following the same process as UWP because, for the UWP head, the Uno Platform is not used.
+Apps created from the Uno Platform templates already load `XamlControlsResources`. If your app does not, add it to the application resources:
 
-The step-by-step process to enable Fluent design styles within an existing Uno Platform solution is as follows:
+```xml
+<Application>
+    <Application.Resources>
+        <!-- Load WinUI resources -->
+        <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+    </Application.Resources>
+</Application>
+```
 
-1. In all platform head projects except UWP update the `Uno.UI` NuGet packages to 3.0 or above.
+Or, if you have other existing application-scope resources, add `XamlControlsResources` at the top (before other resources) as a merged dictionary:
 
-1. In only the `UWP` head project of your solution, if you have one, install the [WinUI 2 NuGet package](https://www.nuget.org/packages/Microsoft.UI.Xaml). This step is the same as required for WinUI 2 UWP apps.
-
-1. Add the `XamlControlsResources` resource dictionary to your application resources inside `App.xaml`. This step is the same as required for WinUI 2 UWP apps.
-
-    ```xml
-    <Application>
-        <Application.Resources>
+```xml
+<Application.Resources>
+    <ResourceDictionary>
+        <ResourceDictionary.MergedDictionaries>
             <!-- Load WinUI resources -->
             <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
-        </Application.Resources>
-    </Application>
-    ```
-
-    Or, if you have other existing application-scope resources, add `XamlControlsResources` at the top (before other resources) as a merged dictionary:
-
-    ```xml
-    <Application.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <!-- Load WinUI resources -->
-                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
-                <!-- Other merged dictionaries here -->
-            </ResourceDictionary.MergedDictionaries>
-            <!-- Other app resources here -->
-        </ResourceDictionary>
-    </Application.Resources>
-    ```
+            <!-- Other merged dictionaries here -->
+        </ResourceDictionary.MergedDictionaries>
+        <!-- Other app resources here -->
+    </ResourceDictionary>
+</Application.Resources>
+```
 
 ## FluentTheme: the Uno Themes semantic layer with a Fluent look
 
@@ -62,7 +54,13 @@ The step-by-step process to enable Fluent design styles within an existing Uno P
 
 ### Installation
 
-Add a reference to the `Uno.Fluent.WinUI` NuGet package to your application project.
+In a single-project app, add `FluentTheme` to the list of `UnoFeatures` in your project file (`PROJECT_NAME.csproj`):
+
+```xml
+<UnoFeatures>FluentTheme</UnoFeatures>
+```
+
+Otherwise, add a reference to the `Uno.Fluent.WinUI` NuGet package to your application project.
 
 A runnable showcase lives in the repository at `src/samples/FluentSampleApp` — the shared Uno Themes sample gallery rendered through `FluentTheme`: Fluent sample tabs for every control the semantic layer covers, plus the Overview, Semantic Styling, Colors, Seed Color and Design Tokens pages.
 
@@ -91,11 +89,11 @@ Merge `FluentTheme` **after** `XamlControlsResources`:
 
 ### Behavior notes
 
-- **High contrast limitation**: `FluentTheme` currently defines its semantic palette and lightweight defaults for Light/Default only. In Windows high contrast mode, semantic resources can retain dark-theme values instead of following the system colors, and generated accent overrides from a seed or `PrimaryColor` can also override built-in controls' high contrast resources. High contrast support for these mappings is incomplete.
+- **High contrast limitation**: `FluentTheme` currently defines its semantic palette and accent mapping for Light/Default only. In Windows high contrast mode, semantic resources can retain dark-theme values instead of following the system colors, and generated accent overrides from a seed or `PrimaryColor` can also override built-in controls' high contrast resources. High contrast support for these mappings is incomplete.
 - **Interaction states**: the semantic layer encodes interaction states as opacity variants of the rest color (`PrimaryHoverBrush` = `PrimaryColor` at hover opacity), while Fluent uses discrete per-state fill colors inside its templates. Under `FluentTheme`, built-in controls keep Fluent's own state behavior (correct by definition); app XAML that uses semantic *state* brushes gets opacity-derived variants of the Fluent rest colors — visually consistent, but not token-identical to Fluent's hover/pressed colors.
 - **Materials**: Mica and Acrylic are not applied by the theme. The semantic surface roles map to Fluent's solid-color fallback tokens (`SolidBackgroundFillColor*`); apps can layer materials themselves where supported.
-- **Seed colors**: setting `Colors.PrimarySeed` generates a semantic palette from your brand color ([seed colors](seed-colors.md)). The generation mode is the shared `SeedColorMode` default (`Fidelity`: the seed's chroma is preserved and the light `PrimaryColor` is the seed verbatim); the seed also supplies accent resources for the built-in Fluent controls ([seed → accent cascade](seed-colors.md#fluenttheme-seed--accent-cascade)). Without a seed, the palette uses the platform accent captured at construction and Fluent neutrals. The semantic palette does not subscribe to subsequent Windows system-accent changes.
-- **Lightweight styling**: the semantic [lightweight-styling](lightweight-styling.md) keys are bridged to the built-in Fluent control resources for Button, TextBox, CheckBox, RadioButton, ToggleSwitch, and Slider. For CheckBox/RadioButton/Slider most key names are WinUI's own, so overrides work natively at any scope; for divergent names, app-wide overrides go through `Colors.OverrideDictionary` and page-scoped overrides target the Fluent per-control keys directly. See [Lightweight Styling — Fluent theme](lightweight-styling.md#fluent-theme).
+- **Seed colors**: like all Uno Themes, setting `Colors.PrimarySeed` generates a semantic palette from your brand color ([seed colors](seed-colors.md)). The generation mode is the shared `SeedColorMode` default (`Fidelity`: the seed's chroma is preserved and the light `PrimaryColor` is the seed verbatim); the seed also recolors the built-in Fluent controls through the same mode ([seed → accent cascade](seed-colors.md#fluenttheme-seed--accent-cascade)). Without a seed, the palette follows the platform accent and Fluent neutrals.
+- **Lightweight styling**: built-in controls keep the WinUI templates, so you lightweight-style them with Fluent's own per-control keys (`AccentButtonBackground`, `TextControlForeground`, …), exactly as in a plain WinUI app. The semantic per-control keys of Material and Simple (`FilledButtonBackground`, …) have no effect under `FluentTheme`. See [Lightweight Styling — Fluent theme](lightweight-styling.md#fluent-theme).
 - **Design tokens reach the built-in controls**: the Fluent templates read `ControlCornerRadius` / `OverlayCornerRadius` and `ContentControlThemeFontFamily`, so a `DefaultCornerRadius` or `DefaultFontFamily` set on `FluentTheme` re-points those platform tokens and stock Fluent controls follow (buttons, text boxes, flyouts, …), as they do under Material and Simple. `OverlayCornerRadius` is twice the base unit (the `Radius200` token). Left unset, the platform values stand. A handful of templates read the corner radius with `StaticResource` and keep the platform value (CalendarView, RadioButton, Slider, ToggleSwitch, PagerControl, ColorPicker); `DefaultSpacing` / `DefaultDensity` have no effect on Fluent templates (their metrics are baked in).
 - **Semantic Primary vs. accent fill**: with the platform accent or a seed, Fluent paints accent controls with a *shade* of the accent (`Dark1` in the light theme, `Light2` in the dark theme), while the semantic `PrimaryBrush` is the accent itself in the light theme. A `FilledButtonStyle` button therefore renders darker than a surface painted with `PrimaryBrush` in the light theme; in the dark theme the two coincide. An explicit `PrimaryColor` supplied through `Colors.OverrideDictionary` instead becomes the accent fill verbatim for its appearance.
 
@@ -103,8 +101,8 @@ Merge `FluentTheme` **after** `XamlControlsResources`:
 
 The current adapter supports a narrower override contract than Material and Simple:
 
-- **Color roles and brushes**: `PrimaryColor` supplied through `Colors.OverrideDictionary` or `Colors.OverrideSource` drives the built-in accent controls. Other semantic overrides, such as `PrimaryBrush`, `OnPrimaryColor`, and `OnPrimaryBrush`, change semantic resource lookups but do not automatically change the built-in accent fill or foreground. Use the supported control keys, such as `FilledButtonBackground` and `FilledButtonForeground`, to customize those parts.
-- **Dictionary structure**: the accent and lightweight bridges inspect entries directly in the override dictionary and its `Light`, `Dark`, or `Default` branches. They do not inspect nested `MergedDictionaries`. Place bridged keys directly in those locations. The constructor's `colorOverride` argument supplies base palette resources but does not feed the bridge; use `Colors.OverrideDictionary` for overrides that must reach built-in controls.
-- **Scope and variants**: divergent semantic control keys require `Colors.OverrideDictionary` at app scope; page or subtree overrides use the corresponding native Fluent keys. Only the rest-state `TextButtonForeground` and `IconButtonForeground` keys are consumed directly by the supplied button styles. `TextButtonForegroundPointerOver`, `TextButtonForegroundPressed`, `TextButtonBackground*`, and `TextButtonBorderBrush` do not customize those styles. Filled tonal and elevated buttons share the standard Fluent button, so their semantic resource families cannot customize those variants independently. See the supported families in [Lightweight Styling](lightweight-styling.md#fluent-theme).
+- **Color roles and brushes**: `PrimaryColor` (or a solid `PrimaryBrush`) drives the built-in accent controls, and `OnPrimaryColor` (or a solid `OnPrimaryBrush`) the text on them, from any color-override channel: the constructor's `colorOverride`, `Colors.OverrideDictionary` / `Colors.OverrideSource`, or the obsolete `ColorOverride*` properties. Other semantic overrides change semantic resource lookups only.
+- **Dictionary structure**: override entries may be flat, in the `Light` / `Dark` / `Default` theme dictionaries, or in nested `MergedDictionaries`, following the native lookup order.
+- **Scope and variants**: the semantic per-control keys (`FilledButtonBackground`, …) are not read by the built-in templates; use the native Fluent keys, at any scope. Filled tonal and elevated buttons share the standard Fluent button, so they cannot be customized independently. See [Lightweight Styling](lightweight-styling.md#fluent-theme).
 - **Typography**: set the theme's `DefaultFontFamily` property to change every semantic font slot and the built-in control font. A dictionary override of the `DefaultFontFamily` resource alone does not cascade under Fluent: its slot aliases target `ContentControlThemeFontFamily` directly. Use concrete slot keys such as `BodyMediumFontFamily` in `FontOverrideDictionary` for individual typography overrides.
-- **Existing controls**: shared semantic brushes update in place, but the Fluent accent and lightweight bridges replace resource dictionaries and brushes when rebuilt. Do not assume existing built-in controls refresh merely because a resource lookup returns the new value. In particular, clearing a seed can leave materialized native accent brushes on the previous color until an app-scope resource refresh or theme switch; see [seed colors](seed-colors.md#fluenttheme-seed--accent-cascade).
+- **Existing controls**: built-in controls rendered while a seed or `PrimaryColor` override is active update in place when it changes or clears. Controls rendered before the first seed or override was set keep the platform accent until they are re-created.

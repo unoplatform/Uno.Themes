@@ -24,7 +24,7 @@ machine: black. A test on a non-system key (`PrimaryColor`) written the same way
   never `TryGetValue`/`ContainsKey` — both check the system dictionary by default. Catch
   `NotSupportedException` for XAML-backed dictionaries (not enumerable on Uno) and treat them as
   "not here"; make sure the asserted keys live in code-built dictionaries. The library code already
-  follows this (`ToOwnEntries` in `FluentAccentPalette` / `FluentLightweightBridge`); the test
+  follows this (`FluentResourceResolver`); the test
   helper had not.
 - A branch-level test on a key that XCR also defines must be red-proven in **both** directions
   (a value that differs from the ambient stock, and one that matches it): only the differing case
@@ -66,6 +66,112 @@ ambient test still green.
   CS0672 pointed straight at the obsolete override) before assuming a clean merge is a no-op.
 - Red-proof after the fact is cheap: `git stash push -- <lib files>`, build, run the filter, pop
   (~2 min here). Do it when the test was written alongside the fix.
+
+---
+
+## `!HAS_UNO` code paths ran nowhere until the WinAppSDK head — `SimpleTheme` crashed every WinUI app at startup
+
+**Context:** adding the WinAppSDK head to `SimpleSampleApp` (2026-09-29). The app failed fast
+(`0xC000027B`, stowed exception in `Microsoft.UI.Xaml.dll`) inside `App.InitializeComponent`, with no
+managed exception surfaced. `AppDomain.FirstChanceException` logging is what found the cause; WinRT
+callbacks swallow the managed trace otherwise.
+
+**Root cause:** on real WinUI, `ResourceDictionaryExtensions.SafeMerge` clones via `Duplicate()`, which
+*enumerates* the dictionary. WinUI resolves every deferred entry while enumerating, including Simple's
+`ColorPalette.xaml` `<StaticResource x:Key="SimpleTextUtilitiesOnOverlayBrush" ResourceKey="OnSurfaceInverseBrush"/>`
+alias. Its target only exists once the theme sits in the app's resources, so resolving it from inside the
+`SimpleTheme` constructor throws `E_FAIL`. Uno resolves aliases lazily and `SafeMerge` never clones there, so no
+existing head could see it.
+
+**How to apply:**
+- Never enumerate a `ResourceDictionary` that may hold `<StaticResource>` aliases on WinUI. Clone a URI-backed
+  one by re-reading its `Source` (what `Duplicate` does now).
+- Any `#if !HAS_UNO` branch is only exercised by the WinAppSDK head: run the runtime tests there when touching one.
+- Uno forgives XAML that WinUI rejects, and every such case is a WinAppSDK crash. Seen so far: a
+  `{StaticResource}` to an undefined key (Design Tokens sample's `SimpleOutlinedButtonStyle`), and an
+  `x:Double` fed through `{StaticResource}` into a `GridLength` row/column (Simple Slider's
+  `SliderPreContentMargin`). Only `{ThemeResource}` converts it, which is why WinUI's own templates use it.
+- WinUI can raise control events while `InitializeComponent` applies attributes, before `x:Name` fields
+  are connected (`ColorPicker.ColorChanged` on the Seed Color sample). Uno doesn't. Guard code-behind
+  handlers until the constructor has finished.
+- A WinUI `XamlParseException` message can be stale: the "Cannot find a Resource with the Name/Key
+  TertiaryContainerColor" text was attached to both of these unrelated failures. Trust the `[Line/Position]`
+  and the first-chance exception, not the text. It also hints that an earlier lookup fails silently, a
+  lead for the WinUI-only seed/typography test failures.
+- On WinUI desktop a `ContentDialog` needs `XamlRoot` set before `ShowAsync()`; Uno doesn't care.
+- Undefined keys in library templates (`SimpleContentDialogEdgeMargin`, `SimpleMenuFlyoutSeparatorHeight`)
+  fail natively on WinUI with no managed exception at all. To sweep for them, diff every
+  `{StaticResource|ThemeResource X}` / `ResourceKey="X"` in `Styles/` against the `x:Key`s of the library,
+  `Uno.Themes/Styles` and WinAppSDK's `generic.xaml`. Ignore the `BaseTheme`-generated tokens (`Space*`,
+  `Radius*`, `ControlHeight*`, `IconSize*`) and `x:Name`-keyed template resources.
+- Never open the `RuntimeTestRunner` sample page from inside a test run. Its `UnitTestsControl`
+  constructor replaces the engine's static test content root, so every later `UnitTestsUIContentHelper.Content`
+  lands in a detached tree and each `WaitForLoaded` times out. Symptom: a page with no parent and no
+  `XamlRoot`. `Given_AllSamplePages` excludes it.
+- The Material sample app loads Material **v2** only. A page with only a v1 `MaterialTemplate` (no
+  `M3MaterialTemplate`) falls back to its v1 content and v1-only keys, which Uno renders unstyled and WinUI
+  crashes on. Give it a v2 template, or don't list it for `Design.Material` (InfoBar, TimePicker and
+  NavigationView (WUX) are unlisted for this reason).
+- The runtime tests that fail only on WinAppSDK are not engine problems (the engine only lacks a headless
+  mode there). They come from how WinUI resolves the themes' `<StaticResource x:Key="A" ResourceKey="B"/>`
+  aliases: against the alias's own dictionary first, then `Application.Resources`, and only once. Uno
+  resolves them later, from the scope actually doing the lookup. Consequences (2026-09-30, 33 Simple / 22
+  Material failures):
+  - `SharedTypography.xaml` declares a Segoe UI `DefaultFontFamily` fallback beside the scale aliases, so every
+    type scale binds to Segoe UI on WinUI, even though the theme's own root is Inter/Roboto (real bug, every
+    WinAppSDK app).
+  - A theme merged into an element's `Resources` (a scoped theme, as most runtime tests do) does not drive
+    its styles on WinUI; the aliases reach the app-level theme instead (density, corner radius, seed and
+    colour overrides).
+  - Values changed at runtime do not reach controls that are already rendered.
+  - Two failures are test techniques, not bugs: a `ContentDialog` placed in the tree never raises `Loaded`,
+    and a `Source`-loaded dictionary can't be written to (`0x800F1000`).
+- Sweep a head's own XAML too (`App.xaml`, override dictionaries), not just the shared pages. The Material
+  head overrode `FlyoutLightDismissOverlayBackground` with the v1-only `MaterialOverlayColor`: Uno drew a
+  transparent overlay, and WinUI failed `ShowAt` (`E_FAIL`, no detail) for every `LightDismissOverlayMode="On"`
+  flyout. Content that only materializes on open (flyouts, dialogs) is invisible to a page-load smoke
+  test and needs its own open-it test.
+- Prove a WinUI hypothesis before keeping the change: `Value="PositiveInfinity"` looked suspect but works on
+  WinUI; it was reverted after a targeted test.
+- A `.cs` file shared between heads belongs in `SamplesApp.Shared`, not a `<Compile Link>`: `dotnet format`
+  formats a linked file without the repo `.editorconfig` and rewrites its tabs to spaces.
+- To find which part of a page kills WinUI, load its sections one by one through `XamlReader.Load`
+  and log before and after each. `DebugSettings.XamlResourceReferenceFailed` stayed silent for both cases.
+- When a WinUI app dies with `0xC000027B` and no managed exception, hook `AppDomain.CurrentDomain.FirstChanceException`
+  in `App`'s static constructor to get the real stack before guessing.
+
+---
+
+## Uno's `AppBarButton` hijacks the template part named `Content` — never use that name for a presenter that is not meant to show `Icon ?? Content`
+
+**Context:** unoplatform/Uno.Themes#1735 (2026-09-29). In the Material v2 and Simple `AppBarButton` styles, a
+`UIElement` assigned to `AppBarButton.Content` (e.g. a `Grid` wrapping a `TextBlock`) rendered nothing, while a
+plain string in `Content` rendered fine. Both templates have two presenters: `ContentPresenter x:Name="Content"`
+bound to `Icon`, nested in a `Viewbox` that collapses when `Icon` is null, and `ContentPresenter
+x:Name="ContentPresenter"` bound to `Content`.
+
+**Root cause:** `AppBarButton.uno.cs` (`SetupContentUpdate`, run from `OnApplyTemplate` / `OnLoaded`) does
+`GetTemplateChild<ContentPresenter>("Content")` and force-sets that presenter's `Content` to `Icon ?? Content`,
+re-applying it whenever either property changes. It exists so that WinUI's icon-only template still shows
+something when only `Content` is set (Uno issue #19649). In our templates the part named `Content` is the icon
+presenter inside the collapsed `Viewbox`. With no `Icon`, Uno pushes the user's `Content` into it; a
+`UIElement` can only have one visual parent, so it is torn out of the visible `ContentPresenter` and ends up
+under a collapsed element. A string is not subject to the single-parent rule, which is why every string-based
+sample and test passed and the bug went unnoticed.
+
+**How to apply:**
+- In an `AppBarButton` template, never name a template part `Content` unless it is meant to display
+  `Icon ?? Content`. Our templates name the icon presenter `IconPresenter` and the content presenter
+  `ContentPresenter`; keep it that way in both Material v2 and Simple (the v1 `MaterialAppBarButton` in
+  `CommandBar.xaml` is icon-only and intentionally relies on the fallback).
+- When a template splits a control's properties across several presenters, add at least one runtime test
+  that sets a `UIElement` (not a string) into each of them — strings hide re-parenting bugs.
+- Before naming a part in a retemplated framework control, check the Uno implementation for
+  `GetTemplateChild("...")` lookups; Uno adds a few beyond WinUI's (`AppBarButton`: `Content`,
+  `KeyboardAcceleratorTextLabel`).
+
+---
+
 ## `Application.Current` is the HOST app inside an ALC-hosted guest — anything resolving the theme through it silently looks at the wrong application
 
 **Context:** `ThemesSampleApp` hosting (2026-09-21, `specs/05-alc-wrapper-app/`). Opening the **Seed Color**
@@ -411,9 +517,9 @@ Everything else — literal per-branch colors/brushes, empty styles, setters-onl
 
 **Context:** Fluent override-driven accent cascade (2026-07-16, `specs/05-fluent-theme/`). Two related traps:
 
-1. **Branch keys.** Code that reads a consumer override's `ThemeDictionaries` by hand (FluentLightweightBridge re-pointing, FluentAccentPalette basis resolution) originally read only the `Light`/`Default` keys — the keys *we* write. Consumers write **`Dark`** (see every sample head's `ColorPaletteOverride.xaml`); `Default` is the universal fallback for either theme. Manual reads must mirror the native semantics: exact branch key first (`Light`/`Dark`), then `Default`, then flat — and read OWN entries only (`TryGetValue` searches the ambient theme branch and breaks branch fidelity).
+1. **Branch keys.** Code that reads a consumer override's `ThemeDictionaries` by hand (FluentAccentPalette basis resolution, through `FluentResourceResolver`) originally read only the `Light`/`Default` keys — the keys *we* write. Consumers write **`Dark`** (see every sample head's `ColorPaletteOverride.xaml`); `Default` is the universal fallback for either theme. Manual reads must mirror the native semantics: exact branch key first (`Light`/`Dark`), then `Default`, then flat — and read OWN entries only (`TryGetValue` searches the ambient theme branch and breaks branch fidelity).
 
-2. **Verification.** There is no way to *render* the dark branch in the CI host: the ambient app theme is fixed at launch, and setting `RequestedTheme` on an element (before load or flipped after load) does **not** re-branch `{ThemeResource}` lookups made inside XCR templates against app-scope dictionaries on this target — the control keeps the ambient branch's values. Guard dark-branch behavior at the produced resource-graph level (the theme IS a `ResourceDictionary`; assert its branch contents) and keep rendered assertions for the ambient branch. See `Given_FluentLightweightStyling.When_OverrideUsesDarkBranchKey_DarkBranchIsRepointed`.
+2. **Verification.** There is no way to *render* the dark branch in the CI host: the ambient app theme is fixed at launch, and setting `RequestedTheme` on an element (before load or flipped after load) does **not** re-branch `{ThemeResource}` lookups made inside XCR templates against app-scope dictionaries on this target — the control keeps the ambient branch's values. Guard dark-branch behavior at the produced resource-graph level (the theme IS a `ResourceDictionary`; assert its branch contents) and keep rendered assertions for the ambient branch. (Exception: a dictionary merged into an *element's* own resources does re-branch with the element's `RequestedTheme`; `Given_FluentSemanticStyles.When_TextButtonPointerOver_UsesTheSubtleFill` relies on it.)
 
 **How to apply:** any new code path that inspects consumer-supplied `ThemeDictionaries` must handle `Light`/`Dark`/`Default` with the fallback above, and its dark-branch tests must assert dictionary structure, not rendered brushes.
 
@@ -435,11 +541,11 @@ Everything else — literal per-branch colors/brushes, empty styles, setters-onl
 
 **Context:** Fluent theme Phase 1 (2026-07-15, `specs/05-fluent-theme/`). The runtime tests instantiate `new FluentTheme()` scoped to a test container (spec 05 D14) inside SimpleSampleApp, whose app-level theme is `SimpleTheme`. Two failure modes surfaced that are invisible when the theme under test is the same as the app-level theme:
 
-1. **Intra-bundle `<StaticResource>` aliases don't see their own bundle below app scope.** An alias like `TextButtonStyle` → `FluentTextButtonStyle` (both shipped in the same merged bundle) resolves at parse time against the app-level scope only. At app scope it happens to work (which is why Simple's `_Resources.xaml` → `Button.xaml` aliases pass); scoped lower, the alias yields nothing — or worse, silently binds to a *foreign* app-level theme's key of the same name. Fix: semantic keys targeting styles the library itself ships are resolved late-bound in code (`FluentTheme._bundleStyleAliases`), from the theme's own `Source` bundle.
+1. **Intra-bundle `<StaticResource>` aliases don't see their own bundle below app scope.** An alias like `TextButtonStyle` → `FluentTextButtonStyle` (both shipped in the same merged bundle) resolves at parse time against the app-level scope only. At app scope it happens to work (which is why Simple's `_Resources.xaml` → `Button.xaml` aliases pass); scoped lower, the alias yields nothing — or worse, silently binds to a *foreign* app-level theme's key of the same name. The same holds for a `SemanticStylesSource` dictionary aliasing into the theme's own bundle. Fix (2026-11-19, replacing an earlier code-built alias table): define such a style directly under its semantic key in the theme's `SemanticStyles.xaml` — no alias, nothing to resolve. Fluent does this for `TextButtonStyle`, `IconButtonStyle` and the 19 typography styles; aliases into `XamlControlsResources` (app scope) are unaffected. **Simple and Material still alias into their own bundle**, so a container-scoped Simple/Material theme below an app with a different theme binds to the foreign theme's styles — tracked as a follow-up.
 
 2. **Generated semantic brushes materialize once, against the app-level scope.** `SharedColors.xaml` defines `<SolidColorBrush Color="{StaticResource PrimaryColor}"/>`; that color reference is a one-time resolution (already documented atop `Given_ColorOverridePrecedence`). Under a container-scoped theme in a host with a different app-level theme, `PrimaryBrush` & co. carry the *app-level* theme's palette, even though the `*Color` keys resolve correctly from the container. This is a pre-existing property of the shared brush layer (Simple/Material behave identically), not a FluentTheme bug. *Superseded 2026-09 by `SemanticBrushUpdater` (#1697): brushes are now per-theme-instance and rewritten from the theme's own color layers, so a container-scoped theme's brushes carry its own palette. The app-scope test topology remains the documented consumer shape but is no longer required for correctness.*
 
-**How to apply:** when adding semantic aliases whose target ships in the same library, alias them in code, not XAML. When writing runtime tests that assert *generated brush values*, merge the theme into `Application.Current.Resources.MergedDictionaries` (the documented consumer topology) inside try/finally — container-scoped assertions on generated brushes test the wrong scope. Container-scoped assertions on `*Color` keys, styles, and typography values remain fine.
+**How to apply:** when a semantic key targets a style the library itself ships, define the style under the semantic key instead of aliasing it. When writing runtime tests that assert *generated brush values*, merge the theme into `Application.Current.Resources.MergedDictionaries` (the documented consumer topology) inside try/finally — container-scoped assertions on generated brushes test the wrong scope. Container-scoped assertions on `*Color` keys, styles, and typography values remain fine.
 
 ---
 
@@ -474,3 +580,30 @@ Everything else — literal per-branch colors/brushes, empty styles, setters-onl
 
 **Verification trap (the more important lesson):** these font tests **passed in the minimal dedicated `Uno.Themes.RuntimeTests` host but failed in `SimpleSampleApp`** (and therefore in CI). The dedicated host merges `<SimpleTheme/>` app-wide, which "warms" the ambient resolution scope so the fragile `<StaticResource>` aliases happen to resolve to the right weight — a **false positive**. The real consumer-like host (`SimpleSampleApp`, also what CI runs) exposed the bug.
 - **Always verify font/typography/resource-precedence changes in `SimpleSampleApp` (the CI host), not only in a minimal host.** A minimal single-theme host can mask cross-dictionary resolution and merge-order bugs. If two hosts disagree, trust the one that matches CI.
+
+## A `ResourceDictionary` subclass declared in XAML with `Source` loses its type; `BaseDictionaries.xaml` feeds the deprecated bundles too (#1728)
+
+**Context:** #1728 marks semantic resources by dictionary type (`SemanticResources : ResourceDictionary`). Declaring `<themes:SemanticResources Source="…/SharedTypography.xaml"/>` in `BaseDictionaries.xaml` compiled and resolved, but a runtime walk showed the entry as a plain `ResourceDictionary`: the Uno XAML generator emits the registered dictionary for a Source-merged entry and ignores the declared type. The first fix removed `SharedTypography.xaml` from `BaseDictionaries.xaml` and re-merged it from C#, which silently stripped the shared type tokens from `MaterialResourcesV1`/`V2` because the `Common` glob feeds `mergedpages.v1` and `.v2` as well.
+
+**How to apply:**
+- Anything that must carry a dictionary *type* is created in C# (`new SemanticResources { Source = … }`), never declared in XAML. Verify the type at runtime, not by reading the markup.
+- Treat `Styles/Application/Common/BaseDictionaries.xaml` as shared with the deprecated Material bundles: prefer adding a layer over removing an entry, and check `MaterialResourcesV1`/`V2` before editing it.
+
+## Fixing breakage at large design-token values: change the tokens, not the templates (#1746)
+
+**Context:** while aligning the spacing scale with Material 3, controls still broke at large `DefaultSpacing` values. One fix moved ContentDialog's max size from its frame onto its content and dropped the height cap; another added a layout property to a NavigationView item template. Both rendered identically at the default in the sample, but the dialog change altered every long-content dialog at the default (it grew to the window instead of stopping at 560 px).
+
+**Correction from the maintainer:** spacing is uncapped, so UI will always break at high enough values. Fixes for large-value breakage stay design-token changes (which token or fixed value a key resolves to) unless the breakage is extreme.
+
+**How to apply:**
+- To stop a control breaking at large scale values, change what its keys resolve to: a fixed token or literal equal to the current default, or a smaller step. Do not restructure a template, move size caps, or add layout properties.
+- A pixel-identical sample at the default does not prove a template change is safe: the sample rarely exercises the case the change affects (long content, an override, another host size). Token remaps are provable by value; template changes are not.
+- List what token-only fixes leave broken in the issue as follow-ups instead of widening the change.
+
+## `{ThemeResource}` on a non-FrameworkElement in a compiled template loses local overrides on theme change (#1739)
+
+**Context:** #1739 made the Material ComboBox floating-label `CompositeTransform` (`ScaleX`/`ScaleY`/`TranslateY`) read lightweight keys through `{ThemeResource}`. Tests that set overrides before load passed. A test that switched `RequestedTheme` after load showed that Uno re-resolves those values from `Application.Resources` only, skipping the control and page resources, so local overrides reverted to the defaults. `Margin`, `Style` and `Foreground` on the same `TextBlock` kept their local overrides. A `XamlReader.Load` template did not reproduce it; only the compiled library template did. Upstream: unoplatform/uno#24958.
+
+**How to apply:**
+- A lightweight key consumed by a non-FrameworkElement (transforms, brushes, gradient stops) inside a template needs a test that flips `RequestedTheme` after load with the override at the scope the doc promises. A pre-load assertion only proves the initial resolution.
+- Do not trust a `XamlReader` repro to clear a template-resolution bug: compiled library XAML takes a different path.

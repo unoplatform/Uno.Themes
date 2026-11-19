@@ -20,9 +20,11 @@ public enum SeedColorMode
 	/// The generated scheme stays true to the seed (default). Every derived palette is scaled
 	/// from the seed's own chroma — a muted seed yields a muted scheme, so a gray seed produces
 	/// a neutral palette — and the light <c>PrimaryColor</c> is the seed verbatim, with
-	/// <c>OnPrimaryColor</c> picked for contrast against it. The dark <c>PrimaryColor</c> is
-	/// always derived (tone 80) so it stays legible on a dark surface.
-	/// Matches Material Design 3's "content" chroma recipe, plus the exact-seed Primary.
+	/// <c>OnPrimaryColor</c> picked for contrast against it. An explicit
+	/// <see cref="ThemeColors.SecondarySeed"/> or <see cref="ThemeColors.TertiarySeed"/> is
+	/// treated the same way: the light <c>SecondaryColor</c> / <c>TertiaryColor</c> is that seed
+	/// verbatim. The dark roles are always derived (tone 80) so they stay legible on a dark surface.
+	/// Matches Material Design 3's "content" chroma recipe, plus the exact-seed key colors.
 	/// </summary>
 	Fidelity = 0,
 
@@ -66,7 +68,9 @@ public sealed partial class ThemeColors : DependencyObject
 	#region SecondarySeed (DP)
 	/// <summary>
 	/// Gets or sets the secondary seed <see cref="Color"/>. If not set, the Secondary
-	/// palette is auto-derived from <see cref="PrimarySeed"/>.
+	/// palette is auto-derived from <see cref="PrimarySeed"/>. When set, the Secondary palette
+	/// uses this color's hue and chroma, and in <see cref="SeedColorMode.Fidelity"/> the light
+	/// <c>SecondaryColor</c> is this color verbatim.
 	/// </summary>
 	public Color? SecondarySeed
 	{
@@ -85,7 +89,9 @@ public sealed partial class ThemeColors : DependencyObject
 	#region TertiarySeed (DP)
 	/// <summary>
 	/// Gets or sets the tertiary seed <see cref="Color"/>. If not set, the Tertiary
-	/// palette is auto-derived from <see cref="PrimarySeed"/>.
+	/// palette is auto-derived from <see cref="PrimarySeed"/>. When set, the Tertiary palette
+	/// uses this color's hue and chroma, and in <see cref="SeedColorMode.Fidelity"/> the light
+	/// <c>TertiaryColor</c> is this color verbatim.
 	/// </summary>
 	public Color? TertiarySeed
 	{
