@@ -14,12 +14,6 @@ namespace Uno.Fluent;
 /// </summary>
 internal static class FluentResourceResolver
 {
-	internal static bool TryResolve(ResourceDictionary? dictionary, string appearance, string key, out object? value)
-	{
-		value = Resolve(dictionary, appearance, key);
-		return value is not null;
-	}
-
 	/// <summary>
 	/// Follows resource dictionary precedence: own entries, merged dictionaries
 	/// in reverse order, then the selected appearance dictionary. Default is used

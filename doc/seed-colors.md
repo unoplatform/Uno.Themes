@@ -285,7 +285,7 @@ Every color-override channel feeds the cascade (the constructor's `colorOverride
 Without a seed or a `PrimaryColor` override, none of these overrides exist and the controls follow the platform accent (on Windows, the user's chosen accent color).
 
 > [!NOTE]
-> Clearing the seed at runtime (`PrimarySeed = null`) immediately restores the default semantic palette and platform accent, including the accent brushes held by controls already on screen. Explicit color and brush overrides continue to take precedence after the seed is cleared.
+> Clearing the seed at runtime (`PrimarySeed = null`) immediately restores the default semantic palette and platform accent, including the accent brushes held by controls already on screen. Explicit color and brush overrides continue to take precedence after the seed is cleared. Built-in controls rendered before the *first* seed or `PrimaryColor` override was set keep the platform accent until they are re-created.
 
 ## Color Precedence
 

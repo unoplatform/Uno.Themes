@@ -25,8 +25,10 @@ internal sealed class FluentAccentLayer
 	public FluentAccentLayer()
 	{
 		// Both branches always exist: a Dark-only entry in Default must not become the Light fallback.
+		// The empty HighContrast branch keeps the platform's high-contrast accent resources.
 		Resources.ThemeDictionaries["Light"] = new ResourceDictionary();
 		Resources.ThemeDictionaries["Default"] = new ResourceDictionary();
+		Resources.ThemeDictionaries["HighContrast"] = new ResourceDictionary();
 	}
 
 	public ResourceDictionary Resources { get; } = new();

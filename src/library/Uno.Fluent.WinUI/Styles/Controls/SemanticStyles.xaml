@@ -28,42 +28,7 @@
 		   BasedOn="{StaticResource DefaultButtonStyle}">
 		<Setter Property="Background" Value="Transparent" />
 		<Setter Property="BorderBrush" Value="Transparent" />
-		<Setter Property="fluent:FluentResources.Merged">
-			<Setter.Value>
-				<ResourceDictionary>
-					<ResourceDictionary.ThemeDictionaries>
-						<ResourceDictionary x:Key="Light">
-							<SolidColorBrush x:Key="ButtonBackgroundPointerOver"
-											 Color="#09000000" />
-							<SolidColorBrush x:Key="ButtonBackgroundPressed"
-											 Color="#06000000" />
-							<SolidColorBrush x:Key="ButtonBackgroundDisabled"
-											 Color="Transparent" />
-							<SolidColorBrush x:Key="ButtonBorderBrushPointerOver"
-											 Color="Transparent" />
-							<SolidColorBrush x:Key="ButtonBorderBrushPressed"
-											 Color="Transparent" />
-							<SolidColorBrush x:Key="ButtonBorderBrushDisabled"
-											 Color="Transparent" />
-						</ResourceDictionary>
-						<ResourceDictionary x:Key="Default">
-							<SolidColorBrush x:Key="ButtonBackgroundPointerOver"
-											 Color="#0FFFFFFF" />
-							<SolidColorBrush x:Key="ButtonBackgroundPressed"
-											 Color="#0AFFFFFF" />
-							<SolidColorBrush x:Key="ButtonBackgroundDisabled"
-											 Color="Transparent" />
-							<SolidColorBrush x:Key="ButtonBorderBrushPointerOver"
-											 Color="Transparent" />
-							<SolidColorBrush x:Key="ButtonBorderBrushPressed"
-											 Color="Transparent" />
-							<SolidColorBrush x:Key="ButtonBorderBrushDisabled"
-											 Color="Transparent" />
-						</ResourceDictionary>
-					</ResourceDictionary.ThemeDictionaries>
-				</ResourceDictionary>
-			</Setter.Value>
-		</Setter>
+		<Setter Property="fluent:FluentSubtleButton.IsEnabled" Value="True" />
 	</Style>
 
 	<!-- Subtle icon button: square padding, secondary text color at rest -->

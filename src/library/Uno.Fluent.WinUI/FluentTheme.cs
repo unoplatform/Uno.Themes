@@ -37,6 +37,7 @@ public partial class FluentTheme : BaseTheme
 
 	// Kept alive with the theme; the handler holds the theme weakly (see ObserveSystemAccent).
 	private UISettings? _uiSettings;
+	private bool _isRefreshQueued;
 
 	/// <summary>
 	/// Initializes the Fluent theme resources with the default palette and typography.
@@ -49,7 +50,11 @@ public partial class FluentTheme : BaseTheme
 	/// <summary>
 	/// Initializes the Fluent theme resources.
 	/// </summary>
-	/// <param name="colorOverride">(Optional) Overrides for the semantic <see cref="Color"/> resources, layered above the Fluent palette.</param>
+	/// <param name="colorOverride">
+	/// (Optional) Overrides for the semantic <see cref="Color"/> resources, layered above the Fluent palette.
+	/// Stored as <see cref="BaseTheme.Colors"/>' <see cref="ThemeColors.OverrideDictionary"/> so it also drives
+	/// the built-in accent; assigning a new <see cref="BaseTheme.Colors"/> replaces it.
+	/// </param>
 	/// <param name="fontOverride">(Optional) Overrides for the typography resources, layered above the Fluent type ramp.</param>
 	public FluentTheme(ResourceDictionary? colorOverride = null, ResourceDictionary? fontOverride = null)
 		: base(CreatePalette(out var palette), fontOverride)
@@ -90,16 +95,26 @@ public partial class FluentTheme : BaseTheme
 	{
 		base.AddThemeSpecificResources();
 
-		// The built-in controls follow the effective primary: a PrimaryColor override, else the seed.
-		var seed = Colors?.PrimarySeed ?? DefaultPrimarySeed;
-		var mode = Colors?.SeedColorMode ?? SeedColorMode.Fidelity;
-		_accent.Update(isLight: true, FluentAccentPalette.Build(isLight: true, seed, mode, ResolvedColorOverride));
-		_accent.Update(isLight: false, FluentAccentPalette.Build(isLight: false, seed, mode, ResolvedColorOverride));
+		// The layer is merged even if updating it fails, so it keeps its last good values.
 		AddThemeDictionary(_accent.Resources);
-
-		if (BuildPlatformTokenOverrides() is { } platformTokens)
+		try
 		{
-			AddThemeDictionary(platformTokens);
+			// The built-in controls follow the effective primary: a PrimaryColor override, else the seed.
+			var seed = Colors?.PrimarySeed ?? DefaultPrimarySeed;
+			var mode = Colors?.SeedColorMode ?? SeedColorMode.Fidelity;
+			_accent.Update(isLight: true, FluentAccentPalette.Build(isLight: true, seed, mode, ResolvedColorOverride));
+			_accent.Update(isLight: false, FluentAccentPalette.Build(isLight: false, seed, mode, ResolvedColorOverride));
+
+			if (BuildPlatformTokenOverrides() is { } platformTokens)
+			{
+				AddThemeDictionary(platformTokens);
+			}
+		}
+		catch (Exception e)
+		{
+			// Runs from property-changed callbacks and the constructor; it reads consumer dictionaries,
+			// which WinUI can fail to enumerate. Degrade rather than throw into the app.
+			FluentDiagnostics.LogWarning($"FluentTheme could not update the Fluent accent resources. {e.Message}");
 		}
 	}
 
@@ -147,11 +162,12 @@ public partial class FluentTheme : BaseTheme
 				return;
 			}
 
-			if (dispatcher is { HasThreadAccess: false })
+			// The event fires several times per system change: coalesce into one rebuild.
+			if (dispatcher is { } && !theme._isRefreshQueued)
 			{
-				dispatcher.TryEnqueue(theme.RefreshSystemAccent);
+				theme._isRefreshQueued = dispatcher.TryEnqueue(theme.RefreshSystemAccent);
 			}
-			else
+			else if (dispatcher is null)
 			{
 				theme.RefreshSystemAccent();
 			}
@@ -161,6 +177,7 @@ public partial class FluentTheme : BaseTheme
 
 	private void RefreshSystemAccent()
 	{
+		_isRefreshQueued = false;
 		try
 		{
 			FluentColorPalette.TryPopulate(_palette);
