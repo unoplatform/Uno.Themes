@@ -358,6 +358,124 @@ public class Given_SeedColorPalette
 	}
 
 	// ─────────────────────────────────────────────────────────────────────
+	// Exact-seed Secondary / Tertiary (#1778): an explicit supporting seed gets
+	// the same Fidelity treatment as the primary one — the light role is the
+	// seed hex verbatim, whatever its tone; dark stays derived.
+	// ─────────────────────────────────────────────────────────────────────
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow(unchecked((int)0xFF008080), "Teal (~T48)")]
+	[DataRow(unchecked((int)0xFFFFA500), "Orange (~T75)")]
+	[DataRow(unchecked((int)0xFFFFD700), "Gold (~T87)")]
+	[DataRow(unchecked((int)0xFF001F3F), "Navy (~T12)")]
+	[DataRow(unchecked((int)0xFFB3261E), "Red already at T40 — was off by one")]
+	public void When_SupportingSeedIsExplicit_Then_LightRoleIsTheSeedExactly(int seedArgb, string name)
+	{
+		var seed = ToColor(seedArgb);
+
+		var secondary = GetGeneratedColor(PrimarySeedForSupportingTests, "Light", "SecondaryColor",
+			configure: colors => colors.SecondarySeed = seed);
+		var tertiary = GetGeneratedColor(PrimarySeedForSupportingTests, "Light", "TertiaryColor",
+			configure: colors => colors.TertiarySeed = seed);
+
+		Assert.AreEqual(seed, secondary,
+			$"{name}: light SecondaryColor should be the SecondarySeed verbatim but was generated as {secondary}.");
+		Assert.AreEqual(seed, tertiary,
+			$"{name}: light TertiaryColor should be the TertiarySeed verbatim but was generated as {tertiary}.");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow(unchecked((int)0xFF001F3F), "Navy (~T12)")]
+	[DataRow(unchecked((int)0xFFFFA500), "Orange (~T75)")]
+	public void When_SupportingSeedIsExplicit_Then_DarkRoleStaysDerived(int seedArgb, string name)
+	{
+		var seed = ToColor(seedArgb);
+
+		var secondary = GetGeneratedColor(PrimarySeedForSupportingTests, "Default", "SecondaryColor",
+			configure: colors => colors.SecondarySeed = seed);
+		var tertiary = GetGeneratedColor(PrimarySeedForSupportingTests, "Default", "TertiaryColor",
+			configure: colors => colors.TertiarySeed = seed);
+
+		foreach (var (role, color) in new[] { ("SecondaryColor", secondary), ("TertiaryColor", tertiary) })
+		{
+			double tone = HctColor.FromArgb(ToArgb(color)).Tone;
+			Assert.IsTrue(Math.Abs(tone - 80) <= 2.0,
+				$"{name}: dark {role} should sit at tone 80, got {tone:F1} ({color}).");
+		}
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow(unchecked((int)0xFFFFD700), "Pale seed (~T87)")]
+	[DataRow(unchecked((int)0xFFFFA500), "Light seed (~T75)")]
+	[DataRow(unchecked((int)0xFF797900), "Mid seed at the contrast worst case (~T49)")]
+	[DataRow(unchecked((int)0xFF008080), "Mid seed (~T48)")]
+	[DataRow(unchecked((int)0xFF001F3F), "Dark seed (~T12)")]
+	public void When_SupportingRoleIsPinned_Then_OnColorClearsWcagAA(int seedArgb, string name)
+	{
+		// Same reasoning as OnPrimary: a pinned role's tone is the consumer's, so the fixed
+		// tone-100 foreground is not always legible on it.
+		var seed = ToColor(seedArgb);
+
+		foreach (var role in new[] { "Secondary", "Tertiary" })
+		{
+			Action<ThemeColors> configure = role == "Secondary"
+				? colors => colors.SecondarySeed = seed
+				: colors => colors.TertiarySeed = seed;
+
+			var background = GetGeneratedColor(PrimarySeedForSupportingTests, "Light", $"{role}Color", configure: configure);
+			var foreground = GetGeneratedColor(PrimarySeedForSupportingTests, "Light", $"On{role}Color", configure: configure);
+
+			double contrast = ColorMathAccessor.ContrastRatio(ToArgb(background), ToArgb(foreground));
+
+			Assert.IsTrue(contrast >= WcagAaContrast,
+				$"{name}: On{role} {foreground} on {role} {background} is {contrast:F2}:1, below WCAG AA ({WcagAaContrast}:1).");
+		}
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_SupportingSeedIsExplicitInTonalSpot_Then_RoleStaysDerived()
+	{
+		// TonalSpot never pins: the explicit seed only supplies hue and chroma, as before.
+		var seed = ToColor(unchecked((int)0xFFFFA500));
+
+		foreach (var role in new[] { "SecondaryColor", "TertiaryColor" })
+		{
+			var color = GetGeneratedColor(PrimarySeedForSupportingTests, "Light", role,
+				seedColorMode: SeedColorMode.TonalSpot,
+				configure: colors =>
+				{
+					colors.SecondarySeed = seed;
+					colors.TertiarySeed = seed;
+				});
+
+			double tone = HctColor.FromArgb(ToArgb(color)).Tone;
+			Assert.IsTrue(Math.Abs(tone - 40) <= 2.0,
+				$"TonalSpot mode should derive light {role} at tone 40, got {tone:F1} ({color}).");
+		}
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_SupportingSeedIsNotSet_Then_RoleStaysDerivedFromPrimary()
+	{
+		// Only an *explicit* supporting seed is pinned; the auto-derived roles keep tone 40.
+		foreach (var role in new[] { "SecondaryColor", "TertiaryColor" })
+		{
+			var color = GetGeneratedColor(PrimarySeedForSupportingTests, "Light", role);
+
+			double tone = HctColor.FromArgb(ToArgb(color)).Tone;
+			Assert.IsTrue(Math.Abs(tone - 40) <= 2.0,
+				$"Auto-derived light {role} should sit at tone 40, got {tone:F1} ({color}).");
+		}
+	}
+
+	private static Color PrimarySeedForSupportingTests => ToColor(unchecked((int)0xFF6750A4));
+
+	// ─────────────────────────────────────────────────────────────────────
 	// Brush propagation: a seed change has to reach the *Brush resources that
 	// controls actually paint with, on the instances consumers already hold.
 	// ─────────────────────────────────────────────────────────────────────
