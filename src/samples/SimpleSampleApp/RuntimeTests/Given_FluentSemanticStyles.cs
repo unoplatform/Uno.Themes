@@ -161,6 +161,26 @@ public class Given_FluentSemanticStyles
 
 	[TestMethod]
 	[RunsOnUIThread]
+	public async Task When_SeveralTextButtons_EachGetsItsOwnStateResources()
+	{
+		var container = CreateThemedContainer();
+		var first = new Button { Content = "first", Style = (Style)container.Resources["TextButtonStyle"] };
+		var second = new Button { Content = "second", Style = (Style)container.Resources["IconButtonStyle"] };
+		container.Children.Add(first);
+		container.Children.Add(second);
+
+		UnitTestsUIContentHelper.Content = container;
+		await UnitTestsUIContentHelper.WaitForLoaded(second);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		// WinUI rejects a ResourceDictionary with two parents, so each button needs its own.
+		Assert.AreEqual(1, first.Resources.MergedDictionaries.Count);
+		Assert.AreEqual(1, second.Resources.MergedDictionaries.Count);
+		Assert.AreNotSame(first.Resources.MergedDictionaries[0], second.Resources.MergedDictionaries[0]);
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
 	public void When_TextButtonStyleReplaced_ItsResourcesAreRemoved()
 	{
 		var container = CreateThemedContainer();

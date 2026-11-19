@@ -78,8 +78,9 @@ internal static class FluentColorPalette
 			}
 		}
 
-		// Primary is Fluent's accent fill per theme (light: the accent, dark: Light2). Secondary and
-		// Tertiary take darker / lighter shades of the same accent, not neutrals, so they stay branded.
+		// Primary is the accent in the light theme and Light2 (Fluent's accent fill) in the dark theme;
+		// the light accent fill is the darker Dark1. Secondary and Tertiary take darker / lighter shades
+		// of the same accent, not neutrals, so they stay branded.
 		branch[SemanticColorKeys.Primary] = isLight ? accent.Accent : accent.Light2;
 		branch[SemanticColorKeys.PrimaryContainer] = isLight ? accent.Light2 : accent.Dark1;
 		branch[SemanticColorKeys.OnPrimaryContainer] = isLight ? accent.Dark2 : accent.Light3;
