@@ -45,7 +45,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `DatePickerButtonForegroundPressed`                    | `SolidColorBrush` | `PrimaryBrush`                  |
 | `DatePickerButtonHeaderMargin`                         | `Thickness`       | 10,8,10,0                       |
 | `DatePickerButtonPlaceholderMargin`                    | `Thickness`       | 4,0,0,0                         |
-| `DatePickerCornerRadius`                               | `CornerRadius`    | 4,4,0,0                         |
+| `DatePickerCornerRadius`                               | `CornerRadius`    | `Radius100TopCornerRadius`      |
 | `DatePickerFlyoutBorderThickness`                      | `Double`          | 1                               |
 | `DatePickerFlyoutButtonBackground`                     | `SolidColorBrush` | `SystemControlTransparentBrush` |
 | `DatePickerFlyoutButtonOpacityDisabled`                | `Double`          | 0.65                            |

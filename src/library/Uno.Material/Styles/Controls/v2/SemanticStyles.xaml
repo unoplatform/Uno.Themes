@@ -223,10 +223,10 @@
 			<Thickness x:Key="ElevatedButtonDisabledMargin">0</Thickness>
 			<StaticResource x:Key="ButtonContentMargin" ResourceKey="Space100HorizontalThickness" />
 			<Thickness x:Key="ButtonMargin">0</Thickness>
-			<StaticResource x:Key="ButtonCornerRadius" ResourceKey="Radius500CornerRadius" />
+			<StaticResource x:Key="ButtonCornerRadius" ResourceKey="MaterialShapeButtonCornerRadius" />
 
 			<!-- CalendarDatePicker.xaml lightweight resources -->
-			<CornerRadius x:Key="CalendarDatePickerBackgroundCornerRadius">4,4,0,0</CornerRadius>
+			<StaticResource x:Key="CalendarDatePickerBackgroundCornerRadius" ResourceKey="Radius100TopCornerRadius" />
 			<Thickness x:Key="CalendarDatePickerBorderThemeThickness">1</Thickness>
 			<Thickness x:Key="CalendarDatePickerFlyoutPresenterPadding">0</Thickness>
 			<Thickness x:Key="CalendarDatePickerFlyoutPresenterMargin">0</Thickness>
@@ -348,7 +348,7 @@
 			<StaticResource x:Key="CheckBoxFocusAreaSize" ResourceKey="ControlHeightMedium" />
 			<x:Double x:Key="CheckBoxCheckAreaSize">18</x:Double>
 			<GridLength x:Key="CheckBoxCheckAreaLength">40</GridLength>
-			<StaticResource x:Key="CheckBoxCheckAreaCornerRadius" ResourceKey="Radius050CornerRadius" />
+			<StaticResource x:Key="CheckBoxCheckAreaCornerRadius" ResourceKey="MaterialShapeCheckBoxCornerRadius" />
 			<Thickness x:Key="CheckBoxCheckAreaBorderThickness">2</Thickness>
 			<StaticResource x:Key="CheckBoxCheckAreaPadding" ResourceKey="Space100LeftThickness" />
 
@@ -494,7 +494,7 @@
 			<Thickness x:Key="DatePickerButtonContentMargin">6,24,10,0</Thickness>
 			<Thickness x:Key="DatePickerHostPadding">24,24,8,8</Thickness>
 			<Thickness x:Key="DatePickerFlyoutButtonPadding">0</Thickness>
-			<CornerRadius x:Key="DatePickerCornerRadius">4,4,0,0</CornerRadius>
+			<StaticResource x:Key="DatePickerCornerRadius" ResourceKey="Radius100TopCornerRadius" />
 
 			<!-- FloatingActionButton.xaml lightweight resources -->
 			<StaticResource x:Key="FabForeground" ResourceKey="OnPrimaryContainerBrush" />
@@ -590,7 +590,7 @@
 			<StaticResource x:Key="NavigationViewItemOnLeftIconBoxHeight" ResourceKey="IconSizeMedium" />
 			<x:Double x:Key="NavigationViewSelectionIndicatorWidth">3</x:Double>
 			<StaticResource x:Key="NavigationViewSelectionIndicatorHeight" ResourceKey="IconSizeMedium" />
-			<x:Double x:Key="NavigationViewSelectionIndicatorRadius">2</x:Double>
+			<StaticResource x:Key="NavigationViewSelectionIndicatorRadius" ResourceKey="MaterialShapeIndicator" />
 			<x:Double x:Key="NavigationViewItemSeparatorHeight">1</x:Double>
 			<x:Double x:Key="TopNavigationViewItemSeparatorWidth">1</x:Double>
 			<Thickness x:Key="NavigationViewToggleBorderThickness">0</Thickness>
@@ -631,7 +631,7 @@
 			<Thickness x:Key="TopNavigationViewItemOnOverflowNoIconContentPresenterMargin">16,0,20,0</Thickness>
 			<Thickness x:Key="TopNavigationViewItemOnOverflowExpandChevronMargin">-4,0,-8,0</Thickness>
 			<StaticResource x:Key="TopNavigationViewItemOnOverflowExpandChevronPadding" ResourceKey="Space150HorizontalThickness" />
-			<CornerRadius x:Key="NavigationViewContentGridCornerRadius">8,0,0,0</CornerRadius>
+			<StaticResource x:Key="NavigationViewContentGridCornerRadius" ResourceKey="Radius200TopLeftCornerRadius" />
 			<CornerRadius x:Key="TopNavigationViewContentGridCornerRadius">0</CornerRadius>
 			<CornerRadius x:Key="NavigationViewMinimalContentGridCornerRadius">0</CornerRadius>
 			<StaticResource x:Key="TopNavigationViewOverflowMenuPadding" ResourceKey="Space100VerticalThickness" />
@@ -761,13 +761,13 @@
 			<StaticResource x:Key="OutlinedPasswordBoxFontWeight" ResourceKey="BodyLargeFontWeight" />
 			<StaticResource x:Key="OutlinedPasswordBoxFontSize" ResourceKey="BodyLargeFontSize" />
 			<StaticResource x:Key="OutlinedPasswordBoxCharacterSpacing" ResourceKey="BodyLargeCharacterSpacing" />
-			<CornerRadius x:Key="OutlinedPasswordBoxCornerRadius">4</CornerRadius>
+			<StaticResource x:Key="OutlinedPasswordBoxCornerRadius" ResourceKey="Radius100CornerRadius" />
 			<x:Double x:Key="OutlinedPasswordBoxMinHeight">58</x:Double>
 			<Thickness x:Key="OutlinedPasswordBoxBorderThickness">1</Thickness>
 			<StaticResource x:Key="OutlinedPasswordBoxPadding" ResourceKey="Space100HorizontalThickness" />
 			<Thickness x:Key="OutlinedPasswordBoxBorderThicknessPointerOver">1</Thickness>
 			<Thickness x:Key="OutlinedPasswordBoxBorderThicknessFocused">2</Thickness>
-			<CornerRadius x:Key="FilledPasswordBoxCornerRadius">4,4,0,0</CornerRadius>
+			<StaticResource x:Key="FilledPasswordBoxCornerRadius" ResourceKey="Radius100TopCornerRadius" />
 			<x:Double x:Key="FilledPasswordBoxMinHeight">56</x:Double>
 			<x:Double x:Key="FilledPasswordBoxBorderHeightPointerOver">2</x:Double>
 			<x:Double x:Key="FilledPasswordBoxBorderHeightFocused">2</x:Double>
@@ -906,8 +906,8 @@
 			<StaticResource x:Key="SliderTrackFillDisabled" ResourceKey="OnSurfaceSelectedBrush" />
 			<StaticResource x:Key="SliderTrackValueFill" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="SliderTrackValueFillDisabled" ResourceKey="SystemControlDisabledChromeDisabledHighBrush" />
-			<CornerRadius x:Key="SliderHorizontalFillCornerRadius">4,0,0,4</CornerRadius>
-			<CornerRadius x:Key="SliderVerticalFillCornerRadius">0,0,4,4</CornerRadius>
+			<StaticResource x:Key="SliderHorizontalFillCornerRadius" ResourceKey="MaterialShapeSliderFillLeftCornerRadius" />
+			<StaticResource x:Key="SliderVerticalFillCornerRadius" ResourceKey="MaterialShapeSliderFillBottomCornerRadius" />
 			<x:Double x:Key="SliderTrackThickness">4</x:Double>
 			<x:Double x:Key="SliderFillThickness">6</x:Double>
 			<x:Double x:Key="SliderPreContentMargin">14</x:Double>
@@ -997,7 +997,7 @@
 			<StaticResource x:Key="FilledTextBoxBorderThicknessFocused" ResourceKey="TextBoxFocusStrokeWidth" />
 			<x:Double x:Key="TextBoxClearGlyphWidth">20</x:Double>
 			<x:Double x:Key="TextBoxClearGlyphHeight">20</x:Double>
-			<CornerRadius x:Key="FilledTextBoxCornerRadius">4,4,0,0</CornerRadius>
+			<StaticResource x:Key="FilledTextBoxCornerRadius" ResourceKey="Radius100TopCornerRadius" />
 			<Thickness x:Key="FilledTextBoxPadding">16,8</Thickness>
 			<x:Double x:Key="FilledTextBoxMinHeight">58</x:Double>
 			<x:Double x:Key="FilledTextBoxBorderHeightFocused">2</x:Double>
@@ -1139,7 +1139,7 @@
 			<x:Double x:Key="SwitchKnobWidth">52</x:Double>
 			<x:Double x:Key="SwitchKnobIncludingOffShadowWidth">56</x:Double>
 			<StaticResource x:Key="SwitchKnobHeight" ResourceKey="ControlHeightSmall" />
-			<x:Double x:Key="SwitchKnobRadius">16</x:Double>
+			<StaticResource x:Key="SwitchKnobRadius" ResourceKey="MaterialShapeSwitchTrack" />
 			<x:Double x:Key="SwitchKnobStrokeThickness">2</x:Double>
 			<StaticResource x:Key="SwitchKnobShadowSize" ResourceKey="ControlHeightMedium" />
 			<StaticResource x:Key="SmallThumbSize" ResourceKey="IconSizeSmall" />
@@ -1269,10 +1269,10 @@
 			<Thickness x:Key="ElevatedButtonDisabledMargin">0</Thickness>
 			<StaticResource x:Key="ButtonContentMargin" ResourceKey="Space100HorizontalThickness" />
 			<Thickness x:Key="ButtonMargin">0</Thickness>
-			<StaticResource x:Key="ButtonCornerRadius" ResourceKey="Radius500CornerRadius" />
+			<StaticResource x:Key="ButtonCornerRadius" ResourceKey="MaterialShapeButtonCornerRadius" />
 
 			<!-- CalendarDatePicker.xaml lightweight resources -->
-			<CornerRadius x:Key="CalendarDatePickerBackgroundCornerRadius">4,4,0,0</CornerRadius>
+			<StaticResource x:Key="CalendarDatePickerBackgroundCornerRadius" ResourceKey="Radius100TopCornerRadius" />
 			<Thickness x:Key="CalendarDatePickerBorderThemeThickness">1</Thickness>
 			<Thickness x:Key="CalendarDatePickerFlyoutPresenterPadding">0</Thickness>
 			<Thickness x:Key="CalendarDatePickerFlyoutPresenterMargin">0</Thickness>
@@ -1394,7 +1394,7 @@
 			<StaticResource x:Key="CheckBoxFocusAreaSize" ResourceKey="ControlHeightMedium" />
 			<x:Double x:Key="CheckBoxCheckAreaSize">18</x:Double>
 			<GridLength x:Key="CheckBoxCheckAreaLength">40</GridLength>
-			<StaticResource x:Key="CheckBoxCheckAreaCornerRadius" ResourceKey="Radius050CornerRadius" />
+			<StaticResource x:Key="CheckBoxCheckAreaCornerRadius" ResourceKey="MaterialShapeCheckBoxCornerRadius" />
 			<Thickness x:Key="CheckBoxCheckAreaBorderThickness">2</Thickness>
 			<StaticResource x:Key="CheckBoxCheckAreaPadding" ResourceKey="Space100LeftThickness" />
 
@@ -1540,7 +1540,7 @@
 			<Thickness x:Key="DatePickerButtonContentMargin">6,24,10,0</Thickness>
 			<Thickness x:Key="DatePickerHostPadding">24,24,8,8</Thickness>
 			<Thickness x:Key="DatePickerFlyoutButtonPadding">0</Thickness>
-			<CornerRadius x:Key="DatePickerCornerRadius">4,4,0,0</CornerRadius>
+			<StaticResource x:Key="DatePickerCornerRadius" ResourceKey="Radius100TopCornerRadius" />
 
 			<!-- FloatingActionButton.xaml lightweight resources -->
 			<StaticResource x:Key="FabForeground" ResourceKey="OnPrimaryContainerBrush" />
@@ -1636,7 +1636,7 @@
 			<StaticResource x:Key="NavigationViewItemOnLeftIconBoxHeight" ResourceKey="IconSizeMedium" />
 			<x:Double x:Key="NavigationViewSelectionIndicatorWidth">3</x:Double>
 			<StaticResource x:Key="NavigationViewSelectionIndicatorHeight" ResourceKey="IconSizeMedium" />
-			<x:Double x:Key="NavigationViewSelectionIndicatorRadius">2</x:Double>
+			<StaticResource x:Key="NavigationViewSelectionIndicatorRadius" ResourceKey="MaterialShapeIndicator" />
 			<x:Double x:Key="NavigationViewItemSeparatorHeight">1</x:Double>
 			<x:Double x:Key="TopNavigationViewItemSeparatorWidth">1</x:Double>
 			<Thickness x:Key="NavigationViewToggleBorderThickness">0</Thickness>
@@ -1677,7 +1677,7 @@
 			<Thickness x:Key="TopNavigationViewItemOnOverflowNoIconContentPresenterMargin">16,0,20,0</Thickness>
 			<Thickness x:Key="TopNavigationViewItemOnOverflowExpandChevronMargin">-4,0,-8,0</Thickness>
 			<StaticResource x:Key="TopNavigationViewItemOnOverflowExpandChevronPadding" ResourceKey="Space150HorizontalThickness" />
-			<CornerRadius x:Key="NavigationViewContentGridCornerRadius">8,0,0,0</CornerRadius>
+			<StaticResource x:Key="NavigationViewContentGridCornerRadius" ResourceKey="Radius200TopLeftCornerRadius" />
 			<CornerRadius x:Key="TopNavigationViewContentGridCornerRadius">0</CornerRadius>
 			<CornerRadius x:Key="NavigationViewMinimalContentGridCornerRadius">0</CornerRadius>
 			<StaticResource x:Key="TopNavigationViewOverflowMenuPadding" ResourceKey="Space100VerticalThickness" />
@@ -1807,13 +1807,13 @@
 			<StaticResource x:Key="OutlinedPasswordBoxFontWeight" ResourceKey="BodyLargeFontWeight" />
 			<StaticResource x:Key="OutlinedPasswordBoxFontSize" ResourceKey="BodyLargeFontSize" />
 			<StaticResource x:Key="OutlinedPasswordBoxCharacterSpacing" ResourceKey="BodyLargeCharacterSpacing" />
-			<CornerRadius x:Key="OutlinedPasswordBoxCornerRadius">4</CornerRadius>
+			<StaticResource x:Key="OutlinedPasswordBoxCornerRadius" ResourceKey="Radius100CornerRadius" />
 			<x:Double x:Key="OutlinedPasswordBoxMinHeight">58</x:Double>
 			<Thickness x:Key="OutlinedPasswordBoxBorderThickness">1</Thickness>
 			<StaticResource x:Key="OutlinedPasswordBoxPadding" ResourceKey="Space100HorizontalThickness" />
 			<Thickness x:Key="OutlinedPasswordBoxBorderThicknessPointerOver">1</Thickness>
 			<Thickness x:Key="OutlinedPasswordBoxBorderThicknessFocused">2</Thickness>
-			<CornerRadius x:Key="FilledPasswordBoxCornerRadius">4,4,0,0</CornerRadius>
+			<StaticResource x:Key="FilledPasswordBoxCornerRadius" ResourceKey="Radius100TopCornerRadius" />
 			<x:Double x:Key="FilledPasswordBoxMinHeight">56</x:Double>
 			<x:Double x:Key="FilledPasswordBoxBorderHeightPointerOver">2</x:Double>
 			<x:Double x:Key="FilledPasswordBoxBorderHeightFocused">2</x:Double>
@@ -1952,8 +1952,8 @@
 			<StaticResource x:Key="SliderTrackFillDisabled" ResourceKey="OnSurfaceSelectedBrush" />
 			<StaticResource x:Key="SliderTrackValueFill" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="SliderTrackValueFillDisabled" ResourceKey="SystemControlDisabledChromeDisabledHighBrush" />
-			<CornerRadius x:Key="SliderHorizontalFillCornerRadius">4,0,0,4</CornerRadius>
-			<CornerRadius x:Key="SliderVerticalFillCornerRadius">0,0,4,4</CornerRadius>
+			<StaticResource x:Key="SliderHorizontalFillCornerRadius" ResourceKey="MaterialShapeSliderFillLeftCornerRadius" />
+			<StaticResource x:Key="SliderVerticalFillCornerRadius" ResourceKey="MaterialShapeSliderFillBottomCornerRadius" />
 			<x:Double x:Key="SliderTrackThickness">4</x:Double>
 			<x:Double x:Key="SliderFillThickness">6</x:Double>
 			<x:Double x:Key="SliderPreContentMargin">14</x:Double>
@@ -2043,7 +2043,7 @@
 			<StaticResource x:Key="FilledTextBoxBorderThicknessFocused" ResourceKey="TextBoxFocusStrokeWidth" />
 			<x:Double x:Key="TextBoxClearGlyphWidth">20</x:Double>
 			<x:Double x:Key="TextBoxClearGlyphHeight">20</x:Double>
-			<CornerRadius x:Key="FilledTextBoxCornerRadius">4,4,0,0</CornerRadius>
+			<StaticResource x:Key="FilledTextBoxCornerRadius" ResourceKey="Radius100TopCornerRadius" />
 			<Thickness x:Key="FilledTextBoxPadding">16,8</Thickness>
 			<x:Double x:Key="FilledTextBoxMinHeight">58</x:Double>
 			<x:Double x:Key="FilledTextBoxBorderHeightFocused">2</x:Double>
@@ -2185,7 +2185,7 @@
 			<x:Double x:Key="SwitchKnobWidth">52</x:Double>
 			<x:Double x:Key="SwitchKnobIncludingOffShadowWidth">56</x:Double>
 			<StaticResource x:Key="SwitchKnobHeight" ResourceKey="ControlHeightSmall" />
-			<x:Double x:Key="SwitchKnobRadius">16</x:Double>
+			<StaticResource x:Key="SwitchKnobRadius" ResourceKey="MaterialShapeSwitchTrack" />
 			<x:Double x:Key="SwitchKnobStrokeThickness">2</x:Double>
 			<StaticResource x:Key="SwitchKnobShadowSize" ResourceKey="ControlHeightMedium" />
 			<StaticResource x:Key="SmallThumbSize" ResourceKey="IconSizeSmall" />
@@ -2222,7 +2222,7 @@
 			<StaticResource x:Key="NavigationViewItemOnLeftIconBoxHeight" ResourceKey="IconSizeMedium" />
 			<x:Double x:Key="NavigationViewSelectionIndicatorWidth">3</x:Double>
 			<StaticResource x:Key="NavigationViewSelectionIndicatorHeight" ResourceKey="IconSizeMedium" />
-			<x:Double x:Key="NavigationViewSelectionIndicatorRadius">2</x:Double>
+			<StaticResource x:Key="NavigationViewSelectionIndicatorRadius" ResourceKey="MaterialShapeIndicator" />
 			<x:Double x:Key="NavigationViewItemSeparatorHeight">1</x:Double>
 			<x:Double x:Key="TopNavigationViewItemSeparatorWidth">1</x:Double>
 			<Thickness x:Key="NavigationViewToggleBorderThickness">0</Thickness>
@@ -2263,7 +2263,7 @@
 			<Thickness x:Key="TopNavigationViewItemOnOverflowNoIconContentPresenterMargin">16,0,20,0</Thickness>
 			<Thickness x:Key="TopNavigationViewItemOnOverflowExpandChevronMargin">-4,0,-8,0</Thickness>
 			<StaticResource x:Key="TopNavigationViewItemOnOverflowExpandChevronPadding" ResourceKey="Space150HorizontalThickness" />
-			<CornerRadius x:Key="NavigationViewContentGridCornerRadius">8,0,0,0</CornerRadius>
+			<StaticResource x:Key="NavigationViewContentGridCornerRadius" ResourceKey="Radius200TopLeftCornerRadius" />
 			<CornerRadius x:Key="TopNavigationViewContentGridCornerRadius">0</CornerRadius>
 			<CornerRadius x:Key="NavigationViewMinimalContentGridCornerRadius">0</CornerRadius>
 			<StaticResource x:Key="TopNavigationViewOverflowMenuPadding" ResourceKey="Space100VerticalThickness" />

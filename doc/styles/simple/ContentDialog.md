@@ -20,18 +20,18 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 ### Theme-agnostic
 
-| Key                                              | Type           | Value                         |
-| ------------------------------------------------ | -------------- | ----------------------------- |
-| `SimpleContentDialogButtonSpacing`               | `GridLength`   | 8                             |
-| `SimpleContentDialogCommandSpaceToContentMargin` | `Thickness`    | `Space300TopThickness`        |
-| `SimpleContentDialogCornerRadius`                | `CornerRadius` | `SimpleRadius200CornerRadius` |
-| `SimpleContentDialogEdgeMargin`                  | `Thickness`    | 0                             |
-| `SimpleContentDialogMaxHeight`                   | `Double`       | 560                           |
-| `SimpleContentDialogMaxWidth`                    | `Double`       | 560                           |
-| `SimpleContentDialogMinHeight`                   | `Double`       | 132                           |
-| `SimpleContentDialogMinWidth`                    | `Double`       | 288                           |
-| `SimpleContentDialogPanelPadding`                | `Thickness`    | 32                            |
-| `SimpleContentDialogTitleToContentMargin`        | `Thickness`    | `Space100BottomThickness`     |
+| Key                                              | Type           | Value                              |
+| ------------------------------------------------ | -------------- | ---------------------------------- |
+| `SimpleContentDialogButtonSpacing`               | `GridLength`   | 8                                  |
+| `SimpleContentDialogCommandSpaceToContentMargin` | `Thickness`    | `Space300TopThickness`             |
+| `SimpleContentDialogCornerRadius`                | `CornerRadius` | `SimpleShapeContainerCornerRadius` |
+| `SimpleContentDialogEdgeMargin`                  | `Thickness`    | 0                                  |
+| `SimpleContentDialogMaxHeight`                   | `Double`       | 560                                |
+| `SimpleContentDialogMaxWidth`                    | `Double`       | 560                                |
+| `SimpleContentDialogMinHeight`                   | `Double`       | 132                                |
+| `SimpleContentDialogMinWidth`                    | `Double`       | 288                                |
+| `SimpleContentDialogPanelPadding`                | `Thickness`    | 32                                 |
+| `SimpleContentDialogTitleToContentMargin`        | `Thickness`    | `Space100BottomThickness`          |
 
 <!-- END GENERATED -->
 

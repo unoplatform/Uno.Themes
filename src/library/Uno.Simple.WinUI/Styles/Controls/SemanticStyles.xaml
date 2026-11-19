@@ -131,7 +131,7 @@
 
 
 	<!-- ComboBox.xaml lightweight resources -->
-	<StaticResource x:Key="ComboBoxCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+	<StaticResource x:Key="ComboBoxCornerRadius" ResourceKey="SimpleShapeControlCornerRadius" />
 	<StaticResource x:Key="ComboBoxMinHeight" ResourceKey="SimpleIconLarge" />
 	<StaticResource x:Key="ComboBoxBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />
 	<Thickness x:Key="ComboBoxPadding">16,10,12,10</Thickness>
@@ -146,9 +146,9 @@
 	<x:Double x:Key="SliderPostContentMargin">14</x:Double>
 	<StaticResource x:Key="SliderHorizontalHeight" ResourceKey="SimpleIconMedium" />
 	<StaticResource x:Key="SliderVerticalWidth" ResourceKey="SimpleIconMedium" />
-	<CornerRadius x:Key="SliderHorizontalFillCornerRadius">4,0,0,4</CornerRadius>
-	<CornerRadius x:Key="SliderVerticalFillCornerRadius">0,0,4,4</CornerRadius>
-	<StaticResource x:Key="SliderCornerRadius" ResourceKey="Radius050CornerRadius" />
+	<StaticResource x:Key="SliderHorizontalFillCornerRadius" ResourceKey="SimpleShapeSliderFillLeftCornerRadius" />
+	<StaticResource x:Key="SliderVerticalFillCornerRadius" ResourceKey="SimpleShapeSliderFillBottomCornerRadius" />
+	<StaticResource x:Key="SliderCornerRadius" ResourceKey="SimpleShapeTrackCornerRadius" />
 	<Thickness x:Key="SliderFocusVisualMargin">-7,0</Thickness>
 	<Thickness x:Key="SliderHorizontalFocusVisualMargin">-14,-6,-14,-6</Thickness>
 	<Thickness x:Key="SliderVerticalFocusVisualMargin">-6,-14,-6,-14</Thickness>
@@ -236,8 +236,8 @@
 			<StaticResource x:Key="IconButtonBorderBrushDisabled" ResourceKey="FilledButtonBorderBrushDisabled" />
 
 			<!-- CalendarDatePicker.xaml lightweight resources -->
-			<StaticResource x:Key="CalendarDatePickerCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
-			<StaticResource x:Key="CalendarDatePickerFlyoutPresenterCornerRadius" ResourceKey="SimpleRadius400CornerRadius" />
+			<StaticResource x:Key="CalendarDatePickerCornerRadius" ResourceKey="SimpleShapeControlCornerRadius" />
+			<StaticResource x:Key="CalendarDatePickerFlyoutPresenterCornerRadius" ResourceKey="SimpleShapeCalendarCornerRadius" />
 			<StaticResource x:Key="CalendarDatePickerBorderThemeThickness" ResourceKey="SimpleStrokeBorderThickness" />
 			<StaticResource x:Key="CalendarDatePickerFlyoutPresenterPadding" ResourceKey="SimpleSpace0Thickness" />
 			<Thickness x:Key="CalendarDatePickerContentMargin">16,10,16,10</Thickness>
@@ -350,7 +350,7 @@
 			<StaticResource x:Key="DatePickerFlyoutPresenterBorderBrush" ResourceKey="OutlineBrush" />
 			<StaticResource x:Key="DatePickerFlyoutPresenterSpacerFill" ResourceKey="OutlineBrush" />
 			<StaticResource x:Key="DatePickerFlyoutPresenterHighlightFill" ResourceKey="PrimaryVariantLightBrush" />
-			<StaticResource x:Key="DatePickerFlyoutPresenterCornerRadius" ResourceKey="SimpleRadius400CornerRadius" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterCornerRadius" ResourceKey="SimpleShapeCalendarCornerRadius" />
 			<x:Double x:Key="DatePickerFlyoutPresenterWidth">296</x:Double>
 			<x:Double x:Key="DatePickerFlyoutPresenterMinWidth">296</x:Double>
 			<x:Double x:Key="DatePickerFlyoutPresenterMaxHeight">398</x:Double>
@@ -378,7 +378,7 @@
 			<StaticResource x:Key="DatePickerPlaceholderTextForeground" ResourceKey="OnSurfaceLowBrush" />
 			<StaticResource x:Key="DatePickerHeaderForeground" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="DatePickerHeaderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="DatePickerCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<StaticResource x:Key="DatePickerCornerRadius" ResourceKey="SimpleShapeControlCornerRadius" />
 			<StaticResource x:Key="DatePickerBorderThemeThickness" ResourceKey="SimpleStrokeBorderThickness" />
 			<Thickness x:Key="DatePickerContentMargin">16,10,16,10</Thickness>
 			<StaticResource x:Key="DatePickerFlyoutButtonPadding" ResourceKey="SimpleSpace0Thickness" />
@@ -462,7 +462,7 @@
 			<StaticResource x:Key="TopNavigationViewItemForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 
 			<!-- PasswordBox.xaml lightweight resources -->
-			<StaticResource x:Key="FilledPasswordBoxCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<StaticResource x:Key="FilledPasswordBoxCornerRadius" ResourceKey="SimpleShapeControlCornerRadius" />
 			<StaticResource x:Key="FilledPasswordBoxBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />
 			<StaticResource x:Key="FilledPasswordBoxFocusedBorderThickness" ResourceKey="SimpleStrokeFocusRingThickness" />
 			<Thickness x:Key="FilledPasswordBoxPadding">16,10,16,10</Thickness>
@@ -487,7 +487,7 @@
 			<StaticResource x:Key="FilledPasswordBoxRevealForegroundPressed" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="FilledPasswordBoxHeaderForeground" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="FilledPasswordBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="OutlinedPasswordBoxCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<StaticResource x:Key="OutlinedPasswordBoxCornerRadius" ResourceKey="SimpleShapeControlCornerRadius" />
 			<StaticResource x:Key="OutlinedPasswordBoxBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />
 			<StaticResource x:Key="OutlinedPasswordBoxFocusedBorderThickness" ResourceKey="SimpleStrokeFocusRingThickness" />
 			<Thickness x:Key="OutlinedPasswordBoxPadding">16,10,16,10</Thickness>
@@ -579,7 +579,7 @@
 			<StaticResource x:Key="SliderTrackFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 
 			<!-- TextBox.xaml lightweight resources -->
-			<StaticResource x:Key="FilledTextBoxCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<StaticResource x:Key="FilledTextBoxCornerRadius" ResourceKey="SimpleShapeControlCornerRadius" />
 			<Thickness x:Key="FilledTextBoxBorderThicknessNormal">0</Thickness>
 			<Thickness x:Key="FilledTextBoxBorderThicknessFocused">0</Thickness>
 			<Thickness x:Key="FilledTextBoxPadding">16,10,16,10</Thickness>
@@ -604,7 +604,7 @@
 			<StaticResource x:Key="FilledTextBoxHeaderForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="FilledTextBoxHeaderForegroundFocused" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="FilledTextBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="OutlinedTextBoxCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<StaticResource x:Key="OutlinedTextBoxCornerRadius" ResourceKey="SimpleShapeControlCornerRadius" />
 			<StaticResource x:Key="OutlinedTextBoxBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />
 			<StaticResource x:Key="OutlinedTextBoxBorderThicknessFocused" ResourceKey="SimpleStrokeFocusRingThickness" />
 			<Thickness x:Key="OutlinedTextBoxPadding">16,10,16,10</Thickness>
@@ -764,8 +764,8 @@
 			<StaticResource x:Key="IconButtonBorderBrushDisabled" ResourceKey="FilledButtonBorderBrushDisabled" />
 
 			<!-- CalendarDatePicker.xaml lightweight resources -->
-			<StaticResource x:Key="CalendarDatePickerCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
-			<StaticResource x:Key="CalendarDatePickerFlyoutPresenterCornerRadius" ResourceKey="SimpleRadius400CornerRadius" />
+			<StaticResource x:Key="CalendarDatePickerCornerRadius" ResourceKey="SimpleShapeControlCornerRadius" />
+			<StaticResource x:Key="CalendarDatePickerFlyoutPresenterCornerRadius" ResourceKey="SimpleShapeCalendarCornerRadius" />
 			<StaticResource x:Key="CalendarDatePickerBorderThemeThickness" ResourceKey="SimpleStrokeBorderThickness" />
 			<StaticResource x:Key="CalendarDatePickerFlyoutPresenterPadding" ResourceKey="SimpleSpace0Thickness" />
 			<Thickness x:Key="CalendarDatePickerContentMargin">16,10,16,10</Thickness>
@@ -877,7 +877,7 @@
 			<StaticResource x:Key="DatePickerFlyoutPresenterBorderBrush" ResourceKey="OutlineBrush" />
 			<StaticResource x:Key="DatePickerFlyoutPresenterSpacerFill" ResourceKey="OutlineBrush" />
 			<StaticResource x:Key="DatePickerFlyoutPresenterHighlightFill" ResourceKey="PrimaryVariantLightBrush" />
-			<StaticResource x:Key="DatePickerFlyoutPresenterCornerRadius" ResourceKey="SimpleRadius400CornerRadius" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterCornerRadius" ResourceKey="SimpleShapeCalendarCornerRadius" />
 			<x:Double x:Key="DatePickerFlyoutPresenterWidth">296</x:Double>
 			<x:Double x:Key="DatePickerFlyoutPresenterMinWidth">296</x:Double>
 			<x:Double x:Key="DatePickerFlyoutPresenterMaxHeight">398</x:Double>
@@ -905,7 +905,7 @@
 			<StaticResource x:Key="DatePickerPlaceholderTextForeground" ResourceKey="OnSurfaceLowBrush" />
 			<StaticResource x:Key="DatePickerHeaderForeground" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="DatePickerHeaderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="DatePickerCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<StaticResource x:Key="DatePickerCornerRadius" ResourceKey="SimpleShapeControlCornerRadius" />
 			<StaticResource x:Key="DatePickerBorderThemeThickness" ResourceKey="SimpleStrokeBorderThickness" />
 			<Thickness x:Key="DatePickerContentMargin">16,10,16,10</Thickness>
 			<StaticResource x:Key="DatePickerFlyoutButtonPadding" ResourceKey="SimpleSpace0Thickness" />
@@ -989,7 +989,7 @@
 			<StaticResource x:Key="TopNavigationViewItemForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 
 			<!-- PasswordBox.xaml lightweight resources -->
-			<StaticResource x:Key="FilledPasswordBoxCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<StaticResource x:Key="FilledPasswordBoxCornerRadius" ResourceKey="SimpleShapeControlCornerRadius" />
 			<StaticResource x:Key="FilledPasswordBoxBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />
 			<StaticResource x:Key="FilledPasswordBoxFocusedBorderThickness" ResourceKey="SimpleStrokeFocusRingThickness" />
 			<Thickness x:Key="FilledPasswordBoxPadding">16,10,16,10</Thickness>
@@ -1014,7 +1014,7 @@
 			<StaticResource x:Key="FilledPasswordBoxRevealForegroundPressed" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="FilledPasswordBoxHeaderForeground" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="FilledPasswordBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="OutlinedPasswordBoxCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<StaticResource x:Key="OutlinedPasswordBoxCornerRadius" ResourceKey="SimpleShapeControlCornerRadius" />
 			<StaticResource x:Key="OutlinedPasswordBoxBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />
 			<StaticResource x:Key="OutlinedPasswordBoxFocusedBorderThickness" ResourceKey="SimpleStrokeFocusRingThickness" />
 			<Thickness x:Key="OutlinedPasswordBoxPadding">16,10,16,10</Thickness>
@@ -1106,7 +1106,7 @@
 			<StaticResource x:Key="SliderTrackFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 
 			<!-- TextBox.xaml lightweight resources -->
-			<StaticResource x:Key="FilledTextBoxCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<StaticResource x:Key="FilledTextBoxCornerRadius" ResourceKey="SimpleShapeControlCornerRadius" />
 			<Thickness x:Key="FilledTextBoxBorderThicknessNormal">0</Thickness>
 			<Thickness x:Key="FilledTextBoxBorderThicknessFocused">0</Thickness>
 			<Thickness x:Key="FilledTextBoxPadding">16,10,16,10</Thickness>
@@ -1131,7 +1131,7 @@
 			<StaticResource x:Key="FilledTextBoxHeaderForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="FilledTextBoxHeaderForegroundFocused" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="FilledTextBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="OutlinedTextBoxCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<StaticResource x:Key="OutlinedTextBoxCornerRadius" ResourceKey="SimpleShapeControlCornerRadius" />
 			<StaticResource x:Key="OutlinedTextBoxBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />
 			<StaticResource x:Key="OutlinedTextBoxBorderThicknessFocused" ResourceKey="SimpleStrokeFocusRingThickness" />
 			<Thickness x:Key="OutlinedTextBoxPadding">16,10,16,10</Thickness>
