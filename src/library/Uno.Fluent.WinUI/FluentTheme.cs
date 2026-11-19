@@ -132,7 +132,7 @@ public partial class FluentTheme : BaseTheme
 		// twice the unit (Radius200), matching the platform's 4 / 8. Invalid values use the shared default.
 		if (ReadLocalValue(DefaultCornerRadiusProperty) is double radius)
 		{
-			radius = NormalizeCornerRadius(radius);
+			radius = SanitizeCornerRadius(radius);
 			tokens ??= new ResourceDictionary();
 			tokens["ControlCornerRadius"] = new CornerRadius(radius);
 			tokens["OverlayCornerRadius"] = new CornerRadius(radius * 2);

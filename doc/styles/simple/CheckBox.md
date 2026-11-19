@@ -27,7 +27,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `SimpleCheckBoxCheckGlyphPathData`  | `String`       | M28.718018,0L32,3.2819897 10.666016,24.616999 0,13.951997 3.2810059,10.670007 10.666016,18.055033z |
 | `SimpleCheckBoxColumnWidth`         | `GridLength`   | Auto                                                                                               |
 | `SimpleCheckBoxContentMargin`       | `Thickness`    | `Space200LeftThickness`                                                                            |
-| `SimpleCheckBoxCornerRadius`        | `CornerRadius` | `SimpleRadius100CornerRadius`                                                                      |
+| `SimpleCheckBoxCornerRadius`        | `CornerRadius` | `SimpleShapeCheckBoxCornerRadius`                                                                  |
 | `SimpleCheckBoxGlyphSize`           | `Double`       | 10                                                                                                 |
 | `SimpleCheckBoxHyphenGlyphPathData` | `String`       | M0,0L32,0 32,5.3 0,5.3z                                                                            |
 | `SimpleCheckBoxSize`                | `Double`       | `SimpleIconExtraSmall`                                                                             |

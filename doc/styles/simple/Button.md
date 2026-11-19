@@ -32,15 +32,15 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 ### Theme-agnostic
 
-| Key                               | Type           | Value                          |
-| --------------------------------- | -------------- | ------------------------------ |
-| `ButtonBorderThickness`           | `Thickness`    | `SimpleButtonBorderThickness`  |
-| `SimpleButtonBorderThickness`     | `Thickness`    | `SimpleStrokeBorderThickness`  |
-| `SimpleButtonCornerRadius`        | `CornerRadius` | `SimpleRadius200CornerRadius`  |
-| `SimpleButtonFontWeight`          | `String`       | Medium                         |
-| `SimpleButtonIconSpacing`         | `Double`       | `SimpleSpace100`               |
-| `SimpleIconButtonBorderThickness` | `Thickness`    | `SimpleStrokeBorderThickness`  |
-| `SimpleIconButtonCornerRadius`    | `CornerRadius` | `SimpleRadiusFullCornerRadius` |
+| Key                               | Type           | Value                            |
+| --------------------------------- | -------------- | -------------------------------- |
+| `ButtonBorderThickness`           | `Thickness`    | `SimpleButtonBorderThickness`    |
+| `SimpleButtonBorderThickness`     | `Thickness`    | `SimpleStrokeBorderThickness`    |
+| `SimpleButtonCornerRadius`        | `CornerRadius` | `SimpleShapeControlCornerRadius` |
+| `SimpleButtonFontWeight`          | `String`       | Medium                           |
+| `SimpleButtonIconSpacing`         | `Double`       | `SimpleSpace100`                 |
+| `SimpleIconButtonBorderThickness` | `Thickness`    | `SimpleStrokeBorderThickness`    |
+| `SimpleIconButtonCornerRadius`    | `CornerRadius` | `SimpleRadiusFullCornerRadius`   |
 
 ### Themed
 

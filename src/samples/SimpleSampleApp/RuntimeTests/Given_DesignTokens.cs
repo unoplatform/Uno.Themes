@@ -1,8 +1,11 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Markup;
+using Microsoft.UI.Xaml.Shapes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Uno.Simple;
 using Uno.Themes;
+using Uno.Themes.Samples.Helpers;
 using Uno.UI.RuntimeTests;
 
 namespace Uno.Themes.Samples.RuntimeTests;
@@ -298,6 +301,172 @@ public class Given_DesignTokens
 		Assert.AreEqual(0.0, GetResource<double>(container, "Radius100"), 0.001);
 		Assert.AreEqual(0.0, GetResource<double>(container, "Radius500"), 0.001);
 		Assert.AreEqual(9999.0, GetResource<double>(container, "RadiusFull"), 0.001);
+	}
+
+	// ═══════════════════════════════════════════════════════════════════════
+	// SHAPE — directional companions, validation and size-capped radii
+	// (unoplatform/Uno.Themes#1747)
+	// ═══════════════════════════════════════════════════════════════════════
+
+	private static readonly double[] ShapeBases = { 0.0, 2.0, 4.0, 8.0, 16.0 };
+
+	// A per-control key is a StaticResource alias, which resolves from the scope doing the lookup:
+	// read from a detached dictionary it reaches the application's theme, not this one. So these
+	// are read the way a template reads them, by an element loaded under the themed container.
+	private static async Task<T> LoadProbe<T>(double baseRadius, string xaml)
+		where T : FrameworkElement
+	{
+		var (container, _) = CreateThemedContainer(cornerRadius: baseRadius);
+		var probe = (T)XamlReader.Load(xaml);
+		container.Children.Add(probe);
+
+		UnitTestsUIContentHelper.Content = container;
+		await UnitTestsUIContentHelper.WaitForLoaded(probe);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		return probe;
+	}
+
+	private static async Task<CornerRadius> ResolveCornerRadius(double baseRadius, string key)
+		=> (await LoadProbe<Border>(baseRadius,
+			$"<Border xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' Width='40' Height='40' CornerRadius='{{ThemeResource {key}}}' />")).CornerRadius;
+
+	private static async Task<double> ResolveRadius(double baseRadius, string key)
+		=> (await LoadProbe<Rectangle>(baseRadius,
+			$"<Rectangle xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' Width='40' Height='40' RadiusX='{{ThemeResource {key}}}' />")).RadiusX;
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_CornerRadiusSet_Then_DirectionalCompanionsExist()
+	{
+		var (container, _) = CreateThemedContainer(cornerRadius: 6.0);
+
+		Assert.AreEqual(new CornerRadius(12, 12, 0, 0), GetResource<CornerRadius>(container, "Radius200TopCornerRadius"));
+		Assert.AreEqual(new CornerRadius(12, 0, 0, 12), GetResource<CornerRadius>(container, "Radius200LeftCornerRadius"));
+		Assert.AreEqual(new CornerRadius(0, 0, 12, 12), GetResource<CornerRadius>(container, "Radius200BottomCornerRadius"));
+		Assert.AreEqual(new CornerRadius(12, 0, 0, 0), GetResource<CornerRadius>(container, "Radius200TopLeftCornerRadius"));
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow(double.NaN)]
+	[DataRow(double.PositiveInfinity)]
+	[DataRow(double.NegativeInfinity)]
+	[DataRow(-4.0)]
+	public void When_CornerRadiusIsInvalid_Then_FallsBackToDefault(double invalid)
+	{
+		var (container, _) = CreateThemedContainer(cornerRadius: invalid);
+
+		Assert.AreEqual(4.0, GetResource<double>(container, "Radius100"), 0.001);
+		Assert.AreEqual(new CornerRadius(8), GetResource<CornerRadius>(container, "Radius200CornerRadius"));
+		Assert.AreEqual(8.0, GetResource<double>(container, "SimpleShapeControl"), 0.001,
+			"A capped radius must fall back to its base-4 value too.");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow("SimpleShapeControl", 2.0, 10.0)]
+	[DataRow("SimpleShapeItem", 1.0, 10.0)]
+	[DataRow("SimpleShapeMenuItem", 2.0, 9.0)]
+	[DataRow("SimpleShapeContainer", 2.0, 16.0)]
+	[DataRow("SimpleShapeCheckBox", 1.0, 4.0)]
+	[DataRow("SimpleShapeAvatar", 2.0, 8.0)]
+	[DataRow("SimpleShapeAvatarSmall", 1.0, 6.0)]
+	[DataRow("SimpleShapePill", 5.0, 20.0)]
+	[DataRow("SimpleShapeSwitchTrack", 3.0, 12.0)]
+	[DataRow("SimpleShapeCalendar", 4.0, 24.0)]
+	[DataRow("SimpleShapeTrack", 0.5, 2.0)]
+	[DataRow("SimpleShapeSliderFill", 1.0, 4.0)]
+	public void When_CornerRadiusChanges_Then_CappedRadiusKeepsControlShape(string key, double multiplier, double cap)
+	{
+		Assert.IsTrue(4.0 * multiplier <= cap, $"{key}: the cap must not change what the default base of 4 renders.");
+
+		foreach (var baseRadius in ShapeBases)
+		{
+			var (container, _) = CreateThemedContainer(cornerRadius: baseRadius);
+			var expected = Math.Min(baseRadius * multiplier, cap);
+
+			Assert.AreEqual(expected, GetResource<double>(container, key), 0.001, $"{key} at base={baseRadius}");
+			Assert.AreEqual(new CornerRadius(expected), GetResource<CornerRadius>(container, key + "CornerRadius"),
+				$"{key}CornerRadius at base={baseRadius}");
+		}
+	}
+
+	// The per-control keys keep their name and type and follow the capped radius: today's value at
+	// 4, square at 0, and never past the control's size at 16.
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow("SimpleButtonCornerRadius", 8.0, 10.0)]
+	[DataRow("SimpleToggleButtonCornerRadius", 8.0, 10.0)]
+	[DataRow("SimpleCheckBoxCornerRadius", 4.0, 4.0)]
+	[DataRow("SimpleAutoSuggestBoxCornerRadius", 20.0, 20.0)]
+	[DataRow("SimpleContentDialogCornerRadius", 8.0, 16.0)]
+	[DataRow("SimpleExpanderCornerRadius", 8.0, 16.0)]
+	[DataRow("FilledTextBoxCornerRadius", 8.0, 10.0)]
+	[DataRow("OutlinedPasswordBoxCornerRadius", 8.0, 10.0)]
+	[DataRow("ComboBoxCornerRadius", 8.0, 10.0)]
+	[DataRow("DatePickerCornerRadius", 8.0, 10.0)]
+	[DataRow("CalendarDatePickerFlyoutPresenterCornerRadius", 16.0, 24.0)]
+	public async Task When_CornerRadiusChanges_Then_ControlKeyKeepsItsShape(string key, double atDefault, double atLarge)
+	{
+		Assert.AreEqual(new CornerRadius(0), await ResolveCornerRadius(0.0, key), $"{key} at base=0");
+		Assert.AreEqual(new CornerRadius(atDefault), await ResolveCornerRadius(4.0, key), $"{key} at base=4");
+		Assert.AreEqual(new CornerRadius(atLarge), await ResolveCornerRadius(16.0, key), $"{key} at base=16");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_CornerRadiusChanges_Then_SliderFillFollowsTheScale()
+	{
+		Assert.AreEqual(new CornerRadius(4, 0, 0, 4), await ResolveCornerRadius(4.0, "SliderHorizontalFillCornerRadius"));
+		Assert.AreEqual(new CornerRadius(0, 0, 4, 4), await ResolveCornerRadius(4.0, "SliderVerticalFillCornerRadius"));
+		Assert.AreEqual(new CornerRadius(0), await ResolveCornerRadius(0.0, "SliderHorizontalFillCornerRadius"));
+
+		// Half the 8px fill and the 4px track: past that the rounded end becomes a point.
+		Assert.AreEqual(new CornerRadius(4, 0, 0, 4), await ResolveCornerRadius(16.0, "SliderHorizontalFillCornerRadius"));
+		Assert.AreEqual(new CornerRadius(2), await ResolveCornerRadius(16.0, "SliderCornerRadius"));
+		Assert.AreEqual(12.0, await ResolveRadius(4.0, "SimpleToggleSwitchTrackRadius"), 0.001);
+		Assert.AreEqual(0.0, await ResolveRadius(0.0, "SimpleToggleSwitchTrackRadius"), 0.001);
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_CornerRadiusIsLarge_Then_CheckBoxStaysASquare()
+	{
+		var (container, _) = CreateThemedContainer(cornerRadius: 16.0);
+		var checkBox = new CheckBox { Content = "probe", Style = (Style)container.Resources["SimpleCheckBoxStyle"] };
+		container.Children.Add(checkBox);
+
+		UnitTestsUIContentHelper.Content = container;
+		await UnitTestsUIContentHelper.WaitForLoaded(checkBox);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		var box = checkBox.FindFirstDescendant<Rectangle>(x => x.Name == "CheckBoxBorder");
+		Assert.IsNotNull(box, "The Simple CheckBox template must have a CheckBoxBorder rectangle.");
+
+		// A quarter of the 16px box. At half (8) the box is a circle and reads as a RadioButton.
+		Assert.AreEqual(4.0, box.RadiusX, 0.001);
+		Assert.AreEqual(4.0, box.RadiusY, 0.001);
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_CornerRadiusIsLarge_Then_ToggleSwitchTrackStaysAPill()
+	{
+		var (container, _) = CreateThemedContainer(cornerRadius: 10.0);
+		var toggle = new ToggleSwitch { Style = (Style)container.Resources["SimpleToggleSwitchStyle"] };
+		container.Children.Add(toggle);
+
+		UnitTestsUIContentHelper.Content = container;
+		await UnitTestsUIContentHelper.WaitForLoaded(toggle);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		var track = toggle.FindFirstDescendant<Rectangle>(x => x.Name == "OuterBorder");
+		Assert.IsNotNull(track, "The Simple ToggleSwitch template must have an OuterBorder rectangle.");
+
+		// Half the track height. Past it the Rectangle clamps X and Y apart and the pill becomes an ellipse.
+		Assert.AreEqual(track.ActualHeight / 2, track.RadiusX, 0.001);
+		Assert.AreEqual(track.ActualHeight / 2, track.RadiusY, 0.001);
 	}
 
 	// ═══════════════════════════════════════════════════════════════════════

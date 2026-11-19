@@ -199,17 +199,17 @@ The Simple theme also provides well-known style key aliases for compatibility wi
 
 Alongside these style aliases, the Simple theme declares portable, theme-independent sizing keys for `ComboBox` and `Slider`, mostly aliased to Simple or shared [design tokens](design-tokens.md). For the per-control brush and layout keys, see [Lightweight Styling](lightweight-styling.md).
 
-| Alias Key                 | Resolves To                   |
-|---------------------------|-------------------------------|
-| `ComboBoxCornerRadius`    | `SimpleRadius200CornerRadius` |
-| `ComboBoxMinHeight`       | `SimpleIconLarge`             |
-| `ComboBoxBorderThickness` | `SimpleStrokeBorderThickness` |
-| `SliderThumbWidth`        | `SimpleIconExtraSmall`        |
-| `SliderThumbHeight`       | `SimpleIconExtraSmall`        |
-| `SliderThumbCornerRadius` | `SimpleRadius200CornerRadius` |
-| `SliderTrackThickness`    | 4                             |
-| `SliderFillThickness`     | 8                             |
-| `SliderHorizontalHeight`  | `SimpleIconMedium`            |
-| `SliderVerticalWidth`     | `SimpleIconMedium`            |
-| `SliderCornerRadius`      | `Radius050CornerRadius`       |
-| `SliderHeaderMargin`      | `Space050BottomThickness`     |
+| Alias Key                 | Resolves To                      |
+|---------------------------|----------------------------------|
+| `ComboBoxCornerRadius`    | `SimpleShapeControlCornerRadius` |
+| `ComboBoxMinHeight`       | `SimpleIconLarge`                |
+| `ComboBoxBorderThickness` | `SimpleStrokeBorderThickness`    |
+| `SliderThumbWidth`        | `SimpleIconExtraSmall`           |
+| `SliderThumbHeight`       | `SimpleIconExtraSmall`           |
+| `SliderThumbCornerRadius` | `SimpleRadius200CornerRadius`    |
+| `SliderTrackThickness`    | 4                                |
+| `SliderFillThickness`     | 8                                |
+| `SliderHorizontalHeight`  | `SimpleIconMedium`               |
+| `SliderVerticalWidth`     | `SimpleIconMedium`               |
+| `SliderCornerRadius`      | `Radius050CornerRadius`          |
+| `SliderHeaderMargin`      | `Space050BottomThickness`        |

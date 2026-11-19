@@ -25,7 +25,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | Key                                                 | Type              | Light                           |
 | --------------------------------------------------- | ----------------- | ------------------------------- |
 | `CalendarDatePickerBackground`                      | `SolidColorBrush` | `SurfaceVariantBrush`           |
-| `CalendarDatePickerBackgroundCornerRadius`          | `CornerRadius`    | 4,4,0,0                         |
+| `CalendarDatePickerBackgroundCornerRadius`          | `CornerRadius`    | `Radius100TopCornerRadius`      |
 | `CalendarDatePickerBackgroundDisabled`              | `SolidColorBrush` | `SystemControlTransparentBrush` |
 | `CalendarDatePickerBackgroundFocused`               | `SolidColorBrush` | `SurfaceVariantBrush`           |
 | `CalendarDatePickerBackgroundMinHeight`             | `Double`          | 53                              |

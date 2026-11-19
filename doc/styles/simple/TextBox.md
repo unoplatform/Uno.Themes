@@ -43,7 +43,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `FilledTextBoxBorderBrushPointerOver`             | `SolidColorBrush` | `SystemControlTransparentBrush`  |
 | `FilledTextBoxBorderThicknessFocused`             | `Thickness`       | 0                                |
 | `FilledTextBoxBorderThicknessNormal`              | `Thickness`       | 0                                |
-| `FilledTextBoxCornerRadius`                       | `CornerRadius`    | `SimpleRadius200CornerRadius`    |
+| `FilledTextBoxCornerRadius`                       | `CornerRadius`    | `SimpleShapeControlCornerRadius` |
 | `FilledTextBoxForeground`                         | `SolidColorBrush` | `OnSurfaceBrush`                 |
 | `FilledTextBoxForegroundDisabled`                 | `SolidColorBrush` | `OnSurfaceDisabledBrush`         |
 | `FilledTextBoxForegroundFocused`                  | `SolidColorBrush` | `OnSurfaceBrush`                 |
@@ -68,7 +68,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `OutlinedTextBoxBorderBrushPointerOver`           | `SolidColorBrush` | `OutlineBrush`                   |
 | `OutlinedTextBoxBorderThickness`                  | `Thickness`       | `SimpleStrokeBorderThickness`    |
 | `OutlinedTextBoxBorderThicknessFocused`           | `Thickness`       | `SimpleStrokeFocusRingThickness` |
-| `OutlinedTextBoxCornerRadius`                     | `CornerRadius`    | `SimpleRadius200CornerRadius`    |
+| `OutlinedTextBoxCornerRadius`                     | `CornerRadius`    | `SimpleShapeControlCornerRadius` |
 | `OutlinedTextBoxForeground`                       | `SolidColorBrush` | `OnSurfaceBrush`                 |
 | `OutlinedTextBoxForegroundDisabled`               | `SolidColorBrush` | `OnSurfaceDisabledBrush`         |
 | `OutlinedTextBoxForegroundFocused`                | `SolidColorBrush` | `OnSurfaceBrush`                 |
@@ -84,7 +84,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `OutlinedTextBoxPlaceholderForegroundFocused`     | `SolidColorBrush` | `OnSurfaceLowBrush`              |
 | `OutlinedTextBoxPlaceholderForegroundPointerOver` | `SolidColorBrush` | `OnSurfaceLowBrush`              |
 | `SimpleTextBoxBorderThickness`                    | `Thickness`       | `SimpleStrokeBorderThickness`    |
-| `SimpleTextBoxCornerRadius`                       | `CornerRadius`    | `SimpleRadius200CornerRadius`    |
+| `SimpleTextBoxCornerRadius`                       | `CornerRadius`    | `SimpleShapeControlCornerRadius` |
 | `SimpleTextBoxFocusedBorderThickness`             | `Thickness`       | `SimpleStrokeFocusRingThickness` |
 | `SimpleTextBoxMinHeight`                          | `Double`          | `SimpleIconLarge`                |
 | `SimpleTextBoxPadding`                            | `Thickness`       | 16,10,16,10                      |

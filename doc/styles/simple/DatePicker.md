@@ -42,7 +42,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `DatePickerButtonForegroundPointerOver`                | `SolidColorBrush` | `OnSurfaceBrush`                        |
 | `DatePickerButtonForegroundPressed`                    | `SolidColorBrush` | `OnSurfaceBrush`                        |
 | `DatePickerContentMargin`                              | `Thickness`       | 16,10,16,10                             |
-| `DatePickerCornerRadius`                               | `CornerRadius`    | `SimpleRadius200CornerRadius`           |
+| `DatePickerCornerRadius`                               | `CornerRadius`    | `SimpleShapeControlCornerRadius`        |
 | `DatePickerFlyoutBorderThickness`                      | `Double`          | `SimpleStrokeBorder`                    |
 | `DatePickerFlyoutButtonBackground`                     | `SolidColorBrush` | `SystemControlTransparentBrush`         |
 | `DatePickerFlyoutButtonOpacityDisabled`                | `Double`          | 0.5                                     |
@@ -51,7 +51,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `DatePickerFlyoutPresenterAcceptDismissHostGridHeight` | `Double`          | 52                                      |
 | `DatePickerFlyoutPresenterBackground`                  | `SolidColorBrush` | `SurfaceBrush`                          |
 | `DatePickerFlyoutPresenterBorderBrush`                 | `SolidColorBrush` | `OutlineBrush`                          |
-| `DatePickerFlyoutPresenterCornerRadius`                | `CornerRadius`    | `SimpleRadius400CornerRadius`           |
+| `DatePickerFlyoutPresenterCornerRadius`                | `CornerRadius`    | `SimpleShapeCalendarCornerRadius`       |
 | `DatePickerFlyoutPresenterFontFamily`                  | `FontFamily`      | `DefaultFontFamily`                     |
 | `DatePickerFlyoutPresenterHighlightFill`               | `SolidColorBrush` | `PrimaryVariantLightBrush`              |
 | `DatePickerFlyoutPresenterHighlightHeight`             | `Double`          | `SimpleIconLarge`                       |
