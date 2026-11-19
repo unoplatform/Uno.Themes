@@ -15,7 +15,6 @@ public sealed partial class SeedColorSamplePage : Page
 	// on load repainted the whole app (FluentTheme loses the system accent; Material's baseline hid it).
 	private static Color? _lastSeed;
 	private static readonly Color DefaultPreviewSeed = Color.FromArgb(0xFF, 0x67, 0x50, 0xA4);
-	private bool _initializing;
 	private static SeedColorMode _lastSeedColorMode = SeedColorMode.Fidelity;
 
 	// The theme element name for the XAML snippet, per active design.
@@ -26,6 +25,10 @@ public sealed partial class SeedColorSamplePage : Page
 		Design.Cupertino => "CupertinoTheme",
 		_ => "MaterialTheme",
 	};
+
+	// WinUI raises ColorChanged while InitializeComponent applies the XAML Color, before the named
+	// elements ApplySeedColor writes to are connected. The constructor applies the seed itself.
+	private readonly bool _isInitialized;
 
 	public SeedColorSamplePage()
 	{
@@ -38,10 +41,9 @@ public sealed partial class SeedColorSamplePage : Page
 		}
 
 		var shown = _lastSeed ?? CurrentPrimary() ?? DefaultPreviewSeed;
-		_initializing = true;
 		SeedColorPicker.Color = shown;
 		SeedColorModeCombo.SelectedIndex = _lastSeedColorMode == SeedColorMode.Fidelity ? 0 : 1;
-		_initializing = false;
+		_isInitialized = true;
 
 		if (_lastSeed is { } seed)
 		{
@@ -58,7 +60,7 @@ public sealed partial class SeedColorSamplePage : Page
 
 	private void SeedColorPicker_ColorChanged(ColorPicker sender, ColorChangedEventArgs args)
 	{
-		if (!_initializing)
+		if (_isInitialized)
 		{
 			ApplySeedColor(args.NewColor);
 		}
@@ -66,11 +68,13 @@ public sealed partial class SeedColorSamplePage : Page
 
 	private void SeedColorModeCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
 	{
-		_lastSeedColorMode = SeedColorModeCombo.SelectedIndex == 1 ? SeedColorMode.TonalSpot : SeedColorMode.Fidelity;
-		if (!_initializing)
+		if (!_isInitialized)
 		{
-			ApplySeedColor(SeedColorPicker.Color);
+			return;
 		}
+
+		_lastSeedColorMode = SeedColorModeCombo.SelectedIndex == 1 ? SeedColorMode.TonalSpot : SeedColorMode.Fidelity;
+		ApplySeedColor(SeedColorPicker.Color);
 	}
 
 	private void ApplySeedColor(Color seed)

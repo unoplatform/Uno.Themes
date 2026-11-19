@@ -4,37 +4,39 @@ uid: Uno.Themes.Simple.Styles.HyperlinkButton
 
 # HyperlinkButton Control
 
+> [!NOTE]
+> `SimpleSecondaryHyperlinkButtonStyle` consumes its own `SecondaryHyperlinkButtonForeground*` keys for normal, pointer-over, pressed, and disabled states, for both content and underline, without changing primary links in the same resource scope.
+
+<!-- BEGIN GENERATED -->
+<!-- This region is generated from the Styles XAML by `dotnet run build/scripts/GenerateStyleDocs.cs`; do not edit it by hand. -->
+
 ## Styles
 
-| Style Key                              | IsDefaultStyle\* |
-|----------------------------------------|------------------|
-| `SimpleHyperlinkButtonStyle`           |                  |
-| `SimpleSecondaryHyperlinkButtonStyle`  |                  |
-| `SimpleDefaultHyperlinkButtonStyle`    | True             |
+| Style Key                             | Semantic Alias                  | IsDefaultStyle\* |
+| ------------------------------------- | ------------------------------- | ---------------- |
+| `SimpleHyperlinkButtonStyle`          | `HyperlinkButtonStyle`          | True             |
+| `SimpleSecondaryHyperlinkButtonStyle` | `SecondaryHyperlinkButtonStyle` |                  |
+| `SimpleDefaultHyperlinkButtonStyle`   |                                 | True             |
 
 IsDefaultStyle\*: Styles in this column will be set as the default implicit style for the matching control
 
 ## Lightweight Styling
 
-> [!NOTE]
-`SimpleSecondaryHyperlinkButtonStyle` consumes its own `SecondaryHyperlinkButtonForeground*` keys for normal, pointer-over, pressed, and disabled states. Each foreground applies to both content and underline without changing primary links in the same resource scope.
+### Themed
 
-### Primary Variant
+| Key                                             | Type              | Light                    |
+| ----------------------------------------------- | ----------------- | ------------------------ |
+| `HyperlinkButtonBackgroundPointerOver`          | `SolidColorBrush` | Transparent              |
+| `HyperlinkButtonBackgroundPressed`              | `SolidColorBrush` | Transparent              |
+| `HyperlinkButtonForeground`                     | `SolidColorBrush` | `PrimaryBrush`           |
+| `HyperlinkButtonForegroundDisabled`             | `SolidColorBrush` | `OnSurfaceDisabledBrush` |
+| `HyperlinkButtonForegroundPointerOver`          | `SolidColorBrush` | `PrimaryBrush`           |
+| `HyperlinkButtonForegroundPressed`              | `SolidColorBrush` | `PrimaryBrush`           |
+| `SecondaryHyperlinkButtonForeground`            | `SolidColorBrush` | `OnSurfaceMediumBrush`   |
+| `SecondaryHyperlinkButtonForegroundDisabled`    | `SolidColorBrush` | `OnSurfaceDisabledBrush` |
+| `SecondaryHyperlinkButtonForegroundPointerOver` | `SolidColorBrush` | `OnSurfaceMediumBrush`   |
+| `SecondaryHyperlinkButtonForegroundPressed`     | `SolidColorBrush` | `OnSurfaceMediumBrush`   |
 
-| Key                                              | Type              | Value                              |
-|--------------------------------------------------|-------------------|------------------------------------|
-| `HyperlinkButtonForeground`                      | `SolidColorBrush` | `PrimaryBrush`                     |
-| `HyperlinkButtonForegroundPointerOver`           | `SolidColorBrush` | `PrimaryBrush`                     |
-| `HyperlinkButtonForegroundPressed`               | `SolidColorBrush` | `PrimaryBrush`                     |
-| `HyperlinkButtonForegroundDisabled`              | `SolidColorBrush` | `OnSurfaceDisabledBrush`           |
-| `HyperlinkButtonBackgroundPointerOver`           | `SolidColorBrush` | Transparent                        |
-| `HyperlinkButtonBackgroundPressed`               | `SolidColorBrush` | Transparent                        |
+The Dark theme uses the same values as Light.
 
-### Secondary Variant
-
-| Key                                                      | Type              | Value                              |
-|----------------------------------------------------------|-------------------|------------------------------------|
-| `SecondaryHyperlinkButtonForeground`                     | `SolidColorBrush` | `OnSurfaceMediumBrush`             |
-| `SecondaryHyperlinkButtonForegroundPointerOver`          | `SolidColorBrush` | `OnSurfaceMediumBrush`             |
-| `SecondaryHyperlinkButtonForegroundPressed`              | `SolidColorBrush` | `OnSurfaceMediumBrush`             |
-| `SecondaryHyperlinkButtonForegroundDisabled`             | `SolidColorBrush` | `OnSurfaceDisabledBrush`           |
+<!-- END GENERATED -->

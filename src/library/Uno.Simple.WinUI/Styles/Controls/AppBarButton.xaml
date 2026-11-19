@@ -36,68 +36,10 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Lightweight styling ThemeResource aliases -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<ResourceDictionary.ThemeDictionaries>
-
-		<!-- ─── Light Theme ─── -->
-		<ResourceDictionary x:Key="Light">
-
-			<!-- ── AppBarButton — semantic keys (source of truth) ── -->
-			<x:Double x:Key="AppBarButtonHeight">64</x:Double>
-			<x:Double x:Key="AppBarButtonWidth">64</x:Double>
-
-			<!-- Foreground (label text) -->
-			<StaticResource x:Key="AppBarButtonForeground" ResourceKey="OnSurfaceMediumBrush" />
-			<StaticResource x:Key="AppBarButtonForegroundPointerOver" ResourceKey="OnSurfaceMediumBrush" />
-			<StaticResource x:Key="AppBarButtonForegroundPressed" ResourceKey="OnSurfaceMediumBrush" />
-			<StaticResource x:Key="AppBarButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-
-			<!-- Background -->
-			<StaticResource x:Key="AppBarButtonBackground" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="AppBarButtonBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
-			<StaticResource x:Key="AppBarButtonBackgroundPressed" ResourceKey="PrimaryContainerBrush" />
-			<StaticResource x:Key="AppBarButtonBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
-
-			<!-- BorderBrush (none by default, but exposed for overriding) -->
-			<StaticResource x:Key="AppBarButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="AppBarButtonBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="AppBarButtonBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="AppBarButtonBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
-
-			<!-- Simple-only keys (no Material equivalent) -->
-		</ResourceDictionary>
-
-		<!-- ─── Dark Theme (Default) ─── -->
-		<ResourceDictionary x:Key="Default">
-
-			<!-- ── AppBarButton — semantic keys (source of truth) ── -->
-			<x:Double x:Key="AppBarButtonHeight">64</x:Double>
-			<x:Double x:Key="AppBarButtonWidth">64</x:Double>
-
-			<!-- Foreground (label text) -->
-			<StaticResource x:Key="AppBarButtonForeground" ResourceKey="OnSurfaceMediumBrush" />
-			<StaticResource x:Key="AppBarButtonForegroundPointerOver" ResourceKey="OnSurfaceMediumBrush" />
-			<StaticResource x:Key="AppBarButtonForegroundPressed" ResourceKey="OnSurfaceMediumBrush" />
-			<StaticResource x:Key="AppBarButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-
-			<!-- Background -->
-			<StaticResource x:Key="AppBarButtonBackground" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="AppBarButtonBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
-			<StaticResource x:Key="AppBarButtonBackgroundPressed" ResourceKey="PrimaryContainerBrush" />
-			<StaticResource x:Key="AppBarButtonBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
-
-			<!-- BorderBrush (none by default, but exposed for overriding) -->
-			<StaticResource x:Key="AppBarButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="AppBarButtonBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="AppBarButtonBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="AppBarButtonBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
-
-			<!-- Simple-only keys (no Material equivalent) -->
-		</ResourceDictionary>
-	</ResourceDictionary.ThemeDictionaries>
 
 	<StaticResource x:Key="SimpleAppBarButtonIconSize" ResourceKey="SimpleIconSmall" />
-	<StaticResource x:Key="SimpleAppBarButtonContentSpacing" ResourceKey="SimpleSpace200" />
-	<StaticResource x:Key="SimpleAppBarButtonPadding" ResourceKey="SimpleSpace200Thickness" />
+	<StaticResource x:Key="SimpleAppBarButtonContentSpacing" ResourceKey="SimpleSpace100" />
+	<Thickness x:Key="SimpleAppBarButtonPadding">8</Thickness>
 
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
@@ -144,7 +86,7 @@
 									<VisualState.Setters>
 										<Setter Target="Root.Background" Value="{ThemeResource AppBarButtonBackgroundPointerOver}" />
 										<Setter Target="Root.BorderBrush" Value="{ThemeResource AppBarButtonBorderBrushPointerOver}" />
-										<Setter Target="Content.Foreground" Value="{ThemeResource OnSurfaceMediumBrush}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource OnSurfaceMediumBrush}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource AppBarButtonForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
@@ -153,7 +95,7 @@
 									<VisualState.Setters>
 										<Setter Target="Root.Background" Value="{ThemeResource AppBarButtonBackgroundPressed}" />
 										<Setter Target="Root.BorderBrush" Value="{ThemeResource AppBarButtonBorderBrushPressed}" />
-										<Setter Target="Content.Foreground" Value="{ThemeResource OnSurfaceMediumBrush}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource OnSurfaceMediumBrush}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource AppBarButtonForegroundPressed}" />
 									</VisualState.Setters>
 								</VisualState>
@@ -162,7 +104,7 @@
 									<VisualState.Setters>
 										<Setter Target="Root.Background" Value="{ThemeResource AppBarButtonBackgroundDisabled}" />
 										<Setter Target="Root.BorderBrush" Value="{ThemeResource AppBarButtonBorderBrushDisabled}" />
-										<Setter Target="Content.Foreground" Value="{ThemeResource OnSurfaceDisabledBrush}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource OnSurfaceDisabledBrush}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource AppBarButtonForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
@@ -183,7 +125,8 @@
 									 HorizontalAlignment="Center"
 									 AutomationProperties.AccessibilityView="Raw"
 									 Visibility="{Binding Icon, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
-								<ContentPresenter x:Name="Content"
+								<!-- Must not be named "Content": Uno's AppBarButton force-sets a template part with that name to Icon ?? Content, which would steal a UIElement Content from ContentPresenter below (unoplatform/Uno.Themes#1735). -->
+								<ContentPresenter x:Name="IconPresenter"
 												  Content="{TemplateBinding Icon}"
 												  Foreground="{ThemeResource OnSurfaceMediumBrush}" />
 							</Viewbox>

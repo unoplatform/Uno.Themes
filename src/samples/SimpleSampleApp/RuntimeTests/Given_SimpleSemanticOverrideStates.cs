@@ -222,7 +222,7 @@ public class Given_SimpleSemanticOverrideStates
 		host.Resources["ButtonBorderThickness"] = new Thickness(3, 4, 5, 6);
 		host.Resources["LabelLargeFontSize"] = 27d;
 		host.Resources["SimpleButtonCornerRadius"] = new CornerRadius(13);
-		host.Resources["SimpleSpace300Thickness"] = new Thickness(17);
+		host.Resources["SimpleSpace150Thickness"] = new Thickness(17);
 		var button = new Button { Content = "measure", Style = GetStyle(host, styleKey) };
 		await Show(host, button);
 		Assert.AreEqual(new Thickness(3, 4, 5, 6), button.BorderThickness, "Portable ButtonBorderThickness override");

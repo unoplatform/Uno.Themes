@@ -17,13 +17,23 @@ All three themes expose the 55 semantic control-style keys below. Check the mapp
 
 ## How It Works
 
-Each theme's `_Resources.xaml` defines `<StaticResource>` aliases that map semantic keys to theme-specific styles:
+Each theme's `SemanticStyles.xaml` defines `<StaticResource>` aliases that map semantic keys to theme-specific styles:
 
 - **Material**: `FilledButtonStyle` &rarr; `MaterialFilledButtonStyle`
 - **Simple**: `FilledButtonStyle` &rarr; `SimpleFilledButtonStyle`
 - **Fluent**: `FilledButtonStyle` &rarr; `AccentButtonStyle` (the built-in WinUI style)
 
 The Fluent theme is an *adapter*: it ships no control templates of its own and instead maps every semantic key onto the built-in Fluent styles provided by `XamlControlsResources` (WinUI on Windows, Uno.UI everywhere else). See [Fluent getting started](fluent-getting-started.md) for setup and behavior notes.
+
+Semantic style aliases exist only in **Material v2**, **Simple** and **Fluent**. The Material v1 styles and Cupertino declare none, so a semantic style key does not resolve under them.
+
+### Runtime discovery (for tooling)
+
+Semantic resources are declared in dictionaries of type `Uno.Themes.SemanticResources`, a `ResourceDictionary` subclass with no members: the type is the signal. This covers the style aliases above, the control lightweight-styling brushes and layout tokens, the shared colour palette and brushes, the shared typography tokens, and the generated spacing, shape and density scales. Theme-prefixed keys are never declared in one.
+
+A tool walking a theme's dictionaries treats a key as semantic when any dictionary declaring it is a `SemanticResources`, or is one of the `ThemeDictionaries` of a `SemanticResources` (a file loaded through `Source` copies its theme dictionaries in as plain `ResourceDictionary` instances). `MergedDictionaries` do not inherit the marker. Read the theme dictionaries through the `ThemeDictionaries` indexer rather than by enumerating its values: a dictionary loaded through `Source` holds them as lazy initializers until first indexed.
+
+The marker type only survives when the dictionary is constructed in C#: a `<SemanticResources Source="…"/>` element declared in XAML compiles and resolves, but the XAML generator emits it as a plain `ResourceDictionary`, so a runtime walk does not see the type. Create such a dictionary in code instead (`new SemanticResources { Source = new Uri("ms-appx:///…") }`), as the themes do.
 
 ## Control Style Mappings
 
@@ -39,8 +49,8 @@ Targets marked *built-in&nbsp;¹* use an empty style of the correct control type
 | `ElevatedButtonStyle` | `MaterialElevatedButtonStyle` | `SimpleFilledTonalButtonStyle` | `DefaultButtonStyle` | Simple and Fluent provide the nearest button appearance without elevation |
 | `FilledTonalButtonStyle` | `MaterialFilledTonalButtonStyle` | `SimpleFilledTonalButtonStyle` | `DefaultButtonStyle` | Simple "Neutral" is closest tonal match; Fluent standard button has a neutral fill |
 | `OutlinedButtonStyle` | `MaterialOutlinedButtonStyle` | `SimpleOutlinedButtonStyle` | `DefaultButtonStyle` | Simple retains tonal defaults with independent outlined overrides; Fluent standard button carries a stroke |
-| `TextButtonStyle` | `MaterialTextButtonStyle` | `SimpleTextButtonStyle` | `FluentTextButtonStyle` | Text-only appearance; Fluent "subtle button" (transparent at rest) |
-| `IconButtonStyle` | `MaterialIconButtonStyle` | `SimpleIconButtonStyle` | `FluentIconButtonStyle` | Simple has multiple icon button colors; Primary is default |
+| `TextButtonStyle` | `MaterialTextButtonStyle` | `SimpleTextButtonStyle` | Fluent subtle button (defined by the theme) | Text-only appearance; Fluent "subtle button" (transparent at rest) |
+| `IconButtonStyle` | `MaterialIconButtonStyle` | `SimpleIconButtonStyle` | Fluent subtle icon button (defined by the theme) | Simple has multiple icon button colors; Primary is default |
 
 ### Floating Action Button (FAB)
 
@@ -201,6 +211,12 @@ FAB is a Material-specific concept. Under Simple theme, FAB keys resolve to exis
 | --- | --- | --- | --- | --- |
 | `RatingControlStyle` | `MaterialRatingControlStyle` | `SimpleRatingControlStyle` | built-in&nbsp;¹ | Star rating with brand colors |
 
+### Ripple
+
+| Semantic Key  | Material              | Simple  | Fluent  | Notes                              |
+| ------------- | --------------------- | ------- | ------- | ---------------------------------- |
+| `RippleStyle` | `MaterialRippleStyle` | **GAP** | **GAP** | `Ripple` is a Uno Material control |
+
 ### Flyout / MenuFlyout
 
 | Semantic Key | Material | Simple | Fluent | Notes |
@@ -302,7 +318,7 @@ Use `{ThemeResource}` for brushes and value tokens that should follow appearance
 
 For palette changes, use the theme's `Colors` override channel rather than declaring only a `*Color` in `Page.Resources`: the brush updater reads the theme's configured color layers, not arbitrary ancestor resources. A page-local color key alone does not recolor already-created shared brushes. Scoped brush or per-control resource overrides target the rendered resource directly.
 
-The shared semantic brush updater and Fluent's accent/lightweight bridges support nested merged dictionaries and resolve each appearance explicitly: own entries first, merged dictionaries last-to-first, then the selected `Light` or `Dark` dictionary. `Default` is selected when that appearance dictionary is absent; it is not an exclusively dark key. A missing key in an existing appearance dictionary does not select its sibling `Default` dictionary. An isolated `Dark` override does not recolor Light. Shared semantic brushes also have a `HighContrast` branch, but the palette generator does not generate a dedicated high-contrast scheme: its override lookup selects the first available `HighContrast`, `Dark`, or `Default` dictionary. Supply explicit high-contrast colors when required by the app.
+The shared semantic brush updater and Fluent's accent layer support nested merged dictionaries and resolve each appearance explicitly: own entries first, merged dictionaries last-to-first, then the selected `Light` or `Dark` dictionary. `Default` is selected when that appearance dictionary is absent; it is not an exclusively dark key. A missing key in an existing appearance dictionary does not select its sibling `Default` dictionary. An isolated `Dark` override does not recolor Light. Shared semantic brushes also have a `HighContrast` branch, but the palette generator does not generate a dedicated high-contrast scheme: its override lookup selects the first available `HighContrast`, `Dark`, or `Default` dictionary. Supply explicit high-contrast colors when required by the app.
 
 Replacing an override dictionary triggers a rebuild; editing entries in an existing dictionary does not itself notify `ThemeColors`. Shared semantic brushes are mutated in place on a rebuild. Fluent also retains solid brushes for native accent and supported lightweight resources, so existing native controls follow seed and override changes. Other brush-resource replacements and regenerated value tokens may require a theme-change pass or recreation. See [Seed Color Palette](seed-colors.md) for the configuration API and [Fluent behavior](fluent-getting-started.md) for the native-control boundary.
 
@@ -315,7 +331,7 @@ Semantic style keys also enable portable [lightweight styling](lightweight-styli
 <SolidColorBrush x:Key="FilledButtonForeground" Color="Red" />
 ```
 
-Both **Material** and **Simple** templates reference the same unprefixed keys (e.g. `FilledButtonForeground`) directly.
+Both **Material** and **Simple** templates reference the same unprefixed keys (e.g. `FilledButtonForeground`) directly. Their lightweight-styling declarations live in the theme's `SemanticStyles.xaml`, alongside the style aliases, so tooling discovers them through `SemanticResources` too. Light, Default and any HighContrast entries keep their existing values; theme-prefixed compatibility aliases remain in the control dictionaries.
 
 ### Override Compatibility
 
@@ -337,7 +353,7 @@ Use the style tables to check key availability and the per-control references to
 The color palette underneath these keys can itself be swapped wholesale — generated from a single seed color, and even changed at runtime — see [Seed Color Palette](seed-colors.md).
 
 > [!NOTE]
-> The **Fluent** theme bridges the semantic lightweight-styling keys to the built-in Fluent control resources for Button, TextBox, CheckBox, RadioButton, ToggleSwitch, and Slider. For CheckBox/RadioButton/Slider most key names are WinUI's own, so overrides work natively at any scope; for divergent names, app-wide overrides go through the theme's `Colors.OverrideDictionary` and page-scoped overrides target the Fluent per-control keys directly. See [Lightweight Styling — Fluent theme](lightweight-styling.md#fluent-theme).
+> The **Fluent** theme keeps the built-in WinUI templates, which read Fluent's own per-control resources. Lightweight-style Fluent controls with those keys (`AccentButtonBackground`, `TextControlForeground`, …); for CheckBox, RadioButton, and Slider most semantic key names already are WinUI's own. See [Lightweight Styling — Fluent theme](lightweight-styling.md#fluent-theme).
 
 ### C# Markup Compatibility
 

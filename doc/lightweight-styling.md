@@ -232,39 +232,26 @@ For more information about the lightweight styling resource keys used in each co
 - [ToggleButton](styles/ToggleButton.md)
 - [ToggleSwitch](styles/ToggleSwitch.md)
 
+> [!NOTE]
+> The per-control pages, the Material pages above and their Simple counterparts, list every resource key the control's styles define. An override takes effect only for a key that the control template actually reads, and some listed keys are defined without being read. For example, the [Simple Slider page](styles/simple/Slider.md) lists both `SimpleSliderCornerRadius` and `SliderCornerRadius`, but the style reads `SliderCornerRadius`, so only an override of that key changes the corner radius. If an override has no visible effect, check which key the template uses in the style's XAML source in the [Uno.Themes repository](https://github.com/unoplatform/Uno.Themes/tree/master/src/library).
+
 ## Fluent theme
 
-Under [`FluentTheme`](fluent-getting-started.md), controls are rendered by the **built-in WinUI templates**, which reference Fluent's own per-control resources (`AccentButtonBackground`, `TextControlForeground`, …) rather than the semantic keys above. The theme bridges the two worlds per control — **Button, TextBox, CheckBox, RadioButton, ToggleSwitch, and Slider** are covered:
-
-- For **CheckBox, RadioButton, and Slider**, the documented semantic key names largely *are* WinUI's per-control resource names (`CheckBoxCheckBackgroundFillChecked`, `RadioButtonOuterEllipseStroke`, `SliderTrackValueFill`, …) — overrides reach Fluent-styled controls **natively, at any scope**, with no theme involvement.
-- For **Button, TextBox, ToggleSwitch**, and CheckBox's glyph family, the semantic names diverge from Fluent's (`FilledButtonBackground` vs `AccentButtonBackground`, `FilledTextBoxBackground`/`OutlinedTextBox*` vs `TextControl*`, `ToggleSwitchKnobOnFill` vs `ToggleSwitchKnobFillOn`, `CheckBoxGlyphForeground*` vs `CheckBoxCheckGlyphForeground*`). The bridge supplies some Fluent defaults and translates explicit overrides for supported keys. Several disabled and interaction-state keys have no default entry; they are translated only when supplied by the consumer.
-- Fluent has a **single TextBox**, so both semantic families map onto the same `TextControl*` resources; if both are overridden, the `OutlinedTextBox*` value wins.
-- An **app-wide** override of a divergent-name key goes through the theme's `Colors.OverrideDictionary` — the theme then re-points the corresponding Fluent per-control resource, so Fluent-styled controls reflect it:
+Under [`FluentTheme`](fluent-getting-started.md), controls are rendered by the **built-in WinUI templates**, which read Fluent's own per-control resources (`AccentButtonBackground`, `TextControlForeground`, `ToggleSwitchFillOn`, …) rather than the semantic keys above. Lightweight styling works exactly as in a plain WinUI app: override the Fluent key, at any scope.
 
 ```xml
-<FluentTheme xmlns="using:Uno.Fluent">
-    <FluentTheme.Colors>
-        <ut:ThemeColors xmlns:ut="using:Uno.Themes">
-            <ut:ThemeColors.OverrideDictionary>
-                <ResourceDictionary>
-                    <SolidColorBrush x:Key="FilledButtonBackground" Color="DarkGreen" />
-                </ResourceDictionary>
-            </ut:ThemeColors.OverrideDictionary>
-        </ut:ThemeColors>
-    </FluentTheme.Colors>
-</FluentTheme>
+<Page.Resources>
+    <SolidColorBrush x:Key="AccentButtonBackground" Color="DarkGreen" />
+</Page.Resources>
+
+<!-- FilledButtonStyle is the Fluent accent button -->
+<Button Content="Save" Style="{StaticResource FilledButtonStyle}" />
 ```
 
-- The override dictionary can contain nested **`MergedDictionaries`** and **`ThemeDictionaries`**. Resolution checks own entries first, merged dictionaries last-to-first, then the selected appearance dictionary. `Light` / `Dark` values apply to their respective appearances; `Default` supplies the fallback when the selected appearance dictionary is absent. A missing key in an existing appearance dictionary does not select the sibling `Default` dictionary. Flat values reach both appearances.
-- When both a semantic key and its native Fluent key are overridden, the explicit native key wins for the control; direct semantic-key lookups keep the semantic override.
-- A **page/subtree-scoped** override generally targets the Fluent per-control key directly (`<SolidColorBrush x:Key="AccentButtonBackground" … />` in `Page.Resources`), exactly as in a plain WinUI app. The supplied text-button style also consumes the semantic `TextButtonForeground*`, `TextButtonBackground*`, and `TextButtonBorderBrush*` families at element scope, including pointer-over, pressed, and disabled states; `IconButtonForeground` colors the icon-button glyph at rest, on hover and when pressed, and `IconButtonForegroundDisabled` when disabled. These text-button overrides do not affect standard buttons. Explicit native state overrides retain precedence, and replacing the semantic style restores native state resources.
-- **Contrast-aware on-accent defaults**: when a seed or a `PrimaryColor` override drives the accent, `FilledButtonForeground*`, `CheckBoxGlyphForegroundChecked` and `ToggleSwitchKnobOnFill` default to the white or black family that contrasts with the derived fill (the same pick the theme applies to Fluent's `TextOnAccentFillColor*`); with the platform accent they keep Fluent's stock values.
-- `TextButtonStyle` and `IconButtonStyle` are Fluent subtle buttons: transparent at rest, `SubtleFillColorSecondary` / `SubtleFillColorTertiary` on hover / press, no border. The icon button keeps `IconButtonForeground` through hover and press and dims with `IconButtonForegroundDisabled`.
-- **Not bridged** (no Fluent equivalent, or indistinguishable without re-templating): `FilledTonalButton*`/`ElevatedButton*` (they share the standard Fluent button with `OutlinedButton*`), `*TextBoxHeaderForegroundPointerOver` / `*TextBoxHeaderForegroundFocused` (the Fluent header has no hover or focus brush), `*IconForeground*` variants, `*StateLayer*`/`*StateCircle*`, `*Elevation*`, ToggleSwitch knob shadow/bounds and icon-presenter keys, and `Focused` knob states. `Disabled` and hover/pressed keys outside the accent families re-point overrides but carry no default values.
-
-Use `Colors.OverrideDictionary`, `Colors.OverrideSource`, or the constructor's `colorOverride` argument for this translation. The obsolete color-override properties forward to the same channel. A Dark-only accent override stays confined to Dark; without another driver, Light retains the platform accent.
-
-The accent bridge also maps `PrimaryColor` / `PrimaryBrush` to the native accent fill and `OnPrimaryColor` / `OnPrimaryBrush` to its foreground. An explicit brush wins over its source color and keeps its opacity. Supported control overrides such as `FilledButtonForeground` can then refine the result. Other semantic palette roles are available to app content but do not each translate to a native Fluent control resource. Solid brushes retained by the native bridge update existing controls when their seed or override changes; see [Fluent behavior](fluent-getting-started.md#override-compatibility) for the remaining scope and resource-type boundaries.
+- For **CheckBox, RadioButton, and Slider**, most of the documented key names already *are* WinUI's (`CheckBoxCheckBackgroundFillChecked`, `RadioButtonOuterEllipseStroke`, `SliderTrackValueFill`, …), so the same override works under every theme.
+- The semantic per-control keys that differ from Fluent's (`FilledButtonBackground`, `OutlinedTextBox*`, `ToggleSwitchKnobOnFill`, …) have no effect under `FluentTheme`.
+- To recolor the accent app-wide, set a seed or a `PrimaryColor` override: the built-in accent controls follow it ([seed → accent cascade](seed-colors.md#fluenttheme-seed--accent-cascade)).
+- `TextButtonStyle` and `IconButtonStyle` are Fluent subtle buttons: transparent at rest, `SubtleFillColorSecondary` / `SubtleFillColorTertiary` on hover / press, no border.
 
 ## Toolkit
 

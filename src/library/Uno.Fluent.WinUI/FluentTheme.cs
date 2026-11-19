@@ -2,11 +2,15 @@
 
 using System;
 using Uno.Themes;
+using Windows.Foundation;
+using Windows.UI.ViewManagement;
 
 #if WinUI
+using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 using Windows.UI;
 #else
+using Windows.System;
 using Windows.UI;
 using Windows.UI.Xaml;
 #endif
@@ -19,73 +23,21 @@ namespace Uno.Fluent;
 /// provided by <c>XamlControlsResources</c>.
 /// </summary>
 /// <remarks>
-/// This library is an adapter, not a style library — it ships no control templates
-/// and no implicit styles; Fluent is already the implicit default of every WinUI /
+/// This library is an adapter, not a style library: it ships no control templates
+/// and no implicit styles, since Fluent is already the implicit default of every WinUI /
 /// Uno Platform app. <c>XamlControlsResources</c> must be merged <b>before</b> this
 /// dictionary; when its tokens are unreachable the semantic color roles keep the
 /// shared defaults and a warning is logged (theme initialization never throws).
 /// </remarks>
 public partial class FluentTheme : BaseTheme
 {
-	// The spec 05 §5.2 Ⓜ gap keys (ProgressRingStyle, NavigationViewStyle, …)
-	// ship as declarative empty styles in _Resources.xaml — an empty style keeps
-	// the control's built-in default template and appearance, so the key always
-	// resolves and renders the Fluent default (D8: nearest-match over GAP).
-
-	// Semantic keys whose target style ships IN THIS BUNDLE (bridge and typography
-	// styles): also resolved late-bound, from the theme's own Source bundle. A XAML
-	// <StaticResource> alias resolves at parse time against the app-level scope
-	// only — when the theme is instantiated below app scope it cannot see this
-	// bundle's own keys, and silently binds to a foreign app-level theme's key of
-	// the same name if one exists (see specs/lessons.md).
-	private static readonly (string SemanticKey, string BundleKey)[] _bundleStyleAliases = BuildBundleStyleAliases();
-
-	private static (string SemanticKey, string BundleKey)[] BuildBundleStyleAliases()
-	{
-		string[] typographySlots =
-		{
-			"DisplayLarge", "DisplayMedium", "DisplaySmall",
-			"HeadlineLarge", "HeadlineMedium", "HeadlineSmall",
-			"TitleLarge", "TitleMedium", "TitleSmall",
-			"BodyLarge", "BodyMedium", "BodySmall",
-			"LabelLarge", "LabelMedium", "LabelSmall", "LabelExtraSmall",
-			"CaptionLarge", "CaptionMedium", "CaptionSmall",
-		};
-
-		var aliases = new (string, string)[typographySlots.Length + 2];
-		aliases[0] = ("TextButtonStyle", "FluentTextButtonStyle");
-		aliases[1] = ("IconButtonStyle", "FluentIconButtonStyle");
-		for (var i = 0; i < typographySlots.Length; i++)
-		{
-			aliases[i + 2] = (typographySlots[i], "Fluent" + typographySlots[i]);
-		}
-
-		return aliases;
-	}
-
-	// Field initializers run before the base constructor, so these dictionaries
-	// are usable from AddThemeSpecificResources during the base ctor's first
-	// UpdateSource pass; _palette (assigned in the ctor body) is not — see below.
-	private readonly ResourceDictionary _bundleAliasStyles = new();
-
-	// Declarative per-branch defaults for the semantic lightweight-styling keys
-	// (spec 05 §10 step 1), loaded once per theme instance and re-attached on
-	// every rebuild pass. Only the accent-derived defaults and the
-	// override-driven re-pointing remain code-built (FluentLightweightBridge).
-	private readonly ResourceDictionary _lightweightDefaults = LoadLightweightDefaults();
-
-	// The palette container passed to BaseTheme as its base color override,
-	// populated in code from the live XamlControlsResources token values
-	// ("mechanism C", spec 05 D6) — per-theme-branch XAML <StaticResource>
-	// color aliases resolve against the ambient theme on Uno and cannot express
-	// a branch-correct palette.
+	// Field initializers run before the base constructor, whose first rebuild pass already uses them.
+	private readonly FluentAccentLayer _accent = new();
 	private readonly ResourceDictionary _palette;
 
-	// Single-entry cache for the reverse accent mapping (spec 05 §9): seed
-	// changes are rare, but UpdateSource runs on every theme-property change —
-	// don't re-solve the tonal palette when neither the seed nor the generation
-	// mode has moved.
-	private (Color Seed, SeedColorMode Mode, ResourceDictionary Dictionary)? _accentOverride;
+	// Kept alive with the theme; the handler holds the theme weakly (see ObserveSystemAccent).
+	private UISettings? _uiSettings;
+	private bool _isRefreshQueued;
 
 	/// <summary>
 	/// Initializes the Fluent theme resources with the default palette and typography.
@@ -98,68 +50,44 @@ public partial class FluentTheme : BaseTheme
 	/// <summary>
 	/// Initializes the Fluent theme resources.
 	/// </summary>
-	/// <param name="colorOverride">(Optional) Overrides for the semantic <see cref="Color"/> resources, layered above the Fluent palette.</param>
+	/// <param name="colorOverride">
+	/// (Optional) Overrides for the semantic <see cref="Color"/> resources, layered above the Fluent palette.
+	/// Stored as <see cref="BaseTheme.Colors"/>' <see cref="ThemeColors.OverrideDictionary"/> so it also drives
+	/// the built-in accent; assigning a new <see cref="BaseTheme.Colors"/> replaces it.
+	/// </param>
 	/// <param name="fontOverride">(Optional) Overrides for the typography resources, layered above the Fluent type ramp.</param>
 	public FluentTheme(ResourceDictionary? colorOverride = null, ResourceDictionary? fontOverride = null)
-		: base(CreateFluentColorOverride(out var palette), fontOverride)
+		: base(CreatePalette(out var palette), fontOverride)
 	{
 		_palette = palette;
+
+		// As the consumer override (not merged into the base palette) so it also drives the accent.
 		if (colorOverride is { })
 		{
 			Colors = new ThemeColors { OverrideDictionary = colorOverride };
 		}
-		else
-		{
-			UpdateSource();
-		}
+
 		ObserveSystemAccent();
 	}
 
 	/// <summary>
-	/// Fluent's default colors come from the platform (accent + neutrals), not from
-	/// a generated seed palette — seed color generation stays opt-in. When a
-	/// consumer opts into a seed, the generation recipe is the shared default
-	/// (<see cref="SeedColorMode.Fidelity"/>: the seed's chroma is preserved, so
-	/// muted corporate accent colors keep their character); select
-	/// <see cref="SeedColorMode.TonalSpot"/> on <see cref="BaseTheme.Colors"/> for
-	/// Material's vibrant recipe. The accent cascade (spec 05 §9) follows the same
-	/// mode, so built-in controls and semantic brushes agree on what "Primary" is.
+	/// Fluent's default colors are the platform's (accent and neutrals), so seed generation is opt-in.
+	/// A seed recolors the built-in Fluent controls too, generated with <see cref="BaseTheme.Colors"/>'
+	/// <see cref="SeedColorMode"/> like the semantic palette.
 	/// </summary>
 	protected override Color? DefaultPrimarySeed => null;
 
 	/// <inheritdoc />
 	protected override string DefaultStylesSource => FluentConstants.ResourcePaths.MergedPages;
 
-	private static ResourceDictionary CreateFluentColorOverride(out ResourceDictionary palette)
+	/// <inheritdoc />
+	protected override string SemanticStylesSource => FluentConstants.ResourcePaths.SemanticStyles;
+
+	private static ResourceDictionary CreatePalette(out ResourceDictionary palette)
 	{
 		palette = new ResourceDictionary();
 		FluentColorPalette.TryPopulate(palette);
-
 		return palette;
-	}
-
-	private static ResourceDictionary LoadLightweightDefaults()
-	{
-		Exception loadError;
-		try
-		{
-			return new ResourceDictionary { Source = new Uri(FluentConstants.ResourcePaths.LightweightDefaults) };
-		}
-		catch (InvalidOperationException e)
-		{
-			loadError = e;
-		}
-		catch (Exception e)
-		{
-			// Theme initialization must also tolerate unexpected platform loader failures.
-			loadError = e;
-		}
-		// The packaged dictionary failed to load — the semantic lightweight
-		// keys then carry no neutral defaults (overrides still re-point);
-		// never throw from theme initialization.
-		FluentDiagnostics.LogWarning(
-			$"FluentTheme could not load its lightweight-styling defaults (LightweightDefaults.xaml). {loadError.Message}");
-		return new ResourceDictionary();
 	}
 
 	/// <inheritdoc />
@@ -167,99 +95,41 @@ public partial class FluentTheme : BaseTheme
 	{
 		base.AddThemeSpecificResources();
 
-		EnsureBundleStyleAliases();
-		AddThemeDictionary(_bundleAliasStyles);
-
-		var effectiveSeed = Colors?.PrimarySeed ?? DefaultPrimarySeed;
-
-		// The recipe the base palette is generated with for this seed (the DP
-		// default is Fidelity). The reverse mapping must derive its tones the
-		// same way, or the built-in accent and the semantic PrimaryColor drift
-		// apart (spec 05 §9.3).
-		var seedColorMode = Colors?.SeedColorMode ?? SeedColorMode.Fidelity;
-
-		var consumerOverride = ResolvedColorOverride;
-
-		// An explicit PrimaryColor override is the highest-precedence statement
-		// of what "Primary" is — per branch, it drives the accent verbatim,
-		// above the seed (parity with Material/Simple, where a PrimaryColor
-		// override visibly recolors the theme's controls).
-		var (lightAccentBasis, darkAccentBasis) = FluentAccentPalette.ResolveAccentBasis(consumerOverride);
-
-		// Reverse accent mapping (spec 05 §9, goal G5): when an effective
-		// primary is active — seed or PrimaryColor override — the built-in
-		// Fluent controls follow it too. Added on every rebuild pass so it
-		// tracks changes and is dropped when the drivers clear (restoring the
-		// platform accent). No driver → no entry at all.
-		if (effectiveSeed is { } || consumerOverride is { })
+		// The layer is merged even if updating it fails, so it keeps its last good values.
+		AddThemeDictionary(_accent.Resources);
+		try
 		{
-			// Only the pure-seed result is cached: override contents can mutate
-			// without a reference change, so override-driven passes rebuild.
-			if (consumerOverride is null && effectiveSeed is { } seed)
-			{
-				if (_accentOverride is not { } cached || cached.Seed != seed || cached.Mode != seedColorMode)
-				{
-					_accentOverride = (seed, seedColorMode, FluentAccentPalette.Build(seed, seedColorMode, lightBasis: null, darkBasis: null, consumerOverride: null));
-				}
+			// The built-in controls follow the effective primary: a PrimaryColor override, else the seed.
+			var seed = Colors?.PrimarySeed ?? DefaultPrimarySeed;
+			var mode = Colors?.SeedColorMode ?? SeedColorMode.Fidelity;
+			_accent.Update(isLight: true, FluentAccentPalette.Build(isLight: true, seed, mode, ResolvedColorOverride));
+			_accent.Update(isLight: false, FluentAccentPalette.Build(isLight: false, seed, mode, ResolvedColorOverride));
 
-				UpdateAccentResources(_accentOverride.Value.Dictionary);
-			}
-			else
+			if (BuildPlatformTokenOverrides() is { } platformTokens)
 			{
-				UpdateAccentResources(FluentAccentPalette.Build(effectiveSeed, seedColorMode, lightAccentBasis, darkAccentBasis, consumerOverride));
+				AddThemeDictionary(platformTokens);
 			}
 		}
-
-		else
+		catch (Exception e)
 		{
-			UpdateAccentResources(new ResourceDictionary());
+			// Runs from property-changed callbacks and the constructor; it reads consumer dictionaries,
+			// which WinUI can fail to enumerate. Degrade rather than throw into the app.
+			FluentDiagnostics.LogWarning($"FluentTheme could not update the Fluent accent resources. {e.Message}");
 		}
-
-		// Lightweight-styling bridge (spec 05 §10, goal G6). The static neutral
-		// key defaults ship declaratively (LightweightDefaults.xaml, loaded once
-		// per instance); the code layer above them carries only the
-		// accent-derived defaults and the override-driven re-pointing of the
-		// built-in per-control resources. The code layer is rebuilt each pass so
-		// it tracks seed and override changes (the override's contents can
-		// mutate without a reference change, so no cache here — it is a handful
-		// of brushes and passes only run on theme-property changes).
-		AddThemeDictionary(_lightweightDefaults);
-		UpdateLightweightResources(FluentLightweightBridge.Build(effectiveSeed, seedColorMode, lightAccentBasis, darkAccentBasis, consumerOverride));
-
-		// Design tokens → built-in controls (spec 05 §8, goal G4). The XCR templates
-		// read ControlCornerRadius / OverlayCornerRadius and
-		// ContentControlThemeFontFamily through {ThemeResource}, so re-pointing
-		// those platform tokens here (the S4(b) mechanism) lets DefaultCornerRadius
-		// and DefaultFontFamily reach stock Fluent controls the way they reach the
-		// Material/Simple templates. Override-driven only: an unset property
-		// writes nothing, so stock rendering stays the platform's.
-		AddFontRootOverrides();
-
-		if (BuildPlatformTokenOverrides() is { } platformTokens)
-		{
-			AddThemeDictionary(platformTokens);
-		}
-
-		// Base typography ships in the Source bundle (BaseDictionaries.xaml). A
-		// consumer font override is NOT merged here: BaseTheme.UpdateSource resolves
-		// and merges FontOverrideDictionary itself, last, so it is re-read from its
-		// Source on hot reload and wins over the generated DefaultFontFamily layer.
 	}
 
 	/// <summary>
-	/// The platform tokens the built-in Fluent templates read, re-pointed at the
-	/// theme's design-token settings when the consumer set them; <c>null</c> when
-	/// nothing is set. Flat (theme-invariant) entries: a font family and a corner
-	/// radius do not vary per appearance.
+	/// The platform tokens the built-in templates read (<c>ControlCornerRadius</c>,
+	/// <c>OverlayCornerRadius</c>, <c>ContentControlThemeFontFamily</c>), re-pointed at
+	/// <see cref="BaseTheme.DefaultCornerRadius"/> / <see cref="BaseTheme.DefaultFontFamily"/> when the
+	/// consumer set them; <c>null</c> otherwise, leaving the platform values.
 	/// </summary>
 	private ResourceDictionary? BuildPlatformTokenOverrides()
 	{
 		ResourceDictionary? tokens = null;
 
-		// A locally set DefaultCornerRadius is an explicit choice (even when it is
-		// 4); the DP default means "the platform's". Radius100 is the base unit and
-		// Radius200 twice it — matching ControlCornerRadius (4) / OverlayCornerRadius
-		// (8) at the default unit. Invalid values use the shared scale's default.
+		// Only a local value is a consumer choice; the DP default means "the platform's". Overlays use
+		// twice the unit (Radius200), matching the platform's 4 / 8. Invalid values use the shared default.
 		if (ReadLocalValue(DefaultCornerRadiusProperty) is double radius)
 		{
 			radius = NormalizeCornerRadius(radius);
@@ -277,26 +147,47 @@ public partial class FluentTheme : BaseTheme
 		return tokens;
 	}
 
-	private void EnsureBundleStyleAliases()
+	private void ObserveSystemAccent()
 	{
-		foreach (var (semanticKey, bundleKey) in _bundleStyleAliases)
+		// Windows can keep a subscribed UISettings alive past the theme, so the handler only holds the
+		// theme weakly and unsubscribes once it is gone.
+		_uiSettings = new UISettings();
+		var weakTheme = new WeakReference<FluentTheme>(this);
+		var dispatcher = DispatcherQueue.GetForCurrentThread();
+		TypedEventHandler<UISettings, object>? handler = null;
+		handler = (sender, args) =>
 		{
-			if (_bundleAliasStyles.TryGetValue(semanticKey, out _))
+			if (!weakTheme.TryGetTarget(out var theme))
 			{
-				continue;
+				sender.ColorValuesChanged -= handler;
+				return;
 			}
 
-			// The Source bundle (mergedpages.xaml) is loaded before the first
-			// UpdateSource pass, so the bundle's own styles are resolvable here.
-			// A miss is left unaliased rather than aliased to a wrong style.
-			if (TryGetValue(bundleKey, out var bundleValue) && bundleValue is Style bundleStyle)
+			// The event fires several times per system change: coalesce into one rebuild.
+			if (dispatcher is { } && !theme._isRefreshQueued)
 			{
-				_bundleAliasStyles[semanticKey] = bundleStyle;
+				theme._isRefreshQueued = dispatcher.TryEnqueue(theme.RefreshSystemAccent);
 			}
-			else
+			else if (dispatcher is null)
 			{
-				FluentDiagnostics.LogWarning($"FluentTheme: bundle style '{bundleKey}' not found; '{semanticKey}' stays unaliased.");
+				theme.RefreshSystemAccent();
 			}
+		};
+		_uiSettings.ColorValuesChanged += handler;
+	}
+
+	private void RefreshSystemAccent()
+	{
+		_isRefreshQueued = false;
+		try
+		{
+			FluentColorPalette.TryPopulate(_palette);
+			UpdateSource();
+		}
+		catch (Exception e)
+		{
+			// Raised from a platform event: an escaping exception would crash the consuming app.
+			FluentDiagnostics.LogWarning($"FluentTheme could not refresh the system accent. {e.Message}");
 		}
 	}
 }

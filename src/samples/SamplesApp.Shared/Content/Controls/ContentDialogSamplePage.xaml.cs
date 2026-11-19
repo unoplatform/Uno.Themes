@@ -28,11 +28,14 @@ public sealed partial class ContentDialogSamplePage : Page
 			[nameof(BuildSimpleCustomContentDialog)] = BuildSimpleCustomContentDialog,
 		};
 
+		// async void: an escaping exception takes the app down, so report it instead.
 		try
 		{
 			if ((sender as Button)?.Tag is string context && mappings.TryGetValue(context, out var builder))
 			{
 				var dialog = builder();
+
+				// WinUI only shows a dialog that knows which XamlRoot (window) to open over.
 				dialog.XamlRoot = XamlRoot;
 
 				await dialog.ShowAsync();
