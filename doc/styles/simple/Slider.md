@@ -19,36 +19,36 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 ### Theme-agnostic
 
-| Key                                       | Type           | Value                         |
-| ----------------------------------------- | -------------- | ----------------------------- |
-| `SimpleSliderCornerRadius`                | `CornerRadius` | `SimpleRadius050CornerRadius` |
-| `SimpleSliderFillThickness`               | `Double`       | `SliderFillThickness`         |
-| `SimpleSliderFocusVisualMargin`           | `Thickness`    | -7,0                          |
-| `SimpleSliderHeaderMargin`                | `Thickness`    | 0,0,0,4                       |
-| `SimpleSliderHorizontalFillCornerRadius`  | `CornerRadius` | 4,0,0,4                       |
-| `SimpleSliderHorizontalFocusVisualMargin` | `Thickness`    | -14,-6,-14,-6                 |
-| `SimpleSliderPostContentMargin`           | `Double`       | 14                            |
-| `SimpleSliderPreContentMargin`            | `Double`       | 14                            |
-| `SimpleSliderThumbCornerRadius`           | `CornerRadius` | `SliderThumbCornerRadius`     |
-| `SimpleSliderTrackThickness`              | `Double`       | `SliderTrackThickness`        |
-| `SimpleSliderVerticalFillCornerRadius`    | `CornerRadius` | 0,0,4,4                       |
-| `SimpleSliderVerticalFocusVisualMargin`   | `Thickness`    | -6,-14,-6,-14                 |
-| `SliderCornerRadius`                      | `CornerRadius` | `Radius050CornerRadius`       |
-| `SliderFillThickness`                     | `Double`       | 8                             |
-| `SliderFocusVisualMargin`                 | `Thickness`    | -7,0                          |
-| `SliderHeaderMargin`                      | `Thickness`    | `Space050BottomThickness`     |
-| `SliderHorizontalFillCornerRadius`        | `CornerRadius` | 4,0,0,4                       |
-| `SliderHorizontalFocusVisualMargin`       | `Thickness`    | -14,-6,-14,-6                 |
-| `SliderHorizontalHeight`                  | `Double`       | `SimpleIconMedium`            |
-| `SliderPostContentMargin`                 | `Double`       | 14                            |
-| `SliderPreContentMargin`                  | `Double`       | 14                            |
-| `SliderThumbCornerRadius`                 | `CornerRadius` | `SimpleRadius200CornerRadius` |
-| `SliderThumbHeight`                       | `Double`       | `SimpleIconExtraSmall`        |
-| `SliderThumbWidth`                        | `Double`       | `SimpleIconExtraSmall`        |
-| `SliderTrackThickness`                    | `Double`       | 4                             |
-| `SliderVerticalFillCornerRadius`          | `CornerRadius` | 0,0,4,4                       |
-| `SliderVerticalFocusVisualMargin`         | `Thickness`    | -6,-14,-6,-14                 |
-| `SliderVerticalWidth`                     | `Double`       | `SimpleIconMedium`            |
+| Key                                       | Type           | Value                                     |
+| ----------------------------------------- | -------------- | ----------------------------------------- |
+| `SimpleSliderCornerRadius`                | `CornerRadius` | `SimpleShapeTrackCornerRadius`            |
+| `SimpleSliderFillThickness`               | `Double`       | `SliderFillThickness`                     |
+| `SimpleSliderFocusVisualMargin`           | `Thickness`    | -7,0                                      |
+| `SimpleSliderHeaderMargin`                | `Thickness`    | 0,0,0,4                                   |
+| `SimpleSliderHorizontalFillCornerRadius`  | `CornerRadius` | `SimpleShapeSliderFillLeftCornerRadius`   |
+| `SimpleSliderHorizontalFocusVisualMargin` | `Thickness`    | -14,-6,-14,-6                             |
+| `SimpleSliderPostContentMargin`           | `Double`       | 14                                        |
+| `SimpleSliderPreContentMargin`            | `Double`       | 14                                        |
+| `SimpleSliderThumbCornerRadius`           | `CornerRadius` | `SliderThumbCornerRadius`                 |
+| `SimpleSliderTrackThickness`              | `Double`       | `SliderTrackThickness`                    |
+| `SimpleSliderVerticalFillCornerRadius`    | `CornerRadius` | `SimpleShapeSliderFillBottomCornerRadius` |
+| `SimpleSliderVerticalFocusVisualMargin`   | `Thickness`    | -6,-14,-6,-14                             |
+| `SliderCornerRadius`                      | `CornerRadius` | `SimpleShapeTrackCornerRadius`            |
+| `SliderFillThickness`                     | `Double`       | 8                                         |
+| `SliderFocusVisualMargin`                 | `Thickness`    | -7,0                                      |
+| `SliderHeaderMargin`                      | `Thickness`    | `Space050BottomThickness`                 |
+| `SliderHorizontalFillCornerRadius`        | `CornerRadius` | `SimpleShapeSliderFillLeftCornerRadius`   |
+| `SliderHorizontalFocusVisualMargin`       | `Thickness`    | -14,-6,-14,-6                             |
+| `SliderHorizontalHeight`                  | `Double`       | `SimpleIconMedium`                        |
+| `SliderPostContentMargin`                 | `Double`       | 14                                        |
+| `SliderPreContentMargin`                  | `Double`       | 14                                        |
+| `SliderThumbCornerRadius`                 | `CornerRadius` | `SimpleRadius200CornerRadius`             |
+| `SliderThumbHeight`                       | `Double`       | `SimpleIconExtraSmall`                    |
+| `SliderThumbWidth`                        | `Double`       | `SimpleIconExtraSmall`                    |
+| `SliderTrackThickness`                    | `Double`       | 4                                         |
+| `SliderVerticalFillCornerRadius`          | `CornerRadius` | `SimpleShapeSliderFillBottomCornerRadius` |
+| `SliderVerticalFocusVisualMargin`         | `Thickness`    | -6,-14,-6,-14                             |
+| `SliderVerticalWidth`                     | `Double`       | `SimpleIconMedium`                        |
 
 ### Themed
 

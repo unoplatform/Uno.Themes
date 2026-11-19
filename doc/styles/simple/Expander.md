@@ -20,19 +20,19 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 ### Theme-agnostic
 
-| Key                                      | Type           | Value                         |
-| ---------------------------------------- | -------------- | ----------------------------- |
-| `SimpleExpanderChevronButtonSize`        | `Double`       | `SimpleIconMedium`            |
-| `SimpleExpanderChevronDownGlyph`         | `String`       | \uE70D                        |
-| `SimpleExpanderChevronGlyphSize`         | `Double`       | 12                            |
-| `SimpleExpanderChevronMargin`            | `Thickness`    | 20,0,8,0                      |
-| `SimpleExpanderContentBorderThickness`   | `Thickness`    | 1,0,1,1                       |
-| `SimpleExpanderContentPadding`           | `Thickness`    | `SimpleSpace200Thickness`     |
-| `SimpleExpanderContentUpBorderThickness` | `Thickness`    | 1,1,1,0                       |
-| `SimpleExpanderCornerRadius`             | `CornerRadius` | `SimpleRadius200CornerRadius` |
-| `SimpleExpanderHeaderBorderThickness`    | `Thickness`    | `SimpleStrokeBorderThickness` |
-| `SimpleExpanderHeaderPadding`            | `Thickness`    | `Space200LeftThickness`       |
-| `SimpleExpanderMinHeight`                | `Double`       | `ControlHeightLarge`          |
+| Key                                      | Type           | Value                              |
+| ---------------------------------------- | -------------- | ---------------------------------- |
+| `SimpleExpanderChevronButtonSize`        | `Double`       | `SimpleIconMedium`                 |
+| `SimpleExpanderChevronDownGlyph`         | `String`       | \uE70D                             |
+| `SimpleExpanderChevronGlyphSize`         | `Double`       | 12                                 |
+| `SimpleExpanderChevronMargin`            | `Thickness`    | 20,0,8,0                           |
+| `SimpleExpanderContentBorderThickness`   | `Thickness`    | 1,0,1,1                            |
+| `SimpleExpanderContentPadding`           | `Thickness`    | `SimpleSpace200Thickness`          |
+| `SimpleExpanderContentUpBorderThickness` | `Thickness`    | 1,1,1,0                            |
+| `SimpleExpanderCornerRadius`             | `CornerRadius` | `SimpleShapeContainerCornerRadius` |
+| `SimpleExpanderHeaderBorderThickness`    | `Thickness`    | `SimpleStrokeBorderThickness`      |
+| `SimpleExpanderHeaderPadding`            | `Thickness`    | `Space200LeftThickness`            |
+| `SimpleExpanderMinHeight`                | `Double`       | `ControlHeightLarge`               |
 
 <!-- END GENERATED -->
 

@@ -564,7 +564,11 @@ sealed class TypeResolver
 		(new(@"^Space\d+$"), "Double"),
 		(new(@"^Space\d+(Horizontal|Vertical|Top|Bottom|Left|Right)?Thickness$"), "Thickness"),
 		(new(@"^Radius(0|050|100|200|300|400|500|700|Full)$"), "Double"),
-		(new(@"^Radius(0|050|100|200|300|400|500|700|Full)CornerRadius$"), "CornerRadius"),
+		(new(@"^Radius(0|050|100|200|300|400|500|700)(Top|Left|Bottom|TopLeft)?CornerRadius$"), "CornerRadius"),
+		(new(@"^RadiusFullCornerRadius$"), "CornerRadius"),
+		// Size-capped radii a theme generates from BaseTheme.CappedRadii.
+		(new(@"^(Simple|Material)Shape[A-Za-z]+?(Top|Left|Bottom|TopLeft)?CornerRadius$"), "CornerRadius"),
+		(new(@"^(Simple|Material)Shape[A-Za-z]+$"), "Double"),
 		(new(@"^(TouchTargetMinSize|IconSize(Small|Medium|Large)|ControlHeight(Small|Medium|MediumLarge|Large))$"), "Double"),
 		(new(@"^(Default|(Display|Headline|Title|Body|Caption)(Large|Medium|Small)|Label(Large|Medium|Small|ExtraSmall))FontFamily$"), "FontFamily"),
 	];

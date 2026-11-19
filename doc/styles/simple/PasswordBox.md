@@ -32,7 +32,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `FilledPasswordBoxBorderBrushFocused`              | `SolidColorBrush` | `PrimaryMediumBrush`             |
 | `FilledPasswordBoxBorderBrushPointerOver`          | `SolidColorBrush` | `OutlineBrush`                   |
 | `FilledPasswordBoxBorderThickness`                 | `Thickness`       | `SimpleStrokeBorderThickness`    |
-| `FilledPasswordBoxCornerRadius`                    | `CornerRadius`    | `SimpleRadius200CornerRadius`    |
+| `FilledPasswordBoxCornerRadius`                    | `CornerRadius`    | `SimpleShapeControlCornerRadius` |
 | `FilledPasswordBoxFocusedBorderThickness`          | `Thickness`       | `SimpleStrokeFocusRingThickness` |
 | `FilledPasswordBoxForeground`                      | `SolidColorBrush` | `OnSurfaceBrush`                 |
 | `FilledPasswordBoxForegroundDisabled`              | `SolidColorBrush` | `OnSurfaceDisabledBrush`         |
@@ -57,7 +57,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `OutlinedPasswordBoxBorderBrushFocused`            | `SolidColorBrush` | `PrimaryMediumBrush`             |
 | `OutlinedPasswordBoxBorderBrushPointerOver`        | `SolidColorBrush` | `OutlineBrush`                   |
 | `OutlinedPasswordBoxBorderThickness`               | `Thickness`       | `SimpleStrokeBorderThickness`    |
-| `OutlinedPasswordBoxCornerRadius`                  | `CornerRadius`    | `SimpleRadius200CornerRadius`    |
+| `OutlinedPasswordBoxCornerRadius`                  | `CornerRadius`    | `SimpleShapeControlCornerRadius` |
 | `OutlinedPasswordBoxFocusedBorderThickness`        | `Thickness`       | `SimpleStrokeFocusRingThickness` |
 | `OutlinedPasswordBoxForeground`                    | `SolidColorBrush` | `OnSurfaceBrush`                 |
 | `OutlinedPasswordBoxForegroundDisabled`            | `SolidColorBrush` | `OnSurfaceDisabledBrush`         |
