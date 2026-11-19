@@ -37,8 +37,8 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `CalendarDatePickerCalendarGlyphForegroundDisabled`   | `SolidColorBrush` | `OnSurfaceDisabledBrush`                        | `OnSurfaceDisabledBrush`                        |
 | `CalendarDatePickerCalendarGlyphMargin`               | `Thickness`       | `Space150LeftThickness`                         | `Space150LeftThickness`                         |
 | `CalendarDatePickerContentMargin`                     | `Thickness`       | 16,10,16,10                                     | 16,10,16,10                                     |
-| `CalendarDatePickerCornerRadius`                      | `CornerRadius`    | `SimpleRadius200CornerRadius`                   | `SimpleRadius200CornerRadius`                   |
-| `CalendarDatePickerFlyoutPresenterCornerRadius`       | `CornerRadius`    | `SimpleRadius400CornerRadius`                   | `SimpleRadius400CornerRadius`                   |
+| `CalendarDatePickerCornerRadius`                      | `CornerRadius`    | `SimpleShapeControlCornerRadius`                | `SimpleShapeControlCornerRadius`                |
+| `CalendarDatePickerFlyoutPresenterCornerRadius`       | `CornerRadius`    | `SimpleShapeCalendarCornerRadius`               | `SimpleShapeCalendarCornerRadius`               |
 | `CalendarDatePickerFlyoutPresenterPadding`            | `Thickness`       | `SimpleSpace0Thickness`                         | `SimpleSpace0Thickness`                         |
 | `CalendarDatePickerForeground`                        | `SolidColorBrush` | `OnSurfaceBrush`                                | `OnSurfaceBrush`                                |
 | `CalendarDatePickerForegroundDisabled`                | `SolidColorBrush` | `OnSurfaceDisabledBrush`                        | `OnSurfaceDisabledBrush`                        |

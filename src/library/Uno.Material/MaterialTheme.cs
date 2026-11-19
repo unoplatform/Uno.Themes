@@ -60,4 +60,32 @@ public class MaterialTheme : BaseTheme
 		"SliderFontFamily",
 		"TextToggleButtonFontFamily",
 	};
+
+	/// <summary>
+	/// The radii Material v2 caps by the size of the control they sit on (unoplatform/Uno.Themes#1747).
+	/// Each cap is at least the value at the default base of 4, so the default look is unchanged.
+	/// Keep in sync with the <c>MaterialShape*</c> references under <c>Styles/Controls/v2</c>.
+	/// </summary>
+	internal override CappedRadius[] CappedRadii { get; } =
+	{
+		// 40px button pill: half the height.
+		new("MaterialShapeButton", 5, 20),
+		// 18px check box: a quarter of its side, so it never reads as a RadioButton.
+		new("MaterialShapeCheckBox", 0.5, 4.5),
+		// 56px, 40px and 96px FABs: 0.3 × the side, so they stay rounded squares.
+		new("MaterialShapeFab", 4, 16.8),
+		new("MaterialShapeFabSmall", 3, 12),
+		new("MaterialShapeFabLarge", 7, 28.8),
+		// ContentDialog: content stays inside the corner.
+		new("MaterialShapeDialog", 7, 32),
+		// 56px NavigationViewItem pill: half the height.
+		new("MaterialShapeNavigationItem", 7, 28),
+		// 32px compact NavigationViewItem and pane buttons: half the height.
+		new("MaterialShapeNavigationItemCompact", 4, 16),
+		// 32px ToggleSwitch track: half the height.
+		new("MaterialShapeSwitchTrack", 4, 16),
+		// Slider fill and NavigationView selection indicator: thin bars that keep their rounded ends.
+		new("MaterialShapeSliderFill", 1, 4),
+		new("MaterialShapeIndicator", 0.5, 2),
+	};
 }

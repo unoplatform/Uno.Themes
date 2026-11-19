@@ -16,7 +16,7 @@
 	Cupertino and Material v1 are out of scope for now.
 
 	WinUI's own keys come from its generic.xaml, so a WinAppSDK head must have been restored first (CI runs this
-	in the WinAppSDK job, after its build). Keys generated in code by BaseTheme (Space*, Radius*, ControlHeight*,
+	in the WinAppSDK job, after its build). Keys generated in code by BaseTheme (Space*, Radius*, SimpleShape*, MaterialShape*, ControlHeight*,
 	IconSize*) and WinUI's System* keys are allowed by prefix.
 
 .PARAMETER GenericXaml
@@ -31,7 +31,7 @@ $ErrorActionPreference = 'Stop'
 $xamlNs = 'http://schemas.microsoft.com/winfx/2006/xaml'
 
 # Declared in code (BaseTheme scale generation) or by the WinUI platform outside generic.xaml.
-$allowedPrefixes = 'Space', 'Radius', 'ControlHeight', 'IconSize', 'System'
+$allowedPrefixes = 'Space', 'Radius', 'SimpleShape', 'MaterialShape', 'ControlHeight', 'IconSize', 'System'
 $allowedKeys = @('ScrollViewerScrollBarlessTemplate')
 
 if (-not $GenericXaml) {

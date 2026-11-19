@@ -46,7 +46,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `FilledTextBoxBorderThicknessFocused`                         | `Double`          | `TextBoxFocusStrokeWidth`     |
 | `FilledTextBoxBorderThicknessNormal`                          | `Double`          | `TextBoxOutlinedStrokeHeight` |
 | `FilledTextBoxCharacterSpacing`                               | `Int32`           | `BodyLargeCharacterSpacing`   |
-| `FilledTextBoxCornerRadius`                                   | `CornerRadius`    | 4,4,0,0                       |
+| `FilledTextBoxCornerRadius`                                   | `CornerRadius`    | `Radius100TopCornerRadius`    |
 | `FilledTextBoxDeleteButtonForeground`                         | `SolidColorBrush` | `OnSurfaceVariantBrush`       |
 | `FilledTextBoxDeleteButtonForegroundDisabled`                 | `SolidColorBrush` | `OnSurfaceLowBrush`           |
 | `FilledTextBoxDeleteButtonForegroundFocused`                  | `SolidColorBrush` | `OnSurfaceVariantBrush`       |

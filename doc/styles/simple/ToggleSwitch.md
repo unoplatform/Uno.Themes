@@ -27,7 +27,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `SimpleToggleSwitchThumbOnMargin`   | `Thickness` | 20,0,0,0                  |
 | `SimpleToggleSwitchThumbSize`       | `Double`    | `SimpleIconExtraSmall`    |
 | `SimpleToggleSwitchTrackHeight`     | `Double`    | `SimpleIconSmall`         |
-| `SimpleToggleSwitchTrackRadius`     | `Double`    | `SimpleRadius300`         |
+| `SimpleToggleSwitchTrackRadius`     | `Double`    | `SimpleShapeSwitchTrack`  |
 | `SimpleToggleSwitchTrackWidth`      | `Double`    | `SimpleIconLarge`         |
 
 ### Themed

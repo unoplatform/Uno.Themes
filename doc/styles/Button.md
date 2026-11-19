@@ -40,7 +40,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | -------------------------------------------------- | ----------------- | ---------------------------------- |
 | `ButtonBorderThickness`                            | `Thickness`       | 0                                  |
 | `ButtonContentMargin`                              | `Thickness`       | `Space100HorizontalThickness`      |
-| `ButtonCornerRadius`                               | `CornerRadius`    | `Radius500CornerRadius`            |
+| `ButtonCornerRadius`                               | `CornerRadius`    | `MaterialShapeButtonCornerRadius`  |
 | `ButtonElevation`                                  | `Double`          | 0                                  |
 | `ButtonIconMinWidth`                               | `Double`          | 18                                 |
 | `ButtonMargin`                                     | `Thickness`       | 0                                  |

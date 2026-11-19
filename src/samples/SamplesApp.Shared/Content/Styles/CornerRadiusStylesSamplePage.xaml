@@ -45,7 +45,7 @@
 								   Margin="0,8,0,0" />
 
 						<StackPanel Style="{StaticResource RadiusSampleRowStyle}">
-							<TextBlock Text="MaterialBaseButtonStyle&#x0a;ButtonCornerRadius = Radius500"
+							<TextBlock Text="MaterialBaseButtonStyle&#x0a;ButtonCornerRadius = Radius500, capped at 20"
 									   Style="{StaticResource RadiusSampleLabelStyle}" />
 							<Border Style="{StaticResource RadiusSampleBoundsStyle}">
 								<Button Content="Base"
@@ -69,7 +69,7 @@
 								   Margin="0,8,0,0" />
 
 						<StackPanel Style="{StaticResource RadiusSampleRowStyle}">
-							<TextBlock Text="MaterialSmallFabStyle / SecondarySmall / TertiarySmall / SurfaceSmall&#x0a;SmallFabCornerRadius = Radius300"
+							<TextBlock Text="MaterialSmallFabStyle / SecondarySmall / TertiarySmall / SurfaceSmall&#x0a;SmallFabCornerRadius = Radius300, capped at 12"
 									   Style="{StaticResource RadiusSampleLabelStyle}" />
 							<StackPanel Orientation="Horizontal"
 										Spacing="12">
@@ -105,7 +105,7 @@
 						</StackPanel>
 
 						<StackPanel Style="{StaticResource RadiusSampleRowStyle}">
-							<TextBlock Text="MaterialFabStyle / SecondaryFab / TertiaryFab / SurfaceFab&#x0a;FabCornerRadius = Radius400"
+							<TextBlock Text="MaterialFabStyle / SecondaryFab / TertiaryFab / SurfaceFab&#x0a;FabCornerRadius = Radius400, capped at 16.8"
 									   Style="{StaticResource RadiusSampleLabelStyle}" />
 							<StackPanel Orientation="Horizontal"
 										Spacing="12">
@@ -142,7 +142,7 @@
 						</StackPanel>
 
 						<StackPanel Style="{StaticResource RadiusSampleRowStyle}">
-							<TextBlock Text="MaterialLargeFabStyle / SecondaryLarge / TertiaryLarge / SurfaceLarge&#x0a;LargeFabCornerRadius = Radius700"
+							<TextBlock Text="MaterialLargeFabStyle / SecondaryLarge / TertiaryLarge / SurfaceLarge&#x0a;LargeFabCornerRadius = Radius700, capped at 28.8"
 									   Style="{StaticResource RadiusSampleLabelStyle}" />
 							<StackPanel Orientation="Horizontal"
 										Spacing="12">
@@ -182,7 +182,7 @@
 								   Margin="0,8,0,0" />
 
 						<StackPanel Style="{StaticResource RadiusSampleRowStyle}">
-							<TextBlock Text="MaterialCheckBoxStyle&#x0a;CheckAreaCornerRadius = Radius050"
+							<TextBlock Text="MaterialCheckBoxStyle&#x0a;CheckAreaCornerRadius = Radius050, capped at 4.5"
 									   Style="{StaticResource RadiusSampleLabelStyle}" />
 							<Border Style="{StaticResource RadiusSampleBoundsStyle}">
 								<CheckBox Content="CheckBox"
@@ -219,7 +219,7 @@
 								   Margin="0,8,0,0" />
 
 						<StackPanel Style="{StaticResource RadiusSampleRowStyle}">
-							<TextBlock Text="MaterialContentDialogStyle&#x0a;ContentDialogCornerRadius = Radius700"
+							<TextBlock Text="MaterialContentDialogStyle&#x0a;ContentDialogCornerRadius = Radius700, capped at 32"
 									   Style="{StaticResource RadiusSampleLabelStyle}" />
 							<Button Content="Show ContentDialog"
 									Click="OnShowContentDialogClick"
@@ -231,7 +231,7 @@
 								   Margin="0,8,0,0" />
 
 						<StackPanel Style="{StaticResource RadiusSampleRowStyle}">
-							<TextBlock Text="MaterialNavigationViewStyle: pane toggle (NavigationViewIconButtonStyle, Radius400), left-pane item presenter (Radius700, compact Radius400) — template parts"
+							<TextBlock Text="MaterialNavigationViewStyle: pane toggle (NavigationViewIconButtonStyle, Radius400 capped at 16), left-pane item presenter (Radius700 capped at 28, compact Radius400 capped at 16) — template parts"
 									   Style="{StaticResource RadiusSampleLabelStyle}" />
 							<Border Style="{StaticResource RadiusSampleBoundsStyle}">
 								<muxc:NavigationView Width="320"
@@ -255,7 +255,7 @@
 						</StackPanel>
 
 						<StackPanel Style="{StaticResource RadiusSampleRowStyle}">
-							<TextBlock Text="Compact pane (item presenter Radius400 compact)"
+							<TextBlock Text="Compact pane (item presenter Radius400 compact, capped at 16)"
 									   Style="{StaticResource RadiusSampleLabelStyle}" />
 							<Border Style="{StaticResource RadiusSampleBoundsStyle}">
 								<muxc:NavigationView Width="320"
@@ -289,7 +289,7 @@
 								Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 						<TextBlock Text="Styles that read the corner-radius scale"
 								   Style="{StaticResource TitleLarge}" />
-						<TextBlock Text="Every Simple style whose corner radius comes from a SimpleRadius* token, directly or through a control alias. The magenta outline marks each control&apos;s bounds."
+						<TextBlock Text="Every Simple style whose corner radius comes from the shape scale, directly or through a control alias. Radii on fixed-size controls are capped by that size. The magenta outline marks each control&apos;s bounds."
 								   Style="{StaticResource BodySmall}"
 								   TextWrapping="Wrap"
 								   Opacity="0.7" />
@@ -298,7 +298,7 @@
 								   Margin="0,8,0,0" />
 
 						<StackPanel Style="{StaticResource RadiusSampleRowStyle}">
-							<TextBlock Text="SimpleBaseButtonStyle&#x0a;ButtonCornerRadius = Radius200"
+							<TextBlock Text="SimpleBaseButtonStyle&#x0a;ButtonCornerRadius = Radius200, capped at 10"
 									   Style="{StaticResource RadiusSampleLabelStyle}" />
 							<Border Style="{StaticResource RadiusSampleBoundsStyle}">
 								<Button Content="Base"
@@ -307,7 +307,7 @@
 						</StackPanel>
 
 						<StackPanel Style="{StaticResource RadiusSampleRowStyle}">
-							<TextBlock Text="SimpleTextToggleButtonStyle&#x0a;ToggleButtonCornerRadius = Radius200"
+							<TextBlock Text="SimpleTextToggleButtonStyle&#x0a;ToggleButtonCornerRadius = Radius200, capped at 10"
 									   Style="{StaticResource RadiusSampleLabelStyle}" />
 							<Border Style="{StaticResource RadiusSampleBoundsStyle}">
 								<ToggleButton Content="Toggle"
@@ -321,7 +321,7 @@
 								   Margin="0,8,0,0" />
 
 						<StackPanel Style="{StaticResource RadiusSampleRowStyle}">
-							<TextBlock Text="SimpleCheckBoxStyle&#x0a;Radius100"
+							<TextBlock Text="SimpleCheckBoxStyle&#x0a;Radius100, capped at 4"
 									   Style="{StaticResource RadiusSampleLabelStyle}" />
 							<Border Style="{StaticResource RadiusSampleBoundsStyle}">
 								<CheckBox Content="CheckBox"
@@ -331,7 +331,7 @@
 						</StackPanel>
 
 						<StackPanel Style="{StaticResource RadiusSampleRowStyle}">
-							<TextBlock Text="SimpleToggleSwitchStyle&#x0a;TrackRadius = Radius300"
+							<TextBlock Text="SimpleToggleSwitchStyle&#x0a;TrackRadius = Radius300, capped at 12"
 									   Style="{StaticResource RadiusSampleLabelStyle}" />
 							<Border Style="{StaticResource RadiusSampleBoundsStyle}">
 								<ToggleSwitch IsOn="True"
@@ -354,7 +354,7 @@
 								   Margin="0,8,0,0" />
 
 						<StackPanel Style="{StaticResource RadiusSampleRowStyle}">
-							<TextBlock Text="SimpleFilledTextBoxStyle&#x0a;Radius200"
+							<TextBlock Text="SimpleFilledTextBoxStyle&#x0a;Radius200, capped at 10"
 									   Style="{StaticResource RadiusSampleLabelStyle}" />
 							<Border Style="{StaticResource RadiusSampleBoundsStyle}">
 								<TextBox Width="240"
@@ -364,7 +364,7 @@
 						</StackPanel>
 
 						<StackPanel Style="{StaticResource RadiusSampleRowStyle}">
-							<TextBlock Text="SimpleOutlinedTextBoxStyle&#x0a;Radius200"
+							<TextBlock Text="SimpleOutlinedTextBoxStyle&#x0a;Radius200, capped at 10"
 									   Style="{StaticResource RadiusSampleLabelStyle}" />
 							<Border Style="{StaticResource RadiusSampleBoundsStyle}">
 								<TextBox Width="240"
@@ -374,7 +374,7 @@
 						</StackPanel>
 
 						<StackPanel Style="{StaticResource RadiusSampleRowStyle}">
-							<TextBlock Text="SimpleFilledPasswordBoxStyle&#x0a;Radius200"
+							<TextBlock Text="SimpleFilledPasswordBoxStyle&#x0a;Radius200, capped at 10"
 									   Style="{StaticResource RadiusSampleLabelStyle}" />
 							<Border Style="{StaticResource RadiusSampleBoundsStyle}">
 								<PasswordBox Width="240"
@@ -384,7 +384,7 @@
 						</StackPanel>
 
 						<StackPanel Style="{StaticResource RadiusSampleRowStyle}">
-							<TextBlock Text="SimpleOutlinedPasswordBoxStyle&#x0a;Radius200"
+							<TextBlock Text="SimpleOutlinedPasswordBoxStyle&#x0a;Radius200, capped at 10"
 									   Style="{StaticResource RadiusSampleLabelStyle}" />
 							<Border Style="{StaticResource RadiusSampleBoundsStyle}">
 								<PasswordBox Width="240"
@@ -394,7 +394,7 @@
 						</StackPanel>
 
 						<StackPanel Style="{StaticResource RadiusSampleRowStyle}">
-							<TextBlock Text="SimpleAutoSuggestBoxStyle&#x0a;Radius200"
+							<TextBlock Text="SimpleAutoSuggestBoxStyle&#x0a;Radius500, capped at 20"
 									   Style="{StaticResource RadiusSampleLabelStyle}" />
 							<Border Style="{StaticResource RadiusSampleBoundsStyle}">
 								<AutoSuggestBox Width="240"
@@ -408,7 +408,7 @@
 								   Margin="0,8,0,0" />
 
 						<StackPanel Style="{StaticResource RadiusSampleRowStyle}">
-							<TextBlock Text="SimpleComboBoxStyle&#x0a;ComboBoxCornerRadius = Radius200"
+							<TextBlock Text="SimpleComboBoxStyle&#x0a;ComboBoxCornerRadius = Radius200, capped at 10"
 									   Style="{StaticResource RadiusSampleLabelStyle}" />
 							<Border Style="{StaticResource RadiusSampleBoundsStyle}">
 								<ComboBox Width="240"
@@ -421,7 +421,7 @@
 						</StackPanel>
 
 						<StackPanel Style="{StaticResource RadiusSampleRowStyle}">
-							<TextBlock Text="SimpleComboBoxItemStyle (shown outside its drop-down)&#x0a;Radius100"
+							<TextBlock Text="SimpleComboBoxItemStyle (shown outside its drop-down)&#x0a;Radius100, capped at 10"
 									   Style="{StaticResource RadiusSampleLabelStyle}" />
 							<Border Style="{StaticResource RadiusSampleBoundsStyle}">
 								<ComboBoxItem Width="240"
@@ -432,7 +432,7 @@
 						</StackPanel>
 
 						<StackPanel Style="{StaticResource RadiusSampleRowStyle}">
-							<TextBlock Text="SimpleCalendarDatePickerStyle + implicit FlyoutPresenter (in its flyout, not shown)&#x0a;Radius200, flyout Radius400"
+							<TextBlock Text="SimpleCalendarDatePickerStyle + implicit FlyoutPresenter (in its flyout, not shown)&#x0a;Radius200 capped at 10, flyout Radius400 capped at 24"
 									   Style="{StaticResource RadiusSampleLabelStyle}" />
 							<Border Style="{StaticResource RadiusSampleBoundsStyle}">
 								<CalendarDatePicker PlaceholderText="Pick a date"
@@ -441,7 +441,7 @@
 						</StackPanel>
 
 						<StackPanel Style="{StaticResource RadiusSampleRowStyle}">
-							<TextBlock Text="SimpleDatePickerStyle + SimpleDatePickerFlyoutPresenterStyle (in its flyout, not shown)&#x0a;Radius200, flyout Radius400"
+							<TextBlock Text="SimpleDatePickerStyle + SimpleDatePickerFlyoutPresenterStyle (in its flyout, not shown)&#x0a;Radius200 capped at 10, flyout Radius400 capped at 24"
 									   Style="{StaticResource RadiusSampleLabelStyle}" />
 							<Border Style="{StaticResource RadiusSampleBoundsStyle}">
 								<DatePicker Style="{StaticResource SimpleDatePickerStyle}" />
@@ -449,7 +449,7 @@
 						</StackPanel>
 
 						<StackPanel Style="{StaticResource RadiusSampleRowStyle}">
-							<TextBlock Text="SimpleCalendarViewStyle&#x0a;Radius100, Radius400"
+							<TextBlock Text="SimpleCalendarViewStyle&#x0a;Radius100, Radius400 capped at 24"
 									   Style="{StaticResource RadiusSampleLabelStyle}" />
 							<Border Style="{StaticResource RadiusSampleBoundsStyle}">
 								<CalendarView Style="{StaticResource SimpleCalendarViewStyle}" />
@@ -461,7 +461,7 @@
 								   Margin="0,8,0,0" />
 
 						<StackPanel Style="{StaticResource RadiusSampleRowStyle}">
-							<TextBlock Text="SimpleExpanderStyle + SimpleExpanderHeaderUp/DownStyle (template parts)&#x0a;ExpanderCornerRadius = Radius200"
+							<TextBlock Text="SimpleExpanderStyle + SimpleExpanderHeaderUp/DownStyle (template parts)&#x0a;ExpanderCornerRadius = Radius200, capped at 16"
 									   Style="{StaticResource RadiusSampleLabelStyle}" />
 							<Border Style="{StaticResource RadiusSampleBoundsStyle}">
 								<Expander Width="320"
@@ -474,7 +474,7 @@
 						</StackPanel>
 
 						<StackPanel Style="{StaticResource RadiusSampleRowStyle}">
-							<TextBlock Text="SimpleFlyoutPresenterStyle&#x0a;Radius200"
+							<TextBlock Text="SimpleFlyoutPresenterStyle&#x0a;Radius200, capped at 16"
 									   Style="{StaticResource RadiusSampleLabelStyle}" />
 							<Border Style="{StaticResource RadiusSampleBoundsStyle}">
 								<FlyoutPresenter Style="{StaticResource SimpleFlyoutPresenterStyle}">
@@ -484,7 +484,7 @@
 						</StackPanel>
 
 						<StackPanel Style="{StaticResource RadiusSampleRowStyle}">
-							<TextBlock Text="SimpleToolTipStyle&#x0a;ToolTipCornerRadius = Radius200"
+							<TextBlock Text="SimpleToolTipStyle&#x0a;ToolTipCornerRadius = Radius200, capped at 10"
 									   Style="{StaticResource RadiusSampleLabelStyle}" />
 							<Border Style="{StaticResource RadiusSampleBoundsStyle}">
 								<ToolTip Content="ToolTip"
@@ -493,7 +493,7 @@
 						</StackPanel>
 
 						<StackPanel Style="{StaticResource RadiusSampleRowStyle}">
-							<TextBlock Text="SimpleContentDialogStyle&#x0a;ContentDialogCornerRadius = Radius200"
+							<TextBlock Text="SimpleContentDialogStyle&#x0a;ContentDialogCornerRadius = Radius200, capped at 16"
 									   Style="{StaticResource RadiusSampleLabelStyle}" />
 							<Button Content="Show ContentDialog"
 									Click="OnShowContentDialogClick"
@@ -505,7 +505,7 @@
 								   Margin="0,8,0,0" />
 
 						<StackPanel Style="{StaticResource RadiusSampleRowStyle}">
-							<TextBlock Text="SimpleMenuFlyoutPresenterStyle with SimpleMenuFlyoutItemStyle, SimpleToggleMenuFlyoutItemStyle, SimpleRadioMenuFlyoutItemStyle, SimpleMenuFlyoutSubItemStyle&#x0a;Radius200"
+							<TextBlock Text="SimpleMenuFlyoutPresenterStyle with SimpleMenuFlyoutItemStyle, SimpleToggleMenuFlyoutItemStyle, SimpleRadioMenuFlyoutItemStyle, SimpleMenuFlyoutSubItemStyle&#x0a;Radius200, presenter capped at 16, items at 9"
 									   Style="{StaticResource RadiusSampleLabelStyle}" />
 							<Border Style="{StaticResource RadiusSampleBoundsStyle}">
 								<MenuFlyoutPresenter Width="240"
@@ -525,7 +525,7 @@
 						</StackPanel>
 
 						<StackPanel Style="{StaticResource RadiusSampleRowStyle}">
-							<TextBlock Text="SimpleListViewItemStyle&#x0a;Radius200"
+							<TextBlock Text="SimpleListViewItemStyle&#x0a;Radius200, capped at 10"
 									   Style="{StaticResource RadiusSampleLabelStyle}" />
 							<Border Style="{StaticResource RadiusSampleBoundsStyle}">
 								<ListView Width="240"
@@ -539,7 +539,7 @@
 						</StackPanel>
 
 						<StackPanel Style="{StaticResource RadiusSampleRowStyle}">
-							<TextBlock Text="SimplePersonPictureSquareStyle / SquareSmallStyle&#x0a;Radius200 / Radius100"
+							<TextBlock Text="SimplePersonPictureSquareStyle / SquareSmallStyle&#x0a;Radius200 capped at 8 / Radius100 capped at 6"
 									   Style="{StaticResource RadiusSampleLabelStyle}" />
 							<StackPanel Orientation="Horizontal"
 										Spacing="12">
