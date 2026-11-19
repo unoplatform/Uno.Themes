@@ -24,7 +24,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | Key                                    | Type           | Value                            |
 | -------------------------------------- | -------------- | -------------------------------- |
 | `ComboBoxBorderThickness`              | `Thickness`    | `SimpleStrokeBorderThickness`    |
-| `ComboBoxCornerRadius`                 | `CornerRadius` | `SimpleRadius200CornerRadius`    |
+| `ComboBoxCornerRadius`                 | `CornerRadius` | `SimpleShapeControlCornerRadius` |
 | `ComboBoxMinHeight`                    | `Double`       | `SimpleIconLarge`                |
 | `ComboBoxPadding`                      | `Thickness`    | 16,10,12,10                      |
 | `SimpleComboBoxBorderThickness`        | `Thickness`    | `ComboBoxBorderThickness`        |

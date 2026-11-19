@@ -26,7 +26,7 @@ public sealed partial class CornerRadiusStylesSamplePage : Page
 	{
 		XamlRoot = xamlRoot,
 		Title = "ContentDialog",
-		Content = IsMaterial ? "CornerRadius = Radius700" : "CornerRadius = Radius200",
+		Content = IsMaterial ? "CornerRadius = Radius700, capped at 32" : "CornerRadius = Radius200, capped at 16",
 		PrimaryButtonText = "Primary",
 		CloseButtonText = "Close",
 		Style = (Style)(SampleThemeHelper.CurrentApplication ?? Application.Current).Resources[IsMaterial ? "MaterialContentDialogStyle" : "SimpleContentDialogStyle"],

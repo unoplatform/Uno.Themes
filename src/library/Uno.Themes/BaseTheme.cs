@@ -287,6 +287,22 @@ public abstract partial class BaseTheme : ResourceDictionary
 	/// Individual tokens can still be overridden via lightweight styling.
 	/// </summary>
 	/// <remarks>
+	/// <para>
+	/// Each token also has directional <see cref="CornerRadius"/> companions:
+	/// <c>Radius200TopCornerRadius</c> (r,r,0,0), <c>…LeftCornerRadius</c> (r,0,0,r),
+	/// <c>…BottomCornerRadius</c> (0,0,r,r) and <c>…TopLeftCornerRadius</c> (r,0,0,0).
+	/// </para>
+	/// <para>
+	/// Controls with a fixed size do not follow the scale without limit: their radius is capped by
+	/// that size (a pill at half its height, a check box at a quarter of its side), so a large value
+	/// keeps every control recognizable. Those capped radii are generated from this property, so
+	/// overriding a <c>Radius*</c> token does not reach them — override the control's own
+	/// <c>*CornerRadius</c> key instead.
+	/// </para>
+	/// <para>
+	/// Non-finite or negative values are treated as unset and fall back to the default of 4.
+	/// </para>
+	/// <para>
 	/// This is a <b>runtime</b> setting: assigning it regenerates the <c>Radius*</c> token
 	/// resources, and controls created afterwards pick the new scale up, because the control
 	/// styles read these tokens (directly or through per-control keys such as
@@ -295,6 +311,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 	/// with no live instance to update — until a theme-change pass re-resolves them (toggle the
 	/// root element's <c>RequestedTheme</c> away from its <c>ActualTheme</c> and back) or the
 	/// root content is recreated.
+	/// </para>
 	/// </remarks>
 	public double DefaultCornerRadius
 	{
@@ -308,7 +325,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 			nameof(DefaultCornerRadius),
 			typeof(double),
 			typeof(BaseTheme),
-			new PropertyMetadata(4.0, OnDefaultCornerRadiusChanged));
+			new PropertyMetadata(DefaultBaseCornerRadius, OnDefaultCornerRadiusChanged));
 
 	private static void OnDefaultCornerRadiusChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 	{
@@ -571,7 +588,9 @@ public abstract partial class BaseTheme : ResourceDictionary
 			_ => 1.0, // Regular, and graceful fallback for undefined enum values
 		};
 		var spacing = GenerateSpacingScale(baseSpacing * densityFactor);
-		var shape = GenerateShapeScale(DefaultCornerRadius);
+		var baseRadius = SanitizeCornerRadius(DefaultCornerRadius);
+		var shape = GenerateShapeScale(baseRadius);
+		var cappedRadii = GenerateCappedRadii(baseRadius);
 		var density = GenerateDensityDefaults();
 
 		// Null when no font family is set, which is the common case: the concrete theme's own
@@ -610,6 +629,12 @@ public abstract partial class BaseTheme : ResourceDictionary
 
 		AddThemeDictionary(spacing);
 		AddThemeDictionary(shape);
+
+		if (cappedRadii is { })
+		{
+			AddThemeDictionary(cappedRadii);
+		}
+
 		AddThemeDictionary(density);
 		AddThemeDictionary(colors);
 
