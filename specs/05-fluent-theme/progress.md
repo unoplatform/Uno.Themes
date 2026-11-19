@@ -392,7 +392,15 @@ dropped** — under Fluent, lightweight styling uses WinUI's native per-control 
   Release Dark (Fluent/semantic/override filter) 240/0; FluentSampleApp 5/5. XamlStyler, dotnet format,
   style-docs `--check` pass.
 - [x] Docs: fluent-getting-started, lightweight-styling, semantic-styles, seed-colors, `doc/styles/*` notes.
-- [ ] Merge up into #1719 / #1721 and fix their Fluent docs; refresh PR descriptions.
+- [x] Reviewer (skeptic) pass: per-button subtle-button resources (a shared dictionary breaks on WinUI;
+  red test `When_SeveralTextButtons_EachGetsItsOwnStateResources`), non-throwing accent rebuild, empty
+  HighContrast branch on the accent layer (unverified: the CI host cannot run high contrast), coalesced
+  system-accent refresh.
+- [x] Merged up into #1719 and #1721 (each re-merged with master incl. #1780). #1721: Simple alias and
+  icon-toggle defaults ported into `SemanticStyles.xaml` (moved there on master), corner-radius normalizer
+  folded into master's `SanitizeCornerRadius`, Fluent uses the shared `ThemeResourceResolver`. Layer 3:
+  Simple host 674/1 skip/0 Debug + Release, Light + Dark; Material host 154/154.
+- [ ] Refresh the three PR descriptions (after push).
 - [ ] Cross-repo: uno#24797 (UnoFeature) and uno.templates#2284 (`-theme fluent`) — resolve conflicts,
   re-verify against a locally packed `Uno.Fluent.WinUI`.
 - Follow-up (not this PR): Simple/Material `SemanticStyles.xaml` alias into their own bundle and so bind
