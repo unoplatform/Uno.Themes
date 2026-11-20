@@ -100,9 +100,11 @@ public class Given_FluentAliasResolution
 		// (spec D16): every semantic key must alias a concrete style key
 		// directly — never another alias. If this assertion ever fails, the
 		// platform constraint has been lifted; revisit D16 before relying on it.
+#if HAS_UNO // WinUI resolves alias chains; D16 is an Uno constraint.
 		container.Resources.TryGetValue("SpikeAliasOfAlias", out var chained);
 		Assert.IsFalse(chained is Style,
 			"alias chaining unexpectedly resolved — revisit specs/05-fluent-theme/spec.md D16");
+#endif
 	}
 
 	// ─────────────────────────────────────────────────────────────────────
