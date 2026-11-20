@@ -466,6 +466,7 @@ public class Given_FluentSeedAccent
 	// documented consumer topology (FluentTheme at app scope, after XCR).
 	// ─────────────────────────────────────────────────────────────────────
 
+#if HAS_UNO // WinUI binds the built-in controls' accent aliases inside XamlControlsResources, so FluentTheme cannot recolor them there (spec 05 §9.2).
 	[TestMethod]
 	[RunsOnUIThread]
 	public async Task When_SeedSet_RenderedAccentButtonFollowsSeed()
@@ -499,6 +500,7 @@ public class Given_FluentSeedAccent
 			appDictionaries.Remove(theme);
 		}
 	}
+#endif
 
 	// ─────────────────────────────────────────────────────────────────────
 	// Seed cleared → the platform accent is restored (no residue).
@@ -653,6 +655,7 @@ public class Given_FluentSeedAccent
 			"the semantic PrimaryColor and the override-driven accent must agree");
 	}
 
+#if HAS_UNO // WinUI binds the built-in controls' accent aliases inside XamlControlsResources, so FluentTheme cannot recolor them there (spec 05 §9.2).
 	[TestMethod]
 	[RunsOnUIThread]
 	public async Task When_PrimaryColorOverridden_RenderedAccentButtonFollows()
@@ -690,6 +693,7 @@ public class Given_FluentSeedAccent
 			appDictionaries.Remove(theme);
 		}
 	}
+#endif
 
 	[TestMethod]
 	[RunsOnUIThread]
@@ -718,6 +722,7 @@ public class Given_FluentSeedAccent
 			"the accent fill must carry the override, not the seed's branch-mapped tone");
 	}
 
+#if HAS_UNO // On WinUI a code lookup on a detached dictionary skips its theme dictionaries and returns the system accent.
 	[TestMethod]
 	[RunsOnUIThread]
 	public void When_ExplicitAccentShadeOverridden_ExplicitWins()
@@ -740,6 +745,7 @@ public class Given_FluentSeedAccent
 		Assert.AreEqual(OverrideGreen, GetColor(container.Resources, "SystemAccentColorLight2"),
 			"an explicit accent-shade override must win over the seed-derived shade");
 	}
+#endif
 
 	[TestMethod]
 	[RunsOnUIThread]
@@ -816,6 +822,7 @@ public class Given_FluentSeedAccent
 			"the later merged Dark override must become the native Dark accent fill");
 	}
 
+#if HAS_UNO // WinUI binds the built-in controls' accent aliases inside XamlControlsResources, so FluentTheme cannot recolor them there (spec 05 §9.2).
 	[TestMethod]
 	[RunsOnUIThread]
 	[DataRow(ElementTheme.Light)]
@@ -842,7 +849,9 @@ public class Given_FluentSeedAccent
 		Assert.AreEqual(expected.Color, actual.Color, "the explicit native fill brush must win over the seed");
 		Assert.AreEqual(expected.Opacity, actual.Opacity, 0.0001, "the explicit brush opacity must be preserved");
 	}
+#endif
 
+#if HAS_UNO // WinUI binds the built-in controls' accent aliases inside XamlControlsResources, so FluentTheme cannot recolor them there (spec 05 §9.2).
 	[TestMethod]
 	[DataRow("PrimaryBrush", false)]
 	[DataRow("PrimaryBrush", true)]
@@ -896,7 +905,9 @@ public class Given_FluentSeedAccent
 			appDictionaries.Remove(theme);
 		}
 	}
+#endif
 
+#if HAS_UNO // WinUI binds the built-in controls' accent aliases inside XamlControlsResources, so FluentTheme cannot recolor them there (spec 05 §9.2).
 	[TestMethod]
 	[DataRow("Light")]
 	[DataRow("Dark")]
@@ -929,4 +940,5 @@ public class Given_FluentSeedAccent
 			appDictionaries.Remove(theme);
 		}
 	}
+#endif
 }

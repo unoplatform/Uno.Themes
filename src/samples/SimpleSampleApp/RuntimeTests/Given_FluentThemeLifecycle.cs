@@ -53,6 +53,7 @@ public class Given_FluentThemeLifecycle
 		GC.Collect();
 	}
 
+#if HAS_UNO // WinUI binds the built-in controls' accent aliases inside XamlControlsResources, so FluentTheme cannot recolor them there (spec 05 §9.2).
 	[TestMethod]
 	[RunsOnUIThread]
 	[DataRow(ElementTheme.Light)]
@@ -79,6 +80,7 @@ public class Given_FluentThemeLifecycle
 		}
 		finally { dictionaries.Remove(theme); }
 	}
+#endif
 
 	[TestMethod]
 	[RunsOnUIThread]
@@ -95,6 +97,7 @@ public class Given_FluentThemeLifecycle
 		Assert.AreNotEqual(Microsoft.UI.Colors.Green, fill, "the built-in accent must follow the seed");
 	}
 
+#if HAS_UNO // WinUI binds the built-in controls' accent aliases inside XamlControlsResources, so FluentTheme cannot recolor them there (spec 05 §9.2).
 	[TestMethod]
 	[RunsOnUIThread]
 	public async Task When_ColorsAssignedWithoutSeed_ConstructorOverrideStillApplies()
@@ -107,6 +110,7 @@ public class Given_FluentThemeLifecycle
 		Assert.AreEqual(Microsoft.UI.Colors.Green, (Color)theme["PrimaryColor"], "assigning Colors must not drop the constructor override");
 		Assert.AreEqual(Microsoft.UI.Colors.Green, fill);
 	}
+#endif
 
 	private static async Task<Color> GetAccentButtonFill(FluentTheme theme)
 	{
@@ -120,6 +124,7 @@ public class Given_FluentThemeLifecycle
 		return Assert.IsInstanceOfType<SolidColorBrush>(button.Background).Color;
 	}
 
+#if HAS_UNO // WinUI binds the built-in controls' accent aliases inside XamlControlsResources, so FluentTheme cannot recolor them there (spec 05 §9.2).
 	[TestMethod]
 	[RunsOnUIThread]
 	[DataRow(ElementTheme.Light)]
@@ -160,6 +165,7 @@ public class Given_FluentThemeLifecycle
 		}
 		finally { dictionaries.Remove(theme); }
 	}
+#endif
 
 #if HAS_UNO
 	[TestMethod]

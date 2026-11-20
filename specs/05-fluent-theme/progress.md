@@ -415,8 +415,11 @@ dropped** — under Fluent, lightweight styling uses WinUI's native per-control 
   hosting smoke `--smoke` (Release desktop, Windows) PASS with every guest ALC reclaimed, Fluent included;
   scope split: master merged (its Uno 7.1 bump supersedes the branch's `Uno.Sdk.Private` 7.0.65 bump) and the
   `specs/pr-1695-review` log dropped. Uno 7.1: Simple 566/1 skip (layer 3: 679/1 skip) Light + Dark, Material 154/154.
-- [ ] WinAppSDK run of `Given_Fluent*` (XCR-internal aliases): the head builds (VS 2022 MSBuild; VS 18's lacks the
-  .NET SDK resolver) and is registered, but the engine has no headless mode there, so it needs the in-app runner.
+- [x] WinAppSDK run of `Given_Fluent*` (2026-11-20, in-app runner; built with VS 2022 MSBuild, VS 18's lacks the .NET
+  SDK resolver): 191/209. 15 rendered-accent failures: WinUI binds the controls' accent aliases inside XCR, so a seed
+  or override never reaches built-in controls there (spec §9.2). Gated to Uno and documented as a WinAppSDK
+  limitation (owner's call over a generated per-control key table). The other three are platform differences in the
+  tests: alias chaining resolves on WinUI, and a detached dictionary's code lookup skips its theme dictionaries.
 - Not taken (Simple/Material, out of scope here): Material v2 duplicate SharedTypography merge;
   `OutlinedButton*` / `IconToggleButton*` lightweight-path change needs a breaking-change note in #1721;
   stale `OutlinedButtonStyle` rows in `doc/simple-controls-styles.md` and `Given_SemanticStyles`.

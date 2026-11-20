@@ -280,6 +280,9 @@ Without a seed or a `PrimaryColor` override, none of these overrides exist and t
 > [!NOTE]
 > Clearing the seed at runtime (`PrimarySeed = null`) immediately restores the default semantic palette and platform accent, including the accent brushes held by controls already on screen. Explicit color and brush overrides continue to take precedence after the seed is cleared. Built-in controls rendered before the *first* seed or `PrimaryColor` override was set keep the platform accent until they are re-created.
 
+> [!NOTE]
+> On the WinAppSDK (`net*-windows`) target the built-in controls keep the system accent: WinUI binds their accent resources inside `XamlControlsResources`. The semantic palette and the accent resources your own XAML reads still follow the seed or override. See [FluentTheme behavior notes](fluent-getting-started.md#behavior-notes).
+
 ## Color Precedence
 
 When building the final theme palette, the following precedence order applies (highest wins):
