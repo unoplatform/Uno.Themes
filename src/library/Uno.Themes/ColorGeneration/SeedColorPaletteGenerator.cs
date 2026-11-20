@@ -93,8 +93,7 @@ internal sealed class SeedColorPaletteGenerator
 		//  - SeedColorMode.TonalSpot (the pre-8.0 behavior): a minimum chroma of 48
 		//    on Primary and fixed chromas on the supporting palettes, which guarantees vibrant
 		//    output at the cost of distorting the seed.
-		double primaryChroma = preserveSeedColor ? chroma : Math.Max(chroma, 48);
-		var primary = new TonalPalette(hue, primaryChroma);
+		var primary = CreatePrimaryPalette(seedHct, mode);
 
 		TonalPalette secondary;
 		if (secondarySeedColor is { } secSeed)
@@ -244,13 +243,17 @@ internal sealed class SeedColorPaletteGenerator
 		darkDict[key] = ArgbToColor(palette.GetArgb(darkTone));
 	}
 
+	/// <summary>The primary tonal palette of a seed; FluentTheme derives the built-in accent from it too.</summary>
+	internal static TonalPalette CreatePrimaryPalette(HctColor seed, SeedColorMode mode) =>
+		new(seed.Hue, mode == SeedColorMode.TonalSpot ? Math.Max(seed.Chroma, 48) : seed.Chroma);
+
 	private static Color WithOpaqueAlpha(Color color) =>
 		color.A == 0xFF ? color : Color.FromArgb(0xFF, color.R, color.G, color.B);
 
-	private static int ColorToArgb(Color color) =>
+	internal static int ColorToArgb(Color color) =>
 		(color.A << 24) | (color.R << 16) | (color.G << 8) | color.B;
 
-	private static Color ArgbToColor(int argb) =>
+	internal static Color ArgbToColor(int argb) =>
 		Color.FromArgb(
 			(byte)((argb >> 24) & 0xFF),
 			(byte)((argb >> 16) & 0xFF),

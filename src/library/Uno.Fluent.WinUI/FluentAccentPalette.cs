@@ -40,9 +40,6 @@ internal static class FluentAccentPalette
 	// accent and the semantic PrimaryColor agree in the dark theme.
 	private const double DarkThemePrimaryTone = 80;
 
-	// Same chroma floor SeedColorPaletteGenerator applies under TonalSpot.
-	private const double TonalSpotMinimumChroma = 48;
-
 	private static readonly Color White = Color.FromArgb(0xFF, 0xFF, 0xFF, 0xFF);
 	private static readonly Color Black = Color.FromArgb(0xFF, 0x00, 0x00, 0x00);
 
@@ -96,8 +93,8 @@ internal static class FluentAccentPalette
 		/// </summary>
 		internal static AccentShades FromSeed(Color seed, SeedColorMode mode)
 		{
-			var hct = HctColor.FromArgb(ToArgb(seed));
-			var palette = PaletteOf(hct, mode);
+			var hct = HctColor.FromArgb(SeedColorPaletteGenerator.ColorToArgb(seed));
+			var palette = SeedColorPaletteGenerator.CreatePrimaryPalette(hct, mode);
 
 			return mode == SeedColorMode.TonalSpot
 				? From(ToneColor(palette, AccentTone), AccentTone, palette)
@@ -107,8 +104,8 @@ internal static class FluentAccentPalette
 		/// <summary>The shades of a verbatim accent (a <c>PrimaryColor</c> override): its own chroma and tone.</summary>
 		internal static AccentShades FromBasis(Color basis)
 		{
-			var hct = HctColor.FromArgb(ToArgb(basis));
-			return From(basis, hct.Tone, PaletteOf(hct, SeedColorMode.Fidelity));
+			var hct = HctColor.FromArgb(SeedColorPaletteGenerator.ColorToArgb(basis));
+			return From(basis, hct.Tone, SeedColorPaletteGenerator.CreatePrimaryPalette(hct, SeedColorMode.Fidelity));
 		}
 
 		private static AccentShades From(Color accent, double accentTone, TonalPalette palette)
@@ -153,26 +150,28 @@ internal static class FluentAccentPalette
 
 	/// <summary>
 	/// The accent resources of one appearance, driven by the consumer override's <c>PrimaryBrush</c>
-	/// (solid) or <c>PrimaryColor</c> — the accent verbatim — else by <paramref name="seed"/>; plus
-	/// <c>OnPrimaryBrush</c> / <c>OnPrimaryColor</c> as the on-accent text. Keys the override defines
-	/// explicitly are left out, so the consumer's value wins. <c>null</c> when nothing drives the accent.
+	/// (solid) or <c>PrimaryColor</c> — the accent verbatim — else by <paramref name="seedShades"/>; plus
+	/// <c>OnPrimaryBrush</c> / <c>OnPrimaryColor</c> as the on-accent text. <paramref name="baseOverride"/>
+	/// is read where <paramref name="consumerOverride"/> has no value. Keys either override defines explicitly
+	/// are left out, so the consumer's value wins. <c>null</c> when nothing drives the accent.
 	/// </summary>
 	/// <returns>Colors and <see cref="SolidColorBrush"/> templates (color + opacity), by key.</returns>
-	internal static Dictionary<string, object>? Build(bool isLight, Color? seed, SeedColorMode mode, ResourceDictionary? consumerOverride)
+	internal static Dictionary<string, object>? Build(bool isLight, AccentShades? seedShades, ResourceDictionary? consumerOverride, ResourceDictionary? baseOverride = null)
 	{
 		var appearance = isLight ? "Light" : "Dark";
-		var primaryBrush = FluentResourceResolver.Resolve(consumerOverride, appearance, "PrimaryBrush") as SolidColorBrush;
-		var basis = primaryBrush?.Color ?? FluentResourceResolver.Resolve(consumerOverride, appearance, SemanticColorKeys.Primary) as Color?;
+		object? Find(string key)
+			=> FluentResourceResolver.Resolve(consumerOverride, appearance, key) ?? FluentResourceResolver.Resolve(baseOverride, appearance, key);
 
-		var onPrimary = FluentResourceResolver.Resolve(consumerOverride, appearance, "OnPrimaryBrush") as SolidColorBrush;
-		if (onPrimary is null && FluentResourceResolver.Resolve(consumerOverride, appearance, SemanticColorKeys.OnPrimary) is Color onPrimaryColor)
+		var primaryBrush = Find("PrimaryBrush") as SolidColorBrush;
+		var basis = primaryBrush?.Color ?? Find(SemanticColorKeys.Primary) as Color?;
+
+		var onPrimary = Find("OnPrimaryBrush") as SolidColorBrush;
+		if (onPrimary is null && Find(SemanticColorKeys.OnPrimary) is Color onPrimaryColor)
 		{
 			onPrimary = new SolidColorBrush(onPrimaryColor);
 		}
 
-		AccentShades? shades = basis is { } b ? AccentShades.FromBasis(b)
-			: seed is { } s ? AccentShades.FromSeed(s, mode)
-			: null;
+		var shades = basis is { } b ? AccentShades.FromBasis(b) : seedShades;
 		if (shades is null && onPrimary is null)
 		{
 			return null;
@@ -193,11 +192,11 @@ internal static class FluentAccentPalette
 			WriteColorAndBrush(entries, "TextOnAccentFillColorSecondary", onPrimary.Color, onPrimary.Opacity);
 		}
 
-		if (consumerOverride is { })
+		if (consumerOverride is { } || baseOverride is { })
 		{
 			foreach (var key in new List<string>(entries.Keys))
 			{
-				if (FluentResourceResolver.Resolve(consumerOverride, appearance, key) is { })
+				if (Find(key) is { })
 				{
 					entries.Remove(key);
 				}
@@ -230,8 +229,8 @@ internal static class FluentAccentPalette
 	/// </summary>
 	internal static (Color Primary, Color Secondary) PickOnAccentText(Color fill)
 	{
-		var fillArgb = ToArgb(fill);
-		return ColorMath.ContrastRatio(fillArgb, ToArgb(White)) >= ColorMath.ContrastRatio(fillArgb, ToArgb(Black))
+		var fillArgb = SeedColorPaletteGenerator.ColorToArgb(fill);
+		return ColorMath.ContrastRatio(fillArgb, SeedColorPaletteGenerator.ColorToArgb(White)) >= ColorMath.ContrastRatio(fillArgb, SeedColorPaletteGenerator.ColorToArgb(Black))
 			? (White, WhiteSecondary)
 			: (Black, BlackSecondary);
 	}
@@ -308,20 +307,7 @@ internal static class FluentAccentPalette
 		return null;
 	}
 
-	private static TonalPalette PaletteOf(HctColor hct, SeedColorMode mode)
-		=> new(hct.Hue, mode == SeedColorMode.TonalSpot ? Math.Max(hct.Chroma, TonalSpotMinimumChroma) : hct.Chroma);
-
 	// Relative shades land on fractional tones; the palette is integer-toned.
 	private static Color ToneColor(TonalPalette palette, double tone)
-		=> FromArgb(palette.GetArgb((int)Math.Round(Math.Clamp(tone, 0, 100))));
-
-	private static int ToArgb(Color color) =>
-		(color.A << 24) | (color.R << 16) | (color.G << 8) | color.B;
-
-	private static Color FromArgb(int argb) =>
-		Color.FromArgb(
-			(byte)((argb >> 24) & 0xFF),
-			(byte)((argb >> 16) & 0xFF),
-			(byte)((argb >> 8) & 0xFF),
-			(byte)(argb & 0xFF));
+		=> SeedColorPaletteGenerator.ArgbToColor(palette.GetArgb((int)Math.Round(Math.Clamp(tone, 0, 100))));
 }

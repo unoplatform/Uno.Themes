@@ -674,6 +674,27 @@ public abstract partial class BaseTheme : ResourceDictionary
 	// derive resources from it (Fluent's accent) without re-parsing its Source.
 	internal ResourceDictionary ResolvedColorOverride { get; private set; }
 
+	/// <summary>The primary seed in effect (<see cref="ThemeColors.PrimarySeed"/>, else <see cref="DefaultPrimarySeed"/>) and its generation mode; <c>null</c> without one.</summary>
+	internal (Color Seed, SeedColorMode Mode)? EffectivePrimarySeed
+	{
+		get
+		{
+			if ((Colors?.PrimarySeed ?? DefaultPrimarySeed) is not { } seed)
+			{
+				return null;
+			}
+
+			// An explicit Colors.SeedColorMode wins; otherwise fall back to the obsolete
+			// virtual so a subclass that overrode it before 8.0 keeps its behavior.
+#pragma warning disable CS0618 // Type or member is obsolete
+			var mode = Colors is { HasExplicitSeedColorMode: true } explicitColors
+				? explicitColors.SeedColorMode
+				: UseHighFidelityColors ? SeedColorMode.Fidelity : SeedColorMode.TonalSpot;
+#pragma warning restore CS0618
+			return (seed, mode);
+		}
+	}
+
 	// The last successfully resolved copy of a URI-backed font override, the consumer instance it
 	// was resolved from, and whether the next rebuild must re-read it from its Source. Re-reading
 	// on every rebuild would re-parse the override XAML on unrelated theme changes (a seed-color
@@ -777,22 +798,9 @@ public abstract partial class BaseTheme : ResourceDictionary
 			colorLayers.Add(baseColorOverride);
 		}
 
-		// Resolve seed colors from Colors property, falling back to theme default
-		var effectivePrimary = Colors?.PrimarySeed ?? DefaultPrimarySeed;
-		var effectiveSecondary = Colors?.SecondarySeed;
-		var effectiveTertiary = Colors?.TertiarySeed;
-
-		if (effectivePrimary is { } seed)
+		if (EffectivePrimarySeed is { } effective)
 		{
-			// An explicit Colors.SeedColorMode wins; otherwise fall back to the obsolete
-			// virtual so a subclass that overrode it before 8.0 keeps its behavior.
-#pragma warning disable CS0618 // Type or member is obsolete
-			var seedColorMode = Colors is { HasExplicitSeedColorMode: true } explicitColors
-				? explicitColors.SeedColorMode
-				: UseHighFidelityColors ? SeedColorMode.Fidelity : SeedColorMode.TonalSpot;
-#pragma warning restore CS0618
-
-			var seedPalette = SeedColorPaletteGenerator.Default.Generate(seed, effectiveSecondary, effectiveTertiary, seedColorMode);
+			var seedPalette = SeedColorPaletteGenerator.Default.Generate(effective.Seed, Colors?.SecondarySeed, Colors?.TertiarySeed, effective.Mode);
 			colors.SafeMerge(seedPalette);
 			colorLayers.Add(seedPalette);
 		}

@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Uno.Fluent;
 using Uno.UI.RuntimeTests;
@@ -17,6 +18,8 @@ namespace Uno.Themes.Samples.RuntimeTests;
 [TestClass]
 public class Given_FluentSemanticStyles
 {
+	private WeakReference<Button>? _unloadedButton;
+
 #if HAS_UNO // WinUI's DatePickerFlyoutPresenter has no public constructor, so it cannot be instantiated there.
 	[TestMethod]
 	[RunsOnUIThread]
@@ -146,7 +149,104 @@ public class Given_FluentSemanticStyles
 		var container = CreateThemedContainer();
 		container.RequestedTheme = appearance;
 		var button = new Button { Content = "subtle", Style = (Style)container.Resources["TextButtonStyle"] };
-		container.Children.Add(button);
+
+		var fill = await GetPointerOverFill(container, button);
+
+		Assert.AreEqual(expected, fill, "the subtle button hovers with SubtleFillColorSecondary, not the standard fill");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_SeveralSubtleButtons_EachUsesTheSubtleFill()
+	{
+		// WinUI rejects a ResourceDictionary with two parents: every button must get its own.
+		var container = CreateThemedContainer();
+		container.RequestedTheme = ElementTheme.Light;
+		var first = new Button { Content = "first", Style = (Style)container.Resources["TextButtonStyle"] };
+		var second = new Button { Content = "second", Style = (Style)container.Resources["IconButtonStyle"] };
+		container.Children.Add(first);
+
+		var firstFill = await GetPointerOverFill(container, first);
+		var secondFill = await GetPointerOverFill(container, second);
+
+		Assert.AreEqual("#09000000", firstFill);
+		Assert.AreEqual("#09000000", secondFill);
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_TextButtonResourcesAssignedAfterStyle_PointerOverUsesTheSubtleFill()
+	{
+		// XAML sets the Style attribute before a <Button.Resources> property element replaces the dictionary.
+		var container = CreateThemedContainer();
+		container.RequestedTheme = ElementTheme.Light;
+		var button = new Button { Content = "subtle", Style = (Style)container.Resources["TextButtonStyle"] };
+		button.Resources = new ResourceDictionary { ["UnrelatedKey"] = 1.0 };
+
+		var fill = await GetPointerOverFill(container, button);
+
+		Assert.AreEqual("#09000000", fill, "a replaced Resources dictionary must not drop the subtle fills");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_LoadedTextButtonSwitchesToTheStandardStyle_PointerOverUsesTheStandardFill()
+	{
+		var container = CreateThemedContainer();
+		container.RequestedTheme = ElementTheme.Light;
+		var standard = (Style)container.Resources["OutlinedButtonStyle"];
+		var reference = new Button { Content = "reference", Style = standard };
+		var expected = await GetPointerOverFill(container, reference);
+
+		var button = new Button { Content = "switched", Style = (Style)container.Resources["TextButtonStyle"] };
+		await GetPointerOverFill(container, button);
+		VisualStateManager.GoToState(button, "Normal", false);
+		button.Style = standard;
+
+		var fill = await GetPointerOverFill(container, button);
+
+		Assert.AreNotEqual("#09000000", expected, "precondition: the standard fill differs from the subtle one");
+		Assert.AreEqual(expected, fill, "replacing the style on a loaded button must drop the subtle fills");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_SubtleButtonUnloaded_ItIsCollected()
+	{
+		await LoadAndUnloadSubtleButton();
+		await UnitTestsUIContentHelper.WaitForIdle();
+		Collect();
+
+		Assert.IsNotNull(_unloadedButton);
+		Assert.IsFalse(_unloadedButton.TryGetTarget(out _), "the subtle button's Loaded subscription must not retain the button");
+	}
+
+	[MethodImpl(MethodImplOptions.NoInlining)]
+	private async Task LoadAndUnloadSubtleButton()
+	{
+		var container = CreateThemedContainer();
+		var button = new Button { Content = "subtle", Style = (Style)container.Resources["TextButtonStyle"] };
+		_unloadedButton = new WeakReference<Button>(button);
+		await GetPointerOverFill(container, button);
+		UnitTestsUIContentHelper.Content = new Grid();
+		await UnitTestsUIContentHelper.WaitForIdle();
+	}
+
+	[MethodImpl(MethodImplOptions.NoInlining)]
+	private static void Collect()
+	{
+		// Leak guard: collect in a separate frame from the strong references.
+		GC.Collect();
+		GC.WaitForPendingFinalizers();
+		GC.Collect();
+	}
+
+	private static async Task<string> GetPointerOverFill(Panel container, Button button)
+	{
+		if (!container.Children.Contains(button))
+		{
+			container.Children.Add(button);
+		}
 
 		UnitTestsUIContentHelper.Content = container;
 		await UnitTestsUIContentHelper.WaitForLoaded(button);
@@ -156,40 +256,7 @@ public class Given_FluentSemanticStyles
 
 		var presenter = Assert.IsInstanceOfType<ContentPresenter>(VisualTreeHelper.GetChild(button, 0));
 		var background = Assert.IsInstanceOfType<SolidColorBrush>(presenter.Background);
-		Assert.AreEqual(expected, background.Color.ToString(), "the subtle button hovers with SubtleFillColorSecondary, not the standard fill");
-	}
-
-	[TestMethod]
-	[RunsOnUIThread]
-	public async Task When_SeveralTextButtons_EachGetsItsOwnStateResources()
-	{
-		var container = CreateThemedContainer();
-		var first = new Button { Content = "first", Style = (Style)container.Resources["TextButtonStyle"] };
-		var second = new Button { Content = "second", Style = (Style)container.Resources["IconButtonStyle"] };
-		container.Children.Add(first);
-		container.Children.Add(second);
-
-		UnitTestsUIContentHelper.Content = container;
-		await UnitTestsUIContentHelper.WaitForLoaded(second);
-		await UnitTestsUIContentHelper.WaitForIdle();
-
-		// WinUI rejects a ResourceDictionary with two parents, so each button needs its own.
-		Assert.AreEqual(1, first.Resources.MergedDictionaries.Count);
-		Assert.AreEqual(1, second.Resources.MergedDictionaries.Count);
-		Assert.AreNotSame(first.Resources.MergedDictionaries[0], second.Resources.MergedDictionaries[0]);
-	}
-
-	[TestMethod]
-	[RunsOnUIThread]
-	public void When_TextButtonStyleReplaced_ItsResourcesAreRemoved()
-	{
-		var container = CreateThemedContainer();
-		var button = new Button { Style = (Style)container.Resources["TextButtonStyle"] };
-		Assert.AreEqual(1, button.Resources.MergedDictionaries.Count, "the subtle button merges its state resources");
-
-		button.Style = (Style)container.Resources["OutlinedButtonStyle"];
-
-		Assert.AreEqual(0, button.Resources.MergedDictionaries.Count, "replacing the style must remove them");
+		return background.Color.ToString();
 	}
 
 	[TestMethod]
