@@ -410,9 +410,13 @@ dropped** — under Fluent, lightweight styling uses WinUI's native per-control 
   legacy `UseHighFidelityColors` subclass); the constructor `colorOverride` is the base palette below a
   seed, as in Simple/Material (red: seed vs override, `Colors` reassignment). Simple host 566/1 skip
   Light + Dark, FluentSampleApp 5/5.
-- [ ] Review panel, still open: WinAppSDK run of the seed-accent tests (XCR-internal control aliases),
-  App.xaml start-up accent test in the Fluent head, hosting smoke (`--smoke`) for ALC reclaim with the
-  `UISettings` observer, scope split (review-note folders, unrelated infra commits).
+- [x] Review panel checks (2026-11-20): `Given_FluentAppTheme` in the Fluent head covers the App.xaml theme
+  (start-up fill is the system accent; an app seed recolors and clearing restores it), 7/7 Light + Dark;
+  hosting smoke `--smoke` (Release desktop, Windows) PASS with every guest ALC reclaimed, Fluent included;
+  scope split: master merged (its Uno 7.1 bump supersedes the branch's `Uno.Sdk.Private` 7.0.65 bump) and the
+  `specs/pr-1695-review` log dropped. Uno 7.1: Simple 566/1 skip (layer 3: 679/1 skip) Light + Dark, Material 154/154.
+- [ ] WinAppSDK run of `Given_Fluent*` (XCR-internal aliases): the head builds (VS 2022 MSBuild; VS 18's lacks the
+  .NET SDK resolver) and is registered, but the engine has no headless mode there, so it needs the in-app runner.
 - Not taken (Simple/Material, out of scope here): Material v2 duplicate SharedTypography merge;
   `OutlinedButton*` / `IconToggleButton*` lightweight-path change needs a breaking-change note in #1721;
   stale `OutlinedButtonStyle` rows in `doc/simple-controls-styles.md` and `Given_SemanticStyles`.
