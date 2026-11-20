@@ -101,11 +101,11 @@ public partial class FluentTheme : BaseTheme
 		AddThemeDictionary(_accent.Resources);
 		try
 		{
-			// The built-in controls follow the effective primary: a PrimaryColor override, else the seed.
-			var seed = Colors?.PrimarySeed ?? DefaultPrimarySeed;
-			var mode = Colors?.SeedColorMode ?? SeedColorMode.Fidelity;
-			_accent.Update(isLight: true, FluentAccentPalette.Build(isLight: true, seed, mode, ResolvedColorOverride));
-			_accent.Update(isLight: false, FluentAccentPalette.Build(isLight: false, seed, mode, ResolvedColorOverride));
+			// The built-in controls follow the effective primary: a PrimaryColor override, else the seed
+			// (in the same mode as the semantic palette).
+			var seedShades = EffectivePrimarySeed is { } seed ? FluentAccentPalette.AccentShades.FromSeed(seed.Seed, seed.Mode) : (FluentAccentPalette.AccentShades?)null;
+			_accent.Update(isLight: true, FluentAccentPalette.Build(isLight: true, seedShades, ResolvedColorOverride));
+			_accent.Update(isLight: false, FluentAccentPalette.Build(isLight: false, seedShades, ResolvedColorOverride));
 
 			if (BuildPlatformTokenOverrides() is { } platformTokens)
 			{

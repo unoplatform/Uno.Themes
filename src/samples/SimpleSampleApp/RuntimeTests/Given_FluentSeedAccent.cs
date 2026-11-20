@@ -261,6 +261,28 @@ public class Given_FluentSeedAccent
 
 	[TestMethod]
 	[RunsOnUIThread]
+	public void When_SubclassUsesTheLegacyTonalSpotSwitch_AccentFollowsTheSemanticPaletteMode()
+	{
+		// No explicit Colors.SeedColorMode: the obsolete UseHighFidelityColors override picks TonalSpot
+		// for the semantic palette, and the built-in accent must follow the same mode.
+		var theme = new LegacyTonalSpotFluentTheme { Colors = new ThemeColors { PrimarySeed = MutedSeed } };
+		var container = new Grid();
+		container.Resources.MergedDictionaries.Add(theme);
+
+		var expectedAccent = Tone(MutedSeed, 40, SeedColorMode.TonalSpot);
+		Assert.AreNotEqual(expectedAccent, MutedSeed, "sanity: TonalSpot must move a muted seed");
+		Assert.AreEqual(expectedAccent, GetColor(container.Resources, "SystemAccentColor"));
+	}
+
+#pragma warning disable CS0618, CS0672 // Exercises the obsolete pre-8.0 switch on purpose.
+	private sealed class LegacyTonalSpotFluentTheme : FluentTheme
+	{
+		protected override bool UseHighFidelityColors => false;
+	}
+#pragma warning restore CS0618, CS0672
+
+	[TestMethod]
+	[RunsOnUIThread]
 	public void When_SeedSetInTonalSpotMode_AccentFollowsBoostedPalette()
 	{
 		var theme = new FluentTheme();
