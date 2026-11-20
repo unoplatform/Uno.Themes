@@ -656,3 +656,17 @@ minimal shared core it needs). Findings in other themes go to the progress file 
 owners. To undo a temporary edit, reverse that edit (or `git stash` first); never `git checkout --` a file
 that holds uncommitted work.
 
+
+## A platform-specific mechanism is unproven until its tests run on that platform
+
+The Fluent accent closure (spec 05 D12) existed only as "WinAppSDK insurance", yet it was never run on WinAppSDK.
+The first run (2026-11-20) showed it never reached built-in controls there: WinUI resolves XCR's per-control
+`<StaticResource>` aliases (`AccentButtonBackground` → `AccentFillColorDefaultBrush`) inside XCR's own dictionary,
+so a later dictionary's brush of the same name is never bound. The resource-level tests passed; only the
+rendered-control tests caught it.
+
+**How to apply:**
+- Before claiming a behavior for a target, run its rendered tests there (WinAppSDK: VS 2022 `MSBuild.exe`, register
+  the `AppxManifest.xml`, run the in-app runner).
+- Assert what a control renders, not only what a resource lookup returns; the two diverge on WinUI.
+- Gate a test to Uno only with `#if HAS_UNO` plus the reason, and document the limitation for consumers.

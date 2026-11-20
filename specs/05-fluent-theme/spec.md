@@ -708,6 +708,14 @@ TFM drop lands the closure is dead insurance and should be stripped
 (see `progress.md` follow-ups). Do **not** strip earlier: packages still
 shipping the windows TFM would silently lose G5 for WinAppSDK consumers.
 
+**WinAppSDK verification (2026-11-20):** the closure does not deliver G5 on WinAppSDK either. WinUI's
+control keys are `<StaticResource>` aliases (`AccentButtonBackground` → `AccentFillColorDefaultBrush`)
+resolved once inside XCR's own dictionary, so they bind XCR's brushes, never `FluentTheme`'s. The
+resource-level tests pass there (the closure values resolve through the theme), the rendered-control
+tests fail, so those are gated to Uno and the limitation is documented. Making it work would mean
+re-pointing every per-control accent key (a table generated from WinUI's `generic.xaml`), which the slim
+scope declines given the planned TFM drop.
+
 ### 9.3 Interaction with the forward mapping
 
 When a seed is active, `BaseTheme.UpdateSource()` already merges the seed
