@@ -1,6 +1,7 @@
 #nullable enable
 
 using System.Collections.Generic;
+using System.Linq;
 
 #if WinUI
 using Microsoft.UI.Xaml;
@@ -42,15 +43,12 @@ internal sealed class FluentAccentLayer
 
 		// Brushes no longer generated return to the platform value for the controls still holding them.
 		Dictionary<string, object>? platform = null;
-		foreach (var pair in brushes)
+		foreach (var pair in brushes.Where(pair => entries?.ContainsKey(pair.Key) != true))
 		{
-			if (entries is null || !entries.ContainsKey(pair.Key))
+			platform ??= FluentAccentPalette.BuildPlatform(isLight);
+			if (platform?.TryGetValue(pair.Key, out var value) == true && value is SolidColorBrush source)
 			{
-				platform ??= FluentAccentPalette.BuildPlatform(isLight);
-				if (platform?.TryGetValue(pair.Key, out var value) == true && value is SolidColorBrush source)
-				{
-					CopyTo(source, pair.Value);
-				}
+				CopyTo(source, pair.Value);
 			}
 		}
 
