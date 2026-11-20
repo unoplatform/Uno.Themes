@@ -1,23 +1,23 @@
 #nullable enable
 
+using System;
+using Microsoft.Extensions.Logging;
+using Uno.Extensions;
+
 namespace Uno.Fluent;
 
 /// <summary>
-/// Warning-log helper for FluentTheme's graceful-degradation paths — theme
-/// initialization and rebuild passes never throw; they log and fall back.
+/// Warning-log helper for FluentTheme's graceful-degradation paths: theme initialization and
+/// rebuild passes never throw; they log and fall back.
 /// </summary>
 internal static class FluentDiagnostics
 {
-	internal static void LogWarning(string message)
+	internal static void LogWarning(string message, Exception? exception = null)
 	{
-#if HAS_UNO
-		var logger = global::Uno.Extensions.LogExtensionPoint.Log(typeof(FluentTheme));
-		if (logger.IsEnabled(global::Microsoft.Extensions.Logging.LogLevel.Warning))
+		var logger = typeof(FluentTheme).Log();
+		if (logger.IsEnabled(LogLevel.Warning))
 		{
-			global::Microsoft.Extensions.Logging.LoggerExtensions.LogWarning(logger, message);
+			logger.LogWarning(exception, message);
 		}
-#else
-		global::System.Diagnostics.Debug.WriteLine(message);
-#endif
 	}
 }

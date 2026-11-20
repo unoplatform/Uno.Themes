@@ -30,39 +30,27 @@ internal static class FluentColorPalette
 	/// <returns><c>false</c> when the platform accent or the neutrals are unavailable.</returns>
 	internal static bool TryPopulate(ResourceDictionary palette)
 	{
-		if (FluentAccentPalette.GetPlatformShades() is not { } accent)
-		{
-			FluentDiagnostics.LogWarning(
-				"FluentTheme could not resolve the Fluent accent; semantic colors keep the shared defaults. Ensure XamlControlsResources is merged before FluentTheme.");
-			return false;
-		}
-
-		if (GetNeutralSource() is not { } neutrals)
-		{
-			return false;
-		}
-
-		palette.ThemeDictionaries["Light"] = BuildBranch("Light", isLight: true, accent, neutrals);
-		palette.ThemeDictionaries["Default"] = BuildBranch("Default", isLight: false, accent, neutrals);
-		return true;
-	}
-
-	private static ResourceDictionary? GetNeutralSource()
-	{
-		if (_neutralSource is { } cached)
-		{
-			return cached;
-		}
-
 		try
 		{
-			return _neutralSource = new ResourceDictionary { Source = new Uri(FluentConstants.ResourcePaths.ColorPalette) };
+			if (FluentAccentPalette.GetPlatformShades() is not { } accent)
+			{
+				FluentDiagnostics.LogWarning(
+					"FluentTheme could not resolve the Fluent accent; semantic colors keep the shared defaults. Ensure XamlControlsResources is merged before FluentTheme.");
+				return false;
+			}
+
+			var neutrals = _neutralSource ??= new ResourceDictionary { Source = new Uri(FluentConstants.ResourcePaths.ColorPalette) };
+			var light = BuildBranch("Light", isLight: true, accent, neutrals);
+			var dark = BuildBranch("Default", isLight: false, accent, neutrals);
+			palette.ThemeDictionaries["Light"] = light;
+			palette.ThemeDictionaries["Default"] = dark;
+			return true;
 		}
 		catch (Exception e)
 		{
-			// Theme initialization never throws: degrade to the shared defaults.
-			FluentDiagnostics.LogWarning($"FluentTheme could not load its neutral color palette; semantic colors keep the shared defaults. {e.Message}");
-			return null;
+			// Runs from the theme constructor (App.xaml parsing): degrade to the shared defaults.
+			FluentDiagnostics.LogWarning("FluentTheme could not build its color palette; semantic colors keep the shared defaults.", e);
+			return false;
 		}
 	}
 
