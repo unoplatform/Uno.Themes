@@ -147,7 +147,7 @@ internal static class FluentAccentPalette
 		}
 		catch (Exception e)
 		{
-			FluentDiagnostics.LogWarning($"FluentTheme could not read the platform accent. {e.Message}");
+			FluentDiagnostics.LogWarning("FluentTheme could not read the platform accent.", e);
 			return null;
 		}
 	}

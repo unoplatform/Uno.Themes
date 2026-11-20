@@ -249,7 +249,7 @@ Under [`FluentTheme`](fluent-getting-started.md), controls are rendered by the *
 ```
 
 - For **CheckBox, RadioButton, and Slider**, most of the documented key names already *are* WinUI's (`CheckBoxCheckBackgroundFillChecked`, `RadioButtonOuterEllipseStroke`, `SliderTrackValueFill`, …), so the same override works under every theme.
-- The semantic per-control keys that differ from Fluent's (`FilledButtonBackground`, `OutlinedTextBox*`, `ToggleSwitchKnobOnFill`, …) have no effect under `FluentTheme`.
+- The semantic per-control keys that differ from Fluent's (`FilledButtonBackground`, `TextButtonForeground`, `IconButtonForeground`, `OutlinedTextBox*`, `ToggleSwitchKnobOnFill`, …) have no effect under `FluentTheme`.
 - To recolor the accent app-wide, set a seed or a `PrimaryColor` override: the built-in accent controls follow it ([seed → accent cascade](seed-colors.md#fluenttheme-seed--accent-cascade)).
 - `TextButtonStyle` and `IconButtonStyle` are Fluent subtle buttons: transparent at rest, `SubtleFillColorSecondary` / `SubtleFillColorTertiary` on hover / press, no border.
 
