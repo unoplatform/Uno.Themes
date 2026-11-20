@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Uno.Themes;
 using Uno.Themes.ColorGeneration;
 using Uno.Themes.ColorGeneration.Hct;
@@ -195,12 +196,9 @@ internal static class FluentAccentPalette
 
 		if (consumerOverride is { } || baseOverride is { })
 		{
-			foreach (var key in new List<string>(entries.Keys))
+			foreach (var key in entries.Keys.Where(key => Find(key) is { }).ToList())
 			{
-				if (Find(key) is { })
-				{
-					entries.Remove(key);
-				}
+				entries.Remove(key);
 			}
 		}
 
