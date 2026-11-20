@@ -1,8 +1,28 @@
 # Material semantic implementation review
 
-Source audit of the current Material v2 implementation, 2026-09-06. No product code changed in this lane. Findings below are established from resource declarations and their consuming templates; runtime reproductions were not executed by this lane.
+Original source audit of Material v2, 2026-09-06. No product code changed and no runtime reproductions ran in the original audit lane. Historical findings and line references remain below; follow-up implementation and verification are recorded separately.
 
-## Confirmed implementation gaps
+## Resolution update — 2026-09-07
+
+The Material Desktop runtime host passed all 74 tests after these fixes, including
+the v1 compatibility guard and two PipsPager path-string checks. The Material
+WebAssembly build passed; no WebAssembly runtime or native WinUI runtime execution
+is claimed. Logs are recorded in [implementation progress](../semantic-fixes/progress.md).
+
+| Finding | Resolution | Regression |
+|---|---|---|
+| Selected-rating hover | Primary and secondary templates consume their selected-hover brushes | `Given_SemanticOverrides.When_SelectedRatingIsHovered_Then_SemanticHoverBrushIsUsed` |
+| Calendar glyph | Normal glyph explicitly consumes its resource; disabled paint remains independent | `Given_SemanticOverrides.When_CalendarGlyphBrushIsOverridden_Then_TemplateConsumesNormalAndDisabledKeys` |
+| Cross-theme button measurements | Simple now consumes `ButtonBorderThickness` and dynamic `LabelLargeFontSize`; per-theme corner and padding keys remain documented | Simple host: `Given_SimpleSemanticOverrideStates.When_ButtonMeasurementsOverridden_PortableBorderAndFontAreConsumed` |
+| Typography precedence | A v2-specific base dictionary merges shared defaults before Material typography; v1 retains its prior resource graph | `Given_Fonts.When_LabelExtraSmallIsUsed_Then_MaterialTypographyWinsOverSharedDefaults`, `When_LegacyMaterialResourcesAreLoaded_Then_SharedTypographyAndFontsRemainAvailable` |
+| Markup PipsPager value types | Typed helpers use strings; Material defaults are confirmed parseable geometry strings | `Given_SemanticOverrides.When_PipsNavigationDataIsResolved_Then_ItIsAPathString`; Simple host: `Given_MarkupSemanticResources.When_PipsPathHelpersAreUsed_Then_StringConsumersResolvePathData` |
+
+The additional `ContentDialog` static `HeadlineSmallFontSize` observation in the
+original coverage notes remains an **unverified follow-up**, outside the numbered
+confirmed fixes. No runtime reproduction or behavior change is claimed for it.
+The published rating, calendar, and typography pages describe the corrected behavior.
+
+## Original confirmed implementation gaps
 
 ### P2: selected-rating hover overrides are ignored
 
@@ -33,7 +53,7 @@ Source audit of the current Material v2 implementation, 2026-09-06. No product c
 - Other overlapping Light/Default size, weight and spacing values currently match, so this is mostly a latent maintenance trap. Do not claim all Material typography is visually wrong.
 - Regression needed: assert the declared Material Light weight and a realized `LabelExtraSmall` TextBlock. A correction should follow the same explicit-source merge approach already used by Simple's typography, if `Medium` is the intended Material value.
 
-## Coverage and positive results
+## Original coverage and positive results
 
 - Material v2 declares every semantic control-style key listed by the semantic skill, plus the 19 typography style aliases. No missing Material alias was found.
 - Material reuses BaseTheme for seeds, color overrides, spacing, density and shape generation, and declares the 12 per-control font-family aliases needed by the generated font layer in `MaterialTheme.FontFamilyAliasKeys`.
@@ -41,14 +61,14 @@ Source audit of the current Material v2 implementation, 2026-09-06. No product c
 - No Material suite currently exercises the full semantic style matrix or the documented per-control interaction-state override matrix. In particular, the rating and calendar glyph seams above lack regression tests.
 - `ContentDialog.xaml:214` still reads `HeadlineSmallFontSize` statically while the adjacent family resource is dynamic; review this alongside the cross-theme typography override contract rather than claiming that the single font-family scalar itself is broken.
 
-## Documentation fixes made
+## Original documentation fixes made
 
 - `doc/material-controls-styles.md`: added eight omitted current style keys (ComboBoxItem, DatePickerFlyoutPresenter, MediaTransportControls, MenuFlyoutSeparator, MenuFlyoutSubItem, RadioMenuFlyoutItem, Ripple, ToggleMenuFlyoutItem), documented the compatibility calendar key, identified Material-specific additions, and linked semantic mappings and override guidance. `SecondaryRatingControlStyle` is valid: it is declared directly in RatingControl.xaml, not aliased in `_Resources.xaml`.
 - `doc/material-colors.md`: corrected the default ShadowColor from opaque black to `#33000000` in both appearances; clarified the common 33-color/280-brush surface, the missing ShadowBrush family, opacity overrides, and seed versus explicit color overrides.
 
 Central documentation corrections passed to the primary lane: semantic mapping table omits DatePickerFlyoutPresenterStyle; design-token table omits Radius500; seed-color/helper sections still inconsistently describe Material/Simple only despite Fluent support.
 
-## Verification
+## Original verification
 
 - Parsed the Material alias dictionary and compared it to the Material style table.
 - Parsed SharedColorPalette and compared every documented Light/Default color value: ShadowColor was the only mismatch.

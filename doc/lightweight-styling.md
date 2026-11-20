@@ -13,7 +13,7 @@ Overriding resources from Uno Material can be done at the App level, Page level,
 
 Lightweight styling is surgical — one key at a time. To change the app's whole color theme at once, generate it from a single [seed color](seed-colors.md) instead; a lightweight override you define always wins over seed-generated values, so the two combine cleanly.
 
-The examples below use Material v2. A semantic style name is portable only where that style exists, and matching resource names do not guarantee that every theme reads them in the same states. Check [semantic override compatibility](semantic-styles.md#override-compatibility), the [Simple control reference](simple-controls-styles.md), and the [Fluent section](#fluent-theme) when sharing overrides across themes. For a color-role change that should regenerate brushes, put the `*Color` override in the theme's `Colors.OverrideDictionary`; a page-local color resource alone does not rebuild the theme's brushes.
+The examples below use Material v2. All three themes expose the semantic style names, with design-system-specific mappings and resource scopes. Check [semantic override compatibility](semantic-styles.md#override-compatibility), the [Simple control reference](simple-controls-styles.md), and the [Fluent section](#fluent-theme) when sharing overrides across themes. For a color-role change that should regenerate brushes, put the `*Color` override in the theme's `Colors.OverrideDictionary`; a page-local color resource alone does not rebuild the theme's brushes.
 
 > [!Video https://www.youtube-nocookie.com/embed/5CsJHMTlNAw]
 
@@ -52,7 +52,7 @@ The most common way to override resources is at the App level. This is done by a
 </ResourceDictionary.MergedDictionaries>
 ```
 
-Notice the `ResourceDictionary.ThemeDictionaries` element. This is where you can override resources for each theme. In the example above, we are overriding the resources for both the Light and Default themes. The Light theme is used when the device is in Light mode, and the Default theme is used when the device is in Dark mode. Below is an example of the same `Button` using the `FilledButtonStyle` from Uno Material, but with the overrides from above applied to both the Light and Dark themes.
+Use `ResourceDictionary.ThemeDictionaries` to override resources per appearance. In the example above, `Light` supplies the Light values and `Default` supplies the fallback for other appearances, including Dark. Use a `Dark` dictionary when an override should apply only in Dark mode. Nested merged dictionaries are supported; later merged children win, while entries declared directly in their parent dictionary take precedence over those children. Below is the same `Button` using `FilledButtonStyle` with the overrides applied in Light and Dark.
 
 ![Material - Button lightweight styling themes](assets/lightweight-styling-theme-comparison.png)
 
@@ -142,7 +142,7 @@ With this XAML, we are given the following visual result, notice the third Butto
 
 ## C# Markup
 
-Many lightweight styling resource keys have C# Markup helpers in the [Uno.Themes.WinUI.Markup](https://www.nuget.org/packages/Uno.Themes.WinUI.Markup/) package. The following code shows how to override several `FilledButton` resources from the previous XAML example. The `Button` keeps its semantic style while its resources change. Helpers name the same underlying XAML keys and inherit the same theme/override limitations; see [C# Markup compatibility](semantic-styles.md#c-markup-compatibility) for missing and incorrectly typed helpers.
+Many lightweight styling resource keys have C# Markup helpers in the [Uno.Themes.WinUI.Markup](https://www.nuget.org/packages/Uno.Themes.WinUI.Markup/) package. The following code shows how to override several `FilledButton` resources from the previous XAML example. The `Button` keeps its semantic style while its resources change. Helpers name the same underlying XAML keys and inherit the same theme/override limitations; see [C# Markup compatibility](semantic-styles.md#c-markup-compatibility) for typed resources, upgrade guidance, and scoped binding behavior.
 
 ```csharp
 // basic filled button

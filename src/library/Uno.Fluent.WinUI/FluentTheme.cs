@@ -141,9 +141,10 @@ public partial class FluentTheme : BaseTheme
 		ResourceDictionary? tokens = null;
 
 		// Only a local value is a consumer choice; the DP default means "the platform's". Overlays use
-		// twice the unit (Radius200), matching the platform's 4 / 8.
-		if (ReadLocalValue(DefaultCornerRadiusProperty) is double radius && double.IsFinite(radius) && radius >= 0)
+		// twice the unit (Radius200), matching the platform's 4 / 8. Invalid values use the shared default.
+		if (ReadLocalValue(DefaultCornerRadiusProperty) is double radius)
 		{
+			radius = SanitizeCornerRadius(radius);
 			tokens ??= new ResourceDictionary();
 			tokens["ControlCornerRadius"] = new CornerRadius(radius);
 			tokens["OverlayCornerRadius"] = new CornerRadius(radius * 2);

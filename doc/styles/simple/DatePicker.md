@@ -9,12 +9,12 @@ uid: Uno.Themes.Simple.Styles.DatePicker
 
 ## Styles
 
-| Style Key                                     | Semantic Alias    | IsDefaultStyle\* |
-| --------------------------------------------- | ----------------- | ---------------- |
-| `SimpleDatePickerFlyoutPresenterStyle`        |                   | True             |
-| `SimpleDatePickerStyle`                       | `DatePickerStyle` | True             |
-| `SimpleDefaultDatePickerStyle`                |                   | True             |
-| `SimpleDefaultDatePickerFlyoutPresenterStyle` |                   | True             |
+| Style Key                                     | Semantic Alias                   | IsDefaultStyle\* |
+| --------------------------------------------- | -------------------------------- | ---------------- |
+| `SimpleDatePickerFlyoutPresenterStyle`        | `DatePickerFlyoutPresenterStyle` | True             |
+| `SimpleDatePickerStyle`                       | `DatePickerStyle`                | True             |
+| `SimpleDefaultDatePickerStyle`                |                                  | True             |
+| `SimpleDefaultDatePickerFlyoutPresenterStyle` |                                  | True             |
 
 IsDefaultStyle\*: Styles in this column will be set as the default implicit style for the matching control
 

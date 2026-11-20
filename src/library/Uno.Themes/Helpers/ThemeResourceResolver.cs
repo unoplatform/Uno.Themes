@@ -6,21 +6,27 @@ using Microsoft.UI.Xaml;
 using Windows.UI.Xaml;
 #endif
 
-namespace Uno.Fluent;
+namespace Uno.Themes.Helpers;
 
 /// <summary>
 /// Resolves consumer resources for an explicit appearance without consulting
 /// the ambient application or system resources.
 /// </summary>
-internal static class FluentResourceResolver
+internal static class ThemeResourceResolver
 {
+	internal static bool TryResolve(ResourceDictionary? dictionary, string appearance, string key, out object? value)
+	{
+		value = Resolve(dictionary, appearance, key);
+		return value is not null;
+	}
+
 	/// <summary>
 	/// Follows resource dictionary precedence: own entries, merged dictionaries
 	/// in reverse order, then the selected appearance dictionary. Default is used
 	/// only when the requested appearance dictionary is absent, not when a key
 	/// is absent from an existing appearance dictionary.
 	/// </summary>
-	internal static object? Resolve(ResourceDictionary? dictionary, string appearance, string key)
+	internal static object? Resolve(ResourceDictionary? dictionary, string appearance, string key, string[]? appearanceFallbacks = null)
 	{
 		if (dictionary is null)
 		{
@@ -39,10 +45,25 @@ internal static class FluentResourceResolver
 
 		for (var i = dictionary.MergedDictionaries.Count - 1; i >= 0; i--)
 		{
-			if (Resolve(dictionary.MergedDictionaries[i], appearance, key) is { } mergedValue)
+			if (Resolve(dictionary.MergedDictionaries[i], appearance, key, appearanceFallbacks) is { } mergedValue)
 			{
 				return mergedValue;
 			}
+		}
+
+		// Shared brushes additionally preserve their explicit HighContrast → Dark → Default
+		// palette policy. Select the first existing branch, never fill missing keys from siblings.
+		if (appearanceFallbacks is not null)
+		{
+			foreach (var candidate in appearanceFallbacks)
+			{
+				if (dictionary.ThemeDictionaries.TryGetValue(candidate, out var selected)
+					&& selected is ResourceDictionary selectedBranch)
+				{
+					return Resolve(selectedBranch, appearance, key, appearanceFallbacks);
+				}
+			}
+			return null;
 		}
 
 		if (dictionary.ThemeDictionaries.TryGetValue(appearance, out var themed)

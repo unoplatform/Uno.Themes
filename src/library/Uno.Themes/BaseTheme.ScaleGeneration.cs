@@ -193,11 +193,12 @@ public abstract partial class BaseTheme
 
 	/// <summary>
 	/// Returns <paramref name="requested"/> when it is a usable base radius, otherwise the default
-	/// of 4. A negative radius throws from the <see cref="CornerRadius"/> constructor and a NaN one
-	/// poisons every Radius* token, and this runs from a property-changed callback.
+	/// of 4. A negative radius throws from the <see cref="CornerRadius"/> constructor and a NaN or
+	/// overflowing one (Radius700 is the largest multiple) poisons the Radius* tokens, and this runs
+	/// from a property-changed callback.
 	/// </summary>
-	private static double SanitizeCornerRadius(double requested)
-		=> double.IsFinite(requested) && requested >= 0 ? requested : DefaultBaseCornerRadius;
+	internal static double SanitizeCornerRadius(double requested)
+		=> double.IsFinite(requested) && requested >= 0 && requested <= double.MaxValue / 7 ? requested : DefaultBaseCornerRadius;
 
 	/// <summary>
 	/// The radii this design system caps by the size of the control they sit on, generated on every
@@ -215,6 +216,7 @@ public abstract partial class BaseTheme
 	/// </summary>
 	private static ResourceDictionary GenerateShapeScale(double baseValue)
 	{
+		baseValue = SanitizeCornerRadius(baseValue);
 		var dict = new SemanticResources();
 
 		foreach (var themeKey in ThemeKeys)
