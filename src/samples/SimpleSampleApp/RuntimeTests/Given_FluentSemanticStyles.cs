@@ -7,7 +7,7 @@ namespace Uno.Themes.Samples.RuntimeTests;
 /// <summary>
 /// Verifies the FluentTheme semantic style layer (specs/05-fluent-theme, §5):
 /// every semantic style key resolves under FluentTheme — XAML aliases resolve to
-/// the very XamlControlsResources instances, bridge styles derive from them, and
+/// the very XamlControlsResources instances, the subtle button styles derive from them, and
 /// the gap keys (no public XCR key on Uno) ship as declarative empty styles that
 /// keep the built-in default appearance.
 ///
@@ -110,7 +110,7 @@ public class Given_FluentSemanticStyles
 	}
 
 	// ─────────────────────────────────────────────────────────────────────
-	// Bridge styles (spec §5.4): setters-only, BasedOn the XCR standard button.
+	// Subtle button styles: setters-only, BasedOn the XCR standard button.
 	// ─────────────────────────────────────────────────────────────────────
 
 	[TestMethod]

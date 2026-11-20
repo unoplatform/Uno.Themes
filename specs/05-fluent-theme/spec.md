@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Status** | Phases 1–3 **done**; Phase 4 **done (samples)** — dedicated `FluentSampleApp` head + `Design.Fluent` shared-UI support + Fluent templates across the full §5 alias surface (28 Fluent pages; only MediaTransportControls deferred). Verified: `ok=28/28` navigation sweep, CI-parity runtime suite unchanged at 300/1 (2026-07-15; deltas in `progress.md` review log). Remaining: MediaTransportControls sample, screenshot pass vs WinUI Gallery, Windows/WASM validation. **2026-09-04:** merged with `master` (#1697 `SeedColorMode`, #1707/#1710 `DefaultFontFamily`, #1701, #1699, #1715) and adapted — see `progress.md` Phase 6 and the gap audit there |
+| **Status** | Phases 1–3 **done**; Phase 4 **done (samples)** — dedicated `FluentSampleApp` head + `Design.Fluent` shared-UI support + Fluent templates across the full §5 alias surface (28 Fluent pages; only MediaTransportControls deferred). Verified: `ok=28/28` navigation sweep, CI-parity runtime suite unchanged at 300/1 (2026-07-15; deltas in `progress.md` review log). Remaining: MediaTransportControls sample, screenshot pass vs WinUI Gallery, Windows/WASM validation. **2026-09-04:** merged with `master` (#1697 `SeedColorMode`, #1707/#1710 `DefaultFontFamily`, #1701, #1699, #1715) and adapted — see `progress.md` Phase 6 and the gap audit there. **2026-11-19:** Phase 10 cut v1 to core + slim accent (lightweight-styling bridge, `FluentResourceUpdater` and the font-override cascade removed); the as-built layout in §3.2 reflects it |
 | **Owner** | Steve Bilogan |
 | **Created** | 2026-07-14 |
 | **Related** | `specs/01-design-tokens/`, `specs/02-semantic-brushes/`, `specs/03-seed-color-palette/`, `.specify/specs/semantic-abstraction-layer/spec.md`, `doc/semantic-styles.md`, `doc/fluent-getting-started.md`, `specs/lessons.md` (eager `<StaticResource>` resolution) |
@@ -105,17 +105,18 @@ the library carries near-zero maintenance drift risk against WinUI.
 
 New project `src/library/Uno.Fluent.WinUI/`, cloned structurally from
 `Uno.Simple.WinUI` (the newest, smallest theme). As-built layout
-(updated 2026-08-11 — declarative-first pass, see the review log):
+(updated 2026-11-19 — Phase 10 simplification, see `progress.md`):
 
 ```
 src/library/Uno.Fluent.WinUI/
 ├── Uno.Fluent.WinUI.csproj          # clone of Uno.Simple.WinUI.csproj (PackageId/AssemblyName=Uno.Fluent.WinUI)
 ├── fluent-common.props              # clone of simple-common.props (XamlMergeInput globs, mobile/not_mobile ns, imports ..\xamlmerge.targets)
-├── FluentTheme.cs                   # : BaseTheme (see §3.3); bundle-alias late-binding; layer assembly
+├── FluentTheme.cs                   # : BaseTheme (see §3.3); palette, accent layer, platform token re-points
 ├── FluentConstants.cs               # internal resource-path constants (mirrors SimpleConstants)
 ├── FluentColorPalette.cs            # accent-derived roles per branch (mechanism C, D6); copies ColorPalette.xaml neutrals
-├── FluentAccentPalette.cs           # Phase 2 reverse mapping: effective primary → SystemAccentColor* + closure (§9)
-├── FluentLightweightBridge.cs       # Phase 3 code half: accent-derived defaults + override-driven re-pointing (§10)
+├── FluentAccentPalette.cs           # pure: effective primary → SystemAccentColor* + closure (§9)
+├── FluentAccentLayer.cs             # stable accent brushes updated in place
+├── FluentSubtleButton.cs            # internal attached property: per-button subtle hover/pressed fills
 ├── FluentDiagnostics.cs             # warning-log helper for the graceful-degradation paths
 ├── AssemblyInfo.cs
 ├── LinkerConfig.xamarin.xml
@@ -124,15 +125,13 @@ src/library/Uno.Fluent.WinUI/
 │   └── Package.targets
 └── Styles/
     ├── Application/
-    │   ├── BaseDictionaries.xaml    # merges shared Converters + SharedTypography + Fluent Typography.xaml + Fonts.xaml
+    │   ├── BaseDictionaries.xaml    # merges shared Converters + Fluent Typography.xaml + Fonts.xaml (SharedTypography comes from BaseTheme)
     │   ├── ColorPalette.xaml        # NEUTRAL semantic role values per branch (EXCLUDED from XamlMergeInput; copied in by FluentColorPalette)
-    │   ├── LightweightDefaults.xaml # NEUTRAL lightweight-styling key defaults per branch (EXCLUDED from XamlMergeInput; merged by FluentTheme)
     │   ├── Fonts.xaml               # FontFamily slot aliases → ContentControlThemeFontFamily (Source-merged, lessons.md)
     │   └── Typography.xaml          # Fluent type-ramp values for the 19 semantic slots (Source-merged, lessons.md)
     └── Controls/
-        ├── _Resources.xaml          # semantic alias table (§5) + declarative empty styles for the Ⓜ gap keys
-        ├── Button.xaml              # FluentTextButtonStyle / FluentIconButtonStyle bridge styles only (§5.4)
-        └── TextBlock.xaml           # semantic TextBlock styles DisplayLarge…CaptionSmall (§7.3)
+        └── SemanticStyles.xaml      # SemanticStylesSource (EXCLUDED from XamlMergeInput): XCR aliases, gap empty styles,
+                                     # TextButtonStyle / IconButtonStyle and the 19 typography styles under their semantic keys
 ```
 
 Namespace `Uno.Fluent`, public type `FluentTheme`, internal `FluentConstants`.
