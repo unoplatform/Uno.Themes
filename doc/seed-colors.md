@@ -142,7 +142,7 @@ Seed colors can be changed at runtime — for example from a settings page or a 
 
 This works because the semantic brushes are updated in place rather than replaced, and it covers the state variants too (`PrimaryHoverBrush`, `PrimaryDisabledBrush`, …) along with their opacities — so overriding a token such as `HoverOpacity` in your override dictionary reaches those brushes as well.
 
-Fluent's generated native accent and lightweight resources are replaced during a rebuild, rather than mutated with the shared brushes. Existing native controls are therefore outside this live-instance guarantee and can require resource re-resolution or recreation. This also applies when clearing the seed; see [Fluent behavior notes](fluent-getting-started.md#behavior-notes).
+Fluent also keeps solid brushes for its generated native accent resources and updates them in place, so existing native controls follow a seed or `PrimaryColor` change and return to the platform accent when it clears. A control rendered before the first seed or override keeps the platform accent until it is re-created; see [Fluent behavior notes](fluent-getting-started.md#behavior-notes).
 
 > [!NOTE]
 > Roles that are not generated from the seed — the four `Error*` keys — keep their base-palette values, and a `*Brush` key you define yourself in an override dictionary still wins over the generated one.
