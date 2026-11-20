@@ -270,6 +270,7 @@ The cascade is not limited to seeds. An explicit **`PrimaryColor` override** —
 - Unlike a seed (a *generator input*, mapped through tonal-palette tones), an override is the highest-precedence statement of what Primary **is** — it becomes the accent fill **verbatim** for its theme branch, with the surrounding `SystemAccentColor*` shades and accent-text tones derived relative to it, and the on-accent text family picked by contrast against it.
 - A flat value drives both appearances. `Light` and `Dark` values select their respective appearances; `Default` supplies a fallback when the corresponding appearance dictionary is absent. A Dark-only override leaves Light on the platform accent when no seed is active. Nested merged dictionaries are supported with normal resource-dictionary precedence.
 - When both a seed and a `PrimaryColor` override are set, the **override wins** — the same precedence as in the semantic palette.
+- A `PrimaryColor` in the `FluentTheme` constructor's `colorOverride` is the theme's base palette, as in the other themes: it drives the accent only while no seed is set.
 - An `OnPrimaryColor` (or solid `OnPrimaryBrush`) override becomes the text on the accent (`TextOnAccentFillColor*`), instead of the contrast pick.
 - Any accent-family key you override **explicitly** (`SystemAccentColor*`, `AccentFillColor*`, `AccentTextFillColor*`, `TextOnAccentFillColor*`) always wins over the derived values.
 

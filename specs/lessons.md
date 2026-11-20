@@ -642,3 +642,17 @@ Everything else — literal per-branch colors/brushes, empty styles, setters-onl
 **How to apply:**
 - A lightweight key consumed by a non-FrameworkElement (transforms, brushes, gradient stops) inside a template needs a test that flips `RequestedTheme` after load with the override at the scope the doc promises. A pre-load assertion only proves the initial resolution.
 - Do not trust a `XamlReader` repro to clear a template-resolution bug: compiled library XAML takes a different path.
+
+## Keep a theme's PR stack to that theme; never `git checkout --` a file with uncommitted work
+
+**What happened (2026-11-20, #1694):** acting on review-panel findings, Simple and Material files were
+edited inside the Fluent PR stack (#1721's merge): a Material `BaseDictionaries.xaml` merge, a Simple doc
+row and test row. The owner corrected: these PRs are Fluent work only. Separately, a temporary
+test-injection was "reverted" with `git checkout -- <file>`, which also discarded the uncommitted fix in
+that file (recovered from a manual backup).
+
+**Rule:** in a theme-specific PR, change only that theme's library, tests, samples and docs (plus the
+minimal shared core it needs). Findings in other themes go to the progress file as follow-ups for their
+owners. To undo a temporary edit, reverse that edit (or `git stash` first); never `git checkout --` a file
+that holds uncommitted work.
+

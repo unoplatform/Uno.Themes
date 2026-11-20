@@ -82,6 +82,46 @@ public class Given_FluentThemeLifecycle
 
 	[TestMethod]
 	[RunsOnUIThread]
+	public async Task When_ConstructorOverrideAndSeed_SeedWinsAsInTheOtherThemes()
+	{
+		// As in SimpleTheme / MaterialTheme, the constructor override is the base palette, below a seed.
+		var theme = new FluentTheme(colorOverride: new ResourceDictionary { ["PrimaryColor"] = Microsoft.UI.Colors.Green });
+		theme.Colors ??= new ThemeColors();
+		theme.Colors.PrimarySeed = Microsoft.UI.Colors.Red;
+
+		var fill = await GetAccentButtonFill(theme);
+
+		Assert.AreNotEqual(Microsoft.UI.Colors.Green, (Color)theme["PrimaryColor"], "the seed must regenerate PrimaryColor");
+		Assert.AreNotEqual(Microsoft.UI.Colors.Green, fill, "the built-in accent must follow the seed");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_ColorsAssignedWithoutSeed_ConstructorOverrideStillApplies()
+	{
+		var theme = new FluentTheme(colorOverride: new ResourceDictionary { ["PrimaryColor"] = Microsoft.UI.Colors.Green });
+		theme.Colors = new ThemeColors();
+
+		var fill = await GetAccentButtonFill(theme);
+
+		Assert.AreEqual(Microsoft.UI.Colors.Green, (Color)theme["PrimaryColor"], "assigning Colors must not drop the constructor override");
+		Assert.AreEqual(Microsoft.UI.Colors.Green, fill);
+	}
+
+	private static async Task<Color> GetAccentButtonFill(FluentTheme theme)
+	{
+		var host = new Grid { RequestedTheme = ElementTheme.Light };
+		host.Resources.MergedDictionaries.Add(theme);
+		var button = new Button { Content = "Accent", Style = (Style)host.Resources["FilledButtonStyle"] };
+		host.Children.Add(button);
+		UnitTestsUIContentHelper.Content = host;
+		await UnitTestsUIContentHelper.WaitForLoaded(button);
+		await UnitTestsUIContentHelper.WaitForIdle();
+		return Assert.IsInstanceOfType<SolidColorBrush>(button.Background).Color;
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
 	[DataRow(ElementTheme.Light)]
 	[DataRow(ElementTheme.Dark)]
 	public async Task When_SeedChangesAndClears_TheSameNativeButtonUpdates(ElementTheme appearance)

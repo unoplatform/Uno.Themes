@@ -1,6 +1,7 @@
 #nullable enable
 
 using System;
+using System.Collections.Generic;
 
 #if WinUI
 using Microsoft.UI.Xaml;
@@ -37,20 +38,17 @@ internal static class FluentSubtleButton
 
 		try
 		{
-			var merged = element.Resources.MergedDictionaries;
-			for (var i = merged.Count - 1; i >= 0; i--)
-			{
-				if (merged[i] is SubtleButtonResources)
-				{
-					merged.RemoveAt(i);
-				}
-			}
-
-			// One dictionary per element: WinUI rejects a dictionary with two parents. First, so the
-			// element's own entries and later merges keep precedence.
+			// Loaded re-applies the resources: a <Button.Resources> property element replaces the
+			// dictionary after the Style attribute has set this property.
+			element.Loaded -= OnLoaded;
 			if (args.NewValue is true)
 			{
-				merged.Insert(0, new SubtleButtonResources());
+				element.Loaded += OnLoaded;
+				Apply(element);
+			}
+			else
+			{
+				Remove(element.Resources.MergedDictionaries);
 			}
 		}
 		catch (Exception e)
@@ -60,29 +58,81 @@ internal static class FluentSubtleButton
 		}
 	}
 
+	private static void OnLoaded(object sender, RoutedEventArgs args)
+	{
+		try
+		{
+			if (sender is FrameworkElement element)
+			{
+				Apply(element);
+			}
+		}
+		catch (Exception e)
+		{
+			FluentDiagnostics.LogWarning("FluentTheme could not apply the subtle button resources.", e);
+		}
+	}
+
+	private static void Apply(FrameworkElement element)
+	{
+		var merged = element.Resources.MergedDictionaries;
+		foreach (var dictionary in merged)
+		{
+			if (dictionary is SubtleButtonResources)
+			{
+				return;
+			}
+		}
+
+		// One dictionary per element: WinUI rejects a dictionary with two parents. First, so the
+		// element's own entries and later merges keep precedence.
+		merged.Insert(0, new SubtleButtonResources());
+	}
+
+	private static void Remove(IList<ResourceDictionary> merged)
+	{
+		for (var i = merged.Count - 1; i >= 0; i--)
+		{
+			if (merged[i] is SubtleButtonResources)
+			{
+				merged.RemoveAt(i);
+			}
+		}
+	}
+
 	private sealed class SubtleButtonResources : ResourceDictionary
 	{
+		// The dictionaries are per element; their brushes are shared (per UI thread, as brushes are
+		// thread-affine).
+		[ThreadStatic]
+		private static Brush[]? _brushes;
+
 		public SubtleButtonResources()
 		{
-			// SubtleFillColorSecondary / SubtleFillColorTertiary per theme. High contrast keeps the
-			// native button resources (the empty branch falls through to them).
-			ThemeDictionaries["Light"] = CreateBranch(Color.FromArgb(0x09, 0, 0, 0), Color.FromArgb(0x06, 0, 0, 0));
-			ThemeDictionaries["Default"] = CreateBranch(Color.FromArgb(0x0F, 0xFF, 0xFF, 0xFF), Color.FromArgb(0x0A, 0xFF, 0xFF, 0xFF));
+			// SubtleFillColorSecondary / SubtleFillColorTertiary per theme, then a transparent brush.
+			// High contrast keeps the native button resources (the empty branch falls through to them).
+			var brushes = _brushes ??= new Brush[]
+			{
+				new SolidColorBrush(Color.FromArgb(0x09, 0, 0, 0)),
+				new SolidColorBrush(Color.FromArgb(0x06, 0, 0, 0)),
+				new SolidColorBrush(Color.FromArgb(0x0F, 0xFF, 0xFF, 0xFF)),
+				new SolidColorBrush(Color.FromArgb(0x0A, 0xFF, 0xFF, 0xFF)),
+				new SolidColorBrush(Color.FromArgb(0, 0xFF, 0xFF, 0xFF)),
+			};
+			ThemeDictionaries["Light"] = CreateBranch(brushes[0], brushes[1], brushes[4]);
+			ThemeDictionaries["Default"] = CreateBranch(brushes[2], brushes[3], brushes[4]);
 			ThemeDictionaries["HighContrast"] = new ResourceDictionary();
 		}
 
-		private static ResourceDictionary CreateBranch(Color pointerOver, Color pressed)
-		{
-			var transparent = Color.FromArgb(0, 0xFF, 0xFF, 0xFF);
-			return new ResourceDictionary
+		private static ResourceDictionary CreateBranch(Brush pointerOver, Brush pressed, Brush transparent)
+			=> new()
 			{
-				["ButtonBackgroundPointerOver"] = new SolidColorBrush(pointerOver),
-				["ButtonBackgroundPressed"] = new SolidColorBrush(pressed),
-				["ButtonBackgroundDisabled"] = new SolidColorBrush(transparent),
-				["ButtonBorderBrushPointerOver"] = new SolidColorBrush(transparent),
-				["ButtonBorderBrushPressed"] = new SolidColorBrush(transparent),
-				["ButtonBorderBrushDisabled"] = new SolidColorBrush(transparent),
+				["ButtonBackgroundPointerOver"] = pointerOver,
+				["ButtonBackgroundPressed"] = pressed,
+				["ButtonBackgroundDisabled"] = transparent,
+				["ButtonBorderBrushPointerOver"] = transparent,
+				["ButtonBorderBrushPressed"] = transparent,
+				["ButtonBorderBrushDisabled"] = transparent,
 			};
-		}
 	}
 }
