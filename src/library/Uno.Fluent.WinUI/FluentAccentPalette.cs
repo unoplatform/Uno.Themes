@@ -151,18 +151,22 @@ internal static class FluentAccentPalette
 	/// <summary>
 	/// The accent resources of one appearance, driven by the consumer override's <c>PrimaryBrush</c>
 	/// (solid) or <c>PrimaryColor</c> — the accent verbatim — else by <paramref name="seedShades"/>; plus
-	/// <c>OnPrimaryBrush</c> / <c>OnPrimaryColor</c> as the on-accent text. Keys the override defines
-	/// explicitly are left out, so the consumer's value wins. <c>null</c> when nothing drives the accent.
+	/// <c>OnPrimaryBrush</c> / <c>OnPrimaryColor</c> as the on-accent text. <paramref name="baseOverride"/>
+	/// is read where <paramref name="consumerOverride"/> has no value. Keys either override defines explicitly
+	/// are left out, so the consumer's value wins. <c>null</c> when nothing drives the accent.
 	/// </summary>
 	/// <returns>Colors and <see cref="SolidColorBrush"/> templates (color + opacity), by key.</returns>
-	internal static Dictionary<string, object>? Build(bool isLight, AccentShades? seedShades, ResourceDictionary? consumerOverride)
+	internal static Dictionary<string, object>? Build(bool isLight, AccentShades? seedShades, ResourceDictionary? consumerOverride, ResourceDictionary? baseOverride = null)
 	{
 		var appearance = isLight ? "Light" : "Dark";
-		var primaryBrush = FluentResourceResolver.Resolve(consumerOverride, appearance, "PrimaryBrush") as SolidColorBrush;
-		var basis = primaryBrush?.Color ?? FluentResourceResolver.Resolve(consumerOverride, appearance, SemanticColorKeys.Primary) as Color?;
+		object? Find(string key)
+			=> FluentResourceResolver.Resolve(consumerOverride, appearance, key) ?? FluentResourceResolver.Resolve(baseOverride, appearance, key);
 
-		var onPrimary = FluentResourceResolver.Resolve(consumerOverride, appearance, "OnPrimaryBrush") as SolidColorBrush;
-		if (onPrimary is null && FluentResourceResolver.Resolve(consumerOverride, appearance, SemanticColorKeys.OnPrimary) is Color onPrimaryColor)
+		var primaryBrush = Find("PrimaryBrush") as SolidColorBrush;
+		var basis = primaryBrush?.Color ?? Find(SemanticColorKeys.Primary) as Color?;
+
+		var onPrimary = Find("OnPrimaryBrush") as SolidColorBrush;
+		if (onPrimary is null && Find(SemanticColorKeys.OnPrimary) is Color onPrimaryColor)
 		{
 			onPrimary = new SolidColorBrush(onPrimaryColor);
 		}
@@ -188,11 +192,11 @@ internal static class FluentAccentPalette
 			WriteColorAndBrush(entries, "TextOnAccentFillColorSecondary", onPrimary.Color, onPrimary.Opacity);
 		}
 
-		if (consumerOverride is { })
+		if (consumerOverride is { } || baseOverride is { })
 		{
 			foreach (var key in new List<string>(entries.Keys))
 			{
-				if (FluentResourceResolver.Resolve(consumerOverride, appearance, key) is { })
+				if (Find(key) is { })
 				{
 					entries.Remove(key);
 				}
