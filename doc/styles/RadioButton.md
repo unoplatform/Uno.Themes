@@ -4,6 +4,9 @@ uid: Uno.Themes.Styles.RadioButton
 
 # RadioButton Control
 
+> [!NOTE]
+> Under the [Fluent theme](../fluent-getting-started.md), the brush keys below are WinUI's own per-control resource names, so overrides reach Fluent-styled radio buttons natively at any scope. `RadioButtonStateCircleBackground*` has no Fluent equivalent. See [Lightweight Styling — Fluent theme](../lightweight-styling.md#fluent-theme).
+
 <!-- BEGIN GENERATED -->
 <!-- This region is generated from the Styles XAML by `dotnet run build/scripts/GenerateStyleDocs.cs`; do not edit it by hand. -->
 

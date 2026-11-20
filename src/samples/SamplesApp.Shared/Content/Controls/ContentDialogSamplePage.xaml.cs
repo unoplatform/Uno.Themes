@@ -5,7 +5,7 @@
 	nameof(ContentDialog),
 	Description = "Represents a dialog box that can be customized to contain checkboxes, hyperlinks, buttons and any other XAML content.",
 	DocumentationLink = "https://docs.microsoft.com/en-us/uwp/api/Windows.UI.Xaml.Controls.ContentDialog",
-	SupportedDesigns = new[] { Design.Material, Design.Simple }
+	SupportedDesigns = new[] { Design.Material, Design.Simple, Design.Fluent }
 )]
 public sealed partial class ContentDialogSamplePage : Page
 {
@@ -45,9 +45,17 @@ public sealed partial class ContentDialogSamplePage : Page
 				throw new KeyNotFoundException($"The given key '{(sender as Button)?.Tag as string}' was not present in the dictionary.");
 			}
 		}
-		catch (Exception ex)
+		catch (KeyNotFoundException exception)
 		{
-			System.Diagnostics.Debug.WriteLine($"Failed to show the ContentDialog sample: {ex}");
+			Console.Error.WriteLine($"Unknown content dialog sample: {exception}");
+		}
+		catch (InvalidOperationException exception)
+		{
+			Console.Error.WriteLine($"Unable to open the content dialog sample: {exception}");
+		}
+		catch (Exception exception)
+		{
+			Console.Error.WriteLine($"Content dialog sample failed: {exception}");
 		}
 	}
 

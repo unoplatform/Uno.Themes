@@ -84,11 +84,12 @@ public class Given_SamplePages
 
 	[TestMethod]
 	[RunsOnUIThread]
-	public async Task When_SeedColorPageLoaded_Then_TheApplicationThemeTakesItsSeed()
+	public async Task When_SeedColorPageLoaded_Then_OnlyAPickedColorSeedsTheApplicationTheme()
 	{
 		// The page seeds the application's own theme, so put the app back for the tests that follow.
 		using var snapshot = new ThemeSeedSnapshot();
 		var colors = snapshot.Colors;
+		var seedBeforeVisit = colors.PrimarySeed;
 
 		var page = new SeedColorSamplePage();
 
@@ -96,7 +97,8 @@ public class Given_SamplePages
 		await UnitTestsUIContentHelper.WaitForLoaded(page);
 		await UnitTestsUIContentHelper.WaitForIdle();
 
-		Assert.IsNotNull(colors.PrimarySeed, "The Seed Color page should apply its seed to the application theme.");
+		// A visit only previews: seeding on load would repaint the whole app, and under FluentTheme replace the system accent.
+		Assert.AreEqual(seedBeforeVisit, colors.PrimarySeed, "Opening the Seed Color page should not reseed the application theme.");
 
 		// Picking another color rebuilds the live application theme under the rendered page.
 		var picked = Windows.UI.Color.FromArgb(0xFF, 0x21, 0x96, 0xF3);

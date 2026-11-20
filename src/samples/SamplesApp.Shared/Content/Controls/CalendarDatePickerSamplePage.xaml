@@ -24,5 +24,29 @@
 				</StackPanel>
 			</DataTemplate>
 		</sample:SamplePageLayout.SimpleTemplate>
+		<sample:SamplePageLayout.FluentTemplate>
+			<DataTemplate>
+				<StackPanel Spacing="8">
+					<!-- Basic -->
+					<smtx:XamlDisplay UniqueKey="Fluent_CalendarDatePicker_Basic"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<CalendarDatePicker Style="{StaticResource CalendarDatePickerStyle}" />
+					</smtx:XamlDisplay>
+					<!-- With header -->
+					<smtx:XamlDisplay UniqueKey="Fluent_CalendarDatePicker_Header"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<CalendarDatePicker Header="Appointment Date"
+											Style="{StaticResource CalendarDatePickerStyle}" />
+					</smtx:XamlDisplay>
+					<!-- Disabled -->
+					<smtx:XamlDisplay UniqueKey="Fluent_CalendarDatePicker_Disabled"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<CalendarDatePicker Header="Disabled"
+											IsEnabled="False"
+											Style="{StaticResource CalendarDatePickerStyle}" />
+					</smtx:XamlDisplay>
+				</StackPanel>
+			</DataTemplate>
+		</sample:SamplePageLayout.FluentTemplate>
 	</sample:SamplePageLayout>
 </Page>
