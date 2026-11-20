@@ -1,6 +1,7 @@
 #nullable enable
 
 using System;
+using System.Threading;
 using Uno.Themes;
 using Windows.Foundation;
 using Windows.UI.ViewManagement;
@@ -37,7 +38,8 @@ public partial class FluentTheme : BaseTheme
 
 	// Kept alive with the theme; the handler holds the theme weakly (see ObserveSystemAccent).
 	private UISettings? _uiSettings;
-	private bool _isRefreshQueued;
+	// 1 while a refresh is queued; the event can fire on a background thread (WinUI).
+	private int _refreshQueued;
 
 	/// <summary>
 	/// Initializes the Fluent theme resources with the default palette and typography.
@@ -114,7 +116,7 @@ public partial class FluentTheme : BaseTheme
 		{
 			// Runs from property-changed callbacks and the constructor; it reads consumer dictionaries,
 			// which WinUI can fail to enumerate. Degrade rather than throw into the app.
-			FluentDiagnostics.LogWarning($"FluentTheme could not update the Fluent accent resources. {e.Message}");
+			FluentDiagnostics.LogWarning("FluentTheme could not update the Fluent accent resources.", e);
 		}
 	}
 
@@ -162,14 +164,16 @@ public partial class FluentTheme : BaseTheme
 				return;
 			}
 
-			// The event fires several times per system change: coalesce into one rebuild.
-			if (dispatcher is { } && !theme._isRefreshQueued)
-			{
-				theme._isRefreshQueued = dispatcher.TryEnqueue(theme.RefreshSystemAccent);
-			}
-			else if (dispatcher is null)
+			if (dispatcher is null)
 			{
 				theme.RefreshSystemAccent();
+			}
+			// The event fires several times per system change: coalesce into one rebuild. The flag is
+			// claimed before enqueuing so the queued refresh can never clear it before it is set.
+			else if (Interlocked.Exchange(ref theme._refreshQueued, 1) == 0
+				&& !dispatcher.TryEnqueue(theme.RefreshSystemAccent))
+			{
+				Volatile.Write(ref theme._refreshQueued, 0);
 			}
 		};
 		_uiSettings.ColorValuesChanged += handler;
@@ -177,7 +181,7 @@ public partial class FluentTheme : BaseTheme
 
 	private void RefreshSystemAccent()
 	{
-		_isRefreshQueued = false;
+		Volatile.Write(ref _refreshQueued, 0);
 		try
 		{
 			FluentColorPalette.TryPopulate(_palette);
@@ -186,7 +190,7 @@ public partial class FluentTheme : BaseTheme
 		catch (Exception e)
 		{
 			// Raised from a platform event: an escaping exception would crash the consuming app.
-			FluentDiagnostics.LogWarning($"FluentTheme could not refresh the system accent. {e.Message}");
+			FluentDiagnostics.LogWarning("FluentTheme could not refresh the system accent.", e);
 		}
 	}
 }

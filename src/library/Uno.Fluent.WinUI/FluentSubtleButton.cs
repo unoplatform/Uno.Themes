@@ -56,7 +56,7 @@ internal static class FluentSubtleButton
 		catch (Exception e)
 		{
 			// Property-changed callback: never let a failure escape into the consumer's layout.
-			FluentDiagnostics.LogWarning($"FluentTheme could not apply the subtle button resources. {e.Message}");
+			FluentDiagnostics.LogWarning("FluentTheme could not apply the subtle button resources.", e);
 		}
 	}
 
