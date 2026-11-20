@@ -400,6 +400,22 @@ dropped** — under Fluent, lightweight styling uses WinUI's native per-control 
   icon-toggle defaults ported into `SemanticStyles.xaml` (moved there on master), corner-radius normalizer
   folded into master's `SanitizeCornerRadius`, Fluent uses the shared `ThemeResourceResolver`. Layer 3:
   Simple host 674/1 skip/0 Debug + Release, Light + Dark; Material host 154/154.
+- [x] Seven-agent review panel (2026-11-20), Fluent-only fixes (owner: Simple/Material stay out of
+  these PRs): atomic system-accent refresh flag; palette build never throws from the constructor;
+  `FluentDiagnostics` logs through Uno's logger on every target with the exception; duplicate
+  SharedTypography merge dropped; stale docs (root font cascade, lightweight bridge, high contrast)
+  rewritten; `FluentSubtleButton` re-applies on `Loaded` (red: `Button.Resources` replaced after the style)
+  and shares its brushes per UI thread, tests assert rendered fills plus a red-proven leak guard; the
+  accent reuses `SeedColorPaletteGenerator`'s primary palette and `BaseTheme.EffectivePrimarySeed` (red:
+  legacy `UseHighFidelityColors` subclass); the constructor `colorOverride` is the base palette below a
+  seed, as in Simple/Material (red: seed vs override, `Colors` reassignment). Simple host 566/1 skip
+  Light + Dark, FluentSampleApp 5/5.
+- [ ] Review panel, still open: WinAppSDK run of the seed-accent tests (XCR-internal control aliases),
+  App.xaml start-up accent test in the Fluent head, hosting smoke (`--smoke`) for ALC reclaim with the
+  `UISettings` observer, scope split (review-note folders, unrelated infra commits).
+- Not taken (Simple/Material, out of scope here): Material v2 duplicate SharedTypography merge;
+  `OutlinedButton*` / `IconToggleButton*` lightweight-path change needs a breaking-change note in #1721;
+  stale `OutlinedButtonStyle` rows in `doc/simple-controls-styles.md` and `Given_SemanticStyles`.
 - [ ] Refresh the three PR descriptions (after push).
 - [ ] Cross-repo: uno#24797 (UnoFeature) and uno.templates#2284 (`-theme fluent`) — resolve conflicts,
   re-verify against a locally packed `Uno.Fluent.WinUI`.
