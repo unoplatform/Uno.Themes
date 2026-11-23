@@ -293,4 +293,62 @@ public class Given_FluentColorPalette
 		Assert.AreEqual(overrideColor, (Color)value,
 			"a constructor color override must win over the code-built Fluent palette");
 	}
+
+	// The override used to sit below the palette's own theme branches for the brush sweep, so
+	// PrimaryColor followed it while PrimaryBrush and its state brushes kept the system accent.
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow("Light", true)]
+	[DataRow("Default", true)]
+	[DataRow("Light", false)]
+	[DataRow("Default", false)]
+	public void When_ConstructorColorOverrideProvided_SemanticBrushesFollowIt(string branchKey, bool themedOverride)
+	{
+		var overrideColor = Color.FromArgb(0xFF, 0x21, 0x96, 0xF3);
+		var overrideDict = new ResourceDictionary();
+		if (themedOverride)
+		{
+			foreach (var themeKey in new[] { "Light", "Default" })
+			{
+				overrideDict.ThemeDictionaries[themeKey] = new ResourceDictionary { ["PrimaryColor"] = overrideColor };
+			}
+		}
+		else
+		{
+			overrideDict["PrimaryColor"] = overrideColor;
+		}
+
+		var theme = new FluentTheme(colorOverride: overrideDict);
+
+		foreach (var brushKey in new[] { "PrimaryBrush", "PrimaryHoverBrush", "PrimaryPressedBrush" })
+		{
+			var brush = FindThemedBrush(theme, branchKey, brushKey);
+			Assert.AreEqual(overrideColor, brush.Color, $"{brushKey} ({branchKey}) must follow the constructor override");
+		}
+	}
+
+	private static SolidColorBrush FindThemedBrush(ResourceDictionary dictionary, string branchKey, string brushKey)
+		=> TryFindThemedBrush(dictionary, branchKey, brushKey)
+			?? throw new AssertFailedException($"{brushKey} should be defined in a '{branchKey}' theme branch of the theme");
+
+	private static SolidColorBrush? TryFindThemedBrush(ResourceDictionary dictionary, string branchKey, string brushKey)
+	{
+		if (dictionary.ThemeDictionaries.TryGetValue(branchKey, out var candidate)
+			&& candidate is ResourceDictionary branch
+			&& branch.TryGetValue(brushKey, out var value)
+			&& value is SolidColorBrush brush)
+		{
+			return brush;
+		}
+
+		for (var i = dictionary.MergedDictionaries.Count - 1; i >= 0; i--)
+		{
+			if (TryFindThemedBrush(dictionary.MergedDictionaries[i], branchKey, brushKey) is { } nested)
+			{
+				return nested;
+			}
+		}
+
+		return null;
+	}
 }

@@ -1,7 +1,9 @@
 #nullable enable
 
 using System;
+using System.Collections.Generic;
 using Uno.Themes;
+using Windows.UI;
 
 #if WinUI
 using Microsoft.UI.Xaml;
@@ -23,12 +25,15 @@ namespace Uno.Fluent;
 /// </remarks>
 internal static class FluentColorPalette
 {
-	// Loaded once and only copied from, never attached, so sharing it across themes is safe.
-	private static ResourceDictionary? _neutralSource;
+	// Plain values, so any UI thread can read them: a ResourceDictionary is thread-affine on WinUI.
+	private static Neutrals? _neutrals;
 
-	/// <summary>Populates the Light/Default branches of <paramref name="palette"/>.</summary>
+	/// <summary>
+	/// Populates the Light/Default branches of <paramref name="palette"/>, with <paramref name="colorOverride"/>'s
+	/// colors written into them.
+	/// </summary>
 	/// <returns><c>false</c> when the platform accent or the neutrals are unavailable.</returns>
-	internal static bool TryPopulate(ResourceDictionary palette)
+	internal static bool TryPopulate(ResourceDictionary palette, ResourceDictionary? colorOverride)
 	{
 		try
 		{
@@ -39,9 +44,16 @@ internal static class FluentColorPalette
 				return false;
 			}
 
-			var neutrals = _neutralSource ??= new ResourceDictionary { Source = new Uri(FluentConstants.ResourcePaths.ColorPalette) };
-			var light = BuildBranch("Light", isLight: true, accent, neutrals);
-			var dark = BuildBranch("Default", isLight: false, accent, neutrals);
+			var neutrals = _neutrals ??= LoadNeutrals();
+			var light = BuildBranch(isLight: true, accent, neutrals.Light);
+			var dark = BuildBranch(isLight: false, accent, neutrals.Dark);
+			if (colorOverride is { })
+			{
+				// The brush sweep reads a layer's theme branches before its merged dictionaries, so the
+				// override merged into the palette alone would reach the *Color keys but not the brushes.
+				ApplyOverride(light, colorOverride, isLight: true);
+				ApplyOverride(dark, colorOverride, isLight: false);
+			}
 			palette.ThemeDictionaries["Light"] = light;
 			palette.ThemeDictionaries["Default"] = dark;
 			return true;
@@ -54,16 +66,62 @@ internal static class FluentColorPalette
 		}
 	}
 
-	private static ResourceDictionary BuildBranch(string branchKey, bool isLight, FluentAccentPalette.AccentShades accent, ResourceDictionary neutrals)
+	private static Neutrals LoadNeutrals()
 	{
-		// Flat copy of the neutrals: the shape SafeMerge and the override precedence expect.
-		var branch = new ResourceDictionary();
-		if (neutrals.ThemeDictionaries.TryGetValue(branchKey, out var declared) && declared is ResourceDictionary declaredBranch)
+		var source = new ResourceDictionary { Source = new Uri(FluentConstants.ResourcePaths.ColorPalette) };
+		return new Neutrals(Read("Light"), Read("Default"));
+
+		KeyValuePair<object, object>[] Read(string branchKey)
 		{
-			foreach (var pair in declaredBranch)
+			var pairs = new List<KeyValuePair<object, object>>();
+			if (source.ThemeDictionaries.TryGetValue(branchKey, out var declared) && declared is ResourceDictionary branch)
+			{
+				foreach (var pair in branch)
+				{
+					pairs.Add(pair);
+				}
+			}
+			return pairs.ToArray();
+		}
+	}
+
+	/// <summary>
+	/// Writes the override's colors for one appearance into <paramref name="branch"/>, with the brush sweep's
+	/// precedence: the appearance's theme dictionaries (e.g. Dark, then Default) over theme-agnostic entries.
+	/// </summary>
+	private static void ApplyOverride(ResourceDictionary branch, ResourceDictionary colorOverride, bool isLight)
+	{
+		foreach (var pair in colorOverride)
+		{
+			if (pair.Value is Color)
 			{
 				branch[pair.Key] = pair.Value;
 			}
+		}
+
+		var themeKeys = ThemesConstants.BrushThemeSources[isLight ? 0 : 1].ColorThemes;
+		for (var i = themeKeys.Length - 1; i >= 0; i--)
+		{
+			if (colorOverride.ThemeDictionaries.TryGetValue(themeKeys[i], out var themed) && themed is ResourceDictionary themedBranch)
+			{
+				foreach (var pair in themedBranch)
+				{
+					if (pair.Value is Color)
+					{
+						branch[pair.Key] = pair.Value;
+					}
+				}
+			}
+		}
+	}
+
+	private static ResourceDictionary BuildBranch(bool isLight, FluentAccentPalette.AccentShades accent, KeyValuePair<object, object>[] neutrals)
+	{
+		// Flat copy of the neutrals: the shape SafeMerge and the override precedence expect.
+		var branch = new ResourceDictionary();
+		foreach (var pair in neutrals)
+		{
+			branch[pair.Key] = pair.Value;
 		}
 
 		// Primary is the accent in the light theme and Light2 (Fluent's accent fill) in the dark theme;
@@ -90,4 +148,6 @@ internal static class FluentColorPalette
 
 		return branch;
 	}
+
+	private sealed record Neutrals(KeyValuePair<object, object>[] Light, KeyValuePair<object, object>[] Dark);
 }
