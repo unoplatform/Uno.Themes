@@ -94,8 +94,7 @@
 				<ControlTemplate TargetType="MenuFlyoutItem">
 					<Grid x:Name="LayoutRoot"
 						  Background="{TemplateBinding Background}"
-						  CornerRadius="{TemplateBinding CornerRadius}"
-						  Padding="{TemplateBinding Padding}">
+						  CornerRadius="{TemplateBinding CornerRadius}">
 
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
@@ -111,7 +110,8 @@
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background" Value="{ThemeResource PrimaryVariantDarkBrush}" />
+										<Setter Target="LayoutRoot.Background" Value="{ThemeResource PrimaryBrush}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource OnPrimaryPressedBrush}" />
 										<Setter Target="TextBlock.Foreground" Value="{ThemeResource OnPrimaryBrush}" />
 										<Setter Target="IconContent.Foreground" Value="{ThemeResource OnPrimaryBrush}" />
 									</VisualState.Setters>
@@ -150,40 +150,47 @@
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="Auto" />
-							<ColumnDefinition Width="*" />
-							<ColumnDefinition Width="Auto" />
-						</Grid.ColumnDefinitions>
+						<!-- Tints the fill in interactive states, so a state stays a shade of the resting role -->
+						<Border x:Name="StateLayer"
+								Background="Transparent"
+								CornerRadius="{TemplateBinding CornerRadius}" />
 
-						<Viewbox x:Name="IconRoot"
-								 Grid.Column="0"
-								 Width="{ThemeResource SimpleIconExtraSmall}"
-								 Height="{ThemeResource SimpleIconExtraSmall}"
-								 Margin="{ThemeResource SimpleMenuFlyoutItemIconMargin}"
-								 HorizontalAlignment="Left"
-								 VerticalAlignment="Center"
-								 Visibility="Collapsed">
-							<ContentPresenter x:Name="IconContent"
-											  Content="{TemplateBinding Icon}"
-											  Foreground="{ThemeResource OnSurfaceBrush}" />
-						</Viewbox>
+						<Grid Margin="{TemplateBinding Padding}">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="Auto" />
+							</Grid.ColumnDefinitions>
 
-						<TextBlock x:Name="TextBlock"
-								   Grid.Column="1"
-								   VerticalAlignment="Center"
-								   Foreground="{TemplateBinding Foreground}"
-								   Text="{TemplateBinding Text}"
-								   TextTrimming="CharacterEllipsis" />
+							<Viewbox x:Name="IconRoot"
+									 Grid.Column="0"
+									 Width="{ThemeResource SimpleIconExtraSmall}"
+									 Height="{ThemeResource SimpleIconExtraSmall}"
+									 Margin="{ThemeResource SimpleMenuFlyoutItemIconMargin}"
+									 HorizontalAlignment="Left"
+									 VerticalAlignment="Center"
+									 Visibility="Collapsed">
+								<ContentPresenter x:Name="IconContent"
+												  Content="{TemplateBinding Icon}"
+												  Foreground="{ThemeResource OnSurfaceBrush}" />
+							</Viewbox>
 
-						<TextBlock x:Name="KeyboardAcceleratorTextBlock"
-								   Grid.Column="2"
-								   Margin="{ThemeResource SimpleMenuFlyoutItemAcceleratorMargin}"
-								   VerticalAlignment="Center"
-								   Foreground="{ThemeResource OnSurfaceMediumBrush}"
-								   Text="{TemplateBinding KeyboardAcceleratorTextOverride}"
-								   FontSize="{ThemeResource BodyMediumFontSize}"
-								   Visibility="Collapsed" />
+							<TextBlock x:Name="TextBlock"
+									   Grid.Column="1"
+									   VerticalAlignment="Center"
+									   Foreground="{TemplateBinding Foreground}"
+									   Text="{TemplateBinding Text}"
+									   TextTrimming="CharacterEllipsis" />
+
+							<TextBlock x:Name="KeyboardAcceleratorTextBlock"
+									   Grid.Column="2"
+									   Margin="{ThemeResource SimpleMenuFlyoutItemAcceleratorMargin}"
+									   VerticalAlignment="Center"
+									   Foreground="{ThemeResource OnSurfaceMediumBrush}"
+									   Text="{TemplateBinding KeyboardAcceleratorTextOverride}"
+									   FontSize="{ThemeResource BodyMediumFontSize}"
+									   Visibility="Collapsed" />
+						</Grid>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
@@ -209,8 +216,7 @@
 				<ControlTemplate TargetType="ToggleMenuFlyoutItem">
 					<Grid x:Name="LayoutRoot"
 						  Background="{TemplateBinding Background}"
-						  CornerRadius="{TemplateBinding CornerRadius}"
-						  Padding="{TemplateBinding Padding}">
+						  CornerRadius="{TemplateBinding CornerRadius}">
 
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
@@ -226,7 +232,8 @@
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background" Value="{ThemeResource PrimaryVariantDarkBrush}" />
+										<Setter Target="LayoutRoot.Background" Value="{ThemeResource PrimaryBrush}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource OnPrimaryPressedBrush}" />
 										<Setter Target="TextBlock.Foreground" Value="{ThemeResource OnPrimaryBrush}" />
 										<Setter Target="CheckGlyph.Foreground" Value="{ThemeResource OnPrimaryBrush}" />
 									</VisualState.Setters>
@@ -261,51 +268,58 @@
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="Auto" />
-							<ColumnDefinition Width="Auto" />
-							<ColumnDefinition Width="*" />
-							<ColumnDefinition Width="Auto" />
-						</Grid.ColumnDefinitions>
+						<!-- Tints the fill in interactive states, so a state stays a shade of the resting role -->
+						<Border x:Name="StateLayer"
+								Background="Transparent"
+								CornerRadius="{TemplateBinding CornerRadius}" />
 
-						<!-- Check glyph -->
-						<FontIcon x:Name="CheckGlyph"
-								  Grid.Column="0"
-								  Glyph="&#xE73E;"
-								  FontSize="{ThemeResource BodySmallFontSize}"
-								  Foreground="{ThemeResource OnSurfaceBrush}"
-								  Margin="{ThemeResource SimpleMenuFlyoutCheckGlyphMargin}"
-								  Opacity="0"
-								  VerticalAlignment="Center" />
+						<Grid Margin="{TemplateBinding Padding}">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="Auto" />
+							</Grid.ColumnDefinitions>
 
-						<Viewbox x:Name="IconRoot"
-								 Grid.Column="1"
-								 Width="{ThemeResource SimpleIconExtraSmall}"
-								 Height="{ThemeResource SimpleIconExtraSmall}"
-								 Margin="{ThemeResource SimpleMenuFlyoutItemIconMargin}"
-								 HorizontalAlignment="Left"
-								 VerticalAlignment="Center"
-								 Visibility="Collapsed">
-							<ContentPresenter x:Name="IconContent"
-											  Content="{TemplateBinding Icon}"
-											  Foreground="{ThemeResource OnSurfaceBrush}" />
-						</Viewbox>
+							<!-- Check glyph -->
+							<FontIcon x:Name="CheckGlyph"
+									  Grid.Column="0"
+									  Glyph="&#xE73E;"
+									  FontSize="{ThemeResource BodySmallFontSize}"
+									  Foreground="{ThemeResource OnSurfaceBrush}"
+									  Margin="{ThemeResource SimpleMenuFlyoutCheckGlyphMargin}"
+									  Opacity="0"
+									  VerticalAlignment="Center" />
 
-						<TextBlock x:Name="TextBlock"
-								   Grid.Column="2"
-								   VerticalAlignment="Center"
-								   Foreground="{TemplateBinding Foreground}"
-								   Text="{TemplateBinding Text}"
-								   TextTrimming="CharacterEllipsis" />
+							<Viewbox x:Name="IconRoot"
+									 Grid.Column="1"
+									 Width="{ThemeResource SimpleIconExtraSmall}"
+									 Height="{ThemeResource SimpleIconExtraSmall}"
+									 Margin="{ThemeResource SimpleMenuFlyoutItemIconMargin}"
+									 HorizontalAlignment="Left"
+									 VerticalAlignment="Center"
+									 Visibility="Collapsed">
+								<ContentPresenter x:Name="IconContent"
+												  Content="{TemplateBinding Icon}"
+												  Foreground="{ThemeResource OnSurfaceBrush}" />
+							</Viewbox>
 
-						<TextBlock x:Name="KeyboardAcceleratorTextBlock"
-								   Grid.Column="3"
-								   Margin="{ThemeResource SimpleMenuFlyoutItemAcceleratorMargin}"
-								   VerticalAlignment="Center"
-								   Foreground="{ThemeResource OnSurfaceMediumBrush}"
-								   Text="{TemplateBinding KeyboardAcceleratorTextOverride}"
-								   FontSize="{ThemeResource BodyMediumFontSize}"
-								   Visibility="Collapsed" />
+							<TextBlock x:Name="TextBlock"
+									   Grid.Column="2"
+									   VerticalAlignment="Center"
+									   Foreground="{TemplateBinding Foreground}"
+									   Text="{TemplateBinding Text}"
+									   TextTrimming="CharacterEllipsis" />
+
+							<TextBlock x:Name="KeyboardAcceleratorTextBlock"
+									   Grid.Column="3"
+									   Margin="{ThemeResource SimpleMenuFlyoutItemAcceleratorMargin}"
+									   VerticalAlignment="Center"
+									   Foreground="{ThemeResource OnSurfaceMediumBrush}"
+									   Text="{TemplateBinding KeyboardAcceleratorTextOverride}"
+									   FontSize="{ThemeResource BodyMediumFontSize}"
+									   Visibility="Collapsed" />
+						</Grid>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
@@ -331,8 +345,7 @@
 				<ControlTemplate TargetType="MenuFlyoutSubItem">
 					<Grid x:Name="LayoutRoot"
 						  Background="{TemplateBinding Background}"
-						  CornerRadius="{TemplateBinding CornerRadius}"
-						  Padding="{TemplateBinding Padding}">
+						  CornerRadius="{TemplateBinding CornerRadius}">
 
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
@@ -348,7 +361,8 @@
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background" Value="{ThemeResource PrimaryVariantDarkBrush}" />
+										<Setter Target="LayoutRoot.Background" Value="{ThemeResource PrimaryBrush}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource OnPrimaryPressedBrush}" />
 										<Setter Target="TextBlock.Foreground" Value="{ThemeResource OnPrimaryBrush}" />
 										<Setter Target="SubItemChevron.Foreground" Value="{ThemeResource OnPrimaryBrush}" />
 									</VisualState.Setters>
@@ -386,40 +400,47 @@
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="Auto" />
-							<ColumnDefinition Width="*" />
-							<ColumnDefinition Width="Auto" />
-						</Grid.ColumnDefinitions>
+						<!-- Tints the fill in interactive states, so a state stays a shade of the resting role -->
+						<Border x:Name="StateLayer"
+								Background="Transparent"
+								CornerRadius="{TemplateBinding CornerRadius}" />
 
-						<Viewbox x:Name="IconRoot"
-								 Grid.Column="0"
-								 Width="{ThemeResource SimpleIconExtraSmall}"
-								 Height="{ThemeResource SimpleIconExtraSmall}"
-								 Margin="{ThemeResource SimpleMenuFlyoutItemIconMargin}"
-								 HorizontalAlignment="Left"
-								 VerticalAlignment="Center"
-								 Visibility="Collapsed">
-							<ContentPresenter x:Name="IconContent"
-											  Content="{TemplateBinding Icon}"
-											  Foreground="{ThemeResource OnSurfaceBrush}" />
-						</Viewbox>
+						<Grid Margin="{TemplateBinding Padding}">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="Auto" />
+							</Grid.ColumnDefinitions>
 
-						<TextBlock x:Name="TextBlock"
-								   Grid.Column="1"
-								   VerticalAlignment="Center"
-								   Foreground="{TemplateBinding Foreground}"
-								   Text="{TemplateBinding Text}"
-								   TextTrimming="CharacterEllipsis" />
+							<Viewbox x:Name="IconRoot"
+									 Grid.Column="0"
+									 Width="{ThemeResource SimpleIconExtraSmall}"
+									 Height="{ThemeResource SimpleIconExtraSmall}"
+									 Margin="{ThemeResource SimpleMenuFlyoutItemIconMargin}"
+									 HorizontalAlignment="Left"
+									 VerticalAlignment="Center"
+									 Visibility="Collapsed">
+								<ContentPresenter x:Name="IconContent"
+												  Content="{TemplateBinding Icon}"
+												  Foreground="{ThemeResource OnSurfaceBrush}" />
+							</Viewbox>
 
-						<!-- Chevron for submenu -->
-						<FontIcon x:Name="SubItemChevron"
-								  Grid.Column="2"
-								  Glyph="&#xE76C;"
-								  FontSize="{ThemeResource BodySmallFontSize}"
-								  Foreground="{ThemeResource OnSurfaceBrush}"
-								  Margin="{ThemeResource SimpleMenuFlyoutItemAcceleratorMargin}"
-								  VerticalAlignment="Center" />
+							<TextBlock x:Name="TextBlock"
+									   Grid.Column="1"
+									   VerticalAlignment="Center"
+									   Foreground="{TemplateBinding Foreground}"
+									   Text="{TemplateBinding Text}"
+									   TextTrimming="CharacterEllipsis" />
+
+							<!-- Chevron for submenu -->
+							<FontIcon x:Name="SubItemChevron"
+									  Grid.Column="2"
+									  Glyph="&#xE76C;"
+									  FontSize="{ThemeResource BodySmallFontSize}"
+									  Foreground="{ThemeResource OnSurfaceBrush}"
+									  Margin="{ThemeResource SimpleMenuFlyoutItemAcceleratorMargin}"
+									  VerticalAlignment="Center" />
+						</Grid>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
@@ -445,8 +466,7 @@
 				<ControlTemplate TargetType="muxc:RadioMenuFlyoutItem">
 					<Grid x:Name="LayoutRoot"
 						  Background="{TemplateBinding Background}"
-						  CornerRadius="{TemplateBinding CornerRadius}"
-						  Padding="{TemplateBinding Padding}">
+						  CornerRadius="{TemplateBinding CornerRadius}">
 
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
@@ -461,7 +481,8 @@
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background" Value="{ThemeResource PrimaryVariantDarkBrush}" />
+										<Setter Target="LayoutRoot.Background" Value="{ThemeResource PrimaryBrush}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource OnPrimaryPressedBrush}" />
 										<Setter Target="TextBlock.Foreground" Value="{ThemeResource OnPrimaryBrush}" />
 									</VisualState.Setters>
 								</VisualState>
@@ -503,29 +524,37 @@
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="Auto" />
-							<ColumnDefinition Width="Auto" />
-							<ColumnDefinition Width="*" />
-							<ColumnDefinition Width="Auto" />
-						</Grid.ColumnDefinitions>
+						<!-- Tints the fill in interactive states, so a state stays a shade of the resting role -->
+						<Border x:Name="StateLayer"
+								Background="Transparent"
+								CornerRadius="{TemplateBinding CornerRadius}" />
 
-						<!-- Radio indicator: outer ring (always visible) + inner dot (checked only) -->
-						<Grid x:Name="CheckGlyph"
-							  Grid.Column="0"
-							  Width="14"
-							  Height="14"
-							  Margin="{ThemeResource SimpleMenuFlyoutCheckGlyphMargin}"
-							  VerticalAlignment="Center">
-							<Ellipse Stroke="{ThemeResource OnSurfaceBrush}"
-									 StrokeThickness="1.5"
-									 Width="14"
-									 Height="14" />
-							<Ellipse x:Name="RadioDot"
-									 Fill="{ThemeResource OnSurfaceBrush}"
-									 Width="6"
-									 Height="6"
-									 Visibility="Collapsed" />
+						<Grid Margin="{TemplateBinding Padding}">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="Auto" />
+							</Grid.ColumnDefinitions>
+
+							<!-- Radio indicator: outer ring (always visible) + inner dot (checked only) -->
+							<Grid x:Name="CheckGlyph"
+								  Grid.Column="0"
+								  Width="14"
+								  Height="14"
+								  Margin="{ThemeResource SimpleMenuFlyoutCheckGlyphMargin}"
+								  VerticalAlignment="Center">
+								<Ellipse Stroke="{ThemeResource OnSurfaceBrush}"
+										 StrokeThickness="1.5"
+										 Width="14"
+										 Height="14" />
+								<Ellipse x:Name="RadioDot"
+										 Fill="{ThemeResource OnSurfaceBrush}"
+										 Width="6"
+										 Height="6"
+										 Visibility="Collapsed" />
+
+							</Grid>
 						</Grid>
 
 						<Viewbox x:Name="IconRoot"

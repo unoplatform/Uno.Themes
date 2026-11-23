@@ -85,6 +85,7 @@
 								<VisualState x:Name="UncheckedPointerOver">
 									<VisualState.Setters>
 										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource CheckBoxBackgroundUncheckedPointerOver}" />
+										<Setter Target="CheckBoxStateLayer.Fill" Value="{ThemeResource CheckBoxStateLayerBackgroundUncheckedPointerOver}" />
 										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource CheckBoxBorderBrushUncheckedPointerOver}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource CheckBoxForegroundUncheckedPointerOver}" />
 									</VisualState.Setters>
@@ -92,6 +93,7 @@
 								<VisualState x:Name="UncheckedPressed">
 									<VisualState.Setters>
 										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource CheckBoxBackgroundUncheckedPressed}" />
+										<Setter Target="CheckBoxStateLayer.Fill" Value="{ThemeResource CheckBoxStateLayerBackgroundUncheckedPressed}" />
 										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource CheckBoxBorderBrushUncheckedPressed}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource CheckBoxForegroundUncheckedPressed}" />
 									</VisualState.Setters>
@@ -116,6 +118,7 @@
 								<VisualState x:Name="CheckedPointerOver">
 									<VisualState.Setters>
 										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource CheckBoxBackgroundCheckedPointerOver}" />
+										<Setter Target="CheckBoxStateLayer.Fill" Value="{ThemeResource CheckBoxStateLayerBackgroundCheckedPointerOver}" />
 										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource CheckBoxBorderBrushCheckedPointerOver}" />
 										<Setter Target="CheckGlyph.Opacity" Value="1" />
 										<Setter Target="CheckGlyph.Fill" Value="{ThemeResource CheckBoxGlyphForegroundCheckedPointerOver}" />
@@ -125,6 +128,7 @@
 								<VisualState x:Name="CheckedPressed">
 									<VisualState.Setters>
 										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource CheckBoxBackgroundCheckedPressed}" />
+										<Setter Target="CheckBoxStateLayer.Fill" Value="{ThemeResource CheckBoxStateLayerBackgroundCheckedPressed}" />
 										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource CheckBoxBorderBrushCheckedPressed}" />
 										<Setter Target="CheckGlyph.Opacity" Value="1" />
 										<Setter Target="CheckGlyph.Fill" Value="{ThemeResource CheckBoxGlyphForegroundCheckedPressed}" />
@@ -153,6 +157,7 @@
 								<VisualState x:Name="IndeterminatePointerOver">
 									<VisualState.Setters>
 										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource CheckBoxBackgroundIndeterminatePointerOver}" />
+										<Setter Target="CheckBoxStateLayer.Fill" Value="{ThemeResource CheckBoxStateLayerBackgroundIndeterminatePointerOver}" />
 										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource CheckBoxBorderBrushIndeterminatePointerOver}" />
 										<Setter Target="IndeterminateGlyph.Opacity" Value="1" />
 										<Setter Target="IndeterminateGlyph.Fill" Value="{ThemeResource CheckBoxGlyphForegroundIndeterminatePointerOver}" />
@@ -162,6 +167,7 @@
 								<VisualState x:Name="IndeterminatePressed">
 									<VisualState.Setters>
 										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource CheckBoxBackgroundIndeterminatePressed}" />
+										<Setter Target="CheckBoxStateLayer.Fill" Value="{ThemeResource CheckBoxStateLayerBackgroundIndeterminatePressed}" />
 										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource CheckBoxBorderBrushIndeterminatePressed}" />
 										<Setter Target="IndeterminateGlyph.Opacity" Value="1" />
 										<Setter Target="IndeterminateGlyph.Fill" Value="{ThemeResource CheckBoxGlyphForegroundIndeterminatePressed}" />
@@ -195,6 +201,12 @@
 									   StrokeThickness="{StaticResource SimpleCheckBoxStrokeThickness}"
 									   RadiusX="{ThemeResource SimpleShapeCheckBox}"
 									   RadiusY="{ThemeResource SimpleShapeCheckBox}" />
+
+							<!-- Tints the fill in interactive states, so a state stays a shade of the resting role -->
+							<Rectangle x:Name="CheckBoxStateLayer"
+									   RadiusX="{ThemeResource SimpleShapeCheckBox}"
+									   RadiusY="{ThemeResource SimpleShapeCheckBox}"
+									   Fill="Transparent" />
 
 							<!-- Checkmark Glyph -->
 							<Path x:Name="CheckGlyph"

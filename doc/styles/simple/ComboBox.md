@@ -39,39 +39,43 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 ### Themed
 
-| Key                                         | Type              | Light                           |
-| ------------------------------------------- | ----------------- | ------------------------------- |
-| `ComboBoxBackground`                        | `SolidColorBrush` | `SurfaceBrush`                  |
-| `ComboBoxBackgroundDisabled`                | `SolidColorBrush` | `OnSurfaceDisabledBrush`        |
-| `ComboBoxBackgroundPointerOver`             | `SolidColorBrush` | `SurfaceBrush`                  |
-| `ComboBoxBackgroundPressed`                 | `SolidColorBrush` | `SurfaceBrush`                  |
-| `ComboBoxBorderBrush`                       | `SolidColorBrush` | `OutlineBrush`                  |
-| `ComboBoxBorderBrushDisabled`               | `SolidColorBrush` | `OutlineDisabledBrush`          |
-| `ComboBoxBorderBrushPointerOver`            | `SolidColorBrush` | `OutlineBrush`                  |
-| `ComboBoxBorderBrushPressed`                | `SolidColorBrush` | `PrimaryMediumBrush`            |
-| `ComboBoxDropDownBackground`                | `SolidColorBrush` | `SurfaceBrush`                  |
-| `ComboBoxDropDownBorderBrush`               | `SolidColorBrush` | `OutlineBrush`                  |
-| `ComboBoxDropDownGlyphForeground`           | `SolidColorBrush` | `OnSurfaceBrush`                |
-| `ComboBoxDropDownGlyphForegroundDisabled`   | `SolidColorBrush` | `OnSurfaceDisabledBrush`        |
-| `ComboBoxForeground`                        | `SolidColorBrush` | `OnSurfaceBrush`                |
-| `ComboBoxForegroundDisabled`                | `SolidColorBrush` | `OnSurfaceDisabledBrush`        |
-| `ComboBoxForegroundPointerOver`             | `SolidColorBrush` | `OnSurfaceBrush`                |
-| `ComboBoxForegroundPressed`                 | `SolidColorBrush` | `OnSurfaceBrush`                |
-| `ComboBoxItemBackground`                    | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `ComboBoxItemBackgroundDisabled`            | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `ComboBoxItemBackgroundPointerOver`         | `SolidColorBrush` | `SurfaceVariantBrush`           |
-| `ComboBoxItemBackgroundPressed`             | `SolidColorBrush` | `TertiaryContainerBrush`        |
-| `ComboBoxItemBackgroundSelected`            | `SolidColorBrush` | `PrimaryBrush`                  |
-| `ComboBoxItemBackgroundSelectedPointerOver` | `SolidColorBrush` | `PrimaryVariantDarkBrush`       |
-| `ComboBoxItemBackgroundSelectedPressed`     | `SolidColorBrush` | `PrimaryVariantDarkBrush`       |
-| `ComboBoxItemForeground`                    | `SolidColorBrush` | `OnSurfaceBrush`                |
-| `ComboBoxItemForegroundDisabled`            | `SolidColorBrush` | `OnSurfaceDisabledBrush`        |
-| `ComboBoxItemForegroundPointerOver`         | `SolidColorBrush` | `OnSurfaceBrush`                |
-| `ComboBoxItemForegroundPressed`             | `SolidColorBrush` | `OnSurfaceBrush`                |
-| `ComboBoxItemForegroundSelected`            | `SolidColorBrush` | `OnPrimaryBrush`                |
-| `ComboBoxItemForegroundSelectedPointerOver` | `SolidColorBrush` | `OnPrimaryBrush`                |
-| `ComboBoxItemForegroundSelectedPressed`     | `SolidColorBrush` | `OnPrimaryBrush`                |
-| `ComboBoxPlaceHolderForeground`             | `SolidColorBrush` | `OnSurfaceLowBrush`             |
+| Key                                                   | Type              | Light                           |
+| ----------------------------------------------------- | ----------------- | ------------------------------- |
+| `ComboBoxBackground`                                  | `SolidColorBrush` | `SurfaceBrush`                  |
+| `ComboBoxBackgroundDisabled`                          | `SolidColorBrush` | `OnSurfaceDisabledBrush`        |
+| `ComboBoxBackgroundPointerOver`                       | `SolidColorBrush` | `SurfaceBrush`                  |
+| `ComboBoxBackgroundPressed`                           | `SolidColorBrush` | `SurfaceBrush`                  |
+| `ComboBoxBorderBrush`                                 | `SolidColorBrush` | `OutlineBrush`                  |
+| `ComboBoxBorderBrushDisabled`                         | `SolidColorBrush` | `OutlineDisabledBrush`          |
+| `ComboBoxBorderBrushPointerOver`                      | `SolidColorBrush` | `OutlineBrush`                  |
+| `ComboBoxBorderBrushPressed`                          | `SolidColorBrush` | `PrimaryMediumBrush`            |
+| `ComboBoxDropDownBackground`                          | `SolidColorBrush` | `SurfaceBrush`                  |
+| `ComboBoxDropDownBorderBrush`                         | `SolidColorBrush` | `OutlineBrush`                  |
+| `ComboBoxDropDownGlyphForeground`                     | `SolidColorBrush` | `OnSurfaceBrush`                |
+| `ComboBoxDropDownGlyphForegroundDisabled`             | `SolidColorBrush` | `OnSurfaceDisabledBrush`        |
+| `ComboBoxForeground`                                  | `SolidColorBrush` | `OnSurfaceBrush`                |
+| `ComboBoxForegroundDisabled`                          | `SolidColorBrush` | `OnSurfaceDisabledBrush`        |
+| `ComboBoxForegroundPointerOver`                       | `SolidColorBrush` | `OnSurfaceBrush`                |
+| `ComboBoxForegroundPressed`                           | `SolidColorBrush` | `OnSurfaceBrush`                |
+| `ComboBoxItemBackground`                              | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `ComboBoxItemBackgroundDisabled`                      | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `ComboBoxItemBackgroundPointerOver`                   | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `ComboBoxItemBackgroundPressed`                       | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `ComboBoxItemBackgroundSelected`                      | `SolidColorBrush` | `PrimaryBrush`                  |
+| `ComboBoxItemBackgroundSelectedPointerOver`           | `SolidColorBrush` | `PrimaryBrush`                  |
+| `ComboBoxItemBackgroundSelectedPressed`               | `SolidColorBrush` | `PrimaryBrush`                  |
+| `ComboBoxItemForeground`                              | `SolidColorBrush` | `OnSurfaceBrush`                |
+| `ComboBoxItemForegroundDisabled`                      | `SolidColorBrush` | `OnSurfaceDisabledBrush`        |
+| `ComboBoxItemForegroundPointerOver`                   | `SolidColorBrush` | `OnSurfaceBrush`                |
+| `ComboBoxItemForegroundPressed`                       | `SolidColorBrush` | `OnSurfaceBrush`                |
+| `ComboBoxItemForegroundSelected`                      | `SolidColorBrush` | `OnPrimaryBrush`                |
+| `ComboBoxItemForegroundSelectedPointerOver`           | `SolidColorBrush` | `OnPrimaryBrush`                |
+| `ComboBoxItemForegroundSelectedPressed`               | `SolidColorBrush` | `OnPrimaryBrush`                |
+| `ComboBoxItemStateLayerBackgroundPointerOver`         | `SolidColorBrush` | `OnSurfaceHoverBrush`           |
+| `ComboBoxItemStateLayerBackgroundPressed`             | `SolidColorBrush` | `OnSurfacePressedBrush`         |
+| `ComboBoxItemStateLayerBackgroundSelectedPointerOver` | `SolidColorBrush` | `OnPrimaryHoverBrush`           |
+| `ComboBoxItemStateLayerBackgroundSelectedPressed`     | `SolidColorBrush` | `OnPrimaryPressedBrush`         |
+| `ComboBoxPlaceHolderForeground`                       | `SolidColorBrush` | `OnSurfaceLowBrush`             |
 
 The Dark theme uses the same values as Light.
 

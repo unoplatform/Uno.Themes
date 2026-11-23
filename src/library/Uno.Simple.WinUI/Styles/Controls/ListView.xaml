@@ -60,6 +60,7 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="ContentBorder.Background" Value="{ThemeResource ListViewItemBackgroundPointerOver}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource ListViewItemStateLayerBackgroundPointerOver}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ListViewItemForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
@@ -67,6 +68,7 @@
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="ContentBorder.Background" Value="{ThemeResource ListViewItemBackgroundPressed}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource ListViewItemStateLayerBackgroundPressed}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ListViewItemForegroundPressed}" />
 									</VisualState.Setters>
 								</VisualState>
@@ -81,6 +83,7 @@
 								<VisualState x:Name="PointerOverSelected">
 									<VisualState.Setters>
 										<Setter Target="ContentBorder.Background" Value="{ThemeResource ListViewItemBackgroundPointerOverSelected}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource ListViewItemStateLayerBackgroundPointerOverSelected}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ListViewItemForegroundPointerOverSelected}" />
 									</VisualState.Setters>
 								</VisualState>
@@ -88,6 +91,7 @@
 								<VisualState x:Name="PressedSelected">
 									<VisualState.Setters>
 										<Setter Target="ContentBorder.Background" Value="{ThemeResource ListViewItemBackgroundPressedSelected}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource ListViewItemStateLayerBackgroundPressedSelected}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ListViewItemForegroundPressedSelected}" />
 									</VisualState.Setters>
 								</VisualState>
@@ -102,6 +106,11 @@
 								</VisualState>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
+
+						<!-- Tints the fill in interactive states, so a state stays a shade of the resting role -->
+						<Border x:Name="StateLayer"
+								Background="Transparent"
+								CornerRadius="{TemplateBinding CornerRadius}" />
 
 						<ContentPresenter x:Name="ContentPresenter"
 										  ContentTransitions="{TemplateBinding ContentTransitions}"

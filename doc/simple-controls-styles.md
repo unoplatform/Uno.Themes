@@ -119,6 +119,12 @@ uid: Uno.Themes.Simple.Styles
 
 IsDefaultStyle\*: Styles in this column will be set as the default implicit style for the matching control
 
+## Interactive States
+
+Hover and pressed states keep the control's resting fill and tint it with a translucent **state layer** in the color of the content drawn on it (`OnPrimary` over `Primary`, `OnSurface` over a surface). A hovered or pressed control therefore stays a shade of its own color, and its label, check glyph or switch knob stays readable with any palette, including one generated from a [seed color](xref:Uno.Themes.SeedColors).
+
+The tint is exposed through `*StateLayerBackground<State>` lightweight-styling keys on the buttons (`FilledButton`, `FilledTonalButton`, `OutlinedButton`, `IconButton`), `TextToggleButton`, `CheckBox`, `ComboBoxItem` and `ListViewItem`, and through `ToggleSwitchStateLayerFillPressed`. Override them with a translucent brush; an opaque one hides the fill. `MenuFlyout` items and `Expander` headers apply the same tint from their templates.
+
 ## Compatibility Aliases
 
 The Simple theme also provides well-known style key aliases for compatibility with Material and Figma naming conventions. These aliases resolve to the corresponding Simple styles listed above.

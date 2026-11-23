@@ -22,23 +22,27 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 ### Themed
 
-| Key                                         | Type              | Light                           |
-| ------------------------------------------- | ----------------- | ------------------------------- |
-| `ListViewBackground`                        | `SolidColorBrush` | `SurfaceBrush`                  |
-| `ListViewBorderBrush`                       | `SolidColorBrush` | `OutlineBrush`                  |
-| `ListViewItemBackground`                    | `SolidColorBrush` | `SystemControlTransparentBrush` |
-| `ListViewItemBackgroundPointerOver`         | `SolidColorBrush` | `SurfaceVariantBrush`           |
-| `ListViewItemBackgroundPointerOverSelected` | `SolidColorBrush` | `PrimaryVariantDarkBrush`       |
-| `ListViewItemBackgroundPressed`             | `SolidColorBrush` | `OutlineBrush`                  |
-| `ListViewItemBackgroundPressedSelected`     | `SolidColorBrush` | `PrimaryVariantDarkBrush`       |
-| `ListViewItemBackgroundSelected`            | `SolidColorBrush` | `PrimaryBrush`                  |
-| `ListViewItemForeground`                    | `SolidColorBrush` | `OnSurfaceBrush`                |
-| `ListViewItemForegroundDisabled`            | `SolidColorBrush` | `OnSurfaceDisabledBrush`        |
-| `ListViewItemForegroundPointerOver`         | `SolidColorBrush` | `OnSurfaceBrush`                |
-| `ListViewItemForegroundPointerOverSelected` | `SolidColorBrush` | `OnPrimaryBrush`                |
-| `ListViewItemForegroundPressed`             | `SolidColorBrush` | `OnSurfaceBrush`                |
-| `ListViewItemForegroundPressedSelected`     | `SolidColorBrush` | `OnPrimaryBrush`                |
-| `ListViewItemForegroundSelected`            | `SolidColorBrush` | `OnPrimaryBrush`                |
+| Key                                                   | Type              | Light                           |
+| ----------------------------------------------------- | ----------------- | ------------------------------- |
+| `ListViewBackground`                                  | `SolidColorBrush` | `SurfaceBrush`                  |
+| `ListViewBorderBrush`                                 | `SolidColorBrush` | `OutlineBrush`                  |
+| `ListViewItemBackground`                              | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `ListViewItemBackgroundPointerOver`                   | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `ListViewItemBackgroundPointerOverSelected`           | `SolidColorBrush` | `PrimaryBrush`                  |
+| `ListViewItemBackgroundPressed`                       | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `ListViewItemBackgroundPressedSelected`               | `SolidColorBrush` | `PrimaryBrush`                  |
+| `ListViewItemBackgroundSelected`                      | `SolidColorBrush` | `PrimaryBrush`                  |
+| `ListViewItemForeground`                              | `SolidColorBrush` | `OnSurfaceBrush`                |
+| `ListViewItemForegroundDisabled`                      | `SolidColorBrush` | `OnSurfaceDisabledBrush`        |
+| `ListViewItemForegroundPointerOver`                   | `SolidColorBrush` | `OnSurfaceBrush`                |
+| `ListViewItemForegroundPointerOverSelected`           | `SolidColorBrush` | `OnPrimaryBrush`                |
+| `ListViewItemForegroundPressed`                       | `SolidColorBrush` | `OnSurfaceBrush`                |
+| `ListViewItemForegroundPressedSelected`               | `SolidColorBrush` | `OnPrimaryBrush`                |
+| `ListViewItemForegroundSelected`                      | `SolidColorBrush` | `OnPrimaryBrush`                |
+| `ListViewItemStateLayerBackgroundPointerOver`         | `SolidColorBrush` | `OnSurfaceHoverBrush`           |
+| `ListViewItemStateLayerBackgroundPointerOverSelected` | `SolidColorBrush` | `OnPrimaryHoverBrush`           |
+| `ListViewItemStateLayerBackgroundPressed`             | `SolidColorBrush` | `OnSurfacePressedBrush`         |
+| `ListViewItemStateLayerBackgroundPressedSelected`     | `SolidColorBrush` | `OnPrimaryPressedBrush`         |
 
 The Dark theme uses the same values as Light.
 

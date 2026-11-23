@@ -26,17 +26,17 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 ### Themed
 
-| Key                                             | Type              | Light                     |
-| ----------------------------------------------- | ----------------- | ------------------------- |
-| `RatingControlCaptionForeground`                | `SolidColorBrush` | `OnSurfaceMediumBrush`    |
-| `RatingControlForeground`                       | `SolidColorBrush` | `PrimaryBrush`            |
-| `RatingControlPlaceholderForeground`            | `SolidColorBrush` | `OnSurfaceMediumBrush`    |
-| `RatingControlPlaceholderForegroundPointerOver` | `SolidColorBrush` | `PrimaryBrush`            |
-| `RatingControlSelectedForeground`               | `SolidColorBrush` | `PrimaryBrush`            |
-| `RatingControlSelectedForegroundDisabled`       | `SolidColorBrush` | `OnSurfaceDisabledBrush`  |
-| `RatingControlSelectedForegroundPointerOver`    | `SolidColorBrush` | `PrimaryVariantDarkBrush` |
-| `RatingControlUnselectedForeground`             | `SolidColorBrush` | `OnSurfaceMediumBrush`    |
-| `RatingControlUnselectedForegroundPointerOver`  | `SolidColorBrush` | `OnSurfaceLowBrush`       |
+| Key                                             | Type              | Light                    |
+| ----------------------------------------------- | ----------------- | ------------------------ |
+| `RatingControlCaptionForeground`                | `SolidColorBrush` | `OnSurfaceMediumBrush`   |
+| `RatingControlForeground`                       | `SolidColorBrush` | `PrimaryBrush`           |
+| `RatingControlPlaceholderForeground`            | `SolidColorBrush` | `OnSurfaceMediumBrush`   |
+| `RatingControlPlaceholderForegroundPointerOver` | `SolidColorBrush` | `PrimaryBrush`           |
+| `RatingControlSelectedForeground`               | `SolidColorBrush` | `PrimaryBrush`           |
+| `RatingControlSelectedForegroundDisabled`       | `SolidColorBrush` | `OnSurfaceDisabledBrush` |
+| `RatingControlSelectedForegroundPointerOver`    | `SolidColorBrush` | `PrimaryBrush`           |
+| `RatingControlUnselectedForeground`             | `SolidColorBrush` | `OnSurfaceMediumBrush`   |
+| `RatingControlUnselectedForegroundPointerOver`  | `SolidColorBrush` | `OnSurfaceLowBrush`      |
 
 The Dark theme uses the same values as Light.
 

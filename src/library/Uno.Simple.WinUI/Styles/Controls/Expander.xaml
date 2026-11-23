@@ -87,13 +87,8 @@
 						  Width="{TemplateBinding Width}"
 						  HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
 						  BorderBrush="{ThemeResource OutlineBrush}"
-						  BorderThickness="{TemplateBinding BorderThickness}"
-						  Padding="{TemplateBinding Padding}">
+						  BorderThickness="{TemplateBinding BorderThickness}">
 
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="*" />
-							<ColumnDefinition Width="Auto" />
-						</Grid.ColumnDefinitions>
 
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
@@ -129,7 +124,12 @@
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="ToggleButtonGrid"
 																	   Storyboard.TargetProperty="Background">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource PrimaryContainerBrush}" />
+																	Value="{ThemeResource SurfaceVariantBrush}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="StateLayer"
+																	   Storyboard.TargetProperty="Background">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource OnSurfaceHoverBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="ToggleButtonGrid"
 																	   Storyboard.TargetProperty="BorderBrush">
@@ -154,7 +154,12 @@
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="ToggleButtonGrid"
 																	   Storyboard.TargetProperty="Background">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource TertiaryContainerBrush}" />
+																	Value="{ThemeResource SurfaceVariantBrush}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="StateLayer"
+																	   Storyboard.TargetProperty="Background">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource OnSurfacePressedBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="ToggleButtonGrid"
 																	   Storyboard.TargetProperty="BorderBrush">
@@ -238,7 +243,12 @@
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="ToggleButtonGrid"
 																	   Storyboard.TargetProperty="Background">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource SurfaceVariantBrush}" />
+																	Value="{ThemeResource SurfaceBrush}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="StateLayer"
+																	   Storyboard.TargetProperty="Background">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource OnSurfaceHoverBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="ToggleButtonGrid"
 																	   Storyboard.TargetProperty="BorderBrush">
@@ -267,7 +277,12 @@
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="ToggleButtonGrid"
 																	   Storyboard.TargetProperty="Background">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource PrimaryContainerBrush}" />
+																	Value="{ThemeResource SurfaceBrush}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="StateLayer"
+																	   Storyboard.TargetProperty="Background">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource OnSurfacePressedBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="ToggleButtonGrid"
 																	   Storyboard.TargetProperty="BorderBrush">
@@ -324,40 +339,52 @@
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
-						<!-- Header content -->
-						<ContentPresenter x:Name="ContentPresenter"
-										  Content="{TemplateBinding Content}"
-										  ContentTemplate="{TemplateBinding ContentTemplate}"
-										  ContentTransitions="{TemplateBinding ContentTransitions}"
-										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-										  Foreground="{TemplateBinding Foreground}" />
-
-						<!-- Chevron button (SDS: 20px down-arrow icon) -->
-						<Border x:Name="ExpandCollapseChevronBorder"
-								Grid.Column="1"
-								Width="{StaticResource SimpleExpanderChevronButtonSize}"
-								Height="{StaticResource SimpleExpanderChevronButtonSize}"
-								Margin="{StaticResource SimpleExpanderChevronMargin}"
-								CornerRadius="{ThemeResource SimpleExpanderCornerRadius}"
+						<!-- Tints the fill in interactive states, so a state stays a shade of the resting role -->
+						<Border x:Name="StateLayer"
 								Background="Transparent"
-								BorderBrush="Transparent"
-								BorderThickness="0">
-							<FontIcon x:Name="ExpandCollapseChevron"
-									  Glyph="{StaticResource SimpleExpanderChevronDownGlyph}"
-									  FontFamily="{StaticResource SymbolThemeFontFamily}"
-									  FontSize="{ThemeResource SimpleExpanderChevronGlyphSize}"
-									  Foreground="{ThemeResource OnSurfaceBrush}"
-									  HorizontalAlignment="Center"
-									  VerticalAlignment="Center"
-									  IsTextScaleFactorEnabled="False"
-									  RenderTransformOrigin="0.5,0.5"
-									  AutomationProperties.AccessibilityView="Raw">
-								<FontIcon.RenderTransform>
-									<RotateTransform x:Name="ExpandCollapseChevronRotateTransform" Angle="0" />
-								</FontIcon.RenderTransform>
-							</FontIcon>
-						</Border>
+								CornerRadius="{TemplateBinding CornerRadius}" />
+
+						<Grid Margin="{TemplateBinding Padding}">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="Auto" />
+							</Grid.ColumnDefinitions>
+
+							<!-- Header content -->
+							<ContentPresenter x:Name="ContentPresenter"
+											  Content="{TemplateBinding Content}"
+											  ContentTemplate="{TemplateBinding ContentTemplate}"
+											  ContentTransitions="{TemplateBinding ContentTransitions}"
+											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+											  Foreground="{TemplateBinding Foreground}" />
+
+							<!-- Chevron button (SDS: 20px down-arrow icon) -->
+							<Border x:Name="ExpandCollapseChevronBorder"
+									Grid.Column="1"
+									Width="{StaticResource SimpleExpanderChevronButtonSize}"
+									Height="{StaticResource SimpleExpanderChevronButtonSize}"
+									Margin="{StaticResource SimpleExpanderChevronMargin}"
+									CornerRadius="{ThemeResource SimpleExpanderCornerRadius}"
+									Background="Transparent"
+									BorderBrush="Transparent"
+									BorderThickness="0">
+								<FontIcon x:Name="ExpandCollapseChevron"
+										  Glyph="{StaticResource SimpleExpanderChevronDownGlyph}"
+										  FontFamily="{StaticResource SymbolThemeFontFamily}"
+										  FontSize="{ThemeResource SimpleExpanderChevronGlyphSize}"
+										  Foreground="{ThemeResource OnSurfaceBrush}"
+										  HorizontalAlignment="Center"
+										  VerticalAlignment="Center"
+										  IsTextScaleFactorEnabled="False"
+										  RenderTransformOrigin="0.5,0.5"
+										  AutomationProperties.AccessibilityView="Raw">
+									<FontIcon.RenderTransform>
+										<RotateTransform x:Name="ExpandCollapseChevronRotateTransform" Angle="0" />
+									</FontIcon.RenderTransform>
+								</FontIcon>
+							</Border>
+						</Grid>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
@@ -383,13 +410,8 @@
 						  Width="{TemplateBinding Width}"
 						  HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
 						  BorderBrush="{ThemeResource OutlineBrush}"
-						  BorderThickness="{TemplateBinding BorderThickness}"
-						  Padding="{TemplateBinding Padding}">
+						  BorderThickness="{TemplateBinding BorderThickness}">
 
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="*" />
-							<ColumnDefinition Width="Auto" />
-						</Grid.ColumnDefinitions>
 
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
@@ -425,7 +447,12 @@
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="ToggleButtonGrid"
 																	   Storyboard.TargetProperty="Background">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource PrimaryContainerBrush}" />
+																	Value="{ThemeResource SurfaceVariantBrush}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="StateLayer"
+																	   Storyboard.TargetProperty="Background">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource OnSurfaceHoverBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="ToggleButtonGrid"
 																	   Storyboard.TargetProperty="BorderBrush">
@@ -450,7 +477,12 @@
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="ToggleButtonGrid"
 																	   Storyboard.TargetProperty="Background">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource TertiaryContainerBrush}" />
+																	Value="{ThemeResource SurfaceVariantBrush}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="StateLayer"
+																	   Storyboard.TargetProperty="Background">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource OnSurfacePressedBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="ToggleButtonGrid"
 																	   Storyboard.TargetProperty="BorderBrush">
@@ -534,7 +566,12 @@
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="ToggleButtonGrid"
 																	   Storyboard.TargetProperty="Background">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource SurfaceVariantBrush}" />
+																	Value="{ThemeResource SurfaceBrush}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="StateLayer"
+																	   Storyboard.TargetProperty="Background">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource OnSurfaceHoverBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="ToggleButtonGrid"
 																	   Storyboard.TargetProperty="BorderBrush">
@@ -563,7 +600,12 @@
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="ToggleButtonGrid"
 																	   Storyboard.TargetProperty="Background">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource PrimaryContainerBrush}" />
+																	Value="{ThemeResource SurfaceBrush}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="StateLayer"
+																	   Storyboard.TargetProperty="Background">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource OnSurfacePressedBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="ToggleButtonGrid"
 																	   Storyboard.TargetProperty="BorderBrush">
@@ -619,40 +661,52 @@
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
-						<!-- Header content -->
-						<ContentPresenter x:Name="ContentPresenter"
-										  Content="{TemplateBinding Content}"
-										  ContentTemplate="{TemplateBinding ContentTemplate}"
-										  ContentTransitions="{TemplateBinding ContentTransitions}"
-										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-										  Foreground="{TemplateBinding Foreground}" />
-
-						<!-- Chevron (SDS: up-arrow for ExpandUp — initial angle 180, rotates to 0 when expanded) -->
-						<Border x:Name="ExpandCollapseChevronBorder"
-								Grid.Column="1"
-								Width="{StaticResource SimpleExpanderChevronButtonSize}"
-								Height="{StaticResource SimpleExpanderChevronButtonSize}"
-								Margin="{StaticResource SimpleExpanderChevronMargin}"
-								CornerRadius="{ThemeResource SimpleExpanderCornerRadius}"
+						<!-- Tints the fill in interactive states, so a state stays a shade of the resting role -->
+						<Border x:Name="StateLayer"
 								Background="Transparent"
-								BorderBrush="Transparent"
-								BorderThickness="0">
-							<FontIcon x:Name="ExpandCollapseChevron"
-									  Glyph="{StaticResource SimpleExpanderChevronDownGlyph}"
-									  FontFamily="{StaticResource SymbolThemeFontFamily}"
-									  FontSize="{ThemeResource SimpleExpanderChevronGlyphSize}"
-									  Foreground="{ThemeResource OnSurfaceBrush}"
-									  HorizontalAlignment="Center"
-									  VerticalAlignment="Center"
-									  IsTextScaleFactorEnabled="False"
-									  RenderTransformOrigin="0.5,0.5"
-									  AutomationProperties.AccessibilityView="Raw">
-								<FontIcon.RenderTransform>
-									<RotateTransform x:Name="ExpandCollapseChevronRotateTransform" Angle="0" />
-								</FontIcon.RenderTransform>
-							</FontIcon>
-						</Border>
+								CornerRadius="{TemplateBinding CornerRadius}" />
+
+						<Grid Margin="{TemplateBinding Padding}">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="Auto" />
+							</Grid.ColumnDefinitions>
+
+							<!-- Header content -->
+							<ContentPresenter x:Name="ContentPresenter"
+											  Content="{TemplateBinding Content}"
+											  ContentTemplate="{TemplateBinding ContentTemplate}"
+											  ContentTransitions="{TemplateBinding ContentTransitions}"
+											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+											  Foreground="{TemplateBinding Foreground}" />
+
+							<!-- Chevron (SDS: up-arrow for ExpandUp — initial angle 180, rotates to 0 when expanded) -->
+							<Border x:Name="ExpandCollapseChevronBorder"
+									Grid.Column="1"
+									Width="{StaticResource SimpleExpanderChevronButtonSize}"
+									Height="{StaticResource SimpleExpanderChevronButtonSize}"
+									Margin="{StaticResource SimpleExpanderChevronMargin}"
+									CornerRadius="{ThemeResource SimpleExpanderCornerRadius}"
+									Background="Transparent"
+									BorderBrush="Transparent"
+									BorderThickness="0">
+								<FontIcon x:Name="ExpandCollapseChevron"
+										  Glyph="{StaticResource SimpleExpanderChevronDownGlyph}"
+										  FontFamily="{StaticResource SymbolThemeFontFamily}"
+										  FontSize="{ThemeResource SimpleExpanderChevronGlyphSize}"
+										  Foreground="{ThemeResource OnSurfaceBrush}"
+										  HorizontalAlignment="Center"
+										  VerticalAlignment="Center"
+										  IsTextScaleFactorEnabled="False"
+										  RenderTransformOrigin="0.5,0.5"
+										  AutomationProperties.AccessibilityView="Raw">
+									<FontIcon.RenderTransform>
+										<RotateTransform x:Name="ExpandCollapseChevronRotateTransform" Angle="0" />
+									</FontIcon.RenderTransform>
+								</FontIcon>
+							</Border>
+						</Grid>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>

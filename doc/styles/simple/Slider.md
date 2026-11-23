@@ -52,16 +52,16 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 ### Themed
 
-| Key                             | Type              | Light                     |
-| ------------------------------- | ----------------- | ------------------------- |
-| `SliderThumbBackground`         | `SolidColorBrush` | `PrimaryBrush`            |
-| `SliderThumbBackgroundDisabled` | `SolidColorBrush` | `OnSurfaceDisabledBrush`  |
-| `SliderThumbBackgroundPressed`  | `SolidColorBrush` | `PrimaryVariantDarkBrush` |
-| `SliderTrackFill`               | `SolidColorBrush` | `OutlineBrush`            |
-| `SliderTrackFillDisabled`       | `SolidColorBrush` | `OnSurfaceDisabledBrush`  |
-| `SliderTrackValueFill`          | `SolidColorBrush` | `PrimaryBrush`            |
-| `SliderTrackValueFillDisabled`  | `SolidColorBrush` | `OnSurfaceDisabledBrush`  |
-| `SliderTrackValueFillPressed`   | `SolidColorBrush` | `PrimaryVariantDarkBrush` |
+| Key                             | Type              | Light                    |
+| ------------------------------- | ----------------- | ------------------------ |
+| `SliderThumbBackground`         | `SolidColorBrush` | `PrimaryBrush`           |
+| `SliderThumbBackgroundDisabled` | `SolidColorBrush` | `OnSurfaceDisabledBrush` |
+| `SliderThumbBackgroundPressed`  | `SolidColorBrush` | `PrimaryBrush`           |
+| `SliderTrackFill`               | `SolidColorBrush` | `OutlineBrush`           |
+| `SliderTrackFillDisabled`       | `SolidColorBrush` | `OnSurfaceDisabledBrush` |
+| `SliderTrackValueFill`          | `SolidColorBrush` | `PrimaryBrush`           |
+| `SliderTrackValueFillDisabled`  | `SolidColorBrush` | `OnSurfaceDisabledBrush` |
+| `SliderTrackValueFillPressed`   | `SolidColorBrush` | `PrimaryBrush`           |
 
 The Dark theme uses the same values as Light.
 
