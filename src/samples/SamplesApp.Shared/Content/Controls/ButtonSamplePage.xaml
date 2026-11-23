@@ -744,32 +744,37 @@
 			<sample:SamplePageLayout.FluentTemplate>
 				<DataTemplate>
 					<StackPanel>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Filled: FilledButtonStyle, the accent button" />
 						<smtx:XamlDisplay UniqueKey="Fluent_Button_Filled"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Button Content="Filled"
 									Style="{StaticResource FilledButtonStyle}" />
 						</smtx:XamlDisplay>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Disabled" />
 						<smtx:XamlDisplay UniqueKey="Fluent_Button_FilledDisabled"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Button Content="Disabled"
 									IsEnabled="False"
 									Style="{StaticResource FilledButtonStyle}" />
 						</smtx:XamlDisplay>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Outlined, tonal and elevated: Fluent has no such variants, so OutlinedButtonStyle, FilledTonalButtonStyle and ElevatedButtonStyle all map to the standard button (DefaultButtonStyle)" />
 						<smtx:XamlDisplay UniqueKey="Fluent_Button_Outlined"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<Button Content="Outlined"
+							<Button Content="Default"
 									Style="{StaticResource OutlinedButtonStyle}" />
 						</smtx:XamlDisplay>
-						<smtx:XamlDisplay UniqueKey="Fluent_Button_FilledTonal"
-										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<Button Content="Tonal"
-									Style="{StaticResource FilledTonalButtonStyle}" />
-						</smtx:XamlDisplay>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Text: TextButtonStyle, transparent until hovered" />
 						<smtx:XamlDisplay UniqueKey="Fluent_Button_Text"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Button Content="Text"
 									Style="{StaticResource TextButtonStyle}" />
 						</smtx:XamlDisplay>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Icon: IconButtonStyle" />
 						<smtx:XamlDisplay UniqueKey="Fluent_Button_Icon"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Button Style="{StaticResource IconButtonStyle}">

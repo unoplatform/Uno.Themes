@@ -762,7 +762,8 @@
 			<sample:SamplePageLayout.FluentTemplate>
 				<DataTemplate>
 					<StackPanel>
-						<!-- Primary FAB (accent) -->
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Primary: small, default and large. Fluent has no FAB, so FabStyle, SmallFabStyle and LargeFabStyle map to the accent button" />
 						<smtx:XamlDisplay UniqueKey="Fluent_Fab_Primary"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<StackPanel Orientation="Horizontal"
@@ -778,7 +779,8 @@
 								</Button>
 							</StackPanel>
 						</smtx:XamlDisplay>
-						<!-- Secondary FAB -->
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Secondary: SecondaryFabStyle maps to the standard button" />
 						<smtx:XamlDisplay UniqueKey="Fluent_Fab_Secondary"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<StackPanel Orientation="Horizontal"
@@ -788,7 +790,8 @@
 								</Button>
 							</StackPanel>
 						</smtx:XamlDisplay>
-						<!-- Tertiary FAB -->
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Tertiary: TertiaryFabStyle maps to the standard button" />
 						<smtx:XamlDisplay UniqueKey="Fluent_Fab_Tertiary"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<StackPanel Orientation="Horizontal"
@@ -798,7 +801,8 @@
 								</Button>
 							</StackPanel>
 						</smtx:XamlDisplay>
-						<!-- Surface FAB -->
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Surface: SurfaceFabStyle maps to the standard button" />
 						<smtx:XamlDisplay UniqueKey="Fluent_Fab_Surface"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<StackPanel Orientation="Horizontal"

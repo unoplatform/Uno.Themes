@@ -90,7 +90,8 @@
 			<sample:SamplePageLayout.FluentTemplate>
 				<DataTemplate>
 					<StackPanel>
-						<!-- Basic (with explicit ListViewItemStyle) -->
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Basic: items with an explicit ListViewItemStyle" />
 						<smtx:XamlDisplay UniqueKey="Fluent_ListView_Basic"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<ListView MaxHeight="300"
@@ -105,7 +106,8 @@
 											  Style="{StaticResource ListViewItemStyle}" />
 							</ListView>
 						</smtx:XamlDisplay>
-						<!-- Multiple selection -->
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Multiple selection: Banana is pre-selected, and the Date item is disabled on purpose (IsEnabled False) to show the disabled item state" />
 						<smtx:XamlDisplay UniqueKey="Fluent_ListView_MultiSelection"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<ListView SelectionMode="Multiple"
