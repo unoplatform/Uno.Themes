@@ -47,6 +47,18 @@ Dropped, with reasons:
 
 Timings vary by about ±1 ms between runs; the allocation figures are stable.
 
+### MaterialTheme
+
+Same desktop setup, two rounds, `master` against this branch. Both changes live in `BaseTheme`, so
+Material tracks Simple.
+
+| Scenario | Before | After |
+|---|---|---|
+| `new MaterialTheme()` | ~5.3–7.2 ms, 1159 KB | ~2.5–3.7 ms, 818 KB |
+| `new MaterialTheme { Colors = seed }` | ~7.2–8.5 ms, 1317 KB | ~3.5–3.8 ms, 849 KB |
+| Runtime seed change | ~0.7–1.1 ms, 157 KB | ~0.7 ms, 30 KB |
+| Runtime radius change | ~0.4–0.7 ms, 141 KB | ~0.5 ms, 74 KB |
+
 ### WebAssembly and Android
 
 Same harness run at app startup, Release, `master` against this branch. WebAssembly: published
