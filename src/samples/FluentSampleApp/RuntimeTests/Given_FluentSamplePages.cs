@@ -149,6 +149,28 @@ public class Given_FluentSamplePages
 		}
 	}
 
+	// The navigation samples' ClippedGrid swapped width and height, so its 400px-tall grid clipped the top
+	// NavigationView at 400px wide and cut off its last item.
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_ClippedGridIsWiderThanTall_TheClipKeepsItsWidth()
+	{
+		var grid = new ClippedGrid { Width = 800, Height = 400 };
+		try
+		{
+			UnitTestsUIContentHelper.Content = grid;
+			await UnitTestsUIContentHelper.WaitForLoaded(grid);
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			var clip = Assert.IsInstanceOfType<RectangleGeometry>(grid.Clip);
+			Assert.AreEqual(new Windows.Foundation.Rect(0, 0, 800, 400), clip.Rect);
+		}
+		finally
+		{
+			UnitTestsUIContentHelper.Content = null;
+		}
+	}
+
 	[TestMethod]
 	public void When_CorePagesDeclareFluent()
 	{
