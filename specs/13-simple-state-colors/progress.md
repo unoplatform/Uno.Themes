@@ -31,16 +31,16 @@ state as a translucent **state layer** (`On<Role>` at the shared Hover/Pressed o
 
 ## Plan
 
-- [ ] Red test: seeded palette (issue's seeds + dark `TertiaryContainerColor` override), Light and
+- [x] Red test: seeded palette (issue's seeds + dark `TertiaryContainerColor` override), Light and
       Dark, each button style in PointerOver/Pressed: fill stays the resting fill and the label
       contrasts with fill + state layer.
-- [ ] Commit 1 (issue scope): `FilledButtonStyle`, `FilledTonalButtonStyle`, and the icon styles
+- [x] Commit 1 (issue scope): `FilledButtonStyle`, `FilledTonalButtonStyle`, and the icon styles
       sharing their keys (`IconButtonStyle`, `IconButtonNeutralStyle`).
-- [ ] Update `Given_SemanticResources.When_LightweightBrushesResolve_Then_ButtonStateValuesArePreserved`.
+- [x] Update `Given_SemanticResources.When_LightweightBrushesResolve_Then_ButtonStateValuesArePreserved`.
 - [ ] Further same-bug fixes (separate commits), see sweep below.
-- [ ] Gates: XAML styler, `dotnet format`, `GenerateStyleDocs.cs`, `check-xaml-resource-keys.ps1`
+- [x] Gates: XAML styler, `dotnet format`, `GenerateStyleDocs.cs`, `check-xaml-resource-keys.ps1`
       (needs WinAppSDK restore, Windows only), runtime tests Light + Dark.
-- [ ] Docs: `doc/simple-controls-styles.md`, `doc/lightweight-styling.md`.
+- [x] Docs: note under the generated tables in `doc/styles/simple/Button.md` (the generated tables pick up the new keys).
 
 ## Sweep: other Simple state keys that change role
 
@@ -55,7 +55,7 @@ switches to `TertiaryContainer`):
 | Slider | `SliderThumbBackgroundPressed`, `SliderTrackValueFillPressed` → `PrimaryVariantDark` |
 | ToggleButton | `TextToggleButtonBackgroundChecked{PointerOver,Pressed}` → `PrimaryVariantDark`; `…{,Indeterminate}PointerOver` → `PrimaryContainer`; `…{,Indeterminate}Pressed` → `TertiaryContainer` |
 | ToggleSwitch | `ToggleSwitchKnobBoundsFillPressed` → `PrimaryVariantDark`; `ToggleSwitchOuterBorderFillPressed` → `TertiaryContainer` |
-| MenuFlyout | template sets `PrimaryVariantDarkBrush` on item backgrounds directly |
+| MenuFlyout | item `Pressed` sets `PrimaryVariantDarkBrush` on the item under an `OnPrimary` label, directly in the template (no lightweight key) |
 | CalendarView | `SelectedHoverBorderBrush` / `SelectedPressedBorderBrush` → `PrimaryVariantDark` |
 | Expander | header pressed → `TertiaryContainer`, pointer-over → `PrimaryContainer` |
 
@@ -66,4 +66,17 @@ its own colour): `AppBarButtonBackground{PointerOver,Pressed}`, `TextButtonBackg
 
 ## Review
 
-_(filled in when done)_
+- Red on master: all 12 `Given_ButtonStateColors` rows failed. In dark, the filled button went from
+  `#EABDA0` (Primary, tone 80) to `#5F402A` (PrimaryVariantDark, tone 30) under a tone-20 label. The
+  tonal button pressed to `#34503A`, the green tertiary-container override.
+- The test seeds the **application** theme (restored in `finally`, as `Given_DesignTokens` does).
+  On Uno, a visual-state setter's `{ThemeResource}` resolves from the app's theme, not from a
+  theme merged into the test container, so a scoped seeded theme reports stock grey state colours.
+- The generator is not at fault: `PrimaryVariantDark` is a dark role in dark mode in the shared
+  palette (`#4128BA`) and Material v1. Simple's stock grey palette is the outlier (`#D9D9D9`), which
+  is why the styles used it as a "slightly darker Primary".
+- The same misuse remains in the controls listed in the sweep. Each needs its own state layer
+  (the fill element differs per template), so they are not part of the issue commit.
+- Full Simple runtime suite on desktop (macOS, Release): 366/366 pass in Light and 366/366 in Dark.
+  `check-xaml-resource-keys.ps1` not run (needs a WinAppSDK restore on Windows); the new keys are
+  all defined in both theme dictionaries.

@@ -116,3 +116,6 @@ The Dark theme uses the same values as Light.
 <!-- END GENERATED -->
 
 The `OutlinedButton*` keys alias the Neutral (`FilledTonalButton*`) variant for cross-design-system compatibility.
+
+> [!NOTE]
+> The filled, neutral (tonal) and icon button styles keep their resting fill in the **PointerOver** and **Pressed** states and tint it with a translucent state layer, so a hovered or pressed button stays a shade of its own color and its label keeps a readable foreground with any palette. To change that tint, override the `*StateLayerBackgroundPointerOver` / `*StateLayerBackgroundPressed` keys. A translucent brush is expected: an opaque one hides the fill.
