@@ -4,7 +4,8 @@ uid: Uno.Themes.Simple.Styles.Button
 
 # Button Control
 
-Semantic `OutlinedButtonStyle` maps to `SimpleFilledTonalButtonStyle`. Its template consumes `FilledTonalButton*`, so the declared `OutlinedButton*` aliases do not customize it independently. Override the tonal family to affect both variants; see [semantic override compatibility](../../semantic-styles.md#override-compatibility).
+> [!NOTE]
+> `OutlinedButtonStyle` maps to `SimpleOutlinedButtonStyle`, which consumes its own `OutlinedButton*` brushes; they default to the Neutral (`FilledTonalButton*`) values. The text-button base reads `ButtonBorderThickness` (default `SimpleButtonBorderThickness`) and `LabelLargeFontSize` through theme resources. See [semantic override compatibility](../../semantic-styles.md#override-compatibility).
 
 <!-- BEGIN GENERATED -->
 <!-- This region is generated from the Styles XAML by `dotnet run build/scripts/GenerateStyleDocs.cs`; do not edit it by hand. -->
@@ -14,7 +15,8 @@ Semantic `OutlinedButtonStyle` maps to `SimpleFilledTonalButtonStyle`. Its templ
 | Style Key                            | Semantic Alias                                                                                                                             | IsDefaultStyle\* |
 | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ---------------- |
 | `SimpleFilledButtonStyle`            | `FilledButtonStyle`                                                                                                                        | True             |
-| `SimpleFilledTonalButtonStyle`       | `FilledTonalButtonStyle`, `OutlinedButtonStyle`                                                                                            |                  |
+| `SimpleFilledTonalButtonStyle`       | `ElevatedButtonStyle`, `FilledTonalButtonStyle`                                                                                            |                  |
+| `SimpleOutlinedButtonStyle`          | `OutlinedButtonStyle`                                                                                                                      |                  |
 | `SimpleTextButtonStyle`              | `TextButtonStyle`                                                                                                                          |                  |
 | `SimpleDangerPrimaryButtonStyle`     |                                                                                                                                            |                  |
 | `SimpleDangerSubtleButtonStyle`      |                                                                                                                                            |                  |
@@ -32,6 +34,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 | Key                               | Type           | Value                            |
 | --------------------------------- | -------------- | -------------------------------- |
+| `ButtonBorderThickness`           | `Thickness`    | `SimpleButtonBorderThickness`    |
 | `SimpleButtonBorderThickness`     | `Thickness`    | `SimpleStrokeBorderThickness`    |
 | `SimpleButtonCornerRadius`        | `CornerRadius` | `SimpleShapeControlCornerRadius` |
 | `SimpleButtonFontWeight`          | `String`       | Medium                           |

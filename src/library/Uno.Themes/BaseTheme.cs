@@ -302,7 +302,8 @@ public abstract partial class BaseTheme : ResourceDictionary
 	/// <c>*CornerRadius</c> key instead.
 	/// </para>
 	/// <para>
-	/// Non-finite or negative values are treated as unset and fall back to the default of 4.
+	/// Non-finite, negative, or scale-overflowing values are treated as unset and fall back to the default
+	/// of 4; zero is valid and generates square corners. The assigned property value is preserved.
 	/// </para>
 	/// <para>
 	/// This is a <b>runtime</b> setting: assigning it regenerates the <c>Radius*</c> token

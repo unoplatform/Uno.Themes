@@ -6,6 +6,7 @@ using System.Linq;
 using Uno.Themes;
 using Uno.Themes.ColorGeneration;
 using Uno.Themes.ColorGeneration.Hct;
+using Uno.Themes.Helpers;
 using Windows.UI.ViewManagement;
 
 #if WinUI
@@ -161,7 +162,7 @@ internal static class FluentAccentPalette
 	{
 		var appearance = isLight ? "Light" : "Dark";
 		object? Find(string key)
-			=> FluentResourceResolver.Resolve(consumerOverride, appearance, key) ?? FluentResourceResolver.Resolve(baseOverride, appearance, key);
+			=> ThemeResourceResolver.Resolve(consumerOverride, appearance, key) ?? ThemeResourceResolver.Resolve(baseOverride, appearance, key);
 
 		var primaryBrush = Find("PrimaryBrush") as SolidColorBrush;
 		var basis = primaryBrush?.Color ?? Find(SemanticColorKeys.Primary) as Color?;

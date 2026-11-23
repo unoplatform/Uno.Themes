@@ -91,7 +91,7 @@ public static partial class Theme
 		}
 		public static partial class Styles
 		{
-			[ResourceKeyDefinition(typeof(Style), "NavigationViewStyle", TargetType = typeof(NavigationView))]
+			[ResourceKeyDefinition(typeof(Style), "NavigationViewStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.NavigationView))]
 			public static StaticResourceKey<Style> Default => new("NavigationViewStyle");
 		}
 	}
