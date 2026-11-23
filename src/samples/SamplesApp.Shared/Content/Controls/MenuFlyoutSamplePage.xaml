@@ -139,9 +139,11 @@
 		<sample:SamplePageLayout.FluentTemplate>
 			<DataTemplate>
 				<StackPanel Spacing="8">
+					<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+							   Text="Text items" />
 					<smtx:XamlDisplay UniqueKey="Fluent_MenuFlyout_Basic"
 									  Style="{StaticResource XamlDisplayBelowStyle}">
-						<Button Content="Open Menu">
+						<Button Content="Text items">
 							<Button.Flyout>
 								<MenuFlyout MenuFlyoutPresenterStyle="{StaticResource MenuFlyoutPresenterStyle}">
 									<MenuFlyoutItem Text="Cut"
@@ -154,9 +156,11 @@
 							</Button.Flyout>
 						</Button>
 					</smtx:XamlDisplay>
+					<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+							   Text="Items with icons" />
 					<smtx:XamlDisplay UniqueKey="Fluent_MenuFlyout_WithIcons"
 									  Style="{StaticResource XamlDisplayBelowStyle}">
-						<Button Content="Edit Menu">
+						<Button Content="Items with icons">
 							<Button.Flyout>
 								<MenuFlyout MenuFlyoutPresenterStyle="{StaticResource MenuFlyoutPresenterStyle}">
 									<MenuFlyoutItem Text="Cut"
@@ -181,9 +185,11 @@
 							</Button.Flyout>
 						</Button>
 					</smtx:XamlDisplay>
+					<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+							   Text="With a separator" />
 					<smtx:XamlDisplay UniqueKey="Fluent_MenuFlyout_Separator"
 									  Style="{StaticResource XamlDisplayBelowStyle}">
-						<Button Content="File Menu">
+						<Button Content="With a separator">
 							<Button.Flyout>
 								<MenuFlyout MenuFlyoutPresenterStyle="{StaticResource MenuFlyoutPresenterStyle}">
 									<MenuFlyoutItem Text="New"
@@ -197,9 +203,11 @@
 							</Button.Flyout>
 						</Button>
 					</smtx:XamlDisplay>
+					<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+							   Text="Toggle items: Show Toolbar starts checked" />
 					<smtx:XamlDisplay UniqueKey="Fluent_MenuFlyout_Toggle"
 									  Style="{StaticResource XamlDisplayBelowStyle}">
-						<Button Content="View Options">
+						<Button Content="Toggle items">
 							<Button.Flyout>
 								<MenuFlyout MenuFlyoutPresenterStyle="{StaticResource MenuFlyoutPresenterStyle}">
 									<ToggleMenuFlyoutItem Text="Show Toolbar"
@@ -211,9 +219,11 @@
 							</Button.Flyout>
 						</Button>
 					</smtx:XamlDisplay>
+					<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+							   Text="With a sub-menu: Text Color opens a nested menu" />
 					<smtx:XamlDisplay UniqueKey="Fluent_MenuFlyout_SubItem"
 									  Style="{StaticResource XamlDisplayBelowStyle}">
-						<Button Content="Format Menu">
+						<Button Content="With a sub-menu">
 							<Button.Flyout>
 								<MenuFlyout MenuFlyoutPresenterStyle="{StaticResource MenuFlyoutPresenterStyle}">
 									<MenuFlyoutItem Text="Bold"
@@ -233,9 +243,11 @@
 							</Button.Flyout>
 						</Button>
 					</smtx:XamlDisplay>
+					<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+							   Text="Radio items: one choice in a group" />
 					<smtx:XamlDisplay UniqueKey="Fluent_MenuFlyout_Radio"
 									  Style="{StaticResource XamlDisplayBelowStyle}">
-						<Button Content="Sort Options">
+						<Button Content="Radio items">
 							<Button.Flyout>
 								<MenuFlyout MenuFlyoutPresenterStyle="{StaticResource MenuFlyoutPresenterStyle}">
 									<RadioMenuFlyoutItem Text="Sort by Name"

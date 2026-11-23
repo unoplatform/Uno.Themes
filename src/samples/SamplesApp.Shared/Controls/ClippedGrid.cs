@@ -10,7 +10,7 @@ public partial class ClippedGrid : Grid
 
 	private void UpdateClippingArea()
 	{
-		var rect = new Rect(0, 0, ActualHeight, ActualWidth);
+		var rect = new Rect(0, 0, ActualWidth, ActualHeight);
 
 		if (Clip != null)
 		{

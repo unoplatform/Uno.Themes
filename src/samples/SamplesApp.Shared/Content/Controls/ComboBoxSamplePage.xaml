@@ -309,7 +309,8 @@
 			<sample:SamplePageLayout.FluentTemplate>
 				<DataTemplate>
 					<StackPanel>
-						<!-- Basic -->
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Basic: placeholder text and four items. ComboBoxItemStyle maps to the default item style, so items look the same with or without it" />
 						<smtx:XamlDisplay UniqueKey="Fluent_ComboBox_Basic"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<ComboBox PlaceholderText="Select an option"
@@ -321,7 +322,8 @@
 								<ComboBoxItem Content="Option 4" />
 							</ComboBox>
 						</smtx:XamlDisplay>
-						<!-- Pre-selected -->
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Pre-selected: SelectedIndex 1" />
 						<smtx:XamlDisplay UniqueKey="Fluent_ComboBox_Preselected"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<ComboBox SelectedIndex="1"
@@ -332,19 +334,8 @@
 								<ComboBoxItem Content="Third" />
 							</ComboBox>
 						</smtx:XamlDisplay>
-						<!-- Explicit ComboBoxItemStyle -->
-						<smtx:XamlDisplay UniqueKey="Fluent_ComboBox_ItemStyle"
-										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<ComboBox PlaceholderText="Styled items"
-									  Width="300"
-									  Style="{StaticResource ComboBoxStyle}">
-								<ComboBoxItem Content="Option 1"
-											  Style="{StaticResource ComboBoxItemStyle}" />
-								<ComboBoxItem Content="Option 2"
-											  Style="{StaticResource ComboBoxItemStyle}" />
-							</ComboBox>
-						</smtx:XamlDisplay>
-						<!-- Disabled -->
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Disabled" />
 						<smtx:XamlDisplay UniqueKey="Fluent_ComboBox_Disabled"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<ComboBox PlaceholderText="Disabled"

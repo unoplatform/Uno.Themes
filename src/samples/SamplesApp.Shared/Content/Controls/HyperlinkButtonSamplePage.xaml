@@ -182,14 +182,16 @@
 			<sample:SamplePageLayout.FluentTemplate>
 				<DataTemplate>
 					<StackPanel>
-						<!-- Primary -->
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Primary: HyperlinkButtonStyle" />
 						<smtx:XamlDisplay UniqueKey="Fluent_HyperlinkButton_Primary"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<HyperlinkButton Content="Uno Platform"
 											 NavigateUri="https://platform.uno/"
 											 Style="{StaticResource HyperlinkButtonStyle}" />
 						</smtx:XamlDisplay>
-						<!-- Primary Disabled -->
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Primary, disabled" />
 						<smtx:XamlDisplay UniqueKey="Fluent_HyperlinkButton_PrimaryDisabled"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<HyperlinkButton Content="Disabled"
@@ -197,14 +199,16 @@
 											 NavigateUri="https://platform.uno/"
 											 Style="{StaticResource HyperlinkButtonStyle}" />
 						</smtx:XamlDisplay>
-						<!-- Secondary -->
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Secondary: SecondaryHyperlinkButtonStyle" />
 						<smtx:XamlDisplay UniqueKey="Fluent_HyperlinkButton_Secondary"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<HyperlinkButton Content="Uno Platform"
 											 NavigateUri="https://platform.uno/"
 											 Style="{StaticResource SecondaryHyperlinkButtonStyle}" />
 						</smtx:XamlDisplay>
-						<!-- Custom content -->
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Custom content: an icon and a text" />
 						<smtx:XamlDisplay UniqueKey="Fluent_HyperlinkButton_CustomContent"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<HyperlinkButton NavigateUri="https://platform.uno/"

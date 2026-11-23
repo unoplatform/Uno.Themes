@@ -704,7 +704,8 @@
 			<sample:SamplePageLayout.FluentTemplate>
 				<DataTemplate>
 					<StackPanel>
-						<!-- Basic flyout (light-dismiss) with FlyoutPresenterStyle -->
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Basic: light-dismiss flyout using FlyoutPresenterStyle" />
 						<smtx:XamlDisplay UniqueKey="Fluent_Flyout_Basic"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Button Content="Show Flyout">
@@ -717,7 +718,8 @@
 								</Button.Flyout>
 							</Button>
 						</smtx:XamlDisplay>
-						<!-- Flyout with a close button -->
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="With a close button: the Yes button closes the flyout" />
 						<smtx:XamlDisplay UniqueKey="Fluent_Flyout_WithContent"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Button x:Name="ShowFluentConfirmFlyoutButton"

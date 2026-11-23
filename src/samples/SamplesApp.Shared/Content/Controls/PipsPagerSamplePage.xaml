@@ -119,13 +119,15 @@
 			<sample:SamplePageLayout.FluentTemplate>
 				<DataTemplate>
 					<StackPanel>
-						<!-- Default -->
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Default: five pages" />
 						<smtx:XamlDisplay UniqueKey="Fluent_PipsPager_Default"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<muxc:PipsPager NumberOfPages="5"
 											Style="{StaticResource PipsPagerStyle}" />
 						</smtx:XamlDisplay>
-						<!-- With navigation buttons -->
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="With navigation buttons: third page selected" />
 						<smtx:XamlDisplay UniqueKey="Fluent_PipsPager_NavButtons"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<muxc:PipsPager NumberOfPages="5"
@@ -134,7 +136,8 @@
 											NextButtonVisibility="Visible"
 											Style="{StaticResource PipsPagerStyle}" />
 						</smtx:XamlDisplay>
-						<!-- Vertical -->
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Vertical: with navigation buttons" />
 						<smtx:XamlDisplay UniqueKey="Fluent_PipsPager_Vertical"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<muxc:PipsPager NumberOfPages="5"
@@ -144,7 +147,8 @@
 											NextButtonVisibility="Visible"
 											Style="{StaticResource PipsPagerStyle}" />
 						</smtx:XamlDisplay>
-						<!-- Disabled -->
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Disabled" />
 						<smtx:XamlDisplay UniqueKey="Fluent_PipsPager_Disabled"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<muxc:PipsPager IsEnabled="False"

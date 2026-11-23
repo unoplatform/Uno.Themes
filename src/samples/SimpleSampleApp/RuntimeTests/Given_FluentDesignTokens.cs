@@ -96,6 +96,19 @@ public class Given_FluentDesignTokens
 			"OverlayCornerRadius must follow twice DefaultCornerRadius (Radius200) under FluentTheme");
 	}
 
+	// A bound radius used to be skipped: ReadLocalValue returns the BindingExpression, not a double.
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_DefaultCornerRadiusBound_PlatformCornerRadiusTokensFollow()
+	{
+		var theme = new FluentTheme();
+		BindingOperations.SetBinding(theme, BaseTheme.DefaultCornerRadiusProperty, new Binding { Source = 10d });
+		var container = CreateThemedContainer(theme);
+
+		Assert.AreEqual(new CornerRadius(10), GetCornerRadius(container.Resources, "ControlCornerRadius"),
+			"a DefaultCornerRadius set through a binding must re-point ControlCornerRadius");
+	}
+
 	[TestMethod]
 	[RunsOnUIThread]
 	public async Task When_DefaultCornerRadiusUnset_PlatformCornerRadiusTokensAreStock()

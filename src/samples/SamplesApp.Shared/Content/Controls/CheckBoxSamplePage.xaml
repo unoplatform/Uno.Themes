@@ -262,17 +262,23 @@
 			<sample:SamplePageLayout.FluentTemplate>
 				<DataTemplate>
 					<StackPanel>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Unchecked" />
 						<smtx:XamlDisplay UniqueKey="Fluent_CheckBox_Unchecked"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<CheckBox Content="Unchecked"
 									  Style="{StaticResource CheckBoxStyle}" />
 						</smtx:XamlDisplay>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Checked" />
 						<smtx:XamlDisplay UniqueKey="Fluent_CheckBox_Checked"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<CheckBox Content="Checked"
 									  IsChecked="True"
 									  Style="{StaticResource CheckBoxStyle}" />
 						</smtx:XamlDisplay>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Indeterminate: three-state, neither checked nor unchecked" />
 						<smtx:XamlDisplay UniqueKey="Fluent_CheckBox_Indeterminate"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<CheckBox Content="Indeterminate"
@@ -280,6 +286,8 @@
 									  IsThreeState="True"
 									  Style="{StaticResource CheckBoxStyle}" />
 						</smtx:XamlDisplay>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Disabled: checked and disabled" />
 						<smtx:XamlDisplay UniqueKey="Fluent_CheckBox_Disabled"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<CheckBox Content="Disabled"

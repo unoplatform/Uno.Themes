@@ -432,7 +432,8 @@
 			<sample:SamplePageLayout.FluentTemplate>
 				<DataTemplate>
 					<StackPanel>
-						<!-- Icon only -->
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Icon only: AppBarButton keeps room for its label, as in WinUI" />
 						<smtx:XamlDisplay UniqueKey="Fluent_AppBarButton_IconOnly"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<StackPanel Orientation="Horizontal"
@@ -454,7 +455,8 @@
 								</AppBarButton>
 							</StackPanel>
 						</smtx:XamlDisplay>
-						<!-- Icon and content -->
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Icon and label" />
 						<smtx:XamlDisplay UniqueKey="Fluent_AppBarButton_IconAndContent"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<StackPanel Orientation="Horizontal"
@@ -479,7 +481,8 @@
 								</AppBarButton>
 							</StackPanel>
 						</smtx:XamlDisplay>
-						<!-- Disabled -->
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Disabled" />
 						<smtx:XamlDisplay UniqueKey="Fluent_AppBarButton_Disabled"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<StackPanel Orientation="Horizontal"

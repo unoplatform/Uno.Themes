@@ -36,8 +36,12 @@ public partial class FluentTheme : BaseTheme
 	private readonly FluentAccentLayer _accent = new();
 	private readonly ResourceDictionary _palette;
 
-	// Assigned after the base constructor's first pass, which therefore leaves it out of the accent.
+	// The base constructor runs the first rebuild before this constructor can assign fields, so the
+	// override reaches that pass through CreatePalette; there is a single pass at startup.
+	[ThreadStatic]
+	private static ResourceDictionary? _constructingColorOverride;
 	private readonly ResourceDictionary? _colorOverride;
+	private bool _isConstructed;
 
 	// Kept alive with the theme; the handler holds the theme weakly (see ObserveSystemAccent).
 	private UISettings? _uiSettings;
@@ -65,12 +69,9 @@ public partial class FluentTheme : BaseTheme
 		: base(CreatePalette(colorOverride, out var palette), fontOverride)
 	{
 		_palette = palette;
-
-		if (colorOverride is { })
-		{
-			_colorOverride = colorOverride;
-			UpdateSource();
-		}
+		_colorOverride = colorOverride;
+		_isConstructed = true;
+		_constructingColorOverride = null;
 
 		ObserveSystemAccent();
 	}
@@ -90,10 +91,11 @@ public partial class FluentTheme : BaseTheme
 
 	private static ResourceDictionary CreatePalette(ResourceDictionary? colorOverride, out ResourceDictionary palette)
 	{
+		_constructingColorOverride = colorOverride;
 		palette = new ResourceDictionary();
-		FluentColorPalette.TryPopulate(palette);
+		FluentColorPalette.TryPopulate(palette, colorOverride);
 
-		// Merged, so it outlives the branches a system-accent refresh replaces.
+		// Also merged, for its non-color keys and for when the Fluent palette is unavailable.
 		if (colorOverride is { })
 		{
 			palette.SafeMerge(colorOverride);
@@ -113,7 +115,8 @@ public partial class FluentTheme : BaseTheme
 			// The built-in controls follow the effective primary, in the semantic palette's precedence: the
 			// Colors override, else the seed (in the palette's mode), else the constructor override.
 			var seedShades = EffectivePrimarySeed is { } seed ? FluentAccentPalette.AccentShades.FromSeed(seed.Seed, seed.Mode) : (FluentAccentPalette.AccentShades?)null;
-			var baseOverride = seedShades is null ? _colorOverride : null;
+			var colorOverride = _isConstructed ? _colorOverride : _constructingColorOverride;
+			var baseOverride = seedShades is null ? colorOverride : null;
 			_accent.Update(isLight: true, FluentAccentPalette.Build(isLight: true, seedShades, ResolvedColorOverride, baseOverride));
 			_accent.Update(isLight: false, FluentAccentPalette.Build(isLight: false, seedShades, ResolvedColorOverride, baseOverride));
 
@@ -142,9 +145,9 @@ public partial class FluentTheme : BaseTheme
 
 		// Only a local value is a consumer choice; the DP default means "the platform's". Overlays use
 		// twice the unit (Radius200), matching the platform's 4 / 8. Invalid values use the shared default.
-		if (ReadLocalValue(DefaultCornerRadiusProperty) is double radius)
+		if (ReadLocalValue(DefaultCornerRadiusProperty) != DependencyProperty.UnsetValue)
 		{
-			radius = SanitizeCornerRadius(radius);
+			var radius = SanitizeCornerRadius(DefaultCornerRadius);
 			tokens ??= new ResourceDictionary();
 			tokens["ControlCornerRadius"] = new CornerRadius(radius);
 			tokens["OverlayCornerRadius"] = new CornerRadius(radius * 2);
@@ -195,7 +198,7 @@ public partial class FluentTheme : BaseTheme
 		Volatile.Write(ref _refreshQueued, 0);
 		try
 		{
-			FluentColorPalette.TryPopulate(_palette);
+			FluentColorPalette.TryPopulate(_palette, _colorOverride);
 			UpdateSource();
 		}
 		catch (Exception e)
