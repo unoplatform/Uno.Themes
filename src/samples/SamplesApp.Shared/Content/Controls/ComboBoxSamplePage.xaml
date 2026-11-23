@@ -306,6 +306,49 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+			<sample:SamplePageLayout.FluentTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Basic: placeholder text and four items. ComboBoxItemStyle maps to the default item style, so items look the same with or without it" />
+						<smtx:XamlDisplay UniqueKey="Fluent_ComboBox_Basic"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ComboBox PlaceholderText="Select an option"
+									  Width="300"
+									  Style="{StaticResource ComboBoxStyle}">
+								<ComboBoxItem Content="Option 1" />
+								<ComboBoxItem Content="Option 2" />
+								<ComboBoxItem Content="Option 3" />
+								<ComboBoxItem Content="Option 4" />
+							</ComboBox>
+						</smtx:XamlDisplay>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Pre-selected: SelectedIndex 1" />
+						<smtx:XamlDisplay UniqueKey="Fluent_ComboBox_Preselected"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ComboBox SelectedIndex="1"
+									  Width="300"
+									  Style="{StaticResource ComboBoxStyle}">
+								<ComboBoxItem Content="First" />
+								<ComboBoxItem Content="Second (selected)" />
+								<ComboBoxItem Content="Third" />
+							</ComboBox>
+						</smtx:XamlDisplay>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Disabled" />
+						<smtx:XamlDisplay UniqueKey="Fluent_ComboBox_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ComboBox PlaceholderText="Disabled"
+									  IsEnabled="False"
+									  Width="300"
+									  Style="{StaticResource ComboBoxStyle}">
+								<ComboBoxItem Content="Option 1" />
+								<ComboBoxItem Content="Option 2" />
+							</ComboBox>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.FluentTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

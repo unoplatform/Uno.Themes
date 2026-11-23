@@ -336,6 +336,28 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+
+			<sample:SamplePageLayout.FluentTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Off, on and disabled" />
+						<smtx:XamlDisplay UniqueKey="Fluent_ToggleSwitch"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Spacing="8">
+								<ToggleSwitch Header="Off"
+											  Style="{StaticResource ToggleSwitchStyle}" />
+								<ToggleSwitch Header="On"
+											  IsOn="True"
+											  Style="{StaticResource ToggleSwitchStyle}" />
+								<ToggleSwitch Header="Disabled"
+											  IsEnabled="False"
+											  Style="{StaticResource ToggleSwitchStyle}" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.FluentTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

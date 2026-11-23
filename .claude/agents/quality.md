@@ -44,7 +44,7 @@ Validate solution–requirement alignment, code elegance, absence of duplication
    - Lightweight-styling key changes → `doc/lightweight-styling.md`.
    - Cross-cutting (semantic styles, design tokens, seed colors, shared brushes) → `doc/semantic-styles.md`, `doc/design-tokens.md`, `doc/seed-colors.md`, `doc/themes-overview.md`, `doc/themes-control-extensions.md`.
    - The PR template (`.github/pull_request_template.md`) explicitly calls out `material-controls-styles.md`, `cupertino-controls-styles.md`, and `lightweight-styling.md` — verify those when relevant.
-8. **Check sample-app coverage.** Per `AGENTS.md` §11 "Adding a new style or theme resource — checklist": a new style/key should have a corresponding sample page under `src/samples/SamplesApp.Shared/Content/` so all three sample heads pick it up. Missing sample coverage is a finding.
+8. **Check sample-app coverage.** Per `AGENTS.md` §11 "Adding a new style or theme resource — checklist": a new style/key should have a corresponding sample page under `src/samples/SamplesApp.Shared/Content/` so all sample heads pick it up. Missing sample coverage is a finding.
 
 ## Repository-specific lenses
 

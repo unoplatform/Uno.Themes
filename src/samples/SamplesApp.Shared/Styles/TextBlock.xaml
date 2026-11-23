@@ -10,4 +10,13 @@
 
 	<Style TargetType="TextBlock"
 		   BasedOn="{StaticResource DefaultTextBlockStyle}" />
+
+	<!-- The caption above a sample example: plain setters, so it resolves in every head -->
+	<Style x:Key="SampleExampleCaptionStyle"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource DefaultTextBlockStyle}">
+		<Setter Property="FontSize" Value="14" />
+		<Setter Property="FontWeight" Value="SemiBold" />
+		<Setter Property="Margin" Value="0,24,0,0" />
+	</Style>
 </ResourceDictionary>

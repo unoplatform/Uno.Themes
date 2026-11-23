@@ -4,6 +4,9 @@ uid: Uno.Themes.Styles.ToggleSwitch
 
 # ToggleSwitch Control
 
+> [!NOTE]
+> Under the [Fluent theme](../fluent-getting-started.md), toggle switches are rendered by the built-in WinUI template, which reads Fluent's own resources (`ToggleSwitchFillOn`, `ToggleSwitchKnobFillOn*`, …), not the keys below. Override those Fluent keys instead. See [Lightweight Styling — Fluent theme](../lightweight-styling.md#fluent-theme).
+
 <!-- BEGIN GENERATED -->
 <!-- This region is generated from the Styles XAML by `dotnet run build/scripts/GenerateStyleDocs.cs`; do not edit it by hand. -->
 

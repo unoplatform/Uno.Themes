@@ -233,6 +233,24 @@ For more information about the lightweight styling resource keys used in each co
 > [!NOTE]
 > The per-control pages, the Material pages above and their Simple counterparts, list every resource key the control's styles define. An override takes effect only for a key that the control template actually reads, and some listed keys are defined without being read. For example, the [Simple Slider page](styles/simple/Slider.md) lists both `SimpleSliderCornerRadius` and `SliderCornerRadius`, but the style reads `SliderCornerRadius`, so only an override of that key changes the corner radius. If an override has no visible effect, check which key the template uses in the style's XAML source in the [Uno.Themes repository](https://github.com/unoplatform/Uno.Themes/tree/master/src/library).
 
+## Fluent theme
+
+Under [`FluentTheme`](fluent-getting-started.md), controls are rendered by the **built-in WinUI templates**, which read Fluent's own per-control resources (`AccentButtonBackground`, `TextControlForeground`, `ToggleSwitchFillOn`, …) rather than the semantic keys above. Lightweight styling works exactly as in a plain WinUI app: override the Fluent key, at any scope.
+
+```xml
+<Page.Resources>
+    <SolidColorBrush x:Key="AccentButtonBackground" Color="DarkGreen" />
+</Page.Resources>
+
+<!-- FilledButtonStyle is the Fluent accent button -->
+<Button Content="Save" Style="{StaticResource FilledButtonStyle}" />
+```
+
+- For **CheckBox, RadioButton, and Slider**, most of the documented key names already *are* WinUI's (`CheckBoxCheckBackgroundFillChecked`, `RadioButtonOuterEllipseStroke`, `SliderTrackValueFill`, …), so the same override works under every theme.
+- The semantic per-control keys that differ from Fluent's (`FilledButtonBackground`, `OutlinedTextBox*`, `ToggleSwitchKnobOnFill`, …) have no effect under `FluentTheme`.
+- To recolor the accent app-wide, set a seed or a `PrimaryColor` override: the built-in accent controls follow it ([seed → accent cascade](seed-colors.md#fluenttheme-seed--accent-cascade)).
+- `TextButtonStyle` and `IconButtonStyle` are Fluent subtle buttons: transparent at rest, `SubtleFillColorSecondary` / `SubtleFillColorTertiary` on hover / press, no border.
+
 ## Toolkit
 
 Toolkit also has controls that allow lightweight styling, check out [Lightweight Styling in Uno.Toolkit](xref:Toolkit.LightweightStyling).

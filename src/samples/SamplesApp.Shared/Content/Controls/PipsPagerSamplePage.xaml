@@ -116,6 +116,49 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+			<sample:SamplePageLayout.FluentTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Default: five pages" />
+						<smtx:XamlDisplay UniqueKey="Fluent_PipsPager_Default"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:PipsPager NumberOfPages="5"
+											Style="{StaticResource PipsPagerStyle}" />
+						</smtx:XamlDisplay>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="With navigation buttons: third page selected" />
+						<smtx:XamlDisplay UniqueKey="Fluent_PipsPager_NavButtons"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:PipsPager NumberOfPages="5"
+											SelectedPageIndex="2"
+											PreviousButtonVisibility="Visible"
+											NextButtonVisibility="Visible"
+											Style="{StaticResource PipsPagerStyle}" />
+						</smtx:XamlDisplay>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Vertical: with navigation buttons" />
+						<smtx:XamlDisplay UniqueKey="Fluent_PipsPager_Vertical"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:PipsPager NumberOfPages="5"
+											SelectedPageIndex="2"
+											Orientation="Vertical"
+											PreviousButtonVisibility="Visible"
+											NextButtonVisibility="Visible"
+											Style="{StaticResource PipsPagerStyle}" />
+						</smtx:XamlDisplay>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Disabled" />
+						<smtx:XamlDisplay UniqueKey="Fluent_PipsPager_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:PipsPager IsEnabled="False"
+											NumberOfPages="5"
+											SelectedPageIndex="2"
+											Style="{StaticResource PipsPagerStyle}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.FluentTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>
