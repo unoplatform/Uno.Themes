@@ -67,10 +67,20 @@ switches to `TertiaryContainer`):
 | CalendarView | `SelectedHoverBorderBrush` / `SelectedPressedBorderBrush` → `PrimaryVariantDark` |
 | Expander | header pressed → `TertiaryContainer`, pointer-over → `PrimaryContainer` |
 
-Judgment calls (transparent / surface fill becoming a container or outline colour, label keeps
-its own colour): `AppBarButtonBackground{PointerOver,Pressed}`, `TextButtonBackgroundPressed`
-(`PrimaryContainer`), `ListViewItemBackgroundPressed` (`Outline`),
-`CheckBoxBackgroundUncheckedPressed` / `RadioButtonOuterEllipseFillPressed` (`PrimaryContainer`).
+Also fixed in the follow-up (they were judgment calls in the first sweep): unselected
+`ComboBoxItem` / `ListViewItem` hover and pressed (transparent + tint instead of `SurfaceVariant` /
+`TertiaryContainer` / `Outline`), `CheckBoxBackgroundUncheckedPressed`, and the unused RadioButton
+`…Pressed` keys. Left as is: `AppBarButton`, `TextButton`, `NavigationViewItem` and `PipsPager`
+pressed/selected `PrimaryContainer`, whose labels still pair with it.
+
+Feedback removed on purpose (nothing sits on these, and a darker shade disappears on a dark
+surface): Slider thumb and value track no longer change when pressed, hovered selected
+RatingControl stars stay `Primary`, and CalendarView's selected-day border no longer changes on
+hover / press.
+
+Not covered here: on Uno, a `VisualState` setter resolves `{ThemeResource}` from the app theme, so a
+seeded theme merged below app level (`<Grid.Resources><SimpleTheme .../>`) paints its controls'
+states in the app palette. Pre-existing and not specific to these keys.
 
 ## Review
 
@@ -86,5 +96,5 @@ its own colour): `AppBarButtonBackground{PointerOver,Pressed}`, `TextButtonBackg
 - The same misuse remains in the controls listed in the sweep. Each needs its own state layer
   (the fill element differs per template), so they are not part of the issue commit.
 - Full Simple runtime suite on desktop (macOS, Release): 366/366 pass in Light and 366/366 in Dark.
-  `check-xaml-resource-keys.ps1` not run (needs a WinAppSDK restore on Windows); the new keys are
-  all defined in both theme dictionaries.
+  `check-xaml-resource-keys.ps1` not run and nothing run on the WinAppSDK head (needs Windows); nine
+  templates were restructured, so run both there before merging.

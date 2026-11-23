@@ -57,23 +57,34 @@ public class Given_InteractiveStateColors
 		"IconButtonNeutral.Pressed" => Button("SimpleIconButtonNeutralStyle", "Pressed"),
 
 		"TextToggleButton.Pressed" => Toggle(isChecked: false, "Pressed"),
+		"IconToggleButton.CheckedPressed" => new(() => new ToggleButton { Content = "\uE734", IsChecked = true, Style = StyleOf("IconToggleButtonStyle") }, "CheckedPressed", "Root", "StateLayer", "ContentPresenter"),
 		"TextToggleButton.CheckedPointerOver" => Toggle(isChecked: true, "CheckedPointerOver"),
 		"TextToggleButton.CheckedPressed" => Toggle(isChecked: true, "CheckedPressed"),
 
 		"CheckBox.CheckedPressed" => CheckBox(isChecked: true, "CheckedPressed", "CheckGlyph"),
+		"CheckBox.UncheckedPressed" => CheckBox(isChecked: false, "UncheckedPressed", null),
 		"CheckBox.IndeterminatePressed" => CheckBox(isChecked: null, "IndeterminatePressed", "IndeterminateGlyph"),
 
 		"ComboBoxItem.SelectedPointerOver" => Item(() => new ComboBoxItem { Content = "Espresso", Style = StyleOf("SimpleComboBoxItemStyle") }, "SelectedPointerOver", "LayoutRoot", "Selected"),
 		"ComboBoxItem.SelectedPressed" => Item(() => new ComboBoxItem { Content = "Espresso", Style = StyleOf("SimpleComboBoxItemStyle") }, "SelectedPressed", "LayoutRoot", "Selected"),
+		"ComboBoxItem.PointerOver" => Item(() => new ComboBoxItem { Content = "Espresso", Style = StyleOf("SimpleComboBoxItemStyle") }, "PointerOver", "LayoutRoot", null),
+		"ComboBoxItem.Pressed" => Item(() => new ComboBoxItem { Content = "Espresso", Style = StyleOf("SimpleComboBoxItemStyle") }, "Pressed", "LayoutRoot", null),
+		"ListViewItem.Pressed" => Item(() => new ListViewItem { Content = "Espresso", Style = StyleOf("SimpleListViewItemStyle") }, "Pressed", "ContentBorder", null),
 		"ListViewItem.PointerOverSelected" => Item(() => new ListViewItem { Content = "Espresso", Style = StyleOf("SimpleListViewItemStyle") }, "PointerOverSelected", "ContentBorder", "Selected"),
 		"ListViewItem.PressedSelected" => Item(() => new ListViewItem { Content = "Espresso", Style = StyleOf("SimpleListViewItemStyle") }, "PressedSelected", "ContentBorder", "Selected"),
 
 		"MenuFlyoutItem.Pressed" => new(() => new MenuFlyoutItem { Text = "Add to order", Style = StyleOf("SimpleMenuFlyoutItemStyle") }, "Pressed", "LayoutRoot", "StateLayer", "TextBlock", "PointerOver"),
+		"ToggleMenuFlyoutItem.Pressed" => new(() => new ToggleMenuFlyoutItem { Text = "Oat milk", Style = StyleOf("SimpleToggleMenuFlyoutItemStyle") }, "Pressed", "LayoutRoot", "StateLayer", "TextBlock", "PointerOver"),
+		"MenuFlyoutSubItem.Pressed" => new(() => new MenuFlyoutSubItem { Text = "Size", Style = StyleOf("SimpleMenuFlyoutSubItemStyle") }, "Pressed", "LayoutRoot", "StateLayer", "TextBlock", "PointerOver"),
+		"RadioMenuFlyoutItem.Pressed" => new(() => new RadioMenuFlyoutItem { Text = "Large", Style = StyleOf("SimpleRadioMenuFlyoutItemStyle") }, "Pressed", "LayoutRoot", "StateLayer", "TextBlock", "PointerOver"),
 
 		"ToggleSwitch.Pressed" => new(() => new ToggleSwitch { IsOn = true, Style = StyleOf("SimpleToggleSwitchStyle") }, "Pressed", "SwitchKnobBounds", "SwitchStateLayer", "KnobOn"),
+		"ToggleSwitch.OffPressed" => new(() => new ToggleSwitch { IsOn = false, Style = StyleOf("SimpleToggleSwitchStyle") }, "Pressed", "OuterBorder", "SwitchStateLayer", null),
 
 		"ExpanderHeader.PointerOver" => new(() => new ToggleButton { Content = "Details", Style = StyleOf("SimpleExpanderHeaderDownStyle") }, "PointerOver", "ToggleButtonGrid", "StateLayer", "ContentPresenter"),
 		"ExpanderHeader.Pressed" => new(() => new ToggleButton { Content = "Details", Style = StyleOf("SimpleExpanderHeaderDownStyle") }, "Pressed", "ToggleButtonGrid", "StateLayer", "ContentPresenter"),
+		"ExpanderHeader.CheckedPressed" => new(() => new ToggleButton { Content = "Details", IsChecked = true, Style = StyleOf("SimpleExpanderHeaderDownStyle") }, "CheckedPressed", "ToggleButtonGrid", "StateLayer", "ContentPresenter"),
+		"ExpanderHeaderUp.Pressed" => new(() => new ToggleButton { Content = "Details", Style = StyleOf("SimpleExpanderHeaderUpStyle") }, "Pressed", "ToggleButtonGrid", "StateLayer", "ContentPresenter"),
 
 		"Slider.Pressed" => new(() => new Slider { Value = 40, Width = 200, Style = StyleOf("SimpleSliderStyle") }, "Pressed", "HorizontalThumb", null, null),
 
@@ -86,10 +97,10 @@ public class Given_InteractiveStateColors
 	private static Scenario Toggle(bool isChecked, string state)
 		=> new(() => new ToggleButton { Content = "Oat milk", IsChecked = isChecked, Style = StyleOf("SimpleTextToggleButtonStyle") }, state, "Root", "StateLayer", "ContentPresenter");
 
-	private static Scenario CheckBox(bool? isChecked, string state, string glyph)
+	private static Scenario CheckBox(bool? isChecked, string state, string? glyph)
 		=> new(() => new CheckBox { Content = "Extra shot", IsThreeState = true, IsChecked = isChecked, Style = StyleOf("SimpleCheckBoxStyle") }, state, "CheckBoxBorder", "CheckBoxStateLayer", glyph);
 
-	private static Scenario Item(Func<Control> create, string state, string root, string restState)
+	private static Scenario Item(Func<Control> create, string state, string root, string? restState)
 		=> new(create, state, root, "StateLayer", "ContentPresenter", restState);
 
 	[TestMethod]
@@ -107,12 +118,17 @@ public class Given_InteractiveStateColors
 	[DataRow("IconButtonNeutral.PointerOver", ElementTheme.Dark)]
 	[DataRow("IconButtonNeutral.Pressed", ElementTheme.Dark)]
 	[DataRow("TextToggleButton.Pressed", ElementTheme.Dark)]
+	[DataRow("IconToggleButton.CheckedPressed", ElementTheme.Dark)]
 	[DataRow("TextToggleButton.CheckedPointerOver", ElementTheme.Light)]
 	[DataRow("TextToggleButton.CheckedPointerOver", ElementTheme.Dark)]
 	[DataRow("TextToggleButton.CheckedPressed", ElementTheme.Dark)]
 	[DataRow("CheckBox.CheckedPressed", ElementTheme.Light)]
 	[DataRow("CheckBox.CheckedPressed", ElementTheme.Dark)]
 	[DataRow("CheckBox.IndeterminatePressed", ElementTheme.Dark)]
+	[DataRow("CheckBox.UncheckedPressed", ElementTheme.Dark)]
+	[DataRow("ComboBoxItem.PointerOver", ElementTheme.Dark)]
+	[DataRow("ComboBoxItem.Pressed", ElementTheme.Dark)]
+	[DataRow("ListViewItem.Pressed", ElementTheme.Dark)]
 	[DataRow("ComboBoxItem.SelectedPointerOver", ElementTheme.Dark)]
 	[DataRow("ComboBoxItem.SelectedPressed", ElementTheme.Light)]
 	[DataRow("ComboBoxItem.SelectedPressed", ElementTheme.Dark)]
@@ -121,11 +137,18 @@ public class Given_InteractiveStateColors
 	[DataRow("ListViewItem.PressedSelected", ElementTheme.Dark)]
 	[DataRow("MenuFlyoutItem.Pressed", ElementTheme.Light)]
 	[DataRow("MenuFlyoutItem.Pressed", ElementTheme.Dark)]
+	[DataRow("ToggleMenuFlyoutItem.Pressed", ElementTheme.Dark)]
+	[DataRow("MenuFlyoutSubItem.Pressed", ElementTheme.Dark)]
+	[DataRow("RadioMenuFlyoutItem.Pressed", ElementTheme.Dark)]
 	[DataRow("ToggleSwitch.Pressed", ElementTheme.Light)]
 	[DataRow("ToggleSwitch.Pressed", ElementTheme.Dark)]
+	[DataRow("ToggleSwitch.OffPressed", ElementTheme.Light)]
+	[DataRow("ToggleSwitch.OffPressed", ElementTheme.Dark)]
 	[DataRow("ExpanderHeader.PointerOver", ElementTheme.Dark)]
 	[DataRow("ExpanderHeader.Pressed", ElementTheme.Light)]
 	[DataRow("ExpanderHeader.Pressed", ElementTheme.Dark)]
+	[DataRow("ExpanderHeader.CheckedPressed", ElementTheme.Dark)]
+	[DataRow("ExpanderHeaderUp.Pressed", ElementTheme.Dark)]
 	[DataRow("Slider.Pressed", ElementTheme.Light)]
 	[DataRow("Slider.Pressed", ElementTheme.Dark)]
 	public async Task When_ColouredPaletteAndInteractiveState_Then_FillKeepsItsRoleAndContentStaysReadable(
@@ -136,6 +159,7 @@ public class Given_InteractiveStateColors
 		var theme = SemanticThemeHelper.GetTheme();
 		Assert.IsNotNull(theme, "The Simple sample app must have a BaseTheme in its application resources.");
 		var originalColors = theme.Colors;
+		var appPrimaryBefore = AppPrimaryColor();
 
 		try
 		{
@@ -170,10 +194,14 @@ public class Given_InteractiveStateColors
 			Assert.AreEqual(resting.Fill, active.Fill,
 				$"{context}: {scenario.Fill} should stay on the resting role ({resting.Fill}) and show the state as a tint, but became {active.Fill}.");
 
-			if (active.Label is { } label)
+			if (scenario.Layer is not null)
 			{
 				Assert.AreNotEqual(resting.Composite, active.Composite, $"{context}: the state should still be visible.");
+			}
 
+			// Contrast is only meaningful on an opaque fill; a transparent one shows whatever is behind the control.
+			if (active.Label is { } label && active.Fill.Opacity >= 0.999)
+			{
 				var contrast = ContrastRatio(active.Composite, label);
 				Assert.IsTrue(contrast >= MinimumStateContrast,
 					$"{context}: {scenario.Label} {label} on {active.Composite} has contrast {contrast:F2}, below {MinimumStateContrast}.");
@@ -183,7 +211,11 @@ public class Given_InteractiveStateColors
 		{
 			theme.Colors = originalColors;
 		}
+
+		Assert.AreEqual(appPrimaryBefore, AppPrimaryColor(), "Restoring the app theme's Colors should bring back its own palette.");
 	}
+
+	private static Color AppPrimaryColor() => ((SolidColorBrush)Application.Current.Resources["PrimaryBrush"]).Color;
 
 	[TestMethod]
 	[RunsOnUIThread]
@@ -303,18 +335,22 @@ public class Given_InteractiveStateColors
 	}
 
 	/// <summary>What the control paints: the fill, the fill with any state layer over it, and the colour of what sits on it.</summary>
-	private static (Color Fill, Color Composite, Color? Label) ReadRendering(Control control, Scenario scenario)
+	private static ((Color Color, double Opacity) Fill, Color Composite, Color? Label) ReadRendering(Control control, Scenario scenario)
 	{
 		var fillElement = FindByName(control, scenario.Fill);
 		Assert.IsNotNull(fillElement, $"The template should have an element named {scenario.Fill}");
-		var fill = SolidColor(FillOf(fillElement), $"{scenario.Fill} fill");
+		Assert.IsInstanceOfType<SolidColorBrush>(FillOf(fillElement), $"The {scenario.Fill} fill should be a SolidColorBrush");
+		var fillBrush = (SolidColorBrush)FillOf(fillElement)!;
+		var fill = (fillBrush.Color, Math.Round(fillBrush.Opacity * fillBrush.Color.A / 255.0, 3));
 
-		var composite = fill;
+		// On a translucent fill (a transparent item) the composite is the tint over an opaque copy of the fill:
+		// enough to tell whether a state paints anything.
+		var composite = Color.FromArgb(0xFF, fillBrush.Color.R, fillBrush.Color.G, fillBrush.Color.B);
 		if (scenario.Layer is { } layerName
 			&& FindByName(control, layerName) is { } layerElement
 			&& FillOf(layerElement) is SolidColorBrush layer)
 		{
-			composite = Over(layer.Color, layer.Opacity * layerElement.Opacity, fill);
+			composite = Over(layer.Color, layer.Opacity * layerElement.Opacity, composite);
 		}
 
 		Color? label = null;
