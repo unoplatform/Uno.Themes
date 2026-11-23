@@ -4,6 +4,9 @@ uid: Uno.Themes.Simple.Styles.CheckBox
 
 # CheckBox Control
 
+> [!NOTE]
+> Current implementation limitation: the label uses `CheckBoxForegroundUnchecked` at rest in all three check states. Hover, pressed, and disabled labels also use the corresponding `CheckBoxForegroundUnchecked*` keys, including when checked or indeterminate. The declared `CheckBoxForegroundChecked*` and `CheckBoxForegroundIndeterminate*` keys do not currently affect the label. Glyph, background, and border overrides still use their matching check-state keys. See [semantic styles](../../semantic-styles.md) for cross-theme mappings.
+
 <!-- BEGIN GENERATED -->
 <!-- This region is generated from the Styles XAML by `dotnet run build/scripts/GenerateStyleDocs.cs`; do not edit it by hand. -->
 

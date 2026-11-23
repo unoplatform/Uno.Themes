@@ -4,6 +4,9 @@ uid: Uno.Themes.Simple.Styles.HyperlinkButton
 
 # HyperlinkButton Control
 
+> [!NOTE]
+> Current implementation limitation: `SimpleSecondaryHyperlinkButtonStyle` uses `SecondaryHyperlinkButtonForeground` only at rest. It inherits the primary template, so hover, pressed, and disabled appearances read `HyperlinkButtonForegroundPointerOver`, `HyperlinkButtonForegroundPressed`, and `HyperlinkButtonForegroundDisabled`. The three corresponding `SecondaryHyperlinkButtonForeground*` state keys listed below resolve as resources but do not currently affect the rendered link. Override the primary state keys to customize those states; this also affects primary links in the same resource scope.
+
 <!-- BEGIN GENERATED -->
 <!-- This region is generated from the Styles XAML by `dotnet run build/scripts/GenerateStyleDocs.cs`; do not edit it by hand. -->
 

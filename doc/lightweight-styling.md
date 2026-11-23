@@ -13,6 +13,8 @@ Overriding resources from Uno Material can be done at the App level, Page level,
 
 Lightweight styling is surgical — one key at a time. To change the app's whole color theme at once, generate it from a single [seed color](seed-colors.md) instead; a lightweight override you define always wins over seed-generated values, so the two combine cleanly.
 
+The examples below use Material v2. A semantic style name is portable only where that style exists, and matching resource names do not guarantee that every theme reads them in the same states. Check [semantic override compatibility](semantic-styles.md#override-compatibility), the [Simple control reference](simple-controls-styles.md), and the [Fluent section](#fluent-theme) when sharing overrides across themes. For a color-role change that should regenerate brushes, put the `*Color` override in the theme's `Colors.OverrideDictionary`; a page-local color resource alone does not rebuild the theme's brushes.
+
 > [!Video https://www.youtube-nocookie.com/embed/5CsJHMTlNAw]
 
 ## App/Page level styling
@@ -140,7 +142,7 @@ With this XAML, we are given the following visual result, notice the third Butto
 
 ## C# Markup
 
-All Lightweight Styling resource keys can also be used in C# Markup through a collection of static helper classes available in the [Uno.Themes.WinUI.Markup](https://www.nuget.org/packages/Uno.Themes.WinUI.Markup/) NuGet package. The following code shows how to override several `FilledButton` resources in C# from the previous XAML example above. Notice that the `Button` is still using the `FilledButtonStyle` from Uno Material, but the resources are being overridden.
+Many lightweight styling resource keys have C# Markup helpers in the [Uno.Themes.WinUI.Markup](https://www.nuget.org/packages/Uno.Themes.WinUI.Markup/) package. The following code shows how to override several `FilledButton` resources from the previous XAML example. The `Button` keeps its semantic style while its resources change. Helpers name the same underlying XAML keys and inherit the same theme/override limitations; see [C# Markup compatibility](semantic-styles.md#c-markup-compatibility) for missing and incorrectly typed helpers.
 
 ```csharp
 // basic filled button
@@ -247,7 +249,7 @@ Under [`FluentTheme`](fluent-getting-started.md), controls are rendered by the *
 ```
 
 - For **CheckBox, RadioButton, and Slider**, most of the documented key names already *are* WinUI's (`CheckBoxCheckBackgroundFillChecked`, `RadioButtonOuterEllipseStroke`, `SliderTrackValueFill`, …), so the same override works under every theme.
-- The semantic per-control keys that differ from Fluent's (`FilledButtonBackground`, `OutlinedTextBox*`, `ToggleSwitchKnobOnFill`, …) have no effect under `FluentTheme`.
+- The semantic per-control keys that differ from Fluent's (`FilledButtonBackground`, `TextButtonForeground`, `IconButtonForeground`, `OutlinedTextBox*`, `ToggleSwitchKnobOnFill`, …) have no effect under `FluentTheme`.
 - To recolor the accent app-wide, set a seed or a `PrimaryColor` override: the built-in accent controls follow it ([seed → accent cascade](seed-colors.md#fluenttheme-seed--accent-cascade)).
 - `TextButtonStyle` and `IconButtonStyle` are Fluent subtle buttons: transparent at rest, `SubtleFillColorSecondary` / `SubtleFillColorTertiary` on hover / press, no border.
 
