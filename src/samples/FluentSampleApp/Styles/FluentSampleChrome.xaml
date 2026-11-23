@@ -106,7 +106,8 @@
 	<!-- A WinUI Gallery example card: the sample on the card surface, "Source code" in a footer strip. -->
 	<Style x:Key="XamlDisplayBelowStyle"
 		   TargetType="smtx:XamlDisplay">
-		<Setter Property="Margin" Value="{ThemeResource Space400TopThickness}" />
+		<!-- Close to its caption (SampleExampleCaptionStyle), as in the WinUI Gallery -->
+		<Setter Property="Margin" Value="{ThemeResource Space100TopThickness}" />
 		<Setter Property="Formatter" Value="{StaticResource NiceFormatter}" />
 		<Setter Property="Template">
 			<Setter.Value>

@@ -27,18 +27,21 @@
 		<sample:SamplePageLayout.FluentTemplate>
 			<DataTemplate>
 				<StackPanel Spacing="8">
-					<!-- Basic -->
+					<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+							   Text="Basic" />
 					<smtx:XamlDisplay UniqueKey="Fluent_CalendarDatePicker_Basic"
 									  Style="{StaticResource XamlDisplayBelowStyle}">
 						<CalendarDatePicker Style="{StaticResource CalendarDatePickerStyle}" />
 					</smtx:XamlDisplay>
-					<!-- With header -->
+					<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+							   Text="With a header" />
 					<smtx:XamlDisplay UniqueKey="Fluent_CalendarDatePicker_Header"
 									  Style="{StaticResource XamlDisplayBelowStyle}">
 						<CalendarDatePicker Header="Appointment Date"
 											Style="{StaticResource CalendarDatePickerStyle}" />
 					</smtx:XamlDisplay>
-					<!-- Disabled -->
+					<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+							   Text="Disabled" />
 					<smtx:XamlDisplay UniqueKey="Fluent_CalendarDatePicker_Disabled"
 									  Style="{StaticResource XamlDisplayBelowStyle}">
 						<CalendarDatePicker Header="Disabled"

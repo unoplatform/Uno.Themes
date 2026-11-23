@@ -99,12 +99,14 @@
 			<sample:SamplePageLayout.FluentTemplate>
 				<DataTemplate>
 					<StackPanel Spacing="16">
-						<!-- Basic -->
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Basic: single selection" />
 						<smtx:XamlDisplay UniqueKey="Fluent_CalendarView_Basic"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<CalendarView Style="{StaticResource CalendarViewStyle}" />
 						</smtx:XamlDisplay>
-						<!-- Multiple selection -->
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Multiple selection" />
 						<smtx:XamlDisplay UniqueKey="Fluent_CalendarView_Multiple"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<CalendarView SelectionMode="Multiple"

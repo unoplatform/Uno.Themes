@@ -224,6 +224,8 @@
 			<sample:SamplePageLayout.FluentTemplate>
 				<DataTemplate>
 					<StackPanel>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Group: two options sharing a GroupName, the first selected" />
 						<smtx:XamlDisplay UniqueKey="Fluent_RadioButton_Group"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<StackPanel>
@@ -236,6 +238,8 @@
 											 Style="{StaticResource RadioButtonStyle}" />
 							</StackPanel>
 						</smtx:XamlDisplay>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Disabled" />
 						<smtx:XamlDisplay UniqueKey="Fluent_RadioButton_Disabled"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<RadioButton Content="Disabled"

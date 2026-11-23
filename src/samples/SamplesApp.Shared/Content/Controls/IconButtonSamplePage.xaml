@@ -85,7 +85,8 @@
 		<sample:SamplePageLayout.FluentTemplate>
 			<DataTemplate>
 				<StackPanel Spacing="8">
-					<!-- Default -->
+					<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+							   Text="Default and disabled: IconButtonStyle" />
 					<smtx:XamlDisplay UniqueKey="Fluent_IconButton_Default"
 									  Style="{StaticResource XamlDisplayBelowStyle}">
 						<StackPanel Orientation="Horizontal"
@@ -99,7 +100,8 @@
 							</Button>
 						</StackPanel>
 					</smtx:XamlDisplay>
-					<!-- Various icons -->
+					<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+							   Text="Various icons" />
 					<smtx:XamlDisplay UniqueKey="Fluent_IconButton_Icons"
 									  Style="{StaticResource XamlDisplayBelowStyle}">
 						<StackPanel Orientation="Horizontal"

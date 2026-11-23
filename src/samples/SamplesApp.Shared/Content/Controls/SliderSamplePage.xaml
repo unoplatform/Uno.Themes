@@ -290,12 +290,16 @@
 			<sample:SamplePageLayout.FluentTemplate>
 				<DataTemplate>
 					<StackPanel>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Basic: range 0 to 100, value 40" />
 						<smtx:XamlDisplay UniqueKey="Fluent_Slider_Basic"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Slider Maximum="100"
 									Value="40"
 									Style="{StaticResource SliderStyle}" />
 						</smtx:XamlDisplay>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Stepped: StepFrequency 10 with tick marks every 10, value 60" />
 						<smtx:XamlDisplay UniqueKey="Fluent_Slider_Stepped"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Slider Maximum="100"
@@ -305,6 +309,8 @@
 									Value="60"
 									Style="{StaticResource SliderStyle}" />
 						</smtx:XamlDisplay>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Disabled: value 30" />
 						<smtx:XamlDisplay UniqueKey="Fluent_Slider_Disabled"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Slider IsEnabled="False"
