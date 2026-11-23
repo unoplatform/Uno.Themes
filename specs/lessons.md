@@ -24,7 +24,7 @@ machine: black. A test on a non-system key (`PrimaryColor`) written the same way
   never `TryGetValue`/`ContainsKey` — both check the system dictionary by default. Catch
   `NotSupportedException` for XAML-backed dictionaries (not enumerable on Uno) and treat them as
   "not here"; make sure the asserted keys live in code-built dictionaries. The library code already
-  follows this (`FluentResourceResolver`); the test
+  follows this (`SemanticBrushUpdater.TryResolve` with `declaredOnly: true`); the test
   helper had not.
 - A branch-level test on a key that XCR also defines must be red-proven in **both** directions
   (a value that differs from the ambient stock, and one that matches it): only the differing case
@@ -517,7 +517,7 @@ Everything else — literal per-branch colors/brushes, empty styles, setters-onl
 
 **Context:** Fluent override-driven accent cascade (2026-07-16, `specs/05-fluent-theme/`). Two related traps:
 
-1. **Branch keys.** Code that reads a consumer override's `ThemeDictionaries` by hand (FluentAccentPalette basis resolution, through `FluentResourceResolver`) originally read only the `Light`/`Default` keys — the keys *we* write. Consumers write **`Dark`** (see every sample head's `ColorPaletteOverride.xaml`); `Default` is the universal fallback for either theme. Manual reads must mirror the native semantics: exact branch key first (`Light`/`Dark`), then `Default`, then flat — and read OWN entries only (`TryGetValue` searches the ambient theme branch and breaks branch fidelity).
+1. **Branch keys.** Code that reads a consumer override's `ThemeDictionaries` by hand (FluentAccentPalette basis resolution, through `SemanticBrushUpdater.TryResolve`) originally read only the `Light`/`Default` keys — the keys *we* write. Consumers write **`Dark`** (see every sample head's `ColorPaletteOverride.xaml`); `Default` is the universal fallback for either theme. Manual reads must mirror the native semantics: exact branch key first (`Light`/`Dark`), then `Default`, then flat — and read OWN entries only (`TryGetValue` searches the ambient theme branch and breaks branch fidelity).
 
 2. **Verification.** There is no way to *render* the dark branch in the CI host: the ambient app theme is fixed at launch, and setting `RequestedTheme` on an element (before load or flipped after load) does **not** re-branch `{ThemeResource}` lookups made inside XCR templates against app-scope dictionaries on this target — the control keeps the ambient branch's values. Guard dark-branch behavior at the produced resource-graph level (the theme IS a `ResourceDictionary`; assert its branch contents) and keep rendered assertions for the ambient branch. (Exception: a dictionary merged into an *element's* own resources does re-branch with the element's `RequestedTheme`; `Given_FluentSemanticStyles.When_TextButtonPointerOver_UsesTheSubtleFill` relies on it.)
 
@@ -635,3 +635,14 @@ rendered-control tests caught it.
   the `AppxManifest.xml`, run the in-app runner).
 - Assert what a control renders, not only what a resource lookup returns; the two diverge on WinUI.
 - Gate a test to Uno only with `#if HAS_UNO` plus the reason, and document the limitation for consumers.
+
+---
+
+## A new theme extends the shared resolver; it does not ship a parallel one
+
+**Context:** Fluent theme review (2026-11-23, `specs/05-fluent-theme/`). `FluentResourceResolver` re-implemented "resolve this key for an explicit theme" next to `SemanticBrushUpdater.TryResolve`, because the accent keys need an own-entries read (`TryGetValue` answers a platform-defined key from the system resources). The two disagreed: a key declared flat *and* per theme, and a key missing from `Dark` but present in `Default`, resolved differently for `PrimaryBrush` and for the built-in accent. The user rejected the second resolver.
+
+**How to apply:**
+- When a design-system library needs a variation of a shared helper, add the capability to the shared helper (here: `declaredOnly` on `SemanticBrushUpdater.TryResolve`) and keep one precedence order. Do not add a `<Theme>…Resolver` beside it.
+- Pin every case where the two implementations disagreed with a test before deleting one (`Given_FluentSeedAccent.When_DarkBranchLacksPrimary_…`, `When_PrimaryDeclaredFlatAndPerTheme_…`), and prove them red against the old code.
+

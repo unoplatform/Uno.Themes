@@ -824,3 +824,19 @@ names the cheapest fix.
   the `specs/lessons.md` failure mode). S2/S3 Skia data captured in `spike-results.md`;
   spec §5.2 confidence column updated (9 keys need M-CODE type-keyed fallback on Skia).
   Spike tests kept as permanent mechanism guards; full runtime-test suite green.
+
+### 2026-11-23 — one override resolver (review of #1695)
+
+- [x] `FluentResourceResolver` removed; `FluentAccentPalette.Build` reads overrides through
+  `SemanticBrushUpdater.TryResolve(..., declaredOnly: true)`.
+- [x] `declaredOnly` keeps the own-entries read the accent keys need (enumeration; `TryGetValue`
+  answers platform-defined keys from the system resources) and adopts the core order: requested
+  theme branch, per-key `Default` fallback, flat entry unless another theme branch declares the
+  key, then merged dictionaries.
+- [x] Behavior changes, pinned by `Given_FluentSeedAccent.When_DarkBranchLacksPrimary_AccentFallsBackToTheDefaultBranch`
+  and `When_PrimaryDeclaredFlatAndPerTheme_ThePerThemeValueDrivesTheAccent` (both red on the old resolver).
+- [x] Simple host Debug desktop: 568 passed, 1 skipped, Light and Dark. Fluent head: 7/7.
+- [ ] Not re-validated: WinAppSDK, WebAssembly, mobile.
+- Known gap (pre-existing, core): the keyed path reads theme dictionaries nested in merged
+  dictionaries through `TryGetValue`, against the application theme; the declared path reads them
+  for the requested theme.

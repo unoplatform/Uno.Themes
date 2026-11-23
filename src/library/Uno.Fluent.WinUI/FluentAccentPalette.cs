@@ -6,6 +6,7 @@ using System.Linq;
 using Uno.Themes;
 using Uno.Themes.ColorGeneration;
 using Uno.Themes.ColorGeneration.Hct;
+using Uno.Themes.Helpers;
 using Windows.UI.ViewManagement;
 
 #if WinUI
@@ -159,9 +160,21 @@ internal static class FluentAccentPalette
 	/// <returns>Colors and <see cref="SolidColorBrush"/> templates (color + opacity), by key.</returns>
 	internal static Dictionary<string, object>? Build(bool isLight, AccentShades? seedShades, ResourceDictionary? consumerOverride, ResourceDictionary? baseOverride = null)
 	{
-		var appearance = isLight ? "Light" : "Dark";
+		// Read through the semantic brushes' resolver, so the built-in accent and PrimaryBrush share one
+		// precedence order. Declared entries only: the platform defines the accent keys too.
+		var themes = isLight ? ThemesConstants.LightColorThemes : ThemesConstants.DarkColorThemes;
+		var overrides = new List<ResourceDictionary>(2);
+		if (baseOverride is { })
+		{
+			overrides.Add(baseOverride);
+		}
+		if (consumerOverride is { })
+		{
+			overrides.Add(consumerOverride);
+		}
+
 		object? Find(string key)
-			=> FluentResourceResolver.Resolve(consumerOverride, appearance, key) ?? FluentResourceResolver.Resolve(baseOverride, appearance, key);
+			=> SemanticBrushUpdater.TryResolve<object>(overrides, themes, key, out var value, declaredOnly: true) ? value : null;
 
 		var primaryBrush = Find("PrimaryBrush") as SolidColorBrush;
 		var basis = primaryBrush?.Color ?? Find(SemanticColorKeys.Primary) as Color?;
@@ -193,7 +206,7 @@ internal static class FluentAccentPalette
 			WriteColorAndBrush(entries, "TextOnAccentFillColorSecondary", onPrimary.Color, onPrimary.Opacity);
 		}
 
-		if (consumerOverride is { } || baseOverride is { })
+		if (overrides.Count > 0)
 		{
 			foreach (var key in entries.Keys.Where(key => Find(key) is { }).ToList())
 			{

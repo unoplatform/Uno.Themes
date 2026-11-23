@@ -64,6 +64,18 @@ internal static class ThemesConstants
 	public static readonly string[] ThemeDictionaryKeys = { "Light", "Default" };
 
 	/// <summary>
+	/// The theme dictionary keys a light-theme color is read from, in probing order: a consumer writes
+	/// <c>Light</c>; <c>Default</c> is the framework's fallback for any theme.
+	/// </summary>
+	public static readonly string[] LightColorThemes = { "Light", "Default" };
+
+	/// <summary>
+	/// The theme dictionary keys a dark-theme color is read from, in probing order: a consumer writes
+	/// <c>Dark</c>, the libraries write <c>Default</c>.
+	/// </summary>
+	public static readonly string[] DarkColorThemes = { "Dark", "Default" };
+
+	/// <summary>
 	/// Every theme dictionary declared by <c>SharedColors.xaml</c>, paired with the color theme keys
 	/// its brushes are resolved from, in decreasing precedence.
 	/// </summary>
@@ -85,8 +97,8 @@ internal static class ThemesConstants
 	/// </remarks>
 	public static readonly (string BrushTheme, string[] ColorThemes)[] BrushThemeSources =
 	{
-		("Light", new[] { "Light", "Default" }),
-		("Default", new[] { "Dark", "Default" }),
+		("Light", LightColorThemes),
+		("Default", DarkColorThemes),
 		("HighContrast", new[] { "HighContrast", "Dark", "Default" }),
 	};
 

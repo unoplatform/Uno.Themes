@@ -822,6 +822,41 @@ public class Given_FluentSeedAccent
 			"the later merged Dark override must become the native Dark accent fill");
 	}
 
+	// The accent reads an override through the resolver the semantic brushes use
+	// (SemanticBrushUpdater.TryResolve), so both agree on these two shapes.
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_DarkBranchLacksPrimary_AccentFallsBackToTheDefaultBranch()
+	{
+		var overrides = new ResourceDictionary();
+		overrides.ThemeDictionaries["Light"] = new ResourceDictionary { ["PrimaryColor"] = OverrideBlue };
+		overrides.ThemeDictionaries["Dark"] = new ResourceDictionary { ["SecondaryColor"] = SeedRed };
+		overrides.ThemeDictionaries["Default"] = new ResourceDictionary { ["PrimaryColor"] = OverrideGreen };
+
+		var theme = new FluentTheme { Colors = new ThemeColors { OverrideDictionary = overrides } };
+
+		Assert.AreEqual(OverrideBlue, GetBranchColor(theme, "Light", "AccentFillColorDefault"),
+			"the Light branch declares PrimaryColor itself");
+		Assert.AreEqual(OverrideGreen, GetBranchColor(theme, "Default", "AccentFillColorDefault"),
+			"a key the Dark branch lacks falls back to the Default branch, key by key, as for PrimaryBrush");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_PrimaryDeclaredFlatAndPerTheme_ThePerThemeValueDrivesTheAccent()
+	{
+		var overrides = CreateBranchedPrimaryOverride(OverrideBlue, OverrideGreen);
+		overrides["PrimaryColor"] = SeedRed;
+
+		var theme = new FluentTheme { Colors = new ThemeColors { OverrideDictionary = overrides } };
+
+		Assert.AreEqual(OverrideBlue, GetBranchColor(theme, "Light", "AccentFillColorDefault"),
+			"the Light branch wins over the flat entry, as for PrimaryBrush");
+		Assert.AreEqual(OverrideGreen, GetBranchColor(theme, "Default", "AccentFillColorDefault"),
+			"the Dark branch wins over the flat entry, as for PrimaryBrush");
+	}
+
 #if HAS_UNO // WinUI binds the built-in controls' accent aliases inside XamlControlsResources, so FluentTheme cannot recolor them there (spec 05 §9.2).
 	[TestMethod]
 	[RunsOnUIThread]
