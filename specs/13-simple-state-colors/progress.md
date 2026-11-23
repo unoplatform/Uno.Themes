@@ -37,7 +37,15 @@ state as a translucent **state layer** (`On<Role>` at the shared Hover/Pressed o
 - [x] Commit 1 (issue scope): `FilledButtonStyle`, `FilledTonalButtonStyle`, and the icon styles
       sharing their keys (`IconButtonStyle`, `IconButtonNeutralStyle`).
 - [x] Update `Given_SemanticResources.When_LightweightBrushesResolve_Then_ButtonStateValuesArePreserved`.
-- [ ] Further same-bug fixes (separate commits), see sweep below.
+- [x] Further same-bug fixes (follow-up commit), see sweep below. Done per control:
+  - TextToggleButton / IconToggleButton, CheckBox, ComboBoxItem, ListViewItem: state layer + `*StateLayerBackground*` keys.
+  - ToggleSwitch: one `SwitchStateLayer` over both tracks (`ToggleSwitchStateLayerFillPressed` = `OnSurfacePressed`).
+  - MenuFlyout items (4 templates) and Expander headers (2): state layer with template brushes (they had no keys).
+  - Slider: pressed keeps `Primary` (nothing sits on the thumb, and the slider's states can't reach into the thumb template).
+  - CalendarView selected hover / pressed border, RatingControl hovered selected stars: `Primary`.
+  - RadioButton: `…Pressed` keys are unused by the template; pointed at the resting roles for consistency.
+- [x] Left as is: AppBarButton, TextButton, NavigationViewItem and PipsPager pressed/selected use
+      `PrimaryContainer` under a label that still pairs with it (same colour family, readable).
 - [x] Gates: XAML styler, `dotnet format`, `GenerateStyleDocs.cs`, `check-xaml-resource-keys.ps1`
       (needs WinAppSDK restore, Windows only), runtime tests Light + Dark.
 - [x] Docs: note under the generated tables in `doc/styles/simple/Button.md` (the generated tables pick up the new keys).
