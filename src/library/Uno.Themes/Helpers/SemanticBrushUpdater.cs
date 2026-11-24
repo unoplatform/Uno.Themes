@@ -23,10 +23,12 @@ namespace Uno.Themes.Helpers;
 /// </summary>
 /// <remarks>
 /// <para>
-/// The brushes are declared as <c>&lt;SolidColorBrush Color="{StaticResource PrimaryColor}" /&gt;</c>.
-/// <c>StaticResource</c> resolves <b>eagerly, at parse time</b>, against the ambient application
-/// scope — not against the dictionaries the theme merges alongside it afterwards — so a
-/// seed-generated or overridden color never reaches the brush on its own.
+/// <c>SharedColors.xaml</c> declares each brush as
+/// <c>&lt;SolidColorBrush Color="{StaticResource PrimaryColor}" /&gt;</c>. <c>StaticResource</c>
+/// resolves <b>eagerly, at parse time</b>, against the ambient application scope — not against
+/// the dictionaries the theme merges alongside it afterwards — so a seed-generated or overridden
+/// color never reaches such a brush on its own. The brushes <see cref="CreateBrushes"/> builds
+/// reference nothing at all: every value they hold is written by <see cref="Apply"/>.
 /// </para>
 /// <para>
 /// Replacing the brush dictionary on each rebuild does not help either: consumers bind with
@@ -41,9 +43,6 @@ internal static class SemanticBrushUpdater
 	private const string ColorSuffix = "Color";
 	private const string BrushSuffix = "Brush";
 	private const string OpacitySuffix = "Opacity";
-
-	// The one role SharedColors.xaml declares with no interaction-state brushes.
-	private const string StatelessColorKey = "SurfaceTintColor";
 
 	// The base (state-less) brush declares no Opacity in XAML, so it keeps the default.
 	private const double OpaqueOpacity = 1.0;
@@ -111,7 +110,7 @@ internal static class SemanticBrushUpdater
 				var roleBrushKeys = _brushKeys[i];
 
 				// States are ordered base-first (BrushStateSuffixes), so a stateless role keeps only its first key.
-				var count = colorKeys[i] == StatelessColorKey ? 1 : roleBrushKeys.Length;
+				var count = colorKeys[i] == ThemesConstants.StatelessBrushColorKey ? 1 : roleBrushKeys.Length;
 				for (int j = 0; j < count; j++)
 				{
 					themed[roleBrushKeys[j]] = new SolidColorBrush();

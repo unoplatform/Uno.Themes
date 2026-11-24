@@ -25,7 +25,8 @@ values `Apply` then overwrites.
 - [x] Build the brush dictionary in code (`SemanticBrushUpdater.CreateBrushes`) instead of loading
   `SharedColors.xaml`. The file stays: `MaterialColorsV2` still loads it.
 - [x] Tests: `Given_DesignTokens.When_ColorsChange_Then_TokenLayersAreReused`,
-  `When_ATokenInputChanges_Then_OnlyItsLayerIsRegenerated`;
+  `When_ATokenInputChanges_Then_OnlyItsLayerIsRegenerated`,
+  `When_FontFamilyIsSet_Then_TypefaceLayerIsReusedUntilItChanges`;
   `Given_SeedColorPalette.When_ThemeIsBuilt_Then_ItsBrushKeysMatchSharedColorsXaml` (3 rows).
 - [x] Re-measure.
 
@@ -77,13 +78,20 @@ figures repeat exactly between rounds.
 
 ## Review
 
-- Runtime tests: SimpleSampleApp 356 passed, 1 skipped (pre-existing `[Ignore]`);
+- Runtime tests: SimpleSampleApp 357 run, 1 skipped (pre-existing `[Ignore]`);
   MaterialSampleApp 143 passed. Desktop only.
-- Not verified: iOS and the WinAppSDK head (cannot run headless). The runtime tests were not run on
-  WebAssembly or Android, only the measurement harness. The brush
-  dictionary is now created in code on real WinUI too.
+- WinAppSDK head (the brush dictionary is created in code on real WinUI too): built unpackaged
+  (`/p:WindowsPackageType=None`, Debug) and launched; the Overview page renders with its semantic
+  brushes. Its runtime tests cannot run headless: the engine's embedded runner throws on
+  `CoreApplication.MainView` ("main window has not yet been created"). They need a manual run of the
+  packaged app (the in-app runner needs package identity).
+- Not verified: iOS. The runtime tests were not run on WebAssembly or Android, only the
+  measurement harness.
 - Behaviour difference: a role `Apply` cannot resolve from any color layer used to keep its
   parse-time XAML value and now stays a blank brush. `SharedColorPalette.xaml` defines every role,
   so this is not reachable today.
+- Behaviour difference: a generated token layer edited directly through `MergedDictionaries` used
+  to lose the edit on the next pass of any kind; it now keeps it until that layer's own input
+  changes.
 - Not addressed: a URI-backed `Colors.OverrideDictionary` is still re-read on every pass (the font
   override is cached). Not measured.

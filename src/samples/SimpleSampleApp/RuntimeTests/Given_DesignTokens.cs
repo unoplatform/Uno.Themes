@@ -770,4 +770,49 @@ public class Given_DesignTokens
 		Assert.AreEqual(10.0, GetResource<double>(container, "SimpleShapeControl"), 0.001,
 			"The capped radii must be regenerated with the shape scale (min(8 × 2, 10))");
 	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_FontFamilyIsSet_Then_TypefaceLayerIsReusedUntilItChanges()
+	{
+		// Arrange
+		var chosen = new FontFamily("Segoe UI");
+		var theme = new SimpleTheme { DefaultFontFamily = chosen };
+		var typefaces = FindTypefaceLayer(theme, "BodySmallFontFamily", chosen);
+		var aliases = FindTypefaceLayer(theme, "SimpleButtonFontFamily", chosen);
+
+		// Act
+		theme.Colors = new ThemeColors { PrimarySeed = Microsoft.UI.Colors.Purple };
+
+		// Assert
+		Assert.AreSame(typefaces, FindTypefaceLayer(theme, "BodySmallFontFamily", chosen), "A color change must not regenerate the typeface scale");
+		Assert.AreSame(aliases, FindTypefaceLayer(theme, "SimpleButtonFontFamily", chosen), "A color change must not regenerate the typeface aliases");
+
+		// Act
+		var other = new FontFamily("Arial");
+		theme.DefaultFontFamily = other;
+
+		// Assert
+		Assert.AreNotSame(typefaces, FindTypefaceLayer(theme, "BodySmallFontFamily", other), "A new DefaultFontFamily must regenerate the typeface scale");
+		Assert.AreNotSame(aliases, FindTypefaceLayer(theme, "SimpleButtonFontFamily", other), "A new DefaultFontFamily must regenerate the typeface aliases");
+	}
+
+	// The theme's own Fonts.xaml declares the same keys, so the generated layer is told apart by
+	// the family instance it carries.
+	private static ResourceDictionary FindTypefaceLayer(SimpleTheme theme, string key, FontFamily family)
+	{
+		foreach (var merged in theme.MergedDictionaries)
+		{
+			if (merged.ThemeDictionaries.TryGetValue("Default", out var themed)
+				&& themed is ResourceDictionary dictionary
+				&& dictionary.TryGetValue(key, out var value)
+				&& ReferenceEquals(value, family))
+			{
+				return merged;
+			}
+		}
+
+		Assert.Fail($"No generated layer sets '{key}' to the theme's font family");
+		return null!;
+	}
 }

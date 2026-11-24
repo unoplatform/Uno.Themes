@@ -64,8 +64,9 @@ internal static class ThemesConstants
 	public static readonly string[] ThemeDictionaryKeys = { "Light", "Default" };
 
 	/// <summary>
-	/// Every theme dictionary declared by <c>SharedColors.xaml</c>, paired with the color theme keys
-	/// its brushes are resolved from, in decreasing precedence.
+	/// Every theme dictionary of the semantic brush dictionary — the one
+	/// <c>SemanticBrushUpdater.CreateBrushes</c> builds, mirroring <c>SharedColors.xaml</c> — paired
+	/// with the color theme keys its brushes are resolved from, in decreasing precedence.
 	/// </summary>
 	/// <remarks>
 	/// <para>
@@ -92,8 +93,8 @@ internal static class ThemesConstants
 
 	/// <summary>
 	/// Every semantic color role declared in <c>SharedColorPalette.xaml</c> and consumed by the
-	/// brushes in <c>SharedColors.xaml</c>. Order is irrelevant; completeness is not — a role
-	/// missing here keeps its parse-time brush color when a seed or override changes it.
+	/// semantic brushes. Order is irrelevant; completeness is not — a role missing here gets no
+	/// brushes at all, since the theme's brush dictionary is built from this list.
 	/// </summary>
 	public static readonly string[] SemanticColorKeys =
 	{
@@ -110,12 +111,17 @@ internal static class ThemesConstants
 	};
 
 	/// <summary>
-	/// The interaction-state suffixes <c>SharedColors.xaml</c> appends between a color role and
-	/// <c>Brush</c> — e.g. <c>Primary</c> + <c>Hover</c> + <c>Brush</c>. The empty entry is the
-	/// opaque base brush.
+	/// The interaction-state suffixes appended between a color role and <c>Brush</c> — e.g.
+	/// <c>Primary</c> + <c>Hover</c> + <c>Brush</c>. The empty entry is the opaque base brush.
 	/// </summary>
 	public static readonly string[] BrushStateSuffixes =
 	{
 		"", "Hover", "Focused", "Pressed", "Dragged", "Selected", "Medium", "Low", "Disabled",
 	};
+
+	/// <summary>
+	/// The one role in <see cref="SemanticColorKeys"/> with only the base brush: it has none of the
+	/// <see cref="BrushStateSuffixes"/> variants.
+	/// </summary>
+	public const string StatelessBrushColorKey = "SurfaceTintColor";
 }
