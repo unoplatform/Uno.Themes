@@ -553,38 +553,37 @@
 										 Width="6"
 										 Height="6"
 										 Visibility="Collapsed" />
-
 							</Grid>
+
+							<Viewbox x:Name="IconRoot"
+									 Grid.Column="1"
+									 Width="{ThemeResource SimpleIconExtraSmall}"
+									 Height="{ThemeResource SimpleIconExtraSmall}"
+									 Margin="{ThemeResource SimpleMenuFlyoutItemIconMargin}"
+									 HorizontalAlignment="Left"
+									 VerticalAlignment="Center"
+									 Visibility="Collapsed">
+								<ContentPresenter x:Name="IconContent"
+												  Content="{TemplateBinding Icon}"
+												  Foreground="{ThemeResource OnSurfaceBrush}" />
+							</Viewbox>
+
+							<TextBlock x:Name="TextBlock"
+									   Grid.Column="2"
+									   VerticalAlignment="Center"
+									   Foreground="{TemplateBinding Foreground}"
+									   Text="{TemplateBinding Text}"
+									   TextTrimming="CharacterEllipsis" />
+
+							<TextBlock x:Name="KeyboardAcceleratorTextBlock"
+									   Grid.Column="3"
+									   Margin="{ThemeResource SimpleMenuFlyoutItemAcceleratorMargin}"
+									   VerticalAlignment="Center"
+									   Foreground="{ThemeResource OnSurfaceMediumBrush}"
+									   Text="{TemplateBinding KeyboardAcceleratorTextOverride}"
+									   FontSize="{ThemeResource BodyMediumFontSize}"
+									   Visibility="Collapsed" />
 						</Grid>
-
-						<Viewbox x:Name="IconRoot"
-								 Grid.Column="1"
-								 Width="{ThemeResource SimpleIconExtraSmall}"
-								 Height="{ThemeResource SimpleIconExtraSmall}"
-								 Margin="{ThemeResource SimpleMenuFlyoutItemIconMargin}"
-								 HorizontalAlignment="Left"
-								 VerticalAlignment="Center"
-								 Visibility="Collapsed">
-							<ContentPresenter x:Name="IconContent"
-											  Content="{TemplateBinding Icon}"
-											  Foreground="{ThemeResource OnSurfaceBrush}" />
-						</Viewbox>
-
-						<TextBlock x:Name="TextBlock"
-								   Grid.Column="2"
-								   VerticalAlignment="Center"
-								   Foreground="{TemplateBinding Foreground}"
-								   Text="{TemplateBinding Text}"
-								   TextTrimming="CharacterEllipsis" />
-
-						<TextBlock x:Name="KeyboardAcceleratorTextBlock"
-								   Grid.Column="3"
-								   Margin="{ThemeResource SimpleMenuFlyoutItemAcceleratorMargin}"
-								   VerticalAlignment="Center"
-								   Foreground="{ThemeResource OnSurfaceMediumBrush}"
-								   Text="{TemplateBinding KeyboardAcceleratorTextOverride}"
-								   FontSize="{ThemeResource BodyMediumFontSize}"
-								   Visibility="Collapsed" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>

@@ -8,6 +8,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Shapes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Uno.UI.RuntimeTests;
+using Windows.Foundation;
 using Windows.UI;
 
 namespace Uno.Themes.Samples.RuntimeTests;
@@ -78,8 +79,8 @@ public class Given_InteractiveStateColors
 		"MenuFlyoutSubItem.Pressed" => new(() => new MenuFlyoutSubItem { Text = "Size", Style = StyleOf("SimpleMenuFlyoutSubItemStyle") }, "Pressed", "LayoutRoot", "StateLayer", "TextBlock", "PointerOver"),
 		"RadioMenuFlyoutItem.Pressed" => new(() => new RadioMenuFlyoutItem { Text = "Large", Style = StyleOf("SimpleRadioMenuFlyoutItemStyle") }, "Pressed", "LayoutRoot", "StateLayer", "TextBlock", "PointerOver"),
 
-		"ToggleSwitch.Pressed" => new(() => new ToggleSwitch { IsOn = true, Style = StyleOf("SimpleToggleSwitchStyle") }, "Pressed", "SwitchKnobBounds", "SwitchStateLayer", "KnobOn"),
-		"ToggleSwitch.OffPressed" => new(() => new ToggleSwitch { IsOn = false, Style = StyleOf("SimpleToggleSwitchStyle") }, "Pressed", "OuterBorder", "SwitchStateLayer", null),
+		"ToggleSwitch.Pressed" => new(() => new ToggleSwitch { IsOn = true, Style = StyleOf("SimpleToggleSwitchStyle") }, "Pressed", "SwitchKnobBounds", "SwitchKnobBoundsStateLayer", "KnobOn"),
+		"ToggleSwitch.OffPressed" => new(() => new ToggleSwitch { IsOn = false, Style = StyleOf("SimpleToggleSwitchStyle") }, "Pressed", "OuterBorder", "OuterBorderStateLayer", null),
 
 		"ExpanderHeader.PointerOver" => new(() => new ToggleButton { Content = "Details", Style = StyleOf("SimpleExpanderHeaderDownStyle") }, "PointerOver", "ToggleButtonGrid", "StateLayer", "ContentPresenter"),
 		"ExpanderHeader.Pressed" => new(() => new ToggleButton { Content = "Details", Style = StyleOf("SimpleExpanderHeaderDownStyle") }, "Pressed", "ToggleButtonGrid", "StateLayer", "ContentPresenter"),
@@ -256,7 +257,8 @@ public class Given_InteractiveStateColors
 			("ListViewItemStateLayerBackgroundPressed", "OnSurfacePressedBrush"),
 			("ListViewItemStateLayerBackgroundPointerOverSelected", "OnPrimaryHoverBrush"),
 			("ListViewItemStateLayerBackgroundPressedSelected", "OnPrimaryPressedBrush"),
-			("ToggleSwitchStateLayerFillPressed", "OnSurfacePressedBrush"),
+			("ToggleSwitchOuterBorderStateLayerFillPressed", "OnSurfacePressedBrush"),
+			("ToggleSwitchKnobBoundsStateLayerFillPressed", "OnPrimaryPressedBrush"),
 		};
 
 		// Resolve through live ThemeResource expressions so each probe follows the container's theme.
@@ -310,6 +312,79 @@ public class Given_InteractiveStateColors
 			$"CalendarView SelectedHoverBorderBrush under {appearance}");
 		Assert.AreEqual(primary, ((SolidColorBrush)calendar.SelectedPressedBorderBrush).Color,
 			$"CalendarView SelectedPressedBorderBrush under {appearance}");
+	}
+
+	/// <summary>A template that wraps its content in a state layer and moved <c>Padding</c> onto an inner element.</summary>
+	/// <param name="Label">Element holding the content; must sit inside the padding.</param>
+	/// <param name="Glyphs">Elements laid out beside the label (check glyph, chevron); the label must not overlap them.</param>
+	private sealed record LayoutScenario(Func<Control> Create, string Label, params string[] Glyphs);
+
+	private static LayoutScenario GetLayoutScenario(string id) => id switch
+	{
+		"FilledButton" => new(() => new Button { Content = "Add", Style = StyleOf("FilledButtonStyle") }, "ContentPresenter"),
+		"FilledTonalButton" => new(() => new Button { Content = "Add", Style = StyleOf("FilledTonalButtonStyle") }, "ContentPresenter"),
+		"TextToggleButton" => new(() => new ToggleButton { Content = "Oat milk", Style = StyleOf("SimpleTextToggleButtonStyle") }, "ContentPresenter"),
+		"ComboBoxItem" => new(() => new ComboBoxItem { Content = "Espresso", Style = StyleOf("SimpleComboBoxItemStyle") }, "ContentPresenter"),
+		"ExpanderHeader" => new(() => new ToggleButton { Content = "Details", Style = StyleOf("SimpleExpanderHeaderDownStyle") }, "ContentPresenter", "ExpandCollapseChevronBorder"),
+		"ExpanderHeaderUp" => new(() => new ToggleButton { Content = "Details", Style = StyleOf("SimpleExpanderHeaderUpStyle") }, "ContentPresenter", "ExpandCollapseChevronBorder"),
+		"MenuFlyoutItem" => new(() => new MenuFlyoutItem { Text = "Add to order", Style = StyleOf("SimpleMenuFlyoutItemStyle") }, "TextBlock"),
+		"ToggleMenuFlyoutItem" => new(() => new ToggleMenuFlyoutItem { Text = "Oat milk", IsChecked = true, Style = StyleOf("SimpleToggleMenuFlyoutItemStyle") }, "TextBlock", "CheckGlyph"),
+		"MenuFlyoutSubItem" => new(() => new MenuFlyoutSubItem { Text = "Size", Style = StyleOf("SimpleMenuFlyoutSubItemStyle") }, "TextBlock", "SubItemChevron"),
+		"RadioMenuFlyoutItem" => new(() => new RadioMenuFlyoutItem { Text = "Large", IsChecked = true, Style = StyleOf("SimpleRadioMenuFlyoutItemStyle") }, "TextBlock", "CheckGlyph"),
+		_ => throw new ArgumentOutOfRangeException(nameof(id), id, "Unknown scenario"),
+	};
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow("FilledButton")]
+	[DataRow("FilledTonalButton")]
+	[DataRow("TextToggleButton")]
+	[DataRow("ComboBoxItem")]
+	[DataRow("ExpanderHeader")]
+	[DataRow("ExpanderHeaderUp")]
+	[DataRow("MenuFlyoutItem")]
+	[DataRow("ToggleMenuFlyoutItem")]
+	[DataRow("MenuFlyoutSubItem")]
+	[DataRow("RadioMenuFlyoutItem")]
+	public async Task When_TemplateHasStateLayer_Then_ContentKeepsPaddingAndClearsItsGlyphs(string scenarioId)
+	{
+		// The state layer made these templates move Padding from the root onto an inner element. Guards
+		// against content ending up outside that element: it loses the padding and, in a column layout,
+		// collapses onto column 0 over the check glyph.
+		// Arrange: asymmetric padding, and left-aligned content so a lost padding is not hidden by centring.
+		var padding = new Thickness(24, 4, 32, 4);
+		var scenario = GetLayoutScenario(scenarioId);
+		var control = scenario.Create();
+		control.Width = 240;
+		control.Padding = padding;
+		control.HorizontalContentAlignment = HorizontalAlignment.Left;
+
+		// Act
+		UnitTestsUIContentHelper.Content = new Grid { Children = { control } };
+		await UnitTestsUIContentHelper.WaitForLoaded(control);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		// Assert
+		const double tolerance = 0.5;
+		var label = BoundsOf(control, scenario.Label);
+		Assert.IsTrue(label.Left >= padding.Left - tolerance,
+			$"{scenarioId}: {scenario.Label} starts at {label.Left}, inside the left padding ({padding.Left}).");
+		Assert.IsTrue(label.Right <= control.ActualWidth - padding.Right + tolerance,
+			$"{scenarioId}: {scenario.Label} ends at {label.Right}, inside the right padding ({control.ActualWidth - padding.Right}).");
+
+		foreach (var glyphName in scenario.Glyphs)
+		{
+			var glyph = BoundsOf(control, glyphName);
+			Assert.IsTrue(label.Right <= glyph.Left + tolerance || label.Left >= glyph.Right - tolerance,
+				$"{scenarioId}: {scenario.Label} [{label.Left}, {label.Right}] overlaps {glyphName} [{glyph.Left}, {glyph.Right}].");
+		}
+	}
+
+	private static Rect BoundsOf(Control control, string name)
+	{
+		var element = FindByName(control, name);
+		Assert.IsNotNull(element, $"The template should have an element named {name}");
+		return element.TransformToVisual(control).TransformBounds(new Rect(0, 0, element.ActualWidth, element.ActualHeight));
 	}
 
 	private static Border CreateBrushProbe(string key)
