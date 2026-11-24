@@ -26,6 +26,9 @@ public class Given_SeedColorPalette
 	// WCAG AA for normal text.
 	private const double WcagAaContrast = 4.5;
 
+	private const string SharedColorsSource =
+		"ms-appx:///Uno.Themes.WinUI/Styles/Applications/Common/SharedColors.xaml";
+
 	// ─────────────────────────────────────────────────────────────────────
 	// HCT round-trip: ARGB → HCT → ARGB.
 	// The saturated rows are the ones that matter: a solver that clamps chroma
@@ -640,6 +643,40 @@ public class Given_SeedColorPalette
 
 		Assert.AreEqual(0.08, ((SolidColorBrush)((ResourceDictionary)highContrast)["PrimaryHoverBrush"]).Opacity, 0.0001,
 			"HighContrast state brushes must carry their state opacity too.");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow("Default")]
+	[DataRow("Light")]
+	[DataRow("HighContrast")]
+	public void When_ThemeIsBuilt_Then_ItsBrushKeysMatchSharedColorsXaml(string themeKey)
+	{
+		// A theme builds its brush dictionary in code (#1786) while MaterialColorsV2 still loads
+		// SharedColors.xaml. Both must expose exactly the same keys, so a brush added to or removed
+		// from only one of them fails here.
+		var declared = new ResourceDictionary { Source = new System.Uri(SharedColorsSource) };
+		var built = FindSemanticBrushes(new SimpleTheme());
+		Assert.IsNotNull(built, "The brush dictionary should be reachable from the theme");
+
+		Assert.IsTrue(declared.ThemeDictionaries.TryGetValue(themeKey, out var declaredValue)
+			&& declaredValue is ResourceDictionary,
+			$"SharedColors.xaml should declare a {themeKey} theme dictionary");
+		Assert.IsTrue(built.ThemeDictionaries.TryGetValue(themeKey, out var builtValue)
+			&& builtValue is ResourceDictionary,
+			$"The theme's brush dictionary should declare a {themeKey} theme dictionary");
+
+		var declaredKeys = ((ResourceDictionary)declaredValue).Keys.Select(k => k.ToString()).OrderBy(k => k, System.StringComparer.Ordinal).ToArray();
+		var builtKeys = ((ResourceDictionary)builtValue).Keys.Select(k => k.ToString()).OrderBy(k => k, System.StringComparer.Ordinal).ToArray();
+
+		Assert.IsTrue(declaredKeys.Length > 0, "Sanity: SharedColors.xaml should declare brushes");
+		CollectionAssert.AreEqual(declaredKeys, builtKeys,
+			$"The {themeKey} brush keys built in code differ from those SharedColors.xaml declares.");
+
+		foreach (var key in builtKeys)
+		{
+			Assert.IsInstanceOfType(((ResourceDictionary)builtValue)[key], typeof(SolidColorBrush), $"{themeKey} {key}");
+		}
 	}
 
 	[TestMethod]

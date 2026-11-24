@@ -696,4 +696,123 @@ public class Given_DesignTokens
 				$"{key} must not follow DefaultSpacing (DefaultSpacing={spacing})");
 		}
 	}
+
+	// ═══════════════════════════════════════════════════════════════════════
+	// LAYER REUSE — a rebuild regenerates only the layers whose input changed (#1786)
+	// ═══════════════════════════════════════════════════════════════════════
+
+	/// <summary>The generated layer of <paramref name="theme"/> declaring <paramref name="tokenKey"/>.</summary>
+	private static ResourceDictionary FindTokenLayer(SimpleTheme theme, string tokenKey)
+	{
+		foreach (var merged in theme.MergedDictionaries)
+		{
+			if (merged.ThemeDictionaries.TryGetValue("Default", out var themed)
+				&& themed is ResourceDictionary dictionary
+				&& dictionary.ContainsKey(tokenKey))
+			{
+				return merged;
+			}
+		}
+
+		Assert.Fail($"No generated layer declares '{tokenKey}'");
+		return null!;
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_ColorsChange_Then_TokenLayersAreReused()
+	{
+		// Arrange
+		var theme = new SimpleTheme();
+		var spacing = FindTokenLayer(theme, "Space100");
+		var shape = FindTokenLayer(theme, "Radius100");
+		var cappedRadii = FindTokenLayer(theme, "SimpleShapeControl");
+		var density = FindTokenLayer(theme, "TouchTargetMinSize");
+
+		// Act: the usual App.xaml shape assigns Colors after construction, then a seed changes.
+		theme.Colors = new ThemeColors { PrimarySeed = Microsoft.UI.Colors.Purple };
+		theme.Colors.PrimarySeed = Microsoft.UI.Colors.Teal;
+
+		// Assert
+		Assert.AreSame(spacing, FindTokenLayer(theme, "Space100"), "A color change must not regenerate the spacing scale");
+		Assert.AreSame(shape, FindTokenLayer(theme, "Radius100"), "A color change must not regenerate the shape scale");
+		Assert.AreSame(cappedRadii, FindTokenLayer(theme, "SimpleShapeControl"), "A color change must not regenerate the capped radii");
+		Assert.AreSame(density, FindTokenLayer(theme, "TouchTargetMinSize"), "A color change must not regenerate the density tokens");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_ATokenInputChanges_Then_OnlyItsLayerIsRegenerated()
+	{
+		// Arrange
+		var (container, theme) = CreateThemedContainer();
+		var spacing = FindTokenLayer(theme, "Space100");
+		var shape = FindTokenLayer(theme, "Radius100");
+
+		// Act
+		theme.DefaultSpacing = 6;
+
+		// Assert
+		Assert.AreNotSame(spacing, FindTokenLayer(theme, "Space100"), "A new DefaultSpacing must regenerate the spacing scale");
+		Assert.AreEqual(6.0, GetResource<double>(container, "Space100"), 0.001);
+		Assert.AreSame(shape, FindTokenLayer(theme, "Radius100"), "A spacing change must not regenerate the shape scale");
+
+		// Act: density shares the spacing layer; radius drives the shape scale and the capped radii.
+		spacing = FindTokenLayer(theme, "Space100");
+		theme.DefaultDensity = Density.Compact;
+		theme.DefaultCornerRadius = 8;
+
+		// Assert
+		Assert.AreNotSame(spacing, FindTokenLayer(theme, "Space100"), "A new DefaultDensity must regenerate the spacing scale");
+		Assert.AreEqual(4.5, GetResource<double>(container, "Space100"), 0.001);
+		Assert.AreNotSame(shape, FindTokenLayer(theme, "Radius100"), "A new DefaultCornerRadius must regenerate the shape scale");
+		Assert.AreEqual(8.0, GetResource<double>(container, "Radius100"), 0.001);
+		Assert.AreEqual(10.0, GetResource<double>(container, "SimpleShapeControl"), 0.001,
+			"The capped radii must be regenerated with the shape scale (min(8 × 2, 10))");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_FontFamilyIsSet_Then_TypefaceLayerIsReusedUntilItChanges()
+	{
+		// Arrange
+		var chosen = new FontFamily("Segoe UI");
+		var theme = new SimpleTheme { DefaultFontFamily = chosen };
+		var typefaces = FindTypefaceLayer(theme, "BodySmallFontFamily", chosen);
+		var aliases = FindTypefaceLayer(theme, "SimpleButtonFontFamily", chosen);
+
+		// Act
+		theme.Colors = new ThemeColors { PrimarySeed = Microsoft.UI.Colors.Purple };
+
+		// Assert
+		Assert.AreSame(typefaces, FindTypefaceLayer(theme, "BodySmallFontFamily", chosen), "A color change must not regenerate the typeface scale");
+		Assert.AreSame(aliases, FindTypefaceLayer(theme, "SimpleButtonFontFamily", chosen), "A color change must not regenerate the typeface aliases");
+
+		// Act
+		var other = new FontFamily("Arial");
+		theme.DefaultFontFamily = other;
+
+		// Assert
+		Assert.AreNotSame(typefaces, FindTypefaceLayer(theme, "BodySmallFontFamily", other), "A new DefaultFontFamily must regenerate the typeface scale");
+		Assert.AreNotSame(aliases, FindTypefaceLayer(theme, "SimpleButtonFontFamily", other), "A new DefaultFontFamily must regenerate the typeface aliases");
+	}
+
+	// The theme's own Fonts.xaml declares the same keys, so the generated layer is told apart by
+	// the family instance it carries.
+	private static ResourceDictionary FindTypefaceLayer(SimpleTheme theme, string key, FontFamily family)
+	{
+		foreach (var merged in theme.MergedDictionaries)
+		{
+			if (merged.ThemeDictionaries.TryGetValue("Default", out var themed)
+				&& themed is ResourceDictionary dictionary
+				&& dictionary.TryGetValue(key, out var value)
+				&& ReferenceEquals(value, family))
+			{
+				return merged;
+			}
+		}
+
+		Assert.Fail($"No generated layer sets '{key}' to the theme's font family");
+		return null!;
+	}
 }
