@@ -39,7 +39,7 @@ state as a translucent **state layer** (`On<Role>` at the shared Hover/Pressed o
 - [x] Update `Given_SemanticResources.When_LightweightBrushesResolve_Then_ButtonStateValuesArePreserved`.
 - [x] Further same-bug fixes (follow-up commit), see sweep below. Done per control:
   - TextToggleButton / IconToggleButton, CheckBox, ComboBoxItem, ListViewItem: state layer + `*StateLayerBackground*` keys.
-  - ToggleSwitch: one `SwitchStateLayer` over both tracks (`ToggleSwitchStateLayerFillPressed` = `OnSurfacePressed`).
+  - ToggleSwitch: one state layer per track, following the track's opacity: `OuterBorderStateLayer` (`ToggleSwitchOuterBorderStateLayerFillPressed` = `OnSurfacePressed`) and `SwitchKnobBoundsStateLayer` (`ToggleSwitchKnobBoundsStateLayerFillPressed` = `OnPrimaryPressed`, so the `Primary` on track is tinted with `OnPrimary` like every other `Primary` fill). Initially a single `OnSurface` layer over both tracks; split after review.
   - MenuFlyout items (4 templates) and Expander headers (2): state layer with template brushes (they had no keys).
   - Slider: pressed keeps `Primary` (nothing sits on the thumb, and the slider's states can't reach into the thumb template).
   - CalendarView selected hover / pressed border, RatingControl hovered selected stars: `Primary`.
