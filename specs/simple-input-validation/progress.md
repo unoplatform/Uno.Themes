@@ -104,11 +104,14 @@ No bump needed: master's Uno already ships unoplatform/uno#24838. The framework'
 - [x] Delete the temporary shim (`src/library/Uno.Themes/InputValidation/`)
 - [x] Enable `FeatureConfiguration.InputValidation.IsEnabled` in SimpleSampleApp (`HAS_UNO`)
 - [x] Docs — namespace, app-wide switch, link to the framework's input validation page
-- [ ] `When_ModeDisabledThenAuto_Then_ErrorStateClearsAndReturns` fails: on `Mode` → `Disabled` the framework
-      goes to `ValidationDisabled` but, like WinUI, leaves `InputValidationErrorStates` where it was
-      (`UpdateValidationStatesInternal`), so the ring and `ErrorPresenter` stay visible while `HasErrors` is
-      false. The shim cleared both groups. Decide: theme-side (visuals also keyed off `ValidationDisabled`),
-      framework-side, or accept parity and change the test
+- [x] Accept the framework's states when validation is disabled: on `Mode` → `Disabled` it goes to
+      `ValidationDisabled` but leaves `InputValidationErrorStates` where it was (`UpdateValidationStatesInternal`),
+      so the ring and `ErrorPresenter` stay visible while `HasErrors` is false; the shim cleared both groups.
+      The state groups match WinUI, whose `CControl::EnsureValidationVisuals` only goes to `ValidationDisabled`.
+      The presenter does not: WinUI's `DeferErrors` unloads the `x:Load` `ErrorPresenter` (`TryDefer`), which
+      Uno cannot do, so it stays visible on Uno (a framework gap, not worked around here). The test, renamed
+      `When_ModeDisabledThenAuto_Then_ValidationDisablesAndReturns`, now asserts the state groups, not the
+      presenter (theme-side and framework-side alternatives declined)
 - [ ] WinAppSDK heads: `Given_InputValidation` and the sample page now resolve `Uno.UI.Xaml.Controls` from
       `Uno.UI.Extras.dll`; gate the test to `HAS_UNO` (the properties are a no-op there) and build both heads
 
@@ -168,8 +171,8 @@ Verified against Uno 7.0.0-dev.703 (no framework validation) with the temporary 
 Verified on master's Uno 7.1.0-dev.477 with the framework implementation, shim removed:
 
 - SimpleSampleApp builds for `net10.0-desktop` (Debug). The WinAppSDK heads were not built (see Phase C).
-- Full SimpleSampleApp suite, Debug: 380 pass, 1 fail, 1 skipped (pre-existing `[Ignore]`). `Given_InputValidation`:
-  23/24, the failure being `When_ModeDisabledThenAuto_Then_ErrorStateClearsAndReturns` ("ErrorPresenter should
-  hide": still Visible after `Mode` → `Disabled`), open above.
+- Full SimpleSampleApp suite, Debug: 380 pass, 1 fail, 1 skipped (pre-existing `[Ignore]`). The failure was
+  `When_ModeDisabledThenAuto_Then_ErrorStateClearsAndReturns` ("ErrorPresenter should hide": still Visible after
+  `Mode` → `Disabled`), the disabled-state difference above. With the test rewritten, `Given_InputValidation`: 24/24.
 - `When_ShownAfterBeingCollapsed_Then_ErrorStateShows` passes: the framework re-applies the states on template
   application, which the shim had to emulate.
