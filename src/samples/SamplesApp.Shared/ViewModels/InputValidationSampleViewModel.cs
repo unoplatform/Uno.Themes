@@ -85,7 +85,8 @@ public sealed class InputValidationSampleViewModel : INotifyPropertyChanged, INo
 		set => Set(ref field, value);
 	}
 
-	public IReadOnlyList<string> Countries { get; } = ["Canada", "France", "Japan", "Portugal"];
+	// An array, not a collection expression: CsWinRT has no concrete type for one targeting IReadOnlyList (CsWinRT1032).
+	public IReadOnlyList<string> Countries { get; } = new[] { "Canada", "France", "Japan", "Portugal" };
 
 	private IEnumerable<string> GetRuleViolations(string propertyName)
 	{
