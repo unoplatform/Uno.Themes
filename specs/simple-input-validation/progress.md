@@ -112,8 +112,9 @@ No bump needed: master's Uno already ships unoplatform/uno#24838. The framework'
       Uno cannot do, so it stays visible on Uno (a framework gap, not worked around here). The test, renamed
       `When_ModeDisabledThenAuto_Then_ValidationDisablesAndReturns`, now asserts the state groups, not the
       presenter (theme-side and framework-side alternatives declined)
-- [ ] WinAppSDK heads: `Given_InputValidation` and the sample page now resolve `Uno.UI.Xaml.Controls` from
-      `Uno.UI.Extras.dll`; gate the test to `HAS_UNO` (the properties are a no-op there) and build both heads
+- [x] WinAppSDK heads: the sample page resolves `Uno.UI.Xaml.Controls` from `Uno.UI.Extras.dll`;
+      `Given_InputValidation` is gated to `HAS_UNO` (the properties are a no-op there); the sample view model's
+      `IReadOnlyList<string>` collection expression is an array (CsWinRT1032). Simple and Material heads build
 
 ## Known limitations
 
@@ -170,7 +171,10 @@ Verified against Uno 7.0.0-dev.703 (no framework validation) with the temporary 
 
 Verified on master's Uno 7.1.0-dev.477 with the framework implementation, shim removed:
 
-- SimpleSampleApp builds for `net10.0-desktop` (Debug). The WinAppSDK heads were not built (see Phase C).
+- SimpleSampleApp builds for `net10.0-desktop` (Debug). Simple and Material WinAppSDK heads build with
+  MSBuild (`net10.0-windows10.0.19041`, x64, Debug): 0 errors, no warnings from the input validation files.
+  Before this phase the Simple head failed on the test's Uno-only `Uno.Extras.Input` (17 errors).
+- `check-xaml-resource-keys.ps1`: all references resolve.
 - Full SimpleSampleApp suite, Debug: 380 pass, 1 fail, 1 skipped (pre-existing `[Ignore]`). The failure was
   `When_ModeDisabledThenAuto_Then_ErrorStateClearsAndReturns` ("ErrorPresenter should hide": still Visible after
   `Mode` → `Disabled`), the disabled-state difference above. With the test rewritten, `Given_InputValidation`: 24/24.
