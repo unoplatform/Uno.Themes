@@ -71,6 +71,12 @@ public class Given_InputValidation
 	private static FrameworkElement? FindPart(Control control, string name) =>
 		control.EnumerateDescendants().OfType<FrameworkElement>().FirstOrDefault(x => x.Name == name);
 
+	/// <summary>Gets the name of the current state of a visual state group declared on the control's template root.</summary>
+	private static string? GetCurrentState(Control control, string groupName) =>
+		VisualTreeHelper.GetChild(control, 0) is FrameworkElement root
+			? VisualStateManager.GetVisualStateGroups(root).FirstOrDefault(x => x.Name == groupName)?.CurrentState?.Name
+			: null;
+
 	[TestMethod]
 	[RunsOnUIThread]
 	[DataRow(ElementTheme.Light)]
@@ -250,7 +256,7 @@ public class Given_InputValidation
 
 	[TestMethod]
 	[RunsOnUIThread]
-	public async Task When_ModeDisabledThenAuto_Then_ErrorStateClearsAndReturns()
+	public async Task When_ModeDisabledThenAuto_Then_ValidationDisablesAndReturns()
 	{
 		// Arrange: a control in error
 		var container = CreateThemedContainer();
@@ -268,10 +274,12 @@ public class Given_InputValidation
 		Validation.SetMode(control, InputValidationMode.Disabled);
 		await UnitTestsUIContentHelper.WaitForIdle();
 
-		// Assert: nothing is presented
+		// Assert: the control leaves the enabled states. Like WinUI (CControl::EnsureValidationVisuals), the framework
+		// leaves the error states group where it was, so the error visuals stay until validation is turned back on.
+		// The ErrorPresenter is not asserted: WinUI unloads it (DeferErrors), while Uno cannot and keeps it visible.
 		Assert.IsFalse(Validation.GetHasErrors(control), "A control that does not validate has no errors");
-		Assert.AreEqual(Visibility.Collapsed, FindPart(control, "ErrorPresenter")?.Visibility ?? Visibility.Collapsed, "ErrorPresenter should hide");
-		Assert.AreEqual(Visibility.Collapsed, FindPart(control, "ErrorBorderElement")?.Visibility, "The error ring should hide");
+		Assert.AreEqual("ValidationDisabled", GetCurrentState(control, "InputValidationEnabledStates"));
+		Assert.AreEqual("CompactErrors", GetCurrentState(control, "InputValidationErrorStates"), "The error states group is left as it was");
 
 		// Act: validation turned back on
 		Validation.SetMode(control, InputValidationMode.Auto);
@@ -279,6 +287,8 @@ public class Given_InputValidation
 
 		// Assert: the source's error is presented again
 		Assert.IsTrue(Validation.GetHasErrors(control), "The source's error should be picked up again");
+		Assert.AreEqual("CompactValidationEnabled", GetCurrentState(control, "InputValidationEnabledStates"));
+		Assert.AreEqual("CompactErrors", GetCurrentState(control, "InputValidationErrorStates"));
 		Assert.AreEqual(Visibility.Visible, FindPart(control, "ErrorPresenter")?.Visibility, "ErrorPresenter should show again");
 		Assert.AreEqual(Visibility.Visible, FindPart(control, "ErrorBorderElement")?.Visibility, "The error ring should show again");
 	}
