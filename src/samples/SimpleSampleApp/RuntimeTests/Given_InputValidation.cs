@@ -4,10 +4,14 @@ using System.Collections;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Uno.Extras.Input;
 using Uno.Simple;
 using Uno.Themes.Samples.Helpers;
 using Uno.UI.RuntimeTests;
+// Aliases, not `using Uno.UI.Xaml.Controls`: that namespace also declares a ComboBox, which would clash with
+// Microsoft.UI.Xaml.Controls.ComboBox.
+using InputValidationKind = Uno.UI.Xaml.Controls.InputValidationKind;
+using InputValidationMode = Uno.UI.Xaml.Controls.InputValidationMode;
+using Validation = Uno.UI.Xaml.Controls.Validation;
 
 namespace Uno.Themes.Samples.RuntimeTests;
 
