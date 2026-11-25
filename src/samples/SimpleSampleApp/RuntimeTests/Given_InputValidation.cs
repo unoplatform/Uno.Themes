@@ -1,5 +1,8 @@
 #nullable enable
 
+// Uno targets only: input validation is an Uno Platform feature. On WinAppSDK the Validation properties
+// compile but have no effect, and the Simple styles exclude their validation setters and templates (not_win).
+#if HAS_UNO
 using System.Collections;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -373,3 +376,4 @@ public class Given_InputValidation
 		public event PropertyChangedEventHandler? PropertyChanged;
 	}
 }
+#endif
