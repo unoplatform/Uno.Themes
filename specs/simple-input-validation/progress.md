@@ -2,9 +2,9 @@
 
 ## Context
 
-Uno's input validation (`Uno.Extras.Input.Validation`: `Mode`, `Kind`, `ErrorTemplate`, `Errors`,
-`HasErrors`, plus `FeatureConfiguration.InputValidation.IsEnabled`) is being added to the framework
-in unoplatform/uno#24838. Controls that declare a validation property (TextBox, PasswordBox,
+Uno's input validation (`Uno.UI.Xaml.Controls.Validation`: `Mode`, `Kind`, `ErrorTemplate`, `Errors`,
+`HasErrors`, plus `FeatureConfiguration.InputValidation.IsEnabled`) was added to the framework in
+unoplatform/uno#24838 (merged 2026-10-21; shipped in Uno 7.1.0-dev.477, which master uses). Controls that declare a validation property (TextBox, PasswordBox,
 AutoSuggestBox, ComboBox) drive two visual-state groups and fill an `ErrorPresenter` template part.
 For that to show anything, the theme's templates have to declare them.
 
@@ -47,8 +47,8 @@ Per-control shape:
   `Tag` is set. The outer template draws the ring as an overlay, sized to the field by an
   invisible `HeaderSpacer`.
 
-`net10.0-windows` has no `Uno.Extras.Input`, so the ErrorTemplate setters and the two DataTemplates
-are `not_win:`-gated. The added parts and states are inert there.
+On `net10.0-windows` the `Validation` properties compile but have no effect, so the ErrorTemplate setters and
+the two DataTemplates are `not_win:`-gated. The added parts and states are inert there.
 
 ### Resource keys
 
@@ -93,20 +93,30 @@ Local only, never committed: the `Uno.Sdk.Private` 7.0.0-dev.703 pin in both `gl
 - [x] SimpleSampleApp — drop the `FeatureConfiguration.InputValidation` line (absent on 703), left as a TODO comment
 - [x] Verify — desktop + windows builds, sample page matches Phase A, runtime suite passes
 
-## TODO — when unoplatform/uno#24838 is merged and published
+### Phase C — the framework implementation (rebased onto master, Uno 7.1.0-dev.477)
 
-- [ ] Bump Uno to the first version that includes it
-- [ ] Delete the temporary `Validation` shim (`src/library/Uno.Themes/InputValidation/`) — it declares the
-      same types in the same namespace as the framework, so it must go in the same change as the bump
-- [ ] Restore `FeatureConfiguration.InputValidation.IsEnabled = true` in SimpleSampleApp
-- [ ] Re-run `Given_InputValidation` + the full suite against the real implementation
+No bump needed: master's Uno already ships unoplatform/uno#24838. The framework's namespace is
+`Uno.UI.Xaml.Controls`, not the `Uno.Extras.Input` the shim had copied; the template contract (state groups,
+`ErrorPresenter`, `DefaultCompactErrorIconTemplate`) is unchanged.
+
+- [x] Styles, sample page and `Given_InputValidation` → `Uno.UI.Xaml.Controls` (the test aliases the types:
+      that namespace also declares a `ComboBox`)
+- [x] Delete the temporary shim (`src/library/Uno.Themes/InputValidation/`)
+- [x] Enable `FeatureConfiguration.InputValidation.IsEnabled` in SimpleSampleApp (`HAS_UNO`)
+- [x] Docs — namespace, app-wide switch, link to the framework's input validation page
+- [ ] `When_ModeDisabledThenAuto_Then_ErrorStateClearsAndReturns` fails: on `Mode` → `Disabled` the framework
+      goes to `ValidationDisabled` but, like WinUI, leaves `InputValidationErrorStates` where it was
+      (`UpdateValidationStatesInternal`), so the ring and `ErrorPresenter` stay visible while `HasErrors` is
+      false. The shim cleared both groups. Decide: theme-side (visuals also keyed off `ValidationDisabled`),
+      framework-side, or accept parity and change the test
+- [ ] WinAppSDK heads: `Given_InputValidation` and the sample page now resolve `Uno.UI.Xaml.Controls` from
+      `Uno.UI.Extras.dll`; gate the test to `HAS_UNO` (the properties are a no-op there) and build both heads
 
 ## Known limitations
 
 - Commits between Phase A and the Phase B shim don't build on CI (the published 701 has no `Uno.Extras.Input`).
-- The shim tracks `{Binding}` with a single-segment path only (no `{x:Bind}`, no dotted paths), and only while
-  the control is loaded. It stands in for the framework's OnApplyTemplate hook with `SizeChanged`, re-applying
-  the states when the template root changes (e.g. a control first laid out after a collapsed ancestor shows).
+- The WinAppSDK heads (added on master by #1740 after this branch was cut) don't build at the Phase B commits:
+  the test's `Uno.Extras.Input` is Uno-only.
 
 ## Review
 
@@ -152,3 +162,14 @@ Verified against Uno 7.0.0-dev.703 (no framework validation) with the temporary 
 - Found and fixed while verifying: controls loaded inside a collapsed section never got their error states
   (no template yet when the shim first ran). Guarded by `When_ShownAfterBeingCollapsed_Then_ErrorStateShows`,
   confirmed red without the fix and green with it.
+
+### Phase C (2026-11-25)
+
+Verified on master's Uno 7.1.0-dev.477 with the framework implementation, shim removed:
+
+- SimpleSampleApp builds for `net10.0-desktop` (Debug). The WinAppSDK heads were not built (see Phase C).
+- Full SimpleSampleApp suite, Debug: 380 pass, 1 fail, 1 skipped (pre-existing `[Ignore]`). `Given_InputValidation`:
+  23/24, the failure being `When_ModeDisabledThenAuto_Then_ErrorStateClearsAndReturns` ("ErrorPresenter should
+  hide": still Visible after `Mode` → `Disabled`), open above.
+- `When_ShownAfterBeingCollapsed_Then_ErrorStateShows` passes: the framework re-applies the states on template
+  application, which the shim had to emulate.
