@@ -7,9 +7,10 @@ namespace Uno.Themes;
 /// </summary>
 /// <remarks>
 /// <see cref="All"/> is the complete role set; its order is irrelevant, its completeness is not —
-/// a role missing there keeps its parse-time brush color when a seed or override changes it.
-/// <see cref="Shadow"/> has no brushes in <c>SharedColors.xaml</c> (the updater skips roles whose
-/// brushes do not exist); it is listed so the set matches the palette one for one.
+/// a role missing there gets no brushes at all, since the theme's brush dictionary is built from it.
+/// <see cref="Shadow"/> has no brushes in <c>SharedColors.xaml</c>, so the brush dictionary built in
+/// code skips it (<see cref="ThemesConstants.BrushlessColorKey"/>); it is listed so the set matches
+/// the palette one for one.
 /// </remarks>
 internal static class SemanticColorKeys
 {

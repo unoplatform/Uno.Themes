@@ -76,8 +76,9 @@ internal static class ThemesConstants
 	public static readonly string[] DarkColorThemes = { "Dark", "Default" };
 
 	/// <summary>
-	/// Every theme dictionary declared by <c>SharedColors.xaml</c>, paired with the color theme keys
-	/// its brushes are resolved from, in decreasing precedence.
+	/// Every theme dictionary of the semantic brush dictionary — the one
+	/// <c>SemanticBrushUpdater.CreateBrushes</c> builds, mirroring <c>SharedColors.xaml</c> — paired
+	/// with the color theme keys its brushes are resolved from, in decreasing precedence.
 	/// </summary>
 	/// <remarks>
 	/// <para>
@@ -103,12 +104,24 @@ internal static class ThemesConstants
 	};
 
 	/// <summary>
-	/// The interaction-state suffixes <c>SharedColors.xaml</c> appends between a color role
-	/// (<see cref="SemanticColorKeys"/>) and <c>Brush</c> — e.g. <c>Primary</c> + <c>Hover</c> +
-	/// <c>Brush</c>. The empty entry is the opaque base brush.
+	/// The interaction-state suffixes appended between a color role (<see cref="SemanticColorKeys"/>)
+	/// and <c>Brush</c> — e.g. <c>Primary</c> + <c>Hover</c> + <c>Brush</c>. The empty entry is the
+	/// opaque base brush.
 	/// </summary>
 	public static readonly string[] BrushStateSuffixes =
 	{
 		"", "Hover", "Focused", "Pressed", "Dragged", "Selected", "Medium", "Low", "Disabled",
 	};
+
+	/// <summary>
+	/// The one role in <see cref="SemanticColorKeys.All"/> with only the base brush: it has none of the
+	/// <see cref="BrushStateSuffixes"/> variants.
+	/// </summary>
+	public const string StatelessBrushColorKey = SemanticColorKeys.SurfaceTint;
+
+	/// <summary>
+	/// The one role in <see cref="SemanticColorKeys.All"/> with no brushes at all: <c>SharedColors.xaml</c>
+	/// declares none for it, so the brush dictionary built in code must not either.
+	/// </summary>
+	public const string BrushlessColorKey = SemanticColorKeys.Shadow;
 }

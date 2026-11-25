@@ -17,15 +17,18 @@ using Windows.UI.Xaml.Media;
 namespace Uno.Themes.Helpers;
 
 /// <summary>
-/// Writes resolved semantic colors into the existing <see cref="SolidColorBrush"/> instances of
-/// <c>SharedColors.xaml</c>.
+/// Creates a theme's semantic brush dictionary — the code-built equivalent of
+/// <c>SharedColors.xaml</c> — and writes resolved semantic colors into its existing
+/// <see cref="SolidColorBrush"/> instances.
 /// </summary>
 /// <remarks>
 /// <para>
-/// The brushes are declared as <c>&lt;SolidColorBrush Color="{StaticResource PrimaryColor}" /&gt;</c>.
-/// <c>StaticResource</c> resolves <b>eagerly, at parse time</b>, against the ambient application
-/// scope — not against the dictionaries the theme merges alongside it afterwards — so a
-/// seed-generated or overridden color never reaches the brush on its own.
+/// <c>SharedColors.xaml</c> declares each brush as
+/// <c>&lt;SolidColorBrush Color="{StaticResource PrimaryColor}" /&gt;</c>. <c>StaticResource</c>
+/// resolves <b>eagerly, at parse time</b>, against the ambient application scope — not against
+/// the dictionaries the theme merges alongside it afterwards — so a seed-generated or overridden
+/// color never reaches such a brush on its own. The brushes <see cref="CreateBrushes"/> builds
+/// reference nothing at all: every value they hold is written by <see cref="Apply"/>.
 /// </para>
 /// <para>
 /// Replacing the brush dictionary on each rebuild does not help either: consumers bind with
@@ -86,10 +89,50 @@ internal static class SemanticBrushUpdater
 	}
 
 	/// <summary>
+	/// Creates the brush dictionary <see cref="Apply"/> writes into: the same keys and theme
+	/// dictionaries as <c>SharedColors.xaml</c>, holding blank brushes. Loading that file instead
+	/// would resolve two <c>StaticResource</c> references per brush only for <see cref="Apply"/> to
+	/// overwrite both values.
+	/// </summary>
+	/// <returns>A <see cref="SemanticResources"/> dictionary; pass it to <see cref="Apply"/> before use.</returns>
+	internal static ResourceDictionary CreateBrushes()
+	{
+		var colorKeys = SemanticColorKeys.All;
+		var brushes = new SemanticResources();
+
+		foreach (var (brushTheme, _) in ThemesConstants.BrushThemeSources)
+		{
+			// Plain, as the theme dictionaries of a Source-loaded file are (see SemanticResources).
+			var themed = new ResourceDictionary();
+
+			for (int i = 0; i < colorKeys.Length; i++)
+			{
+				if (colorKeys[i] == ThemesConstants.BrushlessColorKey)
+				{
+					continue;
+				}
+
+				var roleBrushKeys = _brushKeys[i];
+
+				// States are ordered base-first (BrushStateSuffixes), so a stateless role keeps only its first key.
+				var count = colorKeys[i] == ThemesConstants.StatelessBrushColorKey ? 1 : roleBrushKeys.Length;
+				for (int j = 0; j < count; j++)
+				{
+					themed[roleBrushKeys[j]] = new SolidColorBrush();
+				}
+			}
+
+			brushes.ThemeDictionaries[brushTheme] = themed;
+		}
+
+		return brushes;
+	}
+
+	/// <summary>
 	/// Resolves every semantic color role from <paramref name="colorLayers"/> and applies it to the
 	/// matching brushes in <paramref name="brushes"/>.
 	/// </summary>
-	/// <param name="brushes">The <c>SharedColors.xaml</c> dictionary. Must be the same instance across rebuilds.</param>
+	/// <param name="brushes">The dictionary from <see cref="CreateBrushes"/>. Must be the same instance across rebuilds.</param>
 	/// <param name="colorLayers">
 	/// The color dictionaries in <b>increasing</b> precedence order (library palette, theme base,
 	/// seed palette, consumer override). Later entries win.

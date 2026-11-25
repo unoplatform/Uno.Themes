@@ -45,11 +45,24 @@ public abstract partial class BaseTheme : ResourceDictionary
 	private bool _isFontOverrideMuted;
 	private ResourceDictionary _baseColorOverride;
 
-	// SharedColors.xaml, created on the first UpdateSource and kept for the theme's lifetime so
+	// The semantic brushes, created on the first UpdateSource and kept for the theme's lifetime so
 	// consumers keep resolving to the same SolidColorBrush instances across rebuilds; only their
 	// Color is rewritten. _previousColorsLayer is the parent it is currently nested under.
 	private ResourceDictionary _semanticBrushes;
 	private ResourceDictionary _previousColorsLayer;
+
+	// The generated token layers and the input each was generated from. A layer is a pure function
+	// of its input, so a pass that did not change it (a seed-color drag, most often) merges the
+	// same instance again instead of regenerating ~130 KB of identical tokens (#1786).
+	private ResourceDictionary _spacingLayer;
+	private double _spacingLayerBase;
+	private ResourceDictionary _shapeLayer;
+	private ResourceDictionary _cappedRadiiLayer;
+	private double _shapeLayerBase;
+	private ResourceDictionary _densityLayer;
+	private ResourceDictionary _typefaceLayer;
+	private ResourceDictionary _typefaceAliasLayer;
+	private FontFamily _typefaceLayerFamily;
 
 	// Tracks the dictionaries this theme appends to its own MergedDictionaries during
 	// UpdateSource() so a subsequent rebuild (theme-property change or hot reload) removes
@@ -521,7 +534,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 
 		// Set once: populates this dictionary with the concrete theme's static base layer
 		// (control styles) from the URI it provides. UpdateSource() appends the dynamic
-		// layers (colors/typography/spacing/…) on top and rebuilds them on every pass.
+		// layers (colors/typography/spacing/…) on top and re-merges them on every pass.
 		Source = new Uri(DefaultStylesSource);
 
 		// Merged from code so it carries the SemanticResources type (the XAML generator emits a plain
@@ -587,16 +600,38 @@ public abstract partial class BaseTheme : ResourceDictionary
 			Density.Comfy => 1.25,
 			_ => 1.0, // Regular, and graceful fallback for undefined enum values
 		};
-		var spacing = GenerateSpacingScale(baseSpacing * densityFactor);
+		var spacingBase = baseSpacing * densityFactor;
+		if (_spacingLayer is null || _spacingLayerBase != spacingBase)
+		{
+			_spacingLayer = GenerateSpacingScale(spacingBase);
+			_spacingLayerBase = spacingBase;
+		}
+		var spacing = _spacingLayer;
+
 		var baseRadius = SanitizeCornerRadius(DefaultCornerRadius);
-		var shape = GenerateShapeScale(baseRadius);
-		var cappedRadii = GenerateCappedRadii(baseRadius);
-		var density = GenerateDensityDefaults();
+		if (_shapeLayer is null || _shapeLayerBase != baseRadius)
+		{
+			_shapeLayer = GenerateShapeScale(baseRadius);
+			_cappedRadiiLayer = GenerateCappedRadii(baseRadius);
+			_shapeLayerBase = baseRadius;
+		}
+		var shape = _shapeLayer;
+		var cappedRadii = _cappedRadiiLayer;
+
+		// Fixed values: generated once.
+		var density = _densityLayer ??= GenerateDensityDefaults();
 
 		// Null when no font family is set, which is the common case: the concrete theme's own
 		// Fonts.xaml then stands with no layer over it.
-		var typefaces = GenerateFontFamilyScale(DefaultFontFamily);
-		var typefaceAliases = GenerateFontFamilyAliases(DefaultFontFamily);
+		var fontFamily = DefaultFontFamily;
+		if (!ReferenceEquals(_typefaceLayerFamily, fontFamily))
+		{
+			_typefaceLayer = GenerateFontFamilyScale(fontFamily);
+			_typefaceAliasLayer = GenerateFontFamilyAliases(fontFamily);
+			_typefaceLayerFamily = fontFamily;
+		}
+		var typefaces = _typefaceLayer;
+		var typefaceAliases = _typefaceAliasLayer;
 
 		// Re-resolved from its Source when a hot reload invalidates it: the in-memory entries of the
 		// instance built when the Source was first assigned are a load-time snapshot, so a hot-reload
@@ -834,11 +869,12 @@ public abstract partial class BaseTheme : ResourceDictionary
 
 		// The brush dictionary is created once and reused for the lifetime of the theme; the
 		// colours resolved above are written into its existing SolidColorBrush instances.
-		// Rebuilding it would neither pick up the seed (its {StaticResource *Color} bindings
-		// resolve eagerly at parse time, against the ambient scope) nor reach anything already
-		// rendered (consumers bind {ThemeResource *Brush}, which re-evaluates only on a theme
-		// change). See SemanticBrushUpdater.
-		_semanticBrushes ??= new SemanticResources { Source = new Uri(ThemesConstants.SharedColorsResourcePath) };
+		// Rebuilding it would not reach anything already rendered (consumers bind
+		// {ThemeResource *Brush}, which re-evaluates only on a theme change). It is built in code
+		// rather than loaded from SharedColors.xaml: every value that file declares is overwritten
+		// just below, and materialising its entries costs about a third more time and memory per
+		// theme (#1786). See SemanticBrushUpdater.
+		_semanticBrushes ??= SemanticBrushUpdater.CreateBrushes();
 		SemanticBrushUpdater.Apply(_semanticBrushes, colorLayers);
 
 		return colors;
