@@ -29,28 +29,28 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 ### Themed
 
-| Key                                               | Type              | Light                     |
-| ------------------------------------------------- | ----------------- | ------------------------- |
-| `RadioButtonForeground`                           | `SolidColorBrush` | `OnSurfaceBrush`          |
-| `RadioButtonForegroundDisabled`                   | `SolidColorBrush` | `OnSurfaceDisabledBrush`  |
-| `RadioButtonForegroundPointerOver`                | `SolidColorBrush` | `OnSurfaceBrush`          |
-| `RadioButtonForegroundPressed`                    | `SolidColorBrush` | `OnSurfaceBrush`          |
-| `RadioButtonOuterEllipseCheckedFill`              | `SolidColorBrush` | `PrimaryBrush`            |
-| `RadioButtonOuterEllipseCheckedFillDisabled`      | `SolidColorBrush` | `OnSurfaceDisabledBrush`  |
-| `RadioButtonOuterEllipseCheckedFillPointerOver`   | `SolidColorBrush` | `PrimaryBrush`            |
-| `RadioButtonOuterEllipseCheckedFillPressed`       | `SolidColorBrush` | `PrimaryVariantDarkBrush` |
-| `RadioButtonOuterEllipseCheckedStroke`            | `SolidColorBrush` | `PrimaryBrush`            |
-| `RadioButtonOuterEllipseCheckedStrokeDisabled`    | `SolidColorBrush` | `OutlineDisabledBrush`    |
-| `RadioButtonOuterEllipseCheckedStrokePointerOver` | `SolidColorBrush` | `PrimaryBrush`            |
-| `RadioButtonOuterEllipseCheckedStrokePressed`     | `SolidColorBrush` | `PrimaryVariantDarkBrush` |
-| `RadioButtonOuterEllipseFill`                     | `SolidColorBrush` | `SurfaceBrush`            |
-| `RadioButtonOuterEllipseFillDisabled`             | `SolidColorBrush` | `OnSurfaceDisabledBrush`  |
-| `RadioButtonOuterEllipseFillPointerOver`          | `SolidColorBrush` | `SurfaceBrush`            |
-| `RadioButtonOuterEllipseFillPressed`              | `SolidColorBrush` | `PrimaryContainerBrush`   |
-| `RadioButtonOuterEllipseStroke`                   | `SolidColorBrush` | `OutlineBrush`            |
-| `RadioButtonOuterEllipseStrokeDisabled`           | `SolidColorBrush` | `OutlineDisabledBrush`    |
-| `RadioButtonOuterEllipseStrokePointerOver`        | `SolidColorBrush` | `OutlineBrush`            |
-| `RadioButtonOuterEllipseStrokePressed`            | `SolidColorBrush` | `OutlineBrush`            |
+| Key                                               | Type              | Light                    |
+| ------------------------------------------------- | ----------------- | ------------------------ |
+| `RadioButtonForeground`                           | `SolidColorBrush` | `OnSurfaceBrush`         |
+| `RadioButtonForegroundDisabled`                   | `SolidColorBrush` | `OnSurfaceDisabledBrush` |
+| `RadioButtonForegroundPointerOver`                | `SolidColorBrush` | `OnSurfaceBrush`         |
+| `RadioButtonForegroundPressed`                    | `SolidColorBrush` | `OnSurfaceBrush`         |
+| `RadioButtonOuterEllipseCheckedFill`              | `SolidColorBrush` | `PrimaryBrush`           |
+| `RadioButtonOuterEllipseCheckedFillDisabled`      | `SolidColorBrush` | `OnSurfaceDisabledBrush` |
+| `RadioButtonOuterEllipseCheckedFillPointerOver`   | `SolidColorBrush` | `PrimaryBrush`           |
+| `RadioButtonOuterEllipseCheckedFillPressed`       | `SolidColorBrush` | `PrimaryBrush`           |
+| `RadioButtonOuterEllipseCheckedStroke`            | `SolidColorBrush` | `PrimaryBrush`           |
+| `RadioButtonOuterEllipseCheckedStrokeDisabled`    | `SolidColorBrush` | `OutlineDisabledBrush`   |
+| `RadioButtonOuterEllipseCheckedStrokePointerOver` | `SolidColorBrush` | `PrimaryBrush`           |
+| `RadioButtonOuterEllipseCheckedStrokePressed`     | `SolidColorBrush` | `PrimaryBrush`           |
+| `RadioButtonOuterEllipseFill`                     | `SolidColorBrush` | `SurfaceBrush`           |
+| `RadioButtonOuterEllipseFillDisabled`             | `SolidColorBrush` | `OnSurfaceDisabledBrush` |
+| `RadioButtonOuterEllipseFillPointerOver`          | `SolidColorBrush` | `SurfaceBrush`           |
+| `RadioButtonOuterEllipseFillPressed`              | `SolidColorBrush` | `SurfaceBrush`           |
+| `RadioButtonOuterEllipseStroke`                   | `SolidColorBrush` | `OutlineBrush`           |
+| `RadioButtonOuterEllipseStrokeDisabled`           | `SolidColorBrush` | `OutlineDisabledBrush`   |
+| `RadioButtonOuterEllipseStrokePointerOver`        | `SolidColorBrush` | `OutlineBrush`           |
+| `RadioButtonOuterEllipseStrokePressed`            | `SolidColorBrush` | `OutlineBrush`           |
 
 The Dark theme uses the same values as Light.
 

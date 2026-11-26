@@ -157,8 +157,9 @@ public class Given_SemanticResources
 		(string State, string Background, string Foreground)[] states =
 		{
 			("", "PrimaryBrush", "OnPrimaryBrush"),
-			("PointerOver", "PrimaryVariantDarkBrush", "OnPrimaryBrush"),
-			("Pressed", "PrimaryVariantDarkBrush", "OnPrimaryBrush"),
+			// Interactive states keep the resting fill; the tint lives on the state layer (#1784).
+			("PointerOver", "PrimaryBrush", "OnPrimaryBrush"),
+			("Pressed", "PrimaryBrush", "OnPrimaryBrush"),
 			("Disabled", "OnSurfaceDisabledBrush", "OnSurfaceDisabledBrush"),
 		};
 

@@ -66,6 +66,8 @@
 									<VisualState.Setters>
 										<Setter Target="OuterBorder.Opacity" Value="1" />
 										<Setter Target="SwitchKnobBounds.Opacity" Value="0" />
+										<Setter Target="OuterBorderStateLayer.Opacity" Value="1" />
+										<Setter Target="SwitchKnobBoundsStateLayer.Opacity" Value="0" />
 										<Setter Target="KnobOff.Opacity" Value="1" />
 										<Setter Target="KnobOn.Opacity" Value="0" />
 									</VisualState.Setters>
@@ -75,6 +77,8 @@
 									<VisualState.Setters>
 										<Setter Target="OuterBorder.Opacity" Value="0" />
 										<Setter Target="SwitchKnobBounds.Opacity" Value="1" />
+										<Setter Target="OuterBorderStateLayer.Opacity" Value="0" />
+										<Setter Target="SwitchKnobBoundsStateLayer.Opacity" Value="1" />
 										<Setter Target="KnobOff.Opacity" Value="0" />
 										<Setter Target="KnobOn.Opacity" Value="1" />
 									</VisualState.Setters>
@@ -93,6 +97,8 @@
 									<VisualState.Setters>
 										<Setter Target="OuterBorder.Fill" Value="{ThemeResource ToggleSwitchOuterBorderFillPressed}" />
 										<Setter Target="SwitchKnobBounds.Fill" Value="{ThemeResource ToggleSwitchKnobBoundsFillPressed}" />
+										<Setter Target="OuterBorderStateLayer.Fill" Value="{ThemeResource ToggleSwitchOuterBorderStateLayerFillPressed}" />
+										<Setter Target="SwitchKnobBoundsStateLayer.Fill" Value="{ThemeResource ToggleSwitchKnobBoundsStateLayerFillPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -159,6 +165,28 @@
 									   RadiusY="{ThemeResource SimpleToggleSwitchTrackRadius}"
 									   Fill="{ThemeResource ToggleSwitchKnobBoundsFill}"
 									   HorizontalAlignment="Center"
+									   Opacity="0" />
+
+							<!--
+								Tint each track in interactive states, in the colour of what sits on it, so a state stays a
+								shade of the resting role. Each layer follows its track's opacity (ToggleStates); CommonStates
+								only sets the fills.
+							-->
+							<Rectangle x:Name="OuterBorderStateLayer"
+									   Width="{StaticResource SimpleToggleSwitchTrackWidth}"
+									   Height="{StaticResource SimpleToggleSwitchTrackHeight}"
+									   RadiusX="{ThemeResource SimpleToggleSwitchTrackRadius}"
+									   RadiusY="{ThemeResource SimpleToggleSwitchTrackRadius}"
+									   HorizontalAlignment="Center"
+									   Fill="Transparent" />
+
+							<Rectangle x:Name="SwitchKnobBoundsStateLayer"
+									   Width="{StaticResource SimpleToggleSwitchTrackWidth}"
+									   Height="{StaticResource SimpleToggleSwitchTrackHeight}"
+									   RadiusX="{ThemeResource SimpleToggleSwitchTrackRadius}"
+									   RadiusY="{ThemeResource SimpleToggleSwitchTrackRadius}"
+									   HorizontalAlignment="Center"
+									   Fill="Transparent"
 									   Opacity="0" />
 
 							<Grid x:Name="SwitchKnob"

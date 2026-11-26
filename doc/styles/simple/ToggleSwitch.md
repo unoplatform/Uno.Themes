@@ -32,21 +32,23 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 ### Themed
 
-| Key                                     | Type              | Light                     |
-| --------------------------------------- | ----------------- | ------------------------- |
-| `ToggleSwitchContentForeground`         | `SolidColorBrush` | `OnSurfaceBrush`          |
-| `ToggleSwitchContentForegroundDisabled` | `SolidColorBrush` | `OnSurfaceDisabledBrush`  |
-| `ToggleSwitchKnobBoundsFill`            | `SolidColorBrush` | `PrimaryBrush`            |
-| `ToggleSwitchKnobBoundsFillDisabled`    | `SolidColorBrush` | `OnSurfaceDisabledBrush`  |
-| `ToggleSwitchKnobBoundsFillPressed`     | `SolidColorBrush` | `PrimaryVariantDarkBrush` |
-| `ToggleSwitchKnobFillDisabled`          | `SolidColorBrush` | `OnSurfaceDisabledBrush`  |
-| `ToggleSwitchKnobOffFill`               | `SolidColorBrush` | `OnSurfaceMediumBrush`    |
-| `ToggleSwitchKnobOnFill`                | `SolidColorBrush` | `OnPrimaryBrush`          |
-| `ToggleSwitchOuterBorderFill`           | `SolidColorBrush` | `SurfaceVariantBrush`     |
-| `ToggleSwitchOuterBorderFillDisabled`   | `SolidColorBrush` | `OnSurfaceDisabledBrush`  |
-| `ToggleSwitchOuterBorderFillPressed`    | `SolidColorBrush` | `TertiaryContainerBrush`  |
-| `ToggleSwitchOuterBorderStroke`         | `SolidColorBrush` | `OutlineBrush`            |
-| `ToggleSwitchOuterBorderStrokeDisabled` | `SolidColorBrush` | `OutlineDisabledBrush`    |
+| Key                                            | Type              | Light                    |
+| ---------------------------------------------- | ----------------- | ------------------------ |
+| `ToggleSwitchContentForeground`                | `SolidColorBrush` | `OnSurfaceBrush`         |
+| `ToggleSwitchContentForegroundDisabled`        | `SolidColorBrush` | `OnSurfaceDisabledBrush` |
+| `ToggleSwitchKnobBoundsFill`                   | `SolidColorBrush` | `PrimaryBrush`           |
+| `ToggleSwitchKnobBoundsFillDisabled`           | `SolidColorBrush` | `OnSurfaceDisabledBrush` |
+| `ToggleSwitchKnobBoundsFillPressed`            | `SolidColorBrush` | `PrimaryBrush`           |
+| `ToggleSwitchKnobBoundsStateLayerFillPressed`  | `SolidColorBrush` | `OnPrimaryPressedBrush`  |
+| `ToggleSwitchKnobFillDisabled`                 | `SolidColorBrush` | `OnSurfaceDisabledBrush` |
+| `ToggleSwitchKnobOffFill`                      | `SolidColorBrush` | `OnSurfaceMediumBrush`   |
+| `ToggleSwitchKnobOnFill`                       | `SolidColorBrush` | `OnPrimaryBrush`         |
+| `ToggleSwitchOuterBorderFill`                  | `SolidColorBrush` | `SurfaceVariantBrush`    |
+| `ToggleSwitchOuterBorderFillDisabled`          | `SolidColorBrush` | `OnSurfaceDisabledBrush` |
+| `ToggleSwitchOuterBorderFillPressed`           | `SolidColorBrush` | `SurfaceVariantBrush`    |
+| `ToggleSwitchOuterBorderStateLayerFillPressed` | `SolidColorBrush` | `OnSurfacePressedBrush`  |
+| `ToggleSwitchOuterBorderStroke`                | `SolidColorBrush` | `OutlineBrush`           |
+| `ToggleSwitchOuterBorderStrokeDisabled`        | `SolidColorBrush` | `OutlineDisabledBrush`   |
 
 The Dark theme uses the same values as Light.
 

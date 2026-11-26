@@ -93,7 +93,6 @@
 						  BorderBrush="{TemplateBinding BorderBrush}"
 						  BorderThickness="{TemplateBinding BorderThickness}"
 						  CornerRadius="{TemplateBinding CornerRadius}"
-						  Padding="{TemplateBinding Padding}"
 						  AutomationProperties.AccessibilityView="Raw">
 
 						<VisualStateManager.VisualStateGroups>
@@ -102,6 +101,7 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="Root.Background" Value="{ThemeResource FilledButtonBackgroundPointerOver}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource FilledButtonStateLayerBackgroundPointerOver}" />
 										<Setter Target="Root.BorderBrush" Value="{ThemeResource FilledButtonBorderBrushPointerOver}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledButtonForegroundPointerOver}" />
 										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource FilledButtonForegroundPointerOver}" />
@@ -111,6 +111,7 @@
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="Root.Background" Value="{ThemeResource FilledButtonBackgroundPressed}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource FilledButtonStateLayerBackgroundPressed}" />
 										<Setter Target="Root.BorderBrush" Value="{ThemeResource FilledButtonBorderBrushPressed}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledButtonForegroundPressed}" />
 										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource FilledButtonForegroundPressed}" />
@@ -129,7 +130,13 @@
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
+						<!-- Tints the fill in PointerOver / Pressed, so the state stays a shade of the resting role -->
+						<Border x:Name="StateLayer"
+								Background="Transparent"
+								CornerRadius="{TemplateBinding CornerRadius}" />
+
 						<StackPanel Orientation="Horizontal"
+									Margin="{TemplateBinding Padding}"
 									HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 									VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 									Spacing="{ThemeResource SimpleButtonIconSpacing}">
@@ -177,7 +184,6 @@
 						  BorderBrush="{TemplateBinding BorderBrush}"
 						  BorderThickness="{TemplateBinding BorderThickness}"
 						  CornerRadius="{TemplateBinding CornerRadius}"
-						  Padding="{TemplateBinding Padding}"
 						  AutomationProperties.AccessibilityView="Raw">
 
 						<VisualStateManager.VisualStateGroups>
@@ -186,6 +192,7 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="Root.Background" Value="{ThemeResource FilledTonalButtonBackgroundPointerOver}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource FilledTonalButtonStateLayerBackgroundPointerOver}" />
 										<Setter Target="Root.BorderBrush" Value="{ThemeResource FilledTonalButtonBorderBrushPointerOver}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledTonalButtonForegroundPointerOver}" />
 										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource FilledTonalButtonForegroundPointerOver}" />
@@ -195,6 +202,7 @@
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="Root.Background" Value="{ThemeResource FilledTonalButtonBackgroundPressed}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource FilledTonalButtonStateLayerBackgroundPressed}" />
 										<Setter Target="Root.BorderBrush" Value="{ThemeResource FilledTonalButtonBorderBrushPressed}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledTonalButtonForegroundPressed}" />
 										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource FilledTonalButtonForegroundPressed}" />
@@ -213,7 +221,13 @@
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
+						<!-- Tints the fill in PointerOver / Pressed, so the state stays a shade of the resting role -->
+						<Border x:Name="StateLayer"
+								Background="Transparent"
+								CornerRadius="{TemplateBinding CornerRadius}" />
+
 						<StackPanel Orientation="Horizontal"
+									Margin="{TemplateBinding Padding}"
 									HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 									VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 									Spacing="{ThemeResource SimpleButtonIconSpacing}">
@@ -548,47 +562,56 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
-					<ContentPresenter x:Name="ContentPresenter"
-									  Background="{TemplateBinding Background}"
-									  BorderBrush="{TemplateBinding BorderBrush}"
-									  BorderThickness="{TemplateBinding BorderThickness}"
-									  CornerRadius="{TemplateBinding CornerRadius}"
-									  Content="{TemplateBinding Content}"
-									  ContentTemplate="{TemplateBinding ContentTemplate}"
-									  ContentTransitions="{TemplateBinding ContentTransitions}"
-									  Foreground="{TemplateBinding Foreground}"
-									  Padding="{TemplateBinding Padding}"
-									  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-									  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-									  AutomationProperties.AccessibilityView="Raw">
+					<Grid x:Name="Root"
+						  Background="{TemplateBinding Background}"
+						  BorderBrush="{TemplateBinding BorderBrush}"
+						  BorderThickness="{TemplateBinding BorderThickness}"
+						  CornerRadius="{TemplateBinding CornerRadius}"
+						  AutomationProperties.AccessibilityView="Raw">
 
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Background" Value="{ThemeResource IconButtonBackgroundPointerOver}" />
-										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource IconButtonBorderBrushPointerOver}" />
+										<Setter Target="Root.Background" Value="{ThemeResource IconButtonBackgroundPointerOver}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource IconButtonStateLayerBackgroundPointerOver}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource IconButtonBorderBrushPointerOver}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource IconButtonForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Background" Value="{ThemeResource IconButtonBackgroundPressed}" />
-										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource IconButtonBorderBrushPressed}" />
+										<Setter Target="Root.Background" Value="{ThemeResource IconButtonBackgroundPressed}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource IconButtonStateLayerBackgroundPressed}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource IconButtonBorderBrushPressed}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource IconButtonForegroundPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Background" Value="{ThemeResource IconButtonBackgroundDisabled}" />
-										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource IconButtonBorderBrushDisabled}" />
+										<Setter Target="Root.Background" Value="{ThemeResource IconButtonBackgroundDisabled}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource IconButtonBorderBrushDisabled}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource IconButtonForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
-					</ContentPresenter>
+
+						<!-- Tints the fill in PointerOver / Pressed, so the state stays a shade of the resting role -->
+						<Border x:Name="StateLayer"
+								Background="Transparent"
+								CornerRadius="{TemplateBinding CornerRadius}" />
+
+						<ContentPresenter x:Name="ContentPresenter"
+										  Content="{TemplateBinding Content}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  ContentTransitions="{TemplateBinding ContentTransitions}"
+										  Foreground="{TemplateBinding Foreground}"
+										  Padding="{TemplateBinding Padding}"
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
@@ -606,47 +629,56 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
-					<ContentPresenter x:Name="ContentPresenter"
-									  Background="{TemplateBinding Background}"
-									  BorderBrush="{TemplateBinding BorderBrush}"
-									  BorderThickness="{TemplateBinding BorderThickness}"
-									  CornerRadius="{TemplateBinding CornerRadius}"
-									  Content="{TemplateBinding Content}"
-									  ContentTemplate="{TemplateBinding ContentTemplate}"
-									  ContentTransitions="{TemplateBinding ContentTransitions}"
-									  Foreground="{TemplateBinding Foreground}"
-									  Padding="{TemplateBinding Padding}"
-									  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-									  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-									  AutomationProperties.AccessibilityView="Raw">
+					<Grid x:Name="Root"
+						  Background="{TemplateBinding Background}"
+						  BorderBrush="{TemplateBinding BorderBrush}"
+						  BorderThickness="{TemplateBinding BorderThickness}"
+						  CornerRadius="{TemplateBinding CornerRadius}"
+						  AutomationProperties.AccessibilityView="Raw">
 
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Background" Value="{ThemeResource FilledTonalButtonBackgroundPointerOver}" />
-										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource FilledTonalButtonBorderBrushPointerOver}" />
+										<Setter Target="Root.Background" Value="{ThemeResource FilledTonalButtonBackgroundPointerOver}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource FilledTonalButtonStateLayerBackgroundPointerOver}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource FilledTonalButtonBorderBrushPointerOver}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledTonalButtonForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Background" Value="{ThemeResource FilledTonalButtonBackgroundPressed}" />
-										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource FilledTonalButtonBorderBrushPressed}" />
+										<Setter Target="Root.Background" Value="{ThemeResource FilledTonalButtonBackgroundPressed}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource FilledTonalButtonStateLayerBackgroundPressed}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource FilledTonalButtonBorderBrushPressed}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledTonalButtonForegroundPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Background" Value="{ThemeResource FilledTonalButtonBackgroundDisabled}" />
-										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource FilledTonalButtonBorderBrushDisabled}" />
+										<Setter Target="Root.Background" Value="{ThemeResource FilledTonalButtonBackgroundDisabled}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource FilledTonalButtonBorderBrushDisabled}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledTonalButtonForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
-					</ContentPresenter>
+
+						<!-- Tints the fill in PointerOver / Pressed, so the state stays a shade of the resting role -->
+						<Border x:Name="StateLayer"
+								Background="Transparent"
+								CornerRadius="{TemplateBinding CornerRadius}" />
+
+						<ContentPresenter x:Name="ContentPresenter"
+										  Content="{TemplateBinding Content}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  ContentTransitions="{TemplateBinding ContentTransitions}"
+										  Foreground="{TemplateBinding Foreground}"
+										  Padding="{TemplateBinding Padding}"
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>

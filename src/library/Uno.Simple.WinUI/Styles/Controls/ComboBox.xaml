@@ -223,7 +223,6 @@
 				<ControlTemplate TargetType="ComboBoxItem">
 					<Grid x:Name="LayoutRoot"
 						  Background="{TemplateBinding Background}"
-						  Padding="{TemplateBinding Padding}"
 						  MinHeight="{TemplateBinding MinHeight}"
 						  CornerRadius="{ThemeResource SimpleShapeItemCornerRadius}">
 						<VisualStateManager.VisualStateGroups>
@@ -233,6 +232,7 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="LayoutRoot.Background" Value="{ThemeResource ComboBoxItemBackgroundPointerOver}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource ComboBoxItemStateLayerBackgroundPointerOver}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxItemForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
@@ -240,6 +240,7 @@
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="LayoutRoot.Background" Value="{ThemeResource ComboBoxItemBackgroundPressed}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource ComboBoxItemStateLayerBackgroundPressed}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxItemForegroundPressed}" />
 									</VisualState.Setters>
 								</VisualState>
@@ -254,6 +255,7 @@
 								<VisualState x:Name="SelectedPointerOver">
 									<VisualState.Setters>
 										<Setter Target="LayoutRoot.Background" Value="{ThemeResource ComboBoxItemBackgroundSelectedPointerOver}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource ComboBoxItemStateLayerBackgroundSelectedPointerOver}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxItemForegroundSelectedPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
@@ -261,6 +263,7 @@
 								<VisualState x:Name="SelectedPressed">
 									<VisualState.Setters>
 										<Setter Target="LayoutRoot.Background" Value="{ThemeResource ComboBoxItemBackgroundSelectedPressed}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource ComboBoxItemStateLayerBackgroundSelectedPressed}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxItemForegroundSelectedPressed}" />
 									</VisualState.Setters>
 								</VisualState>
@@ -274,7 +277,13 @@
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
+						<!-- Tints the fill in interactive states, so a state stays a shade of the resting role -->
+						<Border x:Name="StateLayer"
+								Background="Transparent"
+								CornerRadius="{ThemeResource SimpleShapeItemCornerRadius}" />
+
 						<ContentPresenter x:Name="ContentPresenter"
+										  Margin="{TemplateBinding Padding}"
 										  Content="{TemplateBinding Content}"
 										  ContentTemplate="{TemplateBinding ContentTemplate}"
 										  ContentTransitions="{TemplateBinding ContentTransitions}"

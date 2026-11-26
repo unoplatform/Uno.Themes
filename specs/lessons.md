@@ -4,6 +4,24 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## A visual-state setter's `{ThemeResource}` resolves from the app theme on Uno, not from a scoped theme
+
+**Context:** #1784 runtime tests (2026-11-23). A seeded `SimpleTheme` merged into the test container
+painted the control's resting fill from the seed (a style setter), but every `VisualState` setter came
+back with the stock grey palette of the app's own `SimpleTheme`.
+
+**How to apply:**
+- To assert what a control paints in a visual state, seed the **application** theme
+  (`SemanticThemeHelper.GetTheme()`, restore `Colors` in `finally`), as `Given_InteractiveStateColors`
+  does. A scoped theme only proves the resting state.
+- Read the active colours from the template's named elements after `VisualStateManager.GoToState`,
+  not from the resource keys, so a key that resolves correctly but is never used still fails.
+- `PrimaryVariantDark` is a dark role in dark mode (shared palette, Material v1, seed generator). Simple's
+  stock grey palette is the outlier. Never use it, or another role's container, as a state colour of a
+  `Primary` / `SurfaceVariant` fill; tint the fill with a state layer instead.
+
+---
+
 ## `!HAS_UNO` code paths ran nowhere until the WinAppSDK head — `SimpleTheme` crashed every WinUI app at startup
 
 **Context:** adding the WinAppSDK head to `SimpleSampleApp` (2026-09-29). The app failed fast
