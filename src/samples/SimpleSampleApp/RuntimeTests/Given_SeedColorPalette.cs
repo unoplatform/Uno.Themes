@@ -595,7 +595,7 @@ public class Given_SeedColorPalette
 	[RunsOnUIThread]
 	public void When_SeedIsSet_Then_EverySemanticRoleBrushFollowsItsColor()
 	{
-		// ThemesConstants.SemanticColorKeys is a hand-maintained mirror of the roles declared in
+		// Uno.Themes.SemanticColorKeys.All is a hand-maintained mirror of the roles declared in
 		// SharedColorPalette.xaml / SharedColors.xaml, and a role missing from it fails silently — the
 		// brush just keeps its parse-time color. Sweep every role so drift fails the build instead.
 		var container = CreateThemedContainer(out var theme);
@@ -612,7 +612,7 @@ public class Given_SeedColorPalette
 
 			Assert.AreEqual((Color)colorValue, ((SolidColorBrush)brushValue).Color,
 				$"{brushKey} does not match {colorKey} — the role is likely missing from " +
-				"ThemesConstants.SemanticColorKeys, so the brush kept its parse-time color.");
+				"Uno.Themes.SemanticColorKeys.All, so the brush kept its parse-time color.");
 		}
 	}
 
@@ -928,7 +928,7 @@ public class Given_SeedColorPalette
 
 	/// <summary>
 	/// The semantic color roles declared in <c>SharedColorPalette.xaml</c>, listed here independently
-	/// of <c>ThemesConstants.SemanticColorKeys</c> so this acts as an oracle for that list rather than
+	/// of <c>Uno.Themes.SemanticColorKeys.All</c> so this acts as an oracle for that list rather than
 	/// a copy of it. Add a role here when one is added to the XAML.
 	/// </summary>
 	private static readonly string[] SemanticColorKeys =

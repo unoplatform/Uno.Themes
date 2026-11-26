@@ -64,6 +64,18 @@ internal static class ThemesConstants
 	public static readonly string[] ThemeDictionaryKeys = { "Light", "Default" };
 
 	/// <summary>
+	/// The theme dictionary keys a light-theme color is read from, in probing order: a consumer writes
+	/// <c>Light</c>; <c>Default</c> is the framework's fallback for any theme.
+	/// </summary>
+	public static readonly string[] LightColorThemes = { "Light", "Default" };
+
+	/// <summary>
+	/// The theme dictionary keys a dark-theme color is read from, in probing order: a consumer writes
+	/// <c>Dark</c>, the libraries write <c>Default</c>.
+	/// </summary>
+	public static readonly string[] DarkColorThemes = { "Dark", "Default" };
+
+	/// <summary>
 	/// Every theme dictionary of the semantic brush dictionary — the one
 	/// <c>SemanticBrushUpdater.CreateBrushes</c> builds, mirroring <c>SharedColors.xaml</c> — paired
 	/// with the color theme keys its brushes are resolved from, in decreasing precedence.
@@ -86,33 +98,15 @@ internal static class ThemesConstants
 	/// </remarks>
 	public static readonly (string BrushTheme, string[] ColorThemes)[] BrushThemeSources =
 	{
-		("Light", new[] { "Light", "Default" }),
-		("Default", new[] { "Dark", "Default" }),
+		("Light", LightColorThemes),
+		("Default", DarkColorThemes),
 		("HighContrast", new[] { "HighContrast", "Dark", "Default" }),
 	};
 
 	/// <summary>
-	/// Every semantic color role declared in <c>SharedColorPalette.xaml</c> and consumed by the
-	/// semantic brushes. Order is irrelevant; completeness is not — a role missing here gets no
-	/// brushes at all, since the theme's brush dictionary is built from this list.
-	/// </summary>
-	public static readonly string[] SemanticColorKeys =
-	{
-		"PrimaryColor", "OnPrimaryColor", "PrimaryContainerColor", "OnPrimaryContainerColor",
-		"PrimaryInverseColor", "PrimaryVariantDarkColor", "PrimaryVariantLightColor",
-		"SecondaryColor", "OnSecondaryColor", "SecondaryContainerColor", "OnSecondaryContainerColor",
-		"SecondaryVariantDarkColor", "SecondaryVariantLightColor",
-		"TertiaryColor", "OnTertiaryColor", "TertiaryContainerColor", "OnTertiaryContainerColor",
-		"ErrorColor", "OnErrorColor", "ErrorContainerColor", "OnErrorContainerColor",
-		"BackgroundColor", "OnBackgroundColor",
-		"SurfaceColor", "OnSurfaceColor", "SurfaceVariantColor", "OnSurfaceVariantColor",
-		"SurfaceInverseColor", "OnSurfaceInverseColor", "SurfaceTintColor",
-		"OutlineColor", "OutlineVariantColor",
-	};
-
-	/// <summary>
-	/// The interaction-state suffixes appended between a color role and <c>Brush</c> — e.g.
-	/// <c>Primary</c> + <c>Hover</c> + <c>Brush</c>. The empty entry is the opaque base brush.
+	/// The interaction-state suffixes appended between a color role (<see cref="SemanticColorKeys"/>)
+	/// and <c>Brush</c> — e.g. <c>Primary</c> + <c>Hover</c> + <c>Brush</c>. The empty entry is the
+	/// opaque base brush.
 	/// </summary>
 	public static readonly string[] BrushStateSuffixes =
 	{
@@ -120,8 +114,14 @@ internal static class ThemesConstants
 	};
 
 	/// <summary>
-	/// The one role in <see cref="SemanticColorKeys"/> with only the base brush: it has none of the
+	/// The one role in <see cref="SemanticColorKeys.All"/> with only the base brush: it has none of the
 	/// <see cref="BrushStateSuffixes"/> variants.
 	/// </summary>
-	public const string StatelessBrushColorKey = "SurfaceTintColor";
+	public const string StatelessBrushColorKey = SemanticColorKeys.SurfaceTint;
+
+	/// <summary>
+	/// The one role in <see cref="SemanticColorKeys.All"/> with no brushes at all: <c>SharedColors.xaml</c>
+	/// declares none for it, so the brush dictionary built in code must not either.
+	/// </summary>
+	public const string BrushlessColorKey = SemanticColorKeys.Shadow;
 }

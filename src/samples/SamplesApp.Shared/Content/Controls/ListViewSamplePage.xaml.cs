@@ -10,7 +10,7 @@ namespace Uno.Themes.Samples.Content.Controls;
     Description = "Represents a control that displays data items in a vertical stack.",
     DocumentationLink = "https://docs.microsoft.com/en-us/windows/winui/api/microsoft.ui.xaml.controls.ListView?view=winui-3.0",
     DataType = typeof(TestCollections),
-    SupportedDesigns = new[] { Design.Material, Design.Simple })]
+    SupportedDesigns = new[] { Design.Material, Design.Simple, Design.Fluent })]
 public sealed partial class ListViewSamplePage : Page
 {
     public ListViewSamplePage()

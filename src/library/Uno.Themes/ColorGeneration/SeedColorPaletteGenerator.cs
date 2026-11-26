@@ -93,8 +93,7 @@ internal sealed class SeedColorPaletteGenerator
 		//  - SeedColorMode.TonalSpot (the pre-8.0 behavior): a minimum chroma of 48
 		//    on Primary and fixed chromas on the supporting palettes, which guarantees vibrant
 		//    output at the cost of distorting the seed.
-		double primaryChroma = preserveSeedColor ? chroma : Math.Max(chroma, 48);
-		var primary = new TonalPalette(hue, primaryChroma);
+		var primary = CreatePrimaryPalette(seedHct, mode);
 
 		TonalPalette secondary;
 		if (secondarySeedColor is { } secSeed)
@@ -140,48 +139,48 @@ internal sealed class SeedColorPaletteGenerator
 		int? pinnedTertiary = preserveSeedColor && tertiarySeedColor is { } pinTer ? ColorToArgb(pinTer) : null;
 
 		// Primary
-		int lightPrimary = SetKeyColor(lightDict, darkDict, "PrimaryColor", "OnPrimaryColor", primary, pinnedPrimary);
-		SetColor(lightDict, darkDict, "PrimaryContainerColor", primary, 90, 30);
-		SetColor(lightDict, darkDict, "OnPrimaryContainerColor", primary, 10, 90);
-		SetColor(lightDict, darkDict, "PrimaryInverseColor", primary, 80, 40);
-		SetColor(lightDict, darkDict, "PrimaryVariantDarkColor", primary, 30, 30);
-		SetColor(lightDict, darkDict, "PrimaryVariantLightColor", primary, 70, 80);
+		int lightPrimary = SetKeyColor(lightDict, darkDict, SemanticColorKeys.Primary, SemanticColorKeys.OnPrimary, primary, pinnedPrimary);
+		SetColor(lightDict, darkDict, SemanticColorKeys.PrimaryContainer, primary, 90, 30);
+		SetColor(lightDict, darkDict, SemanticColorKeys.OnPrimaryContainer, primary, 10, 90);
+		SetColor(lightDict, darkDict, SemanticColorKeys.PrimaryInverse, primary, 80, 40);
+		SetColor(lightDict, darkDict, SemanticColorKeys.PrimaryVariantDark, primary, 30, 30);
+		SetColor(lightDict, darkDict, SemanticColorKeys.PrimaryVariantLight, primary, 70, 80);
 
 		// Secondary
-		SetKeyColor(lightDict, darkDict, "SecondaryColor", "OnSecondaryColor", secondary, pinnedSecondary);
-		SetColor(lightDict, darkDict, "SecondaryContainerColor", secondary, 90, 30);
-		SetColor(lightDict, darkDict, "OnSecondaryContainerColor", secondary, 10, 90);
-		SetColor(lightDict, darkDict, "SecondaryVariantDarkColor", secondary, 30, 30);
-		SetColor(lightDict, darkDict, "SecondaryVariantLightColor", secondary, 70, 80);
+		SetKeyColor(lightDict, darkDict, SemanticColorKeys.Secondary, SemanticColorKeys.OnSecondary, secondary, pinnedSecondary);
+		SetColor(lightDict, darkDict, SemanticColorKeys.SecondaryContainer, secondary, 90, 30);
+		SetColor(lightDict, darkDict, SemanticColorKeys.OnSecondaryContainer, secondary, 10, 90);
+		SetColor(lightDict, darkDict, SemanticColorKeys.SecondaryVariantDark, secondary, 30, 30);
+		SetColor(lightDict, darkDict, SemanticColorKeys.SecondaryVariantLight, secondary, 70, 80);
 
 		// Tertiary
-		SetKeyColor(lightDict, darkDict, "TertiaryColor", "OnTertiaryColor", tertiary, pinnedTertiary);
-		SetColor(lightDict, darkDict, "TertiaryContainerColor", tertiary, 90, 30);
-		SetColor(lightDict, darkDict, "OnTertiaryContainerColor", tertiary, 10, 90);
+		SetKeyColor(lightDict, darkDict, SemanticColorKeys.Tertiary, SemanticColorKeys.OnTertiary, tertiary, pinnedTertiary);
+		SetColor(lightDict, darkDict, SemanticColorKeys.TertiaryContainer, tertiary, 90, 30);
+		SetColor(lightDict, darkDict, SemanticColorKeys.OnTertiaryContainer, tertiary, 10, 90);
 
 		// Background
-		SetColor(lightDict, darkDict, "BackgroundColor", neutral, 99, 10);
-		SetColor(lightDict, darkDict, "OnBackgroundColor", neutral, 10, 90);
+		SetColor(lightDict, darkDict, SemanticColorKeys.Background, neutral, 99, 10);
+		SetColor(lightDict, darkDict, SemanticColorKeys.OnBackground, neutral, 10, 90);
 
 		// Surface
-		SetColor(lightDict, darkDict, "SurfaceColor", neutral, 99, 20);
-		SetColor(lightDict, darkDict, "OnSurfaceColor", neutral, 10, 90);
-		SetColor(lightDict, darkDict, "SurfaceVariantColor", neutralVariant, 90, 30);
-		SetColor(lightDict, darkDict, "OnSurfaceVariantColor", neutralVariant, 30, 80);
-		SetColor(lightDict, darkDict, "SurfaceInverseColor", neutral, 20, 90);
-		SetColor(lightDict, darkDict, "OnSurfaceInverseColor", neutral, 95, 20);
+		SetColor(lightDict, darkDict, SemanticColorKeys.Surface, neutral, 99, 20);
+		SetColor(lightDict, darkDict, SemanticColorKeys.OnSurface, neutral, 10, 90);
+		SetColor(lightDict, darkDict, SemanticColorKeys.SurfaceVariant, neutralVariant, 90, 30);
+		SetColor(lightDict, darkDict, SemanticColorKeys.OnSurfaceVariant, neutralVariant, 30, 80);
+		SetColor(lightDict, darkDict, SemanticColorKeys.SurfaceInverse, neutral, 20, 90);
+		SetColor(lightDict, darkDict, SemanticColorKeys.OnSurfaceInverse, neutral, 95, 20);
 		// SurfaceTint is M3's alias of Primary, so it follows the pinned value.
-		lightDict["SurfaceTintColor"] = ArgbToColor(lightPrimary);
-		darkDict["SurfaceTintColor"] = ArgbToColor(primary.GetArgb(80));
+		lightDict[SemanticColorKeys.SurfaceTint] = ArgbToColor(lightPrimary);
+		darkDict[SemanticColorKeys.SurfaceTint] = ArgbToColor(primary.GetArgb(80));
 
 		// Outline
-		SetColor(lightDict, darkDict, "OutlineColor", neutralVariant, 50, 60);
-		SetColor(lightDict, darkDict, "OutlineVariantColor", neutralVariant, 80, 30);
+		SetColor(lightDict, darkDict, SemanticColorKeys.Outline, neutralVariant, 50, 60);
+		SetColor(lightDict, darkDict, SemanticColorKeys.OutlineVariant, neutralVariant, 80, 30);
 
 		// Shadow (fixed, not derived from seed)
 		var shadowColor = Color.FromArgb(0x33, 0x00, 0x00, 0x00);
-		lightDict["ShadowColor"] = shadowColor;
-		darkDict["ShadowColor"] = shadowColor;
+		lightDict[SemanticColorKeys.Shadow] = shadowColor;
+		darkDict[SemanticColorKeys.Shadow] = shadowColor;
 
 		var result = new ResourceDictionary();
 		result.ThemeDictionaries["Light"] = lightDict;
@@ -244,13 +243,17 @@ internal sealed class SeedColorPaletteGenerator
 		darkDict[key] = ArgbToColor(palette.GetArgb(darkTone));
 	}
 
+	/// <summary>The primary tonal palette of a seed; FluentTheme derives the built-in accent from it too.</summary>
+	internal static TonalPalette CreatePrimaryPalette(HctColor seed, SeedColorMode mode) =>
+		new(seed.Hue, mode == SeedColorMode.TonalSpot ? Math.Max(seed.Chroma, 48) : seed.Chroma);
+
 	private static Color WithOpaqueAlpha(Color color) =>
 		color.A == 0xFF ? color : Color.FromArgb(0xFF, color.R, color.G, color.B);
 
-	private static int ColorToArgb(Color color) =>
+	internal static int ColorToArgb(Color color) =>
 		(color.A << 24) | (color.R << 16) | (color.G << 8) | color.B;
 
-	private static Color ArgbToColor(int argb) =>
+	internal static Color ArgbToColor(int argb) =>
 		Color.FromArgb(
 			(byte)((argb >> 24) & 0xFF),
 			(byte)((argb >> 16) & 0xFF),

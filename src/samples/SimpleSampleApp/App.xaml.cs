@@ -20,6 +20,10 @@ sealed partial class App : Application
 		// secondary ALC by ThemesSampleApp must hand sample pages its own instance for theme lookups.
 		SampleThemeHelper.CurrentApplication = this;
 
+		// Select the real application appearance before XAML resources initialize, so the
+		// headless suite can verify native resource fallback in both Light and Dark.
+		Helpers.RuntimeTestsThemeHelper.ApplyRequestedTheme(this);
+
 		ConfigureXamlDisplay();
 		SamplePageLayout.ActiveDesign = Design.Simple;
 

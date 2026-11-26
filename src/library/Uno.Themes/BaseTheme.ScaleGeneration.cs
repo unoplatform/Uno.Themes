@@ -196,7 +196,7 @@ public abstract partial class BaseTheme
 	/// of 4. A negative radius throws from the <see cref="CornerRadius"/> constructor and a NaN one
 	/// poisons every Radius* token, and this runs from a property-changed callback.
 	/// </summary>
-	private static double SanitizeCornerRadius(double requested)
+	internal static double SanitizeCornerRadius(double requested)
 		=> double.IsFinite(requested) && requested >= 0 ? requested : DefaultBaseCornerRadius;
 
 	/// <summary>

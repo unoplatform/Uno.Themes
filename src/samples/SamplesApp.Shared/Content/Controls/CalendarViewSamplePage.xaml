@@ -96,6 +96,25 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+			<sample:SamplePageLayout.FluentTemplate>
+				<DataTemplate>
+					<StackPanel Spacing="16">
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Basic: single selection" />
+						<smtx:XamlDisplay UniqueKey="Fluent_CalendarView_Basic"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<CalendarView Style="{StaticResource CalendarViewStyle}" />
+						</smtx:XamlDisplay>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Multiple selection" />
+						<smtx:XamlDisplay UniqueKey="Fluent_CalendarView_Multiple"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<CalendarView SelectionMode="Multiple"
+										  Style="{StaticResource CalendarViewStyle}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.FluentTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

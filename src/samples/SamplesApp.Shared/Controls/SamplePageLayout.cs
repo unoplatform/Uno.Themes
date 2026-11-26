@@ -12,6 +12,7 @@ public partial class SamplePageLayout : ContentControl
 	private const string VisualStateMaterial = nameof(Design.Material);
 	private const string VisualStateCupertino = nameof(Design.Cupertino);
 	private const string VisualStateSimple = nameof(Design.Simple);
+	private const string VisualStateFluent = nameof(Design.Fluent);
 
 	private const string MaterialRadioButtonPartName = "PART_MaterialRadioButton";
 	private const string CupertinoRadioButtonPartName = "PART_CupertinoRadioButton";
@@ -39,6 +40,7 @@ public partial class SamplePageLayout : ContentControl
 		new LayoutModeMapping(Design.Material, _materialRadioButton, _stickyMaterialRadioButton, VisualStateMaterial, /* templates: */ MaterialTemplate, M3MaterialTemplate),
 		new LayoutModeMapping(Design.Cupertino, _cupertinoRadioButton, _stickyCupertinoRadioButton, VisualStateCupertino, /* templates: */ CupertinoTemplate),
 		new LayoutModeMapping(Design.Simple, _materialRadioButton, _stickyMaterialRadioButton, VisualStateSimple, /* templates: */ SimpleTemplate),
+		new LayoutModeMapping(Design.Fluent, _materialRadioButton, _stickyMaterialRadioButton, VisualStateFluent, /* templates: */ FluentTemplate),
 	};
 
 	private RadioButton _materialRadioButton;

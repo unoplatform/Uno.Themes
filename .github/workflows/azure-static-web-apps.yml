@@ -16,8 +16,8 @@ on:
       - feature/*
 
 env:
-  # ThemesSampleApp hosts all three theme sample heads in-process (secondary ALCs), so one
-  # staging site covers Material, Cupertino and Simple. Its guests are loaded from a payload
+  # ThemesSampleApp hosts all four theme sample heads in-process (secondary ALCs), so one
+  # staging site covers Material, Cupertino, Simple and Fluent. Its guests are loaded from a payload
   # built from the heads' own WASM output — they must be built before the wrapper is published
   # (the wasm leg carries no ProjectReference; see specs/05-alc-wrapper-app/progress.md).
   SOLUTION_PATH: src/samples/ThemesSampleApp

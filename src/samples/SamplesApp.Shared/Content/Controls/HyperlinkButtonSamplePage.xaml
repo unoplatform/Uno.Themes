@@ -179,6 +179,51 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+			<sample:SamplePageLayout.FluentTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Primary: HyperlinkButtonStyle" />
+						<smtx:XamlDisplay UniqueKey="Fluent_HyperlinkButton_Primary"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<HyperlinkButton Content="Uno Platform"
+											 NavigateUri="https://platform.uno/"
+											 Style="{StaticResource HyperlinkButtonStyle}" />
+						</smtx:XamlDisplay>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Primary, disabled" />
+						<smtx:XamlDisplay UniqueKey="Fluent_HyperlinkButton_PrimaryDisabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<HyperlinkButton Content="Disabled"
+											 IsEnabled="False"
+											 NavigateUri="https://platform.uno/"
+											 Style="{StaticResource HyperlinkButtonStyle}" />
+						</smtx:XamlDisplay>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Secondary: SecondaryHyperlinkButtonStyle" />
+						<smtx:XamlDisplay UniqueKey="Fluent_HyperlinkButton_Secondary"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<HyperlinkButton Content="Uno Platform"
+											 NavigateUri="https://platform.uno/"
+											 Style="{StaticResource SecondaryHyperlinkButtonStyle}" />
+						</smtx:XamlDisplay>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Custom content: an icon and a text" />
+						<smtx:XamlDisplay UniqueKey="Fluent_HyperlinkButton_CustomContent"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<HyperlinkButton NavigateUri="https://platform.uno/"
+											 Style="{StaticResource HyperlinkButtonStyle}">
+								<StackPanel Orientation="Horizontal"
+											Spacing="8">
+									<SymbolIcon Symbol="Globe" />
+									<TextBlock Text="Uno Platform Website"
+											   VerticalAlignment="Center" />
+								</StackPanel>
+							</HyperlinkButton>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.FluentTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

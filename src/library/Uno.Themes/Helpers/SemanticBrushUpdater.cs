@@ -58,7 +58,7 @@ internal static class SemanticBrushUpdater
 
 	private static string[][] BuildBrushKeys()
 	{
-		var colorKeys = ThemesConstants.SemanticColorKeys;
+		var colorKeys = SemanticColorKeys.All;
 		var states = ThemesConstants.BrushStateSuffixes;
 		var keys = new string[colorKeys.Length][];
 
@@ -97,7 +97,7 @@ internal static class SemanticBrushUpdater
 	/// <returns>A <see cref="SemanticResources"/> dictionary; pass it to <see cref="Apply"/> before use.</returns>
 	internal static ResourceDictionary CreateBrushes()
 	{
-		var colorKeys = ThemesConstants.SemanticColorKeys;
+		var colorKeys = SemanticColorKeys.All;
 		var brushes = new SemanticResources();
 
 		foreach (var (brushTheme, _) in ThemesConstants.BrushThemeSources)
@@ -107,6 +107,11 @@ internal static class SemanticBrushUpdater
 
 			for (int i = 0; i < colorKeys.Length; i++)
 			{
+				if (colorKeys[i] == ThemesConstants.BrushlessColorKey)
+				{
+					continue;
+				}
+
 				var roleBrushKeys = _brushKeys[i];
 
 				// States are ordered base-first (BrushStateSuffixes), so a stateless role keeps only its first key.
@@ -134,7 +139,7 @@ internal static class SemanticBrushUpdater
 	/// </param>
 	internal static void Apply(ResourceDictionary brushes, IReadOnlyList<ResourceDictionary> colorLayers)
 	{
-		var colorKeys = ThemesConstants.SemanticColorKeys;
+		var colorKeys = SemanticColorKeys.All;
 		var states = ThemesConstants.BrushStateSuffixes;
 		Span<double> opacities = stackalloc double[states.Length];
 
@@ -200,13 +205,34 @@ internal static class SemanticBrushUpdater
 	/// <em>application</em> theme, which would bleed one theme's value into another's brushes.
 	/// The plain lookup remains for genuinely theme-agnostic entries (the opacity tokens).
 	/// </summary>
-	private static bool TryResolve<T>(
-		IReadOnlyList<ResourceDictionary> colorLayers, string[] themeKeys, string key, out T resolved)
-		where T : struct
+	/// <param name="colorLayers">The dictionaries in <b>increasing</b> precedence order.</param>
+	/// <param name="themeKeys">The theme dictionary keys to probe in each layer, in order.</param>
+	/// <param name="key">The resource key.</param>
+	/// <param name="resolved">The resolved value.</param>
+	/// <param name="declaredOnly">
+	/// <c>true</c> to accept only entries a layer declares itself. Required for a key the platform
+	/// also defines (Fluent's accent tokens): <see cref="ResourceDictionary.TryGetValue"/> answers
+	/// such a key from the system resources of the ambient theme even when the layer lacks it. Slower
+	/// (it enumerates the layer), and it throws where a dictionary cannot be enumerated, so the
+	/// semantic roles, which no platform defines, keep the keyed lookup.
+	/// </param>
+	internal static bool TryResolve<T>(
+		IReadOnlyList<ResourceDictionary> colorLayers, string[] themeKeys, string key, [MaybeNullWhen(false)] out T resolved, bool declaredOnly = false)
 	{
 		for (int i = colorLayers.Count - 1; i >= 0; i--)
 		{
 			var layer = colorLayers[i];
+
+			if (declaredOnly)
+			{
+				if (TryResolveDeclared(layer, themeKeys, key, out var declared) && declared is T declaredResult)
+				{
+					resolved = declaredResult;
+					return true;
+				}
+
+				continue;
+			}
 
 			for (int t = 0; t < themeKeys.Length; t++)
 			{
@@ -251,6 +277,69 @@ internal static class SemanticBrushUpdater
 			}
 		}
 
+		return false;
+	}
+
+	/// <summary>
+	/// The <c>declaredOnly</c> lookup of one dictionary, in the same order as the keyed one: the
+	/// requested theme dictionaries, then the dictionary's own entries unless another of its theme
+	/// dictionaries declares the key, then its merged dictionaries (last merged first, as the
+	/// framework searches them). The keyed lookup gets the merged dictionaries from
+	/// <see cref="ResourceDictionary.TryGetValue"/>; here they are walked by hand, which also reads
+	/// their theme dictionaries for the requested theme.
+	/// </summary>
+	private static bool TryResolveDeclared(ResourceDictionary dictionary, string[] themeKeys, string key, out object? value)
+	{
+		for (int t = 0; t < themeKeys.Length; t++)
+		{
+			if (TryGetThemeDictionary(dictionary, themeKeys[t], out var themed)
+				&& TryResolveDeclared(themed, themeKeys, key, out value))
+			{
+				return true;
+			}
+		}
+
+		for (int t = 0; t < _allThemeKeys.Length; t++)
+		{
+			if (TryGetThemeDictionary(dictionary, _allThemeKeys[t], out var themed)
+				&& TryGetOwnEntry(themed, key, out _))
+			{
+				value = null;
+				return false;
+			}
+		}
+
+		if (TryGetOwnEntry(dictionary, key, out value))
+		{
+			return true;
+		}
+
+		var merged = dictionary.MergedDictionaries;
+		for (int i = merged.Count - 1; i >= 0; i--)
+		{
+			if (TryResolveDeclared(merged[i], themeKeys, key, out value))
+			{
+				return true;
+			}
+		}
+
+		value = null;
+		return false;
+	}
+
+	// Enumerated, not looked up: TryGetValue and ContainsKey both fall back to the system resources.
+	private static bool TryGetOwnEntry(ResourceDictionary dictionary, string key, out object? value)
+	{
+		foreach (var entry in dictionary)
+		{
+			if (entry.Key is string entryKey && entryKey == key)
+			{
+				value = entry.Value;
+				return true;
+			}
+		}
+
+		value = null;
 		return false;
 	}
 

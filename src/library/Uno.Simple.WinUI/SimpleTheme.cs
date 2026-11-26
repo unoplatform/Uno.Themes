@@ -16,7 +16,7 @@ namespace Uno.Simple;
 /// Simple Theme resources including colors, fonts, layout values, and styles.
 /// </summary>
 public class SimpleTheme(ResourceDictionary colorOverride = null, ResourceDictionary fontOverride = null)
-	: BaseTheme(GetSimpleColorOverride(colorOverride), fontOverride)
+	: BaseTheme(LoadSimplePalette(), colorOverride, fontOverride)
 {
 	/// <summary>
 	/// Simple uses a hand-crafted grayscale palette by default (no seed).
@@ -31,18 +31,10 @@ public class SimpleTheme(ResourceDictionary colorOverride = null, ResourceDictio
 	{
 	}
 
-	private static ResourceDictionary GetSimpleColorOverride(ResourceDictionary colorOverride)
-	{
-		// Load the Simple color palette (overrides the default SharedColorPalette values)
-		var simpleColors = new ResourceDictionary { Source = new Uri(SimpleConstants.ResourcePaths.ColorPalette) };
-
-		if (colorOverride is { })
-		{
-			simpleColors.SafeMerge(colorOverride);
-		}
-
-		return simpleColors;
-	}
+	// The Simple color palette (overrides the default SharedColorPalette values). A constructor
+	// override is a separate layer above it, so it also wins over the palette's theme branches.
+	private static ResourceDictionary LoadSimplePalette()
+		=> new() { Source = new Uri(SimpleConstants.ResourcePaths.ColorPalette) };
 
 	protected override string DefaultStylesSource => SimpleConstants.ResourcePaths.MergedPages;
 

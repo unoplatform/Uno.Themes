@@ -183,6 +183,42 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+			<sample:SamplePageLayout.FluentTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Indeterminate" />
+						<smtx:XamlDisplay UniqueKey="Fluent_ProgressRing_Active"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:ProgressRing IsActive="True"
+											   Width="48"
+											   Height="48"
+											   Style="{StaticResource ProgressRingStyle}" />
+						</smtx:XamlDisplay>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Determinate: 65%" />
+						<smtx:XamlDisplay UniqueKey="Fluent_ProgressRing_Determinate"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:ProgressRing IsActive="True"
+											   IsIndeterminate="False"
+											   Value="65"
+											   Width="48"
+											   Height="48"
+											   Style="{StaticResource ProgressRingStyle}" />
+						</smtx:XamlDisplay>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Disabled" />
+						<smtx:XamlDisplay UniqueKey="Fluent_ProgressRing_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:ProgressRing IsActive="True"
+											   IsEnabled="False"
+											   Width="48"
+											   Height="48"
+											   Style="{StaticResource ProgressRingStyle}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.FluentTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

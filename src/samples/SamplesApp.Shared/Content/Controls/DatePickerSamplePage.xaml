@@ -133,6 +133,41 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+			<sample:SamplePageLayout.FluentTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Basic" />
+						<smtx:XamlDisplay UniqueKey="Fluent_DatePicker_Basic"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<DatePicker Style="{StaticResource DatePickerStyle}" />
+						</smtx:XamlDisplay>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="With a header" />
+						<smtx:XamlDisplay UniqueKey="Fluent_DatePicker_Header"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<DatePicker Header="Date of Birth"
+										Style="{StaticResource DatePickerStyle}" />
+						</smtx:XamlDisplay>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Year and month only: DayVisible False" />
+						<smtx:XamlDisplay UniqueKey="Fluent_DatePicker_YearMonth"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<DatePicker Header="Select Month"
+										DayVisible="False"
+										Style="{StaticResource DatePickerStyle}" />
+						</smtx:XamlDisplay>
+						<TextBlock Style="{StaticResource SampleExampleCaptionStyle}"
+								   Text="Disabled" />
+						<smtx:XamlDisplay UniqueKey="Fluent_DatePicker_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<DatePicker Header="Disabled"
+										IsEnabled="False"
+										Style="{StaticResource DatePickerStyle}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.FluentTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>
