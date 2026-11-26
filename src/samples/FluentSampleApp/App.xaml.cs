@@ -19,6 +19,9 @@ sealed partial class App : Application
 		// secondary ALC by ThemesSampleApp must hand sample pages its own instance for theme lookups.
 		SampleThemeHelper.CurrentApplication = this;
 
+		// Before XAML resources initialize: the App.xaml FluentTheme's Dark branch is covered by a Dark run.
+		Helpers.RuntimeTestsThemeHelper.ApplyRequestedTheme(this);
+
 		ConfigureXamlDisplay();
 		SamplePageLayout.ActiveDesign = Design.Fluent;
 		NavigationHelper.IconOverride = FluentSampleIcons.Create;

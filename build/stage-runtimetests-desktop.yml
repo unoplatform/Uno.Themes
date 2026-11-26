@@ -17,8 +17,10 @@ jobs:
         SampleAppName: SimpleSampleApp
         ProjectPath: src/samples/SimpleSampleApp
         RuntimeTestsTheme: Light
-      # The theme suites assert resource values against the ambient appearance, so the
-      # Dark branches are only exercised by a second run under a Dark application theme.
+      # Built-in templates and platform tokens resolve against the application theme only (an
+      # element's RequestedTheme does not re-branch them), so the Dark branches of those assertions
+      # need a second run under a Dark application theme. The heads read RuntimeTestsTheme through
+      # RuntimeTestsThemeHelper; Material does not, so its Default is the platform default.
       SimpleDark:
         SampleAppName: SimpleSampleApp
         ProjectPath: src/samples/SimpleSampleApp
@@ -26,7 +28,11 @@ jobs:
       Fluent:
         SampleAppName: FluentSampleApp
         ProjectPath: src/samples/FluentSampleApp
-        RuntimeTestsTheme: Default
+        RuntimeTestsTheme: Light
+      FluentDark:
+        SampleAppName: FluentSampleApp
+        ProjectPath: src/samples/FluentSampleApp
+        RuntimeTestsTheme: Dark
 
   variables:
     ArtifactName: runtimetests-desktop-$(SampleAppName)$(RuntimeTestsTheme)
