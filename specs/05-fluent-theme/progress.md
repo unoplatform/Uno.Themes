@@ -853,3 +853,8 @@ names the cheapest fix.
   Material 142/1 — the failure (`When_WeightsDiffer_Then_RenderedWidthsDiffer`) also fails on the
   previous head locally (macOS font rendering), green on Linux CI.
 - [ ] Not re-validated: WinAppSDK (the `SafeMerge` clone path), WebAssembly, mobile.
+- [x] CI: the Fluent head honors `UNO_RUNTIME_TESTS_THEME` (shared `RuntimeTestsThemeHelper`, also used
+  by Simple) and runs a `FluentDark` leg, so `Given_FluentAppTheme`'s Dark branch runs. Probed locally:
+  the head starts Light/Dark as requested, 8/8 both. The `SimpleDark` leg stays: rendered-template
+  and platform-token assertions need a Dark application theme (an element `RequestedTheme` does not
+  re-branch them), so per-test `ElementTheme` rows cannot replace it.

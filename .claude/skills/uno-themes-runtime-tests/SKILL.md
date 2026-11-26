@@ -55,7 +55,7 @@ export DOTNET_MODIFIABLE_ASSEMBLIES=debug
 export UNO_RUNTIME_TESTS_OUTPUT_PATH=/tmp/runtime-tests-results.xml
 export UNO_RUNTIME_TESTS_RUN_TESTS='{}'
 # Optional: Light (default) or Dark. The theme suites assert values against the ambient
-# appearance, so run twice to cover both branches (CI runs a Simple Dark leg).
+# appearance, so run twice to cover both branches (CI runs Simple and Fluent Dark legs).
 export UNO_RUNTIME_TESTS_THEME=Dark
 
 # Headless on a Linux host with no display: wrap in xvfb-run + fluxbox
