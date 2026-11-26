@@ -4,6 +4,8 @@ uid: Uno.Themes.Styles.RatingControl
 
 # RatingControl Control
 
+The tables below describe Material. Currently, `PointerOverSet` reads `RatingControlSelectedForeground` (or `SecondaryRatingControlSelectedForeground` for the secondary style), so the separate selected-foreground `PointerOver` keys are declared but ineffective. Normal selected-foreground overrides also affect that hover state.
+
 <!-- BEGIN GENERATED -->
 <!-- This region is generated from the Styles XAML by `dotnet run build/scripts/GenerateStyleDocs.cs`; do not edit it by hand. -->
 
