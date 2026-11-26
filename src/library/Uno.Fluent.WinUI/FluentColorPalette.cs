@@ -29,11 +29,11 @@ internal static class FluentColorPalette
 	private static Neutrals? _neutrals;
 
 	/// <summary>
-	/// Populates the Light/Default branches of <paramref name="palette"/>, with <paramref name="colorOverride"/>'s
-	/// colors written into them.
+	/// Populates the Light/Default branches of <paramref name="palette"/>. A constructor override is a
+	/// separate layer above it (see <c>BaseTheme</c>), so nothing of the consumer's is written here.
 	/// </summary>
 	/// <returns><c>false</c> when the platform accent or the neutrals are unavailable.</returns>
-	internal static bool TryPopulate(ResourceDictionary palette, ResourceDictionary? colorOverride)
+	internal static bool TryPopulate(ResourceDictionary palette)
 	{
 		try
 		{
@@ -45,17 +45,8 @@ internal static class FluentColorPalette
 			}
 
 			var neutrals = _neutrals ??= LoadNeutrals();
-			var light = BuildBranch(isLight: true, accent, neutrals.Light);
-			var dark = BuildBranch(isLight: false, accent, neutrals.Dark);
-			if (colorOverride is { })
-			{
-				// The brush sweep reads a layer's theme branches before its merged dictionaries, so the
-				// override merged into the palette alone would reach the *Color keys but not the brushes.
-				ApplyOverride(light, colorOverride, isLight: true);
-				ApplyOverride(dark, colorOverride, isLight: false);
-			}
-			palette.ThemeDictionaries["Light"] = light;
-			palette.ThemeDictionaries["Default"] = dark;
+			palette.ThemeDictionaries["Light"] = BuildBranch(isLight: true, accent, neutrals.Light);
+			palette.ThemeDictionaries["Default"] = BuildBranch(isLight: false, accent, neutrals.Dark);
 			return true;
 		}
 		catch (Exception e)
@@ -82,36 +73,6 @@ internal static class FluentColorPalette
 				}
 			}
 			return pairs.ToArray();
-		}
-	}
-
-	/// <summary>
-	/// Writes the override's colors for one appearance into <paramref name="branch"/>, with the brush sweep's
-	/// precedence: the appearance's theme dictionaries (e.g. Dark, then Default) over theme-agnostic entries.
-	/// </summary>
-	private static void ApplyOverride(ResourceDictionary branch, ResourceDictionary colorOverride, bool isLight)
-	{
-		foreach (var pair in colorOverride)
-		{
-			if (pair.Value is Color)
-			{
-				branch[pair.Key] = pair.Value;
-			}
-		}
-
-		var themeKeys = ThemesConstants.BrushThemeSources[isLight ? 0 : 1].ColorThemes;
-		for (var i = themeKeys.Length - 1; i >= 0; i--)
-		{
-			if (colorOverride.ThemeDictionaries.TryGetValue(themeKeys[i], out var themed) && themed is ResourceDictionary themedBranch)
-			{
-				foreach (var pair in themedBranch)
-				{
-					if (pair.Value is Color)
-					{
-						branch[pair.Key] = pair.Value;
-					}
-				}
-			}
 		}
 	}
 

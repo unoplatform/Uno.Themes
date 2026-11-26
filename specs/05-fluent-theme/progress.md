@@ -840,3 +840,16 @@ names the cheapest fix.
 - Known gap (pre-existing, core): the keyed path reads theme dictionaries nested in merged
   dictionaries through `TryGetValue`, against the application theme; the declared path reads them
   for the requested theme.
+
+### 2026-11-25 — maintainability follow-ups (review of #1695)
+
+- [x] `check-xaml-resource-keys.ps1` covers the Fluent library and head; it fails when a `Design`
+  value or `SamplePageLayout` template slot is not mapped to a head. Found and fixed
+  `MaterialTitleSmall` in `ColorsSamplePage` (Fluent head).
+- [x] Constructor color override: `BaseTheme` keeps the theme palette and the override as separate
+  layers (`private protected` constructor); `FluentColorPalette.ApplyOverride` and the
+  `[ThreadStatic]` constructor handoff removed. Also fixes `SimpleTheme` (same bug, pre-existing).
+- [x] macOS desktop Release: Simple 584 passed / 1 skipped under Light and Dark; Fluent head 8/8;
+  Material 142/1 — the failure (`When_WeightsDiffer_Then_RenderedWidthsDiffer`) also fails on the
+  previous head locally (macOS font rendering), green on Linux CI.
+- [ ] Not re-validated: WinAppSDK (the `SafeMerge` clone path), WebAssembly, mobile.

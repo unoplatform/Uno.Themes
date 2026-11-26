@@ -646,3 +646,10 @@ rendered-control tests caught it.
 - When a design-system library needs a variation of a shared helper, add the capability to the shared helper (here: `declaredOnly` on `SemanticBrushUpdater.TryResolve`) and keep one precedence order. Do not add a `<Theme>…Resolver` beside it.
 - Pin every case where the two implementations disagreed with a test before deleting one (`Given_FluentSeedAccent.When_DarkBranchLacksPrimary_…`, `When_PrimaryDeclaredFlatAndPerTheme_…`), and prove them red against the old code.
 
+## A constructor color override is its own color layer, never merged into a themed palette
+
+**Context:** Fluent review follow-up (2026-11-25, `specs/05-fluent-theme/`). `SimpleTheme` and `FluentTheme` both merged the consumer's constructor `colorOverride` *into* their own palette dictionary. That palette carries `Light`/`Default` theme branches, and both the framework lookup and `SemanticBrushUpdater.TryResolve` read a dictionary's own theme branch before its merged dictionaries, so an override of a palette key (`PrimaryColor`) lost to the palette value in the brushes and in a plain lookup. Fluent was patched first by copying the override into its branches by hand (`FluentColorPalette.ApplyOverride`), a second copy of the precedence order; Simple kept the bug (`Given_ColorOverridePrecedence.When_ConstructedWithPaletteKeyOverride_…`, red on the old code).
+
+**How to apply:**
+- A design system with its own palette passes it to `BaseTheme`'s `themePalette` constructor parameter and the consumer override separately; `BaseTheme` layers them (shared palette → theme palette → constructor override → seed → `Colors` override) and `TryResolve` handles the precedence. Never `SafeMerge` a consumer dictionary into a dictionary that has theme branches.
+- A marker key the palette does not define proves nothing about precedence: test an override of a key the palette *does* define, per theme branch, including a `Dark`-keyed override.

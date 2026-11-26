@@ -34,14 +34,6 @@ public partial class FluentTheme : BaseTheme
 {
 	// Field initializers run before the base constructor, whose first rebuild pass already uses them.
 	private readonly FluentAccentLayer _accent = new();
-	private readonly ResourceDictionary _palette;
-
-	// The base constructor runs the first rebuild before this constructor can assign fields, so the
-	// override reaches that pass through CreatePalette; there is a single pass at startup.
-	[ThreadStatic]
-	private static ResourceDictionary? _constructingColorOverride;
-	private readonly ResourceDictionary? _colorOverride;
-	private bool _isConstructed;
 
 	// Kept alive with the theme; the handler holds the theme weakly (see ObserveSystemAccent).
 	private UISettings? _uiSettings;
@@ -66,13 +58,8 @@ public partial class FluentTheme : BaseTheme
 	/// </param>
 	/// <param name="fontOverride">(Optional) Overrides for the typography resources, layered above the Fluent type ramp.</param>
 	public FluentTheme(ResourceDictionary? colorOverride = null, ResourceDictionary? fontOverride = null)
-		: base(CreatePalette(colorOverride, out var palette), fontOverride)
+		: base(CreatePalette(), colorOverride, fontOverride)
 	{
-		_palette = palette;
-		_colorOverride = colorOverride;
-		_isConstructed = true;
-		_constructingColorOverride = null;
-
 		ObserveSystemAccent();
 	}
 
@@ -89,17 +76,10 @@ public partial class FluentTheme : BaseTheme
 	/// <inheritdoc />
 	protected override string SemanticStylesSource => FluentConstants.ResourcePaths.SemanticStyles;
 
-	private static ResourceDictionary CreatePalette(ResourceDictionary? colorOverride, out ResourceDictionary palette)
+	private static ResourceDictionary CreatePalette()
 	{
-		_constructingColorOverride = colorOverride;
-		palette = new ResourceDictionary();
-		FluentColorPalette.TryPopulate(palette, colorOverride);
-
-		// Also merged, for its non-color keys and for when the Fluent palette is unavailable.
-		if (colorOverride is { })
-		{
-			palette.SafeMerge(colorOverride);
-		}
+		var palette = new ResourceDictionary();
+		FluentColorPalette.TryPopulate(palette);
 		return palette;
 	}
 
@@ -115,8 +95,7 @@ public partial class FluentTheme : BaseTheme
 			// The built-in controls follow the effective primary, in the semantic palette's precedence: the
 			// Colors override, else the seed (in the palette's mode), else the constructor override.
 			var seedShades = EffectivePrimarySeed is { } seed ? FluentAccentPalette.AccentShades.FromSeed(seed.Seed, seed.Mode) : (FluentAccentPalette.AccentShades?)null;
-			var colorOverride = _isConstructed ? _colorOverride : _constructingColorOverride;
-			var baseOverride = seedShades is null ? colorOverride : null;
+			var baseOverride = seedShades is null ? ConstructorColorOverride : null;
 			_accent.Update(isLight: true, FluentAccentPalette.Build(isLight: true, seedShades, ResolvedColorOverride, baseOverride));
 			_accent.Update(isLight: false, FluentAccentPalette.Build(isLight: false, seedShades, ResolvedColorOverride, baseOverride));
 
@@ -198,7 +177,10 @@ public partial class FluentTheme : BaseTheme
 		Volatile.Write(ref _refreshQueued, 0);
 		try
 		{
-			FluentColorPalette.TryPopulate(_palette, _colorOverride);
+			if (ThemePalette is { } palette)
+			{
+				FluentColorPalette.TryPopulate(palette);
+			}
 			UpdateSource();
 		}
 		catch (Exception e)
