@@ -248,9 +248,9 @@ public class Given_ColorOverridePrecedence
 	[RunsOnUIThread]
 	public void When_ConstructedWithColorOverride_Then_OverrideResolvesThroughTheTheme()
 	{
-		// SimpleTheme merges the constructor override into its URI-backed palette, which BaseTheme
-		// then clones on WinUI. The clone re-reads the palette's Source, so this guards that the
-		// runtime-merged override is carried over rather than dropped with the reload.
+		// The constructor override is its own color layer, merged next to Simple's URI-backed palette,
+		// which BaseTheme clones on WinUI by re-reading its Source. This guards that the override's
+		// keys still resolve through the theme alongside that reload.
 		const string MarkerKey = "CtorOverrideMarkerColor";
 		var theme = new SimpleTheme(colorOverride: CreateColorAndBrushOverride(MarkerKey, "CtorOverrideMarkerBrush", OverrideBlue));
 		var container = new Grid();
@@ -259,6 +259,71 @@ public class Given_ColorOverridePrecedence
 		Assert.IsTrue(container.Resources.TryGetValue(MarkerKey, out var value),
 			"A key from the constructor color override should resolve through the theme.");
 		Assert.AreEqual(OverrideBlue, (Color)value);
+	}
+
+	// SimpleTheme used to merge the constructor override into its own palette, whose Light/Default
+	// branches are read before its merged dictionaries: an override of a palette key such as PrimaryColor
+	// lost to the Simple value, in the brushes and in a plain lookup alike.
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow("Light", null)]
+	[DataRow("Default", null)]
+	[DataRow("Light", "Light")]
+	[DataRow("Default", "Dark")]
+	[DataRow("Default", "Default")]
+	public void When_ConstructedWithPaletteKeyOverride_Then_ItWinsOverTheSimplePalette(string branchKey, string? overrideThemeKey)
+	{
+		var overrideDict = new ResourceDictionary();
+		var overrideTarget = overrideDict;
+		if (overrideThemeKey is { })
+		{
+			overrideDict.ThemeDictionaries[overrideThemeKey] = overrideTarget = new ResourceDictionary();
+		}
+		overrideTarget["PrimaryColor"] = OverrideBlue;
+
+		var theme = new SimpleTheme(colorOverride: overrideDict);
+
+		Assert.AreEqual(OverrideBlue, FindThemedValue(theme, branchKey, "PrimaryColor"),
+			$"PrimaryColor ({branchKey}) must follow the constructor override");
+		foreach (var brushKey in new[] { "PrimaryBrush", "PrimaryHoverBrush", "PrimaryPressedBrush" })
+		{
+			var brush = FindThemedValue(theme, branchKey, brushKey) as SolidColorBrush;
+			Assert.IsNotNull(brush, $"{brushKey} ({branchKey}) should resolve to a SolidColorBrush");
+			Assert.AreEqual(OverrideBlue, brush.Color, $"{brushKey} ({branchKey}) must follow the constructor override");
+		}
+	}
+
+	// The framework's order: a dictionary's own theme branch (exact key, then Default), its own entries,
+	// then its merged dictionaries, last merged first.
+	private static object? FindThemedValue(ResourceDictionary dictionary, string branchKey, string key)
+	{
+		foreach (var themeKey in branchKey == "Light" ? new[] { "Light", "Default" } : new[] { "Dark", "Default" })
+		{
+			if (dictionary.ThemeDictionaries.TryGetValue(themeKey, out var candidate)
+				&& candidate is ResourceDictionary branch
+				&& FindThemedValue(branch, branchKey, key) is { } themed)
+			{
+				return themed;
+			}
+		}
+
+		foreach (var pair in dictionary)
+		{
+			if (Equals(pair.Key, key))
+			{
+				return pair.Value;
+			}
+		}
+
+		for (var i = dictionary.MergedDictionaries.Count - 1; i >= 0; i--)
+		{
+			if (FindThemedValue(dictionary.MergedDictionaries[i], branchKey, key) is { } nested)
+			{
+				return nested;
+			}
+		}
+
+		return null;
 	}
 
 	[TestMethod]

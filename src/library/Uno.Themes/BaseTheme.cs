@@ -43,7 +43,11 @@ public abstract partial class BaseTheme : ResourceDictionary
 {
 	private bool _isUpdatingColorOverrides;
 	private bool _isFontOverrideMuted;
-	private ResourceDictionary _baseColorOverride;
+	// Below the seed, in increasing precedence: the design system's own palette, then the
+	// constructor override. Kept as separate layers so the override wins over the palette's theme
+	// branches too, for the brushes and for a plain lookup alike.
+	private readonly ResourceDictionary _themePalette;
+	private readonly ResourceDictionary _constructorColorOverride;
 
 	// The semantic brushes, created on the first UpdateSource and kept for the theme's lifetime so
 	// consumers keep resolving to the same SolidColorBrush instances across rebuilds; only their
@@ -517,15 +521,25 @@ public abstract partial class BaseTheme : ResourceDictionary
 	}
 
 	public BaseTheme(ResourceDictionary colorOverride = null, ResourceDictionary fontOverride = null)
+		: this(themePalette: null, colorOverride, fontOverride)
+	{
+	}
+
+	/// <summary>
+	/// For a design system with its own base palette (e.g. Simple's grayscale, Fluent's accent and
+	/// neutrals): the palette sits above the shared palette and below <paramref name="colorOverride"/>.
+	/// </summary>
+	/// <param name="themePalette">The design system's color palette, or <c>null</c> for the shared one alone.</param>
+	/// <param name="colorOverride">The consumer's constructor override, above <paramref name="themePalette"/> and below a seed.</param>
+	/// <param name="fontOverride">The consumer's typography override.</param>
+	private protected BaseTheme(ResourceDictionary themePalette, ResourceDictionary colorOverride, ResourceDictionary fontOverride)
 	{
 		// Opt this instance into hot-reload tracking so BaseTheme.UpdateApplication can
 		// rebuild it when a XAML resource edit is applied (see BaseTheme.HotReload.cs).
 		RegisterInstance(this);
 
-		if (colorOverride is { })
-		{
-			_baseColorOverride = colorOverride;
-		}
+		_themePalette = themePalette;
+		_constructorColorOverride = colorOverride;
 
 		if (fontOverride is { })
 		{
@@ -699,6 +713,12 @@ public abstract partial class BaseTheme : ResourceDictionary
 		}
 	}
 
+	/// <summary>The design system's own palette layer, or <c>null</c>.</summary>
+	internal ResourceDictionary ThemePalette => _themePalette;
+
+	/// <summary>The constructor color override, available from the first rebuild pass on.</summary>
+	internal ResourceDictionary ConstructorColorOverride => _constructorColorOverride;
+
 	// The consumer color override resolved by the last pass, for design-system adapters that
 	// derive resources from it (Fluent's accent) without re-parsing its Source.
 	internal ResourceDictionary ResolvedColorOverride { get; private set; }
@@ -807,24 +827,30 @@ public abstract partial class BaseTheme : ResourceDictionary
 	private ResourceDictionary BuildColorLayer(out ResourceDictionary resolvedOverride)
 	{
 		// The value dictionaries — shared palette, the theme's own base palette (e.g. SimpleTheme's
-		// grayscale, supplied via _baseColorOverride), the seed palette and finally the consumer
+		// grayscale), the constructor override, the seed palette and finally the consumer
 		// override — are merged in increasing precedence, and tracked in that same order so the
 		// brushes can be resolved against them below. This layer is intentionally NOT baked into
 		// the Source bundle (BaseDictionaries.xaml) so colour edits never require reloading the
 		// static base.
 		var colors = new ResourceDictionary();
-		var colorLayers = new List<ResourceDictionary>(4);
+		var colorLayers = new List<ResourceDictionary>(5);
 
 		var sharedPalette = new SemanticResources { Source = new Uri(ThemesConstants.SharedColorPaletteResourcePath) };
 		colors.MergedDictionaries.Add(sharedPalette);
 		colorLayers.Add(sharedPalette);
 
-		// Theme-specific base colors (e.g. SimpleTheme's grayscale palette) are merged
-		// before the seed so that seed-generated colors take precedence.
-		if (_baseColorOverride is { } baseColorOverride)
+		// Theme-specific base colors (e.g. SimpleTheme's grayscale palette), then the constructor
+		// override, are merged before the seed so that seed-generated colors take precedence.
+		AddLayer(_themePalette);
+		AddLayer(_constructorColorOverride);
+
+		void AddLayer(ResourceDictionary layer)
 		{
-			colors.SafeMerge(baseColorOverride);
-			colorLayers.Add(baseColorOverride);
+			if (layer is { })
+			{
+				colors.SafeMerge(layer);
+				colorLayers.Add(layer);
+			}
 		}
 
 		if (EffectivePrimarySeed is { } effective)
