@@ -281,10 +281,11 @@ TargetFrameworkOverride=desktop dotnet format whitespace Uno.Themes.sln --verify
 ```
 
 ```bash
-# XAML resource keys: every {StaticResource}/{ThemeResource} a Simple / Material v2 style or sample page uses
+# XAML resource keys: every {StaticResource}/{ThemeResource} a Simple / Material v2 / Fluent style or sample page uses
 # must resolve. Uno silently ignores an undefined key; WinUI fails, usually as a native fail-fast. Reads
 # WinUI's own keys from its generic.xaml, so restore/build a WinAppSDK head first. CI runs it in the
 # XAML_Resource_Keys job (build/stage-build-winappsdk.yml). Cupertino and Material v1 are out of scope for now.
+# A new Design value or SamplePageLayout template slot fails the check until the script maps it to a head.
 pwsh build/scripts/check-xaml-resource-keys.ps1
 ```
 

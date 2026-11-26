@@ -8,12 +8,13 @@
 	WinAppSDK app down the moment the control or page is realized. This check resolves every reference
 	statically:
 
-	- Library styles: Simple and Material v2 (and the shared Uno.Themes base) against their own keys, the shared
-	  base styles and the WinUI platform keys.
-	- Sample pages: each page against the keys of every head (design) that lists it, ignoring the
-	  SamplePageLayout templates of the other designs, which that head never renders.
+	- Library styles: Simple, Material v2 and Fluent (and the shared Uno.Themes base) against their own keys,
+	  the shared base styles and the WinUI platform keys.
+	- Sample pages: each page against the keys of every head (design) that lists it, keeping only the
+	  SamplePageLayout templates that head renders.
 
-	Cupertino and Material v1 are out of scope for now.
+	Cupertino and Material v1 are out of scope for now. The check fails when a Design value or a
+	SamplePageLayout template slot is added without being mapped here, so a new head cannot be skipped silently.
 
 	WinUI's own keys come from its generic.xaml, so a WinAppSDK head must have been restored first (CI runs this
 	in the WinAppSDK job, after its build). Keys generated in code by BaseTheme (Space*, Radius*, SimpleShape*, MaterialShape*, ControlHeight*,
@@ -102,6 +103,7 @@ $themes = [ordered]@{
 	'Themes'      = @{ Files = $baseFiles }
 	'Simple'      = @{ Files = @(Get-XamlFiles (Join-Path $library 'Uno.Simple.WinUI/Styles')) }
 	'Material v2' = @{ Files = @(Get-XamlFiles (Join-Path $library 'Uno.Material/Styles') -Exclude '[\\/]v1[\\/]') }
+	'Fluent'      = @{ Files = @(Get-XamlFiles (Join-Path $library 'Uno.Fluent.WinUI/Styles')) }
 }
 foreach ($theme in $themes.Values) { $theme.Defined = Get-DefinedKeys ($theme.Files + $baseFiles) }
 
@@ -112,12 +114,29 @@ foreach ($name in $themes.Keys) {
 	}
 }
 
-# Sample heads: which theme they load, which SamplePageLayout templates they never render.
+# Sample heads: which theme they load, and the one SamplePageLayout template they render. The Material head
+# forces the M3 template (SamplePageLayout.UpdateLayoutRadioButtons); the Fluent chrome presents FluentTemplate only.
 $heads = [ordered]@{
-	'Material' = @{ Theme = 'Material v2'; Skip = 'MaterialTemplate', 'CupertinoTemplate', 'SimpleTemplate' }
-	'Simple'   = @{ Theme = 'Simple'; Skip = 'MaterialTemplate', 'M3MaterialTemplate', 'CupertinoTemplate' }
+	'Material' = @{ Theme = 'Material v2'; Template = 'M3MaterialTemplate' }
+	'Simple'   = @{ Theme = 'Simple'; Template = 'SimpleTemplate' }
+	'Fluent'   = @{ Theme = 'Fluent'; Template = 'FluentTemplate' }
 }
-$sharedFiles = @(Get-XamlFiles (Join-Path $samples 'SamplesApp.Shared'))
+$outOfScopeDesigns = @('Cupertino')
+
+# Every Design and every template slot must be accounted for, so a new head fails here instead of going unchecked.
+$sharedRoot = Join-Path $samples 'SamplesApp.Shared'
+$designEnum = Get-Content (Join-Path $sharedRoot 'Entities/Design.cs') -Raw
+$allDesigns = @([regex]::Matches(($designEnum -replace '(?s)^.*?\{|\}.*$', ''), '\b([A-Z]\w*)\b') | ForEach-Object { $_.Groups[1].Value })
+$templateSlots = @([regex]::Matches((Get-Content (Join-Path $sharedRoot 'Controls/SamplePageLayout.Properties.cs') -Raw), 'public DataTemplate (\w+Template)\b') |
+	ForEach-Object { $_.Groups[1].Value } | Where-Object { $_ -ne 'HeaderTemplate' })
+$unmapped = @($allDesigns | Where-Object { -not $heads.Contains($_) -and $outOfScopeDesigns -notcontains $_ })
+if ($unmapped) { throw "Design value(s) with no sample head mapped in this script: $($unmapped -join ', ')" }
+$knownSlots = @($heads.Values | ForEach-Object { $_.Template }) + 'MaterialTemplate', 'CupertinoTemplate' # v1 and Cupertino: out of scope
+$unknownSlots = @($templateSlots | Where-Object { $knownSlots -notcontains $_ })
+if ($unknownSlots) { throw "SamplePageLayout template slot(s) unknown to this script: $($unknownSlots -join ', ')" }
+foreach ($head in $heads.Values) { $head.Skip = @($templateSlots | Where-Object { $_ -ne $head.Template }) }
+
+$sharedFiles = @(Get-XamlFiles $sharedRoot)
 $sharedKeys = Get-DefinedKeys $sharedFiles
 
 # Which designs realize a file. A [SamplePage] lists them. Other shared XAML (nested pages, user controls)
@@ -127,7 +146,6 @@ $sourceFiles = Get-ChildItem $samples -Recurse -Include *.xaml, *.cs |
 	Where-Object { $_.FullName -notmatch '[\\/](obj|bin|RuntimeTests)[\\/]' }
 $sourceText = @{}
 foreach ($file in $sourceFiles) { $sourceText[$file.FullName] = Get-Content $file.FullName -Raw }
-$allDesigns = @('Material', 'Simple', 'Cupertino')
 
 function Get-PageDesigns([string]$XamlPath) {
 	$codeBehind = $sourceText["$XamlPath.cs"]
