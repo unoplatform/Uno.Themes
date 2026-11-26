@@ -47,8 +47,10 @@ Per-control shape:
   `Tag` is set. The outer template draws the ring as an overlay, sized to the field by an
   invisible `HeaderSpacer`.
 
-On `net10.0-windows` the `Validation` properties compile but have no effect, so the ErrorTemplate setters and
-the two DataTemplates are `not_win:`-gated. The added parts and states are inert there.
+On `net10.0-windows` the `Validation` properties exist (`Uno.UI.Extras.dll` registers the same attached properties)
+but have no effect, so the ErrorTemplate setters and the two DataTemplates load there unused, and every key exists
+on every platform. The added parts and states are inert there. (Until Phase C they were `not_win:`-gated, since
+the stand-in namespace only existed on Uno.)
 
 ### Resource keys
 
@@ -115,6 +117,9 @@ No bump needed: master's Uno already ships unoplatform/uno#24838. The framework'
 - [x] WinAppSDK heads: the sample page resolves `Uno.UI.Xaml.Controls` from `Uno.UI.Extras.dll`;
       `Given_InputValidation` is gated to `HAS_UNO` (the properties are a no-op there); the sample view model's
       `IReadOnlyList<string>` collection expression is an array (CsWinRT1032). Simple and Material heads build
+- [x] Drop the `not_win:` gating: `Uno.UI.Extras.dll` defines the same `Validation` attached properties on Windows,
+      so the ErrorTemplate setters and the two DataTemplates load there unused, and `SimpleInputValidationErrorTemplate`
+      exists on every platform
 
 ## Known limitations
 
@@ -180,3 +185,8 @@ Verified on master's Uno 7.1.0-dev.477 with the framework implementation, shim r
   `Mode` → `Disabled`), the disabled-state difference above. With the test rewritten, `Given_InputValidation`: 24/24.
 - `When_ShownAfterBeingCollapsed_Then_ErrorStateShows` passes: the framework re-applies the states on template
   application, which the shim had to emulate.
+- Without the `not_win:` gating (2026-11-26): the Simple WinAppSDK head builds (MSBuild, x64, Debug) with no XAML
+  compiler diagnostics, and the library's `XamlTypeInfo.g.cs` registers `Validation.ErrorTemplate`.
+  `check-xaml-resource-keys.ps1` resolves every key. In the packaged app, `Given_AllSamplePages` passes (1/1), and
+  the Input Validation page survives switching Compact/Inline and entering invalid input, with no visuals (inert,
+  as expected). The desktop head builds.
