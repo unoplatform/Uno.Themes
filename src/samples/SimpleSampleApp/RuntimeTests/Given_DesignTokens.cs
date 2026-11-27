@@ -1,5 +1,6 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Markup;
 using Microsoft.UI.Xaml.Shapes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -441,6 +442,35 @@ public class Given_DesignTokens
 		// Half the track height. Past it the Rectangle clamps X and Y apart and the pill becomes an ellipse.
 		Assert.AreEqual(track.ActualHeight / 2, track.RadiusX, 0.001);
 		Assert.AreEqual(track.ActualHeight / 2, track.RadiusY, 0.001);
+	}
+
+	// The icon buttons are fixed 40px circles at every DefaultCornerRadius. They used RadiusFull (9999),
+	// which only draws a circle while the button is square: Uno and WinUI fit an oversized radius to each
+	// edge apart, so it becomes half the width by half the height (unoplatform/Uno.Themes#1789).
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow("SimpleIconButtonStyle", 0.0)]
+	[DataRow("SimpleIconButtonStyle", 4.0)]
+	[DataRow("SimpleIconButtonStyle", 16.0)]
+	[DataRow("SimpleIconToggleButtonStyle", 0.0)]
+	[DataRow("SimpleIconToggleButtonStyle", 4.0)]
+	[DataRow("SimpleIconToggleButtonStyle", 16.0)]
+	public async Task When_IconButtonLoaded_Then_RadiusIsHalfItsSide(string styleKey, double baseRadius)
+	{
+		var (container, _) = CreateThemedContainer(cornerRadius: baseRadius);
+		var style = (Style)container.Resources[styleKey];
+		Control button = style.TargetType == typeof(ToggleButton)
+			? new ToggleButton { Content = "+", Style = style }
+			: new Button { Content = "+", Style = style };
+		container.Children.Add(button);
+
+		UnitTestsUIContentHelper.Content = container;
+		await UnitTestsUIContentHelper.WaitForLoaded(button);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		Assert.AreEqual(40.0, button.ActualHeight, 0.001, $"{styleKey} is a fixed 40px square.");
+		Assert.AreEqual(new CornerRadius(button.ActualHeight / 2), button.CornerRadius,
+			$"{styleKey} at base={baseRadius}: a circle is half its side, not an unbounded radius.");
 	}
 
 	// ═══════════════════════════════════════════════════════════════════════

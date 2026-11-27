@@ -35,7 +35,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `SimpleButtonFontWeight`          | `String`       | Medium                           |
 | `SimpleButtonIconSpacing`         | `Double`       | `SimpleSpace100`                 |
 | `SimpleIconButtonBorderThickness` | `Thickness`    | `SimpleStrokeBorderThickness`    |
-| `SimpleIconButtonCornerRadius`    | `CornerRadius` | `SimpleRadiusFullCornerRadius`   |
+| `SimpleIconButtonCornerRadius`    | `CornerRadius` | 20                               |
 
 ### Themed
 

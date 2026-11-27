@@ -130,7 +130,7 @@ public abstract partial class BaseTheme
 
 	/// <summary>
 	/// Multiplier table for shape (corner radius) tokens.
-	/// RadiusFull is always 9999 and is handled separately.
+	/// RadiusFull is always 9999 and is handled separately (deprecated, see GenerateShapeScale).
 	/// The values at the default base of 4 are today's look: do not change the multipliers.
 	/// </summary>
 	private static readonly (string Variant, double Multiplier)[] ShapeScaleMultipliers =
@@ -213,6 +213,12 @@ public abstract partial class BaseTheme
 	/// Generates a ResourceDictionary containing all shape scale tokens
 	/// derived from the given base value. RadiusFull is always 9999.
 	/// </summary>
+	/// <remarks>
+	/// RadiusFull is deprecated and kept only because its keys are public. It is not a pill: WinUI
+	/// (<c>CGeometryBuilder::CalculateRoundedCornersRectangle</c>) and Uno fit an oversized radius to
+	/// each edge apart, so 9999 becomes half the width by half the height, an ellipse on any element
+	/// that is not square (unoplatform/Uno.Themes#1789). No fixed value can mean "half the shorter side".
+	/// </remarks>
 	private static ResourceDictionary GenerateShapeScale(double baseValue)
 	{
 		var dict = new SemanticResources();
@@ -226,7 +232,7 @@ public abstract partial class BaseTheme
 				AddRadius(themed, $"Radius{variant}", baseValue * multiplier);
 			}
 
-			// RadiusFull is always 9999 (pill shape)
+			// Deprecated: a circle only on a square element, an ellipse on anything else (see remarks).
 			themed["RadiusFull"] = 9999.0;
 			themed["RadiusFullCornerRadius"] = new CornerRadius(9999);
 
