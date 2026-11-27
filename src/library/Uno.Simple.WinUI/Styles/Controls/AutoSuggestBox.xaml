@@ -444,7 +444,8 @@
 
 						<!--
 							The TextBox spans the first two rows; HeaderSpacer sizes the first to the TextBox's header,
-							leaving the second the field, which the compact error icon centers on.
+							leaving the second the field, which the compact error icon centers on. The TextBox has no
+							Width of its own: it fills the first column, so a box with a set Width makes room for the icon.
 							ErrorIconColumn and ErrorPresenterRow stay at zero size until a validation state opens them.
 						-->
 						<Grid.ColumnDefinitions>
@@ -486,7 +487,6 @@
 								 Style="{TemplateBinding TextBoxStyle}"
 								 PlaceholderText="{TemplateBinding PlaceholderText}"
 								 Header="{TemplateBinding Header}"
-								 Width="{TemplateBinding Width}"
 								 Description="{TemplateBinding Description}"
 								 Foreground="{TemplateBinding Foreground}"
 								 Background="{TemplateBinding Background}"

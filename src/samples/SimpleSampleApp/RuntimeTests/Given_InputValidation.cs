@@ -228,6 +228,57 @@ public class Given_InputValidation
 		Assert.AreEqual(fieldBounds.Width, ringBounds.Width, 0.5, "The error ring should be as wide as the field");
 	}
 
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow("FixedWidth")]
+	[DataRow("StretchedVertically")]
+	public async Task When_SizedAutoSuggestBoxInCompactError_Then_FieldFitsBesideTheIcon(string sizing)
+	{
+		// Arrange: an AutoSuggestBox in Compact error, with an explicit Width or stretched in a tall container
+		var container = CreateThemedContainer();
+		var control = (AutoSuggestBox)CreateControl("SimpleAutoSuggestBoxStyle", container.Resources);
+		if (sizing == "FixedWidth")
+		{
+			control.Width = 300;
+			control.HorizontalAlignment = HorizontalAlignment.Left;
+		}
+		else
+		{
+			container.Height = 160;
+			control.VerticalAlignment = VerticalAlignment.Stretch;
+		}
+
+		Validation.SetMode(control, InputValidationMode.Auto);
+		Validation.SetKind(control, InputValidationKind.Compact);
+		BindValidatedProperty(control, new ErrorSource(ErrorMessage));
+		container.Children.Add(control);
+
+		UnitTestsUIContentHelper.Content = container;
+		await UnitTestsUIContentHelper.WaitForLoaded(control);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		// Assert: the field ends where the icon column starts, the ring covers exactly the field, the icon is centered on it
+		var field = FindPart(control, "BorderElement");
+		var ring = FindPart(control, "ErrorBorderElement");
+		var presenter = FindPart(control, "ErrorPresenter");
+		Assert.IsNotNull(field);
+		Assert.IsNotNull(ring);
+		Assert.IsNotNull(presenter);
+
+		var iconColumn = ((Grid)VisualTreeHelper.GetParent(presenter)).ColumnDefinitions[1].ActualWidth;
+		Assert.IsTrue(iconColumn > 0, "The icon column should have opened");
+
+		var fieldBounds = GetBounds(field, control);
+		var ringBounds = GetBounds(ring, control);
+		var iconBounds = GetBounds(presenter, control);
+		Assert.AreEqual(control.ActualWidth - iconColumn, fieldBounds.Right, 0.5, "The field should end where the icon column starts, not run under it");
+		Assert.AreEqual(fieldBounds.X, ringBounds.X, 0.5, "The error ring should start at the field's left edge");
+		Assert.AreEqual(fieldBounds.Y, ringBounds.Y, 0.5, "The error ring should start at the field's top edge");
+		Assert.AreEqual(fieldBounds.Width, ringBounds.Width, 0.5, "The error ring should be as wide as the field");
+		Assert.AreEqual(fieldBounds.Height, ringBounds.Height, 0.5, "The error ring should be as tall as the field");
+		Assert.AreEqual(fieldBounds.Y + fieldBounds.Height / 2, iconBounds.Y + iconBounds.Height / 2, 1, "The icon should be centered on the field");
+	}
+
 	private static Rect GetBounds(FrameworkElement element, UIElement relativeTo) =>
 		element.TransformToVisual(relativeTo).TransformBounds(new Rect(0, 0, element.ActualWidth, element.ActualHeight));
 
