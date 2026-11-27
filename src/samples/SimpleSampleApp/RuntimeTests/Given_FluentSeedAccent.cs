@@ -822,12 +822,12 @@ public class Given_FluentSeedAccent
 			"the later merged Dark override must become the native Dark accent fill");
 	}
 
-	// The accent reads an override through the resolver the semantic brushes use
-	// (SemanticBrushUpdater.TryResolve), so both agree on these two shapes.
+	// The accent reads an override with the semantic brushes' precedence (ThemeResourceResolver), so
+	// both agree on these two shapes: the accent fill follows PrimaryBrush in each branch.
 
 	[TestMethod]
 	[RunsOnUIThread]
-	public void When_DarkBranchLacksPrimary_AccentFallsBackToTheDefaultBranch()
+	public void When_DarkBranchLacksPrimary_TheDefaultBranchDoesNotFillIt()
 	{
 		var overrides = new ResourceDictionary();
 		overrides.ThemeDictionaries["Light"] = new ResourceDictionary { ["PrimaryColor"] = OverrideBlue };
@@ -838,24 +838,34 @@ public class Given_FluentSeedAccent
 
 		Assert.AreEqual(OverrideBlue, GetBranchColor(theme, "Light", "AccentFillColorDefault"),
 			"the Light branch declares PrimaryColor itself");
-		Assert.AreEqual(OverrideGreen, GetBranchColor(theme, "Default", "AccentFillColorDefault"),
-			"a key the Dark branch lacks falls back to the Default branch, key by key, as for PrimaryBrush");
+		Assert.AreEqual(OverrideBlue, GetPrimaryBrushColor(theme, "Light"), "the accent and PrimaryBrush agree in Light");
+
+		// Default stands in for a missing Dark branch only, not for a key an existing Dark branch lacks.
+		Assert.IsNull(FindBranchColor(theme, "Default", "AccentFillColorDefault"),
+			"the override does not drive the Dark accent: the platform accent stands");
+		Assert.AreNotEqual(OverrideGreen, GetPrimaryBrushColor(theme, "Default"), "nor PrimaryBrush in Dark");
 	}
 
 	[TestMethod]
 	[RunsOnUIThread]
-	public void When_PrimaryDeclaredFlatAndPerTheme_ThePerThemeValueDrivesTheAccent()
+	public void When_PrimaryDeclaredFlatAndPerTheme_TheFlatValueDrivesTheAccent()
 	{
 		var overrides = CreateBranchedPrimaryOverride(OverrideBlue, OverrideGreen);
 		overrides["PrimaryColor"] = SeedRed;
 
 		var theme = new FluentTheme { Colors = new ThemeColors { OverrideDictionary = overrides } };
 
-		Assert.AreEqual(OverrideBlue, GetBranchColor(theme, "Light", "AccentFillColorDefault"),
-			"the Light branch wins over the flat entry, as for PrimaryBrush");
-		Assert.AreEqual(OverrideGreen, GetBranchColor(theme, "Default", "AccentFillColorDefault"),
-			"the Dark branch wins over the flat entry, as for PrimaryBrush");
+		// A dictionary's own entries come before its theme dictionaries, for PrimaryBrush and the accent alike.
+		foreach (var branch in new[] { "Light", "Default" })
+		{
+			Assert.AreEqual(SeedRed, GetBranchColor(theme, branch, "AccentFillColorDefault"), $"[{branch}] the flat entry drives the accent");
+			Assert.AreEqual(SeedRed, GetPrimaryBrushColor(theme, branch), $"[{branch}] as it drives PrimaryBrush");
+		}
 	}
+
+	private static Color GetPrimaryBrushColor(FluentTheme theme, string branchKey)
+		=> Assert.IsInstanceOfType<SolidColorBrush>(FindBranchValue(theme, branchKey, "PrimaryBrush"),
+			$"[{branchKey}] PrimaryBrush should be a themed semantic brush").Color;
 
 #if HAS_UNO // WinUI binds the built-in controls' accent aliases inside XamlControlsResources, so FluentTheme cannot recolor them there (spec 05 §9.2).
 	[TestMethod]

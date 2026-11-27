@@ -202,9 +202,9 @@ internal static class FluentAccentPalette
 	/// <returns>Colors and <see cref="BrushSpec"/>s, by key.</returns>
 	internal static Dictionary<string, object>? Build(bool isLight, IReadOnlyList<ColorLayer> layers, AccentShades? seedShades)
 	{
-		// Read through the semantic brushes' resolver. Declared entries only: the platform defines the
+		// Read through the semantic resolver, for the requested appearance only: the platform defines the
 		// accent keys too. Resolved once per override: every key below is looked up in these snapshots.
-		var themes = isLight ? ThemesConstants.LightColorThemes : ThemesConstants.DarkColorThemes;
+		var appearance = isLight ? "Light" : "Dark";
 		var declared = new List<Dictionary<string, object>>(2);
 		var drivers = 0; // the leading entries of declared, above the seed
 		var seeded = false;
@@ -214,7 +214,7 @@ internal static class FluentAccentPalette
 			{
 				case ColorLayerKind.ConsumerOverride:
 				case ColorLayerKind.ConstructorOverride:
-					declared.Add(SemanticBrushUpdater.ResolveDeclared(layers[i].Dictionary, themes));
+					declared.Add(ThemeResourceResolver.ResolveAll(layers[i].Dictionary, appearance));
 					if (!seeded)
 					{
 						drivers++;

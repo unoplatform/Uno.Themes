@@ -191,10 +191,6 @@ internal static class SemanticBrushUpdater
 		}
 	}
 
-	// All theme keys a color layer may declare. Used to detect that a key is theme-scoped in a
-	// layer whose dictionaries for the requested theme did not carry it.
-	private static readonly string[] _allThemeKeys = { "Light", "Dark", "Default", "HighContrast" };
-
 	/// <summary>
 	/// Resolves each layer for the requested appearance without ambient or system fallback.
 	/// Later color layers win; each layer preserves own/merged/appearance precedence.
@@ -217,92 +213,6 @@ internal static class SemanticBrushUpdater
 		}
 		resolved = default;
 		return false;
-	}
-
-	/// <summary>
-	/// Every non-null entry <paramref name="dictionary"/> declares itself for the requested theme. Required
-	/// for keys the platform also defines (Fluent's accent tokens): <see cref="ResourceDictionary.TryGetValue"/>
-	/// answers such a key from the system resources of the ambient theme even when the dictionary lacks it,
-	/// so the dictionary is enumerated instead, once, and a caller reading many keys looks them up in the
-	/// result. Throws where a dictionary cannot be enumerated; the semantic roles, which no platform
-	/// defines, keep the keyed lookup.
-	/// </summary>
-	/// <param name="dictionary">The dictionary, with its theme and merged dictionaries.</param>
-	/// <param name="themeKeys">The theme dictionary keys to probe, in order.</param>
-	internal static Dictionary<string, object> ResolveDeclared(ResourceDictionary dictionary, string[] themeKeys)
-	{
-		var resolved = new Dictionary<string, object>(StringComparer.Ordinal);
-		foreach (var pair in CollectDeclared(dictionary, themeKeys))
-		{
-			if (pair.Value is { } value)
-			{
-				resolved.Add(pair.Key, value);
-			}
-		}
-
-		return resolved;
-	}
-
-	/// <summary>
-	/// The entries one dictionary declares, in the keyed lookup's order (earlier steps win): the
-	/// requested theme dictionaries; then its own entries, except keys one of its theme dictionaries
-	/// declares (theme-scoped, and the requested themes did not carry them, so this dictionary answers
-	/// none); then its merged dictionaries, last merged first, as the framework searches them. The keyed
-	/// lookup reads merged dictionaries through <see cref="ResourceDictionary.TryGetValue"/>; here they
-	/// are walked by hand, which also reads their theme dictionaries for the requested theme.
-	/// </summary>
-	private static Dictionary<string, object?> CollectDeclared(ResourceDictionary dictionary, string[] themeKeys)
-	{
-		var declared = new Dictionary<string, object?>(StringComparer.Ordinal);
-
-		for (int t = 0; t < themeKeys.Length; t++)
-		{
-			if (TryGetThemeDictionary(dictionary, themeKeys[t], out var themed))
-			{
-				foreach (var pair in CollectDeclared(themed, themeKeys))
-				{
-					declared.TryAdd(pair.Key, pair.Value);
-				}
-			}
-		}
-
-		HashSet<string>? themeScoped = null;
-		for (int t = 0; t < _allThemeKeys.Length; t++)
-		{
-			if (TryGetThemeDictionary(dictionary, _allThemeKeys[t], out var themed))
-			{
-				foreach (var entry in themed)
-				{
-					if (entry.Key is string key)
-					{
-						(themeScoped ??= new HashSet<string>(StringComparer.Ordinal)).Add(key);
-					}
-				}
-			}
-		}
-
-		// Enumerated, not looked up: TryGetValue and ContainsKey both fall back to the system resources.
-		foreach (var entry in dictionary)
-		{
-			if (entry.Key is string key && themeScoped?.Contains(key) != true)
-			{
-				declared.TryAdd(key, entry.Value);
-			}
-		}
-
-		var merged = dictionary.MergedDictionaries;
-		for (int i = merged.Count - 1; i >= 0; i--)
-		{
-			foreach (var pair in CollectDeclared(merged[i], themeKeys))
-			{
-				if (themeScoped?.Contains(pair.Key) != true)
-				{
-					declared.TryAdd(pair.Key, pair.Value);
-				}
-			}
-		}
-
-		return declared;
 	}
 
 	/// <summary>

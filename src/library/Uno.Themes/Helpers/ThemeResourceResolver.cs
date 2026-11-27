@@ -1,5 +1,8 @@
 #nullable enable
 
+using System;
+using System.Collections.Generic;
+
 #if WinUI
 using Microsoft.UI.Xaml;
 #else
@@ -18,6 +21,69 @@ internal static class ThemeResourceResolver
 	{
 		value = Resolve(dictionary, appearance, key);
 		return value is not null;
+	}
+
+	/// <summary>
+	/// Every non-null value <see cref="Resolve"/> (without appearance fallbacks) answers from
+	/// <paramref name="dictionary"/> for <paramref name="appearance"/>, by key, in one pass: for a caller
+	/// reading many keys, each dictionary is enumerated once instead of once per key.
+	/// </summary>
+	internal static Dictionary<string, object> ResolveAll(ResourceDictionary dictionary, string appearance)
+	{
+		var resolved = new Dictionary<string, object>(StringComparer.Ordinal);
+		foreach (var pair in Collect(dictionary, appearance))
+		{
+			if (pair.Value is { } value)
+			{
+				resolved.Add(pair.Key, value);
+			}
+		}
+		return resolved;
+	}
+
+	// Resolve for every key at once. Earlier steps win (TryAdd), in Resolve's order: own entries (a null
+	// one included: Resolve returns it), merged dictionaries last first (a null answer falls through to
+	// the next, as in Resolve), then the appearance branch, else Default when that branch is absent.
+	private static Dictionary<string, object?> Collect(ResourceDictionary dictionary, string appearance)
+	{
+		var declared = new Dictionary<string, object?>(StringComparer.Ordinal);
+		foreach (var entry in dictionary)
+		{
+			if (entry.Key is string key)
+			{
+				declared.TryAdd(key, entry.Value);
+			}
+		}
+
+		for (var i = dictionary.MergedDictionaries.Count - 1; i >= 0; i--)
+		{
+			foreach (var pair in Collect(dictionary.MergedDictionaries[i], appearance))
+			{
+				if (pair.Value is { })
+				{
+					declared.TryAdd(pair.Key, pair.Value);
+				}
+			}
+		}
+
+		ResourceDictionary? branch = null;
+		if (dictionary.ThemeDictionaries.TryGetValue(appearance, out var themed) && themed is ResourceDictionary appearanceBranch)
+		{
+			branch = appearanceBranch;
+		}
+		else if (dictionary.ThemeDictionaries.TryGetValue("Default", out var fallback) && fallback is ResourceDictionary defaultBranch)
+		{
+			branch = defaultBranch;
+		}
+
+		if (branch is { })
+		{
+			foreach (var pair in Collect(branch, appearance))
+			{
+				declared.TryAdd(pair.Key, pair.Value);
+			}
+		}
+		return declared;
 	}
 
 	/// <summary>
