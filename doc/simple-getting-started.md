@@ -125,6 +125,6 @@ See [Design Tokens](design-tokens.md) for the generated scales and how runtime c
 Simple's control styles consume the shared tokens through a layer of `Simple`-prefixed aliases declared in `Styles/Application/Common/Thickness.xaml`. Each alias resolves to the shared token it names, so overriding a shared token or changing a scale property reaches it:
 
 - `SimpleSpace*` for every `Space*` step, and `SimpleSpace*Thickness` for the steps `0` through `900`; `SimpleSpace100HorizontalThickness` and `SimpleSpace200HorizontalThickness`.
-- `SimpleRadius*` and `SimpleRadius*CornerRadius` for the steps `050` through `400`, plus `SimpleRadiusFull` / `SimpleRadiusFullCornerRadius`.
+- `SimpleRadius*` and `SimpleRadius*CornerRadius` for the steps `050` through `400`. The `SimpleRadiusFull` / `SimpleRadiusFullCornerRadius` aliases are deprecated. They still resolve to 9999, but that draws an ellipse on anything that isn't square. See [Pills and circles](design-tokens.md#pills-and-circles).
 - `SimpleIconExtraSmall` / `SimpleIconSmall` / `SimpleIconMedium` (aliases of `IconSizeSmall` / `IconSizeMedium` / `IconSizeLarge`) and a fixed `SimpleIconLarge` (40).
 - `SimpleStrokeBorder` / `SimpleStrokeFocusRing` (and their `*Thickness` companions), which are fixed Simple values.

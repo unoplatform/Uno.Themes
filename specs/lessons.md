@@ -4,6 +4,21 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## A huge `CornerRadius` is never a pill, on WinUI or Uno
+
+**Context:** #1789 (2026-11-26). `RadiusFull` (9999) was documented as a pill but drew an ellipse on any
+element that isn't square. The issue asked whether this was a Uno parity bug.
+
+**How to apply:**
+- It isn't a parity bug. WinUI's `CGeometryBuilder::CalculateRoundedCornersRectangle` (and `ClampRadii` for the
+  composition clip) fits an oversized radius to each edge separately, so 9999 becomes W/2 × H/2. Uno matches
+  it. CSS scales both axes together, which is why `border-radius: 9999px` is a pill on the web and not in XAML.
+- A pill needs half its height and a circle half its side. Use a literal or a size-capped role
+  (`BaseTheme.CappedRadii`), never `RadiusFull`, which is deprecated.
+- To settle "what does WinUI do?", read the WinUI source (`microsoft/microsoft-ui-xaml`) before guessing.
+
+---
+
 ## A visual-state setter's `{ThemeResource}` resolves from the app theme on Uno, not from a scoped theme
 
 **Context:** #1784 runtime tests (2026-11-23). A seeded `SimpleTheme` merged into the test container

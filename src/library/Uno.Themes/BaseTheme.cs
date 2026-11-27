@@ -296,7 +296,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 	/// All shape scale tokens (Radius100, Radius200, …) are computed
 	/// as multiples of this value — e.g. <c>DefaultCornerRadius="6"</c> makes
 	/// Radius100=6, Radius200=12, Radius400=24, etc.
-	/// <c>RadiusFull</c> always remains 9999 (pill shape).
+	/// <c>RadiusFull</c> always remains 9999; it is deprecated, see the remarks.
 	/// Individual tokens can still be overridden via lightweight styling.
 	/// </summary>
 	/// <remarks>
@@ -314,6 +314,12 @@ public abstract partial class BaseTheme : ResourceDictionary
 	/// </para>
 	/// <para>
 	/// Non-finite or negative values are treated as unset and fall back to the default of 4.
+	/// </para>
+	/// <para>
+	/// <c>RadiusFull</c> / <c>RadiusFullCornerRadius</c> (9999) are deprecated and kept only for
+	/// compatibility. A radius larger than the element is fitted to each edge separately, on WinUI as
+	/// on Uno, so 9999 draws a circle on a square but an ellipse on anything wider than it is tall.
+	/// Give a pill a radius of half its height and a circle half its side.
 	/// </para>
 	/// <para>
 	/// This is a <b>runtime</b> setting: assigning it regenerates the <c>Radius*</c> token

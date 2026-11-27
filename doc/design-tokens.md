@@ -106,9 +106,8 @@ If you set `DefaultSpacing="4"` to get the default spacing, remove it or set `De
 | `Radius400`  | 16         | `Radius400CornerRadius`  |
 | `Radius500`  | 20         | `Radius500CornerRadius`  |
 | `Radius700`  | 28         | `Radius700CornerRadius`  |
-| `RadiusFull` | 9999       | `RadiusFullCornerRadius` |
 
-Every step except `RadiusFull` also has directional `CornerRadius` companions, for shapes rounded on one side only:
+Every step also has directional `CornerRadius` companions, for shapes rounded on one side only:
 
 | Suffix                | Value     | Example                        |
 |-----------------------|-----------|--------------------------------|
@@ -116,6 +115,18 @@ Every step except `RadiusFull` also has directional `CornerRadius` companions, f
 | `LeftCornerRadius`    | `r,0,0,r` | `Radius100LeftCornerRadius`    |
 | `BottomCornerRadius`  | `0,0,r,r` | `Radius100BottomCornerRadius`  |
 | `TopLeftCornerRadius` | `r,0,0,0` | `Radius200TopLeftCornerRadius` |
+
+#### Pills and circles
+
+A fully rounded shape needs a radius of half its shorter side, which a token can't know. Set it from the element's size:
+
+- **Pill:** half the height. A 120 × 32 badge takes `CornerRadius="16"`.
+- **Circle:** half the side. A 48 × 48 avatar takes `CornerRadius="24"`.
+
+Don't use a very large radius instead. When a radius doesn't fit, WinUI and Uno shrink it along each edge separately, so a 9999 radius on a 120 × 32 element becomes 60 × 16, and the element is drawn as an ellipse. It is only a circle when the element is square.
+
+> [!WARNING]
+> `RadiusFull` (9999) and `RadiusFullCornerRadius` are deprecated, along with Simple's `SimpleRadiusFull` / `SimpleRadiusFullCornerRadius` aliases. They still resolve to 9999, so existing apps keep working, but they draw an ellipse on anything wider than it is tall. Use the radii above instead.
 
 #### Size-capped radii
 

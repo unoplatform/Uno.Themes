@@ -47,7 +47,8 @@
 	<StaticResource x:Key="SimpleButtonCornerRadius" ResourceKey="SimpleShapeControlCornerRadius" />
 	<StaticResource x:Key="SimpleButtonBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />
 	<StaticResource x:Key="SimpleButtonIconSpacing" ResourceKey="SimpleSpace100" />
-	<StaticResource x:Key="SimpleIconButtonCornerRadius" ResourceKey="SimpleRadiusFullCornerRadius" />
+	<!-- Half the fixed 40px side (SimpleIconLarge): a circle at every DefaultCornerRadius. Override it with the size. -->
+	<CornerRadius x:Key="SimpleIconButtonCornerRadius">20</CornerRadius>
 	<StaticResource x:Key="SimpleIconButtonBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />
 
 
