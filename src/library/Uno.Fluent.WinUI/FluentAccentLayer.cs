@@ -46,9 +46,9 @@ internal sealed class FluentAccentLayer
 		foreach (var pair in brushes.Where(pair => entries?.ContainsKey(pair.Key) != true))
 		{
 			platform ??= FluentAccentPalette.BuildPlatform(isLight);
-			if (platform?.TryGetValue(pair.Key, out var value) == true && value is SolidColorBrush source)
+			if (platform?.TryGetValue(pair.Key, out var value) == true && value is FluentAccentPalette.BrushSpec spec)
 			{
-				CopyTo(source, pair.Value);
+				Apply(spec, pair.Value);
 			}
 		}
 
@@ -60,13 +60,13 @@ internal sealed class FluentAccentLayer
 
 		foreach (var pair in entries)
 		{
-			if (pair.Value is SolidColorBrush source)
+			if (pair.Value is FluentAccentPalette.BrushSpec spec)
 			{
 				if (!brushes.TryGetValue(pair.Key, out var brush))
 				{
 					brushes[pair.Key] = brush = new SolidColorBrush();
 				}
-				CopyTo(source, brush);
+				Apply(spec, brush);
 				branch[pair.Key] = brush;
 			}
 			else
@@ -76,9 +76,9 @@ internal sealed class FluentAccentLayer
 		}
 	}
 
-	private static void CopyTo(SolidColorBrush source, SolidColorBrush target)
+	private static void Apply(FluentAccentPalette.BrushSpec spec, SolidColorBrush target)
 	{
-		target.Color = source.Color;
-		target.Opacity = source.Opacity;
+		target.Color = spec.Color;
+		target.Opacity = spec.Opacity;
 	}
 }

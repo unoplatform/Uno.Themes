@@ -82,6 +82,12 @@ internal static class FluentAccentPalette
 	};
 
 	/// <summary>
+	/// A brush's values: <see cref="FluentAccentLayer"/> writes them into its own stable
+	/// <see cref="SolidColorBrush"/> per key, so building the resources allocates no brush.
+	/// </summary>
+	internal readonly record struct BrushSpec(Color Color, double Opacity);
+
+	/// <summary>
 	/// An accent and its Fluent shade ramp. Shades are relative to the accent's tone: the dark shades
 	/// sit 3/4, 1/2 and 1/4 of the way to black (so they stay darker than any accent), Light2 at the
 	/// dark-theme Primary tone, Light1 between the accent and it, Light3 between it and white.
@@ -193,7 +199,7 @@ internal static class FluentAccentPalette
 	/// same way. Keys any override declares are left out, whether or not it drives the accent, so an
 	/// explicit consumer value always wins. <c>null</c> when nothing drives the accent.
 	/// </summary>
-	/// <returns>Colors and <see cref="SolidColorBrush"/> templates (color + opacity), by key.</returns>
+	/// <returns>Colors and <see cref="BrushSpec"/>s, by key.</returns>
 	internal static Dictionary<string, object>? Build(bool isLight, IReadOnlyList<ColorLayer> layers, AccentShades? seedShades)
 	{
 		// Read through the semantic brushes' resolver. Declared entries only: the platform defines the
@@ -235,11 +241,9 @@ internal static class FluentAccentPalette
 		var primaryBrush = Find("PrimaryBrush") as SolidColorBrush;
 		var basis = primaryBrush?.Color ?? Find(SemanticColorKeys.Primary) as Color?;
 
-		var onPrimary = Find("OnPrimaryBrush") as SolidColorBrush;
-		if (onPrimary is null && Find(SemanticColorKeys.OnPrimary) is Color onPrimaryColor)
-		{
-			onPrimary = new SolidColorBrush(onPrimaryColor);
-		}
+		var onPrimary = Find("OnPrimaryBrush") is SolidColorBrush onPrimaryBrush
+			? new BrushSpec(onPrimaryBrush.Color, onPrimaryBrush.Opacity)
+			: Find(SemanticColorKeys.OnPrimary) is Color onPrimaryColor ? new BrushSpec(onPrimaryColor, 1) : (BrushSpec?)null;
 
 		var shades = basis is { } b ? AccentShades.FromBasis(b) : seeded ? seedShades : null;
 		if (shades is null && onPrimary is null)
@@ -256,10 +260,10 @@ internal static class FluentAccentPalette
 			WriteAccent(entries, accent, isLight, fill, primaryBrush?.Opacity ?? 1, PickOnAccentText(fill));
 		}
 
-		if (onPrimary is { })
+		if (onPrimary is { } onAccent)
 		{
-			WriteColorAndBrush(entries, "TextOnAccentFillColorPrimary", onPrimary.Color, onPrimary.Opacity);
-			WriteColorAndBrush(entries, "TextOnAccentFillColorSecondary", onPrimary.Color, onPrimary.Opacity);
+			WriteColorAndBrush(entries, "TextOnAccentFillColorPrimary", onAccent.Color, onAccent.Opacity);
+			WriteColorAndBrush(entries, "TextOnAccentFillColorSecondary", onAccent.Color, onAccent.Opacity);
 		}
 
 		foreach (var layer in declared)
@@ -313,7 +317,7 @@ internal static class FluentAccentPalette
 
 		foreach (var key in LegacyAccentBrushKeys)
 		{
-			entries[key] = new SolidColorBrush(shades.Accent);
+			entries[key] = new BrushSpec(shades.Accent, 1);
 		}
 
 		// Secondary / Tertiary fills are the same color at 90% / 80% brush opacity, as in Fluent.
@@ -334,7 +338,7 @@ internal static class FluentAccentPalette
 	private static void WriteColorAndBrush(Dictionary<string, object> entries, string colorKey, Color color, double opacity)
 	{
 		entries[colorKey] = color;
-		entries[colorKey + "Brush"] = new SolidColorBrush(color) { Opacity = opacity };
+		entries[colorKey + "Brush"] = new BrushSpec(color, opacity);
 	}
 
 	private static bool TryReadShades(ResourceDictionary resources, Color[] colors)
