@@ -42,12 +42,15 @@ Per-control shape:
 - ComboBox: `BorderElement` carries the content, so the ring covers it at the theme's
   heaviest stroke instead of replacing it.
 - AutoSuggestBox: the field is drawn by the inner TextBox's template, a separate namescope. The
-  outer error states set the inner `TextBox.Tag`. The inner style
-  (`SimpleAutoSuggestBoxTextBoxStyle`, changed in place) swaps its stroke for the ring and tint
-  while `Tag` is set, so they always cover exactly the field. The outer template only centers the
-  compact icon on the field, with row 0 sized by an invisible `HeaderSpacer` `TextBlock` bound to
-  the header's text. (It was a `ContentPresenter` presenting `Header` itself until review item
-  RP1: on WinUI it took an element header from the inner TextBox, which then disappeared.)
+  outer error states set `ControlExtensions.IsInError` (new in `Uno.Themes`) on the inner TextBox.
+  The inner style (`SimpleAutoSuggestBoxTextBoxStyle`, changed in place) swaps its stroke for the
+  ring and tint while it is true, so they always cover exactly the field. (Until review item RP3
+  the signal was the inner `TextBox.Tag`, so any app `Tag` on that public style drew the error
+  look.) The inner TextBox fills the first column, with no `Width` of its own, so a fixed-width box
+  makes room for the icon (RP4). The outer template only centers the compact icon on the field,
+  with row 0 sized by an invisible `HeaderSpacer` `TextBlock` bound to the header's text. (It was
+  a `ContentPresenter` presenting `Header` itself until review item RP1: on WinUI it took an
+  element header from the inner TextBox, which then disappeared.)
 
 On `net10.0-windows` the `Validation` properties exist (`Uno.UI.Extras.dll` registers the same attached properties)
 but have no effect, so the ErrorTemplate setters and the two DataTemplates load there unused, and every key exists
@@ -131,6 +134,29 @@ No bump needed: master's Uno already ships unoplatform/uno#24838. The framework'
       ring moved into `SimpleAutoSuggestBoxTextBoxStyle` next to the tint (same `Tag` signal), so it always covers
       exactly the field. Guarded by `Given_AutoSuggestBox.When_HeaderIsAnElement_Then_InnerTextBoxPresentsIt` (all
       targets) and `Given_InputValidation.When_AutoSuggestBoxWithHeaderInError_Then_ErrorRingFitsTheField` (Uno)
+- [x] RP3 — the AutoSuggestBox error states signalled the inner TextBox through `Tag`, so an app `Tag` on the public
+      `SimpleAutoSuggestBoxTextBoxStyle` drew the error look. New attached property `ControlExtensions.IsInError`
+      (`Uno.Themes`, bool) replaces it, documented in `doc/themes-control-extensions.md`. Guarded by
+      `Given_AutoSuggestBox.When_TextBoxStyleUsedWithTag_Then_NoErrorLook` (red before) and
+      `When_IsInErrorSetThenCleared_Then_ErrorLookFollows`
+- [x] RP4 — a fixed-`Width` AutoSuggestBox kept its inner TextBox at that width when the compact icon column opened,
+      so the field ran under the icon. The inner TextBox no longer takes the `Width`. Guarded by
+      `When_SizedAutoSuggestBoxInCompactError_Then_FieldFitsBesideTheIcon` (`FixedWidth`, red before)
+- [x] RP5 — a vertically stretched AutoSuggestBox drew the ring over the whole row while the field stayed centered.
+      Fixed by RP1 (the ring is in the field's own row); `When_SizedAutoSuggestBoxInCompactError_...`
+      (`StretchedVertically`) fails on the pre-RP1 template (ring top 0, field top 59) and passes now
+- [x] RP6 — the doc said `SimpleInputValidationErrorTemplate` can be overridden in app resources. It can't: the
+      styles take it from the theme dictionary (a temporary probe confirmed an `Application.Resources` entry doesn't
+      reach the setter). The doc now points to `input:Validation.ErrorTemplate` on the control or a based-on style,
+      guarded by `When_ControlSetsItsOwnErrorTemplate_Then_InlineErrorsUseIt`
+- [x] RP7 — doc: `DefaultCompactErrorIconTemplate` is looked up in `Application.Resources` only
+      (`ResourceResolver.ResolveTopLevelResource`), so it applies app-wide when the theme is merged there, is ignored
+      when merged lower, and has at most 28px beside the field
+- [x] RP8 — tests now check the visuals rather than states only: the field reaches the control's edges when clean
+      (with a header, Compact and Inline), the tint and the field's own stroke in and out of error, the Simple
+      compact icon, and the ring and tint through focus, disabled and a Light → Dark switch. The pixel comparison
+      against master was rerun (below)
+- [x] RP9 — stale `not_win` comment in `Given_InputValidation`
 
 ## Known limitations
 
@@ -220,3 +246,16 @@ rebasing onto master `45b8e2ab` (#1787, no conflicts):
   (`FileNotFoundException`), before any XAML loads.
 - Full SimpleSampleApp suite, desktop Debug: 446 pass, 1 skipped (pre-existing `[Ignore]`). XAML Styler,
   `dotnet format whitespace`, `GenerateStyleDocs.cs --check` and `check-xaml-resource-keys.ps1` are clean.
+
+After the P1 items (RP3–RP9):
+
+- Full SimpleSampleApp suite, desktop Debug: 463 pass, 1 skipped (pre-existing `[Ignore]`).
+- Packaged Simple WinAppSDK head (Debug): `Given_AutoSuggestBox` (3 tests, including `IsInError` set/clear) and
+  `Given_AllSamplePages` pass.
+- Pixel parity with master `45b8e2ab`, rerun after the framework migration and these fixes: a temporary in-process test
+  loaded master's TextBox / PasswordBox / AutoSuggestBox / ComboBox dictionaries with `XamlReader` (their identical
+  `<StaticResource/>` aliases stripped, as `XamlReader` can't load them) and rendered each of the six styles next to
+  the branch's with `RenderTargetBitmap`, in Light and Dark, with and without a header, not in error: 0 differing bytes
+  in all 24 cases (about 16,000 drawn pixels each). Resting state only; focus was not compared this time.
+- XAML Styler, `dotnet format whitespace`, `GenerateStyleDocs.cs --check`, `check-xaml-resource-keys.ps1`, and cSpell +
+  markdownlint on the two changed docs are clean.
