@@ -43,9 +43,11 @@ Per-control shape:
   heaviest stroke instead of replacing it.
 - AutoSuggestBox: the field is drawn by the inner TextBox's template, a separate namescope. The
   outer error states set the inner `TextBox.Tag`. The inner style
-  (`SimpleAutoSuggestBoxTextBoxStyle`, changed in place) hides its stroke and shows its tint while
-  `Tag` is set. The outer template draws the ring as an overlay, sized to the field by an
-  invisible `HeaderSpacer`.
+  (`SimpleAutoSuggestBoxTextBoxStyle`, changed in place) swaps its stroke for the ring and tint
+  while `Tag` is set, so they always cover exactly the field. The outer template only centers the
+  compact icon on the field, with row 0 sized by an invisible `HeaderSpacer` `TextBlock` bound to
+  the header's text. (It was a `ContentPresenter` presenting `Header` itself until review item
+  RP1: on WinUI it took an element header from the inner TextBox, which then disappeared.)
 
 On `net10.0-windows` the `Validation` properties exist (`Uno.UI.Extras.dll` registers the same attached properties)
 but have no effect, so the ErrorTemplate setters and the two DataTemplates load there unused, and every key exists
@@ -121,6 +123,15 @@ No bump needed: master's Uno already ships unoplatform/uno#24838. The framework'
       so the ErrorTemplate setters and the two DataTemplates load there unused, and `SimpleInputValidationErrorTemplate`
       exists on every platform
 
+### Review panel fixes (2026-11-27)
+
+- [x] RP1 — AutoSuggestBox element header: the outer `HeaderSpacer` was a `ContentPresenter` bound to `Header`, so an
+      element header had two presenters. On WinUI the spacer kept it and the header vanished (invisible spacer);
+      on Uno the inner TextBox kept it. The spacer is now a `TextBlock` bound to the header's text, and the error
+      ring moved into `SimpleAutoSuggestBoxTextBoxStyle` next to the tint (same `Tag` signal), so it always covers
+      exactly the field. Guarded by `Given_AutoSuggestBox.When_HeaderIsAnElement_Then_InnerTextBoxPresentsIt` (all
+      targets) and `Given_InputValidation.When_AutoSuggestBoxWithHeaderInError_Then_ErrorRingFitsTheField` (Uno)
+
 ## Known limitations
 
 - Commits between Phase A and the Phase B shim don't build on CI (the published 701 has no `Uno.Extras.Input`).
@@ -190,3 +201,22 @@ Verified on master's Uno 7.1.0-dev.477 with the framework implementation, shim r
   `check-xaml-resource-keys.ps1` resolves every key. In the packaged app, `Given_AllSamplePages` passes (1/1), and
   the Input Validation page survives switching Compact/Inline and entering invalid input, with no visuals (inert,
   as expected). The desktop head builds.
+
+### Review panel (2026-11-27)
+
+Seven-reviewer panel on `f8b439ed..433866e2`, verdict fix-first; the items are tracked outside the repo. After
+rebasing onto master `45b8e2ab` (#1787, no conflicts):
+
+- RP1 (fixed, above): `When_HeaderIsAnElement_Then_InnerTextBoxPresentsIt` failed on the packaged Simple WinAppSDK
+  head (Debug) before the fix ("The header element should be shown by the inner TextBox") and passes after it, with
+  `Given_AllSamplePages`. On desktop both new tests already passed before the fix: Uno lets the inner TextBox keep
+  the element.
+- RP2 (no change): the Release XamlMerge output orders files alphabetically, so the AutoSuggestBox and ComboBox
+  setters reference `SimpleInputValidationErrorTemplate` before its definition. WinUI resolves this: a temporary
+  probe (an AutoSuggestBox setter referencing a `DataTemplate` defined at the end of the same file) resolved to the
+  probe template on the packaged WinAppSDK head, and `Given_AllSamplePages` passed with it. Master already ships the
+  same pattern (`CalendarDatePicker.xaml` → `SimpleCalendarViewStyle`; Material v2 controls → `Styles/Application`
+  keys). The Release WinAppSDK package itself could not be checked: it fails at startup on `System.Runtime`
+  (`FileNotFoundException`), before any XAML loads.
+- Full SimpleSampleApp suite, desktop Debug: 446 pass, 1 skipped (pre-existing `[Ignore]`). XAML Styler,
+  `dotnet format whitespace`, `GenerateStyleDocs.cs --check` and `check-xaml-resource-keys.ps1` are clean.
