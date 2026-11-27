@@ -30,7 +30,7 @@ If all you want is a palette derived from one brand color, you don't need the DS
 
 ## The Uno.Dsp.Tasks NuGet package
 
-This package will be automatically present in the project after [creating a new Uno Platform project](https://aka.platform.uno/get-started) specifying the _Material_ theme. It is also possible to add it manually to an existing Uno Platform project by adding the following line to the _PackageReference_ section of the _csproj_ file:
+This package is added to the project when you [create a new Uno Platform project](https://aka.platform.uno/get-started) with the _Material_ theme and the **Import Uno DSP** option (`dotnet new unoapp -theme material -dsp`), which adds the `Dsp` UnoFeature. It is also possible to add it manually to an existing Uno Platform project by adding the following line to the _PackageReference_ section of the _csproj_ file:
 
 * Add a nuget package reference:
 
@@ -38,7 +38,7 @@ This package will be automatically present in the project after [creating a new 
    <PackageReference Include="Uno.Dsp.Tasks" Version="[latest version]" />
    ```
 
-* The package is already present when you select _Material_ theme during project creation:
+* The package is already present when you select the _Material_ theme and check **Import Uno DSP** during project creation:
    ![Selection of Material theme when creating a project using the Uno Template Wizard](assets/material-theme-selection-wizard.png)
 
 It is possible to configure the import process. The _UnoDspImportColors_ item found in the _csproj_ file has a number of attributes we can set:
