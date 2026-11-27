@@ -264,28 +264,23 @@ internal static class SemanticBrushUpdater
 	}
 
 	/// <summary>
-	/// Every entry <paramref name="colorLayers"/> declare themselves for the requested theme, each key
-	/// with the value of the highest-precedence layer that declares it. Required for keys the platform
-	/// also defines (Fluent's accent tokens): <see cref="ResourceDictionary.TryGetValue"/> answers such a
-	/// key from the system resources of the ambient theme even when the layer lacks it, so the layers
-	/// are enumerated instead. Each dictionary is enumerated once, so a caller reading many keys looks
-	/// them up in the result rather than walking the layers per key. Throws where a dictionary cannot
-	/// be enumerated; the semantic roles, which no platform defines, keep the keyed lookup.
+	/// Every non-null entry <paramref name="dictionary"/> declares itself for the requested theme. Required
+	/// for keys the platform also defines (Fluent's accent tokens): <see cref="ResourceDictionary.TryGetValue"/>
+	/// answers such a key from the system resources of the ambient theme even when the dictionary lacks it,
+	/// so the dictionary is enumerated instead, once, and a caller reading many keys looks them up in the
+	/// result. Throws where a dictionary cannot be enumerated; the semantic roles, which no platform
+	/// defines, keep the keyed lookup.
 	/// </summary>
-	/// <param name="colorLayers">The dictionaries in <b>increasing</b> precedence order.</param>
-	/// <param name="themeKeys">The theme dictionary keys to probe in each layer, in order.</param>
-	internal static Dictionary<string, object> ResolveDeclared(IReadOnlyList<ResourceDictionary> colorLayers, string[] themeKeys)
+	/// <param name="dictionary">The dictionary, with its theme and merged dictionaries.</param>
+	/// <param name="themeKeys">The theme dictionary keys to probe, in order.</param>
+	internal static Dictionary<string, object> ResolveDeclared(ResourceDictionary dictionary, string[] themeKeys)
 	{
 		var resolved = new Dictionary<string, object>(StringComparer.Ordinal);
-		for (int i = colorLayers.Count - 1; i >= 0; i--)
+		foreach (var pair in CollectDeclared(dictionary, themeKeys))
 		{
-			foreach (var pair in CollectDeclared(colorLayers[i], themeKeys))
+			if (pair.Value is { } value)
 			{
-				// A null entry settles the key within its own layer only; a lower layer may still answer it.
-				if (pair.Value is { } value)
-				{
-					resolved.TryAdd(pair.Key, value);
-				}
+				resolved.Add(pair.Key, value);
 			}
 		}
 

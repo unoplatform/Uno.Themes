@@ -97,6 +97,31 @@ public class Given_FluentThemeLifecycle
 		Assert.AreNotEqual(Microsoft.UI.Colors.Green, fill, "the built-in accent must follow the seed");
 	}
 
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_ConstructorOverrideDeclaresAccentKeysAndSeed_ExplicitKeysWin()
+	{
+		// A seed outranks the constructor override's semantic roles, but not the platform accent keys it
+		// declares by name: like a Colors override, those are explicit consumer values.
+		var explicitBrush = new SolidColorBrush(Microsoft.UI.Colors.Orange);
+		var theme = new FluentTheme(colorOverride: new ResourceDictionary
+		{
+			["SystemAccentColor"] = Microsoft.UI.Colors.Green,
+			["AccentFillColorDefaultBrush"] = explicitBrush,
+		});
+		theme.Colors ??= new ThemeColors();
+		theme.Colors.PrimarySeed = Microsoft.UI.Colors.Red;
+
+		var host = new Grid { RequestedTheme = ElementTheme.Light };
+		host.Resources.MergedDictionaries.Add(theme);
+
+		Assert.IsTrue(host.Resources.TryGetValue("SystemAccentColor", out var accent));
+		Assert.AreEqual(Microsoft.UI.Colors.Green, (Color)accent, "the seed must not replace an explicit SystemAccentColor");
+		Assert.IsTrue(host.Resources.TryGetValue("AccentFillColorDefaultBrush", out var fill));
+		Assert.AreSame(explicitBrush, fill, "the seed must not replace an explicit AccentFillColorDefaultBrush");
+		Assert.AreNotEqual(Microsoft.UI.Colors.Green, (Color)theme["PrimaryColor"], "the seed still drives the semantic palette");
+	}
+
 #if HAS_UNO // WinUI binds the built-in controls' accent aliases inside XamlControlsResources, so FluentTheme cannot recolor them there (spec 05 §9.2).
 	[TestMethod]
 	[RunsOnUIThread]
