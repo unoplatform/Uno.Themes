@@ -110,3 +110,20 @@ The following control styles have support for elevation:
 | Control  | Supporting Styles     |
 |----------|-----------------------|
 | `Button` | `ElevatedButtonStyle` |
+
+## Error State
+
+`ControlExtensions.IsInError` turns on a control's error look on styles that support it: while it is `true`, the style draws its error visuals. It is meant for a parent template that passes its own error state down to a templated part, but an app can set it too.
+
+The Simple AutoSuggestBox uses it for [input validation](xref:Uno.Themes.Simple.Styles#input-validation): its error states set it on the inner `TextBox`, which then swaps its outline for an error outline and a light error tint.
+
+```xml
+<TextBox Style="{StaticResource SimpleAutoSuggestBoxTextBoxStyle}"
+         ut:ControlExtensions.IsInError="True" />
+```
+
+### Supported Styles
+
+| Control   | Supporting Styles                   |
+|-----------|-------------------------------------|
+| `TextBox` | `SimpleAutoSuggestBoxTextBoxStyle`  |

@@ -139,4 +139,27 @@ public static class ControlExtensions
 	public static void SetElevation(Control obj, int value) => obj.SetValue(ElevationProperty, value);
 
 	#endregion
+
+	#region DependencyProperty: IsInError
+
+	/// <summary>
+	/// Gets or sets whether the control shows its error visuals. Styles that support it draw an error look while it
+	/// is <see langword="true"/>. A parent template sets it on a templated part to pass its own error state down, as
+	/// the Simple AutoSuggestBox's input validation states do on its inner TextBox.
+	/// </summary>
+	public static DependencyProperty IsInErrorProperty { [DynamicDependency(nameof(GetIsInError))] get; } = DependencyProperty.RegisterAttached(
+		"IsInError",
+		typeof(bool),
+		typeof(ControlExtensions),
+		new PropertyMetadata(false));
+
+	/// <summary>Gets whether the control shows its error visuals.</summary>
+	[DynamicDependency(nameof(SetIsInError))]
+	public static bool GetIsInError(Control obj) => (bool)obj.GetValue(IsInErrorProperty);
+
+	/// <summary>Sets whether the control shows its error visuals.</summary>
+	[DynamicDependency(nameof(GetIsInError))]
+	public static void SetIsInError(Control obj, bool value) => obj.SetValue(IsInErrorProperty, value);
+
+	#endregion
 }

@@ -176,10 +176,14 @@ public class Given_InputValidation
 			Assert.AreEqual(0, Grid.GetColumn(presenter), "Inline: the errors span from the first column");
 		}
 
-		if (control is AutoSuggestBox)
+		var tint = FindPart(control, "ErrorBackgroundElement");
+		Assert.AreEqual(Visibility.Visible, tint?.Visibility, "The error tint should show while in error");
+
+		// The field's own stroke gives way to the ring (ComboBox keeps it: its ring covers it instead).
+		var resting = FindRestingStroke(control);
+		if (resting is not null)
 		{
-			var innerTextBox = control.EnumerateDescendants().OfType<TextBox>().First();
-			Assert.IsNotNull(innerTextBox.Tag, "The error states signal the inner TextBox through its Tag");
+			Assert.AreEqual(Visibility.Collapsed, resting.Visibility, "The field's own stroke should give way to the error ring while in error");
 		}
 
 		// Act: the source clears its errors
@@ -190,7 +194,20 @@ public class Given_InputValidation
 		Assert.IsFalse(Validation.GetHasErrors(control), "The control should no longer be in error");
 		Assert.AreEqual(Visibility.Collapsed, presenter.Visibility, "ErrorPresenter should hide once the errors clear");
 		Assert.AreEqual(Visibility.Collapsed, ring.Visibility, "The error ring should hide once the errors clear");
+		Assert.AreEqual(Visibility.Collapsed, tint?.Visibility, "The error tint should hide once the errors clear");
+		if (resting is not null)
+		{
+			Assert.AreEqual(Visibility.Visible, resting.Visibility, "The field's own stroke should come back once the errors clear");
+		}
 	}
+
+	/// <summary>The part drawing the field's own stroke, which the error states swap for the ring; null for ComboBox.</summary>
+	private static FrameworkElement? FindRestingStroke(Control control) => control switch
+	{
+		AutoSuggestBox => FindPart(control, "BorderStrokeElement"),
+		ComboBox => null,
+		_ => FindPart(control, "BorderElement"),
+	};
 
 	[TestMethod]
 	[RunsOnUIThread]
