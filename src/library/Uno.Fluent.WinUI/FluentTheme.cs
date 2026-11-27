@@ -63,12 +63,15 @@ public partial class FluentTheme : BaseTheme
 		: base(CreatePalette(out var shades), colorOverride, fontOverride)
 	{
 		_paletteShades = shades;
-		ObserveSystemAccent();
 
-		// In App.xaml the theme is constructed before the application's own entries (a redefined
-		// SystemAccentColor*) are parsed: read the accent again once, after the parse completes.
+		// Refreshes rebuild the theme, so they only ever run on its own thread. Without a dispatcher (a
+		// theme built off the UI thread) there is nothing to marshal them to: the accent stays as built.
 		if (DispatcherQueue.GetForCurrentThread() is { } dispatcher)
 		{
+			ObserveSystemAccent(dispatcher);
+
+			// In App.xaml the theme is constructed before the application's own entries (a redefined
+			// SystemAccentColor*) are parsed: read the accent again once, after the parse completes.
 			QueueRefresh(dispatcher);
 		}
 	}
@@ -150,13 +153,12 @@ public partial class FluentTheme : BaseTheme
 		return tokens;
 	}
 
-	private void ObserveSystemAccent()
+	private void ObserveSystemAccent(DispatcherQueue dispatcher)
 	{
 		// Windows can keep a subscribed UISettings alive past the theme, so the handler only holds the
-		// theme weakly and unsubscribes once it is gone.
+		// theme weakly and unsubscribes once it is gone. The event can fire on any thread (WinUI).
 		_uiSettings = new UISettings();
 		var weakTheme = new WeakReference<FluentTheme>(this);
-		var dispatcher = DispatcherQueue.GetForCurrentThread();
 		TypedEventHandler<UISettings, object>? handler = null;
 		handler = (sender, args) =>
 		{
@@ -166,14 +168,7 @@ public partial class FluentTheme : BaseTheme
 				return;
 			}
 
-			if (dispatcher is null)
-			{
-				theme.RefreshSystemAccent();
-			}
-			else
-			{
-				theme.QueueRefresh(dispatcher);
-			}
+			theme.QueueRefresh(dispatcher);
 		};
 		_uiSettings.ColorValuesChanged += handler;
 	}

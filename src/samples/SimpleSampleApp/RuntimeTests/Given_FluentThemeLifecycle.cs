@@ -33,6 +33,22 @@ public class Given_FluentThemeLifecycle
 		_replacementTheme = null;
 	}
 
+	[TestMethod]
+	public async Task When_ConstructedWithoutDispatcher_SystemAccentIsNotObserved()
+	{
+		// Off the UI thread there is no dispatcher to marshal a refresh to, and rebuilding the theme on
+		// the event's thread would fail (WinUI) or race UI-thread reads (Uno): the theme must not subscribe.
+		var publisher = await Task.Run(() =>
+		{
+			Assert.IsNull(Microsoft.UI.Dispatching.DispatcherQueue.GetForCurrentThread(), "the test needs a thread without a dispatcher");
+			var theme = new FluentTheme();
+			var field = Assert.IsInstanceOfType<FieldInfo>(typeof(FluentTheme).GetField("_uiSettings", BindingFlags.NonPublic | BindingFlags.Instance));
+			return field.GetValue(theme);
+		});
+
+		Assert.IsNull(publisher, "a theme built without a dispatcher must not observe the system accent");
+	}
+
 	[MethodImpl(MethodImplOptions.NoInlining)]
 	private void CreateObservedTheme()
 	{
