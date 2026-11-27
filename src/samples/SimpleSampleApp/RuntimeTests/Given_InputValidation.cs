@@ -167,6 +167,8 @@ public class Given_InputValidation
 
 			var icon = (presenter as ContentPresenter)?.Content as FrameworkElement;
 			Assert.IsNotNull(icon, "Compact: ErrorPresenter should hold the error icon");
+			var simpleIcon = ((DataTemplate)container.Resources["DefaultCompactErrorIconTemplate"]).LoadContent() as FontIcon;
+			Assert.AreEqual(simpleIcon?.Glyph, (icon as FontIcon)?.Glyph, "Compact: the icon should be the Simple theme's, not the framework's");
 			var toolTip = ToolTipService.GetToolTip(icon) as ToolTip;
 			Assert.IsNotNull(toolTip?.Content, "Compact: the icon's tooltip should carry the errors");
 		}
@@ -361,19 +363,28 @@ public class Given_InputValidation
 
 	[TestMethod]
 	[RunsOnUIThread]
-	[DataRow("SimpleOutlinedTextBoxStyle")]
-	[DataRow("SimpleFilledTextBoxStyle")]
-	[DataRow("SimpleOutlinedPasswordBoxStyle")]
-	[DataRow("SimpleFilledPasswordBoxStyle")]
-	[DataRow("SimpleAutoSuggestBoxStyle")]
-	[DataRow("SimpleComboBoxStyle")]
-	public async Task When_NoErrors_Then_LayoutMatchesUnvalidatedControl(string styleKey)
+	[DataRow("SimpleOutlinedTextBoxStyle", InputValidationKind.Compact)]
+	[DataRow("SimpleOutlinedTextBoxStyle", InputValidationKind.Inline)]
+	[DataRow("SimpleFilledTextBoxStyle", InputValidationKind.Compact)]
+	[DataRow("SimpleFilledTextBoxStyle", InputValidationKind.Inline)]
+	[DataRow("SimpleOutlinedPasswordBoxStyle", InputValidationKind.Compact)]
+	[DataRow("SimpleOutlinedPasswordBoxStyle", InputValidationKind.Inline)]
+	[DataRow("SimpleFilledPasswordBoxStyle", InputValidationKind.Compact)]
+	[DataRow("SimpleFilledPasswordBoxStyle", InputValidationKind.Inline)]
+	[DataRow("SimpleAutoSuggestBoxStyle", InputValidationKind.Compact)]
+	[DataRow("SimpleAutoSuggestBoxStyle", InputValidationKind.Inline)]
+	[DataRow("SimpleComboBoxStyle", InputValidationKind.Compact)]
+	[DataRow("SimpleComboBoxStyle", InputValidationKind.Inline)]
+	public async Task When_NoErrors_Then_ValidationTakesNoSpaceButTheInlineRow(string styleKey, InputValidationKind kind)
 	{
-		// Arrange: the same style twice, one validating against a clean source, one not validating at all
+		// Arrange: a clean validated control and an unvalidated one, both with a header
 		var container = CreateThemedContainer();
 		var validated = CreateControl(styleKey, container.Resources);
 		var plain = CreateControl(styleKey, container.Resources);
+		SetHeader(validated, "Header");
+		SetHeader(plain, "Header");
 		Validation.SetMode(validated, InputValidationMode.Auto);
+		Validation.SetKind(validated, kind);
 		BindValidatedProperty(validated, new ErrorSource());
 
 		var panel = new StackPanel();
@@ -386,10 +397,89 @@ public class Given_InputValidation
 		await UnitTestsUIContentHelper.WaitForLoaded(plain);
 		await UnitTestsUIContentHelper.WaitForIdle();
 
-		// Assert
+		// Assert: the icon column stays closed, and only Inline reserves its error row, by design
 		Assert.IsFalse(Validation.GetHasErrors(validated));
+		var reservedRow = kind == InputValidationKind.Inline ? 20 : 0;
 		Assert.AreEqual(plain.ActualWidth, validated.ActualWidth, 0.5, "A clean validated control should be as wide as an unvalidated one");
-		Assert.AreEqual(plain.ActualHeight, validated.ActualHeight, 0.5, "A clean validated control should be as tall as an unvalidated one");
+		Assert.AreEqual(plain.ActualHeight + reservedRow, validated.ActualHeight, 0.5, "A clean validated control should be as tall as an unvalidated one, plus the Inline error row");
+
+		var field = GetBounds(FindPart(validated, "BorderElement") ?? throw new AssertFailedException("BorderElement should be part of the template"), validated);
+		Assert.AreEqual(validated.ActualWidth, field.Right, 0.5, "The field should reach the control's right edge: the icon column takes no space");
+		Assert.AreEqual(validated.ActualHeight - reservedRow, field.Bottom, 0.5, "Only the Inline error row should sit under the field");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow("SimpleOutlinedTextBoxStyle")]
+	[DataRow("SimpleFilledTextBoxStyle")]
+	[DataRow("SimpleOutlinedPasswordBoxStyle")]
+	[DataRow("SimpleFilledPasswordBoxStyle")]
+	[DataRow("SimpleAutoSuggestBoxStyle")]
+	[DataRow("SimpleComboBoxStyle")]
+	public async Task When_InErrorThenFocusedDisabledAndThemeSwitched_Then_ErrorLookStays(string styleKey)
+	{
+		// Arrange: a control in Compact error, next to a probe that tracks the theme's ErrorBrush
+		var container = CreateThemedContainer(ElementTheme.Light);
+		var control = CreateControl(styleKey, container.Resources);
+		Validation.SetMode(control, InputValidationMode.Auto);
+		BindValidatedProperty(control, new ErrorSource(ErrorMessage));
+		var probe = (Border)XamlReader.Load("""
+			<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					Width="1"
+					Height="1"
+					Background="{ThemeResource ErrorBrush}" />
+			""");
+		var panel = new StackPanel();
+		panel.Children.Add(control);
+		panel.Children.Add(probe);
+		container.Children.Add(panel);
+
+		UnitTestsUIContentHelper.Content = container;
+		await UnitTestsUIContentHelper.WaitForLoaded(control);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		var ring = (Border?)FindPart(control, "ErrorBorderElement");
+		var tint = FindPart(control, "ErrorBackgroundElement");
+		Assert.IsNotNull(ring);
+		Assert.IsNotNull(tint);
+		void AssertErrorLook(string when)
+		{
+			Assert.AreEqual(Visibility.Visible, ring.Visibility, $"The error ring should stay {when}");
+			Assert.AreEqual(Visibility.Visible, tint.Visibility, $"The error tint should stay {when}");
+			Assert.AreEqual((probe.Background as SolidColorBrush)?.Color, (ring.BorderBrush as SolidColorBrush)?.Color, $"The error ring should use the theme's ErrorBrush {when}");
+		}
+
+		AssertErrorLook("in error");
+
+		// Act + Assert: focused (the common states must not clear it)
+		control.Focus(FocusState.Programmatic);
+		await UnitTestsUIContentHelper.WaitForIdle();
+		AssertErrorLook("while focused");
+
+		// Act + Assert: disabled, then enabled again
+		control.IsEnabled = false;
+		await UnitTestsUIContentHelper.WaitForIdle();
+		AssertErrorLook("while disabled");
+		control.IsEnabled = true;
+
+		// Act + Assert: the theme switches while in error
+		var lightError = (probe.Background as SolidColorBrush)?.Color;
+		container.RequestedTheme = ElementTheme.Dark;
+		await UnitTestsUIContentHelper.WaitForIdle();
+		Assert.AreNotEqual(lightError, (probe.Background as SolidColorBrush)?.Color, "The probe should follow the theme");
+		AssertErrorLook("after switching to Dark");
+	}
+
+	private static void SetHeader(Control control, object header)
+	{
+		switch (control)
+		{
+			case TextBox textBox: textBox.Header = header; break;
+			case PasswordBox passwordBox: passwordBox.Header = header; break;
+			case AutoSuggestBox autoSuggestBox: autoSuggestBox.Header = header; break;
+			case ComboBox comboBox: comboBox.Header = header; break;
+			default: throw new ArgumentOutOfRangeException(nameof(control));
+		}
 	}
 
 	[TestMethod]
