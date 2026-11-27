@@ -110,7 +110,17 @@ public partial class FluentTheme : BaseTheme
 			var seedShades = EffectivePrimarySeed is { } seed ? FluentAccentPalette.AccentShades.FromSeed(seed.Seed, seed.Mode) : (FluentAccentPalette.AccentShades?)null;
 			_accent.Update(isLight: true, FluentAccentPalette.Build(isLight: true, ColorLayers, seedShades));
 			_accent.Update(isLight: false, FluentAccentPalette.Build(isLight: false, ColorLayers, seedShades));
+		}
+		catch (Exception e)
+		{
+			// Runs from property-changed callbacks and the constructor; it reads consumer dictionaries,
+			// which WinUI can fail to enumerate. Degrade rather than throw into the app.
+			FluentDiagnostics.LogWarning("FluentTheme could not update the Fluent accent resources.", e);
+		}
 
+		// Separate from the accent, so a failure there does not also drop the consumer's tokens.
+		try
+		{
 			if (BuildPlatformTokenOverrides() is { } platformTokens)
 			{
 				AddThemeDictionary(platformTokens);
@@ -118,9 +128,7 @@ public partial class FluentTheme : BaseTheme
 		}
 		catch (Exception e)
 		{
-			// Runs from property-changed callbacks and the constructor; it reads consumer dictionaries,
-			// which WinUI can fail to enumerate. Degrade rather than throw into the app.
-			FluentDiagnostics.LogWarning("FluentTheme could not update the Fluent accent resources.", e);
+			FluentDiagnostics.LogWarning("FluentTheme could not apply DefaultCornerRadius / DefaultFontFamily to the platform tokens.", e);
 		}
 	}
 
