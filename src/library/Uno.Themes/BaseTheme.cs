@@ -597,7 +597,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 		// from property-changed callbacks and the hot-reload handler. Committing only once the new
 		// layers exist means a failure leaves the theme on its last good palette, instead of stripping
 		// every colour, spacing and shape key out of the consuming app permanently.
-		var colors = BuildColorLayer(out var resolvedOverride);
+		var colors = BuildColorLayer(out var resolvedOverride, out var colorLayers);
 
 		// Spacing and density are orthogonal: DefaultSpacing supplies the base unit, the density
 		// mode scales it. Non-finite or negative consumer values degrade to the default base (8)
@@ -652,7 +652,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 		// edit to the override file would otherwise never reach the theme (unoplatform/Uno.Themes#1705).
 		// Unrelated rebuilds (a seed-color change, a spacing tweak) reuse the resolved copy.
 		var fontOverride = ResolveFontOverride();
-		ResolvedColorOverride = resolvedOverride;
+		ColorLayers = colorLayers;
 
 		// ── Commit. Nothing below parses XAML or runs consumer-supplied code. ──
 
@@ -716,12 +716,13 @@ public abstract partial class BaseTheme : ResourceDictionary
 	/// <summary>The design system's own palette layer, or <c>null</c>.</summary>
 	internal ResourceDictionary ThemePalette => _themePalette;
 
-	/// <summary>The constructor color override, available from the first rebuild pass on.</summary>
-	internal ResourceDictionary ConstructorColorOverride => _constructorColorOverride;
-
-	// The consumer color override resolved by the last pass, for design-system adapters that
-	// derive resources from it (Fluent's accent) without re-parsing its Source.
-	internal ResourceDictionary ResolvedColorOverride { get; private set; }
+	/// <summary>
+	/// The color layer's dictionaries resolved by the last rebuild pass, in increasing precedence:
+	/// the single definition of the color precedence, for design-system adapters that derive
+	/// resources from it (Fluent's accent) without re-encoding it or re-parsing an override Source.
+	/// Set before <see cref="AddThemeSpecificResources"/> runs.
+	/// </summary>
+	internal IReadOnlyList<ColorLayer> ColorLayers { get; private set; } = Array.Empty<ColorLayer>();
 
 	/// <summary>The primary seed in effect (<see cref="ThemeColors.PrimarySeed"/>, else <see cref="DefaultPrimarySeed"/>) and its generation mode; <c>null</c> without one.</summary>
 	internal (Color Seed, SeedColorMode Mode)? EffectivePrimarySeed
@@ -824,7 +825,8 @@ public abstract partial class BaseTheme : ResourceDictionary
 	/// The consumer override to merge last, or <c>null</c>. Returned separately because it has to be
 	/// merged after the brush dictionary so a consumer-defined <c>*Brush</c> key still wins.
 	/// </param>
-	private ResourceDictionary BuildColorLayer(out ResourceDictionary resolvedOverride)
+	/// <param name="layers">The value dictionaries, tagged, in increasing precedence (see <see cref="ColorLayers"/>).</param>
+	private ResourceDictionary BuildColorLayer(out ResourceDictionary resolvedOverride, out IReadOnlyList<ColorLayer> layers)
 	{
 		// The value dictionaries — shared palette, the theme's own base palette (e.g. SimpleTheme's
 		// grayscale), the constructor override, the seed palette and finally the consumer
@@ -834,30 +836,36 @@ public abstract partial class BaseTheme : ResourceDictionary
 		// static base.
 		var colors = new ResourceDictionary();
 		var colorLayers = new List<ResourceDictionary>(5);
+		var taggedLayers = new List<ColorLayer>(5);
 
 		var sharedPalette = new SemanticResources { Source = new Uri(ThemesConstants.SharedColorPaletteResourcePath) };
 		colors.MergedDictionaries.Add(sharedPalette);
-		colorLayers.Add(sharedPalette);
+		Track(sharedPalette, ColorLayerKind.SharedPalette);
 
 		// Theme-specific base colors (e.g. SimpleTheme's grayscale palette), then the constructor
 		// override, are merged before the seed so that seed-generated colors take precedence.
-		AddLayer(_themePalette);
-		AddLayer(_constructorColorOverride);
+		AddLayer(_themePalette, ColorLayerKind.ThemePalette);
+		AddLayer(_constructorColorOverride, ColorLayerKind.ConstructorOverride);
 
-		void AddLayer(ResourceDictionary layer)
+		void AddLayer(ResourceDictionary layer, ColorLayerKind kind)
 		{
 			if (layer is { })
 			{
 				colors.SafeMerge(layer);
-				colorLayers.Add(layer);
+				Track(layer, kind);
 			}
+		}
+
+		void Track(ResourceDictionary layer, ColorLayerKind kind)
+		{
+			colorLayers.Add(layer);
+			taggedLayers.Add(new ColorLayer(layer, kind));
 		}
 
 		if (EffectivePrimarySeed is { } effective)
 		{
 			var seedPalette = SeedColorPaletteGenerator.Default.Generate(effective.Seed, Colors?.SecondarySeed, Colors?.TertiarySeed, effective.Mode);
-			colors.SafeMerge(seedPalette);
-			colorLayers.Add(seedPalette);
+			AddLayer(seedPalette, ColorLayerKind.Seed);
 		}
 
 		// Explicit user overrides from Colors.OverrideDictionary take highest precedence.
@@ -890,7 +898,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 				resolvedOverride = userOverride;
 			}
 
-			colorLayers.Add(resolvedOverride);
+			Track(resolvedOverride, ColorLayerKind.ConsumerOverride);
 		}
 
 		// The brush dictionary is created once and reused for the lifetime of the theme; the
@@ -903,6 +911,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 		_semanticBrushes ??= SemanticBrushUpdater.CreateBrushes();
 		SemanticBrushUpdater.Apply(_semanticBrushes, colorLayers);
 
+		layers = taggedLayers;
 		return colors;
 	}
 

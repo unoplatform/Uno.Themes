@@ -185,27 +185,52 @@ internal static class FluentAccentPalette
 	}
 
 	/// <summary>
-	/// The accent resources of one appearance, driven by the effective primary in the semantic palette's
-	/// precedence: the consumer override's <c>PrimaryBrush</c> (solid) or <c>PrimaryColor</c> — the accent
-	/// verbatim — else <paramref name="seedShades"/>, else <paramref name="constructorOverride"/>'s; plus
-	/// <c>OnPrimaryBrush</c> / <c>OnPrimaryColor</c> as the on-accent text, in the same order. Keys either
-	/// override declares are left out whether or not it drives the accent, so an explicit consumer value
-	/// always wins. <c>null</c> when nothing drives the accent.
+	/// The accent resources of one appearance, driven by the effective primary in the theme's color
+	/// precedence (<paramref name="layers"/>, from <c>BaseTheme.ColorLayers</c>): walking down from the top,
+	/// an override's <c>PrimaryBrush</c> (solid) or <c>PrimaryColor</c> is the accent verbatim, and the seed
+	/// layer, once reached, drives it through <paramref name="seedShades"/>; palettes below never do (the
+	/// platform accent stands). <c>OnPrimaryBrush</c> / <c>OnPrimaryColor</c> become the on-accent text the
+	/// same way. Keys any override declares are left out, whether or not it drives the accent, so an
+	/// explicit consumer value always wins. <c>null</c> when nothing drives the accent.
 	/// </summary>
 	/// <returns>Colors and <see cref="SolidColorBrush"/> templates (color + opacity), by key.</returns>
-	internal static Dictionary<string, object>? Build(bool isLight, AccentShades? seedShades, ResourceDictionary? consumerOverride, ResourceDictionary? constructorOverride = null)
+	internal static Dictionary<string, object>? Build(bool isLight, IReadOnlyList<ColorLayer> layers, AccentShades? seedShades)
 	{
 		// Read through the semantic brushes' resolver. Declared entries only: the platform defines the
-		// accent keys too. Resolved once per layer: every key below is looked up in these snapshots.
+		// accent keys too. Resolved once per override: every key below is looked up in these snapshots.
 		var themes = isLight ? ThemesConstants.LightColorThemes : ThemesConstants.DarkColorThemes;
-		var consumer = Resolve(consumerOverride, themes);
-		var constructor = Resolve(constructorOverride, themes);
+		var declared = new List<Dictionary<string, object>>(2);
+		var drivers = 0; // the leading entries of declared, above the seed
+		var seeded = false;
+		for (var i = layers.Count - 1; i >= 0; i--)
+		{
+			switch (layers[i].Kind)
+			{
+				case ColorLayerKind.ConsumerOverride:
+				case ColorLayerKind.ConstructorOverride:
+					declared.Add(SemanticBrushUpdater.ResolveDeclared(layers[i].Dictionary, themes));
+					if (!seeded)
+					{
+						drivers++;
+					}
+					break;
+				case ColorLayerKind.Seed:
+					seeded = true;
+					break;
+			}
+		}
 
-		// A seed outranks the constructor override's semantic roles, as in the semantic palette.
 		object? Find(string key)
-			=> consumer is { } && consumer.TryGetValue(key, out var value) ? value
-			: seedShades is null && constructor is { } && constructor.TryGetValue(key, out value) ? value
-			: null;
+		{
+			for (var i = 0; i < drivers; i++)
+			{
+				if (declared[i].TryGetValue(key, out var value))
+				{
+					return value;
+				}
+			}
+			return null;
+		}
 
 		var primaryBrush = Find("PrimaryBrush") as SolidColorBrush;
 		var basis = primaryBrush?.Color ?? Find(SemanticColorKeys.Primary) as Color?;
@@ -216,7 +241,7 @@ internal static class FluentAccentPalette
 			onPrimary = new SolidColorBrush(onPrimaryColor);
 		}
 
-		var shades = basis is { } b ? AccentShades.FromBasis(b) : seedShades;
+		var shades = basis is { } b ? AccentShades.FromBasis(b) : seeded ? seedShades : null;
 		if (shades is null && onPrimary is null)
 		{
 			return null;
@@ -237,23 +262,14 @@ internal static class FluentAccentPalette
 			WriteColorAndBrush(entries, "TextOnAccentFillColorSecondary", onPrimary.Color, onPrimary.Opacity);
 		}
 
-		RemoveDeclared(entries, consumer);
-		RemoveDeclared(entries, constructor);
-		return entries;
-	}
-
-	private static Dictionary<string, object>? Resolve(ResourceDictionary? layer, string[] themes)
-		=> layer is { } ? SemanticBrushUpdater.ResolveDeclared(layer, themes) : null;
-
-	private static void RemoveDeclared(Dictionary<string, object> entries, Dictionary<string, object>? declared)
-	{
-		if (declared is { })
+		foreach (var layer in declared)
 		{
-			foreach (var key in declared.Keys)
+			foreach (var key in layer.Keys)
 			{
 				entries.Remove(key);
 			}
 		}
+		return entries;
 	}
 
 	/// <summary>
