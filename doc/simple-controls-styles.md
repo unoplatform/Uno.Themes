@@ -248,12 +248,33 @@ Uno.UI.FeatureConfiguration.InputValidation.IsEnabled = true;
              Text="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 ```
 
-The error presentation comes from two templates the theme provides. Both can be overridden in the app's resources:
+The error presentation comes from two templates the theme provides:
 
 | Resource Key                         | Description                                                                              |
 |--------------------------------------|------------------------------------------------------------------------------------------|
-| `SimpleInputValidationErrorTemplate` | The error list, set as each style's `Validation.ErrorTemplate`.                         |
-| `DefaultCompactErrorIconTemplate`    | The Compact error icon. The framework looks this key up at application level, so the Simple theme overrides the framework's default. |
+| `SimpleInputValidationErrorTemplate` | The error list, set as each style's `Validation.ErrorTemplate`. The styles take it from the theme itself, so redefining this key in the app's resources has no effect on them. |
+| `DefaultCompactErrorIconTemplate`    | The Compact error icon. The framework looks this key up in the application's resources only. |
+
+To list the errors your own way, set `input:Validation.ErrorTemplate` on the control, or in a style based on the Simple one. The template's `DataContext` is the validated control:
+
+```xml
+<TextBox Style="{StaticResource SimpleOutlinedTextBoxStyle}"
+         input:Validation.Mode="Auto"
+         input:Validation.Kind="Inline"
+         Text="{Binding UserName, Mode=TwoWay}">
+    <input:Validation.ErrorTemplate>
+        <DataTemplate>
+            <ItemsControl ItemsSource="{Binding (input:Validation.Errors)}" />
+        </DataTemplate>
+    </input:Validation.ErrorTemplate>
+</TextBox>
+```
+
+`DefaultCompactErrorIconTemplate` is app-wide:
+
+- It replaces the framework's icon only when `SimpleTheme` is merged into `Application.Resources`. Merged lower, for example in a page's resources, it is ignored and the framework's icon shows.
+- Merged there, it is the Compact icon of every validated control in the app, whichever design system styles it.
+- To use your own icon, define the key in `Application.Resources` itself, which takes precedence over the merged theme. The Simple styles keep at most 28px beside the field for it: the Simple icon is 24px wide with a 3px left margin.
 
 > [!NOTE]
 > Input validation is an Uno Platform feature. On WinAppSDK the `Validation` properties have no effect, and these styles render as they do without validation.

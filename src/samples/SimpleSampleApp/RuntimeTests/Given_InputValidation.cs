@@ -296,6 +296,34 @@ public class Given_InputValidation
 		Assert.AreEqual(fieldBounds.Y + fieldBounds.Height / 2, iconBounds.Y + iconBounds.Height / 2, 1, "The icon should be centered on the field");
 	}
 
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_ControlSetsItsOwnErrorTemplate_Then_InlineErrorsUseIt()
+	{
+		// Arrange: a Simple TextBox whose ErrorTemplate is replaced on the control, as the docs recommend
+		var container = CreateThemedContainer();
+		var control = CreateControl("SimpleOutlinedTextBoxStyle", container.Resources);
+		var custom = (DataTemplate)XamlReader.Load("""
+			<DataTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+				<TextBlock Text="custom" />
+			</DataTemplate>
+			""");
+		Validation.SetErrorTemplate(control, custom);
+		Validation.SetMode(control, InputValidationMode.Auto);
+		Validation.SetKind(control, InputValidationKind.Inline);
+		BindValidatedProperty(control, new ErrorSource(ErrorMessage));
+		container.Children.Add(control);
+
+		UnitTestsUIContentHelper.Content = container;
+		await UnitTestsUIContentHelper.WaitForLoaded(control);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		// Assert
+		var presenter = FindPart(control, "ErrorPresenter") as ContentPresenter;
+		Assert.IsNotNull(presenter, "ErrorPresenter should be realized while in error");
+		Assert.AreEqual("custom", (presenter.Content as TextBlock)?.Text, "The inline errors should use the control's own ErrorTemplate");
+	}
+
 	private static Rect GetBounds(FrameworkElement element, UIElement relativeTo) =>
 		element.TransformToVisual(relativeTo).TransformBounds(new Rect(0, 0, element.ActualWidth, element.ActualHeight));
 
