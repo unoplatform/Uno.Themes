@@ -79,6 +79,8 @@ You can override the default Simple color palette by providing a `ResourceDictio
 </us:SimpleTheme>
 ```
 
+From code, the `colorOverride` argument of the `SimpleTheme` constructor is the theme's base palette instead: it is layered above the Simple palette, so its keys (including themed ones such as `PrimaryColor`) win over the Simple values, and below a seed and the `Colors` override, as in the other themes. In earlier versions, the Simple palette's themed keys won over it.
+
 ### Customize Fonts
 
 Uno Simple ships with the [Inter](https://fonts.google.com/specimen/Inter) font family. Every type scale derives from the single `DefaultFontFamily` root token, so to use a different font for the whole app, set the `DefaultFontFamily` property on the theme:
