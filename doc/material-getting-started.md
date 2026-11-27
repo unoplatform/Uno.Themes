@@ -108,7 +108,7 @@ The guides below give you full manual control instead. They require the creation
 
 It is possible to use the [Material Theme Builder](https://aka.platform.uno/uno-material-themebuilder) to generate a custom color palette derived from your own basic colors. The generated palette is provided in the [DSP format](https://m3.material.io/styles/color/the-color-system/color-dsp) and can be used to override the default Uno Material colors.
 
-The tooling required to generate the _Material Colors Override_ file from a theme file (JSON file) will be present by default when creating an Uno Platform application with support for Uno Material from the Wizard.
+The tooling required to generate the _Material Colors Override_ file from a theme file (JSON file) is added when you create an Uno Platform application with the _Material_ theme and the **Import Uno DSP** option checked in the Wizard, or with `dotnet new unoapp -theme material -dsp`. Choosing the _Material_ theme alone doesn't add it.
 
 ![Wizard - Theme Selection](assets/material-theme-selection-wizard.png)
 
