@@ -2,7 +2,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Uno.Themes;
 using Uno.Themes.ColorGeneration;
 using Uno.Themes.ColorGeneration.Hct;
@@ -173,8 +172,10 @@ internal static class FluentAccentPalette
 			overrides.Add(consumerOverride);
 		}
 
+		// Resolved once: every key below is looked up in this snapshot instead of re-walking the overrides.
+		var declared = overrides.Count > 0 ? SemanticBrushUpdater.ResolveDeclared(overrides, themes) : null;
 		object? Find(string key)
-			=> SemanticBrushUpdater.TryResolve<object>(overrides, themes, key, out var value, declaredOnly: true) ? value : null;
+			=> declared is { } && declared.TryGetValue(key, out var value) ? value : null;
 
 		var primaryBrush = Find("PrimaryBrush") as SolidColorBrush;
 		var basis = primaryBrush?.Color ?? Find(SemanticColorKeys.Primary) as Color?;
@@ -206,9 +207,9 @@ internal static class FluentAccentPalette
 			WriteColorAndBrush(entries, "TextOnAccentFillColorSecondary", onPrimary.Color, onPrimary.Opacity);
 		}
 
-		if (overrides.Count > 0)
+		if (declared is { })
 		{
-			foreach (var key in entries.Keys.Where(key => Find(key) is { }).ToList())
+			foreach (var key in declared.Keys)
 			{
 				entries.Remove(key);
 			}

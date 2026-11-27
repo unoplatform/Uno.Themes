@@ -209,30 +209,13 @@ internal static class SemanticBrushUpdater
 	/// <param name="themeKeys">The theme dictionary keys to probe in each layer, in order.</param>
 	/// <param name="key">The resource key.</param>
 	/// <param name="resolved">The resolved value.</param>
-	/// <param name="declaredOnly">
-	/// <c>true</c> to accept only entries a layer declares itself. Required for a key the platform
-	/// also defines (Fluent's accent tokens): <see cref="ResourceDictionary.TryGetValue"/> answers
-	/// such a key from the system resources of the ambient theme even when the layer lacks it. Slower
-	/// (it enumerates the layer), and it throws where a dictionary cannot be enumerated, so the
-	/// semantic roles, which no platform defines, keep the keyed lookup.
-	/// </param>
-	internal static bool TryResolve<T>(
-		IReadOnlyList<ResourceDictionary> colorLayers, string[] themeKeys, string key, [MaybeNullWhen(false)] out T resolved, bool declaredOnly = false)
+	private static bool TryResolve<T>(
+		IReadOnlyList<ResourceDictionary> colorLayers, string[] themeKeys, string key, out T resolved)
+		where T : struct
 	{
 		for (int i = colorLayers.Count - 1; i >= 0; i--)
 		{
 			var layer = colorLayers[i];
-
-			if (declaredOnly)
-			{
-				if (TryResolveDeclared(layer, themeKeys, key, out var declared) && declared is T declaredResult)
-				{
-					resolved = declaredResult;
-					return true;
-				}
-
-				continue;
-			}
 
 			for (int t = 0; t < themeKeys.Length; t++)
 			{
@@ -281,66 +264,94 @@ internal static class SemanticBrushUpdater
 	}
 
 	/// <summary>
-	/// The <c>declaredOnly</c> lookup of one dictionary, in the same order as the keyed one: the
-	/// requested theme dictionaries, then the dictionary's own entries unless another of its theme
-	/// dictionaries declares the key, then its merged dictionaries (last merged first, as the
-	/// framework searches them). The keyed lookup gets the merged dictionaries from
-	/// <see cref="ResourceDictionary.TryGetValue"/>; here they are walked by hand, which also reads
-	/// their theme dictionaries for the requested theme.
+	/// Every entry <paramref name="colorLayers"/> declare themselves for the requested theme, each key
+	/// with the value of the highest-precedence layer that declares it. Required for keys the platform
+	/// also defines (Fluent's accent tokens): <see cref="ResourceDictionary.TryGetValue"/> answers such a
+	/// key from the system resources of the ambient theme even when the layer lacks it, so the layers
+	/// are enumerated instead. Each dictionary is enumerated once, so a caller reading many keys looks
+	/// them up in the result rather than walking the layers per key. Throws where a dictionary cannot
+	/// be enumerated; the semantic roles, which no platform defines, keep the keyed lookup.
 	/// </summary>
-	private static bool TryResolveDeclared(ResourceDictionary dictionary, string[] themeKeys, string key, out object? value)
+	/// <param name="colorLayers">The dictionaries in <b>increasing</b> precedence order.</param>
+	/// <param name="themeKeys">The theme dictionary keys to probe in each layer, in order.</param>
+	internal static Dictionary<string, object> ResolveDeclared(IReadOnlyList<ResourceDictionary> colorLayers, string[] themeKeys)
 	{
+		var resolved = new Dictionary<string, object>(StringComparer.Ordinal);
+		for (int i = colorLayers.Count - 1; i >= 0; i--)
+		{
+			foreach (var pair in CollectDeclared(colorLayers[i], themeKeys))
+			{
+				// A null entry settles the key within its own layer only; a lower layer may still answer it.
+				if (pair.Value is { } value)
+				{
+					resolved.TryAdd(pair.Key, value);
+				}
+			}
+		}
+
+		return resolved;
+	}
+
+	/// <summary>
+	/// The entries one dictionary declares, in the keyed lookup's order (earlier steps win): the
+	/// requested theme dictionaries; then its own entries, except keys one of its theme dictionaries
+	/// declares (theme-scoped, and the requested themes did not carry them, so this dictionary answers
+	/// none); then its merged dictionaries, last merged first, as the framework searches them. The keyed
+	/// lookup reads merged dictionaries through <see cref="ResourceDictionary.TryGetValue"/>; here they
+	/// are walked by hand, which also reads their theme dictionaries for the requested theme.
+	/// </summary>
+	private static Dictionary<string, object?> CollectDeclared(ResourceDictionary dictionary, string[] themeKeys)
+	{
+		var declared = new Dictionary<string, object?>(StringComparer.Ordinal);
+
 		for (int t = 0; t < themeKeys.Length; t++)
 		{
-			if (TryGetThemeDictionary(dictionary, themeKeys[t], out var themed)
-				&& TryResolveDeclared(themed, themeKeys, key, out value))
+			if (TryGetThemeDictionary(dictionary, themeKeys[t], out var themed))
 			{
-				return true;
+				foreach (var pair in CollectDeclared(themed, themeKeys))
+				{
+					declared.TryAdd(pair.Key, pair.Value);
+				}
 			}
 		}
 
+		HashSet<string>? themeScoped = null;
 		for (int t = 0; t < _allThemeKeys.Length; t++)
 		{
-			if (TryGetThemeDictionary(dictionary, _allThemeKeys[t], out var themed)
-				&& TryGetOwnEntry(themed, key, out _))
+			if (TryGetThemeDictionary(dictionary, _allThemeKeys[t], out var themed))
 			{
-				value = null;
-				return false;
+				foreach (var entry in themed)
+				{
+					if (entry.Key is string key)
+					{
+						(themeScoped ??= new HashSet<string>(StringComparer.Ordinal)).Add(key);
+					}
+				}
 			}
 		}
 
-		if (TryGetOwnEntry(dictionary, key, out value))
+		// Enumerated, not looked up: TryGetValue and ContainsKey both fall back to the system resources.
+		foreach (var entry in dictionary)
 		{
-			return true;
+			if (entry.Key is string key && themeScoped?.Contains(key) != true)
+			{
+				declared.TryAdd(key, entry.Value);
+			}
 		}
 
 		var merged = dictionary.MergedDictionaries;
 		for (int i = merged.Count - 1; i >= 0; i--)
 		{
-			if (TryResolveDeclared(merged[i], themeKeys, key, out value))
+			foreach (var pair in CollectDeclared(merged[i], themeKeys))
 			{
-				return true;
+				if (themeScoped?.Contains(pair.Key) != true)
+				{
+					declared.TryAdd(pair.Key, pair.Value);
+				}
 			}
 		}
 
-		value = null;
-		return false;
-	}
-
-	// Enumerated, not looked up: TryGetValue and ContainsKey both fall back to the system resources.
-	private static bool TryGetOwnEntry(ResourceDictionary dictionary, string key, out object? value)
-	{
-		foreach (var entry in dictionary)
-		{
-			if (entry.Key is string entryKey && entryKey == key)
-			{
-				value = entry.Value;
-				return true;
-			}
-		}
-
-		value = null;
-		return false;
+		return declared;
 	}
 
 	/// <summary>
