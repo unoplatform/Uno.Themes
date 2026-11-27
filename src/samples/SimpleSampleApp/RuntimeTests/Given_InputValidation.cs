@@ -194,6 +194,45 @@ public class Given_InputValidation
 
 	[TestMethod]
 	[RunsOnUIThread]
+	[DataRow(false, InputValidationKind.Compact)]
+	[DataRow(false, InputValidationKind.Inline)]
+	[DataRow(true, InputValidationKind.Compact)]
+	[DataRow(true, InputValidationKind.Inline)]
+	public async Task When_AutoSuggestBoxWithHeaderInError_Then_ErrorRingFitsTheField(bool elementHeader, InputValidationKind kind)
+	{
+		// Arrange: an AutoSuggestBox in error, with a text header or an element header
+		var container = CreateThemedContainer();
+		var control = (AutoSuggestBox)CreateControl("SimpleAutoSuggestBoxStyle", container.Resources);
+		control.Header = elementHeader ? new StackPanel { Children = { new TextBlock { Text = "Header" }, new TextBlock { Text = "Second line" } } } : "Header";
+		Validation.SetMode(control, InputValidationMode.Auto);
+		Validation.SetKind(control, kind);
+		BindValidatedProperty(control, new ErrorSource(ErrorMessage));
+		container.Children.Add(control);
+
+		UnitTestsUIContentHelper.Content = container;
+		await UnitTestsUIContentHelper.WaitForLoaded(control);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		// Assert: the ring has the bounds of the field (the inner TextBox's BorderElement), not of field and header
+		var ring = FindPart(control, "ErrorBorderElement");
+		var field = FindPart(control, "BorderElement");
+		Assert.IsNotNull(ring, "ErrorBorderElement should be part of the template");
+		Assert.IsNotNull(field, "The inner TextBox should have its BorderElement");
+		Assert.AreEqual(Visibility.Visible, ring.Visibility, "The error ring should show while in error");
+
+		var ringBounds = GetBounds(ring, control);
+		var fieldBounds = GetBounds(field, control);
+		Assert.AreEqual(fieldBounds.Y, ringBounds.Y, 0.5, "The error ring should start where the field starts");
+		Assert.AreEqual(fieldBounds.Height, ringBounds.Height, 0.5, "The error ring should be as tall as the field");
+		Assert.AreEqual(fieldBounds.X, ringBounds.X, 0.5, "The error ring should start at the field's left edge");
+		Assert.AreEqual(fieldBounds.Width, ringBounds.Width, 0.5, "The error ring should be as wide as the field");
+	}
+
+	private static Rect GetBounds(FrameworkElement element, UIElement relativeTo) =>
+		element.TransformToVisual(relativeTo).TransformBounds(new Rect(0, 0, element.ActualWidth, element.ActualHeight));
+
+	[TestMethod]
+	[RunsOnUIThread]
 	[DataRow(InputValidationKind.Compact)]
 	[DataRow(InputValidationKind.Inline)]
 	public async Task When_ShownAfterBeingCollapsed_Then_ErrorStateShows(InputValidationKind kind)

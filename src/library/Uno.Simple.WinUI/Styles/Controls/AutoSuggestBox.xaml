@@ -260,9 +260,9 @@
 
 						<!--
 							Input validation (Uno). The outer AutoSuggestBox template cannot reach this namescope, so
-							while in error it sets this TextBox's Tag: the tint shows and the stroke hides, replaced
-							by the outer template's error ring. Visibility is written by no state here, so hover and
-							focus cannot bring the stroke back.
+							while in error it sets this TextBox's Tag: the tint and the error ring show, and the stroke
+							hides. Drawn here, they cover the field exactly, whatever the header. Visibility is written
+							by no state here, so hover and focus cannot bring the stroke back.
 						-->
 						<Border x:Name="ErrorBackgroundElement"
 								Grid.Row="1"
@@ -280,6 +280,15 @@
 								BorderThickness="{TemplateBinding BorderThickness}"
 								CornerRadius="{TemplateBinding CornerRadius}"
 								Visibility="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToVisibleConverter}}" />
+
+						<Border x:Name="ErrorBorderElement"
+								Grid.Row="1"
+								Grid.ColumnSpan="4"
+								BorderBrush="{ThemeResource ErrorBrush}"
+								BorderThickness="{ThemeResource SimpleAutoSuggestBoxFocusedBorderThickness}"
+								CornerRadius="{TemplateBinding CornerRadius}"
+								IsHitTestVisible="False"
+								Visibility="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}}" />
 
 						<!-- Header -->
 						<ContentPresenter x:Name="HeaderContentPresenter"
@@ -392,8 +401,8 @@
 
 							<!--
 								Input validation (Uno). The field is drawn by the inner TextBox's template, out of reach
-								of setters here: the error states set its Tag instead, which hides its stroke and shows
-								its tint (see SimpleAutoSuggestBoxTextBoxStyle), and show ErrorBorderElement over it.
+								of setters here: the error states set its Tag instead, which swaps its stroke for the
+								error ring and tint (see SimpleAutoSuggestBoxTextBoxStyle).
 							-->
 							<VisualStateGroup x:Name="InputValidationEnabledStates">
 								<VisualState x:Name="CompactValidationEnabled" />
@@ -414,7 +423,6 @@
 										<!-- Fits DefaultCompactErrorIconTemplate: a 24px icon with a 3px margin. -->
 										<Setter Target="ErrorIconColumn.MaxWidth" Value="28" />
 										<Setter Target="ErrorPresenter.Visibility" Value="Visible" />
-										<Setter Target="ErrorBorderElement.Visibility" Value="Visible" />
 										<Setter Target="TextBox.Tag" Value="Error" />
 									</VisualState.Setters>
 								</VisualState>
@@ -425,7 +433,6 @@
 										<Setter Target="ErrorPresenter.(Grid.Column)" Value="0" />
 										<Setter Target="ErrorPresenter.(Grid.ColumnSpan)" Value="2" />
 										<Setter Target="ErrorPresenter.Visibility" Value="Visible" />
-										<Setter Target="ErrorBorderElement.Visibility" Value="Visible" />
 										<Setter Target="TextBox.Tag" Value="Error" />
 									</VisualState.Setters>
 								</VisualState>
@@ -437,7 +444,7 @@
 
 						<!--
 							The TextBox spans the first two rows; HeaderSpacer sizes the first to the TextBox's header,
-							leaving the second exactly the field, which the error ring and icon line up with.
+							leaving the second the field, which the compact error icon centers on.
 							ErrorIconColumn and ErrorPresenterRow stay at zero size until a validation state opens them.
 						-->
 						<Grid.ColumnDefinitions>
@@ -456,20 +463,23 @@
 						<!--
 							Invisible stand-in for the inner TextBox's header, laid out like HeaderContentPresenter in
 							SimpleAutoSuggestBoxTextBoxStyle and shown under the same rule (a non-null Header).
+							A TextBlock, not a ContentPresenter: an element header can have only one parent, and a
+							second presenter would take it from the TextBox. Exact for text headers; for an element
+							header it is one line tall, which only shifts the compact error icon.
 						-->
-						<ContentPresenter x:Name="HeaderSpacer"
-										  Grid.Row="0"
-										  Grid.Column="0"
-										  Content="{TemplateBinding Header}"
-										  FontFamily="{ThemeResource BodyMediumFontFamily}"
-										  FontSize="{ThemeResource BodyMediumFontSize}"
-										  FontWeight="SemiBold"
-										  Margin="0,0,0,4"
-										  TextWrapping="Wrap"
-										  Opacity="0"
-										  IsHitTestVisible="False"
-										  Visibility="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}}"
-										  AutomationProperties.AccessibilityView="Raw" />
+						<TextBlock x:Name="HeaderSpacer"
+								   Grid.Row="0"
+								   Grid.Column="0"
+								   Text="{Binding Header, RelativeSource={RelativeSource TemplatedParent}}"
+								   FontFamily="{ThemeResource BodyMediumFontFamily}"
+								   FontSize="{ThemeResource BodyMediumFontSize}"
+								   FontWeight="SemiBold"
+								   Margin="0,0,0,4"
+								   TextWrapping="Wrap"
+								   Opacity="0"
+								   IsHitTestVisible="False"
+								   Visibility="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}}"
+								   AutomationProperties.AccessibilityView="Raw" />
 
 						<TextBox x:Name="TextBox"
 								 Grid.RowSpan="2"
@@ -494,17 +504,6 @@
 								 DesiredCandidateWindowAlignment="BottomEdge"
 								 UseSystemFocusVisuals="{TemplateBinding UseSystemFocusVisuals}"
 								 CornerRadius="{TemplateBinding CornerRadius}" />
-
-						<!-- Error ring over the field, drawn while the inner stroke is hidden. Width mirrors the TextBox's. -->
-						<Border x:Name="ErrorBorderElement"
-								Grid.Row="1"
-								Grid.Column="0"
-								Width="{TemplateBinding Width}"
-								BorderBrush="{ThemeResource ErrorBrush}"
-								BorderThickness="{ThemeResource SimpleAutoSuggestBoxFocusedBorderThickness}"
-								CornerRadius="{TemplateBinding CornerRadius}"
-								IsHitTestVisible="False"
-								Visibility="Collapsed" />
 
 						<Popup x:Name="SuggestionsPopup"
 							   ShouldConstrainToRootBounds="False">
