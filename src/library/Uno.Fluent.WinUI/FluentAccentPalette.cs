@@ -123,16 +123,28 @@ internal static class FluentAccentPalette
 	/// <summary>
 	/// The platform accent shades, read where FluentTheme's own accent layer cannot shadow them:
 	/// the app's <c>XamlControlsResources</c>, else <see cref="UISettings"/> (the source of the system
-	/// accent on WinUI, where the shades are framework resources). <c>null</c> when unavailable.
+	/// accent on WinUI, where the shades are framework resources); then each shade the application
+	/// resources redefine as their own entry, the standard WinUI accent customization, which the
+	/// built-in controls follow too. <c>null</c> when unavailable.
 	/// </summary>
 	internal static AccentShades? GetPlatformShades()
 	{
 		var colors = new Color[ShadeKeys.Length];
-		if (FindXamlControlsResources(Application.Current?.Resources) is { } xcr && TryReadShades(xcr, colors))
+		var appResources = Application.Current?.Resources;
+		if (!(FindXamlControlsResources(appResources) is { } xcr && TryReadShades(xcr, colors)) && !TryReadSystemShades(colors))
 		{
-			return new AccentShades(colors[0], colors[1], colors[2], colors[3], colors[4], colors[5], colors[6]);
+			return null;
 		}
 
+		if (appResources is { })
+		{
+			ApplyAppShades(appResources, colors);
+		}
+		return new AccentShades(colors[0], colors[1], colors[2], colors[3], colors[4], colors[5], colors[6]);
+	}
+
+	private static bool TryReadSystemShades(Color[] colors)
+	{
 		try
 		{
 			var settings = new UISettings();
@@ -140,12 +152,35 @@ internal static class FluentAccentPalette
 			{
 				colors[i] = settings.GetColorValue(ShadeColorTypes[i]);
 			}
-			return new AccentShades(colors[0], colors[1], colors[2], colors[3], colors[4], colors[5], colors[6]);
+			return true;
 		}
 		catch (Exception e)
 		{
 			FluentDiagnostics.LogWarning("FluentTheme could not read the platform accent.", e);
-			return null;
+			return false;
+		}
+	}
+
+	/// <summary>
+	/// Overwrites each shade the application resources declare as their own entry. Own entries only:
+	/// the merged dictionaries hold <c>XamlControlsResources</c> and FluentTheme's own accent layer.
+	/// </summary>
+	private static void ApplyAppShades(ResourceDictionary appResources, Color[] colors)
+	{
+		try
+		{
+			foreach (var pair in appResources)
+			{
+				if (pair.Key is string key && pair.Value is Color color && Array.IndexOf(ShadeKeys, key) is var index and >= 0)
+				{
+					colors[index] = color;
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			// WinUI can fail to enumerate a dictionary: keep the platform shades.
+			FluentDiagnostics.LogWarning("FluentTheme could not read the application's accent colors.", e);
 		}
 	}
 

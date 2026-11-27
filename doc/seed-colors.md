@@ -266,7 +266,7 @@ The cascade is not limited to seeds. An explicit **`PrimaryColor` override** —
 - When both a seed and a `PrimaryColor` override are set, the **override wins** — the same precedence as in the semantic palette.
 - A `PrimaryColor` in the `FluentTheme` constructor's `colorOverride` is the theme's base palette, as in the other themes: it drives the accent only while no seed is set.
 - An `OnPrimaryColor` (or solid `OnPrimaryBrush`) override becomes the text on the accent (`TextOnAccentFillColor*`), instead of the contrast pick.
-- Any accent-family key you override **explicitly** (`SystemAccentColor*`, `AccentFillColor*`, `AccentTextFillColor*`, `TextOnAccentFillColor*`) always wins over the derived values.
+- Any accent-family key you override **explicitly** (`SystemAccentColor*`, `AccentFillColor*`, `AccentTextFillColor*`, `TextOnAccentFillColor*`), in `Colors` or in the constructor's `colorOverride`, always wins over the derived values, a seed's included.
 
 ```xml
 <uf:FluentTheme xmlns:uf="using:Uno.Fluent"

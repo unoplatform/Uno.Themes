@@ -29,11 +29,14 @@ internal static class FluentColorPalette
 	private static Neutrals? _neutrals;
 
 	/// <summary>
-	/// Populates the Light/Default branches of <paramref name="palette"/>. A constructor override is a
-	/// separate layer above it (see <c>BaseTheme</c>), so nothing of the consumer's is written here.
+	/// Populates the Light/Default branches of <paramref name="palette"/> from the platform accent, unless it
+	/// is still <paramref name="shades"/> (the accent the palette was last built from, updated on success). A
+	/// constructor override is a separate layer above it (see <c>BaseTheme</c>), so nothing of the
+	/// consumer's is written here.
 	/// </summary>
-	/// <returns><c>false</c> when the platform accent or the neutrals are unavailable.</returns>
-	internal static bool TryPopulate(ResourceDictionary palette)
+	/// <returns><c>true</c> when the palette was (re)built; <c>false</c> when the accent is unchanged or the
+	/// platform accent or the neutrals are unavailable.</returns>
+	internal static bool TryPopulate(ResourceDictionary palette, ref FluentAccentPalette.AccentShades? shades)
 	{
 		try
 		{
@@ -44,9 +47,15 @@ internal static class FluentColorPalette
 				return false;
 			}
 
+			if (accent == shades)
+			{
+				return false;
+			}
+
 			var neutrals = _neutrals ??= LoadNeutrals();
 			palette.ThemeDictionaries["Light"] = BuildBranch(isLight: true, accent, neutrals.Light);
 			palette.ThemeDictionaries["Default"] = BuildBranch(isLight: false, accent, neutrals.Dark);
+			shades = accent;
 			return true;
 		}
 		catch (Exception e)

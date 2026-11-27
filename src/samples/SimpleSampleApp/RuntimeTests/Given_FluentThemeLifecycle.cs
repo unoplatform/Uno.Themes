@@ -122,6 +122,51 @@ public class Given_FluentThemeLifecycle
 		Assert.AreNotEqual(Microsoft.UI.Colors.Green, (Color)theme["PrimaryColor"], "the seed still drives the semantic palette");
 	}
 
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow(true)]
+	[DataRow(false)]
+	public async Task When_AppDeclaresSystemAccentShades_PaletteFollowsThem(bool declaredBeforeTheme)
+	{
+		// The standard WinUI accent customization: SystemAccentColor* declared in the app resources. In
+		// App.xaml they are parsed after the merged FluentTheme is constructed (declaredBeforeTheme: false).
+		var shades = new (string Key, Color Value)[]
+		{
+			("SystemAccentColor", Color.FromArgb(0xFF, 0xE0, 0x60, 0x10)),
+			("SystemAccentColorLight1", Color.FromArgb(0xFF, 0xF0, 0x80, 0x30)),
+			("SystemAccentColorLight2", Color.FromArgb(0xFF, 0xF8, 0xA0, 0x50)),
+			("SystemAccentColorLight3", Color.FromArgb(0xFF, 0xFF, 0xC0, 0x80)),
+			("SystemAccentColorDark1", Color.FromArgb(0xFF, 0xB0, 0x40, 0x08)),
+			("SystemAccentColorDark2", Color.FromArgb(0xFF, 0x80, 0x30, 0x04)),
+			("SystemAccentColorDark3", Color.FromArgb(0xFF, 0x50, 0x20, 0x02)),
+		};
+		var app = Application.Current.Resources;
+		var theme = declaredBeforeTheme ? null : new FluentTheme();
+		foreach (var (key, value) in shades)
+		{
+			app[key] = value;
+		}
+		try
+		{
+			theme ??= new FluentTheme();
+			var fill = await GetAccentButtonFill(theme);
+
+			// The indexer resolves against the ambient app theme: Primary is the accent in Light, Light2 in Dark.
+			var expectedPrimary = Application.Current.RequestedTheme == ApplicationTheme.Dark ? shades[2].Value : shades[0].Value;
+			Assert.AreEqual(expectedPrimary, (Color)theme["PrimaryColor"], "PrimaryColor must follow the app's SystemAccentColor shades, like the built-in controls");
+#if HAS_UNO // On WinUI the built-in accent aliases are bound inside XamlControlsResources at load (spec 05 §9.2).
+			Assert.AreEqual(shades[4].Value, fill, "the built-in accent fill follows the app's SystemAccentColorDark1");
+#endif
+		}
+		finally
+		{
+			foreach (var (key, _) in shades)
+			{
+				app.Remove(key);
+			}
+		}
+	}
+
 #if HAS_UNO // WinUI binds the built-in controls' accent aliases inside XamlControlsResources, so FluentTheme cannot recolor them there (spec 05 §9.2).
 	[TestMethod]
 	[RunsOnUIThread]

@@ -39,6 +39,8 @@ public partial class FluentTheme : BaseTheme
 	private UISettings? _uiSettings;
 	// 1 while a refresh is queued; the event can fire on a background thread (WinUI).
 	private int _refreshQueued;
+	// The accent ThemePalette was last built from: a refresh rebuilds only when it changes.
+	private FluentAccentPalette.AccentShades? _paletteShades;
 
 	/// <summary>
 	/// Initializes the Fluent theme resources with the default palette and typography.
@@ -58,9 +60,17 @@ public partial class FluentTheme : BaseTheme
 	/// </param>
 	/// <param name="fontOverride">(Optional) Overrides for the typography resources, layered above the Fluent type ramp.</param>
 	public FluentTheme(ResourceDictionary? colorOverride = null, ResourceDictionary? fontOverride = null)
-		: base(CreatePalette(), colorOverride, fontOverride)
+		: base(CreatePalette(out var shades), colorOverride, fontOverride)
 	{
+		_paletteShades = shades;
 		ObserveSystemAccent();
+
+		// In App.xaml the theme is constructed before the application's own entries (a redefined
+		// SystemAccentColor*) are parsed: read the accent again once, after the parse completes.
+		if (DispatcherQueue.GetForCurrentThread() is { } dispatcher)
+		{
+			QueueRefresh(dispatcher);
+		}
 	}
 
 	/// <summary>
@@ -76,10 +86,11 @@ public partial class FluentTheme : BaseTheme
 	/// <inheritdoc />
 	protected override string SemanticStylesSource => FluentConstants.ResourcePaths.SemanticStyles;
 
-	private static ResourceDictionary CreatePalette()
+	private static ResourceDictionary CreatePalette(out FluentAccentPalette.AccentShades? shades)
 	{
 		var palette = new ResourceDictionary();
-		FluentColorPalette.TryPopulate(palette);
+		shades = null;
+		FluentColorPalette.TryPopulate(palette, ref shades);
 		return palette;
 	}
 
@@ -160,15 +171,22 @@ public partial class FluentTheme : BaseTheme
 			{
 				theme.RefreshSystemAccent();
 			}
-			// The event fires several times per system change: coalesce into one rebuild. The flag is
-			// claimed before enqueuing so the queued refresh can never clear it before it is set.
-			else if (Interlocked.Exchange(ref theme._refreshQueued, 1) == 0
-				&& !dispatcher.TryEnqueue(theme.RefreshSystemAccent))
+			else
 			{
-				Volatile.Write(ref theme._refreshQueued, 0);
+				theme.QueueRefresh(dispatcher);
 			}
 		};
 		_uiSettings.ColorValuesChanged += handler;
+	}
+
+	private void QueueRefresh(DispatcherQueue dispatcher)
+	{
+		// The system event fires several times per change: coalesce into one rebuild. The flag is
+		// claimed before enqueuing so the queued refresh can never clear it before it is set.
+		if (Interlocked.Exchange(ref _refreshQueued, 1) == 0 && !dispatcher.TryEnqueue(RefreshSystemAccent))
+		{
+			Volatile.Write(ref _refreshQueued, 0);
+		}
 	}
 
 	private void RefreshSystemAccent()
@@ -176,11 +194,12 @@ public partial class FluentTheme : BaseTheme
 		Volatile.Write(ref _refreshQueued, 0);
 		try
 		{
-			if (ThemePalette is { } palette)
+			// Rebuild only when the accent changed: the system event also fires for unrelated color
+			// values, and the post-construction read usually finds the accent it started with.
+			if (ThemePalette is { } palette && FluentColorPalette.TryPopulate(palette, ref _paletteShades))
 			{
-				FluentColorPalette.TryPopulate(palette);
+				UpdateSource();
 			}
-			UpdateSource();
 		}
 		catch (Exception e)
 		{
